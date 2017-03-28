@@ -106,6 +106,8 @@ public class TemplatesFragment extends BaseFragment {
 
                         ringProgressDialog.dismiss();
 
+
+
                         if (!(response.equals("0")))
                         {
                             try {
