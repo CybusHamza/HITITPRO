@@ -112,6 +112,7 @@ public class TemplatesFragment extends BaseFragment {
                         {
                             try {
 
+
                                 JSONArray Array = new JSONArray(response);
 
                                 for(int i=0;i<Array.length();i++) {
