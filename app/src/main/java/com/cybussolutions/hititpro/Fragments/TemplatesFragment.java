@@ -103,6 +103,7 @@ public class TemplatesFragment extends BaseFragment {
                     @Override
                     public void onResponse(String response) {
 
+
                         ringProgressDialog.dismiss();
 
                         if (!(response.equals("0")))
