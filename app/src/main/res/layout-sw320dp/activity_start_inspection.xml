@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    tools:context="com.cybussolutions.hititpro.Activities.Start_Inspection">
+
+    <include
+        android:id="@+id/app_bar"
+        layout="@layout/app_bar">
+
+    </include>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Client Name"
+        android:textSize="20sp"
+        android:layout_marginTop="34dp"
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/textView"
+        android:layout_below="@+id/app_bar"
+        android:layout_centerHorizontal="true" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Hamza Bin Tariq"
+        android:id="@+id/client_name_ins"
+        android:textSize="27sp"
+        android:layout_gravity="center_horizontal"
+        android:textStyle="bold"
+        android:typeface="serif"
+        android:layout_below="@+id/textView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="    Start Inspection"
+        android:drawableLeft="@drawable/start_inspection"
+        android:id="@+id/button"
+        android:padding="30dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:typeface="serif"
+        android:textColor="@color/white"
+        android:background="@drawable/round_corner_button"
+        android:layout_gravity="center_horizontal|center_vertical|bottom"
+        android:layout_marginBottom="36dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tem_name"
+        android:hint="  Template Name"
+        android:visibility="gone"
+        android:layout_centerVertical="true"
+        android:layout_alignRight="@+id/button"
+        android:layout_alignEnd="@+id/button"
+        android:layout_alignLeft="@+id/button"
+        android:layout_alignStart="@+id/button"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp" />
+
+
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tem_spinner"
+        android:hint="  Template Name"
+
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Template Name"
+        android:textSize="20sp"
+        android:layout_marginTop="33dp"
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/textView3"
+        android:layout_below="@+id/client_name_ins"
+        android:layout_centerHorizontal="true" />
+
+</RelativeLayout>

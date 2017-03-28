@@ -1,0 +1,407 @@
+package com.cybussolutions.hititpro.Template_Inspection;
+
+
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.NoConnectionError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.TimeoutError;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.cybussolutions.hititpro.Activities.Detailed_Activity_All_Screens;
+import com.cybussolutions.hititpro.Activities.StructureScreensActivity;
+import com.cybussolutions.hititpro.Fragments.BaseFragment;
+import com.cybussolutions.hititpro.Network.End_Points;
+import com.cybussolutions.hititpro.R;
+import com.cybussolutions.hititpro.Sql_LocalDataBase.Database;
+
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
+
+
+public class InsulationScreenFragment extends BaseFragment {
+
+    Button next, back;
+    View root;
+
+    Button ATTIC_INSULATION,EXTERIORWALLINSULATION,BASEMENTWALLINSULATION,CRAWLSPACEINSULATION,
+    VAPORRETARDERS,ROOFVENTILATION,CRAWLSPACEVENTILATION,EXHAUSTFANS_VENTS,Insulation_Ventilation_Observations,
+    Attic_Roof,Basement,CrawlSpace;
+
+    String[] ATTIC_INSULATION_Values,EXTERIORWALLINSULATION_Values,BASEMENTWALLINSULATION_Values,
+    CRAWLSPACEINSULATION_Values,VAPORRETARDERS_Values,ROOFVENTILATION_Values,CRAWLSPACEVENTILATION_Values,
+    EXHAUSTFANS_VENTS_Values,Insulation_Ventilation_Observations_Values,Attic_Roof_Values,Basement_Values
+    ,CrawlSpace_Values;
+
+    private static final int MY_SOCKET_TIMEOUT_MS = 10000;
+    ProgressDialog ringProgressDialog;
+    Database database;
+    private static final String INSULATION_TABLE = "insulation";
+
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+
+        root = inflater.inflate(R.layout.fragment_insulation_screen, container, false);
+
+        next = (Button) root.findViewById(R.id.next);
+        back = (Button) root.findViewById(R.id.back);
+
+
+        next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                InsulationSync();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new PlumbingScreenFragment()).addToBackStack("plumbing").commit();
+            }
+        });
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().getSupportFragmentManager().popBackStack();
+            }
+        });
+
+        database= new Database(getActivity());
+
+        try {
+            database = database.open();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        ATTIC_INSULATION = (Button) root.findViewById(R.id.attic_insulation);
+        EXTERIORWALLINSULATION = (Button) root.findViewById(R.id.exterior_wall_insulation);
+        BASEMENTWALLINSULATION = (Button) root.findViewById(R.id.basement_wall_insulation);
+        CRAWLSPACEINSULATION = (Button) root.findViewById(R.id.crawl_space_insulation);
+        VAPORRETARDERS = (Button) root.findViewById(R.id.vapor_retarders);
+        ROOFVENTILATION = (Button) root.findViewById(R.id.roof_ventilation);
+        CRAWLSPACEVENTILATION = (Button) root.findViewById(R.id.crawl_space_ventilation);
+        EXHAUSTFANS_VENTS = (Button) root.findViewById(R.id.exhaust_fans_vents);
+        Insulation_Ventilation_Observations = (Button) root.findViewById(R.id.insulation_ventilation_observations);
+        Attic_Roof = (Button) root.findViewById(R.id.attic_and_roof);
+        Basement = (Button) root.findViewById(R.id.basement);
+        CrawlSpace = (Button) root.findViewById(R.id.crawl_space);
+
+
+        ATTIC_INSULATION_Values = new String[]{"R 30 Fiberglass%0","R 37 Fiberglass%0","R 25-30 Fiberglass%0","R 30 Cellulose%0",
+                "Attic Inaccessible%0","None Visible%0","None%0"};
+        EXTERIORWALLINSULATION_Values = new String[]{"R 13%0","R 19%0","Not Visible%0","None%0"};
+        BASEMENTWALLINSULATION_Values = new String[]{"R 13 On Visible Portions%0","R 19 On Visible Portions%0","Not Visible%0","None%0"};
+        CRAWLSPACEINSULATION_Values = new String[]{"R 19 In Floor Above Crawl Space%0","R 13 In Floor Above Crawl Space%0","None Visible%0",
+                "None%0","Crawl Space Inaccessible%0"};
+        VAPORRETARDERS_Values = new String[]{"Plastic%0","Kraft Paper%0","None Visible%0"};
+        ROOFVENTILATION_Values = new String[]{"Roof Vents%0","Ridge Vents%0","Gable Vents%0","Soffit Vents%0","Power Ventilator%0",
+                "None Visible%0"};
+        CRAWLSPACEVENTILATION_Values = new String[]{"Exterior Wall Vents%0","Vents to Interior%0","No Ventilation Visible%0"};
+        EXHAUSTFANS_VENTS_Values = new String[]{"Bathrooms%0","Kitchen Cooktop Hood Vent%0","Dryer%0","Kitchen Cooktop Downdraft%0",
+                "Whole Kitchen Vent%0"};
+        Insulation_Ventilation_Observations_Values = new String[]{"WELL INSULATED HOME%0","OK INSULATED HOME%0","POORLY INSULATED HOME%0"};
+        Attic_Roof_Values = new String[]{"Even Out Insulation%0","Vermin Activity%0","Compressed Insulation%0","Add Bags of Insulation / Stairs%0"
+                ,"Improve Insulation and Stairs%0","Too Many Platforms%0","Vermin Activity %0","Ridge Vent Recommended%0","Improper Ridge Vent Installation%0"
+                ,"Soffit Vents Congested%0","Condensation / Mildew%0","Power Ventilator Inoperative%0","Ducts in Attic Need Insulation%0",
+                "Vent Exhaust Fans Outside%0","Trail Runs%0"};
+        Basement_Values = new String[]{"Insulation Improvement%0","Vermin Activity%0"};
+        CrawlSpace_Values = new String[]{"Improper Dryer Venting%0","Crawl Space Mold / Mildew%0","Floor Insulation Needed%0","Loose Floor Insulation%0",
+                "Obstructed Wall Vents%0","Ventilation Needed%0","Ductwork Needs Insulation%0","Moisture Barrier Needed%0","Moisture Barrier Adjustment%0","Vermin Activity%0"};
+
+
+
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Insulation Screen");
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.menu);
+
+
+        SharedPreferences pref = getActivity().getApplicationContext().getSharedPreferences("HititPro", getActivity().MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        String populate = pref.getString("isInsulation_populated","");
+
+        if(!(populate.equals("true")))
+        {
+            database.prePopulateData("atticinsulation", ATTIC_INSULATION_Values, INSULATION_TABLE, StructureScreensActivity.inspectionID);
+            database.prePopulateData("exteriorwallinsulation", EXTERIORWALLINSULATION_Values, INSULATION_TABLE, StructureScreensActivity.inspectionID);
+            database.prePopulateData("basementwallinsulation", BASEMENTWALLINSULATION_Values, INSULATION_TABLE, StructureScreensActivity.inspectionID);
+            database.prePopulateData("crawlspaceinsulation", CRAWLSPACEINSULATION_Values, INSULATION_TABLE, StructureScreensActivity.inspectionID);
+            database.prePopulateData("vaporretarders", VAPORRETARDERS_Values, INSULATION_TABLE, StructureScreensActivity.inspectionID);
+            database.prePopulateData("roofventilation", ROOFVENTILATION_Values, INSULATION_TABLE, StructureScreensActivity.inspectionID);
+            database.prePopulateData("rfurnace", CRAWLSPACEVENTILATION_Values, INSULATION_TABLE, StructureScreensActivity.inspectionID);
+            database.prePopulateData("rsupplyairductwork", EXHAUSTFANS_VENTS_Values, INSULATION_TABLE, StructureScreensActivity.inspectionID);
+            database.prePopulateData("boiler", Insulation_Ventilation_Observations_Values, INSULATION_TABLE, StructureScreensActivity.inspectionID);
+            database.prePopulateData("atticandroof", Attic_Roof_Values, INSULATION_TABLE, StructureScreensActivity.inspectionID);
+            database.prePopulateData("basement", Basement_Values, INSULATION_TABLE, StructureScreensActivity.inspectionID);
+            database.prePopulateData("crawlspace", CrawlSpace_Values, INSULATION_TABLE, StructureScreensActivity.inspectionID);
+
+            // Saving string
+            editor.putString("isInsulation_populated", "true");
+            editor.apply();
+        }
+        
+        ATTIC_INSULATION.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
+                intent.putExtra("items",ATTIC_INSULATION_Values);
+                intent.putExtra("heading",ATTIC_INSULATION.getText().toString());
+                intent.putExtra("column","atticinsulation");
+                intent.putExtra("dbTable",INSULATION_TABLE);
+                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                startActivity(intent);
+            }
+        });
+
+        EXTERIORWALLINSULATION.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
+                intent.putExtra("items",EXTERIORWALLINSULATION_Values);
+                intent.putExtra("heading",EXTERIORWALLINSULATION.getText().toString());
+                intent.putExtra("column","exteriorwallinsulation");
+                intent.putExtra("dbTable",INSULATION_TABLE);
+                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                startActivity(intent);
+            }
+        });
+
+        BASEMENTWALLINSULATION.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
+                intent.putExtra("items",BASEMENTWALLINSULATION_Values);
+                intent.putExtra("heading",BASEMENTWALLINSULATION.getText().toString());
+                intent.putExtra("column","basementwallinsulation");
+                intent.putExtra("dbTable",INSULATION_TABLE);
+                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                startActivity(intent);
+            }
+        });
+
+        CRAWLSPACEINSULATION.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
+                intent.putExtra("items",CRAWLSPACEINSULATION_Values);
+                intent.putExtra("heading",CRAWLSPACEINSULATION.getText().toString());
+                intent.putExtra("column","crawlspaceinsulation");
+                intent.putExtra("dbTable",INSULATION_TABLE);
+                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                startActivity(intent);
+            }
+        });
+
+        VAPORRETARDERS.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
+                intent.putExtra("items",VAPORRETARDERS_Values);
+                intent.putExtra("heading",VAPORRETARDERS.getText().toString());
+                intent.putExtra("column","vaporretarders");
+                intent.putExtra("dbTable",INSULATION_TABLE);
+                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                startActivity(intent);
+            }
+        });
+
+        ROOFVENTILATION.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
+                intent.putExtra("items",ROOFVENTILATION_Values);
+                intent.putExtra("heading",ROOFVENTILATION.getText().toString());
+                intent.putExtra("column","roofventilation");
+                intent.putExtra("dbTable",INSULATION_TABLE);
+                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                startActivity(intent);
+            }
+        });
+
+        CRAWLSPACEVENTILATION.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
+                intent.putExtra("items",CRAWLSPACEVENTILATION_Values);
+                intent.putExtra("heading",CRAWLSPACEVENTILATION.getText().toString());
+                intent.putExtra("column","servicedrop");
+                intent.putExtra("dbTable",INSULATION_TABLE);
+                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                startActivity(intent);
+            }
+        });
+
+        EXHAUSTFANS_VENTS.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
+                intent.putExtra("items",EXHAUSTFANS_VENTS_Values);
+                intent.putExtra("heading",EXHAUSTFANS_VENTS.getText().toString());
+                intent.putExtra("column","servicedrop");
+                intent.putExtra("dbTable",INSULATION_TABLE);
+                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                startActivity(intent);
+            }
+        });
+
+        Insulation_Ventilation_Observations.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
+                intent.putExtra("items",Insulation_Ventilation_Observations_Values);
+                intent.putExtra("heading",Insulation_Ventilation_Observations.getText().toString());
+                intent.putExtra("column","servicedrop");
+                intent.putExtra("dbTable",INSULATION_TABLE);
+                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                startActivity(intent);
+            }
+        });
+
+        Attic_Roof.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
+                intent.putExtra("items",Attic_Roof_Values);
+                intent.putExtra("heading",Attic_Roof.getText().toString());
+                intent.putExtra("column","atticandroof");
+                intent.putExtra("dbTable",INSULATION_TABLE);
+                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                startActivity(intent);
+            }
+        });
+
+        Basement.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
+                intent.putExtra("items",Basement_Values);
+                intent.putExtra("heading",Basement.getText().toString());
+                intent.putExtra("column","basement");
+                intent.putExtra("dbTable",INSULATION_TABLE);
+                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                startActivity(intent);
+            }
+        });
+
+        CrawlSpace.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
+                intent.putExtra("items",CrawlSpace_Values);
+                intent.putExtra("heading",CrawlSpace.getText().toString());
+                intent.putExtra("column","crawlspace");
+                intent.putExtra("dbTable",INSULATION_TABLE);
+                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                startActivity(intent);
+            }
+        });
+
+
+        return root;
+    }
+
+
+    public void InsulationSync() {
+
+        ringProgressDialog = ProgressDialog.show(getActivity(), "Please wait ...", "Sync Insulation ...", true);
+        ringProgressDialog.setCancelable(false);
+        ringProgressDialog.show();
+
+        StringRequest request = new StringRequest(Request.Method.POST, End_Points.SYNC_INSULATION,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        ringProgressDialog.dismiss();
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                ringProgressDialog.dismiss();
+                if (error instanceof NoConnectionError) {
+
+                    new SweetAlertDialog(getActivity(), SweetAlertDialog.ERROR_TYPE)
+                            .setTitleText("Error!")
+                            .setConfirmText("OK").setContentText("No Internet Connection")
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    sDialog.dismiss();
+                                }
+                            })
+                            .show();
+                } else if (error instanceof TimeoutError) {
+
+                    new SweetAlertDialog(getActivity(), SweetAlertDialog.ERROR_TYPE)
+                            .setTitleText("Error!")
+                            .setConfirmText("OK").setContentText("Connection TimeOut! Please check your internet connection.")
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    sDialog.dismiss();
+                                }
+                            })
+                            .show();
+                }
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+
+
+                Cursor cursor = database.getTable(INSULATION_TABLE,StructureScreensActivity.inspectionID);
+                cursor.moveToFirst();
+
+                Map<String, String> params = new HashMap<>();
+                params.put("template_id", "");
+                params.put("inspection_id", StructureScreensActivity.inspectionID);
+                params.put("client_id", "2");
+                params.put("is_applicable", "1");
+                params.put("empty_fields", "0");
+                if(cursor != null) {
+                    params.put("atticinsulation", cursor.getString(6));
+                    params.put("exteriorwallinsulation", cursor.getString(7));
+                    params.put("basementwallinsulation", cursor.getString(8));
+                    params.put("csv", cursor.getString(9));
+                    params.put("efv", cursor.getString(10));
+                    params.put("crawlspaceinsulation", cursor.getString(11));
+                    params.put("vaporretarders", cursor.getString(12));
+                    params.put("roofventilation", cursor.getString(13));
+                    params.put("observations", cursor.getString(14));
+                    params.put("atticandroof", cursor.getString(15));
+                    params.put("basement", cursor.getString(16));
+                    params.put("crawlspace", cursor.getString(17));
+
+                }
+
+                return params;
+            }
+        };
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                MY_SOCKET_TIMEOUT_MS,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+        requestQueue.add(request);
+
+    }
+
+
+}

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@drawable/house_bkg"
+    tools:context=".Activities.Add_Client">
+
+    <com.github.florent37.materialtextfield.MaterialTextField
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        app:mtf_cardCollapsedHeight="4dp"
+        app:mtf_image="@drawable/user"
+        app:mtf_openKeyboardOnFocus="true"
+        android:layout_marginTop="30dp"
+        android:id="@+id/name">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Client Name"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            android:textSize="15sp"
+            android:id="@+id/client_name" />
+
+    </com.github.florent37.materialtextfield.MaterialTextField>
+
+    <com.github.florent37.materialtextfield.MaterialTextField
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        app:mtf_cardCollapsedHeight="4dp"
+        app:mtf_image="@drawable/gender"
+        app:mtf_openKeyboardOnFocus="true"
+        android:layout_marginTop="20dp"
+        android:id="@+id/gender">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Gender"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:inputType="textPassword"
+            android:textColorHint="@color/black"
+            android:textSize="15sp"
+            android:id="@+id/client_gender" />
+
+    </com.github.florent37.materialtextfield.MaterialTextField>
+
+    <com.github.florent37.materialtextfield.MaterialTextField
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        app:mtf_cardCollapsedHeight="4dp"
+        app:mtf_image="@drawable/location"
+        app:mtf_openKeyboardOnFocus="true"
+        android:layout_marginTop="30dp"
+        android:id="@+id/location">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Location"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            android:textSize="15sp"
+            android:id="@+id/client_location" />
+
+    </com.github.florent37.materialtextfield.MaterialTextField>
+
+    <com.github.florent37.materialtextfield.MaterialTextField
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        app:mtf_cardCollapsedHeight="4dp"
+        app:mtf_image="@drawable/phone"
+        app:mtf_openKeyboardOnFocus="true"
+        android:layout_marginTop="20dp"
+        android:id="@+id/phone">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Password"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:inputType="textPassword"
+            android:textColorHint="@color/black"
+            android:textSize="15sp"
+            android:id="@+id/client_phone" />
+
+    </com.github.florent37.materialtextfield.MaterialTextField>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Register"
+        android:id="@+id/register"
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:typeface="serif"
+        android:padding="20dp"
+        android:background="@drawable/round_corner_button"
+        android:layout_marginTop="40dp"
+        android:layout_gravity="center_horizontal" />
+
+
+</LinearLayout>

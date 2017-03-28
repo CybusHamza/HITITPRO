@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/house_bkg">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Header_image"
+        android:text="@string/hit_it_pro"
+        android:textSize="35sp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:textStyle="bold"
+        android:typeface="serif"
+        android:textColor="#FFFFFF"
+
+        />
+
+
+    <com.github.florent37.materialtextfield.MaterialTextField
+        android:layout_width="match_parent"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        app:mtf_cardCollapsedHeight="4dp"
+        app:mtf_image="@drawable/user"
+        app:mtf_openKeyboardOnFocus="true"
+        android:layout_marginTop="30dp"
+        android:id="@+id/login">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="User Name"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            android:textSize="15sp"
+            android:id="@+id/username_login" />
+
+    </com.github.florent37.materialtextfield.MaterialTextField>
+
+    <com.github.florent37.materialtextfield.MaterialTextField
+        android:layout_width="match_parent"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        app:mtf_cardCollapsedHeight="4dp"
+        app:mtf_image="@drawable/password"
+        app:mtf_openKeyboardOnFocus="true"
+        android:layout_marginTop="20dp"
+        android:id="@+id/password">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Password"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:inputType="textPassword"
+            android:textColorHint="@color/black"
+            android:textSize="15sp"
+            android:id="@+id/password_login" />
+
+    </com.github.florent37.materialtextfield.MaterialTextField>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:gravity="center|bottom"
+        android:orientation="vertical"
+        android:layout_marginBottom="30dp">
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="Login"
+        android:textSize="23sp"
+        android:id="@+id/login_button"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:typeface="serif"
+        android:layout_marginLeft="@dimen/activity_vertical_margin"
+        android:layout_marginRight="@dimen/activity_vertical_margin"
+        android:background="@drawable/round_corner_button"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="120dp" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textSize="23sp"
+        android:text="Sign Up"
+        android:id="@+id/signUp_button"
+        android:layout_marginLeft="@dimen/activity_vertical_margin"
+        android:layout_marginRight="@dimen/activity_vertical_margin"
+        android:textStyle="bold"
+        android:textColor="@color/LightCoral"
+        android:typeface="serif"
+        android:background="@drawable/outline_style"
+        android:layout_marginTop="20dp" />
+
+    </LinearLayout>
+</LinearLayout>
