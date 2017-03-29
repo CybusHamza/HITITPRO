@@ -10,8 +10,9 @@ public class End_Points {
     public static final String ADD_CLIENT = BASE_URL + "addClient";
     public static final String GET_CLIENT = BASE_URL + "getClient";
     public static final String START_INSPECTION = BASE_URL + "addTemplate";
-    public static final String PRE_POPULATE = BASE_URL + "addTemplate";
+    public static final String PRE_POPULATE = BASE_URL + "insertSimpleEnteriesToAllReferenceTables";
     public static final String GET_TEMPLATES = BASE_URL + "getTemplates";
+    public static final String GET_INSPECTION = BASE_URL + "getInspection";
 
     // sync Forms .
     public static final String SYNC_STRUCTURE = BASE_URL + "syncStructure";

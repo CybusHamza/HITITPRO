@@ -202,6 +202,11 @@ public class Database {
 
     public void prePopulateData(String columnName, String Value[], String tableName, String tempID) {
 
+
+        String selectQuery = "SELECT  * FROM " + tableName + " WHERE template_id = " + tempID;
+        db = dbHelper.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
         String valueInsert = "";
 
         for (int i = 0; i < Value.length; i++) {
@@ -210,10 +215,29 @@ public class Database {
 
         valueInsert = valueInsert.substring(0, valueInsert.length() - 1);
 
-        ContentValues newValues = new ContentValues();
-        newValues.put(columnName, valueInsert);
-        newValues.put("template_id", tempID);
-        long res = db.insert(tableName, null, newValues);
+
+        if (cursor != null && cursor.getCount() > 0) {
+            // update
+            ContentValues newValues = new ContentValues();
+            newValues.put(columnName, valueInsert);
+            int res = db.update(tableName, newValues, "template_id" + "=" + tempID,
+                    null);
+            Toast.makeText(context, res + "/ updated", Toast.LENGTH_SHORT).show();
+
+        } else {
+            //save
+
+            ContentValues newValues = new ContentValues();
+            newValues.put(columnName, valueInsert);
+            newValues.put("template_id", tempID);
+            long res = db.insert(tableName, null, newValues);
+            Toast.makeText(context, res + " /  saved", Toast.LENGTH_SHORT).show();
+        }
+
+
+
+
+
 
     }
 

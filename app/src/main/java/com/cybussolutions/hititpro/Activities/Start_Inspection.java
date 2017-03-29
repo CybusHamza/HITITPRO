@@ -1,20 +1,24 @@
 package com.cybussolutions.hititpro.Activities;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
@@ -26,6 +30,7 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.cybussolutions.hititpro.Model.Detailed_model;
 import com.cybussolutions.hititpro.Network.End_Points;
 import com.cybussolutions.hititpro.R;
 
@@ -50,7 +55,9 @@ public class Start_Inspection extends AppCompatActivity {
     Button Start_Ispection;
     private static final int MY_SOCKET_TIMEOUT_MS = 10000;
     ProgressDialog ringProgressDialog;
+    AlertDialog b;
     EditText tempName;
+    ImageView add_template;
     Spinner tem_spinner;
     private List<String> inspection_list = new ArrayList<>();
     private List<String> inspection_id_list = new ArrayList<>();
@@ -74,6 +81,7 @@ public class Start_Inspection extends AppCompatActivity {
         client_name = (TextView) findViewById(R.id.client_name_ins);
         tempName = (EditText) findViewById(R.id.tem_name);
         tem_spinner = (Spinner) findViewById(R.id.tem_spinner);
+        add_template = (ImageView) findViewById(R.id.add_template);
 
         SharedPreferences pref = getApplicationContext().getSharedPreferences("UserPrefs", MODE_PRIVATE);
 
@@ -82,6 +90,14 @@ public class Start_Inspection extends AppCompatActivity {
         client_name.setText(client);
 
         getTemplates(clientId);
+
+
+        add_template.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addDetail();
+            }
+        });
 
 
         Start_Ispection.setOnClickListener(new View.OnClickListener() {
@@ -127,7 +143,7 @@ public class Start_Inspection extends AppCompatActivity {
                     public void onResponse(String response) {
 
 
-                            prePopulate(response,clientId);
+                           prePopulate(response,clientId);
 
 
 
@@ -169,6 +185,12 @@ public class Start_Inspection extends AppCompatActivity {
 
                 String time = DateFormat.getDateTimeInstance().format(new Date());
 
+                SharedPreferences pref = getApplicationContext().getSharedPreferences("HititPro", MODE_PRIVATE);
+                SharedPreferences.Editor editor = pref.edit();
+                editor.clear();
+                editor.apply();
+
+
                 Map<String, String> params = new HashMap<>();
                 params.put("name",StrtmpName);
                 params.put("client_id",clientId);
@@ -198,7 +220,7 @@ public class Start_Inspection extends AppCompatActivity {
 
                         ringProgressDialog.dismiss();
 
-                       if (response.equals("Success!%"+temId))
+                       if (response.equals(temId))
                         {
                             Intent intent= new Intent(Start_Inspection.this,StructureScreensActivity.class);
                             intent.putExtra("inspectionId",response);
@@ -292,7 +314,7 @@ public class Start_Inspection extends AppCompatActivity {
 
                         ringProgressDialog.dismiss();
 
-                        if (!(response.equals("0")))
+                        if (!(response.equals("\"no record found\"")))
                         {
                             try {
 
@@ -415,6 +437,41 @@ public class Start_Inspection extends AppCompatActivity {
             // TODO Auto-generated method stub
 
         }
+
+    }
+
+    void addDetail() {
+
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = getLayoutInflater();
+        final View dialogView = inflater.inflate(R.layout.add_dalogbox, null);
+        dialogBuilder.setView(dialogView);
+        dialogBuilder.setCancelable(true);
+
+        // intializing variables
+        final EditText Add = (EditText) dialogView.findViewById(R.id.add_ET);
+        final Button to = (Button) dialogView.findViewById(R.id.add_BT);
+
+        to.setText("Create and Start Inspection");
+
+
+        Add.setHint("Template Name");
+        b = dialogBuilder.create();
+        b.show();
+
+        to.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+               StrtmpName  = Add.getText().toString();
+
+                startInspection();
+
+                b.dismiss();
+
+            }
+        });
+
 
     }
 

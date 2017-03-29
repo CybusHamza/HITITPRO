@@ -178,8 +178,8 @@ public class Login extends AppCompatActivity {
             protected Map<String, String> getParams() throws AuthFailureError {
 
                 Map<String, String> params = new HashMap<>();
-                params.put("user_name", "hamza@tariq.com");
-                params.put("password", "12345");
+                params.put("user_name",strUser );
+                params.put("password",strPass );
                 return params;
             }
         };

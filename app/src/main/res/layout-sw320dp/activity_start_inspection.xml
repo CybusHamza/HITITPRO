@@ -20,23 +20,23 @@
         android:layout_height="wrap_content"
         android:text="Client Name"
         android:textSize="20sp"
+        android:layout_marginLeft="20dp"
         android:layout_marginTop="34dp"
-        android:layout_gravity="center_horizontal"
         android:id="@+id/textView"
         android:layout_below="@+id/app_bar"
-        android:layout_centerHorizontal="true" />
+       />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Hamza Bin Tariq"
         android:id="@+id/client_name_ins"
+        android:layout_marginLeft="20dp"
         android:textSize="27sp"
-        android:layout_gravity="center_horizontal"
         android:textStyle="bold"
         android:typeface="serif"
         android:layout_below="@+id/textView"
-        android:layout_centerHorizontal="true"
+
         android:layout_marginTop="20dp" />
 
     <Button
@@ -77,20 +77,29 @@
         android:layout_height="wrap_content"
         android:id="@+id/tem_spinner"
         android:hint="  Template Name"
-
-        android:layout_centerVertical="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_above="@+id/button"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="80dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Template Name"
         android:textSize="20sp"
-        android:layout_marginTop="33dp"
-        android:layout_gravity="center_horizontal"
         android:id="@+id/textView3"
-        android:layout_below="@+id/client_name_ins"
-        android:layout_centerHorizontal="true" />
+        android:layout_above="@+id/tem_spinner"
+        android:layout_alignRight="@+id/client_name_ins"
+        android:layout_alignEnd="@+id/client_name_ins" />
+
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:id="@+id/add_template"
+        android:background="@drawable/add"
+        android:layout_above="@+id/client_name_ins"
+        android:layout_alignRight="@+id/button"
+        android:layout_alignEnd="@+id/button" />
 
 </RelativeLayout>

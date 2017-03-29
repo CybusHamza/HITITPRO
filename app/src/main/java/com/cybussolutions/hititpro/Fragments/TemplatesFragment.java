@@ -39,10 +39,15 @@ public class TemplatesFragment extends BaseFragment {
     View root;
     private static final int MY_SOCKET_TIMEOUT_MS = 10000;
     ProgressDialog ringProgressDialog;
-    String id;
-    Spinner tem_spinner,client_spinner;
+    String id, client_id;
+    Spinner tem_spinner,client_spinner,inspection_spinner;
+
     private List<String> client_list = new ArrayList<>();
     private List<String> client_id_list = new ArrayList<>();
+
+    private List<String>template_list = new ArrayList<>();
+    private List<String> templateID_list = new ArrayList<>();
+    private List<String> templateID_date = new ArrayList<>();
 
     private List<String> inspection_list = new ArrayList<>();
     private List<String> inspection_id_list = new ArrayList<>();
@@ -63,8 +68,14 @@ public class TemplatesFragment extends BaseFragment {
 
         tem_spinner = (Spinner) root.findViewById(R.id.spinner);
         client_spinner = (Spinner) root.findViewById(R.id.client_spinner);
+        inspection_spinner = (Spinner) root.findViewById(R.id.inspection);
 
         client_spinner.setOnItemSelectedListener(new CustomOnItemSelectedListener_client());
+
+
+        tem_spinner.setOnItemSelectedListener(new CustomOnItemSelectedListener_inspection());
+
+
 
         AllClients();
 
@@ -77,9 +88,9 @@ public class TemplatesFragment extends BaseFragment {
         public void onItemSelected(AdapterView<?> parent, View view, final int pos,
                                    long id) {
 
-            String client_id = client_id_list.get(pos);
+             client_id = client_id_list.get(pos);
 
-            getTemplates(client_id);
+            getTemplates();
 
 
         }
@@ -92,7 +103,142 @@ public class TemplatesFragment extends BaseFragment {
 
     }
 
-    public void getTemplates(final String clientId)
+
+    public class CustomOnItemSelectedListener_inspection implements AdapterView.OnItemSelectedListener {
+
+        public void onItemSelected(AdapterView<?> parent, View view, final int pos,
+                                   long id) {
+
+            String temp_id = inspection_id_list.get(pos);
+
+            getInspections(temp_id);
+
+
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> arg0) {
+            // TODO Auto-generated method stub
+
+        }
+
+    }
+    public void getInspections(final String temp_id)
+    {
+        ringProgressDialog = ProgressDialog.show(getActivity(), "", "Please wait ...", true);
+        ringProgressDialog.setCancelable(false);
+        ringProgressDialog.show();
+
+        StringRequest request = new StringRequest(Request.Method.POST, End_Points.GET_INSPECTION,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+
+                        ringProgressDialog.dismiss();
+
+
+
+                        if (!(response.equals("0")))
+                        {
+                            try {
+
+
+                                JSONArray Array = new JSONArray(response);
+
+                                for(int i=0;i<Array.length();i++) {
+
+                                    JSONObject object = new JSONObject(Array.getJSONObject(i).toString());
+
+                                    templateID_list.add(object.getString("id"));
+                                    template_list.add(object.getString("name"));
+                                    templateID_date.add(object.getString("added_on"));
+
+                                }
+
+                                ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>
+                                        (getActivity(), android.R.layout.simple_spinner_item,template_list);
+
+                                dataAdapter.setDropDownViewResource
+                                        (android.R.layout.simple_spinner_dropdown_item);
+
+                                inspection_spinner.setAdapter(dataAdapter);
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+
+                        else
+                        {
+                            new SweetAlertDialog(getActivity(), SweetAlertDialog.ERROR_TYPE)
+                                    .setTitleText("Error!")
+                                    .setConfirmText("OK").setContentText("There Are No Templates Against this Client")
+                                    .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                        @Override
+                                        public void onClick(SweetAlertDialog sDialog) {
+                                            sDialog.dismiss();
+                                        }
+                                    })
+                                    .show();
+
+                        }
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                ringProgressDialog.dismiss();
+                if (error instanceof NoConnectionError) {
+
+                    new SweetAlertDialog(getActivity(), SweetAlertDialog.ERROR_TYPE)
+                            .setTitleText("Error!")
+                            .setConfirmText("OK").setContentText("No Internet Connection")
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    sDialog.dismiss();
+                                }
+                            })
+                            .show();
+                } else if (error instanceof TimeoutError) {
+
+                    new SweetAlertDialog(getActivity(), SweetAlertDialog.ERROR_TYPE)
+                            .setTitleText("Error!")
+                            .setConfirmText("OK").setContentText("Connection TimeOut! Please check your internet connection.")
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    sDialog.dismiss();
+                                }
+                            })
+                            .show();
+                }
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+
+                Map<String, String> params = new HashMap<>();
+
+                params.put("tempid",temp_id);
+                params.put("client_id",client_id);
+
+                return params;
+            }
+        };
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                MY_SOCKET_TIMEOUT_MS,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        RequestQueue requestQueue = Volley.newRequestQueue(getContext());
+        requestQueue.add(request);
+
+    }
+
+    public void getTemplates()
     {
         ringProgressDialog = ProgressDialog.show(getActivity(), "", "Please wait ...", true);
         ringProgressDialog.setCancelable(false);
@@ -190,7 +336,7 @@ public class TemplatesFragment extends BaseFragment {
 
                 Map<String, String> params = new HashMap<>();
 
-                params.put("client_id",clientId);
+                params.put("client_id",client_id);
                 params.put("user_id",id);
 
                 return params;
@@ -205,6 +351,7 @@ public class TemplatesFragment extends BaseFragment {
         requestQueue.add(request);
 
     }
+
 
 
     public void AllClients() {
