@@ -29,6 +29,10 @@ import com.cybussolutions.hititpro.Network.End_Points;
 import com.cybussolutions.hititpro.R;
 import com.cybussolutions.hititpro.Sql_LocalDataBase.Database;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
@@ -123,25 +127,34 @@ public class RoofingScreenFragment extends BaseFragment {
         SharedPreferences.Editor editor = pref.edit();
         String populate = pref.getString("isRoofing_populated","");
 
-        if(!(populate.equals("true")))
+        if(StructureScreensActivity.inspection_type.equals("old"))
         {
-            database.prePopulateData("roofcovering", roofCoveringButtonValues, ROOFING_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("roofflashing", roofFlashingButtonValues, ROOFING_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("chimneys", chimneysButtonValues, ROOFING_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("roofdrainage", roofDrainageButtonValues, ROOFING_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("skylights", skyLightsButtonValues, ROOFING_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("methodofinspection", methodInspectionButtonValues, ROOFING_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("observations", roofingObservationsButtonValues, ROOFING_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("recommendslopedroofing", roSloppedButtonValues, ROOFING_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("flatroofing", roFlatButtonValues, ROOFING_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("flashing", roFlashingButtonValues, ROOFING_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("recommendchimneys", roChimneyButtonValues, ROOFING_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("guttersdownspouts", roGutterDownspoutsButtonValues, ROOFING_TABLE, StructureScreensActivity.inspectionID);
+            getRoofing();
 
-            // Saving string
-            editor.putString("isRoofing_populated", "true");
-            editor.apply();
         }
+        else {
+            if(!(populate.equals("true")))
+            {
+                database.prePopulateData("roofcovering", roofCoveringButtonValues, ROOFING_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("roofflashing", roofFlashingButtonValues, ROOFING_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("chimneys", chimneysButtonValues, ROOFING_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("roofdrainage", roofDrainageButtonValues, ROOFING_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("skylights", skyLightsButtonValues, ROOFING_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("methodofinspection", methodInspectionButtonValues, ROOFING_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("observations", roofingObservationsButtonValues, ROOFING_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("recommendslopedroofing", roSloppedButtonValues, ROOFING_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("flatroofing", roFlatButtonValues, ROOFING_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("flashing", roFlashingButtonValues, ROOFING_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("recommendchimneys", roChimneyButtonValues, ROOFING_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("guttersdownspouts", roGutterDownspoutsButtonValues, ROOFING_TABLE, StructureScreensActivity.inspectionID);
+
+                // Saving string
+                editor.putString("isRoofing_populated", "true");
+                editor.apply();
+            }
+        }
+        
+      
 
         roofCoveringButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -391,5 +404,107 @@ public class RoofingScreenFragment extends BaseFragment {
         requestQueue.add(request);
 
     }
+
+    public void getRoofing() {
+
+        ringProgressDialog = ProgressDialog.show(getActivity(), "", "Please wait ...", true);
+        ringProgressDialog.setCancelable(false);
+        ringProgressDialog.show();
+
+        final StringRequest request = new StringRequest(Request.Method.POST, End_Points.GET_TEMPLATE_DATA,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        ringProgressDialog.dismiss();
+
+                        database.clearTable(ROOFING_TABLE);
+
+
+                        try {
+                            JSONArray jsonArray = new JSONArray(response);
+
+                            JSONObject object = jsonArray.getJSONObject(0);
+
+                            database.insertEntry("roofcovering",object.getString("roofcovering"),ROOFING_TABLE,StructureScreensActivity.inspectionID);
+                            database.insertEntry("roofflashing",object.getString("roofflashing"),ROOFING_TABLE,StructureScreensActivity.inspectionID);
+                            database.insertEntry("chimneys",object.getString("chimneys"),ROOFING_TABLE,StructureScreensActivity.inspectionID);
+                            database.insertEntry("roofdrainage",object.getString("roofdrainage"),ROOFING_TABLE,StructureScreensActivity.inspectionID);
+                            database.insertEntry("skylights",object.getString("skylights"),ROOFING_TABLE,StructureScreensActivity.inspectionID);
+                            database.insertEntry("methodofinspection",object.getString("methodofinspection"),ROOFING_TABLE,StructureScreensActivity.inspectionID);
+                            database.insertEntry("observations",object.getString("observations"),ROOFING_TABLE,StructureScreensActivity.inspectionID);
+                            database.insertEntry("recommendslopedroofing",object.getString("recommendslopedroofing"),ROOFING_TABLE,StructureScreensActivity.inspectionID);
+                            database.insertEntry("flatroofing",object.getString("flatroofing"),ROOFING_TABLE,StructureScreensActivity.inspectionID);
+                            database.insertEntry("flashing",object.getString("flashing"),ROOFING_TABLE,StructureScreensActivity.inspectionID);
+                            database.insertEntry("recommendchimneys",object.getString("recommendchimneys"),ROOFING_TABLE,StructureScreensActivity.inspectionID);
+                            database.insertEntry("guttersdownspouts",object.getString("guttersdownspouts"),ROOFING_TABLE,StructureScreensActivity.inspectionID);
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                ringProgressDialog.dismiss();
+                if (error instanceof NoConnectionError) {
+
+                    new SweetAlertDialog(getActivity(), SweetAlertDialog.ERROR_TYPE)
+                            .setTitleText("Error!")
+                            .setConfirmText("OK").setContentText("No Internet Connection")
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    sDialog.dismiss();
+                                }
+                            })
+                            .show();
+                } else if (error instanceof TimeoutError) {
+
+                    new SweetAlertDialog(getActivity(), SweetAlertDialog.ERROR_TYPE)
+                            .setTitleText("Error!")
+                            .setConfirmText("OK").setContentText("Connection TimeOut! Please check your internet connection.")
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    sDialog.dismiss();
+                                }
+                            })
+                            .show();
+                }
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+
+
+                Cursor cursor = database.getTable(ROOFING_TABLE,StructureScreensActivity.inspectionID);
+                cursor.moveToFirst();
+
+                Map<String, String> params = new HashMap<>();
+                params.put("client_id",StructureScreensActivity.client_id);
+                params.put("tempid",StructureScreensActivity.template_id );
+                params.put("inspection_id",StructureScreensActivity.inspectionID);
+                params.put("temp_name", ROOFING_TABLE);
+
+
+                return params;
+
+            }
+        };
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                MY_SOCKET_TIMEOUT_MS,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+        requestQueue.add(request);
+
+    }
+
 
 }

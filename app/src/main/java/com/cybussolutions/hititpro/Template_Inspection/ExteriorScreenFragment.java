@@ -30,6 +30,10 @@ import com.cybussolutions.hititpro.Network.End_Points;
 import com.cybussolutions.hititpro.R;
 import com.cybussolutions.hititpro.Sql_LocalDataBase.Database;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
@@ -168,6 +172,13 @@ public class ExteriorScreenFragment extends BaseFragment {
         SharedPreferences.Editor editor = pref.edit();
         String populate = pref.getString("isExterior_populated","");
 
+        if(StructureScreensActivity.inspection_type.equals("old"))
+        {
+            getExterior();
+
+        }
+        else {
+
 
         if(!(populate.equals("true")))
         {
@@ -199,6 +210,8 @@ public class ExteriorScreenFragment extends BaseFragment {
             // Saving string
             editor.putString("isExterior_populated", "true");
             editor.apply();
+        }
+
         }
 
         exteriorWallCoveringButton.setOnClickListener(new View.OnClickListener() {
@@ -601,9 +614,121 @@ public class ExteriorScreenFragment extends BaseFragment {
         requestQueue.add(request);
 
     }
-   
 
 
+
+    public void getExterior() {
+
+        ringProgressDialog = ProgressDialog.show(getActivity(), "", "Please wait ...", true);
+        ringProgressDialog.setCancelable(false);
+        ringProgressDialog.show();
+
+        final StringRequest request = new StringRequest(Request.Method.POST, End_Points.GET_TEMPLATE_DATA,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        ringProgressDialog.dismiss();
+
+                        database.clearTable(EXTERIROR_TABLE);
+
+
+                        try {
+                            JSONArray jsonArray = new JSONArray(response);
+
+                            JSONObject object = jsonArray.getJSONObject(0);
+
+                            database.insertEntry("wallcovering",object.getString("wallcovering"),EXTERIROR_TABLE,StructureScreensActivity.inspectionID);
+                            database.insertEntry("eaves_soffits_fascia",object.getString("eaves_soffits_fascia"),EXTERIROR_TABLE,StructureScreensActivity.inspectionID);
+                            database.insertEntry("exteriordoors",object.getString("exteriordoors"),EXTERIROR_TABLE,StructureScreensActivity.inspectionID);
+                            database.insertEntry("windows_doorframes_trim",object.getString("windows_doorframes_trim"),EXTERIROR_TABLE,StructureScreensActivity.inspectionID);
+                            database.insertEntry("entry_driveways",object.getString("entry_driveways"),EXTERIROR_TABLE,StructureScreensActivity.inspectionID);
+                            database.insertEntry("entrywalk_patios",object.getString("entrywalk_patios"),EXTERIROR_TABLE,StructureScreensActivity.inspectionID);
+                            database.insertEntry("porch_decks_steps_railings",object.getString("porch_decks_steps_railings"),EXTERIROR_TABLE,StructureScreensActivity.inspectionID);
+                            database.insertEntry("overheadgaragedoors",object.getString("overheadgaragedoors"),EXTERIROR_TABLE,StructureScreensActivity.inspectionID);
+                            database.insertEntry("surfacedrainage",object.getString("surfacedrainage"),EXTERIROR_TABLE,StructureScreensActivity.inspectionID);
+                            database.insertEntry("retainingwalls",object.getString("retainingwalls"),EXTERIROR_TABLE,StructureScreensActivity.inspectionID);
+                            database.insertEntry("fencing",object.getString("fencing"),EXTERIROR_TABLE,StructureScreensActivity.inspectionID);
+                            database.insertEntry("observations",object.getString("observations"),EXTERIROR_TABLE,StructureScreensActivity.inspectionID);
+                            database.insertEntry("rexteriorwalls",object.getString("rexteriorwalls"),EXTERIROR_TABLE,StructureScreensActivity.inspectionID);
+                            database.insertEntry("reaves",object.getString("reaves"),EXTERIROR_TABLE,StructureScreensActivity.inspectionID);
+                            database.insertEntry("rexteriordoors_windows",object.getString("rexteriordoors_windows"),EXTERIROR_TABLE,StructureScreensActivity.inspectionID);
+                            database.insertEntry("rgrage",object.getString("rgrage"),EXTERIROR_TABLE,StructureScreensActivity.inspectionID);
+                            database.insertEntry("rporches",object.getString("rporches"),EXTERIROR_TABLE,StructureScreensActivity.inspectionID);
+                            database.insertEntry("rdriveway",object.getString("rdriveway"),EXTERIROR_TABLE,StructureScreensActivity.inspectionID);
+                            database.insertEntry("rexteriorsteps_walkways",object.getString("rexteriorsteps_walkways"),EXTERIROR_TABLE,StructureScreensActivity.inspectionID);
+                            database.insertEntry("rdeck",object.getString("rdeck"),EXTERIROR_TABLE,StructureScreensActivity.inspectionID);
+                            database.insertEntry("rlotdrainage",object.getString("rlotdrainage"),EXTERIROR_TABLE,StructureScreensActivity.inspectionID);
+                            database.insertEntry("rlandscaping",object.getString("rlandscaping"),EXTERIROR_TABLE,StructureScreensActivity.inspectionID);
+                            database.insertEntry("retainwall",object.getString("retainwall"),EXTERIROR_TABLE,StructureScreensActivity.inspectionID);
+                            database.insertEntry("rfencing",object.getString("rfencing"),EXTERIROR_TABLE,StructureScreensActivity.inspectionID);
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                ringProgressDialog.dismiss();
+                if (error instanceof NoConnectionError) {
+
+                    new SweetAlertDialog(getActivity(), SweetAlertDialog.ERROR_TYPE)
+                            .setTitleText("Error!")
+                            .setConfirmText("OK").setContentText("No Internet Connection")
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    sDialog.dismiss();
+                                }
+                            })
+                            .show();
+                } else if (error instanceof TimeoutError) {
+
+                    new SweetAlertDialog(getActivity(), SweetAlertDialog.ERROR_TYPE)
+                            .setTitleText("Error!")
+                            .setConfirmText("OK").setContentText("Connection TimeOut! Please check your internet connection.")
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    sDialog.dismiss();
+                                }
+                            })
+                            .show();
+                }
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+
+
+                Cursor cursor = database.getTable(EXTERIROR_TABLE,StructureScreensActivity.inspectionID);
+                cursor.moveToFirst();
+
+                Map<String, String> params = new HashMap<>();
+                params.put("client_id",StructureScreensActivity.client_id);
+                params.put("tempid",StructureScreensActivity.template_id );
+                params.put("inspection_id",StructureScreensActivity.inspectionID);
+                params.put("temp_name", EXTERIROR_TABLE);
+
+
+                return params;
+
+            }
+        };
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                MY_SOCKET_TIMEOUT_MS,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+        requestQueue.add(request);
+
+    }
 
 
 

@@ -64,7 +64,7 @@ public class Detailed_Adapter extends BaseAdapter {
         String splitter = "%";
         String row[] = arrayList.get(position).getItemName().split(splitter);
 
-            if (row[1].equals("1")) {
+            if (row[1] !=null && row[1].equals("1")) {
                 item.setChecked(true);
             } else {
                 item.setChecked(false);

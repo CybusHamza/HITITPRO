@@ -29,6 +29,10 @@ import com.cybussolutions.hititpro.Network.End_Points;
 import com.cybussolutions.hititpro.R;
 import com.cybussolutions.hititpro.Sql_LocalDataBase.Database;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
@@ -168,36 +172,48 @@ public class InteriorScreenFragment extends BaseFragment {
         String populate = pref.getString("isInterior_populated","");
 
 
-        if(!(populate.equals("true")))
+        if(StructureScreensActivity.inspection_type.equals("old"))
         {
-            database.prePopulateData("wall_cieling", wall_ceilingValues, INTERIOR_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("floors", floors_interoirValues, INTERIOR_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("windows", windowsValues, INTERIOR_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("doors", doorsValues, INTERIOR_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("observation", interior_observationsValues, INTERIOR_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("rwalls_ceiling", walls_ceilingsValues, INTERIOR_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("rfloors", floors_roValues, INTERIOR_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("rwindows", windows_roValues, INTERIOR_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("rdoors", doors_roValues, INTERIOR_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("rcounters_cabinets", counters_cabinetsValues, INTERIOR_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("rskylights", skylights_roValues, INTERIOR_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("rstairways", stairways_roValues, INTERIOR_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("rbasement", basement_roValues, INTERIOR_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("renvironmentalissues", environmental_issuesValues, INTERIOR_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("walls_ceilings_ro", walls_ceilings_roValues, INTERIOR_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("floors_observer", floors_observerValues, INTERIOR_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("windows_observe", windows_observeValues, INTERIOR_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("doors_observation", doors_observationValues, INTERIOR_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("Counters_Cabinets_observation", Counters_Cabinets_observationValues, INTERIOR_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("skylights_obs", skylights_obsValues, INTERIOR_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("stairways_observation", stairways_observationValues, INTERIOR_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("basement_observation", basement_observationValues, INTERIOR_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("environmental_issues_ro", environmental_issues_roValues, INTERIOR_TABLE, StructureScreensActivity.inspectionID);
+            getInterior();
 
-            // Saving string
-            editor.putString("isInterior_populated", "true");
-            editor.apply();
         }
+        else {
+
+
+            if(!(populate.equals("true")))
+            {
+                database.prePopulateData("wall_cieling", wall_ceilingValues, INTERIOR_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("floors", floors_interoirValues, INTERIOR_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("windows", windowsValues, INTERIOR_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("doors", doorsValues, INTERIOR_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("observation", interior_observationsValues, INTERIOR_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("rwalls_ceiling", walls_ceilingsValues, INTERIOR_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("rfloors", floors_roValues, INTERIOR_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("rwindows", windows_roValues, INTERIOR_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("rdoors", doors_roValues, INTERIOR_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("rcounters_cabinets", counters_cabinetsValues, INTERIOR_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("rskylights", skylights_roValues, INTERIOR_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("rstairways", stairways_roValues, INTERIOR_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("rbasement", basement_roValues, INTERIOR_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("renvironmentalissues", environmental_issuesValues, INTERIOR_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("walls_ceilings_ro", walls_ceilings_roValues, INTERIOR_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("floors_observer", floors_observerValues, INTERIOR_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("windows_observe", windows_observeValues, INTERIOR_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("doors_observation", doors_observationValues, INTERIOR_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("Counters_Cabinets_observation", Counters_Cabinets_observationValues, INTERIOR_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("skylights_obs", skylights_obsValues, INTERIOR_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("stairways_observation", stairways_observationValues, INTERIOR_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("basement_observation", basement_observationValues, INTERIOR_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("environmental_issues_ro", environmental_issues_roValues, INTERIOR_TABLE, StructureScreensActivity.inspectionID);
+
+                // Saving string
+                editor.putString("isInterior_populated", "true");
+                editor.apply();
+            }
+
+        }
+
+
 
 
         wall_ceiling.setOnClickListener(new View.OnClickListener() {
@@ -579,6 +595,109 @@ public class InteriorScreenFragment extends BaseFragment {
                     params.put("renvironmentalissues", cursor.getString(19));
 
                 }
+
+                return params;
+
+            }
+        };
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                MY_SOCKET_TIMEOUT_MS,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+        requestQueue.add(request);
+
+    }
+
+    public void getInterior() {
+
+        ringProgressDialog = ProgressDialog.show(getActivity(), "", "Please wait ...", true);
+        ringProgressDialog.setCancelable(false);
+        ringProgressDialog.show();
+
+        final StringRequest request = new StringRequest(Request.Method.POST, End_Points.GET_TEMPLATE_DATA,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        ringProgressDialog.dismiss();
+
+                        database.clearTable(INTERIOR_TABLE);
+
+
+                        try {
+                            JSONArray jsonArray = new JSONArray(response);
+
+                            JSONObject object = jsonArray.getJSONObject(0);
+
+                            database.insertEntry("wall_cieling",object.getString("wall_cieling"),INTERIOR_TABLE,StructureScreensActivity.inspectionID);
+                            database.insertEntry("floors",object.getString("floors"),INTERIOR_TABLE,StructureScreensActivity.inspectionID);
+                            database.insertEntry("windows",object.getString("windows"),INTERIOR_TABLE,StructureScreensActivity.inspectionID);
+                            database.insertEntry("doors",object.getString("doors"),INTERIOR_TABLE,StructureScreensActivity.inspectionID);
+                            database.insertEntry("observation",object.getString("observation"),INTERIOR_TABLE,StructureScreensActivity.inspectionID);
+                            database.insertEntry("rwalls_ceiling",object.getString("rwalls_ceiling"),INTERIOR_TABLE,StructureScreensActivity.inspectionID);
+                            database.insertEntry("rfloors",object.getString("rfloors"),INTERIOR_TABLE,StructureScreensActivity.inspectionID);
+                            database.insertEntry("rwindows",object.getString("rwindows"),INTERIOR_TABLE,StructureScreensActivity.inspectionID);
+                            database.insertEntry("rdoors",object.getString("rdoors"),INTERIOR_TABLE,StructureScreensActivity.inspectionID);
+                            database.insertEntry("rcounters_cabinets",object.getString("rcounters_cabinets"),INTERIOR_TABLE,StructureScreensActivity.inspectionID);
+                            database.insertEntry("rskylights",object.getString("rskylights"),INTERIOR_TABLE,StructureScreensActivity.inspectionID);
+                            database.insertEntry("rstairways",object.getString("rstairways"),INTERIOR_TABLE,StructureScreensActivity.inspectionID);
+                            database.insertEntry("rbasement",object.getString("rbasement"),INTERIOR_TABLE,StructureScreensActivity.inspectionID);
+                            database.insertEntry("renvironmentalissues",object.getString("renvironmentalissues"),INTERIOR_TABLE,StructureScreensActivity.inspectionID);
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                ringProgressDialog.dismiss();
+                if (error instanceof NoConnectionError) {
+
+                    new SweetAlertDialog(getActivity(), SweetAlertDialog.ERROR_TYPE)
+                            .setTitleText("Error!")
+                            .setConfirmText("OK").setContentText("No Internet Connection")
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    sDialog.dismiss();
+                                }
+                            })
+                            .show();
+                } else if (error instanceof TimeoutError) {
+
+                    new SweetAlertDialog(getActivity(), SweetAlertDialog.ERROR_TYPE)
+                            .setTitleText("Error!")
+                            .setConfirmText("OK").setContentText("Connection TimeOut! Please check your internet connection.")
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    sDialog.dismiss();
+                                }
+                            })
+                            .show();
+                }
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+
+
+                Cursor cursor = database.getTable(INTERIOR_TABLE,StructureScreensActivity.inspectionID);
+                cursor.moveToFirst();
+
+                Map<String, String> params = new HashMap<>();
+                params.put("client_id",StructureScreensActivity.client_id);
+                params.put("tempid",StructureScreensActivity.template_id );
+                params.put("inspection_id",StructureScreensActivity.inspectionID);
+                params.put("temp_name", INTERIOR_TABLE);
+
 
                 return params;
 
