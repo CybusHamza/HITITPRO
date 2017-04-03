@@ -15,6 +15,10 @@ public class StructureScreensActivity extends AppCompatActivity {
 
     Toolbar toolbar;
    public static String inspectionID;
+   public static String inspection_type;
+   public static String client_id;
+   public static String template_id;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -30,7 +34,13 @@ public class StructureScreensActivity extends AppCompatActivity {
         Intent intent= getIntent();
 
         inspectionID = intent.getStringExtra("inspectionId");
+        inspection_type = intent.getStringExtra("inspection_type");
 
+        if(inspection_type.equals("old"))
+        {
+            client_id = intent.getStringExtra("client_id");
+            template_id = intent.getStringExtra("template_id");
+        }
 
 
 

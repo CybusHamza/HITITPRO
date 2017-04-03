@@ -13,6 +13,7 @@ public class End_Points {
     public static final String PRE_POPULATE = BASE_URL + "insertSimpleEnteriesToAllReferenceTables";
     public static final String GET_TEMPLATES = BASE_URL + "getTemplates";
     public static final String GET_INSPECTION = BASE_URL + "getInspection";
+    public static final String GET_TEMPLATE_DATA = BASE_URL + "getTemplatesData";
 
     // sync Forms .
     public static final String SYNC_STRUCTURE = BASE_URL + "syncStructure";

@@ -1,6 +1,7 @@
 package com.cybussolutions.hititpro.Fragments;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
@@ -21,8 +23,11 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.cybussolutions.hititpro.Activities.StructureScreensActivity;
 import com.cybussolutions.hititpro.Network.End_Points;
 import com.cybussolutions.hititpro.R;
+import com.cybussolutions.hititpro.Template_Inspection.StructureScreenFragment;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -45,12 +50,14 @@ public class TemplatesFragment extends BaseFragment {
     private List<String> client_list = new ArrayList<>();
     private List<String> client_id_list = new ArrayList<>();
 
-    private List<String>template_list = new ArrayList<>();
-    private List<String> templateID_list = new ArrayList<>();
-    private List<String> templateID_date = new ArrayList<>();
+    private List<String>template_list;
+    private List<String> templateID_list ;
+    private List<String> templateID_date ;
 
-    private List<String> inspection_list = new ArrayList<>();
-    private List<String> inspection_id_list = new ArrayList<>();
+    private List<String> inspection_list;
+    private List<String> inspection_id_list;
+
+    Button review;
 
 
     @Nullable
@@ -69,13 +76,28 @@ public class TemplatesFragment extends BaseFragment {
         tem_spinner = (Spinner) root.findViewById(R.id.spinner);
         client_spinner = (Spinner) root.findViewById(R.id.client_spinner);
         inspection_spinner = (Spinner) root.findViewById(R.id.inspection);
+        review = (Button) root.findViewById(R.id.button);
 
         client_spinner.setOnItemSelectedListener(new CustomOnItemSelectedListener_client());
 
+        review.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+                int client_id =  client_spinner.getSelectedItemPosition();
+                int inspection_id =  inspection_spinner.getSelectedItemPosition();
+                int template_id =  tem_spinner.getSelectedItemPosition();
+
+                Intent intent= new Intent(getActivity(),StructureScreensActivity.class);
+                intent.putExtra("inspectionId",templateID_list.get(inspection_id));
+                intent.putExtra("client_id",client_id_list.get(client_id));
+                intent.putExtra("template_id",inspection_id_list.get(template_id));
+                intent.putExtra("inspection_type","old");
+                startActivity(intent);
+
+            }
+        });
         tem_spinner.setOnItemSelectedListener(new CustomOnItemSelectedListener_inspection());
-
-
 
         AllClients();
 
@@ -108,6 +130,7 @@ public class TemplatesFragment extends BaseFragment {
 
         public void onItemSelected(AdapterView<?> parent, View view, final int pos,
                                    long id) {
+
 
             String temp_id = inspection_id_list.get(pos);
 
@@ -143,18 +166,22 @@ public class TemplatesFragment extends BaseFragment {
                         {
                             try {
 
-
+                                template_list  = new ArrayList<>();
+                                templateID_list  = new ArrayList<>();
+                                templateID_date   = new ArrayList<>();
                                 JSONArray Array = new JSONArray(response);
 
                                 for(int i=0;i<Array.length();i++) {
 
                                     JSONObject object = new JSONObject(Array.getJSONObject(i).toString());
 
+
+                                    template_list.add(object.getString("id")+"  "+object.getString("name"));
                                     templateID_list.add(object.getString("id"));
-                                    template_list.add(object.getString("name"));
                                     templateID_date.add(object.getString("added_on"));
 
                                 }
+
 
                                 ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>
                                         (getActivity(), android.R.layout.simple_spinner_item,template_list);
@@ -261,14 +288,20 @@ public class TemplatesFragment extends BaseFragment {
 
                                 JSONArray Array = new JSONArray(response);
 
+                                inspection_list= new ArrayList<>();
+                                inspection_id_list = new ArrayList<>();
+
+
                                 for(int i=0;i<Array.length();i++) {
 
                                     JSONObject object = new JSONObject(Array.getJSONObject(i).toString());
 
+                                    inspection_list.add(object.getString("ca_id")+"  "+object.getString("name"));
                                     inspection_id_list.add(object.getString("ca_id"));
-                                    inspection_list.add(object.getString("name"));
 
                                 }
+
+                                tem_spinner.setAdapter(null);
 
                                 ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>
                                         (getActivity(), android.R.layout.simple_spinner_item,inspection_list);
@@ -389,7 +422,7 @@ public class TemplatesFragment extends BaseFragment {
 
                                     JSONObject object = new JSONObject(Array.getJSONObject(i).toString());
 
-                                    client_list .add(object.getString("client_name"));
+                                    client_list .add(object.getString("id")+"  "+object.getString("client_name"));
                                     client_id_list .add(object.getString("id"));
 
                                 }

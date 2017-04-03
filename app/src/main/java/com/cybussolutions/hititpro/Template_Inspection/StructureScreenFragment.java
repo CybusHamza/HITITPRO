@@ -23,13 +23,19 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.cybussolutions.hititpro.Activities.Detailed_Activity_All_Screens;
+import com.cybussolutions.hititpro.Activities.Start_Inspection;
 import com.cybussolutions.hititpro.Activities.StructureScreensActivity;
 import com.cybussolutions.hititpro.Fragments.BaseFragment;
 import com.cybussolutions.hititpro.Network.End_Points;
 import com.cybussolutions.hititpro.R;
 import com.cybussolutions.hititpro.Sql_LocalDataBase.Database;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -44,6 +50,7 @@ public class StructureScreenFragment extends BaseFragment {
     private static final int MY_SOCKET_TIMEOUT_MS = 10000;
     ProgressDialog ringProgressDialog;
     Database database;
+    ArrayList<String> datArray = new ArrayList<>();
 
 //    ImageView foundationImg, columnsImg, floorStructureImg, wallStructureImg, ceilingStructureImg, roofStructureImg,
 //     structureObservationsImg, roFoundationImg, roCrawlSpacesImg, roFloorsImg, roExteriorWallsImg, roRoofImg;
@@ -103,43 +110,55 @@ public class StructureScreenFragment extends BaseFragment {
 
         // setting up values
 
-        foundationSpinnerValues = new String[]{"Poured Concrete%0", "Slab On Grade%0", "Concrete Block%0", "Masonry Block%0", "Piers%0", "Basement Configuration%0", "Crawl Space%0", "Basement/Crawl Space Configuration%0"};
-        columnsSpinnerValues = new String[]{"Steel%0", "Wood%0", "Concrete Block%0", "Wood%0"};
-        floorStructureSpinnerValues = new String[]{"Wood Joist%0", "Trusses%0", "Concrete%0"};
-        wallStructureSpinnerValues = new String[]{"Wood Frame%0", "Wood Frame, Brick Veneer%0", "Masonry%0", "Other%0"};
-        ceilingStructureSpinnerValues = new String[]{"Joist%0", "Truss%0", "Rafters%0", "Other%0"};
-        roofStructureSpinnerValues = new String[]{"Rafters%0", "Truss%0", "Joists%0","Other%0"};
-        structureObservationsSpinnerValues = new String[]{"GOOD%0", "AVERAGE%0", "MINOR SETTLEMENT%0", "SIGNIFICANT ISSUES%0"};
-        roFoundationSpinnerValues = new String[]{"Cracks Minor%0", "Cracks Moderate%0", "Cracks Major%0", "Water Intrusion%0", "Floor Jacks%0", "Active Plumbing Leaks%0", "Termite Warning%0", "Basement Floor Cracks%0"};
-        roCrawlSpacesSpinnerValues = new String[]{"Wood Debris/Trash%0", "Wood/Soil Contact%0", "Water Intrusion%0", "Efflorescence%0", "Floor Jacks%0", "Seal Openings%0", "Mildew/Mold on Joists%0", "Reroute Dryer Vent%0", "Vermin Activity%0", "Active Plumbing Leaks%0", "Standing Water%0"};
-        roFloorsValues = new String[]{"Minor Framing Flaws%0", "Sills Near Grade%0", "Sills Below Grade%0",
-                "Joist Cracking%0", "Joist Notching%0", "Rot Visible%0"};
-        roExteriorWallsValues = new String[]{"Foundation Cracks%0", "Chimney Movement%0", "Parge Exterior Walls%0"};
-        roRoofValues = new String[]{"Ridge Sag%0", "Rafter Sag%0", "Collar Ties Insufficient%0", "Trusses Cut%0",
-                "Decking Delaminating%0", "Major Roof Leaks%0"};
+
+            foundationSpinnerValues = new String[]{"Poured Concrete%0", "Slab On Grade%0", "Concrete Block%0", "Masonry Block%0", "Piers%0", "Basement Configuration%0", "Crawl Space%0", "Basement/Crawl Space Configuration%0"};
+            columnsSpinnerValues = new String[]{"Steel%0", "Wood%0", "Concrete Block%0", "Wood%0"};
+            floorStructureSpinnerValues = new String[]{"Wood Joist%0", "Trusses%0", "Concrete%0"};
+            wallStructureSpinnerValues = new String[]{"Wood Frame%0", "Wood Frame, Brick Veneer%0", "Masonry%0", "Other%0"};
+            ceilingStructureSpinnerValues = new String[]{"Joist%0", "Truss%0", "Rafters%0", "Other%0"};
+            roofStructureSpinnerValues = new String[]{"Rafters%0", "Truss%0", "Joists%0","Other%0"};
+            structureObservationsSpinnerValues = new String[]{"GOOD%0", "AVERAGE%0", "MINOR SETTLEMENT%0", "SIGNIFICANT ISSUES%0"};
+            roFoundationSpinnerValues = new String[]{"Cracks Minor%0", "Cracks Moderate%0", "Cracks Major%0", "Water Intrusion%0", "Floor Jacks%0", "Active Plumbing Leaks%0", "Termite Warning%0", "Basement Floor Cracks%0"};
+            roCrawlSpacesSpinnerValues = new String[]{"Wood Debris/Trash%0", "Wood/Soil Contact%0", "Water Intrusion%0", "Efflorescence%0", "Floor Jacks%0", "Seal Openings%0", "Mildew/Mold on Joists%0", "Reroute Dryer Vent%0", "Vermin Activity%0", "Active Plumbing Leaks%0", "Standing Water%0"};
+            roFloorsValues = new String[]{"Minor Framing Flaws%0", "Sills Near Grade%0", "Sills Below Grade%0",
+                    "Joist Cracking%0", "Joist Notching%0", "Rot Visible%0"};
+            roExteriorWallsValues = new String[]{"Foundation Cracks%0", "Chimney Movement%0", "Parge Exterior Walls%0"};
+            roRoofValues = new String[]{"Ridge Sag%0", "Rafter Sag%0", "Collar Ties Insufficient%0", "Trusses Cut%0",
+                    "Decking Delaminating%0", "Major Roof Leaks%0"};
+
+
 
         SharedPreferences pref = getActivity().getApplicationContext().getSharedPreferences("HititPro", getActivity().MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
         String populate = pref.getString("isStructure_populated","");
 
-        if(!(populate.equals("true")))
+        if(StructureScreensActivity.inspection_type.equals("old"))
         {
-            database.prePopulateData("foundation", foundationSpinnerValues, PORTFOLIO_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("columns", columnsSpinnerValues, PORTFOLIO_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("floor_structure", floorStructureSpinnerValues, PORTFOLIO_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("wall_structure", wallStructureSpinnerValues, PORTFOLIO_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("celling_struture", ceilingStructureSpinnerValues, PORTFOLIO_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("roof_structure", roofStructureSpinnerValues, PORTFOLIO_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("observation", structureObservationsSpinnerValues, PORTFOLIO_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("recomnd_foundation", roFoundationSpinnerValues, PORTFOLIO_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("crawl_space", roCrawlSpacesSpinnerValues, PORTFOLIO_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("recomnd_floor", roFloorsValues, PORTFOLIO_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("exterior_wall", roExteriorWallsValues, PORTFOLIO_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("roof", roRoofValues, PORTFOLIO_TABLE, StructureScreensActivity.inspectionID);
+            getStructure();
 
-            // Saving string
-            editor.putString("isStructure_populated", "true");
-            editor.apply();
+        }
+
+        else {
+            if(!(populate.equals("true")))
+            {
+                database.prePopulateData("foundation", foundationSpinnerValues, PORTFOLIO_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("columns", columnsSpinnerValues, PORTFOLIO_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("floor_structure", floorStructureSpinnerValues, PORTFOLIO_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("wall_structure", wallStructureSpinnerValues, PORTFOLIO_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("celling_struture", ceilingStructureSpinnerValues, PORTFOLIO_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("roof_structure", roofStructureSpinnerValues, PORTFOLIO_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("observation", structureObservationsSpinnerValues, PORTFOLIO_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("recomnd_foundation", roFoundationSpinnerValues, PORTFOLIO_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("crawl_space", roCrawlSpacesSpinnerValues, PORTFOLIO_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("recomnd_floor", roFloorsValues, PORTFOLIO_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("exterior_wall", roExteriorWallsValues, PORTFOLIO_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("roof", roRoofValues, PORTFOLIO_TABLE, StructureScreensActivity.inspectionID);
+
+                // Saving string
+                editor.putString("isStructure_populated", "true");
+                editor.apply();
+            }
+
         }
 
         // inserting into local database for pre population of data
@@ -363,9 +382,9 @@ public class StructureScreenFragment extends BaseFragment {
                 cursor.moveToFirst();
 
                     Map<String, String> params = new HashMap<>();
-                    params.put("template_id", "");
+                    params.put("template_id", StructureScreensActivity.template_id);
                     params.put("inspection_id", StructureScreensActivity.inspectionID);
-                    params.put("client_id", "2");
+                    params.put("client_id", StructureScreensActivity.client_id);
                     params.put("is_applicable", "1");
                     params.put("empty_fields", "0");
                 if(cursor != null) {
@@ -384,6 +403,108 @@ public class StructureScreenFragment extends BaseFragment {
                 }
 
                     return params;
+
+            }
+        };
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                MY_SOCKET_TIMEOUT_MS,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+        requestQueue.add(request);
+
+    }
+
+    public void getStructure() {
+
+        ringProgressDialog = ProgressDialog.show(getActivity(), "", "Please wait ...", true);
+        ringProgressDialog.setCancelable(false);
+        ringProgressDialog.show();
+
+        final StringRequest request = new StringRequest(Request.Method.POST, End_Points.GET_TEMPLATE_DATA,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        ringProgressDialog.dismiss();
+
+                        database.clearTable(PORTFOLIO_TABLE);
+
+
+                        try {
+                            JSONArray jsonArray = new JSONArray(response);
+
+                                JSONObject object = jsonArray.getJSONObject(0);
+
+
+                    database.insertEntry("foundation",object.getString("foundation"),PORTFOLIO_TABLE,StructureScreensActivity.inspectionID);
+                    database.insertEntry("columns",object.getString("columns"),PORTFOLIO_TABLE,StructureScreensActivity.inspectionID);
+                    database.insertEntry("floor_structure",object.getString("floor_structure"),PORTFOLIO_TABLE,StructureScreensActivity.inspectionID);
+                    database.insertEntry("wall_structure",object.getString("wall_structure"),PORTFOLIO_TABLE,StructureScreensActivity.inspectionID);
+                    database.insertEntry("celling_struture",object.getString("celling_struture"),PORTFOLIO_TABLE,StructureScreensActivity.inspectionID);
+                    database.insertEntry("roof_structure",object.getString("roof_structure"),PORTFOLIO_TABLE,StructureScreensActivity.inspectionID);
+                    database.insertEntry("observation",object.getString("observation"),PORTFOLIO_TABLE,StructureScreensActivity.inspectionID);
+                    database.insertEntry("recomnd_foundation",object.getString("recomnd_foundation"),PORTFOLIO_TABLE,StructureScreensActivity.inspectionID);
+                    database.insertEntry("crawl_space",object.getString("crawl_space"),PORTFOLIO_TABLE,StructureScreensActivity.inspectionID);
+                    database.insertEntry("recomnd_floor",object.getString("recomnd_floor"),PORTFOLIO_TABLE,StructureScreensActivity.inspectionID);
+                    database.insertEntry("exterior_wall",object.getString("exterior_wall"),PORTFOLIO_TABLE,StructureScreensActivity.inspectionID);
+                    database.insertEntry("roof",object.getString("roof"),PORTFOLIO_TABLE,StructureScreensActivity.inspectionID);
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                ringProgressDialog.dismiss();
+                if (error instanceof NoConnectionError) {
+
+                    new SweetAlertDialog(getActivity(), SweetAlertDialog.ERROR_TYPE)
+                            .setTitleText("Error!")
+                            .setConfirmText("OK").setContentText("No Internet Connection")
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    sDialog.dismiss();
+                                }
+                            })
+                            .show();
+                } else if (error instanceof TimeoutError) {
+
+                    new SweetAlertDialog(getActivity(), SweetAlertDialog.ERROR_TYPE)
+                            .setTitleText("Error!")
+                            .setConfirmText("OK").setContentText("Connection TimeOut! Please check your internet connection.")
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    sDialog.dismiss();
+                                }
+                            })
+                            .show();
+                }
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+
+
+                Cursor cursor = database.getTable(PORTFOLIO_TABLE,StructureScreensActivity.inspectionID);
+                cursor.moveToFirst();
+
+                Map<String, String> params = new HashMap<>();
+                params.put("client_id",StructureScreensActivity.client_id);
+                params.put("tempid",StructureScreensActivity.template_id );
+                params.put("inspection_id",StructureScreensActivity.inspectionID);
+                params.put("temp_name", PORTFOLIO_TABLE);
+
+
+                return params;
 
             }
         };

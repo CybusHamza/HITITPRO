@@ -187,7 +187,7 @@ public class Database {
             newValues.put(columnName, Value);
             int res = db.update(tableName, newValues, "template_id" + "=" + tempID,
                     null);
-            Toast.makeText(context, res + "/ updated", Toast.LENGTH_SHORT).show();
+          //  Toast.makeText(context, res + "/ updated", Toast.LENGTH_SHORT).show();
 
         } else {
             //save
@@ -196,7 +196,7 @@ public class Database {
             newValues.put(columnName, Value);
             newValues.put("template_id", tempID);
             long res = db.insert(tableName, null, newValues);
-            Toast.makeText(context, res + " /  saved", Toast.LENGTH_SHORT).show();
+          //  Toast.makeText(context, res + " /  saved", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -222,7 +222,7 @@ public class Database {
             newValues.put(columnName, valueInsert);
             int res = db.update(tableName, newValues, "template_id" + "=" + tempID,
                     null);
-            Toast.makeText(context, res + "/ updated", Toast.LENGTH_SHORT).show();
+           // Toast.makeText(context, res + "/ updated", Toast.LENGTH_SHORT).show();
 
         } else {
             //save
@@ -231,7 +231,7 @@ public class Database {
             newValues.put(columnName, valueInsert);
             newValues.put("template_id", tempID);
             long res = db.insert(tableName, null, newValues);
-            Toast.makeText(context, res + " /  saved", Toast.LENGTH_SHORT).show();
+          //  Toast.makeText(context, res + " /  saved", Toast.LENGTH_SHORT).show();
         }
 
 

@@ -224,6 +224,7 @@ public class Start_Inspection extends AppCompatActivity {
                         {
                             Intent intent= new Intent(Start_Inspection.this,StructureScreensActivity.class);
                             intent.putExtra("inspectionId",response);
+                            intent.putExtra("inspection_type","new");
                             startActivity(intent);
                         }
 
