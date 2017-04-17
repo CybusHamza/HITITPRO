@@ -29,6 +29,10 @@ import com.cybussolutions.hititpro.Network.End_Points;
 import com.cybussolutions.hititpro.R;
 import com.cybussolutions.hititpro.Sql_LocalDataBase.Database;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
@@ -150,10 +154,15 @@ public class AppliancesScreenFragment extends BaseFragment {
         SharedPreferences.Editor editor = pref.edit();
         String populate = pref.getString("isAppliances_populated","");
 
+        if(StructureScreensActivity.inspection_type.equals("old"))
+        {
+            getInsulation();
 
+        }
+        else
+        {
 
-
-        if(!(populate.equals("true")))
+            if(!(populate.equals("true")))
         {
             database.prePopulateData("appliancestested", appliances_testedValues, APPLIANCE_TABLE, StructureScreensActivity.inspectionID);
             database.prePopulateData("laundryfacility", laundry_facilityValues, APPLIANCE_TABLE, StructureScreensActivity.inspectionID);
@@ -180,6 +189,11 @@ public class AppliancesScreenFragment extends BaseFragment {
             editor.putString("isAppliances_populated", "true");
             editor.apply();
         }
+
+        }
+
+
+
         appliances_tested.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -527,6 +541,114 @@ public class AppliancesScreenFragment extends BaseFragment {
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
         requestQueue.add(request);
 
+    }
+
+    private void getInsulation() {
+        ringProgressDialog = ProgressDialog.show(getActivity(), "", "Please wait ...", true);
+        ringProgressDialog.setCancelable(false);
+        ringProgressDialog.show();
+
+        final StringRequest request = new StringRequest(Request.Method.POST, End_Points.GET_TEMPLATE_DATA,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        ringProgressDialog.dismiss();
+
+                        database.clearTable(APPLIANCE_TABLE);
+
+
+                        try {
+                            JSONArray jsonArray = new JSONArray(response);
+
+                            JSONObject object = jsonArray.getJSONObject(0);
+
+
+                            database.insertEntry("appliancestested", object.getString("appliancestested"), APPLIANCE_TABLE, StructureScreensActivity.inspectionID);
+                            database.insertEntry("laundryfacility", object.getString("laundryfacility"), APPLIANCE_TABLE, StructureScreensActivity.inspectionID);
+                            database.insertEntry("othercomponentstested", object.getString("othercomponentstested"), APPLIANCE_TABLE, StructureScreensActivity.inspectionID);
+                            database.insertEntry("observations", object.getString("observations"), APPLIANCE_TABLE, StructureScreensActivity.inspectionID);
+                            database.insertEntry("relectricrange", object.getString("relectricrange"), APPLIANCE_TABLE, StructureScreensActivity.inspectionID);
+                            database.insertEntry("rgasrange", object.getString("rgasrange"), APPLIANCE_TABLE, StructureScreensActivity.inspectionID);
+                            database.insertEntry("rbuiltinelectricoven", object.getString("rbuiltinelectricoven"), APPLIANCE_TABLE, StructureScreensActivity.inspectionID);
+                            database.insertEntry("relectriccooktop", object.getString("relectriccooktop"), APPLIANCE_TABLE, StructureScreensActivity.inspectionID);
+                            database.insertEntry("rgascooktop", object.getString("rgascooktop"), APPLIANCE_TABLE, StructureScreensActivity.inspectionID);
+                            database.insertEntry("rmicrowaveoven", object.getString("rmicrowaveoven"), APPLIANCE_TABLE, StructureScreensActivity.inspectionID);
+                            database.insertEntry("rdishwasher", object.getString("rdishwasher"), APPLIANCE_TABLE, StructureScreensActivity.inspectionID);
+                            database.insertEntry("rwastedisposer", object.getString("rwastedisposer"), APPLIANCE_TABLE, StructureScreensActivity.inspectionID);
+                            database.insertEntry("rrefrigerator", object.getString("rrefrigerator"), APPLIANCE_TABLE, StructureScreensActivity.inspectionID);
+                            database.insertEntry("rwinecooler", object.getString("rwinecooler"), APPLIANCE_TABLE, StructureScreensActivity.inspectionID);
+                            database.insertEntry("rtrashcompactor", object.getString("rtrashcompactor"), APPLIANCE_TABLE, StructureScreensActivity.inspectionID);
+                            database.insertEntry("rclotheswasher", object.getString("rclotheswasher"), APPLIANCE_TABLE, StructureScreensActivity.inspectionID);
+                            database.insertEntry("rclothesdryer", object.getString("rclothesdryer"), APPLIANCE_TABLE, StructureScreensActivity.inspectionID);
+                            database.insertEntry("rcooktopexhaustfan", object.getString("rcooktopexhaustfan"), APPLIANCE_TABLE, StructureScreensActivity.inspectionID);
+                            database.insertEntry("rcentralvacuum", object.getString("rcentralvacuum"), APPLIANCE_TABLE, StructureScreensActivity.inspectionID);
+                            database.insertEntry("rdoorbell", object.getString("rdoorbell"), APPLIANCE_TABLE, StructureScreensActivity.inspectionID);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                ringProgressDialog.dismiss();
+                if (error instanceof NoConnectionError) {
+
+                    new SweetAlertDialog(getActivity(), SweetAlertDialog.ERROR_TYPE)
+                            .setTitleText("Error!")
+                            .setConfirmText("OK").setContentText("No Internet Connection")
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    sDialog.dismiss();
+                                }
+                            })
+                            .show();
+                } else if (error instanceof TimeoutError) {
+
+                    new SweetAlertDialog(getActivity(), SweetAlertDialog.ERROR_TYPE)
+                            .setTitleText("Error!")
+                            .setConfirmText("OK").setContentText("Connection TimeOut! Please check your internet connection.")
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    sDialog.dismiss();
+                                }
+                            })
+                            .show();
+                }
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+
+
+                Cursor cursor = database.getTable(APPLIANCE_TABLE, StructureScreensActivity.inspectionID);
+                cursor.moveToFirst();
+
+                Map<String, String> params = new HashMap<>();
+                params.put("client_id", StructureScreensActivity.client_id);
+                params.put("tempid", StructureScreensActivity.template_id);
+                params.put("inspection_id", StructureScreensActivity.inspectionID);
+                params.put("temp_name", APPLIANCE_TABLE);
+
+
+                return params;
+
+            }
+        };
+
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                MY_SOCKET_TIMEOUT_MS,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+        requestQueue.add(request);
     }
 
 }

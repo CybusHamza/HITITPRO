@@ -56,19 +56,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/tem_name"
-        android:hint="  Template Name"
-        android:visibility="gone"
-        android:layout_centerVertical="true"
-        android:layout_alignRight="@+id/button"
-        android:layout_alignEnd="@+id/button"
-        android:layout_alignLeft="@+id/button"
-        android:layout_alignStart="@+id/button"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp" />
+
 
 
 
@@ -88,10 +76,11 @@
         android:layout_height="wrap_content"
         android:text="Template Name"
         android:textSize="20sp"
+        android:layout_below="@+id/client_name_ins"
         android:id="@+id/textView3"
-        android:layout_above="@+id/tem_spinner"
-        android:layout_alignRight="@+id/client_name_ins"
-        android:layout_alignEnd="@+id/client_name_ins" />
+        android:layout_marginTop="60dp"
+        android:layout_centerHorizontal="true"
+         />
 
     <ImageView
         android:layout_width="40dp"

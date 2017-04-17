@@ -30,6 +30,10 @@ import com.cybussolutions.hititpro.Network.End_Points;
 import com.cybussolutions.hititpro.R;
 import com.cybussolutions.hititpro.Sql_LocalDataBase.Database;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
@@ -159,35 +163,44 @@ public class ElectricalScreenFragment extends BaseFragment {
         String populate = pref.getString("isElectrical_populated","");
 
 
-
-        if(!(populate.equals("true")))
+        if(StructureScreensActivity.inspection_type.equals("old"))
         {
-            database.prePopulateData("sizeofservice", electricalSizeButtonValues, ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("servicedrop", electricalDropButtonValues, ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("entranceconductors", electricalConductorsButtonValues, ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("maindisconnect", electricalDisconnectButtonValues, ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("grounding", electricalGroundingButtonValues, ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("servicepanel", electricalPanelButtonValues, ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("sub_panel", electricalSubpanelButtonValues, ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("wiring", electricalWiringButtonValues, ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("wiring_method", electricalMethodButtonValues, ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("switches_receptacles", electricalSwitchesButtonValues, ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("gfci", electricalgfciButtonValues, ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("smoke_codetector", electricalSmokeButtonValues, ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("observation", electricalObservationButtonValues, ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("serviceentrance", roEntranceButtonValues, ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("mainpanel", roMainpanelButtonValues, ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("subpanel", roSubpanelButtonValues, ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("distribution", roDistributionButtonValues, ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("outlets", roOutletButtonValues, ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("switches", roSwitchesButtonValues, ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("lights_ceiling_fans", roCeilingButtonValues, ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("smoke_co_detectors", roDetectorButtonValues, ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
+            getElectrical();
 
-            // Saving string
-            editor.putString("isElectrical_populated", "true");
-            editor.apply();
         }
+        else
+        {
+            if(!(populate.equals("true")))
+            {
+                database.prePopulateData("sizeofservice", electricalSizeButtonValues, ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("servicedrop", electricalDropButtonValues, ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("entranceconductors", electricalConductorsButtonValues, ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("maindisconnect", electricalDisconnectButtonValues, ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("grounding", electricalGroundingButtonValues, ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("servicepanel", electricalPanelButtonValues, ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("sub_panel", electricalSubpanelButtonValues, ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("wiring", electricalWiringButtonValues, ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("wiring_method", electricalMethodButtonValues, ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("switches_receptacles", electricalSwitchesButtonValues, ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("gfci", electricalgfciButtonValues, ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("smoke_codetector", electricalSmokeButtonValues, ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("observation", electricalObservationButtonValues, ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("serviceentrance", roEntranceButtonValues, ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("mainpanel", roMainpanelButtonValues, ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("subpanel", roSubpanelButtonValues, ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("distribution", roDistributionButtonValues, ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("outlets", roOutletButtonValues, ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("switches", roSwitchesButtonValues, ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("lights_ceiling_fans", roCeilingButtonValues, ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("smoke_co_detectors", roDetectorButtonValues, ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
+
+                // Saving string
+                editor.putString("isElectrical_populated", "true");
+                editor.apply();
+            } 
+        }
+
+       
 
         electricalSizeButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -466,6 +479,116 @@ public class ElectricalScreenFragment extends BaseFragment {
 
 
         return root;
+    }
+
+    private void getElectrical() {
+
+        ringProgressDialog = ProgressDialog.show(getActivity(), "", "Please wait ...", true);
+        ringProgressDialog.setCancelable(false);
+        ringProgressDialog.show();
+
+        final StringRequest request = new StringRequest(Request.Method.POST, End_Points.GET_TEMPLATE_DATA,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        ringProgressDialog.dismiss();
+
+                        database.clearTable(ELECTRICAL_TABLE);
+
+
+                        try {
+                            JSONArray jsonArray = new JSONArray(response);
+
+                            JSONObject object = jsonArray.getJSONObject(0);
+
+                            database.insertEntry("sizeofservice", object.getString("sizeofservice"), ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
+                            database.insertEntry("servicedrop", object.getString("servicedrop"), ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
+                            database.insertEntry("entranceconductors", object.getString("entranceconductors"), ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
+                            database.insertEntry("maindisconnect", object.getString("maindisconnect"), ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
+                            database.insertEntry("grounding", object.getString("grounding"), ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
+                            database.insertEntry("servicepanel", object.getString("servicepanel"), ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
+                            database.insertEntry("sub_panel", object.getString("sub_panel"), ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
+                            database.insertEntry("wiring", object.getString("wiring") ,ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
+                            database.insertEntry("wiring_method", object.getString("wiring_method"), ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
+                            database.insertEntry("switches_receptacles", object.getString("switches_receptacles"),ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
+                            database.insertEntry("gfci", object.getString("gfci"), ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
+                            database.insertEntry("smoke_codetector", object.getString("smoke_codetector"), ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
+                            database.insertEntry("observation", object.getString("observation"), ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
+                            database.insertEntry("serviceentrance", object.getString("serviceentrance"), ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
+                            database.insertEntry("mainpanel", object.getString("mainpanel"), ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
+                            database.insertEntry("subpanel", object.getString("subpanel"), ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
+                            database.insertEntry("distribution", object.getString(""), ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
+                            database.insertEntry("outlets", object.getString("distribution"), ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
+                            database.insertEntry("switches", object.getString("switches"), ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
+                            database.insertEntry("lights_ceiling_fans", object.getString("lights_ceiling_fans"), ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
+                            database.insertEntry("smoke_co_detectors", object.getString("smoke_co_detectors"), ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                ringProgressDialog.dismiss();
+                if (error instanceof NoConnectionError) {
+
+                    new SweetAlertDialog(getActivity(), SweetAlertDialog.ERROR_TYPE)
+                            .setTitleText("Error!")
+                            .setConfirmText("OK").setContentText("No Internet Connection")
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    sDialog.dismiss();
+                                }
+                            })
+                            .show();
+                } else if (error instanceof TimeoutError) {
+
+                    new SweetAlertDialog(getActivity(), SweetAlertDialog.ERROR_TYPE)
+                            .setTitleText("Error!")
+                            .setConfirmText("OK").setContentText("Connection TimeOut! Please check your internet connection.")
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    sDialog.dismiss();
+                                }
+                            })
+                            .show();
+                }
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+
+
+                Cursor cursor = database.getTable(ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
+                cursor.moveToFirst();
+
+                Map<String, String> params = new HashMap<>();
+                params.put("client_id", StructureScreensActivity.client_id);
+                params.put("tempid", StructureScreensActivity.template_id);
+                params.put("inspection_id", StructureScreensActivity.inspectionID);
+                params.put("temp_name", ELECTRICAL_TABLE);
+
+
+                return params;
+
+            }
+        };
+
+            request.setRetryPolicy(new DefaultRetryPolicy(
+                    MY_SOCKET_TIMEOUT_MS,
+                    DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                    DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+            RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+            requestQueue.add(request);
     }
 
 

@@ -13,6 +13,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.Toast;
+
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.NoConnectionError;
@@ -88,12 +90,19 @@ public class TemplatesFragment extends BaseFragment {
                 int inspection_id =  inspection_spinner.getSelectedItemPosition();
                 int template_id =  tem_spinner.getSelectedItemPosition();
 
-                Intent intent= new Intent(getActivity(),StructureScreensActivity.class);
-                intent.putExtra("inspectionId",templateID_list.get(inspection_id));
-                intent.putExtra("client_id",client_id_list.get(client_id));
-                intent.putExtra("template_id",inspection_id_list.get(template_id));
-                intent.putExtra("inspection_type","old");
-                startActivity(intent);
+                if(client_spinner.getSelectedItem().equals("No Records Founds") &&inspection_spinner.getSelectedItem().equals("No Records Founds")&&tem_spinner.getSelectedItem().equals("No Records Founds") ) {
+                    Toast.makeText(getActivity(), "Please Select Templates", Toast.LENGTH_SHORT).show();
+
+                }
+                else {
+
+                    Intent intent = new Intent(getActivity(), StructureScreensActivity.class);
+                    intent.putExtra("inspectionId", templateID_list.get(inspection_id));
+                    intent.putExtra("client_id", client_id_list.get(client_id));
+                    intent.putExtra("template_id", inspection_id_list.get(template_id));
+                    intent.putExtra("inspection_type", "old");
+                    startActivity(intent);
+                     }
 
             }
         });
@@ -110,7 +119,14 @@ public class TemplatesFragment extends BaseFragment {
         public void onItemSelected(AdapterView<?> parent, View view, final int pos,
                                    long id) {
 
-             client_id = client_id_list.get(pos);
+            if(client_list.get(pos).equals("No Records Founds"))
+            {
+                client_id = "0";
+            }
+            else {
+                client_id = client_id_list.get(pos);
+
+            }
 
             getTemplates();
 
@@ -131,8 +147,17 @@ public class TemplatesFragment extends BaseFragment {
         public void onItemSelected(AdapterView<?> parent, View view, final int pos,
                                    long id) {
 
+            String temp_id = null;
 
-            String temp_id = inspection_id_list.get(pos);
+            if(inspection_list.get(pos).equals("No Records Founds"))
+            {
+                temp_id = "0";
+            }
+            else {
+
+                temp_id = inspection_id_list.get(pos);
+
+            }
 
             getInspections(temp_id);
 
@@ -160,9 +185,21 @@ public class TemplatesFragment extends BaseFragment {
 
                         ringProgressDialog.dismiss();
 
+                        if(response.equals("\"no record found\""))
+                        {
+                            template_list  = new ArrayList<>();
+                            template_list.add(0,"No Records Founds");
+                            ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>
+                                    (getContext(), android.R.layout.simple_spinner_item,template_list);
 
+                            dataAdapter.setDropDownViewResource
+                                    (android.R.layout.simple_spinner_dropdown_item);
 
-                        if (!(response.equals("0")))
+                            inspection_spinner.setAdapter(dataAdapter);
+
+                        }
+
+                        else if (!(response.equals("0")))
                         {
                             try {
 
@@ -195,7 +232,6 @@ public class TemplatesFragment extends BaseFragment {
                                 e.printStackTrace();
                             }
                         }
-
                         else
                         {
                             new SweetAlertDialog(getActivity(), SweetAlertDialog.ERROR_TYPE)
@@ -279,9 +315,25 @@ public class TemplatesFragment extends BaseFragment {
 
                         ringProgressDialog.dismiss();
 
+                        if(response.equals("\"no record found\""))
+                        {
 
 
-                        if (!(response.equals("0")))
+                            inspection_list= new ArrayList<>();
+
+                            inspection_list.add(0,"No Records Founds");
+                            ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>
+                                    (getContext(), android.R.layout.simple_spinner_item,inspection_list);
+
+                            dataAdapter.setDropDownViewResource
+                                    (android.R.layout.simple_spinner_dropdown_item);
+
+                            tem_spinner.setAdapter(dataAdapter);
+
+                        }
+
+
+                        else if (!(response.equals("0")))
                         {
                             try {
 
@@ -296,7 +348,7 @@ public class TemplatesFragment extends BaseFragment {
 
                                     JSONObject object = new JSONObject(Array.getJSONObject(i).toString());
 
-                                    inspection_list.add(object.getString("ca_id")+"  "+object.getString("name"));
+                                    inspection_list.add(object.getString("name"));
                                     inspection_id_list.add(object.getString("ca_id"));
 
                                 }
@@ -315,6 +367,7 @@ public class TemplatesFragment extends BaseFragment {
                                 e.printStackTrace();
                             }
                         }
+
 
                         else
                         {
@@ -399,7 +452,22 @@ public class TemplatesFragment extends BaseFragment {
                     public void onResponse(String response) {
 
                         ringProgressDialog.dismiss();
-                        if (response.equals("false")) {
+
+                        if(response.equals("\"no record found\""))
+                        {
+
+                            client_list.add(0,"No Records Founds");
+                            ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>
+                                    (getContext(), android.R.layout.simple_spinner_item,client_list);
+
+                            dataAdapter.setDropDownViewResource
+                                    (android.R.layout.simple_spinner_dropdown_item);
+
+                            client_spinner.setAdapter(dataAdapter);
+
+                        }
+
+                        else if (response.equals("false")) {
                             new SweetAlertDialog(getActivity(), SweetAlertDialog.ERROR_TYPE)
                                     .setTitleText("Error!")
                                     .setConfirmText("OK").setContentText("No Clients Found ")
@@ -412,6 +480,7 @@ public class TemplatesFragment extends BaseFragment {
                                     })
                                     .show();
                         }
+
                         else {
 
                             try {
@@ -422,7 +491,7 @@ public class TemplatesFragment extends BaseFragment {
 
                                     JSONObject object = new JSONObject(Array.getJSONObject(i).toString());
 
-                                    client_list .add(object.getString("id")+"  "+object.getString("client_name"));
+                                    client_list .add(object.getString("client_name"));
                                     client_id_list .add(object.getString("id"));
 
                                 }

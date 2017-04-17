@@ -30,6 +30,10 @@ import com.cybussolutions.hititpro.Network.End_Points;
 import com.cybussolutions.hititpro.R;
 import com.cybussolutions.hititpro.Sql_LocalDataBase.Database;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
@@ -136,28 +140,35 @@ public class HeatingScreenFragment extends BaseFragment {
         String populate = pref.getString("isHeating_populated","");
 
 
-
-
-        if(!(populate.equals("true")))
+        if(StructureScreensActivity.inspection_type.equals("old"))
         {
-            database.prePopulateData("energy_source", heatingEnergyButtonValues, HEATING_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("heatingsystemtype", heatingSystemButtonValues, HEATING_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("vent_flues_chimneys", heatingChimneysButtonValues, HEATING_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("heatdistributionmethods", heatingDistributionValues, HEATING_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("othercomponents", heatingComponentsButtonValues, HEATING_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("observation", heatingObservationsButtonValues, HEATING_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("rfurnace", roFuranceButtonValues, HEATING_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("rsupplyairductwork", roDuctWorkButtonValues, HEATING_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("boiler", roBoilerButtonValues, HEATING_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("combustion_exhaust", roCombustionButtonValues, HEATING_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("furnace_chimneys", roChimneysButtonValues, HEATING_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("thermostats", roThermostatsButtonValues, HEATING_TABLE, StructureScreensActivity.inspectionID);
+            getHeating();
 
-            // Saving string
-            editor.putString("isHeating_populated", "true");
-            editor.apply();
+        }
+        else {
+            if(!(populate.equals("true")))
+            {
+                database.prePopulateData("energy_source", heatingEnergyButtonValues, HEATING_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("heatingsystemtype", heatingSystemButtonValues, HEATING_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("vent_flues_chimneys", heatingChimneysButtonValues, HEATING_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("heatdistributionmethods", heatingDistributionValues, HEATING_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("othercomponents", heatingComponentsButtonValues, HEATING_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("observation", heatingObservationsButtonValues, HEATING_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("rfurnace", roFuranceButtonValues, HEATING_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("rsupplyairductwork", roDuctWorkButtonValues, HEATING_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("boiler", roBoilerButtonValues, HEATING_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("combustion_exhaust", roCombustionButtonValues, HEATING_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("furnace_chimneys", roChimneysButtonValues, HEATING_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("thermostats", roThermostatsButtonValues, HEATING_TABLE, StructureScreensActivity.inspectionID);
+
+                // Saving string
+                editor.putString("isHeating_populated", "true");
+                editor.apply();
+            }
+
         }
 
+      
 
         heatingEnergyButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -321,7 +332,106 @@ public class HeatingScreenFragment extends BaseFragment {
         return root;
     }
 
+    private void getHeating() {
 
+        ringProgressDialog = ProgressDialog.show(getActivity(), "", "Please wait ...", true);
+        ringProgressDialog.setCancelable(false);
+        ringProgressDialog.show();
+
+        final StringRequest request = new StringRequest(Request.Method.POST, End_Points.GET_TEMPLATE_DATA,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        ringProgressDialog.dismiss();
+
+                        database.clearTable(HEATING_TABLE);
+
+
+                        try {
+                            JSONArray jsonArray = new JSONArray(response);
+
+                            JSONObject object = jsonArray.getJSONObject(0);
+
+                            database.insertEntry("energy_source",object.getString("energy_source"),HEATING_TABLE,StructureScreensActivity.inspectionID);
+                            database.insertEntry("heatingsystemtype",object.getString("heatingsystemtype"),HEATING_TABLE,StructureScreensActivity.inspectionID);
+                            database.insertEntry("vent_flues_chimneys",object.getString("vent_flues_chimneys"),HEATING_TABLE,StructureScreensActivity.inspectionID);
+                            database.insertEntry("heatdistributionmethods",object.getString("heatdistributionmethods"),HEATING_TABLE,StructureScreensActivity.inspectionID);
+                            database.insertEntry("othercomponents",object.getString("othercomponents"),HEATING_TABLE,StructureScreensActivity.inspectionID);
+                            database.insertEntry("observation",object.getString("observation"),HEATING_TABLE,StructureScreensActivity.inspectionID);
+                            database.insertEntry("rfurnace",object.getString("rfurnace"),HEATING_TABLE,StructureScreensActivity.inspectionID);
+                            database.insertEntry("rsupplyairductwork",object.getString("rsupplyairductwork"),HEATING_TABLE,StructureScreensActivity.inspectionID);
+                            database.insertEntry("boiler",object.getString("boiler"),HEATING_TABLE,StructureScreensActivity.inspectionID);
+                            database.insertEntry("combustion_exhaust",object.getString("combustion_exhaust"),HEATING_TABLE,StructureScreensActivity.inspectionID);
+                            database.insertEntry("furnace_chimneys",object.getString("furnace_chimneys"),HEATING_TABLE,StructureScreensActivity.inspectionID);
+                            database.insertEntry("thermostats",object.getString("thermostats"),HEATING_TABLE,StructureScreensActivity.inspectionID);
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                ringProgressDialog.dismiss();
+                if (error instanceof NoConnectionError) {
+
+                    new SweetAlertDialog(getActivity(), SweetAlertDialog.ERROR_TYPE)
+                            .setTitleText("Error!")
+                            .setConfirmText("OK").setContentText("No Internet Connection")
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    sDialog.dismiss();
+                                }
+                            })
+                            .show();
+                } else if (error instanceof TimeoutError) {
+
+                    new SweetAlertDialog(getActivity(), SweetAlertDialog.ERROR_TYPE)
+                            .setTitleText("Error!")
+                            .setConfirmText("OK").setContentText("Connection TimeOut! Please check your internet connection.")
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    sDialog.dismiss();
+                                }
+                            })
+                            .show();
+                }
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+
+
+                Cursor cursor = database.getTable(HEATING_TABLE,StructureScreensActivity.inspectionID);
+                cursor.moveToFirst();
+
+                Map<String, String> params = new HashMap<>();
+                params.put("client_id",StructureScreensActivity.client_id);
+                params.put("tempid",StructureScreensActivity.template_id );
+                params.put("inspection_id",StructureScreensActivity.inspectionID);
+                params.put("temp_name", HEATING_TABLE);
+
+
+                return params;
+
+            }
+        };
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                MY_SOCKET_TIMEOUT_MS,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+        requestQueue.add(request);
+
+    }
 
 
     public void HeatingSync() {

@@ -116,7 +116,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="e.g (012)345-6789"
+            android:hint="Phone Number"
             android:singleLine="true"
             android:textColor="@color/black"
             android:inputType="phone"
@@ -139,7 +139,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="e.g (012)345-6789"
+            android:hint="Fax Number"
             android:singleLine="true"
             android:textColor="@color/black"
             android:inputType="phone"

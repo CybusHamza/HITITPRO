@@ -29,6 +29,10 @@ import com.cybussolutions.hititpro.Network.End_Points;
 import com.cybussolutions.hititpro.R;
 import com.cybussolutions.hititpro.Sql_LocalDataBase.Database;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
@@ -188,38 +192,47 @@ public class PlumbingScreenFragment extends BaseFragment {
 
 
 
-
-        if(!(populate.equals("true")))
+        if(StructureScreensActivity.inspection_type.equals("old"))
         {
-            database.prePopulateData("watersupplysource", water_supply_sourceValues, PLUMBING_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("servicepipe", service_pipe_to_houseValues, PLUMBING_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("mainwatervalvelocation", main_water_valve_locationValues, PLUMBING_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("interiorsupply", interior_supply_pipingValues, PLUMBING_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("wastesystem", waste_systemValues, PLUMBING_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("waterheater", water_heaterValues, PLUMBING_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("rfurnace", dwv_pipingValues, PLUMBING_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("fuelshortage_distribution", fuel_storage_distributionValues, PLUMBING_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("fuelshutoffvalves", fuel_shut_off_valvesValues, PLUMBING_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("othercomponents", other_components_plumbingValues, PLUMBING_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("observation", plumbing_observationsValues, PLUMBING_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("rwaterheater", water_heater_plimbingValues, PLUMBING_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("gaspiping", gas_pipingValues, PLUMBING_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("rsupplypiping", supply_pipingValues, PLUMBING_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("dwvpiping", dwv_piping_observationValues, PLUMBING_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("fixtures", fixturesValues, PLUMBING_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("sumppump", sump_pumpValues, PLUMBING_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("wasteejectorpump", waste_ejector_pumpValues, PLUMBING_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("gas_piping_plumbing", gas_piping_plumbingValues, PLUMBING_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("supply_plumbing", supply_plumbingValues, PLUMBING_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("dwv_plumbing", dwv_plumbingValues, PLUMBING_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("fixtures_observation", fixtures_observationValues, PLUMBING_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("sump_pump_plumbing", sump_pump_plumbingValues, PLUMBING_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("waste_ejector_pump_ro", waste_ejector_pump_roValues, PLUMBING_TABLE, StructureScreensActivity.inspectionID);
+            getPlumbing();
 
-            // Saving string
-            editor.putString("isInsulation_populated", "true");
-            editor.apply();
         }
+        else
+        {
+            if(!(populate.equals("true")))
+            {
+                database.prePopulateData("watersupplysource", water_supply_sourceValues, PLUMBING_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("servicepipe", service_pipe_to_houseValues, PLUMBING_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("mainwatervalvelocation", main_water_valve_locationValues, PLUMBING_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("interiorsupply", interior_supply_pipingValues, PLUMBING_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("wastesystem", waste_systemValues, PLUMBING_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("waterheater", water_heaterValues, PLUMBING_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("rfurnace", dwv_pipingValues, PLUMBING_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("fuelshortage_distribution", fuel_storage_distributionValues, PLUMBING_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("fuelshutoffvalves", fuel_shut_off_valvesValues, PLUMBING_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("othercomponents", other_components_plumbingValues, PLUMBING_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("observation", plumbing_observationsValues, PLUMBING_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("rwaterheater", water_heater_plimbingValues, PLUMBING_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("gaspiping", gas_pipingValues, PLUMBING_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("rsupplypiping", supply_pipingValues, PLUMBING_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("dwvpiping", dwv_piping_observationValues, PLUMBING_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("fixtures", fixturesValues, PLUMBING_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("sumppump", sump_pumpValues, PLUMBING_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("wasteejectorpump", waste_ejector_pumpValues, PLUMBING_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("gas_piping_plumbing", gas_piping_plumbingValues, PLUMBING_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("supply_plumbing", supply_plumbingValues, PLUMBING_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("dwv_plumbing", dwv_plumbingValues, PLUMBING_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("fixtures_observation", fixtures_observationValues, PLUMBING_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("sump_pump_plumbing", sump_pump_plumbingValues, PLUMBING_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("waste_ejector_pump_ro", waste_ejector_pump_roValues, PLUMBING_TABLE, StructureScreensActivity.inspectionID);
+
+                // Saving string
+                editor.putString("isInsulation_populated", "true");
+                editor.apply();
+            }
+
+        }
+
 
         water_supply_source.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -531,6 +544,118 @@ public class PlumbingScreenFragment extends BaseFragment {
 
 
         return root;
+    }
+
+    private void getPlumbing() {
+
+        ringProgressDialog = ProgressDialog.show(getActivity(), "", "Please wait ...", true);
+        ringProgressDialog.setCancelable(false);
+        ringProgressDialog.show();
+
+        final StringRequest request = new StringRequest(Request.Method.POST, End_Points.GET_TEMPLATE_DATA,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        ringProgressDialog.dismiss();
+
+                        database.clearTable(PLUMBING_TABLE);
+
+
+                        try {
+                            JSONArray jsonArray = new JSONArray(response);
+
+                            JSONObject object = jsonArray.getJSONObject(0);
+
+                            database.insertEntry("watersupplysource", object.getString("watersupplysource"), PLUMBING_TABLE, StructureScreensActivity.inspectionID);
+                            database.insertEntry("servicepipe", object.getString("servicepipe"), PLUMBING_TABLE, StructureScreensActivity.inspectionID);
+                            database.insertEntry("mainwatervalvelocation", object.getString("mainwatervalvelocation"), PLUMBING_TABLE, StructureScreensActivity.inspectionID);
+                            database.insertEntry("interiorsupply", object.getString("interiorsupply"), PLUMBING_TABLE, StructureScreensActivity.inspectionID);
+                            database.insertEntry("wastesystem", object.getString("wastesystem"), PLUMBING_TABLE, StructureScreensActivity.inspectionID);
+                            database.insertEntry("waterheater", object.getString("waterheater"), PLUMBING_TABLE, StructureScreensActivity.inspectionID);
+                            database.insertEntry("rfurnace", object.getString("rfurnace"), PLUMBING_TABLE, StructureScreensActivity.inspectionID);
+                            database.insertEntry("fuelshortage_distribution", object.getString("fuelshortage_distribution"), PLUMBING_TABLE, StructureScreensActivity.inspectionID);
+                            database.insertEntry("fuelshutoffvalves", object.getString("fuelshutoffvalves"), PLUMBING_TABLE, StructureScreensActivity.inspectionID);
+                            database.insertEntry("othercomponents", object.getString("othercomponents"), PLUMBING_TABLE, StructureScreensActivity.inspectionID);
+                            database.insertEntry("observation", object.getString("observation"), PLUMBING_TABLE, StructureScreensActivity.inspectionID);
+                            database.insertEntry("rwaterheater", object.getString("rwaterheater"), PLUMBING_TABLE, StructureScreensActivity.inspectionID);
+                            database.insertEntry("gaspiping", object.getString("gaspiping"), PLUMBING_TABLE, StructureScreensActivity.inspectionID);
+                            database.insertEntry("rsupplypiping", object.getString("rsupplypiping"), PLUMBING_TABLE, StructureScreensActivity.inspectionID);
+                            database.insertEntry("dwvpiping", object.getString("dwvpiping"), PLUMBING_TABLE, StructureScreensActivity.inspectionID);
+                            database.insertEntry("fixtures", object.getString("fixtures"), PLUMBING_TABLE, StructureScreensActivity.inspectionID);
+                            database.insertEntry("c", object.getString("fixtures"), PLUMBING_TABLE, StructureScreensActivity.inspectionID);
+                            database.insertEntry("wasteejectorpump", object.getString("wasteejectorpump"), PLUMBING_TABLE, StructureScreensActivity.inspectionID);
+                            database.insertEntry("gas_piping_plumbing", object.getString("gas_piping_plumbing"), PLUMBING_TABLE, StructureScreensActivity.inspectionID);
+                            database.insertEntry("supply_plumbing", object.getString("supply_plumbing"), PLUMBING_TABLE, StructureScreensActivity.inspectionID);
+                            database.insertEntry("dwv_plumbing", object.getString("dwv_plumbing"), PLUMBING_TABLE, StructureScreensActivity.inspectionID);
+                            database.insertEntry("fixtures_observation", object.getString("fixtures_observation"), PLUMBING_TABLE, StructureScreensActivity.inspectionID);
+                            database.insertEntry("sump_pump_plumbing", object.getString("sump_pump_plumbing"), PLUMBING_TABLE, StructureScreensActivity.inspectionID);
+                            database.insertEntry("waste_ejector_pump_ro", object.getString("waste_ejector_pump_ro"), PLUMBING_TABLE, StructureScreensActivity.inspectionID);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                ringProgressDialog.dismiss();
+                if (error instanceof NoConnectionError) {
+
+                    new SweetAlertDialog(getActivity(), SweetAlertDialog.ERROR_TYPE)
+                            .setTitleText("Error!")
+                            .setConfirmText("OK").setContentText("No Internet Connection")
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    sDialog.dismiss();
+                                }
+                            })
+                            .show();
+                } else if (error instanceof TimeoutError) {
+
+                    new SweetAlertDialog(getActivity(), SweetAlertDialog.ERROR_TYPE)
+                            .setTitleText("Error!")
+                            .setConfirmText("OK").setContentText("Connection TimeOut! Please check your internet connection.")
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    sDialog.dismiss();
+                                }
+                            })
+                            .show();
+                }
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+
+
+                Cursor cursor = database.getTable(PLUMBING_TABLE, StructureScreensActivity.inspectionID);
+                cursor.moveToFirst();
+
+                Map<String, String> params = new HashMap<>();
+                params.put("client_id", StructureScreensActivity.client_id);
+                params.put("tempid", StructureScreensActivity.template_id);
+                params.put("inspection_id", StructureScreensActivity.inspectionID);
+                params.put("temp_name", PLUMBING_TABLE);
+
+
+                return params;
+
+            }
+        };
+
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                MY_SOCKET_TIMEOUT_MS,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+        requestQueue.add(request);
     }
 
     public void PlumbingSync() {

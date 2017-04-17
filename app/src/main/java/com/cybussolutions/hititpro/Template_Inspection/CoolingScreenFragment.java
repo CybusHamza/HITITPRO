@@ -30,6 +30,10 @@ import com.cybussolutions.hititpro.Network.End_Points;
 import com.cybussolutions.hititpro.R;
 import com.cybussolutions.hititpro.Sql_LocalDataBase.Database;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
@@ -67,7 +71,6 @@ public class CoolingScreenFragment extends BaseFragment {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 CoolingSync();
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new ElectricalScreenFragment()).addToBackStack("electrical").commit();
             }
@@ -76,7 +79,6 @@ public class CoolingScreenFragment extends BaseFragment {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 getActivity().getSupportFragmentManager().popBackStack();
             }
         });
@@ -138,23 +140,31 @@ public class CoolingScreenFragment extends BaseFragment {
 
 
 
-        if(!(populate.equals("true")))
+        if(StructureScreensActivity.inspection_type.equals("old"))
         {
-            database.prePopulateData("energy_source", coolingEnergyButtonValues, COOLING_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("heatingsystemtype", coolingSystemButtonValues, COOLING_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("vent_flues_chimneys", coolingEquipmentButtonValues, COOLING_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("heatdistributionmethods", coolingComponentsButtonValues, COOLING_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("othercomponents", coolingObservationsButtonValues, COOLING_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("observation", roCentralButtonValues, COOLING_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("rfurnace", roPumpButtonValues, COOLING_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("rsupplyairductwork", roEvaporatorButtonValues, COOLING_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("boiler", roFansButtonValues, COOLING_TABLE, StructureScreensActivity.inspectionID);
+            getCooling();
 
-            // Saving string
-            editor.putString("isColling_populated", "true");
-            editor.apply();
         }
-        
+        else
+        {
+
+            if(!(populate.equals("true")))
+            {
+                database.prePopulateData("energysource", coolingEnergyButtonValues, COOLING_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("centralsystemtype", coolingSystemButtonValues, COOLING_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("throughwallequipment", coolingEquipmentButtonValues, COOLING_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("othercomponents", coolingComponentsButtonValues, COOLING_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("heatobservation", coolingObservationsButtonValues, COOLING_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("recomndcentralaircondition", roCentralButtonValues, COOLING_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("heatpumps", roPumpButtonValues, COOLING_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("evaporator", roEvaporatorButtonValues, COOLING_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("housefans", roFansButtonValues, COOLING_TABLE, StructureScreensActivity.inspectionID);
+
+                // Saving string
+                editor.putString("isColling_populated", "true");
+                editor.apply();
+            }
+        }
         
         coolingEnergyButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -274,6 +284,105 @@ public class CoolingScreenFragment extends BaseFragment {
         });
 
         return root;
+    }
+
+    private void getCooling() {
+
+
+        ringProgressDialog = ProgressDialog.show(getActivity(), "", "Please wait ...", true);
+        ringProgressDialog.setCancelable(false);
+        ringProgressDialog.show();
+
+        final StringRequest request = new StringRequest(Request.Method.POST, End_Points.GET_TEMPLATE_DATA,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        ringProgressDialog.dismiss();
+
+                        database.clearTable(COOLING_TABLE);
+
+
+                        try {
+                            JSONArray jsonArray = new JSONArray(response);
+
+                            JSONObject object = jsonArray.getJSONObject(0);
+
+                            database.insertEntry("energysource",object.getString("energysource"),COOLING_TABLE,StructureScreensActivity.inspectionID);
+                            database.insertEntry("centralsystemtype",object.getString("centralsystemtype"),COOLING_TABLE,StructureScreensActivity.inspectionID);
+                            database.insertEntry("throughwallequipment",object.getString("throughwallequipment"),COOLING_TABLE,StructureScreensActivity.inspectionID);
+                            database.insertEntry("othercomponents",object.getString("othercomponents"),COOLING_TABLE,StructureScreensActivity.inspectionID);
+                            database.insertEntry("heatobservation",object.getString("heatobservation"),COOLING_TABLE,StructureScreensActivity.inspectionID);
+                            database.insertEntry("recomndcentralaircondition",object.getString("recomndcentralaircondition"),COOLING_TABLE,StructureScreensActivity.inspectionID);
+                            database.insertEntry("heatpumps",object.getString("heatpumps"),COOLING_TABLE,StructureScreensActivity.inspectionID);
+                            database.insertEntry("evaporator",object.getString("evaporator"),COOLING_TABLE,StructureScreensActivity.inspectionID);
+                            database.insertEntry("housefans",object.getString("housefans"),COOLING_TABLE,StructureScreensActivity.inspectionID);
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                ringProgressDialog.dismiss();
+                if (error instanceof NoConnectionError) {
+
+                    new SweetAlertDialog(getActivity(), SweetAlertDialog.ERROR_TYPE)
+                            .setTitleText("Error!")
+                            .setConfirmText("OK").setContentText("No Internet Connection")
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    sDialog.dismiss();
+                                }
+                            })
+                            .show();
+                } else if (error instanceof TimeoutError) {
+
+                    new SweetAlertDialog(getActivity(), SweetAlertDialog.ERROR_TYPE)
+                            .setTitleText("Error!")
+                            .setConfirmText("OK").setContentText("Connection TimeOut! Please check your internet connection.")
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    sDialog.dismiss();
+                                }
+                            })
+                            .show();
+                }
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+
+
+                Cursor cursor = database.getTable(COOLING_TABLE,StructureScreensActivity.inspectionID);
+                cursor.moveToFirst();
+
+                Map<String, String> params = new HashMap<>();
+                params.put("client_id",StructureScreensActivity.client_id);
+                params.put("tempid",StructureScreensActivity.template_id );
+                params.put("inspection_id",StructureScreensActivity.inspectionID);
+                params.put("temp_name", COOLING_TABLE);
+
+
+                return params;
+
+            }
+        };
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                MY_SOCKET_TIMEOUT_MS,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+        requestQueue.add(request);
+
     }
 
 

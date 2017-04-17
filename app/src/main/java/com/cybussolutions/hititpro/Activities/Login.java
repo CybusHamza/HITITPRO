@@ -46,6 +46,16 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        SharedPreferences preferences = getSharedPreferences("UserPrefs",MODE_PRIVATE);
+        String islogged = preferences.getString("isloggedin","");
+
+        if(islogged.equals("true"))
+        {
+            Intent intent = new Intent(Login.this,LandingScreen.class);
+            finish();
+            startActivity(intent);
+
+        }
         login = (Button) findViewById(login_button);
         signup = (Button) findViewById(R.id.signUp_button);
         username = (TextView) findViewById(R.id.username_login);
@@ -58,7 +68,7 @@ public class Login extends AppCompatActivity {
                 strUser = username.getText().toString();
                 strPass = password.getText().toString();
 
-                login();
+
 
                 if(strUser.equals("") || strPass.equals(""))
                 {
@@ -66,7 +76,7 @@ public class Login extends AppCompatActivity {
                 }
                 else
                 {
-
+                    login();
                 }
             }
         });
@@ -117,7 +127,7 @@ public class Login extends AppCompatActivity {
                                 userid = object.getString("id");
                                 name = object.getString("first_name");
                                 name += " " + object.getString("last_name");
-                                email=object.getString("email");
+                                email=object.getString("email");;
                                 adress=object.getString("adress");
                                 adress += " ," +object.getString("city");
                                 adress += " ,"+object.getString("country");
@@ -131,6 +141,7 @@ public class Login extends AppCompatActivity {
                                 editor.putString("email", email);
                                 editor.putString("adress", adress);
                                 editor.putString("phone", phone);
+                                editor.putString("isloggedin","true");
                                 editor.apply();
 
                                 Intent intent = new Intent(Login.this, LandingScreen.class);
@@ -178,8 +189,8 @@ public class Login extends AppCompatActivity {
             protected Map<String, String> getParams() throws AuthFailureError {
 
                 Map<String, String> params = new HashMap<>();
-                params.put("user_name","demo@housing.com" );
-                params.put("password","demo456" );
+                params.put("user_name",strUser);
+                params.put("password",strPass );
                 return params;
             }
         };

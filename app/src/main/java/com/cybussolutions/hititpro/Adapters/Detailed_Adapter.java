@@ -88,6 +88,7 @@ public class Detailed_Adapter extends BaseAdapter {
 
                     if (b) {
                         dbEnterArray[position] = row[0] + "%1";
+
                     }
                     else {
                         dbEnterArray[position] = row[0] + "%0";
@@ -142,7 +143,7 @@ public class Detailed_Adapter extends BaseAdapter {
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(context);
         final View dialogView = inflter.inflate(R.layout.add_dalogbox, null);
         dialogBuilder.setView(dialogView);
-        dialogBuilder.setCancelable(true);
+        dialogBuilder.setCancelable(false);
 
         // intializing variables
         final EditText Add = (EditText) dialogView.findViewById(R.id.add_ET);

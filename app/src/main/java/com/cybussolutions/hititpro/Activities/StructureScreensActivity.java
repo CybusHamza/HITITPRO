@@ -1,8 +1,10 @@
 package com.cybussolutions.hititpro.Activities;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
@@ -42,10 +44,6 @@ public class StructureScreensActivity extends AppCompatActivity {
             template_id = intent.getStringExtra("template_id");
         }
 
-
-
-
-
         getSupportFragmentManager().beginTransaction().replace(R.id.container,
                 new StructureScreenFragment()).addToBackStack("structure").commit();
     }
@@ -59,9 +57,27 @@ public class StructureScreensActivity extends AppCompatActivity {
         }
         else if(getSupportFragmentManager().getBackStackEntryCount()==1)
         {
-            getSupportFragmentManager().popBackStack();
 
-            finish();
+            new AlertDialog.Builder(StructureScreensActivity.this)
+                    .setTitle("Close Inspection")
+                    .setMessage("Are you sure you want to Close this Inspection? This Will remove all un synced data !!")
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+
+                            getSupportFragmentManager().popBackStack();
+
+                            finish();
+
+                        }
+                    })
+                    .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    })
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .show();
+
 
         }
         else {

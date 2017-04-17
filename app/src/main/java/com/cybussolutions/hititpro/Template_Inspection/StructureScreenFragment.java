@@ -1,5 +1,6 @@
 package com.cybussolutions.hititpro.Template_Inspection;
 
+import android.app.FragmentManager;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -7,6 +8,7 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +28,7 @@ import com.cybussolutions.hititpro.Activities.Detailed_Activity_All_Screens;
 import com.cybussolutions.hititpro.Activities.Start_Inspection;
 import com.cybussolutions.hititpro.Activities.StructureScreensActivity;
 import com.cybussolutions.hititpro.Fragments.BaseFragment;
+import com.cybussolutions.hititpro.Fragments.ClientsFragment;
 import com.cybussolutions.hititpro.Network.End_Points;
 import com.cybussolutions.hititpro.R;
 import com.cybussolutions.hititpro.Sql_LocalDataBase.Database;
@@ -45,12 +48,13 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 public class StructureScreenFragment extends BaseFragment {
 
     View root;
-    Button next;
+    Button next,back;
     private static final String PORTFOLIO_TABLE = "portfolio";
     private static final int MY_SOCKET_TIMEOUT_MS = 10000;
     ProgressDialog ringProgressDialog;
     Database database;
     ArrayList<String> datArray = new ArrayList<>();
+    FragmentManager manager;
 
 //    ImageView foundationImg, columnsImg, floorStructureImg, wallStructureImg, ceilingStructureImg, roofStructureImg,
 //     structureObservationsImg, roFoundationImg, roCrawlSpacesImg, roFloorsImg, roExteriorWallsImg, roRoofImg;
@@ -65,13 +69,15 @@ public class StructureScreenFragment extends BaseFragment {
 
     @Nullable
     @Override
-    public View onCreateView(final LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(final LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
+    {
 
         database= new Database(getActivity());
 
         root = inflater.inflate(R.layout.fragment_structure_screen, container, false);
 
         next = (Button) root.findViewById(R.id.next);
+        back = (Button) root.findViewById(R.id.back);
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,6 +88,14 @@ public class StructureScreenFragment extends BaseFragment {
             }
         });
 
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                manager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new ClientsFragment()).commit();
+            }
+        });
 
         try {
             database = database.open();
@@ -328,6 +342,7 @@ public class StructureScreenFragment extends BaseFragment {
     }
 
 
+
     public void StructureSync() {
 
         ringProgressDialog = ProgressDialog.show(getActivity(), "Please wait ...", "Sync Structure ...", true);
@@ -517,6 +532,7 @@ public class StructureScreenFragment extends BaseFragment {
         requestQueue.add(request);
 
     }
+
 
 
 

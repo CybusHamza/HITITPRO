@@ -53,7 +53,7 @@ public class Add_Client extends AppCompatActivity {
         Submit = (Button) findViewById(R.id.register);
 
         final SharedPreferences pref = getApplicationContext().getSharedPreferences("UserPrefs", MODE_PRIVATE);
-        userid = pref.getString("id", null);
+        userid = pref.getString("user_id", null);
 
         Submit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -170,8 +170,8 @@ public class Add_Client extends AppCompatActivity {
                                 @Override
                                 public void onClick(SweetAlertDialog sDialog) {
                                     sDialog.dismiss();
-                                }
-                            })
+                                 }
+                           })
                             .show();
                 } else if (error instanceof TimeoutError) {
 

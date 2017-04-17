@@ -12,6 +12,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="50dp"
         android:hint="Item"
+        android:focusable="true"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="20dp"
@@ -24,10 +25,25 @@
         android:background="@drawable/round_corner_button"
         android:textColor="@color/White"
         android:textSize="20sp"
-        android:layout_marginBottom="20dp"
         android:id="@+id/add_BT"
-        android:layout_below="@+id/add_ET"
-        android:layout_centerHorizontal="true"
         android:layout_marginTop="58dp"
-        android:padding="15dp" />
+        android:padding="15dp"
+        android:layout_below="@+id/add_ET"
+        android:layout_alignLeft="@+id/add_ET"
+        android:layout_alignStart="@+id/add_ET"
+        android:layout_marginRight="20dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="cancel"
+        android:background="@drawable/round_corner_button"
+        android:textColor="@color/White"
+        android:textSize="20sp"
+        android:id="@+id/cancel"
+        android:padding="15dp"
+        android:layout_alignTop="@+id/add_BT"
+        android:layout_alignRight="@+id/add_ET"
+        android:layout_alignEnd="@+id/add_ET"
+        android:layout_marginBottom="20dp" />
 </RelativeLayout>

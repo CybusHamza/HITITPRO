@@ -76,12 +76,7 @@ public class ClientsFragment extends BaseFragment {
         final SharedPreferences pref = getActivity().getSharedPreferences("UserPrefs", getActivity().MODE_PRIVATE);
          id = pref.getString("user_id", null);
 
-
-
         AllClients();
-
-
-
 
         client_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

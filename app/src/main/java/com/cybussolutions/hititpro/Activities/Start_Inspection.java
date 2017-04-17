@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -56,7 +57,6 @@ public class Start_Inspection extends AppCompatActivity {
     private static final int MY_SOCKET_TIMEOUT_MS = 10000;
     ProgressDialog ringProgressDialog;
     AlertDialog b;
-    EditText tempName;
     ImageView add_template;
     Spinner tem_spinner;
     private List<String> inspection_list = new ArrayList<>();
@@ -79,7 +79,6 @@ public class Start_Inspection extends AppCompatActivity {
         clientId =intent.getStringExtra("client_id");
 
         client_name = (TextView) findViewById(R.id.client_name_ins);
-        tempName = (EditText) findViewById(R.id.tem_name);
         tem_spinner = (Spinner) findViewById(R.id.tem_spinner);
         add_template = (ImageView) findViewById(R.id.add_template);
 
@@ -104,13 +103,22 @@ public class Start_Inspection extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                StrtmpName = tempName.getText().toString();
+                if(tem_spinner.getSelectedItem().equals("Select a Template"))
+                {
+                    Toast.makeText(Start_Inspection.this, "Please Select A Template ", Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
 
-                startInspection();
+                    StrtmpName  = tem_spinner.getSelectedItem().toString();
+                    startInspection();
 
-                ringProgressDialog = ProgressDialog.show(Start_Inspection.this, "", "Please wait ...", true);
-                ringProgressDialog.setCancelable(false);
-                ringProgressDialog.show();
+                    ringProgressDialog = ProgressDialog.show(Start_Inspection.this, "", "Please wait ...", true);
+                    ringProgressDialog.setCancelable(false);
+                    ringProgressDialog.show();
+
+                }
+
 
             }
         });
@@ -220,7 +228,7 @@ public class Start_Inspection extends AppCompatActivity {
 
                         ringProgressDialog.dismiss();
 
-                       if (response.equals(temId))
+                       if (!(response.equals("")))
                         {
                             Intent intent= new Intent(Start_Inspection.this,StructureScreensActivity.class);
                             intent.putExtra("inspectionId",response);
@@ -345,24 +353,17 @@ public class Start_Inspection extends AppCompatActivity {
                             }
 
                         }
-
                         else
                         {
-                            tem_spinner.setVisibility(View.GONE);
-                            tempName.setVisibility(View.VISIBLE);
+                            inspection_list.add(0,"Select a Template");
 
-                            new SweetAlertDialog(Start_Inspection.this, SweetAlertDialog.ERROR_TYPE)
-                                    .setTitleText("Error!")
-                                    .setConfirmText("OK").setContentText("There Are No Templates Against this Client")
-                                    .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                                        @Override
-                                        public void onClick(SweetAlertDialog sDialog) {
-                                            sDialog.dismiss();
-                                        }
-                                    })
-                                    .show();
+                            ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>
+                                    (Start_Inspection.this, android.R.layout.simple_spinner_item,inspection_list);
 
+                            dataAdapter.setDropDownViewResource
+                                    (android.R.layout.simple_spinner_dropdown_item);
 
+                            tem_spinner.setAdapter(dataAdapter);
 
                         }
 
@@ -447,29 +448,48 @@ public class Start_Inspection extends AppCompatActivity {
         LayoutInflater inflater = getLayoutInflater();
         final View dialogView = inflater.inflate(R.layout.add_dalogbox, null);
         dialogBuilder.setView(dialogView);
-        dialogBuilder.setCancelable(true);
+        dialogBuilder.setCancelable(false);
 
         // intializing variables
         final EditText Add = (EditText) dialogView.findViewById(R.id.add_ET);
         final Button to = (Button) dialogView.findViewById(R.id.add_BT);
+        final Button cancel = (Button) dialogView.findViewById(R.id.cancel);
 
-        to.setText("Create and Start Inspection");
+        to.setText("Create and Start");
 
 
         Add.setHint("Template Name");
         b = dialogBuilder.create();
+
+        b.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+
         b.show();
 
         to.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-               StrtmpName  = Add.getText().toString();
+                if(Add.getText().toString().equals(""))
+                {
+                    Toast.makeText(Start_Inspection.this, "Enter Template Name", Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    StrtmpName  = Add.getText().toString();
 
-                startInspection();
+                    startInspection();
 
+                    b.dismiss();
+                }
+
+
+            }
+        });
+
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 b.dismiss();
-
             }
         });
 

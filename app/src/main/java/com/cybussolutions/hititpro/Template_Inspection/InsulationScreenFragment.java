@@ -29,6 +29,10 @@ import com.cybussolutions.hititpro.Network.End_Points;
 import com.cybussolutions.hititpro.R;
 import com.cybussolutions.hititpro.Sql_LocalDataBase.Database;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
@@ -134,25 +138,35 @@ public class InsulationScreenFragment extends BaseFragment {
         SharedPreferences.Editor editor = pref.edit();
         String populate = pref.getString("isInsulation_populated","");
 
-        if(!(populate.equals("true")))
+        if(StructureScreensActivity.inspection_type.equals("old"))
         {
-            database.prePopulateData("atticinsulation", ATTIC_INSULATION_Values, INSULATION_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("exteriorwallinsulation", EXTERIORWALLINSULATION_Values, INSULATION_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("basementwallinsulation", BASEMENTWALLINSULATION_Values, INSULATION_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("crawlspaceinsulation", CRAWLSPACEINSULATION_Values, INSULATION_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("vaporretarders", VAPORRETARDERS_Values, INSULATION_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("roofventilation", ROOFVENTILATION_Values, INSULATION_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("rfurnace", CRAWLSPACEVENTILATION_Values, INSULATION_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("rsupplyairductwork", EXHAUSTFANS_VENTS_Values, INSULATION_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("boiler", Insulation_Ventilation_Observations_Values, INSULATION_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("atticandroof", Attic_Roof_Values, INSULATION_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("basement", Basement_Values, INSULATION_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("crawlspace", CrawlSpace_Values, INSULATION_TABLE, StructureScreensActivity.inspectionID);
+            getInsulation();
 
-            // Saving string
-            editor.putString("isInsulation_populated", "true");
-            editor.apply();
         }
+        else
+        {
+            if(!(populate.equals("true")))
+            {
+                database.prePopulateData("atticinsulation", ATTIC_INSULATION_Values, INSULATION_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("exteriorwallinsulation", EXTERIORWALLINSULATION_Values, INSULATION_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("basementwallinsulation", BASEMENTWALLINSULATION_Values, INSULATION_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("crawlspaceinsulation", CRAWLSPACEINSULATION_Values, INSULATION_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("vaporretarders", VAPORRETARDERS_Values, INSULATION_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("roofventilation", ROOFVENTILATION_Values, INSULATION_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("rfurnace", CRAWLSPACEVENTILATION_Values, INSULATION_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("rsupplyairductwork", EXHAUSTFANS_VENTS_Values, INSULATION_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("boiler", Insulation_Ventilation_Observations_Values, INSULATION_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("atticandroof", Attic_Roof_Values, INSULATION_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("basement", Basement_Values, INSULATION_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("crawlspace", CrawlSpace_Values, INSULATION_TABLE, StructureScreensActivity.inspectionID);
+
+                // Saving string
+                editor.putString("isInsulation_populated", "true");
+                editor.apply();
+            }
+
+        }
+
         
         ATTIC_INSULATION.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -312,6 +326,105 @@ public class InsulationScreenFragment extends BaseFragment {
 
 
         return root;
+    }
+
+    private void getInsulation() {
+        ringProgressDialog = ProgressDialog.show(getActivity(), "", "Please wait ...", true);
+        ringProgressDialog.setCancelable(false);
+        ringProgressDialog.show();
+
+        final StringRequest request = new StringRequest(Request.Method.POST, End_Points.GET_TEMPLATE_DATA,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        ringProgressDialog.dismiss();
+
+                        database.clearTable(INSULATION_TABLE);
+
+
+                        try {
+                            JSONArray jsonArray = new JSONArray(response);
+
+                            JSONObject object = jsonArray.getJSONObject(0);
+
+                            database.insertEntry("atticinsulation", object.getString("atticinsulation"), INSULATION_TABLE, StructureScreensActivity.inspectionID);
+                            database.insertEntry("exteriorwallinsulation", object.getString("exteriorwallinsulation"), INSULATION_TABLE, StructureScreensActivity.inspectionID);
+                            database.insertEntry("basementwallinsulation", object.getString("basementwallinsulation"), INSULATION_TABLE, StructureScreensActivity.inspectionID);
+                            database.insertEntry("crawlspaceinsulation", object.getString("crawlspaceinsulation"), INSULATION_TABLE, StructureScreensActivity.inspectionID);
+                            database.insertEntry("vaporretarders", object.getString("vaporretarders"), INSULATION_TABLE, StructureScreensActivity.inspectionID);
+                            database.insertEntry("roofventilation", object.getString("roofventilation"), INSULATION_TABLE, StructureScreensActivity.inspectionID);
+                            database.insertEntry("rfurnace", object.getString("rfurnace"), INSULATION_TABLE, StructureScreensActivity.inspectionID);
+                            database.insertEntry("rsupplyairductwork", object.getString("rsupplyairductwork"), INSULATION_TABLE, StructureScreensActivity.inspectionID);
+                            database.insertEntry("boiler", object.getString("boiler"), INSULATION_TABLE, StructureScreensActivity.inspectionID);
+                            database.insertEntry("atticandroof", object.getString("atticandroof"), INSULATION_TABLE, StructureScreensActivity.inspectionID);
+                            database.insertEntry("basement", object.getString("basement"), INSULATION_TABLE, StructureScreensActivity.inspectionID);
+                            database.insertEntry("crawlspace", object.getString("crawlspace"), INSULATION_TABLE, StructureScreensActivity.inspectionID);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                ringProgressDialog.dismiss();
+                if (error instanceof NoConnectionError) {
+
+                    new SweetAlertDialog(getActivity(), SweetAlertDialog.ERROR_TYPE)
+                            .setTitleText("Error!")
+                            .setConfirmText("OK").setContentText("No Internet Connection")
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    sDialog.dismiss();
+                                }
+                            })
+                            .show();
+                } else if (error instanceof TimeoutError) {
+
+                    new SweetAlertDialog(getActivity(), SweetAlertDialog.ERROR_TYPE)
+                            .setTitleText("Error!")
+                            .setConfirmText("OK").setContentText("Connection TimeOut! Please check your internet connection.")
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    sDialog.dismiss();
+                                }
+                            })
+                            .show();
+                }
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+
+
+                Cursor cursor = database.getTable(INSULATION_TABLE, StructureScreensActivity.inspectionID);
+                cursor.moveToFirst();
+
+                Map<String, String> params = new HashMap<>();
+                params.put("client_id", StructureScreensActivity.client_id);
+                params.put("tempid", StructureScreensActivity.template_id);
+                params.put("inspection_id", StructureScreensActivity.inspectionID);
+                params.put("temp_name", INSULATION_TABLE);
+
+
+                return params;
+
+            }
+        };
+
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                MY_SOCKET_TIMEOUT_MS,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+        requestQueue.add(request);
     }
 
 

@@ -1,6 +1,7 @@
 package com.cybussolutions.hititpro.Activities;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +10,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -155,19 +158,34 @@ public class Detailed_Activity_All_Screens extends AppCompatActivity {
         LayoutInflater inflater = getLayoutInflater();
         final View dialogView = inflater.inflate(R.layout.add_dalogbox, null);
         dialogBuilder.setView(dialogView);
-        dialogBuilder.setCancelable(true);
+        dialogBuilder.setCancelable(false);
 
         // intializing variables
         final EditText Add = (EditText) dialogView.findViewById(R.id.add_ET);
         final Button to = (Button) dialogView.findViewById(R.id.add_BT);
+        final Button cancel = (Button) dialogView.findViewById(R.id.cancel);
+
 
 
         b = dialogBuilder.create();
+
+
+        b.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+
+
         b.show();
 
         to.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                if (Add.getText().toString().equals(""))
+                {
+                    Toast.makeText(Detailed_Activity_All_Screens.this, "Please Enter Some Data !!", Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+
 
                 String[] insertArray = Detailed_Adapter.getDbInsertArray();
 
@@ -181,27 +199,35 @@ public class Detailed_Activity_All_Screens extends AppCompatActivity {
                     model.setItemName(insertArray[item]);
 
                     if (item == (insertArray.length - 1)) {
-                        if (Add.getText().toString().equals(""))
-                        {
-                            Toast.makeText(Detailed_Activity_All_Screens.this, "Please Enter Some Data !!", Toast.LENGTH_SHORT).show();
-                        }
-                        else
-                        {
+
+
                             model.setItemName(Add.getText().toString() + "%0");
-                        }
+
                     }
 
                     list.add(model);
                 }
 
 
-                Detailed_Adapter.notifyDataSetChanged();
+
+
+                    Detailed_Adapter.notifyDataSetChanged();
+
+
 
                 b.dismiss();
+                }
 
             }
         });
 
+
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                b.dismiss();
+            }
+        });
 
     }
 }

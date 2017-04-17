@@ -30,6 +30,10 @@ import com.cybussolutions.hititpro.Network.End_Points;
 import com.cybussolutions.hititpro.R;
 import com.cybussolutions.hititpro.Sql_LocalDataBase.Database;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
@@ -121,21 +125,31 @@ public class FirePlaceScreenFragment extends BaseFragment {
         String populate = pref.getString("isFirePlace_populated","");
 
 
-        if(!(populate.equals("true")))
-        {
-            database.prePopulateData("fireplaceswoodstoves", fireplaces_wood_stovesValues, FIREPLACE_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("woodcoalstoves", wood_coal_stovesValues, FIREPLACE_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("ventsflueschimney", vents_flues_chimneyValues, FIREPLACE_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("observations", fireplaces_wood_stoves_observationValues, FIREPLACE_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("recommendationsfireplace", fireplaceValues, FIREPLACE_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("recommendationswood", wood_stoveValues, FIREPLACE_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("fireplace_ro", fireplace_roValues, FIREPLACE_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("wood_stove_ro", wood_stove_roValues, FIREPLACE_TABLE, StructureScreensActivity.inspectionID);
 
-            // Saving string
-            editor.putString("isFirePlace_populated", "true");
-            editor.apply();
+        if(StructureScreensActivity.inspection_type.equals("old"))
+        {
+            getInsulation();
+
         }
+        else
+        {
+            if(!(populate.equals("true")))
+            {
+                database.prePopulateData("fireplaceswoodstoves", fireplaces_wood_stovesValues, FIREPLACE_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("woodcoalstoves", wood_coal_stovesValues, FIREPLACE_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("ventsflueschimney", vents_flues_chimneyValues, FIREPLACE_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("observations", fireplaces_wood_stoves_observationValues, FIREPLACE_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("recommendationsfireplace", fireplaceValues, FIREPLACE_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("recommendationswood", wood_stoveValues, FIREPLACE_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("fireplace_ro", fireplace_roValues, FIREPLACE_TABLE, StructureScreensActivity.inspectionID);
+                database.prePopulateData("wood_stove_ro", wood_stove_roValues, FIREPLACE_TABLE, StructureScreensActivity.inspectionID);
+
+                // Saving string
+                editor.putString("isFirePlace_populated", "true");
+                editor.apply();
+            }
+        }
+
         
         fireplaces_wood_stoves.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -242,6 +256,102 @@ public class FirePlaceScreenFragment extends BaseFragment {
         return root;
     }
 
+    private void getInsulation() {
+
+        ringProgressDialog = ProgressDialog.show(getActivity(), "", "Please wait ...", true);
+        ringProgressDialog.setCancelable(false);
+        ringProgressDialog.show();
+
+        final StringRequest request = new StringRequest(Request.Method.POST, End_Points.GET_TEMPLATE_DATA,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        ringProgressDialog.dismiss();
+
+                        database.clearTable(FIREPLACE_TABLE);
+
+
+                        try {
+                            JSONArray jsonArray = new JSONArray(response);
+
+                            JSONObject object = jsonArray.getJSONObject(0);
+
+
+                            database.insertEntry("fireplaceswoodstoves",  object.getString("fireplaceswoodstoves"), FIREPLACE_TABLE, StructureScreensActivity.inspectionID);
+                            database.insertEntry("woodcoalstoves",  object.getString("woodcoalstoves"), FIREPLACE_TABLE, StructureScreensActivity.inspectionID);
+                            database.insertEntry("ventsflueschimney",  object.getString("ventsflueschimney"), FIREPLACE_TABLE, StructureScreensActivity.inspectionID);
+                            database.insertEntry("observations",  object.getString("observations"), FIREPLACE_TABLE, StructureScreensActivity.inspectionID);
+                            database.insertEntry("recommendationsfireplace",  object.getString("recommendationsfireplace"), FIREPLACE_TABLE, StructureScreensActivity.inspectionID);
+                            database.insertEntry("recommendationswood",  object.getString("recommendationswood"), FIREPLACE_TABLE, StructureScreensActivity.inspectionID);
+                            database.insertEntry("fireplace_ro",  object.getString("fireplace_ro"), FIREPLACE_TABLE, StructureScreensActivity.inspectionID);
+                            database.insertEntry("wood_stove_ro",  object.getString("wood_stove_ro"), FIREPLACE_TABLE, StructureScreensActivity.inspectionID);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                ringProgressDialog.dismiss();
+                if (error instanceof NoConnectionError) {
+
+                    new SweetAlertDialog(getActivity(), SweetAlertDialog.ERROR_TYPE)
+                            .setTitleText("Error!")
+                            .setConfirmText("OK").setContentText("No Internet Connection")
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    sDialog.dismiss();
+                                }
+                            })
+                            .show();
+                } else if (error instanceof TimeoutError) {
+
+                    new SweetAlertDialog(getActivity(), SweetAlertDialog.ERROR_TYPE)
+                            .setTitleText("Error!")
+                            .setConfirmText("OK").setContentText("Connection TimeOut! Please check your internet connection.")
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    sDialog.dismiss();
+                                }
+                            })
+                            .show();
+                }
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+
+
+                Cursor cursor = database.getTable(FIREPLACE_TABLE, StructureScreensActivity.inspectionID);
+                cursor.moveToFirst();
+
+                Map<String, String> params = new HashMap<>();
+                params.put("client_id", StructureScreensActivity.client_id);
+                params.put("tempid", StructureScreensActivity.template_id);
+                params.put("inspection_id", StructureScreensActivity.inspectionID);
+                params.put("temp_name", FIREPLACE_TABLE);
+
+
+                return params;
+
+            }
+        };
+
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                MY_SOCKET_TIMEOUT_MS,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+        requestQueue.add(request);
+    }
 
 
     public void FirePlaceSync() {
