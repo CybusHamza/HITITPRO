@@ -1,7 +1,6 @@
 package com.cybussolutions.hititpro.Activities;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
@@ -11,20 +10,19 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.cybussolutions.hititpro.Adapters.Detailed_Adapter;
-import com.cybussolutions.hititpro.Model.Detailed_model;
+import com.cybussolutions.hititpro.Model.Checkbox_model;
 import com.cybussolutions.hititpro.R;
 import com.cybussolutions.hititpro.Sql_LocalDataBase.Database;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-
 
 
 public class Detailed_Activity_All_Screens extends AppCompatActivity {
@@ -36,7 +34,8 @@ public class Detailed_Activity_All_Screens extends AppCompatActivity {
     Database database = new Database(this);
     Button addCategory;
     AlertDialog b;
-    private ArrayList<Detailed_model> list = new ArrayList<>();
+    private ArrayList<Checkbox_model> list = new ArrayList<>();
+    ArrayAdapter<Checkbox_model> adapter;
 
 
     @Override
@@ -92,8 +91,8 @@ public class Detailed_Activity_All_Screens extends AppCompatActivity {
             String[] row = fromDataBase.split(splitter);
 
             for (String item : row) {
-                Detailed_model model = new Detailed_model();
-                model.setItemName(item);
+                Checkbox_model model = new Checkbox_model();
+                model.setName(item);
                 list.add(model);
             }
 
@@ -101,15 +100,15 @@ public class Detailed_Activity_All_Screens extends AppCompatActivity {
         else {
             if (items.length != 0) {
                 for (String item : items) {
-                    Detailed_model model = new Detailed_model();
-                    model.setItemName(item);
+                    Checkbox_model model = new Checkbox_model();
+                    model.setName(item);
                     list.add(model);
                 }
             }
 
         }
 
-        Detailed_Adapter = new Detailed_Adapter(list, Detailed_Activity_All_Screens.this);
+        Detailed_Adapter = new Detailed_Adapter(Detailed_Activity_All_Screens.this,list,R.layout.row_detailed);
         detailedListView.setAdapter(Detailed_Adapter);
 
     }
@@ -195,13 +194,13 @@ public class Detailed_Activity_All_Screens extends AppCompatActivity {
                 Detailed_Adapter.notifyDataSetChanged();
 
                 for (int item = 0; item < insertArray.length; item++) {
-                    Detailed_model model = new Detailed_model();
-                    model.setItemName(insertArray[item]);
+                    Checkbox_model model = new Checkbox_model();
+                    model.setName(insertArray[item]);
 
                     if (item == (insertArray.length - 1)) {
 
 
-                            model.setItemName(Add.getText().toString() + "%0");
+                            model.setName(Add.getText().toString() + "%0");
 
                     }
 

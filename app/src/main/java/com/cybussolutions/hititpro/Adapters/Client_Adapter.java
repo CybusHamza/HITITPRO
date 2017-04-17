@@ -5,13 +5,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 
 import com.cybussolutions.hititpro.Model.Clients_model;
 import com.cybussolutions.hititpro.R;
 
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -48,15 +48,31 @@ public class Client_Adapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        view = inflter.inflate(R.layout.row_client, null);
 
-        TextView name= (TextView) view.findViewById(R.id.client_name);
-        TextView adress= (TextView) view.findViewById(R.id.client_adress);
+        View v = convertView;
+        ViewHolder viewholder = null;
 
-        name.setText(arrayList.get(position).getClient_name());
-        adress.setText(arrayList.get(position).getClient_adress());
+        if (convertView == null) {
+            LayoutInflater li = (LayoutInflater) context
+                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            v = li.inflate(R.layout.row_client, null);
+            viewholder = new ViewHolder();
+            viewholder.name = (TextView) v.findViewById(R.id.client_name);
+            viewholder.adress = (TextView) v.findViewById(R.id.client_adress);
+            v.setTag(viewholder);
+        } else {
+            viewholder = (ViewHolder) v.getTag();
+        }
+
+        viewholder.name.setText(arrayList.get(position).getClient_name());
+        viewholder.adress.setText(arrayList.get(position).getClient_adress());
+
+        return v;
+    }
+
+      class ViewHolder{
+          protected TextView name,adress;
 
 
-        return view;
     }
 }

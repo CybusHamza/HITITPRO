@@ -1,111 +1,121 @@
 package com.cybussolutions.hititpro.Adapters;
 
+import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.cybussolutions.hititpro.Activities.Detailed_Activity_All_Screens;
-import com.cybussolutions.hititpro.Model.Detailed_model;
+import com.cybussolutions.hititpro.Model.Checkbox_model;
 import com.cybussolutions.hititpro.R;
 
-import java.util.ArrayList;
+import java.util.List;
 
 
-public class Detailed_Adapter extends BaseAdapter {
-    ArrayList<Detailed_model> arrayList;
-    Context context;
+public class Detailed_Adapter extends ArrayAdapter<Checkbox_model> {
+    private final List<Checkbox_model> list;
+    Activity context;
     LayoutInflater inflter;
-    View view;
     String[] dbEnterArray;
     AlertDialog b;
 
-    public Detailed_Adapter(ArrayList<Detailed_model> arrayList, Context context) {
-        this.arrayList = arrayList;
+    public Detailed_Adapter(Activity context, List<Checkbox_model> list, int resource) {
+        super(context, resource);
         this.context = context;
-        inflter = (LayoutInflater.from(context));
-
+        this.list = list;
     }
+
 
     @Override
     public int getCount() {
-        return arrayList.size();
-    }
-
-    @Override
-    public Object getItem(int position) {
-        return arrayList.get(position);
-    }
-
-    @Override
-    public long getItemId(int position) {
-        return position;
+        return list.size();
     }
 
     @Override
     public View getView(final int position, View convertView, final ViewGroup parent) {
-        view = inflter.inflate(R.layout.row_detailed, null);
 
-        final CheckBox item = (CheckBox) view.findViewById(R.id.detailed_checkbox);
-        ImageView edit = (ImageView) view.findViewById(R.id.edit);
-        ImageView delete = (ImageView) view.findViewById(R.id.delete);
+        ViewHolder viewHolder;
+        if (convertView == null) {
+            inflter = context.getLayoutInflater();
+            convertView = inflter.inflate(R.layout.row_detailed, null);
+            viewHolder = new ViewHolder();
+            viewHolder.text = (TextView) convertView.findViewById(R.id.label);
+            viewHolder.checkbox = (CheckBox) convertView.findViewById(R.id.check);
+            viewHolder.delete = (ImageView) convertView.findViewById(R.id.delete);
+            viewHolder.edit = (ImageView) convertView.findViewById(R.id.edit);
 
-        dbEnterArray = new String[arrayList.size() + 1];
+            viewHolder.checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
-        String splitter = "%";
-        String row[] = arrayList.get(position).getItemName().split(splitter);
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
-            if (row[1] !=null && row[1].equals("1")) {
-                item.setChecked(true);
-            } else {
-                item.setChecked(false);
-            }
-
-            item.setText(row[0]);
-
-
-            for (int i = 0; i < arrayList.size(); i++) {
-                dbEnterArray[i] = arrayList.get(i).getItemName();
-            }
+                    String splitter = "%";
+                    String row[] = list.get(position).getName().split(splitter);
+                    int getPosition = (Integer) buttonView.getTag();  // Here we get the position that we have set for the checkbox using setTag.
+                    list.get(getPosition).setSelected(buttonView.isChecked()); // Set the value of checkbox to maintain its state.
 
 
-
-        item.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-
-                String splitter = "%";
-                String row[] = arrayList.get(position).getItemName().split(splitter);
-
-                    if (b) {
+                    if (isChecked) {
                         dbEnterArray[position] = row[0] + "%1";
 
-                    }
-                    else {
+                    } else {
                         dbEnterArray[position] = row[0] + "%0";
                     }
-            }
 
-        });
+                }
+            });
+            convertView.setTag(viewHolder);
+            convertView.setTag(R.id.label, viewHolder.text);
+            convertView.setTag(R.id.check, viewHolder.checkbox);
+        }
+        else{
+
+            viewHolder = (ViewHolder) convertView.getTag();
+        }
+
+        viewHolder.checkbox.setTag(position); // This line is important.
+
+        viewHolder.checkbox.setChecked(list.get(position).isSelected());
 
 
-        delete.setOnClickListener(new View.OnClickListener() {
+
+
+        dbEnterArray = new String[list.size() + 1];
+
+        String splitter = "%";
+        String row[] = list.get(position).getName().split(splitter);
+
+        if (row[1] != null && row[1].equals("1")) {
+            viewHolder.checkbox.setChecked(true);
+        } else {
+            viewHolder.checkbox.setChecked(false);
+        }
+
+        viewHolder.text.setText(row[0]);
+
+
+        for (int i = 0; i < list.size(); i++) {
+            dbEnterArray[i] = list.get(i).getName();
+        }
+
+
+        viewHolder.delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 final AlertDialog.Builder builder = new AlertDialog.Builder(context);
                 builder.setMessage("Are you sure?").setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        arrayList.remove(position);
+                        list.remove(position);
                         notifyDataSetChanged();
                     }
                 })
@@ -120,17 +130,18 @@ public class Detailed_Adapter extends BaseAdapter {
             }
         });
 
-        edit.setOnClickListener(new View.OnClickListener() {
+        final ViewHolder finalViewHolder = viewHolder;
+        viewHolder.edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                editItem(position, item.getText().toString());
+                editItem(position, finalViewHolder.text.getText().toString());
 
             }
         });
 
 
-        return view;
+        return convertView;
     }
 
     public String[] getDbInsertArray() {
@@ -162,29 +173,26 @@ public class Detailed_Adapter extends BaseAdapter {
 
                 // clearing list view
 
-                arrayList.clear();
+                list.clear();
                 notifyDataSetChanged();
 
                 for (int item = 0; item < dbEnterArray.length; item++) {
-                    Detailed_model model = new Detailed_model();
-                    model.setItemName(dbEnterArray[item]);
+                    Checkbox_model model = new Checkbox_model();
+                    model.setName(dbEnterArray[item]);
 
-                    arrayList.add(model);
+                    list.add(model);
 
                     if (item == (dbEnterArray.length - 1)) {
-                        arrayList.remove(position);
+                        list.remove(position);
 
-                        if (Add.getText().toString().equals(""))
-                        {
+                        if (Add.getText().toString().equals("")) {
                             Toast.makeText(context, "Please Enter Some Data !!", Toast.LENGTH_SHORT).show();
-                        }
-                        else
-                        {
-                            model.setItemName(Add.getText().toString() + "%0");
+                        } else {
+                            model.setName(Add.getText().toString() + "%0");
 
-                            arrayList.add(position, model);
+                            list.add(position, model);
 
-                            arrayList.remove(arrayList.size() - 1);
+                            list.remove(list.size() - 1);
                         }
 
                     }
@@ -199,6 +207,12 @@ public class Detailed_Adapter extends BaseAdapter {
         });
 
 
+    }
+
+    static class ViewHolder {
+        protected TextView text;
+        protected CheckBox checkbox;
+        protected ImageView edit, delete;
     }
 
 

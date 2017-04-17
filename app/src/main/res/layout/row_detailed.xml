@@ -7,13 +7,25 @@
     >
 
 
-    <CheckBox
+    <TextView
+        android:id="@+id/label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New CheckBox"
-        android:padding="13dp"
-        android:id="@+id/detailed_checkbox"
-        android:checked="false" />
+        android:layout_toEndOf="@+id/check"
+        android:textSize="16sp"
+        android:layout_marginRight="90dp"
+        android:layout_toRightOf="@+id/check">
+    </TextView>
+
+    <CheckBox
+        android:id="@+id/check"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="4dip"
+        android:layout_marginRight="10dip"
+        android:focusable="false"
+        android:focusableInTouchMode="false" />
 
     <ImageView
         android:layout_width="35dp"
