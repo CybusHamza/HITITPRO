@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
     Button b,saveImage,drawLine,drawCircle,drawSquare,drawArrow,drawPen;
    // private static final int SELECT_PICTURE = 100;
     private static final String TAG = "MainActivity";
-    private static int IMG_RESULT = 1;
+    private static int IMG_RESULT = 2;
     String ImageDecode;
     View mview;
     ImageView imageViewLoad;
@@ -323,10 +323,10 @@ public class MainActivity extends AppCompatActivity {
                // imageView.setImageBitmap(BitmapFactory
                  //       .decodeFile(ImageDecode));
 
-
             }
         } catch (Exception e) {
-
+            Toast.makeText(this, "Please try again"+e.toString(), Toast.LENGTH_LONG)
+                    .show();
         }
     }
     /* Get the real path from the URI */
