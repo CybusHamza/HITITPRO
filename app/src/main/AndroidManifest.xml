@@ -33,10 +33,12 @@
         <activity android:name=".Activities.Start_Inspection" />
         <activity android:name=".Activities.Add_Client" />
         <activity android:name=".Activities.StructureScreensActivity" />
+        <activity android:name=".Activities.MainActivity" />
         <activity
             android:name=".Activities.Detailed_Activity_All_Screens"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
-    </application>
+            android:windowSoftInputMode="adjustPan">
+            </activity>
+
+   </application>
 
 </manifest>

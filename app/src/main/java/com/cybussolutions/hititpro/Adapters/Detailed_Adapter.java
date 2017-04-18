@@ -3,6 +3,7 @@ package com.cybussolutions.hititpro.Adapters;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.cybussolutions.hititpro.Activities.MainActivity;
 import com.cybussolutions.hititpro.Model.Checkbox_model;
 import com.cybussolutions.hititpro.R;
 
@@ -52,6 +54,7 @@ public class Detailed_Adapter extends ArrayAdapter<Checkbox_model> {
             viewHolder.checkbox = (CheckBox) convertView.findViewById(R.id.check);
             viewHolder.delete = (ImageView) convertView.findViewById(R.id.delete);
             viewHolder.edit = (ImageView) convertView.findViewById(R.id.edit);
+            viewHolder.imageEditor = (ImageView) convertView.findViewById(R.id.imageEditor);
 
             viewHolder.checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
@@ -126,6 +129,18 @@ public class Detailed_Adapter extends ArrayAdapter<Checkbox_model> {
 
                             }
                         }).show();
+
+            }
+        });
+        viewHolder.imageEditor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    Intent intent=new Intent(context,MainActivity.class);
+                    context.startActivity(intent);
+                }catch (Exception e){
+                    Toast.makeText(context,e.toString(),Toast.LENGTH_LONG).show();
+                }
 
             }
         });
@@ -212,7 +227,7 @@ public class Detailed_Adapter extends ArrayAdapter<Checkbox_model> {
     static class ViewHolder {
         protected TextView text;
         protected CheckBox checkbox;
-        protected ImageView edit, delete;
+        protected ImageView edit, delete,imageEditor;
     }
 
 

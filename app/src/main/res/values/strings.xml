@@ -225,4 +225,14 @@
     <string name="fireplace_ro">Fireplace</string>
     <string name="stairways">Stairways</string>
     <string name="waste_ejector_pump_ro">Waste Ejector Pump</string>
+
+    ///editor resources/////
+    <string name="action_line">Line</string>
+    <string name="action_smoothline">Pen</string>
+    <string name="action_square">Square</string>
+    <string name="action_circle">Circle</string>
+    <string name="action_rectangle">Rectangle</string>
+    <string name="action_triangle">Triangle</string>
+    <string name="action_arrow">Arrow</string>
+    <string name="action_text">Text</string>
 </resources>
