@@ -2,6 +2,7 @@ package com.cybussolutions.hititpro.Template_Inspection;
 
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -58,11 +59,19 @@ public class FirePlaceScreenFragment extends BaseFragment {
     ProgressDialog ringProgressDialog;
     Database database;
 
+    SharedPreferences sp;
+    SharedPreferences.Editor edit;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.fragment_fire_place_screen, container, false);
+
+        ///////////set title of main screens/////////////////
+        sp=getContext().getSharedPreferences("prefs", Context.MODE_PRIVATE);
+        edit=sp.edit();
+        edit.putString("main_screen","FirePlace Screen");
+        edit.commit();
 
         save = (Button) root.findViewById(R.id.next);
         back = (Button) root.findViewById(R.id.back);
@@ -154,6 +163,8 @@ public class FirePlaceScreenFragment extends BaseFragment {
         fireplaces_wood_stoves.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",false);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",fireplaces_wood_stovesValues);
                 intent.putExtra("heading",wood_stove_ro.getText().toString());
@@ -166,6 +177,8 @@ public class FirePlaceScreenFragment extends BaseFragment {
         wood_coal_stoves.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",false);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",wood_coal_stovesValues);
                 intent.putExtra("heading",wood_stove_ro.getText().toString());
@@ -178,6 +191,8 @@ public class FirePlaceScreenFragment extends BaseFragment {
         vents_flues_chimney.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",false);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",vents_flues_chimneyValues);
                 intent.putExtra("heading",wood_stove_ro.getText().toString());
@@ -190,6 +205,8 @@ public class FirePlaceScreenFragment extends BaseFragment {
         fireplace_wood_stove_observations.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",false);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",fireplaces_wood_stoves_observationValues);
                 intent.putExtra("heading",wood_stove_ro.getText().toString());
@@ -202,6 +219,8 @@ public class FirePlaceScreenFragment extends BaseFragment {
         fireplace.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",fireplaceValues);
                 intent.putExtra("heading",wood_stove_ro.getText().toString());
@@ -214,6 +233,8 @@ public class FirePlaceScreenFragment extends BaseFragment {
         wood_stove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",wood_stoveValues);
                 intent.putExtra("heading",wood_stove_ro.getText().toString());
@@ -226,6 +247,8 @@ public class FirePlaceScreenFragment extends BaseFragment {
         fireplace_ro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",fireplace_roValues);
                 intent.putExtra("heading",wood_stove_ro.getText().toString());
@@ -239,6 +262,8 @@ public class FirePlaceScreenFragment extends BaseFragment {
         wood_stove_ro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",wood_stove_roValues);
                 intent.putExtra("heading",wood_stove_ro.getText().toString());

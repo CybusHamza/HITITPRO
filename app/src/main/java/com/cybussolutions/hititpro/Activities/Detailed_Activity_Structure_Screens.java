@@ -19,9 +19,11 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.cybussolutions.hititpro.Adapters.Detailed_Adapter;
+import com.cybussolutions.hititpro.Adapters.Detailed_Adapter_Structure_Screen;
 import com.cybussolutions.hititpro.Model.Checkbox_model;
 import com.cybussolutions.hititpro.R;
 import com.cybussolutions.hititpro.Sql_LocalDataBase.Database;
@@ -30,12 +32,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 
-public class Detailed_Activity_All_Screens extends AppCompatActivity {
+public class Detailed_Activity_Structure_Screens extends AppCompatActivity {
 
     ListView detailedListView;
     String[] items;
     String heading, dbColumn, dbTable, enteredStructure = "", inspectionID, fromDataBase;
-    Detailed_Adapter Detailed_Adapter;
+    Detailed_Adapter_Structure_Screen Detailed_Adapter;
     Database database = new Database(this);
     Button addCategory;
     AlertDialog b;
@@ -48,7 +50,7 @@ public class Detailed_Activity_All_Screens extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.detailed_activity_all_screens);
+        setContentView(R.layout.detail_activity_structure_screen);
 
         try {
             database = database.open();
@@ -64,7 +66,7 @@ public class Detailed_Activity_All_Screens extends AppCompatActivity {
         dbColumn = intent.getStringExtra("column");
         dbTable = intent.getStringExtra("dbTable");
         inspectionID = intent.getStringExtra("inspectionID");
-        
+
         SharedPreferences sp=getSharedPreferences("prefs", MODE_PRIVATE);
         SharedPreferences.Editor editor=sp.edit();
         editor.putString("heading",heading);
@@ -120,22 +122,17 @@ public class Detailed_Activity_All_Screens extends AppCompatActivity {
 
         }
 
-        Detailed_Adapter = new Detailed_Adapter(Detailed_Activity_All_Screens.this,list,R.layout.row_detailed);
+        Detailed_Adapter = new Detailed_Adapter_Structure_Screen(Detailed_Activity_Structure_Screens.this,list,R.layout.structure_observations);
+        detailedListView.setChoiceMode(android.R.layout.simple_list_item_single_choice);
         detailedListView.setAdapter(Detailed_Adapter);
         detailedListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                CheckBox checkBox = (CheckBox) findViewById(R.id.check);
-                if (checkBox.isChecked()) {
-                    checkBox.setChecked(true);
 
-                } else {
-                    checkBox.setChecked(false);
-                }
-                Toast.makeText(getApplicationContext(), String.valueOf(checkBox.isChecked()), Toast.LENGTH_LONG).show();
+
             }
         });
-        Detailed_Adapter.notifyDataSetChanged();
+        //Detailed_Adapter.notifyDataSetChanged();
 
     }
 
@@ -205,7 +202,7 @@ public class Detailed_Activity_All_Screens extends AppCompatActivity {
             public void onClick(View v) {
 
                 if (Add.getText().toString().equals("")) {
-                    Toast.makeText(Detailed_Activity_All_Screens.this, "Please Enter Some Data !!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Detailed_Activity_Structure_Screens.this, "Please Enter Some Data !!", Toast.LENGTH_SHORT).show();
                 } else {
 
 

@@ -2,6 +2,7 @@ package com.cybussolutions.hititpro.Template_Inspection;
 
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -61,12 +62,19 @@ public class InteriorScreenFragment extends BaseFragment {
 
     private static final String INTERIOR_TABLE = "interior";
 
-
+    SharedPreferences sp;
+    SharedPreferences.Editor edit;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.fragment_interior_screen, container, false);
+
+        ///////////set title of main screens/////////////////
+        sp=getContext().getSharedPreferences("prefs", Context.MODE_PRIVATE);
+        edit=sp.edit();
+        edit.putString("main_screen","Interior Screen");
+        edit.commit();
 
         next = (Button) root.findViewById(R.id.next);
         back = (Button) root.findViewById(R.id.back);
@@ -219,6 +227,9 @@ public class InteriorScreenFragment extends BaseFragment {
         wall_ceiling.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                edit.putBoolean("imageButton",false);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",wall_ceilingValues);
                 intent.putExtra("heading",wall_ceiling.getText().toString());
@@ -232,6 +243,8 @@ public class InteriorScreenFragment extends BaseFragment {
         floors_interoir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",false);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",floors_interoirValues);
                 intent.putExtra("heading",floors_interoir.getText().toString());
@@ -245,6 +258,8 @@ public class InteriorScreenFragment extends BaseFragment {
         windows.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",false);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",windowsValues);
                 intent.putExtra("heading",windows.getText().toString());
@@ -258,6 +273,8 @@ public class InteriorScreenFragment extends BaseFragment {
         doors.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",false);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",doorsValues);
                 intent.putExtra("heading",doors.getText().toString());
@@ -271,6 +288,9 @@ public class InteriorScreenFragment extends BaseFragment {
         interior_observations.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                edit.putBoolean("imageButton",false);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",interior_observationsValues);
                 intent.putExtra("heading",interior_observations.getText().toString());
@@ -284,6 +304,8 @@ public class InteriorScreenFragment extends BaseFragment {
         walls_ceilings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",walls_ceilingsValues);
                 intent.putExtra("heading",walls_ceilings.getText().toString());
@@ -297,6 +319,8 @@ public class InteriorScreenFragment extends BaseFragment {
         floors_ro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",floors_roValues);
                 intent.putExtra("heading",floors_ro.getText().toString());
@@ -310,6 +334,8 @@ public class InteriorScreenFragment extends BaseFragment {
         windows_ro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",windows_roValues);
                 intent.putExtra("heading",windows_ro.getText().toString());
@@ -322,6 +348,8 @@ public class InteriorScreenFragment extends BaseFragment {
         doors_ro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",doors_roValues);
                 intent.putExtra("heading",doors_ro.getText().toString());
@@ -335,6 +363,8 @@ public class InteriorScreenFragment extends BaseFragment {
         counters_cabinets.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",counters_cabinetsValues);
                 intent.putExtra("heading",counters_cabinets.getText().toString());
@@ -348,6 +378,8 @@ public class InteriorScreenFragment extends BaseFragment {
         skylights_ro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",skylights_roValues);
                 intent.putExtra("heading",skylights_ro.getText().toString());
@@ -361,6 +393,8 @@ public class InteriorScreenFragment extends BaseFragment {
         stairways_ro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",stairways_roValues);
                 intent.putExtra("heading",stairways_ro.getText().toString());
@@ -374,6 +408,8 @@ public class InteriorScreenFragment extends BaseFragment {
         basement_ro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",basement_roValues);
                 intent.putExtra("heading",basement_ro.getText().toString());
@@ -386,6 +422,8 @@ public class InteriorScreenFragment extends BaseFragment {
         environmental_issues.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",environmental_issuesValues);
                 intent.putExtra("heading",environmental_issues.getText().toString());
@@ -398,6 +436,8 @@ public class InteriorScreenFragment extends BaseFragment {
         walls_ceilings_ro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",walls_ceilings_roValues);
                 intent.putExtra("heading",walls_ceilings_ro.getText().toString());
@@ -411,6 +451,8 @@ public class InteriorScreenFragment extends BaseFragment {
         floors_observer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",floors_observerValues);
                 intent.putExtra("heading",floors_observer.getText().toString());
@@ -424,6 +466,8 @@ public class InteriorScreenFragment extends BaseFragment {
         windows_observe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",windows_observeValues);
                 intent.putExtra("heading",windows_observe.getText().toString());
@@ -437,6 +481,8 @@ public class InteriorScreenFragment extends BaseFragment {
         doors_observation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",doors_observationValues);
                 intent.putExtra("heading",doors_observation.getText().toString());
@@ -450,6 +496,8 @@ public class InteriorScreenFragment extends BaseFragment {
         Counters_Cabinets_observation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",Counters_Cabinets_observationValues);
                 intent.putExtra("heading",Counters_Cabinets_observation.getText().toString());
@@ -463,6 +511,8 @@ public class InteriorScreenFragment extends BaseFragment {
         skylights_obs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",skylights_obsValues);
                 intent.putExtra("heading",skylights_obs.getText().toString());
@@ -476,6 +526,8 @@ public class InteriorScreenFragment extends BaseFragment {
         basement_observation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",basement_observationValues);
                 intent.putExtra("heading",basement_observation.getText().toString());
@@ -490,6 +542,8 @@ public class InteriorScreenFragment extends BaseFragment {
         stairways_observation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",stairways_observationValues);
                 intent.putExtra("heading",stairways_observation.getText().toString());
@@ -503,6 +557,8 @@ public class InteriorScreenFragment extends BaseFragment {
         environmental_issues_ro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",environmental_issues_roValues);
                 intent.putExtra("heading",environmental_issues_ro.getText().toString());

@@ -2,6 +2,7 @@ package com.cybussolutions.hititpro.Template_Inspection;
 
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -59,11 +60,19 @@ public class CoolingScreenFragment extends BaseFragment {
     private static final String COOLING_TABLE = "cooling";
 
 
+    SharedPreferences sp;
+    SharedPreferences.Editor edit;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         root = inflater.inflate(R.layout.fragment_cooling_screen, container, false);
+
+        ///////////set title of main screens/////////////////
+        sp=getContext().getSharedPreferences("prefs", Context.MODE_PRIVATE);
+        edit=sp.edit();
+        edit.putString("main_screen","Cooling Screen");
+        edit.commit();
 
         next = (Button) root.findViewById(R.id.next);
         back = (Button) root.findViewById(R.id.back);
@@ -169,6 +178,8 @@ public class CoolingScreenFragment extends BaseFragment {
         coolingEnergyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",false);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",coolingEnergyButtonValues);
                 intent.putExtra("heading",coolingEnergyButton.getText().toString());
@@ -182,6 +193,8 @@ public class CoolingScreenFragment extends BaseFragment {
         coolingSystemButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",false);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",coolingSystemButtonValues);
                 intent.putExtra("heading",coolingSystemButton.getText().toString());
@@ -195,6 +208,8 @@ public class CoolingScreenFragment extends BaseFragment {
         coolingEquipmentButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",false);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",coolingEquipmentButtonValues);
                 intent.putExtra("heading",coolingEquipmentButton.getText().toString());
@@ -208,6 +223,8 @@ public class CoolingScreenFragment extends BaseFragment {
         coolingComponentsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",false);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",coolingComponentsButtonValues);
                 intent.putExtra("heading",coolingComponentsButton.getText().toString());
@@ -221,6 +238,8 @@ public class CoolingScreenFragment extends BaseFragment {
         coolingObservationsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",false);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",coolingObservationsButtonValues);
                 intent.putExtra("heading",coolingObservationsButton.getText().toString());
@@ -234,6 +253,8 @@ public class CoolingScreenFragment extends BaseFragment {
         roCentralButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",roCentralButtonValues);
                 intent.putExtra("heading",roCentralButton.getText().toString());
@@ -247,6 +268,9 @@ public class CoolingScreenFragment extends BaseFragment {
         roPumpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",true);
+                edit.commit();
+
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",roPumpButtonValues);
                 intent.putExtra("heading",roPumpButton.getText().toString());
@@ -260,6 +284,8 @@ public class CoolingScreenFragment extends BaseFragment {
         roEvaporatorButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",roEvaporatorButtonValues);
                 intent.putExtra("heading",roEvaporatorButton.getText().toString());
@@ -273,6 +299,8 @@ public class CoolingScreenFragment extends BaseFragment {
         roFansButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",roFansButtonValues);
                 intent.putExtra("heading",roFansButton.getText().toString());

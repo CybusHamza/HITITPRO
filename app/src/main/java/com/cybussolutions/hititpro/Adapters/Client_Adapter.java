@@ -59,6 +59,7 @@ public class Client_Adapter extends BaseAdapter {
             viewholder = new ViewHolder();
             viewholder.name = (TextView) v.findViewById(R.id.client_name);
             viewholder.adress = (TextView) v.findViewById(R.id.client_adress);
+            viewholder.phone_number=(TextView)v.findViewById(R.id.client_phone);
             v.setTag(viewholder);
         } else {
             viewholder = (ViewHolder) v.getTag();
@@ -66,12 +67,13 @@ public class Client_Adapter extends BaseAdapter {
 
         viewholder.name.setText(arrayList.get(position).getClient_name());
         viewholder.adress.setText(arrayList.get(position).getClient_adress());
+        viewholder.phone_number.setText(arrayList.get(position).getClient_phone());
 
         return v;
     }
 
       class ViewHolder{
-          protected TextView name,adress;
+          protected TextView name,adress,phone_number;
 
 
     }

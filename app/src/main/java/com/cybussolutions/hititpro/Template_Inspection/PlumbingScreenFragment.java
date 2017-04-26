@@ -2,6 +2,7 @@ package com.cybussolutions.hititpro.Template_Inspection;
 
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -58,12 +59,19 @@ public class PlumbingScreenFragment extends BaseFragment {
     private static final int MY_SOCKET_TIMEOUT_MS = 10000;
     ProgressDialog ringProgressDialog;
     Database database;
-
+    SharedPreferences sp;
+    SharedPreferences.Editor edit;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         root = inflater.inflate(R.layout.fragment_plumbing_screen, container, false);
+
+        ///////////set title of main screens/////////////////
+        sp=getContext().getSharedPreferences("prefs", Context.MODE_PRIVATE);
+        edit=sp.edit();
+        edit.putString("main_screen","Plumbing Screen");
+        edit.commit();
 
         next = (Button) root.findViewById(R.id.next);
         back = (Button) root.findViewById(R.id.back);
@@ -237,6 +245,9 @@ public class PlumbingScreenFragment extends BaseFragment {
         water_supply_source.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                edit.putBoolean("imageButton",false);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",water_supply_sourceValues);
                 intent.putExtra("heading",water_supply_source.getText().toString());
@@ -249,6 +260,9 @@ public class PlumbingScreenFragment extends BaseFragment {
         service_pipe_to_house.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                edit.putBoolean("imageButton",false);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",service_pipe_to_houseValues);
                 intent.putExtra("heading",service_pipe_to_house.getText().toString());
@@ -261,6 +275,10 @@ public class PlumbingScreenFragment extends BaseFragment {
         main_water_valve_location.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                edit.putBoolean("imageButton",false);
+                edit.commit();
+
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",main_water_valve_locationValues);
                 intent.putExtra("heading",main_water_valve_location.getText().toString());
@@ -273,6 +291,9 @@ public class PlumbingScreenFragment extends BaseFragment {
         interior_supply_piping.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                edit.putBoolean("imageButton",false);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",interior_supply_pipingValues);
                 intent.putExtra("heading",interior_supply_piping.getText().toString());
@@ -285,6 +306,9 @@ public class PlumbingScreenFragment extends BaseFragment {
         waste_system.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                edit.putBoolean("imageButton",false);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",waste_systemValues);
                 intent.putExtra("heading",waste_system.getText().toString());
@@ -297,6 +321,9 @@ public class PlumbingScreenFragment extends BaseFragment {
         dwv_piping.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                edit.putBoolean("imageButton",false);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",dwv_pipingValues);
                 intent.putExtra("heading",dwv_piping.getText().toString());
@@ -310,6 +337,9 @@ public class PlumbingScreenFragment extends BaseFragment {
         water_heater.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                edit.putBoolean("imageButton",false);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",water_heaterValues);
                 intent.putExtra("heading",water_heater.getText().toString());
@@ -324,6 +354,9 @@ public class PlumbingScreenFragment extends BaseFragment {
         fuel_storage_distribution.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                edit.putBoolean("imageButton",false);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",fuel_storage_distributionValues);
                 intent.putExtra("heading",fuel_storage_distribution.getText().toString());
@@ -337,6 +370,9 @@ public class PlumbingScreenFragment extends BaseFragment {
         fuel_shut_off_valves.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                edit.putBoolean("imageButton",false);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",fuel_shut_off_valvesValues);
                 intent.putExtra("heading",fuel_shut_off_valves.getText().toString());
@@ -349,6 +385,9 @@ public class PlumbingScreenFragment extends BaseFragment {
         other_components_plumbing.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                edit.putBoolean("imageButton",false);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",other_components_plumbingValues);
                 intent.putExtra("heading",other_components_plumbing.getText().toString());
@@ -361,6 +400,9 @@ public class PlumbingScreenFragment extends BaseFragment {
         plumbing_observations.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                edit.putBoolean("imageButton",false);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",plumbing_observationsValues);
                 intent.putExtra("heading",plumbing_observations.getText().toString());
@@ -373,6 +415,8 @@ public class PlumbingScreenFragment extends BaseFragment {
         water_heater_plimbing.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",water_heater_plimbingValues);
                 intent.putExtra("heading",water_heater_plimbing.getText().toString());
@@ -385,6 +429,9 @@ public class PlumbingScreenFragment extends BaseFragment {
         gas_piping.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",gas_pipingValues);
                 intent.putExtra("heading",gas_piping.getText().toString());
@@ -397,6 +444,8 @@ public class PlumbingScreenFragment extends BaseFragment {
         supply_piping.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",supply_pipingValues);
                 intent.putExtra("heading",supply_piping.getText().toString());
@@ -410,6 +459,8 @@ public class PlumbingScreenFragment extends BaseFragment {
         dwv_piping_observation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",dwv_piping_observationValues);
                 intent.putExtra("heading",dwv_piping_observation.getText().toString());
@@ -422,6 +473,9 @@ public class PlumbingScreenFragment extends BaseFragment {
         fixtures.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",fixturesValues);
                 intent.putExtra("heading",fixtures.getText().toString());
@@ -434,6 +488,9 @@ public class PlumbingScreenFragment extends BaseFragment {
         sump_pump.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",sump_pumpValues);
                 intent.putExtra("heading",sump_pump.getText().toString());
@@ -446,6 +503,9 @@ public class PlumbingScreenFragment extends BaseFragment {
         waste_ejector_pump.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",waste_ejector_pumpValues);
                 intent.putExtra("heading",waste_ejector_pump.getText().toString());
@@ -458,6 +518,9 @@ public class PlumbingScreenFragment extends BaseFragment {
         water_heater_plumbing.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",water_heater_plumbingValues);
                 intent.putExtra("heading",water_heater_plumbing.getText().toString());
@@ -470,6 +533,9 @@ public class PlumbingScreenFragment extends BaseFragment {
         gas_piping_plumbing.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",gas_piping_plumbingValues);
                 intent.putExtra("heading",gas_piping_plumbing.getText().toString());
@@ -482,6 +548,9 @@ public class PlumbingScreenFragment extends BaseFragment {
         supply_plumbing.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",supply_plumbingValues);
                 intent.putExtra("heading",supply_plumbing.getText().toString());
@@ -494,6 +563,9 @@ public class PlumbingScreenFragment extends BaseFragment {
         dwv_plumbing.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",dwv_plumbingValues);
                 intent.putExtra("heading",dwv_plumbing.getText().toString());
@@ -506,6 +578,9 @@ public class PlumbingScreenFragment extends BaseFragment {
         fixtures_observation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",fixtures_observationValues);
                 intent.putExtra("heading",fixtures_observation.getText().toString());
@@ -519,6 +594,9 @@ public class PlumbingScreenFragment extends BaseFragment {
         sump_pump_plumbing.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",sump_pump_plumbingValues);
                 intent.putExtra("heading",sump_pump_plumbing.getText().toString());
@@ -532,6 +610,9 @@ public class PlumbingScreenFragment extends BaseFragment {
         waste_ejector_pump_ro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",waste_ejector_pump_roValues);
                 intent.putExtra("heading",waste_ejector_pump_ro.getText().toString());

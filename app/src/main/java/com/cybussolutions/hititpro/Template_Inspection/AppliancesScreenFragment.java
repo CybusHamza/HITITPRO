@@ -2,6 +2,7 @@ package com.cybussolutions.hititpro.Template_Inspection;
 
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -57,6 +58,8 @@ public class AppliancesScreenFragment extends BaseFragment {
     private static final int MY_SOCKET_TIMEOUT_MS = 10000;
     ProgressDialog ringProgressDialog;
     Database database;
+    SharedPreferences sp;
+    SharedPreferences.Editor edit;
 
 
     @Override
@@ -66,6 +69,11 @@ public class AppliancesScreenFragment extends BaseFragment {
 
 
         root = inflater.inflate(R.layout.fragment_appliances_screen, container, false);
+        ///////////set title of main screens/////////////////
+        sp=getContext().getSharedPreferences("prefs", Context.MODE_PRIVATE);
+        edit=sp.edit();
+        edit.putString("main_screen","Appliances Screen");
+        edit.commit();
 
         next = (Button) root.findViewById(R.id.next);
         back = (Button) root.findViewById(R.id.back);
@@ -197,6 +205,8 @@ public class AppliancesScreenFragment extends BaseFragment {
         appliances_tested.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",false);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",appliances_testedValues);
                 intent.putExtra("heading",appliances_tested.getText().toString());
@@ -209,6 +219,8 @@ public class AppliancesScreenFragment extends BaseFragment {
         laundry_facility.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",false);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",laundry_facilityValues);
                 intent.putExtra("heading",laundry_facility.getText().toString());
@@ -221,6 +233,8 @@ public class AppliancesScreenFragment extends BaseFragment {
         other_components_tested.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",false);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",other_components_testedValues);
                 intent.putExtra("heading",other_components_tested.getText().toString());
@@ -233,6 +247,8 @@ public class AppliancesScreenFragment extends BaseFragment {
         appliance_observations.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",false);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",appliance_observationsValues);
                 intent.putExtra("heading",appliance_observations.getText().toString());
@@ -245,6 +261,8 @@ public class AppliancesScreenFragment extends BaseFragment {
         electric_range.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",electric_rangeValues);
                 intent.putExtra("heading",electric_range.getText().toString());
@@ -257,6 +275,8 @@ public class AppliancesScreenFragment extends BaseFragment {
         gas_range.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",gas_rangeValues);
                 intent.putExtra("heading",gas_range.getText().toString());
@@ -269,6 +289,8 @@ public class AppliancesScreenFragment extends BaseFragment {
         built_in_electric_oven.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",built_in_electric_ovenValues);
                 intent.putExtra("heading",built_in_electric_oven.getText().toString());
@@ -281,6 +303,8 @@ public class AppliancesScreenFragment extends BaseFragment {
         electric_cooktop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",electric_cooktopValues);
                 intent.putExtra("heading",electric_cooktop.getText().toString());
@@ -295,6 +319,8 @@ public class AppliancesScreenFragment extends BaseFragment {
         gas_cooktop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",gas_cooktopValues);
                 intent.putExtra("heading",gas_cooktop.getText().toString());
@@ -309,6 +335,8 @@ public class AppliancesScreenFragment extends BaseFragment {
         microwave_oven.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",microwave_ovenValues);
                 intent.putExtra("heading",microwave_oven.getText().toString());
@@ -321,6 +349,8 @@ public class AppliancesScreenFragment extends BaseFragment {
         dishwasher.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",dishwasherValues);
                 intent.putExtra("heading",dishwasher.getText().toString());
@@ -333,6 +363,8 @@ public class AppliancesScreenFragment extends BaseFragment {
         waste_disposer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",waste_disposerValues);
                 intent.putExtra("heading",waste_disposer.getText().toString());
@@ -345,6 +377,8 @@ public class AppliancesScreenFragment extends BaseFragment {
         refrigerator.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",refrigeratorValues);
                 intent.putExtra("heading",refrigerator.getText().toString());
@@ -357,6 +391,8 @@ public class AppliancesScreenFragment extends BaseFragment {
         wine_cooler.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",wine_coolerValues);
                 intent.putExtra("heading",wine_cooler.getText().toString());
@@ -369,6 +405,8 @@ public class AppliancesScreenFragment extends BaseFragment {
         trash_compactor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",trash_compactorValues);
                 intent.putExtra("heading",trash_compactor.getText().toString());
@@ -381,6 +419,8 @@ public class AppliancesScreenFragment extends BaseFragment {
         clothes_washer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",clothes_washerValues);
                 intent.putExtra("heading",clothes_washer.getText().toString());
@@ -394,6 +434,8 @@ public class AppliancesScreenFragment extends BaseFragment {
         clothes_dryer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",clothes_dryerValues);
                 intent.putExtra("heading",clothes_dryer.getText().toString());
@@ -406,6 +448,8 @@ public class AppliancesScreenFragment extends BaseFragment {
         cooktop_exhaust_fan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",cooktop_exhaust_fanValues);
                 intent.putExtra("heading",cooktop_exhaust_fan.getText().toString());
@@ -418,6 +462,8 @@ public class AppliancesScreenFragment extends BaseFragment {
         central_vacuum.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",central_vacuumValues);
                 intent.putExtra("heading",central_vacuum.getText().toString());
@@ -431,6 +477,8 @@ public class AppliancesScreenFragment extends BaseFragment {
         door_bell.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",door_bellValues);
                 intent.putExtra("heading",door_bell.getText().toString());

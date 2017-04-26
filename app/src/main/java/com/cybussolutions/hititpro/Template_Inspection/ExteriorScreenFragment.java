@@ -2,6 +2,7 @@ package com.cybussolutions.hititpro.Template_Inspection;
 
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -64,11 +65,19 @@ public class ExteriorScreenFragment extends BaseFragment {
             roDrivewaysButtonValues, roStepsButtonValues, roDeckButtonValues, roDrainangeButtonValues, roLandscapButtonValues,
             roRetainingButtonValues, roFencingButtonValues;
 
+    SharedPreferences sp;
+    SharedPreferences.Editor edit;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         root = inflater.inflate(R.layout.fragment_exterior_screen, container, false);
+
+        ///////////set title of main screens/////////////////
+        sp=getContext().getSharedPreferences("prefs", Context.MODE_PRIVATE);
+        edit=sp.edit();
+        edit.putString("main_screen","Exterior Screen");
+        edit.commit();
 
         next = (Button) root.findViewById(R.id.next);
         back = (Button) root.findViewById(R.id.back);
@@ -217,6 +226,8 @@ public class ExteriorScreenFragment extends BaseFragment {
         exteriorWallCoveringButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",false);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",exteriorWallCoveringButtonValues);
                 intent.putExtra("heading",exteriorWallCoveringButton.getText().toString());
@@ -229,6 +240,8 @@ public class ExteriorScreenFragment extends BaseFragment {
         exteriorEavesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",false);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",exteriorEavesButtonValues);
                 intent.putExtra("heading",exteriorEavesButton.getText().toString());
@@ -241,6 +254,8 @@ public class ExteriorScreenFragment extends BaseFragment {
         exteriorDoorsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",false);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",exteriorDoorsButtonValues);
                 intent.putExtra("heading",exteriorDoorsButton.getText().toString());
@@ -253,6 +268,8 @@ public class ExteriorScreenFragment extends BaseFragment {
         exteriorWindowButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",false);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",exteriorWindowButtonValues);
                 intent.putExtra("heading",exteriorWindowButton.getText().toString());
@@ -265,6 +282,8 @@ public class ExteriorScreenFragment extends BaseFragment {
         exteriorDrivewaysButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",false);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",exteriorDrivewaysButtonValues);
                 intent.putExtra("heading",exteriorDrivewaysButton.getText().toString());
@@ -277,6 +296,8 @@ public class ExteriorScreenFragment extends BaseFragment {
         exteriorWalksButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",false);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",exteriorWalksButtonValues);
                 intent.putExtra("heading",exteriorWalksButton.getText().toString());
@@ -289,6 +310,8 @@ public class ExteriorScreenFragment extends BaseFragment {
         exteriorPorchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",false);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",exteriorPorchButtonValues);
                 intent.putExtra("heading",exteriorPorchButton.getText().toString());
@@ -301,6 +324,8 @@ public class ExteriorScreenFragment extends BaseFragment {
         exteriorOverheadButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",false);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",exteriorOverheadButtonValues);
                 intent.putExtra("heading",exteriorOverheadButton.getText().toString());
@@ -313,6 +338,8 @@ public class ExteriorScreenFragment extends BaseFragment {
         exteriorSurfaceButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",false);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",exteriorSurfaceButtonValues);
                 intent.putExtra("heading",exteriorSurfaceButton.getText().toString());
@@ -325,6 +352,8 @@ public class ExteriorScreenFragment extends BaseFragment {
         exteriorTrainingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",false);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",exteriorTrainingButtonValues);
                 intent.putExtra("heading",exteriorTrainingButton.getText().toString());
@@ -337,6 +366,8 @@ public class ExteriorScreenFragment extends BaseFragment {
         exteriorFencingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",false);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",exteriorFencingButtonvalues);
                 intent.putExtra("heading",exteriorFencingButton.getText().toString());
@@ -349,6 +380,8 @@ public class ExteriorScreenFragment extends BaseFragment {
         exteriorObservationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",false);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",exteriorObservationButtonValues);
                 intent.putExtra("heading",exteriorObservationButton.getText().toString());
@@ -362,6 +395,8 @@ public class ExteriorScreenFragment extends BaseFragment {
         roWallsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",roWallsButtonValues);
                 intent.putExtra("heading",roWallsButton.getText().toString());
@@ -374,6 +409,8 @@ public class ExteriorScreenFragment extends BaseFragment {
         roEavesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",roEavesButtonValues);
                 intent.putExtra("heading",roEavesButton.getText().toString());
@@ -386,6 +423,8 @@ public class ExteriorScreenFragment extends BaseFragment {
         roDoorsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",roDoorsButtonValues);
                 intent.putExtra("heading",roDoorsButton.getText().toString());
@@ -398,6 +437,8 @@ public class ExteriorScreenFragment extends BaseFragment {
         roGarageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",roGarageButtonValues);
                 intent.putExtra("heading",roGarageButton.getText().toString());
@@ -410,6 +451,8 @@ public class ExteriorScreenFragment extends BaseFragment {
         roPorchesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",roPorchesButtonValues);
                 intent.putExtra("heading",roPorchesButton.getText().toString());
@@ -422,6 +465,8 @@ public class ExteriorScreenFragment extends BaseFragment {
         roDrivewaysButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",roDrivewaysButtonValues);
                 intent.putExtra("heading",roDrivewaysButton.getText().toString());
@@ -434,6 +479,8 @@ public class ExteriorScreenFragment extends BaseFragment {
         roStepsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",roStepsButtonValues);
                 intent.putExtra("heading",roStepsButton.getText().toString());
@@ -446,6 +493,8 @@ public class ExteriorScreenFragment extends BaseFragment {
         roDeckButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",roDeckButtonValues);
                 intent.putExtra("heading",roDeckButton.getText().toString());
@@ -458,6 +507,8 @@ public class ExteriorScreenFragment extends BaseFragment {
         roDrainangeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",roDrainangeButtonValues);
                 intent.putExtra("heading",roDrainangeButton.getText().toString());
@@ -470,6 +521,8 @@ public class ExteriorScreenFragment extends BaseFragment {
         roLandscapButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",roLandscapButtonValues);
                 intent.putExtra("heading",roLandscapButton.getText().toString());
@@ -482,6 +535,8 @@ public class ExteriorScreenFragment extends BaseFragment {
         roRetainingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",roRetainingButtonValues);
                 intent.putExtra("heading",roRetainingButton.getText().toString());
@@ -494,6 +549,8 @@ public class ExteriorScreenFragment extends BaseFragment {
         roFencingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",roFencingButtonValues);
                 intent.putExtra("heading",roFencingButton.getText().toString());

@@ -216,6 +216,7 @@ public class ClientsFragment extends BaseFragment {
                 model.setClient_name(object.getString("client_name"));
                 model.setClient_id(object.getString("id"));
                 model.setClient_adress(object.getString("address"));
+                model.setClient_phone(object.getString("phone"));
 
                 list.add(model);
             }

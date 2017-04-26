@@ -2,6 +2,7 @@ package com.cybussolutions.hititpro.Template_Inspection;
 
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -64,12 +65,20 @@ public class ElectricalScreenFragment extends BaseFragment {
     ProgressDialog ringProgressDialog;
     Database database;
 
+    SharedPreferences sp;
+    SharedPreferences.Editor edit;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         root = inflater.inflate(R.layout.fragment_electrical_screen, container, false);
+
+        ///////////set title of main screens/////////////////
+        sp=getContext().getSharedPreferences("prefs", Context.MODE_PRIVATE);
+        edit=sp.edit();
+        edit.putString("main_screen","Electrical Screen");
+        edit.commit();
 
         next = (Button) root.findViewById(R.id.next);
         back = (Button) root.findViewById(R.id.back);
@@ -205,6 +214,8 @@ public class ElectricalScreenFragment extends BaseFragment {
         electricalSizeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",false);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",electricalSizeButtonValues);
                 intent.putExtra("heading",electricalSizeButton.getText().toString());
@@ -218,6 +229,8 @@ public class ElectricalScreenFragment extends BaseFragment {
         electricalDropButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",false);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",electricalDropButtonValues);
                 intent.putExtra("heading",electricalDropButton.getText().toString());
@@ -231,6 +244,8 @@ public class ElectricalScreenFragment extends BaseFragment {
         electricalConductorsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",false);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",electricalConductorsButtonValues);
                 intent.putExtra("heading",electricalConductorsButton.getText().toString());
@@ -244,6 +259,8 @@ public class ElectricalScreenFragment extends BaseFragment {
         electricalDisconnectButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",false);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",electricalDisconnectButtonValues);
                 intent.putExtra("heading",electricalDisconnectButton.getText().toString());
@@ -257,6 +274,8 @@ public class ElectricalScreenFragment extends BaseFragment {
         electricalGroundingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",false);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",electricalGroundingButtonValues);
                 intent.putExtra("heading",electricalGroundingButton.getText().toString());
@@ -270,6 +289,8 @@ public class ElectricalScreenFragment extends BaseFragment {
         electricalPanelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",false);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",electricalPanelButtonValues);
                 intent.putExtra("heading",electricalPanelButton.getText().toString());
@@ -283,6 +304,8 @@ public class ElectricalScreenFragment extends BaseFragment {
         electricalSubpanelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",false);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",electricalSubpanelButtonValues);
                 intent.putExtra("heading",electricalSubpanelButton.getText().toString());
@@ -296,6 +319,8 @@ public class ElectricalScreenFragment extends BaseFragment {
         electricalWiringButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",false);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",electricalWiringButtonValues);
                 intent.putExtra("heading",electricalWiringButton.getText().toString());
@@ -309,6 +334,8 @@ public class ElectricalScreenFragment extends BaseFragment {
         electricalMethodButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",false);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",electricalMethodButtonValues);
                 intent.putExtra("heading",electricalMethodButton.getText().toString());
@@ -322,6 +349,8 @@ public class ElectricalScreenFragment extends BaseFragment {
         electricalSwitchesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",false);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",electricalSwitchesButtonValues);
                 intent.putExtra("heading",electricalSwitchesButton.getText().toString());
@@ -336,6 +365,8 @@ public class ElectricalScreenFragment extends BaseFragment {
         electricalgfciButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",false);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",electricalgfciButtonValues);
                 intent.putExtra("heading",electricalgfciButton.getText().toString());
@@ -349,6 +380,8 @@ public class ElectricalScreenFragment extends BaseFragment {
         electricalSmokeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",false);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",electricalSmokeButtonValues);
                 intent.putExtra("heading",electricalSmokeButton.getText().toString());
@@ -362,6 +395,8 @@ public class ElectricalScreenFragment extends BaseFragment {
         electricalObservationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",false);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",electricalObservationButtonValues);
                 intent.putExtra("heading",electricalObservationButton.getText().toString());
@@ -375,6 +410,8 @@ public class ElectricalScreenFragment extends BaseFragment {
         roEntranceButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",roEntranceButtonValues);
                 intent.putExtra("heading",roEntranceButton.getText().toString());
@@ -389,6 +426,8 @@ public class ElectricalScreenFragment extends BaseFragment {
         roMainpanelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",roMainpanelButtonValues);
                 intent.putExtra("heading",roMainpanelButton.getText().toString());
@@ -402,6 +441,8 @@ public class ElectricalScreenFragment extends BaseFragment {
         roSubpanelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",roSubpanelButtonValues);
                 intent.putExtra("heading",roSubpanelButton.getText().toString());
@@ -415,6 +456,8 @@ public class ElectricalScreenFragment extends BaseFragment {
         roDistributionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",roDistributionButtonValues);
                 intent.putExtra("heading",roDistributionButton.getText().toString());
@@ -428,6 +471,8 @@ public class ElectricalScreenFragment extends BaseFragment {
         roOutletButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",roOutletButtonValues);
                 intent.putExtra("heading",roOutletButton.getText().toString());
@@ -441,6 +486,8 @@ public class ElectricalScreenFragment extends BaseFragment {
         roSwitchesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",roSwitchesButtonValues);
                 intent.putExtra("heading",roSwitchesButton.getText().toString());
@@ -454,6 +501,8 @@ public class ElectricalScreenFragment extends BaseFragment {
         roCeilingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",roCeilingButtonValues);
                 intent.putExtra("heading",roCeilingButton.getText().toString());
@@ -467,6 +516,8 @@ public class ElectricalScreenFragment extends BaseFragment {
         roDetectorButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",roDetectorButtonValues);
                 intent.putExtra("heading",roDetectorButton.getText().toString());

@@ -2,6 +2,7 @@ package com.cybussolutions.hititpro.Template_Inspection;
 
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -58,13 +59,20 @@ public class InsulationScreenFragment extends BaseFragment {
     ProgressDialog ringProgressDialog;
     Database database;
     private static final String INSULATION_TABLE = "insulation";
-
+    SharedPreferences sp;
+    SharedPreferences.Editor edit;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         root = inflater.inflate(R.layout.fragment_insulation_screen, container, false);
+
+        ///////////set title of main screens/////////////////
+        sp=getContext().getSharedPreferences("prefs", Context.MODE_PRIVATE);
+        edit=sp.edit();
+        edit.putString("main_screen","Insulation Screen");
+        edit.commit();
 
         next = (Button) root.findViewById(R.id.next);
         back = (Button) root.findViewById(R.id.back);
@@ -171,6 +179,8 @@ public class InsulationScreenFragment extends BaseFragment {
         ATTIC_INSULATION.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",false);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",ATTIC_INSULATION_Values);
                 intent.putExtra("heading",ATTIC_INSULATION.getText().toString());
@@ -184,6 +194,8 @@ public class InsulationScreenFragment extends BaseFragment {
         EXTERIORWALLINSULATION.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",false);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",EXTERIORWALLINSULATION_Values);
                 intent.putExtra("heading",EXTERIORWALLINSULATION.getText().toString());
@@ -197,6 +209,8 @@ public class InsulationScreenFragment extends BaseFragment {
         BASEMENTWALLINSULATION.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",false);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",BASEMENTWALLINSULATION_Values);
                 intent.putExtra("heading",BASEMENTWALLINSULATION.getText().toString());
@@ -210,6 +224,8 @@ public class InsulationScreenFragment extends BaseFragment {
         CRAWLSPACEINSULATION.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",false);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",CRAWLSPACEINSULATION_Values);
                 intent.putExtra("heading",CRAWLSPACEINSULATION.getText().toString());
@@ -223,6 +239,8 @@ public class InsulationScreenFragment extends BaseFragment {
         VAPORRETARDERS.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",false);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",VAPORRETARDERS_Values);
                 intent.putExtra("heading",VAPORRETARDERS.getText().toString());
@@ -236,6 +254,8 @@ public class InsulationScreenFragment extends BaseFragment {
         ROOFVENTILATION.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",false);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",ROOFVENTILATION_Values);
                 intent.putExtra("heading",ROOFVENTILATION.getText().toString());
@@ -249,6 +269,8 @@ public class InsulationScreenFragment extends BaseFragment {
         CRAWLSPACEVENTILATION.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",false);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",CRAWLSPACEVENTILATION_Values);
                 intent.putExtra("heading",CRAWLSPACEVENTILATION.getText().toString());
@@ -262,6 +284,8 @@ public class InsulationScreenFragment extends BaseFragment {
         EXHAUSTFANS_VENTS.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",false);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",EXHAUSTFANS_VENTS_Values);
                 intent.putExtra("heading",EXHAUSTFANS_VENTS.getText().toString());
@@ -275,6 +299,8 @@ public class InsulationScreenFragment extends BaseFragment {
         Insulation_Ventilation_Observations.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",false);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",Insulation_Ventilation_Observations_Values);
                 intent.putExtra("heading",Insulation_Ventilation_Observations.getText().toString());
@@ -288,6 +314,8 @@ public class InsulationScreenFragment extends BaseFragment {
         Attic_Roof.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",false);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",Attic_Roof_Values);
                 intent.putExtra("heading",Attic_Roof.getText().toString());
@@ -301,6 +329,8 @@ public class InsulationScreenFragment extends BaseFragment {
         Basement.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",false);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",Basement_Values);
                 intent.putExtra("heading",Basement.getText().toString());
@@ -314,6 +344,8 @@ public class InsulationScreenFragment extends BaseFragment {
         CrawlSpace.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",false);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",CrawlSpace_Values);
                 intent.putExtra("heading",CrawlSpace.getText().toString());

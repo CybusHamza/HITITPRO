@@ -17,7 +17,15 @@ public class Clients_model {
     }
 
     String client_adress;
+    String client_phone;
 
+    public String getClient_phone() {
+        return client_phone;
+    }
+
+    public void setClient_phone(String client_phone) {
+        this.client_phone = client_phone;
+    }
     public String getClient_adress() {
         return client_adress;
     }

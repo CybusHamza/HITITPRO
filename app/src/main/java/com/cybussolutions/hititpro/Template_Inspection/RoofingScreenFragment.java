@@ -1,6 +1,7 @@
 package com.cybussolutions.hititpro.Template_Inspection;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -55,6 +56,8 @@ public class RoofingScreenFragment extends BaseFragment {
     String[] roofCoveringButtonValues, roofFlashingButtonValues, chimneysButtonValues, roofDrainageButtonValues, skyLightsButtonValues, methodInspectionButtonValues,
             roofingObservationsButtonValues, roSloppedButtonValues, roFlatButtonValues, roFlashingButtonValues, roChimneyButtonValues, roGutterDownspoutsButtonValues;
 
+    SharedPreferences sp;
+    SharedPreferences.Editor edit;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -65,6 +68,11 @@ public class RoofingScreenFragment extends BaseFragment {
 
         try {
             database = database.open();
+            ///////////set title of main screens/////////////////
+            sp=getActivity().getSharedPreferences("prefs", Context.MODE_PRIVATE);
+            edit=sp.edit();
+            edit.putString("main_screen","Roofing Screen");
+            edit.commit();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -159,6 +167,8 @@ public class RoofingScreenFragment extends BaseFragment {
         roofCoveringButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",false);
+                edit.commit();
 
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",roofCoveringButtonValues);
@@ -172,6 +182,9 @@ public class RoofingScreenFragment extends BaseFragment {
         roofFlashingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                edit.putBoolean("imageButton",false);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",roofFlashingButtonValues);
                 intent.putExtra("heading",roofFlashingButton.getText().toString());
@@ -184,6 +197,9 @@ public class RoofingScreenFragment extends BaseFragment {
         chimneysButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                edit.putBoolean("imageButton",false);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",chimneysButtonValues);
                 intent.putExtra("heading",chimneysButton.getText().toString());
@@ -196,6 +212,8 @@ public class RoofingScreenFragment extends BaseFragment {
         roofDrainageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",false);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",roofDrainageButtonValues);
                 intent.putExtra("heading",roofDrainageButton.getText().toString());
@@ -208,6 +226,9 @@ public class RoofingScreenFragment extends BaseFragment {
         skyLightsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                edit.putBoolean("imageButton",false);
+                edit.commit();
 
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",skyLightsButtonValues);
@@ -222,6 +243,9 @@ public class RoofingScreenFragment extends BaseFragment {
         methodInspectionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                edit.putBoolean("imageButton",false);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",methodInspectionButtonValues);
                 intent.putExtra("heading",methodInspectionButton.getText().toString());
@@ -234,6 +258,9 @@ public class RoofingScreenFragment extends BaseFragment {
         roofingObservationsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                edit.putBoolean("imageButton",false);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",roofingObservationsButtonValues);
                 intent.putExtra("heading",roofingObservationsButton.getText().toString());
@@ -246,6 +273,9 @@ public class RoofingScreenFragment extends BaseFragment {
         roSloppedButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",roSloppedButtonValues);
                 intent.putExtra("heading",roSloppedButton.getText().toString());
@@ -258,6 +288,9 @@ public class RoofingScreenFragment extends BaseFragment {
         roFlatButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",roFlatButtonValues);
                 intent.putExtra("heading",roFlatButton.getText().toString());
@@ -270,6 +303,10 @@ public class RoofingScreenFragment extends BaseFragment {
         roFlashingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                edit.putBoolean("imageButton",true);
+                edit.commit();
+
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",roFlashingButtonValues);
                 intent.putExtra("heading",roFlashingButton.getText().toString());
@@ -282,6 +319,9 @@ public class RoofingScreenFragment extends BaseFragment {
         roChimneyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",roChimneyButtonValues);
                 intent.putExtra("heading",roChimneyButton.getText().toString());
@@ -295,6 +335,10 @@ public class RoofingScreenFragment extends BaseFragment {
         roGutterDownspoutsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                edit.putBoolean("imageButton",true);
+                edit.commit();
+
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",roGutterDownspoutsButtonValues);
                 intent.putExtra("heading",roGutterDownspoutsButton.getText().toString());

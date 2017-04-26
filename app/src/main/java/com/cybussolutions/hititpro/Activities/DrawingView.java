@@ -22,9 +22,10 @@ import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 
 public class DrawingView extends ImageView {
-    MainActivity ma=new MainActivity();
     String message = "No key pressed yet.";
 
     public static final int LINE = 1;
@@ -35,6 +36,7 @@ public class DrawingView extends ImageView {
     public static final int SMOOTHLINE = 2;
     public static final int ARROW=7;
     public static final int TEXT=8;
+    public static final int UNDO=9;
     public static String textInput="";
 
     public static final float TOUCH_TOLERANCE = 4;
@@ -47,6 +49,8 @@ public class DrawingView extends ImageView {
     protected Paint mPaintFinal;
     protected Bitmap mBitmap;
     protected Canvas mCanvas;
+
+
 
     String s;
 
@@ -77,6 +81,11 @@ public class DrawingView extends ImageView {
     private EditText et;
     String test;
 
+    private ArrayList<Path> paths = new ArrayList<Path>();
+    private ArrayList<Path> undonePaths = new ArrayList<Path>();
+    private ArrayList<Integer> colors = new ArrayList<Integer>();
+    private ArrayList<Integer> sizes = new ArrayList<Integer>();
+
     public DrawingView(Activity context) {
         super(context);
         activity =context;
@@ -104,31 +113,31 @@ public class DrawingView extends ImageView {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         canvas.drawBitmap(mBitmap, 0, 0, mPaint);
-
-        if (isDrawing){
-            switch (mCurrentShape) {
-                case LINE:
-                    onDrawLine(canvas);
-                    break;
-                case RECTANGLE:
-                    onDrawRectangle(canvas);
-                    break;
-                case SQUARE:
-                    onDrawSquare(canvas);
-                    break;
-                case CIRCLE:
-                    onDrawCircle(canvas);
-                    break;
-                case TRIANGLE:
-                    onDrawTriangle(canvas);
-                    break;
-                case ARROW:
-                    onDrawArrow(canvas);
-                    break;
-                case TEXT:
-                    onDrawText(canvas);
-
-
+        for(Path p: paths) {
+            canvas.drawPath(p, mPaint);
+            if (isDrawing) {
+                switch (mCurrentShape) {
+                    case LINE:
+                        onDrawLine(canvas);
+                        break;
+                    case RECTANGLE:
+                        onDrawRectangle(canvas);
+                        break;
+                    case SQUARE:
+                        onDrawSquare(canvas);
+                        break;
+                    case CIRCLE:
+                        onDrawCircle(canvas);
+                        break;
+                    case TRIANGLE:
+                        onDrawTriangle(canvas);
+                        break;
+                    case ARROW:
+                        onDrawArrow(canvas);
+                        break;
+                    case TEXT:
+                        onDrawText(canvas);
+                }
             }
         }
     }
@@ -136,6 +145,7 @@ public class DrawingView extends ImageView {
 
     protected void init() {
         mPath = new Path();
+        paths.add(mPath);
         mPaint = new Paint(Paint.DITHER_FLAG);
         mPaint.setAntiAlias(true);
         mPaint.setTextSize(48.0f);
@@ -155,11 +165,42 @@ public class DrawingView extends ImageView {
         mPaintFinal.setStrokeJoin(Paint.Join.ROUND);
         mPaintFinal.setStrokeCap(Paint.Cap.ROUND);
         mPaintFinal.setStrokeWidth(TOUCH_STROKE_WIDTH);
+
     }
 
     protected void reset() {
+        paths.add(mPath);
         mPath = new Path();
         countTouch=0;
+    }
+    public void onClickUndo () {
+
+        if (paths.size()>0)
+        {
+            mBitmap.eraseColor(Color.TRANSPARENT);
+            Toast.makeText(getContext(),"removed",Toast.LENGTH_LONG).show();
+            undonePaths.add(paths.remove(paths.size()-1));
+            invalidate();
+        }
+        else
+        {
+
+            Toast.makeText(getContext(), paths.size()+"undo isnt working wth", Toast.LENGTH_SHORT).show();
+        }
+        //toast the user
+    }
+
+    public void onClickRedo (){
+        if (undonePaths.size()>0)
+        {
+            paths.add(undonePaths.remove(undonePaths.size()-1));
+            invalidate();
+        }
+        else
+        {
+
+        }
+        //toast the user
     }
 
     @Override
@@ -190,7 +231,9 @@ public class DrawingView extends ImageView {
                 break;
             case TEXT:
                 textInput = "text";
-                
+                break;
+            case UNDO:
+                onClickUndo();
              //  onTouchEventText(event);
         }
         return true;
@@ -322,7 +365,7 @@ public class DrawingView extends ImageView {
                 mCanvas.drawPath(mPath, mPaint);
                 endPoint.x = event.getX();
                 endPoint.y = event.getY();
-                isDrawing = false;
+             //   isDrawing = false;
 
                 invalidate();
                 break;
@@ -373,6 +416,7 @@ public class DrawingView extends ImageView {
                 invalidate();
                 break;
             case MotionEvent.ACTION_MOVE:
+              //  mCanvas.drawLine(mStartX, mStartY, mx, my, mPaintFinal);
                 invalidate();
                 break;
             case MotionEvent.ACTION_UP:

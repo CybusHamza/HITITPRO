@@ -15,6 +15,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
@@ -26,7 +27,9 @@ import com.cybussolutions.hititpro.R;
 import java.util.List;
 
 
-public class Detailed_Adapter extends ArrayAdapter<Checkbox_model> {
+public class Detailed_Adapter_Structure_Screen extends ArrayAdapter<Checkbox_model> {
+
+    int mSelectedIndex = -1;
     private final List<Checkbox_model> list;
     private final Activity context;
     LayoutInflater inflter;
@@ -34,8 +37,10 @@ public class Detailed_Adapter extends ArrayAdapter<Checkbox_model> {
     AlertDialog b;
     boolean checkAll_flag = false;
     boolean checkItem_flag = false;
+    private int selectedPosition = -1;
+    boolean test=false;
 
-    public Detailed_Adapter(Activity context, List<Checkbox_model> list, int resource) {
+    public Detailed_Adapter_Structure_Screen(Activity context, List<Checkbox_model> list, int resource) {
         super(context,resource,list);
         this.context = context;
         this.list = list;
@@ -53,10 +58,10 @@ public class Detailed_Adapter extends ArrayAdapter<Checkbox_model> {
         final ViewHolder viewHolder;
         if (convertView == null) {
             inflter = context.getLayoutInflater();
-            convertView = inflter.inflate(R.layout.row_detailed, null);
+            convertView = inflter.inflate(R.layout.structure_observations, null);
             viewHolder = new ViewHolder();
             viewHolder.text = (TextView) convertView.findViewById(R.id.label);
-            viewHolder.checkbox = (CheckBox) convertView.findViewById(R.id.check);
+            viewHolder.checkbox = (RadioButton) convertView.findViewById(R.id.check);
             viewHolder.delete = (ImageView) convertView.findViewById(R.id.delete);
             viewHolder.edit = (ImageView) convertView.findViewById(R.id.edit);
             viewHolder.imageEditor = (ImageView) convertView.findViewById(R.id.imageEditor);
@@ -70,30 +75,41 @@ public class Detailed_Adapter extends ArrayAdapter<Checkbox_model> {
                 }
 
             }
-
-            viewHolder.checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-
+            viewHolder.checkbox.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                public void onClick(View v) {
                     String splitter = "%";
-
-                    int getPosition = (Integer) buttonView.getTag();  // Here we get the position that we have set for the checkbox using setTag.
-                    String row[] = list.get(getPosition).getName().split(splitter);
-                    list.get(getPosition).setSelected((buttonView.isChecked())); // Set the value of checkbox to maintain its state.
-                    //Boolean test=buttonView.isChecked();
-                    //Toast.makeText(context,String.valueOf(buttonView.isChecked()),Toast.LENGTH_LONG).show();
-                    if (isChecked) {
-                        dbEnterArray[position] = row[0] + "%1";
-                        viewHolder.checkbox.setChecked(true);
-
-
-                    } else {
-                        dbEnterArray[position] = row[0] + "%0";
+                    String row[] = list.get(position).getName().split(splitter);
+                    for(int i=0;i<list.size();i++){
+                        String row1[]=list.get(i).getName().split("%");
+                        dbEnterArray[i] = row1[0] + "%0";
                         viewHolder.checkbox.setChecked(false);
+                        if (i == position) {
+                            dbEnterArray[i]=row[0]+"%1";
+                            viewHolder.checkbox.setChecked(true);
+
+                        }
                     }
 
                 }
             });
+//            viewHolder.checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//
+//                @Override
+//                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//                    String splitter = "%";
+//                    //setSelectedIndex((Integer) buttonView.getTag());
+//                    int getPosition = (Integer) buttonView.getTag();  // Here we get the position that we have set for the checkbox using setTag.
+//                    String row[] = list.get(getPosition).getName().split(splitter);
+//                    list.get(getPosition).setSelected((buttonView.isChecked())); // Set the value of checkbox to maintain its state.
+//                    //Boolean test=buttonView.isChecked();
+//                    //Toast.makeText(context,String.valueOf(buttonView.isChecked()),Toast.LENGTH_LONG).show();
+//
+//
+//
+//               }
+//
+//            });
             convertView.setTag(viewHolder);
             convertView.setTag(R.id.label, viewHolder.text);
             convertView.setTag(R.id.check, viewHolder.checkbox);
@@ -106,17 +122,18 @@ public class Detailed_Adapter extends ArrayAdapter<Checkbox_model> {
 
         viewHolder.checkbox.setChecked(list.get(position).isSelected());
 
-
         dbEnterArray = new String[list.size() + 1];
-
         String splitter = "%";
-        String row[] = list.get(position).getName().split(splitter);
 
+        String row[] = list.get(position).getName().split(splitter);
         if (row[1] != null && row[1].equals("1")) {
             viewHolder.checkbox.setChecked(true);
+            dbEnterArray[position]=row[0]+"%1";
         } else {
             viewHolder.checkbox.setChecked(false);
+            dbEnterArray[position]=row[0]+"%0";
         }
+
 
         viewHolder.text.setText(row[0]);
         for (int i = 0; i < list.size(); i++) {
@@ -173,10 +190,15 @@ public class Detailed_Adapter extends ArrayAdapter<Checkbox_model> {
     }
 
     public String[] getDbInsertArray() {
-
+        String splitter = "%";
+        String row[] = list.get(mSelectedIndex).getName().split(splitter);
+        dbEnterArray[mSelectedIndex]=row[0]+"%1";
         return dbEnterArray;
     }
-
+    public void setSelectedIndex(int index)
+    {
+        mSelectedIndex = index;
+    }
     void editItem(final int position, final String text) {
 
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(context);
@@ -239,7 +261,7 @@ public class Detailed_Adapter extends ArrayAdapter<Checkbox_model> {
 
     static class ViewHolder {
         protected TextView text;
-        protected CheckBox checkbox;
+        protected RadioButton checkbox;
         protected ImageView edit, delete,imageEditor;
     }
 
