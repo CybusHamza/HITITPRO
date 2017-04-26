@@ -52,12 +52,6 @@ public class ElectricalScreenFragment extends BaseFragment {
             roEntranceButton, roMainpanelButton, roSubpanelButton, roDistributionButton, roOutletButton, roSwitchesButton,
             roCeilingButton, roDetectorButton;
 
-    String[] electricalSizeButtonValues, electricalDropButtonValues, electricalConductorsButtonValues, electricalDisconnectButtonValues,
-            electricalGroundingButtonValues, electricalPanelButtonValues,
-            electricalSubpanelButtonValues, electricalWiringButtonValues, electricalMethodButtonValues, electricalSwitchesButtonValues,
-            electricalgfciButtonValues, electricalSmokeButtonValues, electricalObservationButtonValues, roEntranceButtonValues,
-            roMainpanelButtonValues, roSubpanelButtonValues, roDistributionButtonValues, roOutletButtonValues,
-            roSwitchesButtonValues, roCeilingButtonValues, roDetectorButtonValues;
 
     private static final String ELECTRICAL_TABLE = "electrical";
     private static final int MY_SOCKET_TIMEOUT_MS = 10000;
@@ -127,36 +121,6 @@ public class ElectricalScreenFragment extends BaseFragment {
         ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.menu);
 
 
-        electricalSizeButtonValues = new String[]{"100 Amps  120/240v Main Service%0", "150 Amps  120/240v Main Service%0", "200 Amps  120/240v Main Service%0", "(2) 150 Amps  120/240v Main Service%0"};
-        electricalDropButtonValues = new String[]{"Overhead%0", "Underground%0", "Not Visible%0"};
-        electricalConductorsButtonValues = new String[]{"Aluminum%0", "Copper%0", "Not Visible%0"};
-        electricalDisconnectButtonValues = new String[]{"Main Service Rating 100 Amps%0", "Main Service Rating 150 Amps%0", "Main Service Rating 200 Amps%0", "Main Service Rating (2) 150 Amps%0"};
-        electricalGroundingButtonValues = new String[]{"Copper%0", "Aluminum%0", "Ground Rod Connection%0", "UFER Ground%0", "Connection Not Visible%0"};
-        electricalPanelButtonValues = new String[]{"Panel Rating 100 Amps%0", "Panel Rating 150 Amps%0", "Panel Rating 200 Amps%0", "Fuses%0", "Breakers%0", "Location ???%0"};
-        electricalSubpanelButtonValues = new String[]{"Panel Rating  60 Amps%0", "Panel Rating 100 Amps%0", "Panel Rating 150 Amps%0", "Breakers%0", "Fuses%0", "Location???%0"};
-        electricalWiringButtonValues = new String[]{"Copper%0", "Aluminum Solid Conductor%0", "Aluminum Multi-Strand%0"};
-        electricalMethodButtonValues = new String[]{"Non- Metalic  Cable Romex%0", "Tinned Copper%0", "Armored Cable BX%0", "Fabric Covered%0", "Knob and Tube Copper%0"};
-        electricalSwitchesButtonValues = new String[]{"Grounded%0", "Ungrounded%0", "Grounded and Ungrounded%0"};
-        electricalgfciButtonValues = new String[]{"Bathroom(s)%0", "Kitchen%0", "Exterior%0", "Garage%0", "Jetted Tub%0"};
-        electricalSmokeButtonValues = new String[]{"Present%0", "Smoke Detectors Present%0", "None Observed%0"};
-        electricalObservationButtonValues = new String[]{"MINOR IMPROVEMENTS NEEDED%0", "NO IMPROVEMENTS%0", "NUMEROUS REPAIRS NEEDED%0", "OBSOLETE SYSTEM%0"};
-
-        roEntranceButtonValues = new String[]{"Undersized%0", "Tap on Main Service%0", "Drip Loop Insufficient%0", "Clearance Inadequate%0", "Poorly Attached%0", "Service Conductors Need Conduit%0", "Rusted Service Box%0", "Damaged Service Box%0", "Ground Rod Ineffective%0"};
-        roMainpanelButtonValues = new String[]{"Old%0", "Federal Pacific Panel%0", "Zinsko Panel%0", "Panel Location Poor%0", "Panel Crowded%0", "Close Panel Openings%0",
-                "Panel Front Missing%0", "Panel Poorly Labeled%0", "Wiring Clamps Missing%0", "Blunt Panel Screws Needed%0", "Overheated Wiring%0", "Double Taps Present%0",
-                "Oversized AC Breaker%0"};
-        roSubpanelButtonValues = new String[]{"Old%0", "Panel Location Poor%0", "Panel Crowded%0", "Close Panel Openings%0", "Panel Poorly Labeled%0",
-                "Wiring Clamps Missing%0", "Blunt Panel Screws Needed%0", "Overheated Wiring%0", "Double Taps Present%0"};
-        roDistributionButtonValues = new String[]{"Abandoned Wiring%0", "Loose Wiring%0", "Overheated%0", "Exposed Wiring%0", "Extension Cords%0", "Open Junction Box%0",
-                "Loose Junction Box%0", "Poor Wiring Installation%0", "Knob and Tube%0"};
-        roOutletButtonValues = new String[]{"Inoperative%0", "Damaged%0", "Missing Covers%0", "Loose Outlet%0", "Missing Cover Plate%0", "Ungrounded 3-Prong Outlet%0",
-                "Grounding Pins Broken%0", "Outlet Layout Inadequate%0", "Reversed Polarity%0", "Most Outlets Ungrounded%0", "Overheated Outlet%0",
-                "GFCI Inoperative%0", "GFCI Did Not Trip%0", "GFCI Recommended%0", "3-Prong Dryer Outlet%0", "Dryer Outlet Inoperative%0", "Add ARC Fault Breakers%0", "Add Surge Protector%0"};
-        roSwitchesButtonValues = new String[]{"Inoperative%0", "Damaged%0", "Loose%0", "Non-Functioning 3-Way%0", "Overheated%0", "Inoperative Dimmer Switch%0"};
-        roCeilingButtonValues = new String[]{"Non-Working Lights%0", "Damaged Fixture%0", "Loose Fixture%0", "Missing Globe%0", "Recessed Light Rating%0", "Ceiling Fan Inoperative%0",
-                "Ceiling Fan Wobbles%0", "Ceiling Fan Loose%0", "Fan Not Operable at Low Speeds%0"};
-        roDetectorButtonValues = new String[]{"No Detectors Present%0", "Need CO Detector%0", "Smoke Detector Non-Responsive%0", "Update Smoke Detectors%0"};
-
 
         SharedPreferences pref = getActivity().getApplicationContext().getSharedPreferences("HititPro", getActivity().MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
@@ -168,37 +132,7 @@ public class ElectricalScreenFragment extends BaseFragment {
             getElectrical();
 
         }
-        else
-        {
-            if(!(populate.equals("true")))
-            {
-                database.prePopulateData("sizeofservice", electricalSizeButtonValues, ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
-                database.prePopulateData("servicedrop", electricalDropButtonValues, ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
-                database.prePopulateData("entranceconductors", electricalConductorsButtonValues, ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
-                database.prePopulateData("maindisconnect", electricalDisconnectButtonValues, ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
-                database.prePopulateData("grounding", electricalGroundingButtonValues, ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
-                database.prePopulateData("servicepanel", electricalPanelButtonValues, ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
-                database.prePopulateData("sub_panel", electricalSubpanelButtonValues, ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
-                database.prePopulateData("wiring", electricalWiringButtonValues, ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
-                database.prePopulateData("wiring_method", electricalMethodButtonValues, ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
-                database.prePopulateData("switches_receptacles", electricalSwitchesButtonValues, ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
-                database.prePopulateData("gfci", electricalgfciButtonValues, ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
-                database.prePopulateData("smoke_codetector", electricalSmokeButtonValues, ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
-                database.prePopulateData("observation", electricalObservationButtonValues, ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
-                database.prePopulateData("serviceentrance", roEntranceButtonValues, ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
-                database.prePopulateData("mainpanel", roMainpanelButtonValues, ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
-                database.prePopulateData("subpanel", roSubpanelButtonValues, ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
-                database.prePopulateData("distribution", roDistributionButtonValues, ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
-                database.prePopulateData("outlets", roOutletButtonValues, ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
-                database.prePopulateData("switches", roSwitchesButtonValues, ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
-                database.prePopulateData("lights_ceiling_fans", roCeilingButtonValues, ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
-                database.prePopulateData("smoke_co_detectors", roDetectorButtonValues, ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
 
-                // Saving string
-                editor.putString("isElectrical_populated", "true");
-                editor.apply();
-            } 
-        }
 
        
 
@@ -206,7 +140,7 @@ public class ElectricalScreenFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",electricalSizeButtonValues);
+                intent.putExtra("items",StructureScreensActivity.electricalSizeButtonValues);
                 intent.putExtra("heading",electricalSizeButton.getText().toString());
                 intent.putExtra("column","sizeofservice");
                 intent.putExtra("dbTable",ELECTRICAL_TABLE);
@@ -219,7 +153,7 @@ public class ElectricalScreenFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",electricalDropButtonValues);
+                intent.putExtra("items",StructureScreensActivity.electricalDropButtonValues);
                 intent.putExtra("heading",electricalDropButton.getText().toString());
                 intent.putExtra("column","servicedrop");
                 intent.putExtra("dbTable",ELECTRICAL_TABLE);
@@ -232,7 +166,7 @@ public class ElectricalScreenFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",electricalConductorsButtonValues);
+                intent.putExtra("items",StructureScreensActivity.electricalConductorsButtonValues);
                 intent.putExtra("heading",electricalConductorsButton.getText().toString());
                 intent.putExtra("column","entranceconductors");
                 intent.putExtra("dbTable",ELECTRICAL_TABLE);
@@ -245,7 +179,7 @@ public class ElectricalScreenFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",electricalDisconnectButtonValues);
+                intent.putExtra("items",StructureScreensActivity.electricalDisconnectButtonValues);
                 intent.putExtra("heading",electricalDisconnectButton.getText().toString());
                 intent.putExtra("column","maindisconnect");
                 intent.putExtra("dbTable",ELECTRICAL_TABLE);
@@ -258,7 +192,7 @@ public class ElectricalScreenFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",electricalGroundingButtonValues);
+                intent.putExtra("items",StructureScreensActivity.electricalGroundingButtonValues);
                 intent.putExtra("heading",electricalGroundingButton.getText().toString());
                 intent.putExtra("column","grounding");
                 intent.putExtra("dbTable",ELECTRICAL_TABLE);
@@ -271,7 +205,7 @@ public class ElectricalScreenFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",electricalPanelButtonValues);
+                intent.putExtra("items",StructureScreensActivity.electricalPanelButtonValues);
                 intent.putExtra("heading",electricalPanelButton.getText().toString());
                 intent.putExtra("column","servicepanel");
                 intent.putExtra("dbTable",ELECTRICAL_TABLE);
@@ -284,7 +218,7 @@ public class ElectricalScreenFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",electricalSubpanelButtonValues);
+                intent.putExtra("items",StructureScreensActivity.electricalSubpanelButtonValues);
                 intent.putExtra("heading",electricalSubpanelButton.getText().toString());
                 intent.putExtra("column","sub_panel");
                 intent.putExtra("dbTable",ELECTRICAL_TABLE);
@@ -297,7 +231,7 @@ public class ElectricalScreenFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",electricalWiringButtonValues);
+                intent.putExtra("items",StructureScreensActivity.electricalWiringButtonValues);
                 intent.putExtra("heading",electricalWiringButton.getText().toString());
                 intent.putExtra("column","wiring");
                 intent.putExtra("dbTable",ELECTRICAL_TABLE);
@@ -310,7 +244,7 @@ public class ElectricalScreenFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",electricalMethodButtonValues);
+                intent.putExtra("items",StructureScreensActivity.electricalMethodButtonValues);
                 intent.putExtra("heading",electricalMethodButton.getText().toString());
                 intent.putExtra("column","wiring_method");
                 intent.putExtra("dbTable",ELECTRICAL_TABLE);
@@ -323,7 +257,7 @@ public class ElectricalScreenFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",electricalSwitchesButtonValues);
+                intent.putExtra("items",StructureScreensActivity.electricalSwitchesButtonValues);
                 intent.putExtra("heading",electricalSwitchesButton.getText().toString());
                 intent.putExtra("column","switches_receptacles");
                 intent.putExtra("dbTable",ELECTRICAL_TABLE);
@@ -337,7 +271,7 @@ public class ElectricalScreenFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",electricalgfciButtonValues);
+                intent.putExtra("items",StructureScreensActivity.electricalgfciButtonValues);
                 intent.putExtra("heading",electricalgfciButton.getText().toString());
                 intent.putExtra("column","gfci");
                 intent.putExtra("dbTable",ELECTRICAL_TABLE);
@@ -350,7 +284,7 @@ public class ElectricalScreenFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",electricalSmokeButtonValues);
+                intent.putExtra("items",StructureScreensActivity.electricalSmokeButtonValues);
                 intent.putExtra("heading",electricalSmokeButton.getText().toString());
                 intent.putExtra("column","smoke_codetector");
                 intent.putExtra("dbTable",ELECTRICAL_TABLE);
@@ -363,7 +297,7 @@ public class ElectricalScreenFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",electricalObservationButtonValues);
+                intent.putExtra("items",StructureScreensActivity.electricalObservationButtonValues);
                 intent.putExtra("heading",electricalObservationButton.getText().toString());
                 intent.putExtra("column","observation");
                 intent.putExtra("dbTable",ELECTRICAL_TABLE);
@@ -376,7 +310,7 @@ public class ElectricalScreenFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",roEntranceButtonValues);
+                intent.putExtra("items",StructureScreensActivity.roEntranceButtonValues);
                 intent.putExtra("heading",roEntranceButton.getText().toString());
                 intent.putExtra("column","serviceentrance");
                 intent.putExtra("dbTable",ELECTRICAL_TABLE);
@@ -390,7 +324,7 @@ public class ElectricalScreenFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",roMainpanelButtonValues);
+                intent.putExtra("items",StructureScreensActivity.roMainpanelButtonValues);
                 intent.putExtra("heading",roMainpanelButton.getText().toString());
                 intent.putExtra("column","mainpanel");
                 intent.putExtra("dbTable",ELECTRICAL_TABLE);
@@ -403,7 +337,7 @@ public class ElectricalScreenFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",roSubpanelButtonValues);
+                intent.putExtra("items",StructureScreensActivity.roSubpanelButtonValues);
                 intent.putExtra("heading",roSubpanelButton.getText().toString());
                 intent.putExtra("column","subpanel");
                 intent.putExtra("dbTable",ELECTRICAL_TABLE);
@@ -416,7 +350,7 @@ public class ElectricalScreenFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",roDistributionButtonValues);
+                intent.putExtra("items",StructureScreensActivity.roDistributionButtonValues);
                 intent.putExtra("heading",roDistributionButton.getText().toString());
                 intent.putExtra("column","distribution");
                 intent.putExtra("dbTable",ELECTRICAL_TABLE);
@@ -429,7 +363,7 @@ public class ElectricalScreenFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",roOutletButtonValues);
+                intent.putExtra("items",StructureScreensActivity.roOutletButtonValues);
                 intent.putExtra("heading",roOutletButton.getText().toString());
                 intent.putExtra("column","outlets");
                 intent.putExtra("dbTable",ELECTRICAL_TABLE);
@@ -442,7 +376,7 @@ public class ElectricalScreenFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",roSwitchesButtonValues);
+                intent.putExtra("items",StructureScreensActivity.roSwitchesButtonValues);
                 intent.putExtra("heading",roSwitchesButton.getText().toString());
                 intent.putExtra("column","switches");
                 intent.putExtra("dbTable",ELECTRICAL_TABLE);
@@ -455,7 +389,7 @@ public class ElectricalScreenFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",roCeilingButtonValues);
+                intent.putExtra("items",StructureScreensActivity.roCeilingButtonValues);
                 intent.putExtra("heading",roCeilingButton.getText().toString());
                 intent.putExtra("column","lights_ceiling_fans");
                 intent.putExtra("dbTable",ELECTRICAL_TABLE);
@@ -468,7 +402,7 @@ public class ElectricalScreenFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",roDetectorButtonValues);
+                intent.putExtra("items",StructureScreensActivity.roDetectorButtonValues);
                 intent.putExtra("heading",roDetectorButton.getText().toString());
                 intent.putExtra("column","smoke_co_detectors");
                 intent.putExtra("dbTable",ELECTRICAL_TABLE);
@@ -646,9 +580,9 @@ public class ElectricalScreenFragment extends BaseFragment {
                 cursor.moveToFirst();
 
                 Map<String, String> params = new HashMap<>();
-                params.put("template_id", "");
+                params.put("template_id", StructureScreensActivity.template_id);
                 params.put("inspection_id", StructureScreensActivity.inspectionID);
-                params.put("client_id", "2");
+                params.put("client_id", StructureScreensActivity.client_id);
                 params.put("is_applicable", "1");
                 params.put("empty_fields", "0");
                 if(cursor != null) {

@@ -49,10 +49,7 @@ public class InsulationScreenFragment extends BaseFragment {
     VAPORRETARDERS,ROOFVENTILATION,CRAWLSPACEVENTILATION,EXHAUSTFANS_VENTS,Insulation_Ventilation_Observations,
     Attic_Roof,Basement,CrawlSpace;
 
-    String[] ATTIC_INSULATION_Values,EXTERIORWALLINSULATION_Values,BASEMENTWALLINSULATION_Values,
-    CRAWLSPACEINSULATION_Values,VAPORRETARDERS_Values,ROOFVENTILATION_Values,CRAWLSPACEVENTILATION_Values,
-    EXHAUSTFANS_VENTS_Values,Insulation_Ventilation_Observations_Values,Attic_Roof_Values,Basement_Values
-    ,CrawlSpace_Values;
+
 
     private static final int MY_SOCKET_TIMEOUT_MS = 10000;
     ProgressDialog ringProgressDialog;
@@ -106,28 +103,6 @@ public class InsulationScreenFragment extends BaseFragment {
         CrawlSpace = (Button) root.findViewById(R.id.crawl_space);
 
 
-        ATTIC_INSULATION_Values = new String[]{"R 30 Fiberglass%0","R 37 Fiberglass%0","R 25-30 Fiberglass%0","R 30 Cellulose%0",
-                "Attic Inaccessible%0","None Visible%0","None%0"};
-        EXTERIORWALLINSULATION_Values = new String[]{"R 13%0","R 19%0","Not Visible%0","None%0"};
-        BASEMENTWALLINSULATION_Values = new String[]{"R 13 On Visible Portions%0","R 19 On Visible Portions%0","Not Visible%0","None%0"};
-        CRAWLSPACEINSULATION_Values = new String[]{"R 19 In Floor Above Crawl Space%0","R 13 In Floor Above Crawl Space%0","None Visible%0",
-                "None%0","Crawl Space Inaccessible%0"};
-        VAPORRETARDERS_Values = new String[]{"Plastic%0","Kraft Paper%0","None Visible%0"};
-        ROOFVENTILATION_Values = new String[]{"Roof Vents%0","Ridge Vents%0","Gable Vents%0","Soffit Vents%0","Power Ventilator%0",
-                "None Visible%0"};
-        CRAWLSPACEVENTILATION_Values = new String[]{"Exterior Wall Vents%0","Vents to Interior%0","No Ventilation Visible%0"};
-        EXHAUSTFANS_VENTS_Values = new String[]{"Bathrooms%0","Kitchen Cooktop Hood Vent%0","Dryer%0","Kitchen Cooktop Downdraft%0",
-                "Whole Kitchen Vent%0"};
-        Insulation_Ventilation_Observations_Values = new String[]{"WELL INSULATED HOME%0","OK INSULATED HOME%0","POORLY INSULATED HOME%0"};
-        Attic_Roof_Values = new String[]{"Even Out Insulation%0","Vermin Activity%0","Compressed Insulation%0","Add Bags of Insulation / Stairs%0"
-                ,"Improve Insulation and Stairs%0","Too Many Platforms%0","Vermin Activity %0","Ridge Vent Recommended%0","Improper Ridge Vent Installation%0"
-                ,"Soffit Vents Congested%0","Condensation / Mildew%0","Power Ventilator Inoperative%0","Ducts in Attic Need Insulation%0",
-                "Vent Exhaust Fans Outside%0","Trail Runs%0"};
-        Basement_Values = new String[]{"Insulation Improvement%0","Vermin Activity%0"};
-        CrawlSpace_Values = new String[]{"Improper Dryer Venting%0","Crawl Space Mold / Mildew%0","Floor Insulation Needed%0","Loose Floor Insulation%0",
-                "Obstructed Wall Vents%0","Ventilation Needed%0","Ductwork Needs Insulation%0","Moisture Barrier Needed%0","Moisture Barrier Adjustment%0","Vermin Activity%0"};
-
-
 
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Insulation Screen");
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -143,36 +118,14 @@ public class InsulationScreenFragment extends BaseFragment {
             getInsulation();
 
         }
-        else
-        {
-            if(!(populate.equals("true")))
-            {
-                database.prePopulateData("atticinsulation", ATTIC_INSULATION_Values, INSULATION_TABLE, StructureScreensActivity.inspectionID);
-                database.prePopulateData("exteriorwallinsulation", EXTERIORWALLINSULATION_Values, INSULATION_TABLE, StructureScreensActivity.inspectionID);
-                database.prePopulateData("basementwallinsulation", BASEMENTWALLINSULATION_Values, INSULATION_TABLE, StructureScreensActivity.inspectionID);
-                database.prePopulateData("crawlspaceinsulation", CRAWLSPACEINSULATION_Values, INSULATION_TABLE, StructureScreensActivity.inspectionID);
-                database.prePopulateData("vaporretarders", VAPORRETARDERS_Values, INSULATION_TABLE, StructureScreensActivity.inspectionID);
-                database.prePopulateData("roofventilation", ROOFVENTILATION_Values, INSULATION_TABLE, StructureScreensActivity.inspectionID);
-                database.prePopulateData("rfurnace", CRAWLSPACEVENTILATION_Values, INSULATION_TABLE, StructureScreensActivity.inspectionID);
-                database.prePopulateData("rsupplyairductwork", EXHAUSTFANS_VENTS_Values, INSULATION_TABLE, StructureScreensActivity.inspectionID);
-                database.prePopulateData("boiler", Insulation_Ventilation_Observations_Values, INSULATION_TABLE, StructureScreensActivity.inspectionID);
-                database.prePopulateData("atticandroof", Attic_Roof_Values, INSULATION_TABLE, StructureScreensActivity.inspectionID);
-                database.prePopulateData("basement", Basement_Values, INSULATION_TABLE, StructureScreensActivity.inspectionID);
-                database.prePopulateData("crawlspace", CrawlSpace_Values, INSULATION_TABLE, StructureScreensActivity.inspectionID);
 
-                // Saving string
-                editor.putString("isInsulation_populated", "true");
-                editor.apply();
-            }
-
-        }
 
         
         ATTIC_INSULATION.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",ATTIC_INSULATION_Values);
+                intent.putExtra("items",StructureScreensActivity.ATTIC_INSULATION_Values);
                 intent.putExtra("heading",ATTIC_INSULATION.getText().toString());
                 intent.putExtra("column","atticinsulation");
                 intent.putExtra("dbTable",INSULATION_TABLE);
@@ -185,7 +138,7 @@ public class InsulationScreenFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",EXTERIORWALLINSULATION_Values);
+                intent.putExtra("items",StructureScreensActivity.EXTERIORWALLINSULATION_Values);
                 intent.putExtra("heading",EXTERIORWALLINSULATION.getText().toString());
                 intent.putExtra("column","exteriorwallinsulation");
                 intent.putExtra("dbTable",INSULATION_TABLE);
@@ -198,7 +151,7 @@ public class InsulationScreenFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",BASEMENTWALLINSULATION_Values);
+                intent.putExtra("items",StructureScreensActivity.BASEMENTWALLINSULATION_Values);
                 intent.putExtra("heading",BASEMENTWALLINSULATION.getText().toString());
                 intent.putExtra("column","basementwallinsulation");
                 intent.putExtra("dbTable",INSULATION_TABLE);
@@ -211,7 +164,7 @@ public class InsulationScreenFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",CRAWLSPACEINSULATION_Values);
+                intent.putExtra("items",StructureScreensActivity.CRAWLSPACEINSULATION_Values);
                 intent.putExtra("heading",CRAWLSPACEINSULATION.getText().toString());
                 intent.putExtra("column","crawlspaceinsulation");
                 intent.putExtra("dbTable",INSULATION_TABLE);
@@ -224,7 +177,7 @@ public class InsulationScreenFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",VAPORRETARDERS_Values);
+                intent.putExtra("items",StructureScreensActivity.VAPORRETARDERS_Values);
                 intent.putExtra("heading",VAPORRETARDERS.getText().toString());
                 intent.putExtra("column","vaporretarders");
                 intent.putExtra("dbTable",INSULATION_TABLE);
@@ -237,7 +190,7 @@ public class InsulationScreenFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",ROOFVENTILATION_Values);
+                intent.putExtra("items",StructureScreensActivity.ROOFVENTILATION_Values);
                 intent.putExtra("heading",ROOFVENTILATION.getText().toString());
                 intent.putExtra("column","roofventilation");
                 intent.putExtra("dbTable",INSULATION_TABLE);
@@ -250,7 +203,7 @@ public class InsulationScreenFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",CRAWLSPACEVENTILATION_Values);
+                intent.putExtra("items",StructureScreensActivity.CRAWLSPACEVENTILATION_Values);
                 intent.putExtra("heading",CRAWLSPACEVENTILATION.getText().toString());
                 intent.putExtra("column","servicedrop");
                 intent.putExtra("dbTable",INSULATION_TABLE);
@@ -263,7 +216,7 @@ public class InsulationScreenFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",EXHAUSTFANS_VENTS_Values);
+                intent.putExtra("items",StructureScreensActivity.EXHAUSTFANS_VENTS_Values);
                 intent.putExtra("heading",EXHAUSTFANS_VENTS.getText().toString());
                 intent.putExtra("column","servicedrop");
                 intent.putExtra("dbTable",INSULATION_TABLE);
@@ -276,7 +229,7 @@ public class InsulationScreenFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",Insulation_Ventilation_Observations_Values);
+                intent.putExtra("items",StructureScreensActivity.Insulation_Ventilation_Observations_Values);
                 intent.putExtra("heading",Insulation_Ventilation_Observations.getText().toString());
                 intent.putExtra("column","servicedrop");
                 intent.putExtra("dbTable",INSULATION_TABLE);
@@ -289,7 +242,7 @@ public class InsulationScreenFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",Attic_Roof_Values);
+                intent.putExtra("items",StructureScreensActivity.Attic_Roof_Values);
                 intent.putExtra("heading",Attic_Roof.getText().toString());
                 intent.putExtra("column","atticandroof");
                 intent.putExtra("dbTable",INSULATION_TABLE);
@@ -302,7 +255,7 @@ public class InsulationScreenFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",Basement_Values);
+                intent.putExtra("items",StructureScreensActivity.Basement_Values);
                 intent.putExtra("heading",Basement.getText().toString());
                 intent.putExtra("column","basement");
                 intent.putExtra("dbTable",INSULATION_TABLE);
@@ -315,7 +268,7 @@ public class InsulationScreenFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",CrawlSpace_Values);
+                intent.putExtra("items",StructureScreensActivity.CrawlSpace_Values);
                 intent.putExtra("heading",CrawlSpace.getText().toString());
                 intent.putExtra("column","crawlspace");
                 intent.putExtra("dbTable",INSULATION_TABLE);
@@ -351,12 +304,12 @@ public class InsulationScreenFragment extends BaseFragment {
                             database.insertEntry("atticinsulation", object.getString("atticinsulation"), INSULATION_TABLE, StructureScreensActivity.inspectionID);
                             database.insertEntry("exteriorwallinsulation", object.getString("exteriorwallinsulation"), INSULATION_TABLE, StructureScreensActivity.inspectionID);
                             database.insertEntry("basementwallinsulation", object.getString("basementwallinsulation"), INSULATION_TABLE, StructureScreensActivity.inspectionID);
+                            database.insertEntry("csv", object.getString("csv"), INSULATION_TABLE, StructureScreensActivity.inspectionID);
+                            database.insertEntry("efv", object.getString("efv"), INSULATION_TABLE, StructureScreensActivity.inspectionID);
                             database.insertEntry("crawlspaceinsulation", object.getString("crawlspaceinsulation"), INSULATION_TABLE, StructureScreensActivity.inspectionID);
                             database.insertEntry("vaporretarders", object.getString("vaporretarders"), INSULATION_TABLE, StructureScreensActivity.inspectionID);
                             database.insertEntry("roofventilation", object.getString("roofventilation"), INSULATION_TABLE, StructureScreensActivity.inspectionID);
-                            database.insertEntry("rfurnace", object.getString("rfurnace"), INSULATION_TABLE, StructureScreensActivity.inspectionID);
-                            database.insertEntry("rsupplyairductwork", object.getString("rsupplyairductwork"), INSULATION_TABLE, StructureScreensActivity.inspectionID);
-                            database.insertEntry("boiler", object.getString("boiler"), INSULATION_TABLE, StructureScreensActivity.inspectionID);
+                            database.insertEntry("observations", object.getString("observations"), INSULATION_TABLE, StructureScreensActivity.inspectionID);
                             database.insertEntry("atticandroof", object.getString("atticandroof"), INSULATION_TABLE, StructureScreensActivity.inspectionID);
                             database.insertEntry("basement", object.getString("basement"), INSULATION_TABLE, StructureScreensActivity.inspectionID);
                             database.insertEntry("crawlspace", object.getString("crawlspace"), INSULATION_TABLE, StructureScreensActivity.inspectionID);
@@ -482,9 +435,9 @@ public class InsulationScreenFragment extends BaseFragment {
                 cursor.moveToFirst();
 
                 Map<String, String> params = new HashMap<>();
-                params.put("template_id", "");
+                params.put("template_id", StructureScreensActivity.template_id);
                 params.put("inspection_id", StructureScreensActivity.inspectionID);
-                params.put("client_id", "2");
+                params.put("client_id", StructureScreensActivity.client_id);
                 params.put("is_applicable", "1");
                 params.put("empty_fields", "0");
                 if(cursor != null) {
