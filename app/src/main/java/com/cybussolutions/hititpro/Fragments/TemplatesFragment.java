@@ -90,11 +90,10 @@ public class TemplatesFragment extends BaseFragment {
                 int inspection_id =  inspection_spinner.getSelectedItemPosition();
                 int template_id =  tem_spinner.getSelectedItemPosition();
 
-                if(client_spinner.getSelectedItem().equals("No Records Founds") &&inspection_spinner.getSelectedItem().equals("No Records Founds")&&tem_spinner.getSelectedItem().equals("No Records Founds") ) {
+                if (client_spinner.getSelectedItem().equals("No Records Founds") && inspection_spinner.getSelectedItem().equals("No Records Founds") && tem_spinner.getSelectedItem().equals("No Records Founds")) {
                     Toast.makeText(getActivity(), "Please Select Templates", Toast.LENGTH_SHORT).show();
 
-                }
-                else {
+                } else {
 
                     Intent intent = new Intent(getActivity(), StructureScreensActivity.class);
                     intent.putExtra("inspectionId", templateID_list.get(inspection_id));
@@ -102,7 +101,7 @@ public class TemplatesFragment extends BaseFragment {
                     intent.putExtra("template_id", inspection_id_list.get(template_id));
                     intent.putExtra("inspection_type", "old");
                     startActivity(intent);
-                     }
+                }
 
             }
         });

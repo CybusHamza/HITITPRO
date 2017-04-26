@@ -53,9 +53,6 @@ public class CoolingScreenFragment extends BaseFragment {
     Button coolingEnergyButton, coolingSystemButton, coolingEquipmentButton, coolingComponentsButton, coolingObservationsButton,
             roCentralButton, roPumpButton, roEvaporatorButton, roFansButton;
 
-    String[] coolingEnergyButtonValues, coolingSystemButtonValues, coolingEquipmentButtonValues, coolingComponentsButtonValues,
-            coolingObservationsButtonValues, roCentralButtonValues,
-            roPumpButtonValues, roEvaporatorButtonValues, roFansButtonValues;
 
     private static final String COOLING_TABLE = "cooling";
 
@@ -115,28 +112,6 @@ public class CoolingScreenFragment extends BaseFragment {
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.menu);
 
-        coolingEnergyButtonValues = new String[]{"Gas%0", "Electricity%0", "Other%0"};
-        coolingSystemButtonValues = new String[]{"Air Cooled Central Air%0", "Air Source Heat Pump System%0", "Water Source Heat Pump System%0",
-                "Ground Source Heat Pump System%0", "Evaporator Cooler%0", "Capacity in Tons ??? (1 Ton Serves Approx 500-600 sf)%0",
-                "Manufacturer / Age ???%0", "Serial Number ???%0"};
-        coolingEquipmentButtonValues = new String[]{"Present At ???%0"};
-        coolingComponentsButtonValues = new String[]{"Whole House Fan%0"};
-        coolingObservationsButtonValues = new String[]{"SINGLE A/C UNIT GENERALLY OK DESCRIPTION%0", "MULTIPLE A/C UNITS GENERALLY OK DESCRIPTION%0",
-                "NOT COOLING PROPERLY SINGLE UNIT%0", "NOT COOLING PROPERLY MULTI A/C CONFIGURATION%0"};
-
-        roCentralButtonValues = new String[]{"Inoperative System%0", "Old System%0", "Very Old System%0", "Undersized%0", "Not Cooling Adequately%0",
-                "Temperature Drop Excessive%0", "Clean Outdoor Unit%0", "Insulation Damage to Refrigerant Lines%0",
-                "Units Out of Level%0", "Outdoor Unit Fin Damage%0", "Outdoor Unit Noisy", "Cut Back Vegetation%0",
-                "Re-route Condensate Line%0", "Negative Slope on Condensate Line%0"};
-        roPumpButtonValues = new String[]{"Inoperative System%0", "Old System%0", "Very Old System%0", "Undersized%0",
-                "Not Cooling Adequately%0", "Temperature Drop Excessive%0", "Clean Outdoor Unit%0",
-                "Insulation Damage to Refrigerant Lines%0", "Units Out of Level%0", "Outdoor Unit Fin Damage%0",
-                "Outdoor Unit Noisy%0", "Cut Back Vegetation%0", "Re-route Condensate Line%0",
-                "Negative Slope on Condensate Line%0"};
-        roEvaporatorButtonValues = new String[]{"Inoperative%0", "Older System%0", "Lacking Maintenance%0",
-                "Noisy%0", "Spray Nozzle Restricted%0", "Float Valve Suspect%0", "Pump Suspect%0",
-                "Excess Humidity in House%0"};
-        roFansButtonValues = new String[]{"Inoperative%0", "Removal Recommended%0"};
 
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Cooling Screen");
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -154,26 +129,7 @@ public class CoolingScreenFragment extends BaseFragment {
             getCooling();
 
         }
-        else
-        {
 
-            if(!(populate.equals("true")))
-            {
-                database.prePopulateData("energysource", coolingEnergyButtonValues, COOLING_TABLE, StructureScreensActivity.inspectionID);
-                database.prePopulateData("centralsystemtype", coolingSystemButtonValues, COOLING_TABLE, StructureScreensActivity.inspectionID);
-                database.prePopulateData("throughwallequipment", coolingEquipmentButtonValues, COOLING_TABLE, StructureScreensActivity.inspectionID);
-                database.prePopulateData("othercomponents", coolingComponentsButtonValues, COOLING_TABLE, StructureScreensActivity.inspectionID);
-                database.prePopulateData("heatobservation", coolingObservationsButtonValues, COOLING_TABLE, StructureScreensActivity.inspectionID);
-                database.prePopulateData("recomndcentralaircondition", roCentralButtonValues, COOLING_TABLE, StructureScreensActivity.inspectionID);
-                database.prePopulateData("heatpumps", roPumpButtonValues, COOLING_TABLE, StructureScreensActivity.inspectionID);
-                database.prePopulateData("evaporator", roEvaporatorButtonValues, COOLING_TABLE, StructureScreensActivity.inspectionID);
-                database.prePopulateData("housefans", roFansButtonValues, COOLING_TABLE, StructureScreensActivity.inspectionID);
-
-                // Saving string
-                editor.putString("isColling_populated", "true");
-                editor.apply();
-            }
-        }
         
         coolingEnergyButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -181,7 +137,7 @@ public class CoolingScreenFragment extends BaseFragment {
                 edit.putBoolean("imageButton",false);
                 edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",coolingEnergyButtonValues);
+                intent.putExtra("items",StructureScreensActivity.coolingEnergyButtonValues);
                 intent.putExtra("heading",coolingEnergyButton.getText().toString());
                 intent.putExtra("column","energysource");
                 intent.putExtra("dbTable",COOLING_TABLE);
@@ -196,7 +152,7 @@ public class CoolingScreenFragment extends BaseFragment {
                 edit.putBoolean("imageButton",false);
                 edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",coolingSystemButtonValues);
+                intent.putExtra("items",StructureScreensActivity.coolingSystemButtonValues);
                 intent.putExtra("heading",coolingSystemButton.getText().toString());
                 intent.putExtra("column","centralsystemtype");
                 intent.putExtra("dbTable",COOLING_TABLE);
@@ -211,7 +167,7 @@ public class CoolingScreenFragment extends BaseFragment {
                 edit.putBoolean("imageButton",false);
                 edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",coolingEquipmentButtonValues);
+                intent.putExtra("items",StructureScreensActivity.coolingEquipmentButtonValues);
                 intent.putExtra("heading",coolingEquipmentButton.getText().toString());
                 intent.putExtra("column","throughwallequipment");
                 intent.putExtra("dbTable",COOLING_TABLE);
@@ -226,7 +182,7 @@ public class CoolingScreenFragment extends BaseFragment {
                 edit.putBoolean("imageButton",false);
                 edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",coolingComponentsButtonValues);
+                intent.putExtra("items",StructureScreensActivity.coolingComponentsButtonValues);
                 intent.putExtra("heading",coolingComponentsButton.getText().toString());
                 intent.putExtra("column","othercomponents");
                 intent.putExtra("dbTable",COOLING_TABLE);
@@ -241,7 +197,7 @@ public class CoolingScreenFragment extends BaseFragment {
                 edit.putBoolean("imageButton",false);
                 edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",coolingObservationsButtonValues);
+                intent.putExtra("items",StructureScreensActivity.coolingObservationsButtonValues);
                 intent.putExtra("heading",coolingObservationsButton.getText().toString());
                 intent.putExtra("column","heatobservation");
                 intent.putExtra("dbTable",COOLING_TABLE);
@@ -256,7 +212,7 @@ public class CoolingScreenFragment extends BaseFragment {
                 edit.putBoolean("imageButton",true);
                 edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",roCentralButtonValues);
+                intent.putExtra("items",StructureScreensActivity.roCentralButtonValues);
                 intent.putExtra("heading",roCentralButton.getText().toString());
                 intent.putExtra("column","recomndcentralaircondition");
                 intent.putExtra("dbTable",COOLING_TABLE);
@@ -272,7 +228,7 @@ public class CoolingScreenFragment extends BaseFragment {
                 edit.commit();
 
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",roPumpButtonValues);
+                intent.putExtra("items",StructureScreensActivity.roPumpButtonValues);
                 intent.putExtra("heading",roPumpButton.getText().toString());
                 intent.putExtra("column","heatpumps");
                 intent.putExtra("dbTable",COOLING_TABLE);
@@ -287,7 +243,7 @@ public class CoolingScreenFragment extends BaseFragment {
                 edit.putBoolean("imageButton",true);
                 edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",roEvaporatorButtonValues);
+                intent.putExtra("items",StructureScreensActivity.roEvaporatorButtonValues);
                 intent.putExtra("heading",roEvaporatorButton.getText().toString());
                 intent.putExtra("column","evaporator");
                 intent.putExtra("dbTable",COOLING_TABLE);
@@ -302,7 +258,7 @@ public class CoolingScreenFragment extends BaseFragment {
                 edit.putBoolean("imageButton",true);
                 edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",roFansButtonValues);
+                intent.putExtra("items",StructureScreensActivity.roFansButtonValues);
                 intent.putExtra("heading",roFansButton.getText().toString());
                 intent.putExtra("column","housefans");
                 intent.putExtra("dbTable",COOLING_TABLE);
@@ -468,9 +424,9 @@ public class CoolingScreenFragment extends BaseFragment {
                 cursor.moveToFirst();
 
                 Map<String, String> params = new HashMap<>();
-                params.put("template_id", "");
+                params.put("template_id", StructureScreensActivity.template_id);
                 params.put("inspection_id", StructureScreensActivity.inspectionID);
-                params.put("client_id", "2");
+                params.put("client_id", StructureScreensActivity.client_id);
                 params.put("is_applicable", "1");
                 params.put("empty_fields", "0");
                 if(cursor != null) {

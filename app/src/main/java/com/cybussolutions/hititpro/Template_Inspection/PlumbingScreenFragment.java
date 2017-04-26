@@ -50,10 +50,6 @@ public class PlumbingScreenFragment extends BaseFragment {
             plumbing_observations,water_heater_plimbing,gas_piping,supply_piping,dwv_piping_observation,fixtures,sump_pump
             ,waste_ejector_pump,water_heater_plumbing,gas_piping_plumbing,supply_plumbing,dwv_plumbing,fixtures_observation,sump_pump_plumbing,waste_ejector_pump_ro;
 
-    String[] water_supply_sourceValues,service_pipe_to_houseValues,main_water_valve_locationValues,interior_supply_pipingValues,
-            waste_systemValues,water_heaterValues,dwv_pipingValues,fuel_storage_distributionValues,fuel_shut_off_valvesValues,other_components_plumbingValues,
-            plumbing_observationsValues,water_heater_plimbingValues,gas_pipingValues,supply_pipingValues,dwv_piping_observationValues,fixturesValues,sump_pumpValues
-            ,waste_ejector_pumpValues,water_heater_plumbingValues,gas_piping_plumbingValues,supply_plumbingValues,dwv_plumbingValues,fixtures_observationValues,sump_pump_plumbingValues,waste_ejector_pump_roValues;
 
     private static final String PLUMBING_TABLE = "plumbing";
     private static final int MY_SOCKET_TIMEOUT_MS = 10000;
@@ -132,71 +128,7 @@ public class PlumbingScreenFragment extends BaseFragment {
         waste_ejector_pump_ro= (Button) root.findViewById(R.id.waste_ejector_pump_ro);
 
 
-        water_supply_sourceValues =  new String[]{"Public%0","Private%0","Unknown%0"};
-        service_pipe_to_houseValues =  new String[]{"Copper%0","Plastic%0","Steel%0","Lead%0","Not Visible%0"};
-        main_water_valve_locationValues =  new String[]{"Front Wall Basement%0","Rear Wall of Basement%0","Crawl Space%0","Beside Water Heater%0","Location ???%0","Not Found%0"};
-        interior_supply_pipingValues =  new String[]{"Copper%0","Plastic%0","Steel%0","Lead%0"};
-        waste_systemValues =  new String[]{"Public Sewer%0","Private Sewer%0","Unknown%0"};
-        dwv_pipingValues =  new String[]{"Plastic%0","Cast Iron%0","Steel%0","Copper%0","Lead%0"};
-        water_heaterValues =  new String[]{"Gas%0","Electric%0","Tank Capacity%0","Age%0","Manufacturer%0","Tankless Gas%0",
-                "Tankless Electric%0"};
-        fuel_storage_distributionValues =  new String[]{"Natural Gas%0","Propane%0","Liquid Petrolium%0", "None; All Electric%0"};
-        fuel_shut_off_valvesValues =  new String[]{"Natural Gas Main Side of Home%0","Natural Gas Main %0",
-                "Propane Shut-Off %0","LP Shut-Off%0","Heating Oil Tank %0"};
-        other_components_plumbingValues =  new String[]{"Pressure Regulator on Main Line%0","Sump Pump%0",
-                "Sewer Ejector Pump%0","Hot Water Circulator%0","Backflow Devices on Hose Bibs%0","Sprinkler  System%0"};
-        plumbing_observationsValues =  new String[]{"OVERALL GOOD CONDITION%0","OVERALL GOOD WITH OLDER PLUMBING FIXTURES%0","NUMEROUS REPAIRS NEEDED%0"};
-        water_heater_plimbingValues =  new String[]{"Very Old Unit%0","Old Unit%0","Leakage Evident%0", "Thermal Expansion Device Needed%0",
-                "Sediment Trap%0","Capacity Questionable%0","Burner Dirty/Rust%0","No Cold Water Shut-Off%0", "No TPR Valve%0"
-                ,"Leaking TPR Valve%0","Wiring Connection Poor%0","Exhaust Spillage %0","Missing Burner Cover%0",
-                "Lack of Combustion Air%0","Improve Draft Diverter%0"};
-        gas_pipingValues =  new String[]{"Gas Leak%0","Cap Gas Lines %0","Main Shut-Off  Not Found%0","Secure Gas Line%0","Gas Line Corrosion%0",
-                "Drip Leg Needed%0","Shut-Off  Valve Needed%0","Dryer Gas Line Cap Needed%0","Support Lacking%0"};
-        supply_pipingValues =  new String[]{"Pressure Regulator Needed%0","Label Water Shut-Offs%0","Leak%0"
-                ,"Polybutelyne%0","Freezing Potential%0","Support Lacking%0","Supply Handle Missing%0","Pipe Hammer%0"};
-        dwv_piping_observationValues =  new String[]{"Leaks%0","Flexible Piping%0","Overflow Pan for Washer%0",
-                "Overflow Pan for WH%0","Trap Leak%0","S Trap%0","Insufficient Slope%0","Older Piping %0","Support Lacking%0",
-                "No Main Clean-Out Found%0","Septic System Disclosure%0","Septic System Disclaimer%0","Odor%0","Vent Stack Height Inadequate%0"};
-        fixturesValues =  new String[]{"Older%0","Insufficient Water Flow%0","Hot/Cold Reversed%0","Faucet Leaky%0",
-                "Previous Leaks Under Sink%0","Under Sink Openings%0","Sink Drains Slow%0","Sink Drain Damaged%0",
-                "Sink Drain Missing%0","Loose Toilet Only%0","Loose Toilet Wax Ring%0","Toilet Lid Cracked%0","Toilet Slow Flush%0",
-                "Toilet Slow Flush%0","Toilet Old%0","Shower Head Leak%0","Hot Shower/Cold Shower%0", "Seal Shower Fixtures%0",
-                "Backsplash Caulking Top%0","Backslash Caulking Bottom%0","Shower Stall Tile/Grout%0","Shower Stall Tile Damage%0",
-                "Shower Stall Drains Slow%0","Bathtub Tile/Grout%0","Bathtub Enclosure Caulk%0","Bathtub Floor Damage%0",
-                "Bathtub No Drain Plug%0","Bathtub Drains Slow%0","Jetted Tub Inoperative%0","Jetted Tub Noisy%0","Jetted Tub No Motor Access%0"
-                ,"Jetted Tub Lacks GFCI%0","Laundry Tub Loose%0","Exhaust Fan Needed%0","Exhaust Fan Inoperative%0","Hose Bib Anti-Siphon Needed%0"};
-        sump_pumpValues =  new String[]{"Inoperative%0","Old%0 ","Discharge Line Suspect%0","Cover Needed%0"};
-        waste_ejector_pumpValues =  new String[]{"Inoperative%0","Seal Openings%0","No Vent Visible%0"};
-        water_heater_plumbingValues =  new String[]{"Very Old Unit%0","Older Unit%0","Leakage Evident%0","Thermal Expansion Device Needed%0",
-                "Sediment Trap%0","Capacity Questionable%0","Burner Dirty/Rust%0","No Cold Water Shut-Off%0","No TPR Valve%0",
-                "Leaking TPR Valve%0","TPR Discharge Improvement%0","Wiring Connection Poor%0","Missing Burner Cover%0"
-                ,"Exhaust Spillage%0","Lack of Combustion Air%0","Improve Draft Diverter%0","Vent Pipe Clearance%0",
-                "Protect WH from Damage%0","Older WH Garage Floor Clearance Needed%0"};
-        gas_piping_plumbingValues =  new String[]{"Gas Leak%0","Cap Gas Lines%0","Main Shut-Off Not Found%0","Secure Gas Line%0",
-                "Gas Line Corrosion%0", "Drip Leg Needed%0","Shut-Off Valve Needed%0","Dryer Gas Line Cap Needed%0","Support Lacking%0",
-                "Gas Meter Locked%0"};
-        supply_plumbingValues =  new String[]{"Pressure Regulator Needed%0","Label Water Shut-Offs%0","Leak%0",
-                "Polybutylene%0","Freezing Potential%0","Support Lacking%0","Supply Handle Missing%0","Pipe Hammer%0"};
-        dwv_plumbingValues =  new String[]{"Leaks%0","Flexible Piping%0","Overflow Pan for Washing Machine%0",
-                "Overflow Pan for WH%0","Trap Leak%0","S-Trap%0", "Insufficient Slope%0","Support Lacking%0","Older Piping%0",
-                "No Main Clean-Out Found%0","Septic System Warning/Disclosure%0", "Septic System Disclaimer%0",
-                "Odor%0","Vent Stack Height Insufficient%0"};
-        fixtures_observationValues =  new String[]{"Older%0","Insufficient Water Flow%0","Hot/Cold Reversed%0","Faucet Leaking%0","Previous Leaks Under Sinks%0"
-                ,"Under Sink Openings%0","Sink Drains Slow%0", "Sink Drain Damaged%0","Sink Drain Missing%0","Loose Toilet Only%0"
-                ,"Loose Toilet Wax Ring%0","Toilet Lid Cracked%0","Toilet Slow Flush%0","Toilet Runs%0",
-                "Toilet Old%0", "Shower Head Leak%0","Hot Shower/Cold Shower%0","Seal Shower Fixtures%0","Backsplash Top Caulking%0"
-                ,"Backsplash Bottom Caulking%0","Shower Stall Tile Grout/Caulk%0","Shower Stall Tile Damage%0","Shower Stall Drains Slow%0",
-                "Bathtub Tile Grout/Caulk%0","Bathtub Floor Damage %0","Bathtub Enclosure Caulk%0","Bathtub Drains Slow%0",
-                "Bathtub No Drain Plug%0","Jetted Tub Inoperative%0","Jetted Tub Noisy%0","Jetted Tub No Motor Access%0",
-                "Jetted Tub Lacks GFCI%0","Waste Ejector Pump%0","Laundry Tub Loose%0","Exhaust Fan Needed%0","Exhaust Fan Inoperative%0","Hose Bib Anti-Siphon Needed%0 "
-        };
-        sump_pump_plumbingValues =  new String[]{"Inoperative%0","Old%0","Discharge Line Suspect%0","Cover Needed%0"};
-        waste_ejector_pump_roValues =  new String[]{"Inoperative%0","Unsealed Openings%0","No Vent%0"};
 
-
-        SharedPreferences pref = getActivity().getApplicationContext().getSharedPreferences("HititPro", getActivity().MODE_PRIVATE);
-        SharedPreferences.Editor editor = pref.edit();
-        String populate = pref.getString("isInsulation_populated","");
 
 
 
@@ -205,41 +137,7 @@ public class PlumbingScreenFragment extends BaseFragment {
             getPlumbing();
 
         }
-        else
-        {
-            if(!(populate.equals("true")))
-            {
-                database.prePopulateData("watersupplysource", water_supply_sourceValues, PLUMBING_TABLE, StructureScreensActivity.inspectionID);
-                database.prePopulateData("servicepipe", service_pipe_to_houseValues, PLUMBING_TABLE, StructureScreensActivity.inspectionID);
-                database.prePopulateData("mainwatervalvelocation", main_water_valve_locationValues, PLUMBING_TABLE, StructureScreensActivity.inspectionID);
-                database.prePopulateData("interiorsupply", interior_supply_pipingValues, PLUMBING_TABLE, StructureScreensActivity.inspectionID);
-                database.prePopulateData("wastesystem", waste_systemValues, PLUMBING_TABLE, StructureScreensActivity.inspectionID);
-                database.prePopulateData("waterheater", water_heaterValues, PLUMBING_TABLE, StructureScreensActivity.inspectionID);
-                database.prePopulateData("rfurnace", dwv_pipingValues, PLUMBING_TABLE, StructureScreensActivity.inspectionID);
-                database.prePopulateData("fuelshortage_distribution", fuel_storage_distributionValues, PLUMBING_TABLE, StructureScreensActivity.inspectionID);
-                database.prePopulateData("fuelshutoffvalves", fuel_shut_off_valvesValues, PLUMBING_TABLE, StructureScreensActivity.inspectionID);
-                database.prePopulateData("othercomponents", other_components_plumbingValues, PLUMBING_TABLE, StructureScreensActivity.inspectionID);
-                database.prePopulateData("observation", plumbing_observationsValues, PLUMBING_TABLE, StructureScreensActivity.inspectionID);
-                database.prePopulateData("rwaterheater", water_heater_plimbingValues, PLUMBING_TABLE, StructureScreensActivity.inspectionID);
-                database.prePopulateData("gaspiping", gas_pipingValues, PLUMBING_TABLE, StructureScreensActivity.inspectionID);
-                database.prePopulateData("rsupplypiping", supply_pipingValues, PLUMBING_TABLE, StructureScreensActivity.inspectionID);
-                database.prePopulateData("dwvpiping", dwv_piping_observationValues, PLUMBING_TABLE, StructureScreensActivity.inspectionID);
-                database.prePopulateData("fixtures", fixturesValues, PLUMBING_TABLE, StructureScreensActivity.inspectionID);
-                database.prePopulateData("sumppump", sump_pumpValues, PLUMBING_TABLE, StructureScreensActivity.inspectionID);
-                database.prePopulateData("wasteejectorpump", waste_ejector_pumpValues, PLUMBING_TABLE, StructureScreensActivity.inspectionID);
-                database.prePopulateData("gas_piping_plumbing", gas_piping_plumbingValues, PLUMBING_TABLE, StructureScreensActivity.inspectionID);
-                database.prePopulateData("supply_plumbing", supply_plumbingValues, PLUMBING_TABLE, StructureScreensActivity.inspectionID);
-                database.prePopulateData("dwv_plumbing", dwv_plumbingValues, PLUMBING_TABLE, StructureScreensActivity.inspectionID);
-                database.prePopulateData("fixtures_observation", fixtures_observationValues, PLUMBING_TABLE, StructureScreensActivity.inspectionID);
-                database.prePopulateData("sump_pump_plumbing", sump_pump_plumbingValues, PLUMBING_TABLE, StructureScreensActivity.inspectionID);
-                database.prePopulateData("waste_ejector_pump_ro", waste_ejector_pump_roValues, PLUMBING_TABLE, StructureScreensActivity.inspectionID);
 
-                // Saving string
-                editor.putString("isInsulation_populated", "true");
-                editor.apply();
-            }
-
-        }
 
 
         water_supply_source.setOnClickListener(new View.OnClickListener() {
@@ -249,7 +147,7 @@ public class PlumbingScreenFragment extends BaseFragment {
                 edit.putBoolean("imageButton",false);
                 edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",water_supply_sourceValues);
+                intent.putExtra("items", StructureScreensActivity.water_supply_sourceValues);
                 intent.putExtra("heading",water_supply_source.getText().toString());
                 intent.putExtra("column","watersupplysource");
                 intent.putExtra("dbTable",PLUMBING_TABLE);
@@ -264,7 +162,7 @@ public class PlumbingScreenFragment extends BaseFragment {
                 edit.putBoolean("imageButton",false);
                 edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",service_pipe_to_houseValues);
+                intent.putExtra("items", StructureScreensActivity.service_pipe_to_houseValues);
                 intent.putExtra("heading",service_pipe_to_house.getText().toString());
                 intent.putExtra("column","servicepipe");
                 intent.putExtra("dbTable",PLUMBING_TABLE);
@@ -280,7 +178,7 @@ public class PlumbingScreenFragment extends BaseFragment {
                 edit.commit();
 
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",main_water_valve_locationValues);
+                intent.putExtra("items", StructureScreensActivity.main_water_valve_locationValues);
                 intent.putExtra("heading",main_water_valve_location.getText().toString());
                 intent.putExtra("column","mainwatervalvelocation");
                 intent.putExtra("dbTable",PLUMBING_TABLE);
@@ -295,7 +193,7 @@ public class PlumbingScreenFragment extends BaseFragment {
                 edit.putBoolean("imageButton",false);
                 edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",interior_supply_pipingValues);
+                intent.putExtra("items", StructureScreensActivity.interior_supply_pipingValues);
                 intent.putExtra("heading",interior_supply_piping.getText().toString());
                 intent.putExtra("column","interiorsupply");
                 intent.putExtra("dbTable",PLUMBING_TABLE);
@@ -310,7 +208,7 @@ public class PlumbingScreenFragment extends BaseFragment {
                 edit.putBoolean("imageButton",false);
                 edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",waste_systemValues);
+                intent.putExtra("items", StructureScreensActivity.waste_systemValues);
                 intent.putExtra("heading",waste_system.getText().toString());
                 intent.putExtra("column","wastesystem");
                 intent.putExtra("dbTable",PLUMBING_TABLE);
@@ -325,7 +223,7 @@ public class PlumbingScreenFragment extends BaseFragment {
                 edit.putBoolean("imageButton",false);
                 edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",dwv_pipingValues);
+                intent.putExtra("items", StructureScreensActivity.dwv_pipingValues);
                 intent.putExtra("heading",dwv_piping.getText().toString());
                 intent.putExtra("column","strudwvpiping");
                 intent.putExtra("dbTable",PLUMBING_TABLE);
@@ -341,7 +239,7 @@ public class PlumbingScreenFragment extends BaseFragment {
                 edit.putBoolean("imageButton",false);
                 edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",water_heaterValues);
+                intent.putExtra("items", StructureScreensActivity.water_heaterValues);
                 intent.putExtra("heading",water_heater.getText().toString());
                 intent.putExtra("column","waterheater");
                 intent.putExtra("dbTable",PLUMBING_TABLE);
@@ -358,7 +256,7 @@ public class PlumbingScreenFragment extends BaseFragment {
                 edit.putBoolean("imageButton",false);
                 edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",fuel_storage_distributionValues);
+                intent.putExtra("items", StructureScreensActivity.fuel_storage_distributionValues);
                 intent.putExtra("heading",fuel_storage_distribution.getText().toString());
                 intent.putExtra("column","fuelshortage_distribution");
                 intent.putExtra("dbTable",PLUMBING_TABLE);
@@ -374,7 +272,7 @@ public class PlumbingScreenFragment extends BaseFragment {
                 edit.putBoolean("imageButton",false);
                 edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",fuel_shut_off_valvesValues);
+                intent.putExtra("items", StructureScreensActivity.fuel_shut_off_valvesValues);
                 intent.putExtra("heading",fuel_shut_off_valves.getText().toString());
                 intent.putExtra("column","fuelshutoffvalves");
                 intent.putExtra("dbTable",PLUMBING_TABLE);
@@ -389,7 +287,7 @@ public class PlumbingScreenFragment extends BaseFragment {
                 edit.putBoolean("imageButton",false);
                 edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",other_components_plumbingValues);
+                intent.putExtra("items", StructureScreensActivity.other_components_plumbingValues);
                 intent.putExtra("heading",other_components_plumbing.getText().toString());
                 intent.putExtra("column","othercomponents");
                 intent.putExtra("dbTable",PLUMBING_TABLE);
@@ -404,7 +302,7 @@ public class PlumbingScreenFragment extends BaseFragment {
                 edit.putBoolean("imageButton",false);
                 edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",plumbing_observationsValues);
+                intent.putExtra("items", StructureScreensActivity.plumbing_observationsValues);
                 intent.putExtra("heading",plumbing_observations.getText().toString());
                 intent.putExtra("column","observation");
                 intent.putExtra("dbTable",PLUMBING_TABLE);
@@ -418,7 +316,7 @@ public class PlumbingScreenFragment extends BaseFragment {
                 edit.putBoolean("imageButton",true);
                 edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",water_heater_plimbingValues);
+                intent.putExtra("items", StructureScreensActivity.water_heater_plimbingValues);
                 intent.putExtra("heading",water_heater_plimbing.getText().toString());
                 intent.putExtra("column","rwaterheater");
                 intent.putExtra("dbTable",PLUMBING_TABLE);
@@ -433,7 +331,7 @@ public class PlumbingScreenFragment extends BaseFragment {
                 edit.putBoolean("imageButton",true);
                 edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",gas_pipingValues);
+                intent.putExtra("items", StructureScreensActivity.gas_pipingValues);
                 intent.putExtra("heading",gas_piping.getText().toString());
                 intent.putExtra("column","gaspiping");
                 intent.putExtra("dbTable",PLUMBING_TABLE);
@@ -447,7 +345,7 @@ public class PlumbingScreenFragment extends BaseFragment {
                 edit.putBoolean("imageButton",true);
                 edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",supply_pipingValues);
+                intent.putExtra("items", StructureScreensActivity.supply_pipingValues);
                 intent.putExtra("heading",supply_piping.getText().toString());
                 intent.putExtra("column","rsupplypiping");
                 intent.putExtra("dbTable",PLUMBING_TABLE);
@@ -462,7 +360,7 @@ public class PlumbingScreenFragment extends BaseFragment {
                 edit.putBoolean("imageButton",true);
                 edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",dwv_piping_observationValues);
+                intent.putExtra("items", StructureScreensActivity.dwv_piping_observationValues);
                 intent.putExtra("heading",dwv_piping_observation.getText().toString());
                 intent.putExtra("column","dwvpiping");
                 intent.putExtra("dbTable",PLUMBING_TABLE);
@@ -477,7 +375,7 @@ public class PlumbingScreenFragment extends BaseFragment {
                 edit.putBoolean("imageButton",true);
                 edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",fixturesValues);
+                intent.putExtra("items", StructureScreensActivity.fixturesValues);
                 intent.putExtra("heading",fixtures.getText().toString());
                 intent.putExtra("column","fixtures");
                 intent.putExtra("dbTable",PLUMBING_TABLE);
@@ -492,7 +390,7 @@ public class PlumbingScreenFragment extends BaseFragment {
                 edit.putBoolean("imageButton",true);
                 edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",sump_pumpValues);
+                intent.putExtra("items", StructureScreensActivity.sump_pumpValues);
                 intent.putExtra("heading",sump_pump.getText().toString());
                 intent.putExtra("column","sumppump");
                 intent.putExtra("dbTable",PLUMBING_TABLE);
@@ -507,7 +405,7 @@ public class PlumbingScreenFragment extends BaseFragment {
                 edit.putBoolean("imageButton",true);
                 edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",waste_ejector_pumpValues);
+                intent.putExtra("items", StructureScreensActivity.waste_ejector_pumpValues);
                 intent.putExtra("heading",waste_ejector_pump.getText().toString());
                 intent.putExtra("column","wasteejectorpump");
                 intent.putExtra("dbTable",PLUMBING_TABLE);
@@ -522,7 +420,7 @@ public class PlumbingScreenFragment extends BaseFragment {
                 edit.putBoolean("imageButton",true);
                 edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",water_heater_plumbingValues);
+                intent.putExtra("items", StructureScreensActivity.water_heater_plumbingValues);
                 intent.putExtra("heading",water_heater_plumbing.getText().toString());
                 intent.putExtra("column","water_heater_plumbing");
                 intent.putExtra("dbTable",PLUMBING_TABLE);
@@ -537,7 +435,7 @@ public class PlumbingScreenFragment extends BaseFragment {
                 edit.putBoolean("imageButton",true);
                 edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",gas_piping_plumbingValues);
+                intent.putExtra("items", StructureScreensActivity.gas_piping_plumbingValues);
                 intent.putExtra("heading",gas_piping_plumbing.getText().toString());
                 intent.putExtra("column","gas_piping_plumbing");
                 intent.putExtra("dbTable",PLUMBING_TABLE);
@@ -552,7 +450,7 @@ public class PlumbingScreenFragment extends BaseFragment {
                 edit.putBoolean("imageButton",true);
                 edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",supply_plumbingValues);
+                intent.putExtra("items", StructureScreensActivity.supply_plumbingValues);
                 intent.putExtra("heading",supply_plumbing.getText().toString());
                 intent.putExtra("column","supply_plumbing");
                 intent.putExtra("dbTable",PLUMBING_TABLE);
@@ -567,7 +465,7 @@ public class PlumbingScreenFragment extends BaseFragment {
                 edit.putBoolean("imageButton",true);
                 edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",dwv_plumbingValues);
+                intent.putExtra("items", StructureScreensActivity.dwv_plumbingValues);
                 intent.putExtra("heading",dwv_plumbing.getText().toString());
                 intent.putExtra("column","dwv_plumbing");
                 intent.putExtra("dbTable",PLUMBING_TABLE);
@@ -582,7 +480,7 @@ public class PlumbingScreenFragment extends BaseFragment {
                 edit.putBoolean("imageButton",true);
                 edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",fixtures_observationValues);
+                intent.putExtra("items", StructureScreensActivity.fixtures_observationValues);
                 intent.putExtra("heading",fixtures_observation.getText().toString());
                 intent.putExtra("column","fixtures_observation");
                 intent.putExtra("dbTable",PLUMBING_TABLE);
@@ -598,7 +496,7 @@ public class PlumbingScreenFragment extends BaseFragment {
                 edit.putBoolean("imageButton",true);
                 edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",sump_pump_plumbingValues);
+                intent.putExtra("items", StructureScreensActivity.sump_pump_plumbingValues);
                 intent.putExtra("heading",sump_pump_plumbing.getText().toString());
                 intent.putExtra("column","sump_pump_plumbing");
                 intent.putExtra("dbTable",PLUMBING_TABLE);
@@ -614,7 +512,7 @@ public class PlumbingScreenFragment extends BaseFragment {
                 edit.putBoolean("imageButton",true);
                 edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",waste_ejector_pump_roValues);
+                intent.putExtra("items", StructureScreensActivity.waste_ejector_pump_roValues);
                 intent.putExtra("heading",waste_ejector_pump_ro.getText().toString());
                 intent.putExtra("column","waste_ejector_pump_ro");
                 intent.putExtra("dbTable",PLUMBING_TABLE);
@@ -793,9 +691,9 @@ public class PlumbingScreenFragment extends BaseFragment {
                 cursor.moveToFirst();
 
                 Map<String, String> params = new HashMap<>();
-                params.put("template_id", "");
+                params.put("template_id", StructureScreensActivity.template_id);
                 params.put("inspection_id", StructureScreensActivity.inspectionID);
-                params.put("client_id", "2");
+                params.put("client_id", StructureScreensActivity.client_id);
                 params.put("is_applicable", "1");
                 params.put("empty_fields", "0");
                 if(cursor != null) {
