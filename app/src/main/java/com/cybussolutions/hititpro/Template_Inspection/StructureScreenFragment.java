@@ -2,6 +2,7 @@ package com.cybussolutions.hititpro.Template_Inspection;
 
 import android.app.FragmentManager;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -63,7 +64,8 @@ public class StructureScreenFragment extends BaseFragment {
     Button foundationButton, columnsButton, floorStructureButton,wallStructureSpinner, ceilingStructureButton, roofStructureButton,
             structureObservationsButton, roFoundationButton, roCrawlSpacesButton, roFloorsButton, roExteriorWallsButton, roRoofButton;
 
-
+    SharedPreferences sp;
+    SharedPreferences.Editor edit;
     @Nullable
     @Override
     public View onCreateView(final LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
@@ -96,6 +98,11 @@ public class StructureScreenFragment extends BaseFragment {
 
         try {
             database = database.open();
+            ///////////set title of main screens/////////////////
+            sp=getActivity().getSharedPreferences("prefs", Context.MODE_PRIVATE);
+            edit=sp.edit();
+            edit.putString("main_screen","Structure Screen");
+            edit.commit();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -137,6 +144,8 @@ public class StructureScreenFragment extends BaseFragment {
         foundationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",false);
+                edit.commit();
 
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",StructureScreensActivity.foundationSpinnerValues);
@@ -152,6 +161,8 @@ public class StructureScreenFragment extends BaseFragment {
         columnsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",false);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",StructureScreensActivity.columnsSpinnerValues);
                 intent.putExtra("heading",columnsButton.getText().toString());
@@ -165,6 +176,8 @@ public class StructureScreenFragment extends BaseFragment {
         floorStructureButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",false);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",StructureScreensActivity.floorStructureSpinnerValues);
                 intent.putExtra("heading",columnsButton.getText().toString());
@@ -178,6 +191,8 @@ public class StructureScreenFragment extends BaseFragment {
         wallStructureSpinner.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",false);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",StructureScreensActivity.wallStructureSpinnerValues);
                 intent.putExtra("heading",wallStructureSpinner.getText().toString());
@@ -192,6 +207,8 @@ public class StructureScreenFragment extends BaseFragment {
         ceilingStructureButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",false);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",StructureScreensActivity.ceilingStructureSpinnerValues);
                 intent.putExtra("heading",ceilingStructureButton.getText().toString());
@@ -205,6 +222,8 @@ public class StructureScreenFragment extends BaseFragment {
         roofStructureButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",false);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",StructureScreensActivity.roofStructureSpinnerValues);
                 intent.putExtra("heading",columnsButton.getText().toString());
@@ -218,6 +237,8 @@ public class StructureScreenFragment extends BaseFragment {
         structureObservationsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",false);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",StructureScreensActivity.structureObservationsSpinnerValues);
                 intent.putExtra("heading",roofStructureButton.getText().toString());
@@ -230,6 +251,8 @@ public class StructureScreenFragment extends BaseFragment {
         roFoundationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",StructureScreensActivity.roFoundationSpinnerValues);
                 intent.putExtra("heading",roFoundationButton.getText().toString());
@@ -243,6 +266,8 @@ public class StructureScreenFragment extends BaseFragment {
         roCrawlSpacesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",StructureScreensActivity.roCrawlSpacesSpinnerValues);
                 intent.putExtra("heading",roCrawlSpacesButton.getText().toString());
@@ -256,6 +281,8 @@ public class StructureScreenFragment extends BaseFragment {
         roFloorsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",StructureScreensActivity.roFloorsValues);
                 intent.putExtra("heading",roFloorsButton.getText().toString());
@@ -269,6 +296,8 @@ public class StructureScreenFragment extends BaseFragment {
         roExteriorWallsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",StructureScreensActivity.roExteriorWallsValues);
                 intent.putExtra("heading",roExteriorWallsButton.getText().toString());
@@ -282,6 +311,8 @@ public class StructureScreenFragment extends BaseFragment {
         roRoofButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",StructureScreensActivity.roRoofValues);
                 intent.putExtra("heading",roRoofButton.getText().toString());
