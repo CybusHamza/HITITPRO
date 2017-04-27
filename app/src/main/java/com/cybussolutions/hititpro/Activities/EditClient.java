@@ -109,7 +109,7 @@ public class EditClient extends AppCompatActivity {
                     {
                         if(strPhone.matches(numberPattern))
                         {
-                            AddClient();
+                            UpdateClient();
                         }
                         else {
                             new SweetAlertDialog(EditClient.this, SweetAlertDialog.ERROR_TYPE)
@@ -145,7 +145,7 @@ public class EditClient extends AppCompatActivity {
     }
 
 
-    public void AddClient() {
+    public void UpdateClient() {
 
         ringProgressDialog = ProgressDialog.show(this, "", "Please wait ...", true);
         ringProgressDialog.setCancelable(false);
