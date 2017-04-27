@@ -1,5 +1,6 @@
 package com.cybussolutions.hititpro.Fragments;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.cybussolutions.hititpro.Activities.Edit_Profile;
 import com.cybussolutions.hititpro.R;
 
 
@@ -43,10 +45,10 @@ public class ProfileFragment extends BaseFragment {
 
 
         final SharedPreferences pref = getActivity().getSharedPreferences("UserPrefs", getActivity().MODE_PRIVATE);
-        String struserName = pref.getString("user_name", null);
-        String struserEmail = pref.getString("email", null);
-        String strcontact = pref.getString("phone", null);
-        String stradress = pref.getString("adress", null);
+        final String struserName = pref.getString("user_name", null);
+        final String struserEmail = pref.getString("email", null);
+        final String strcontact = pref.getString("phone", null);
+        final String stradress = pref.getString("adress", null);
 
         name.setText(struserName);
         email.setText(struserEmail);
@@ -54,13 +56,18 @@ public class ProfileFragment extends BaseFragment {
         adress.setText(stradress);
 
 
-
         FloatingActionButton fab = (FloatingActionButton) root. findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Hellooooo !!!!", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent intent=new Intent(getActivity(), Edit_Profile.class);
+                intent.putExtra("user_name",struserName);
+                intent.putExtra("email",struserEmail);
+                intent.putExtra("phone",strcontact);
+                intent.putExtra("adress",stradress);
+                startActivity(intent);
+//                Snackbar.make(view, "Hellooooo !!!!", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
             }
         });
 

@@ -1,12 +1,14 @@
 package com.cybussolutions.hititpro.Activities;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -27,21 +29,36 @@ import java.util.Map;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
-public class Add_Client extends AppCompatActivity {
+public class EditClient extends AppCompatActivity {
 
 
     EditText Name,City,ContactName,Address,Phone,Fax,Email,State,Zip;
     String strName,strCity,strContactName,strAddress,strPhone,strFax,strEmail,strState,strZip,userid;
-    Button Submit;
+    Button Update;
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
     String numberPattern = "^[+]?[0-9]{10,13}$+";
     private static final int MY_SOCKET_TIMEOUT_MS = 10000;
     ProgressDialog ringProgressDialog;
 
+    ////// Strings to get default values //////////
+    String clientId,clientName,clientContact,clientAddress,clientCity,clientPhone,clientFax,clientEmail,clientState,clientZip;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_client);
+        setContentView(R.layout.activity_edit_client);
+
+        Intent intent = getIntent();
+        clientId =intent.getStringExtra("client_id");
+        clientName =intent.getStringExtra("client_name");
+        clientContact=intent.getStringExtra("client_contact");
+        clientAddress =intent.getStringExtra("client_address");
+        clientCity =intent.getStringExtra("client_city");
+        clientPhone =intent.getStringExtra("client_phone");
+        clientFax =intent.getStringExtra("client_fax");
+        clientEmail =intent.getStringExtra("client_email");
+        clientState =intent.getStringExtra("client_state");
+        clientZip =intent.getStringExtra("client_zip");
+
 
         Name = (EditText) findViewById(R.id.client_name);
         City = (EditText) findViewById(R.id.client_location);
@@ -52,12 +69,22 @@ public class Add_Client extends AppCompatActivity {
         Email = (EditText) findViewById(R.id.client_email);
         State = (EditText) findViewById(R.id.client_state);
         Zip = (EditText) findViewById(R.id.client_zip);
-        Submit = (Button) findViewById(R.id.register);
+        Update = (Button) findViewById(R.id.update);
+
+        Name.setText(clientName);
+        ContactName.setText(clientContact);
+        Address.setText(clientAddress);
+        City.setText(clientCity);
+        Phone.setText(clientPhone);
+        Fax.setText(clientFax);
+        Email.setText(clientEmail);
+        State.setText(clientState);
+        Zip.setText(clientZip);
 
         final SharedPreferences pref = getApplicationContext().getSharedPreferences("UserPrefs", MODE_PRIVATE);
         userid = pref.getString("user_id", null);
 
-        Submit.setOnClickListener(new View.OnClickListener() {
+        Update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -74,7 +101,7 @@ public class Add_Client extends AppCompatActivity {
                 if(strName.equals("") || strCity.equals("")|| strContactName.equals("")|| strAddress.equals("")
                         || strPhone.equals("")|| strFax.equals("")|| strEmail.equals(""))
                 {
-                    Toast.makeText(Add_Client.this, "Fields cannot be empty ", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(EditClient.this, "Fields cannot be empty ", Toast.LENGTH_SHORT).show();
                 }
                 else
                 {
@@ -85,7 +112,7 @@ public class Add_Client extends AppCompatActivity {
                             AddClient();
                         }
                         else {
-                            new SweetAlertDialog(Add_Client.this, SweetAlertDialog.ERROR_TYPE)
+                            new SweetAlertDialog(EditClient.this, SweetAlertDialog.ERROR_TYPE)
                                     .setTitleText("Error!")
                                     .setConfirmText("OK").setContentText("Invalid format of Phone number")
                                     .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
@@ -99,7 +126,7 @@ public class Add_Client extends AppCompatActivity {
                         }
                     }
                     else {
-                        new SweetAlertDialog(Add_Client.this, SweetAlertDialog.ERROR_TYPE)
+                        new SweetAlertDialog(EditClient.this, SweetAlertDialog.ERROR_TYPE)
                                 .setTitleText("Error!")
                                 .setConfirmText("OK").setContentText("Invalid format of email adress")
                                 .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
@@ -124,16 +151,15 @@ public class Add_Client extends AppCompatActivity {
         ringProgressDialog.setCancelable(false);
         ringProgressDialog.show();
 
-        StringRequest request = new StringRequest(Request.Method.POST, End_Points.ADD_CLIENT,
+        StringRequest request = new StringRequest(Request.Method.POST, End_Points.UPDATE_CLIENT,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-
                         ringProgressDialog.dismiss();
                         if (response.equals("")) {
-                            new SweetAlertDialog(Add_Client.this, SweetAlertDialog.ERROR_TYPE)
+                            new SweetAlertDialog(EditClient.this, SweetAlertDialog.ERROR_TYPE)
                                     .setTitleText("Error!")
-                                    .setConfirmText("OK").setContentText("Error Adding Client")
+                                    .setConfirmText("OK").setContentText("Error Updating Client")
                                     .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                                         @Override
                                         public void onClick(SweetAlertDialog sDialog) {
@@ -144,9 +170,9 @@ public class Add_Client extends AppCompatActivity {
                                     .show();
                         }
                         else {
-                            new SweetAlertDialog(Add_Client.this, SweetAlertDialog.SUCCESS_TYPE)
+                            new SweetAlertDialog(EditClient.this, SweetAlertDialog.SUCCESS_TYPE)
                                     .setTitleText("Success!")
-                                    .setConfirmText("OK").setContentText("Client Added Successful")
+                                    .setConfirmText("OK").setContentText("Client Updated Successful")
                                     .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                                         @Override
                                         public void onClick(SweetAlertDialog sDialog) {
@@ -167,19 +193,19 @@ public class Add_Client extends AppCompatActivity {
                 ringProgressDialog.dismiss();
                 if (error instanceof NoConnectionError) {
 
-                    new SweetAlertDialog(Add_Client.this, SweetAlertDialog.ERROR_TYPE)
+                    new SweetAlertDialog(EditClient.this, SweetAlertDialog.ERROR_TYPE)
                             .setTitleText("Error!")
                             .setConfirmText("OK").setContentText("No Internet Connection")
                             .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                                 @Override
                                 public void onClick(SweetAlertDialog sDialog) {
                                     sDialog.dismiss();
-                                 }
-                           })
+                                }
+                            })
                             .show();
                 } else if (error instanceof TimeoutError) {
 
-                    new SweetAlertDialog(Add_Client.this, SweetAlertDialog.ERROR_TYPE)
+                    new SweetAlertDialog(EditClient.this, SweetAlertDialog.ERROR_TYPE)
                             .setTitleText("Error!")
                             .setConfirmText("OK").setContentText("Connection TimeOut! Please check your internet connection.")
                             .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
@@ -196,6 +222,7 @@ public class Add_Client extends AppCompatActivity {
             protected Map<String, String> getParams() throws AuthFailureError {
 
                 Map<String, String> params = new HashMap<>();
+                params.put("id",clientId);
                 params.put("client_name", strName);
                 params.put("city", strCity);
                 params.put("contactname", strContactName);

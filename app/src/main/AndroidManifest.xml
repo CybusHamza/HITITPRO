@@ -37,13 +37,12 @@
         <activity android:name=".Activities.Add_Comments" />
         <activity
             android:name=".Activities.Detailed_Activity_All_Screens"
-            android:windowSoftInputMode="adjustPan">
-            </activity>
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".Activities.Detailed_Activity_Structure_Screens"
-            android:windowSoftInputMode="adjustPan">
-        </activity>
-
-   </application>
+            android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".Activities.EditClient" />
+        <activity android:name=".Activities.Edit_Profile"></activity>
+    </application>
 
 </manifest>

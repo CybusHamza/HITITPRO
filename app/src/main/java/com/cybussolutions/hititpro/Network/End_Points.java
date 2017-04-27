@@ -8,6 +8,8 @@ public class End_Points {
     public static final String LOGIN = BASE_URL + "login";
     public static final String SIGN_UP = BASE_URL + "addUserSignUp";
     public static final String ADD_CLIENT = BASE_URL + "addClient";
+    public static final String UPDATE_CLIENT = BASE_URL + "updateClient";
+
     public static final String GET_CLIENT = BASE_URL + "getClient";
     public static final String START_INSPECTION = BASE_URL + "addTemplate";
     public static final String PRE_POPULATE = BASE_URL + "insertSimpleEnteriesToAllReferenceTables";

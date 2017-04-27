@@ -171,6 +171,48 @@
             android:id="@+id/client_email" />
 
     </com.github.florent37.materialtextfield.MaterialTextField>
+    <com.github.florent37.materialtextfield.MaterialTextField
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        app:mtf_cardCollapsedHeight="4dp"
+        app:mtf_image="@drawable/location"
+        app:mtf_openKeyboardOnFocus="true"
+        android:layout_marginTop="30dp"
+        android:id="@+id/state">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="State"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            android:textSize="15sp"
+            android:id="@+id/client_state" />
+
+    </com.github.florent37.materialtextfield.MaterialTextField>
+    <com.github.florent37.materialtextfield.MaterialTextField
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        app:mtf_cardCollapsedHeight="4dp"
+        app:mtf_image="@drawable/user"
+        app:mtf_openKeyboardOnFocus="true"
+        android:layout_marginTop="30dp"
+        android:id="@+id/zip">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Zip e.g. 333333"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            android:textSize="15sp"
+            android:id="@+id/client_zip" />
+
+    </com.github.florent37.materialtextfield.MaterialTextField>
 
     <Button
         android:layout_width="wrap_content"
