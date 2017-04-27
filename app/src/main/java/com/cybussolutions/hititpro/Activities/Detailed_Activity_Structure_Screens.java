@@ -42,6 +42,7 @@ public class Detailed_Activity_Structure_Screens extends AppCompatActivity {
     Button addCategory;
     AlertDialog b;
     private ArrayList<Checkbox_model> list = new ArrayList<>();
+    private ArrayList<Checkbox_model> list_temp ;
     ArrayAdapter<Checkbox_model> adapter;
 
     ArrayList <String> checkedValue;
@@ -125,14 +126,7 @@ public class Detailed_Activity_Structure_Screens extends AppCompatActivity {
         Detailed_Adapter = new Detailed_Adapter_Structure_Screen(Detailed_Activity_Structure_Screens.this,list,R.layout.structure_observations);
         detailedListView.setChoiceMode(android.R.layout.simple_list_item_single_choice);
         detailedListView.setAdapter(Detailed_Adapter);
-        detailedListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-
-            }
-        });
-        //Detailed_Adapter.notifyDataSetChanged();
 
     }
 
@@ -203,32 +197,73 @@ public class Detailed_Activity_Structure_Screens extends AppCompatActivity {
 
                 if (Add.getText().toString().equals("")) {
                     Toast.makeText(Detailed_Activity_Structure_Screens.this, "Please Enter Some Data !!", Toast.LENGTH_SHORT).show();
-                } else {
+                }
+
+                else
+                {
 
 
                     String[] insertArray = Detailed_Adapter.getDbInsertArray();
 
+                    list_temp = new ArrayList<>(list);
                     // clearing list view
-
                     list.clear();
                     Detailed_Adapter.notifyDataSetChanged();
 
-                    for (int item = 0; item < insertArray.length; item++) {
-                        Checkbox_model model = new Checkbox_model();
-                        model.setName(insertArray[item]);
 
-                        if (item == (insertArray.length - 1)) {
+                    for (int item = 0; item <= insertArray.length -1; item++) {
+
+                        if(item != 0)
+                        {
+                            if(insertArray[item-1].equals(Add.getText().toString()+"%0") || insertArray[item-1].equals(Add.getText().toString()+"%1") )
+                            {
+                                Toast.makeText(Detailed_Activity_Structure_Screens.this, "Item Already Available", Toast.LENGTH_SHORT).show();
+                                list = new ArrayList<>(list_temp);
+                                break;
+                            }
+                            else
+                            {
+
+                                Checkbox_model model = new Checkbox_model();
+                                model.setName(insertArray[item]);
+
+                                if (item == insertArray.length -1 ) {
 
 
-                            model.setName(Add.getText().toString() + "%0");
+                                    model.setName(Add.getText().toString() + "%0");
 
+                                }
+
+                                list.add(model);
+                                list_temp.add(model);
+                            }
+                        }
+                        else
+                        {
+
+                            Checkbox_model model = new Checkbox_model();
+                            model.setName(insertArray[item]);
+
+                            if (item == insertArray.length -1) {
+
+                                model.setName(Add.getText().toString() + "%0");
+
+                            }
+
+                            list.add(model);
                         }
 
-                        list.add(model);
+
+
+
+
                     }
 
-
                     Detailed_Adapter.notifyDataSetChanged();
+
+
+
+
 
 
                     b.dismiss();

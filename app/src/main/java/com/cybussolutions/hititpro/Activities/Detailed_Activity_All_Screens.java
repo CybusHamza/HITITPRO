@@ -40,8 +40,9 @@ public class Detailed_Activity_All_Screens extends AppCompatActivity {
     Button addCategory;
     AlertDialog b;
     private ArrayList<Checkbox_model> list = new ArrayList<>();
+    private ArrayList<Checkbox_model> list_temp;
     ArrayAdapter<Checkbox_model> adapter;
-
+    public static  boolean isSame;
     ArrayList <String> checkedValue;
 
 
@@ -205,33 +206,74 @@ public class Detailed_Activity_All_Screens extends AppCompatActivity {
             public void onClick(View v) {
 
                 if (Add.getText().toString().equals("")) {
+
                     Toast.makeText(Detailed_Activity_All_Screens.this, "Please Enter Some Data !!", Toast.LENGTH_SHORT).show();
-                } else {
+                }
+                else
+                {
 
 
                     String[] insertArray = Detailed_Adapter.getDbInsertArray();
 
+                    list_temp = new ArrayList<>(list);
                     // clearing list view
-
                     list.clear();
                     Detailed_Adapter.notifyDataSetChanged();
 
-                    for (int item = 0; item < insertArray.length; item++) {
-                        Checkbox_model model = new Checkbox_model();
-                        model.setName(insertArray[item]);
 
-                        if (item == (insertArray.length - 1)) {
+                    for (int item = 0; item <= insertArray.length -1; item++) {
+
+                        if(item != 0)
+                        {
+                            if(insertArray[item-1].equals(Add.getText().toString()+"%0") || insertArray[item-1].equals(Add.getText().toString()+"%1") )
+                            {
+                                Toast.makeText(Detailed_Activity_All_Screens.this, "Item Already Available", Toast.LENGTH_SHORT).show();
+                                list = new ArrayList<>(list_temp);
+                                break;
+                            }
+                            else
+                            {
+
+                                Checkbox_model model = new Checkbox_model();
+                                model.setName(insertArray[item]);
+
+                                if (item == insertArray.length -1 ) {
 
 
-                            model.setName(Add.getText().toString() + "%0");
+                                    model.setName(Add.getText().toString() + "%0");
 
+                                }
+
+                                list.add(model);
+                                list_temp.add(model);
+                            }
+                        }
+                        else
+                        {
+
+                            Checkbox_model model = new Checkbox_model();
+                            model.setName(insertArray[item]);
+
+                            if (item == insertArray.length -1) {
+
+                                model.setName(Add.getText().toString() + "%0");
+
+                            }
+
+                            list.add(model);
                         }
 
-                        list.add(model);
+
+
+
+
                     }
 
+                        Detailed_Adapter.notifyDataSetChanged();
 
-                    Detailed_Adapter.notifyDataSetChanged();
+
+
+
 
 
                     b.dismiss();
