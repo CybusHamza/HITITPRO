@@ -15,6 +15,7 @@ import com.cybussolutions.hititpro.Fragments.ReviewInspectionFragment;
 import com.cybussolutions.hititpro.Fragments.SettingsFragment;
 import com.cybussolutions.hititpro.Fragments.TemplatesFragment;
 
+import com.cybussolutions.hititpro.Fragments.TemplatesListFragment;
 import com.cybussolutions.hititpro.R;
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
@@ -35,8 +36,8 @@ public class LandingScreen extends AppCompatActivity {
     Toolbar toolbar;
 
     // drawer items name icons
-    String[] drawerNames = new String[]{"Profile", "Clients", "Templates", "Review Inspection", "Inspection Images", "Settings", "Logout"};
-    int[] drawerImages = new int[]{R.drawable.profile, R.drawable.clients, R.drawable.template, R.drawable.user_review, R.drawable.picture,
+    String[] drawerNames = new String[]{"Profile", "Clients", "Templates","Inspection" ,"Review Inspection", "Inspection Images", "Settings", "Logout"};
+    int[] drawerImages = new int[]{R.drawable.profile, R.drawable.clients, R.drawable.template,R.drawable.template, R.drawable.user_review, R.drawable.picture,
             R.drawable.settings, R.drawable.logout};
 
     @Override
@@ -60,10 +61,11 @@ public class LandingScreen extends AppCompatActivity {
         PrimaryDrawerItem drawerItem1 = new PrimaryDrawerItem().withIdentifier(1).withName(drawerNames[0]).withIcon(drawerImages[0]);
         PrimaryDrawerItem drawerItem2 = new PrimaryDrawerItem().withIdentifier(2).withName(drawerNames[1]).withIcon(drawerImages[1]);
         PrimaryDrawerItem drawerItem3 = new PrimaryDrawerItem().withIdentifier(3).withName(drawerNames[2]).withIcon(drawerImages[2]);
-        PrimaryDrawerItem drawerItem4 = new PrimaryDrawerItem().withIdentifier(4).withName(drawerNames[3]).withIcon(drawerImages[3]);
-        PrimaryDrawerItem drawerItem5 = new PrimaryDrawerItem().withIdentifier(5).withName(drawerNames[4]).withIcon(drawerImages[4]);
-        PrimaryDrawerItem drawerItem6 = new PrimaryDrawerItem().withIdentifier(6).withName(drawerNames[5]).withIcon(drawerImages[5]);
-        PrimaryDrawerItem drawerItem7 = new PrimaryDrawerItem().withIdentifier(7).withName(drawerNames[6]).withIcon(drawerImages[6]);
+        PrimaryDrawerItem drawerItem4 = new PrimaryDrawerItem().withIdentifier(3).withName(drawerNames[3]).withIcon(drawerImages[3]);
+        PrimaryDrawerItem drawerItem5 = new PrimaryDrawerItem().withIdentifier(4).withName(drawerNames[4]).withIcon(drawerImages[4]);
+        PrimaryDrawerItem drawerItem6 = new PrimaryDrawerItem().withIdentifier(5).withName(drawerNames[5]).withIcon(drawerImages[5]);
+        PrimaryDrawerItem drawerItem7 = new PrimaryDrawerItem().withIdentifier(6).withName(drawerNames[6]).withIcon(drawerImages[6]);
+        PrimaryDrawerItem drawerItem8 = new PrimaryDrawerItem().withIdentifier(7).withName(drawerNames[7]).withIcon(drawerImages[7]);
 
 
         final SharedPreferences pref = getApplicationContext().getSharedPreferences("UserPrefs", MODE_PRIVATE);
@@ -74,7 +76,7 @@ public class LandingScreen extends AppCompatActivity {
         drawer = new DrawerBuilder()
                 .withActivity(this)
                 .withToolbar(toolbar)
-                .withAccountHeader(setupHeader(userName,userEmail))
+                .withAccountHeader(setupHeader(userName, userEmail))
                 .addDrawerItems(
                         drawerItem1,
                         new DividerDrawerItem(),
@@ -88,70 +90,63 @@ public class LandingScreen extends AppCompatActivity {
                         new DividerDrawerItem(),
                         drawerItem6,
                         new DividerDrawerItem(),
-                        drawerItem7
+                        drawerItem7,
+                        new DividerDrawerItem(),
+                        drawerItem8
                 )
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
                         // do something with the clicked item :D
-                        Fragment fragment=null;
+                        Fragment fragment = null;
 
-                        switch (position)
-                        {
-                            case 1:
-                            {
-                                fragment= new ProfileFragment();
-                                getSupportFragmentManager().beginTransaction().replace(R.id.container,fragment).commit();
+                        switch (position) {
+                            case 1: {
+                                fragment = new ProfileFragment();
+                                getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment).commit();
 
                                 break;
                             }
-                            case 3:
-                            {
-                                fragment= new ClientsFragment();
-                                getSupportFragmentManager().beginTransaction().replace(R.id.container,fragment).commit();
-
+                            case 3: {
+                                fragment = new ClientsFragment();
+                                getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment).commit();
+                                break;
+                            }
+                            case 5: {
+                                fragment = new TemplatesListFragment();
+                                getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment).commit();
+                                break;
+                            }
+                            case 7: {
+                                ///////////inspection///////////
+                                fragment = new TemplatesFragment();
+                                getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment).commit();
+                                break;
+                            }
+                            case 9: {
+                                fragment = new ReviewInspectionFragment();
+                                getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment).commit();
+                                break;
+                            }
+                            case 11: {
+                                fragment = new InspectionImagesFragment();
+                                getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment).commit();
 
                                 break;
                             }
-                            case 5:
-                            {
-                                fragment= new TemplatesFragment();
-                                getSupportFragmentManager().beginTransaction().replace(R.id.container,fragment).commit();
-
-
-                                break;
-                            }
-                            case 7:
-                            {
-                                fragment= new ReviewInspectionFragment();
-                                getSupportFragmentManager().beginTransaction().replace(R.id.container,fragment).commit();
-
-
-                                break;
-                            }
-                            case 9:
-                            {
-                                fragment= new InspectionImagesFragment();
-                                getSupportFragmentManager().beginTransaction().replace(R.id.container,fragment).commit();
-
-
-                                break;
-                            }
-                            case 11:
-                            {
-                                fragment= new SettingsFragment();
-                                getSupportFragmentManager().beginTransaction().replace(R.id.container,fragment).commit();
+                            case 13: {
+                                fragment = new SettingsFragment();
+                                getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment).commit();
 
 
                                 break;
                             }
-                            case 13:
-                            {
-                                SharedPreferences preferences = getSharedPreferences("UserPrefs",MODE_PRIVATE);
-                                SharedPreferences.Editor editor= preferences.edit();
+                            case 15: {
+                                SharedPreferences preferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+                                SharedPreferences.Editor editor = preferences.edit();
                                 editor.clear();
                                 editor.apply();
-                                 Intent intent= new Intent(LandingScreen.this,Login.class);
+                                Intent intent = new Intent(LandingScreen.this, Login.class);
                                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 startActivity(intent);
                                 break;

@@ -77,7 +77,6 @@ public class Edit_Profile extends AppCompatActivity {
         UserCity.setText(fulladdress[1]);
         UserAddress.setText(fulladdress[0]);
         UserCountry.setText(fulladdress[2]);
-
     }
     public void UpdateClient() {
 
@@ -98,7 +97,6 @@ public class Edit_Profile extends AppCompatActivity {
                                         @Override
                                         public void onClick(SweetAlertDialog sDialog) {
                                             sDialog.dismiss();
-
                                         }
                                     })
                                     .show();
@@ -124,7 +122,6 @@ public class Edit_Profile extends AppCompatActivity {
                                     })
                                     .show();
                         }
-
                     }
                 }, new Response.ErrorListener() {
             @Override

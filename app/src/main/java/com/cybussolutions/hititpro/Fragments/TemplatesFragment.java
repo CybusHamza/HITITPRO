@@ -25,6 +25,7 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.cybussolutions.hititpro.Activities.Start_Inspection;
 import com.cybussolutions.hititpro.Activities.StructureScreensActivity;
 import com.cybussolutions.hititpro.Network.End_Points;
 import com.cybussolutions.hititpro.R;
@@ -90,19 +91,25 @@ public class TemplatesFragment extends BaseFragment {
                 int inspection_id =  inspection_spinner.getSelectedItemPosition();
                 int template_id =  tem_spinner.getSelectedItemPosition();
 
-                if (client_spinner.getSelectedItem().equals("No Records Founds") && inspection_spinner.getSelectedItem().equals("No Records Founds") && tem_spinner.getSelectedItem().equals("No Records Founds")) {
-                    Toast.makeText(getActivity(), "Please Select Templates", Toast.LENGTH_SHORT).show();
+                if(review.getText().equals("Start Inspection")){
+                        Intent intent=new Intent(getActivity(), Start_Inspection.class);
+                        intent.putExtra("client_name",client_spinner.getSelectedItem().toString());
+                        intent.putExtra("client_id",inspection_id_list.get(template_id));
+                        startActivity(intent);
+                }else {
+                    if (client_spinner.getSelectedItem().equals("No Records Founds") && inspection_spinner.getSelectedItem().equals("No Records Founds") && tem_spinner.getSelectedItem().equals("No Records Founds")) {
+                        Toast.makeText(getActivity(), "Please Select Templates", Toast.LENGTH_SHORT).show();
 
-                } else {
+                    } else {
 
-                    Intent intent = new Intent(getActivity(), StructureScreensActivity.class);
-                    intent.putExtra("inspectionId", templateID_list.get(inspection_id));
-                    intent.putExtra("client_id", client_id_list.get(client_id));
-                    intent.putExtra("template_id", inspection_id_list.get(template_id));
-                    intent.putExtra("inspection_type", "old");
-                    startActivity(intent);
+                        Intent intent = new Intent(getActivity(), StructureScreensActivity.class);
+                        intent.putExtra("inspectionId", templateID_list.get(inspection_id));
+                        intent.putExtra("client_id", client_id_list.get(client_id));
+                        intent.putExtra("template_id", inspection_id_list.get(template_id));
+                        intent.putExtra("inspection_type", "old");
+                        startActivity(intent);
+                    }
                 }
-
             }
         });
         tem_spinner.setOnItemSelectedListener(new CustomOnItemSelectedListener_inspection());
@@ -187,7 +194,7 @@ public class TemplatesFragment extends BaseFragment {
                         if(response.equals("\"no record found\""))
                         {
                             template_list  = new ArrayList<>();
-                            template_list.add(0,"No Records Founds");
+                            template_list.add(0, "No Records Founds");
                             ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>
                                     (getContext(), android.R.layout.simple_spinner_item,template_list);
 
@@ -195,6 +202,7 @@ public class TemplatesFragment extends BaseFragment {
                                     (android.R.layout.simple_spinner_dropdown_item);
 
                             inspection_spinner.setAdapter(dataAdapter);
+                            review.setText("Start Inspection");
 
                         }
 
@@ -230,6 +238,7 @@ public class TemplatesFragment extends BaseFragment {
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
+                            review.setText("Review Inspection");
                         }
                         else
                         {

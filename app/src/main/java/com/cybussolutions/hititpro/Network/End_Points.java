@@ -20,6 +20,8 @@ public class End_Points {
     public static final String UPLOAD_IMAGE=BASE_URL+"uploadimagetest";
     public static final String UPLOAD="http://xfer.cybusservices.com/hititpro/upload_image_mobile.php";
 
+    public static final String GET_ALL_TEMPLATES = BASE_URL + "getAllTemplates";
+
     // sync Forms .
     public static final String SYNC_STRUCTURE = BASE_URL + "syncStructure";
     public static final String SYNC_ROOf = BASE_URL + "syncRoof";

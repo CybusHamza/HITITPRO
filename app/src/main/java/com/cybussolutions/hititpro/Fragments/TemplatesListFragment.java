@@ -23,11 +23,9 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.cybussolutions.hititpro.Activities.Add_Client;
-import com.cybussolutions.hititpro.Activities.EditClient;
-import com.cybussolutions.hititpro.Activities.Start_Inspection;
-import com.cybussolutions.hititpro.Adapters.Client_Adapter;
-import com.cybussolutions.hititpro.Model.Clients_model;
+import com.cybussolutions.hititpro.Activities.StructureScreensActivity;
+import com.cybussolutions.hititpro.Adapters.Template_Adapter;
+import com.cybussolutions.hititpro.Model.Templates_model;
 import com.cybussolutions.hititpro.Network.End_Points;
 import com.cybussolutions.hititpro.R;
 
@@ -42,63 +40,46 @@ import java.util.Map;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
 
-public class ClientsFragment extends BaseFragment {
+public class TemplatesListFragment extends BaseFragment {
 
     View root;
-    private ArrayList<Clients_model> list = new ArrayList<>();
-    ListView client_list;
+    private ArrayList<Templates_model> list = new ArrayList<>();
+    ListView templates_list;
     ImageView addClient;
     String id;
     private static final int MY_SOCKET_TIMEOUT_MS = 10000;
     ProgressDialog ringProgressDialog;
 
+    String templatename,inspectionname;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        root = inflater.inflate(R.layout.fragment_clients, container, false);
+        root = inflater.inflate(R.layout.fragment_list_templates, container, false);
 
-        client_list = (ListView) root.findViewById(R.id.client);
-        addClient=(ImageView) root.findViewById(R.id.add_client);
+        templates_list = (ListView) root.findViewById(R.id.templates_list);
 
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Clients");
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Template List");
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.menu);
 
-  /*      String[] client_name = new String[]{"Hamza Bin Tariq", "Zaeem Sattar", "Noor Siddiqui", "Maria Talib"};
-        for (String aClient_name : client_name) {
-            Clients_model model = new Clients_model();
-            model.setClient_name(aClient_name);
-
-            list.add(model);
-        }*/
 
 
         final SharedPreferences pref = getActivity().getSharedPreferences("UserPrefs", getActivity().MODE_PRIVATE);
-         id = pref.getString("user_id", null);
-
+        id = pref.getString("user_id", null);
         AllClients();
-
-        client_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        templates_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-              /*  Intent intent = new Intent(getActivity(), Start_Inspection.class);
-                intent.putExtra("client_name", list.get(i).getClient_name());
-                intent.putExtra("client_id", list.get(i).getClient_id());
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+               /* Intent intent = new Intent(getActivity(), StructureScreensActivity.class);
+                intent.putExtra("inspectionId",list.get(position).get_inspection_id());
+                intent.putExtra("client_id", list.get(position).getClient_id());
+                intent.putExtra("template_id",list.get(position).get_template_id());
+                intent.putExtra("inspection_type", "old");
                 startActivity(intent);*/
             }
         });
-
-        addClient.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), Add_Client.class);
-                startActivity(intent);
-
-            }
-        });
-
         return root;
     }
 
@@ -121,7 +102,7 @@ public class ClientsFragment extends BaseFragment {
         ringProgressDialog.setCancelable(false);
         ringProgressDialog.show();
 
-        StringRequest request = new StringRequest(Request.Method.POST, End_Points.GET_CLIENT,
+        StringRequest request = new StringRequest(Request.Method.POST, End_Points.GET_ALL_TEMPLATES,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -144,8 +125,8 @@ public class ClientsFragment extends BaseFragment {
 
                             parseJson(response);
 
-                            Client_Adapter client_adapter = new Client_Adapter(list, getActivity());
-                            client_list.setAdapter(client_adapter);
+                            Template_Adapter client_adapter = new Template_Adapter(list, getActivity());
+                            templates_list.setAdapter(client_adapter);
 
 
                         }
@@ -186,7 +167,7 @@ public class ClientsFragment extends BaseFragment {
             protected Map<String, String> getParams() throws AuthFailureError {
 
                 Map<String, String> params = new HashMap<>();
-                params.put("userid",id);
+                params.put("id",id);
                 return params;
             }
         };
@@ -201,7 +182,7 @@ public class ClientsFragment extends BaseFragment {
     }
 
 
-    public ArrayList<Clients_model>  parseJson(String responce)
+    public ArrayList<Templates_model>  parseJson(String responce)
     {
 
         try {
@@ -212,19 +193,27 @@ public class ClientsFragment extends BaseFragment {
 
                 JSONObject object = new JSONObject(Array.getJSONObject(i).toString());
 
-                Clients_model model =  new Clients_model();
+                Templates_model model =  new Templates_model();
+                templatename=object.getString("name");
+                if(templatename==null||templatename.equals("")){
+                    templatename="No name found";
+                }
+                else
+                templatename=object.getString("name");
 
-                model.setClient_name(object.getString("client_name"));
-                model.setClient_id(object.getString("id"));
-                model.setClient_adress(object.getString("address"));
-                model.setClient_phone(object.getString("phone"));
-                model.setContact_name(object.getString("contactname"));
-                model.set_city(object.getString("city"));
-                model.set_fax(object.getString("fax"));
-                model.set_email(object.getString("email"));
-                model.set_state(object.getString("state"));
-                model.set_zip(object.getString("zip"));
+                inspectionname=object.getString("inspection_name");
+                if(inspectionname==null || inspectionname.equals("")){
+                    inspectionname="No inspection found";
+                }
+                else
+                    inspectionname=object.getString("inspection_name");
 
+                model.setClient_name("Client Name: "+object.getString("client_name"));
+                model.setClient_id(object.getString("client_id"));
+                model.set_template("Template: "+templatename);
+                model.set_template_id(object.getString("template_id"));
+                model.set_inspection("Inspection: "+inspectionname);
+                model.set_inspection_id(object.getString("inspection_id"));
                 list.add(model);
             }
 

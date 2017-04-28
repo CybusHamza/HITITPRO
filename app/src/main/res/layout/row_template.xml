@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Client Name"
+        android:id="@+id/client_name"
+        android:typeface="sans"
+        android:textSize="13sp"
+        android:textStyle="bold"
+        android:textColor="@color/colorPrimary"
+        android:paddingTop="10dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:maxLines="1" />
+    <TextView
+        android:id="@+id/template"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="13sp"
+        android:typeface="sans"
+        android:textStyle="bold"
+        android:textColor="#515050"
+        android:paddingTop="3dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:text="Template Name"
+        android:layout_below="@+id/client_name"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Inspection Name"
+        android:textSize="15sp"
+        android:id="@+id/inspection"
+        android:typeface="sans"
+        android:paddingTop="3dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingBottom="10dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:layout_marginRight="40dp"
+        android:layout_below="@+id/template"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editTemplate"
+        android:src="@android:drawable/ic_menu_edit"
+        android:paddingRight="10dp"
+        android:layout_alignTop="@+id/template"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/deleteTemplate"
+        android:src="@android:drawable/ic_menu_delete"
+        android:layout_alignTop="@+id/editTemplate"
+        android:layout_alignRight="@+id/inspection"
+        />
+</RelativeLayout>

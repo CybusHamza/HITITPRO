@@ -3,11 +3,13 @@ package com.cybussolutions.hititpro.Template_Inspection;
 import android.app.FragmentManager;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -69,7 +71,7 @@ public class StructureScreenFragment extends BaseFragment {
     SharedPreferences.Editor edit;
     @Nullable
     @Override
-    public View onCreateView(final LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
+    public View onCreateView(final LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState)
     {
 
         database= new Database(getActivity());
@@ -91,9 +93,37 @@ public class StructureScreenFragment extends BaseFragment {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (getActivity().getSupportFragmentManager().getBackStackEntryCount() > 1) {
+                    getActivity().getSupportFragmentManager().popBackStack();
+                } else if (getActivity().getSupportFragmentManager().getBackStackEntryCount() == 1) {
 
-                manager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new ClientsFragment()).commit();
+                    new AlertDialog.Builder(getActivity())
+                            .setTitle("Close Inspection")
+                            .setMessage("Are you sure you want to Close this Inspection? This Will remove all un synced data !!")
+                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                    getActivity().getSupportFragmentManager().popBackStack();
+
+                                    getActivity().finish();
+
+                                }
+                            })
+                            .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                }
+                            })
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .show();
+
+
+                } else {
+                    getActivity().finish();
+
+                    //  manager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                    // getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new ClientsFragment()).commit();
+                }
             }
         });
 
@@ -521,9 +551,4 @@ public class StructureScreenFragment extends BaseFragment {
         requestQueue.add(request);
 
     }
-
-
-
-
-
 }

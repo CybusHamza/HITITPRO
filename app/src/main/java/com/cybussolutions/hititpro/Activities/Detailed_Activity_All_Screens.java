@@ -200,7 +200,7 @@ public class Detailed_Activity_All_Screens extends AppCompatActivity {
         dialogBuilder.setView(dialogView);
         dialogBuilder.setCancelable(false);
 
-        // intializing variables
+        // initializing variables
         final EditText Add = (EditText) dialogView.findViewById(R.id.add_ET);
         final Button to = (Button) dialogView.findViewById(R.id.add_BT);
         final Button cancel = (Button) dialogView.findViewById(R.id.cancel);
