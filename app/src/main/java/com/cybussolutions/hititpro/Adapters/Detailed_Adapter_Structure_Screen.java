@@ -57,7 +57,7 @@ public class Detailed_Adapter_Structure_Screen extends ArrayAdapter<Checkbox_mod
     public View getView(final int position, View convertView, final ViewGroup parent) {
 
         final ViewHolder viewHolder;
-        if (convertView == null) {
+
             inflter = context.getLayoutInflater();
             convertView = inflter.inflate(R.layout.row_detailed, null);
             viewHolder = new ViewHolder();
@@ -70,10 +70,7 @@ public class Detailed_Adapter_Structure_Screen extends ArrayAdapter<Checkbox_mod
             convertView.setTag(viewHolder);
             convertView.setTag(R.id.label, viewHolder.text);
             convertView.setTag(R.id.check, viewHolder.checkbox);
-        } else {
-
-            viewHolder = (ViewHolder) convertView.getTag();
-        }
+       
 
 
         SharedPreferences sp=context.getSharedPreferences("prefs", Context.MODE_PRIVATE);
@@ -104,16 +101,16 @@ public class Detailed_Adapter_Structure_Screen extends ArrayAdapter<Checkbox_mod
                     list.clear();
                     for(int i=0;i<size;i++){
                         String splitter = "%";
-                        String row[] = list_temp.get(i).getName().split(splitter);
+                        String row[] = list_temp.get(i).getTitle().split(splitter);
 
                         Checkbox_model model = new Checkbox_model();
                         if (i == position) {
 
-                            model.setName(row[0]+"%1");
+                            model.setTitle(row[0]+"%1");
                         }
                         else
                         {
-                            model.setName(row[0]+"%0");
+                            model.setTitle(row[0]+"%0");
                         }
 
                         list.add(model);
@@ -127,7 +124,7 @@ public class Detailed_Adapter_Structure_Screen extends ArrayAdapter<Checkbox_mod
 
                 else {
                     for(int i=0;i<list.size();i++){
-                        String row1[]=list.get(i).getName().split("%");
+                        String row1[]=list.get(i).getTitle().split("%");
                         dbEnterArray[i] = row1[0] + "%0";
                     }
                 }
@@ -137,14 +134,15 @@ public class Detailed_Adapter_Structure_Screen extends ArrayAdapter<Checkbox_mod
         });
 
 
-        viewHolder.checkbox.setTag(position); // This line is important.
 
-        viewHolder.checkbox.setChecked(list.get(position).isSelected());
+        viewHolder.checkbox.setTag(position); // This line is important.
+//
+//        viewHolder.checkbox.setChecked(list.get(position).isSelected());
 
         dbEnterArray = new String[list.size() + 1];
 
         String splitter = "%";
-        String row[] = list.get(position).getName().split(splitter);
+        String row[] = list.get(position).getTitle().split(splitter);
 
         if (row[1] != null && row[1].equals("1")) {
             viewHolder.checkbox.setChecked(true);
@@ -154,7 +152,7 @@ public class Detailed_Adapter_Structure_Screen extends ArrayAdapter<Checkbox_mod
 
         viewHolder.text.setText(row[0]);
         for (int i = 0; i < list.size(); i++) {
-            dbEnterArray[i] = list.get(i).getName();
+            dbEnterArray[i] = list.get(i).getTitle();
         }
 
         viewHolder.delete.setOnClickListener(new View.OnClickListener() {
@@ -246,7 +244,7 @@ public class Detailed_Adapter_Structure_Screen extends ArrayAdapter<Checkbox_mod
 
                 for (int item = 0; item < dbEnterArray.length; item++) {
                     Checkbox_model model = new Checkbox_model();
-                    model.setName(dbEnterArray[item]);
+                    model.setTitle(dbEnterArray[item]);
 
                     list.add(model);
 
@@ -256,7 +254,7 @@ public class Detailed_Adapter_Structure_Screen extends ArrayAdapter<Checkbox_mod
                         if (Add.getText().toString().equals("")) {
                             Toast.makeText(context, "Please Enter Some Data !!", Toast.LENGTH_SHORT).show();
                         } else {
-                            model.setName(Add.getText().toString() + "%0");
+                            model.setTitle(Add.getText().toString() + "%0");
 
                             list.add(position, model);
 

@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
-import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -17,11 +16,10 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.cybussolutions.hititpro.Adapters.Detailed_Adapter;
+import com.cybussolutions.hititpro.Adapters.CustomArrayAdapter;
 import com.cybussolutions.hititpro.Model.Checkbox_model;
 import com.cybussolutions.hititpro.R;
 import com.cybussolutions.hititpro.Sql_LocalDataBase.Database;
@@ -35,7 +33,7 @@ public class Detailed_Activity_All_Screens extends AppCompatActivity {
     ListView detailedListView;
     String[] items;
     String heading, dbColumn, dbTable, enteredStructure = "", inspectionID, fromDataBase;
-    Detailed_Adapter Detailed_Adapter;
+    CustomArrayAdapter Detailed_Adapter;
     Database database = new Database(this);
     Button addCategory;
     AlertDialog b;
@@ -84,7 +82,6 @@ public class Detailed_Activity_All_Screens extends AppCompatActivity {
 
         Cursor cursor = database.getData(dbColumn, dbTable, inspectionID);
         cursor.moveToFirst();
-
         addCategory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -103,39 +100,55 @@ public class Detailed_Activity_All_Screens extends AppCompatActivity {
             String splitter = "\\^";
             String[] row = fromDataBase.split(splitter);
 
+            int position = 0;
             for (String item : row) {
                 Checkbox_model model = new Checkbox_model();
-                model.setName(item);
+                model.setTitle(item);
+
+                String splitter1 = "%";
+                String rows[] = item.split(splitter1);
+
                 list.add(model);
+
+                if (rows[1] != null && rows[1].equals("1")) {
+                    list.get(position).setChecked(true);
+                } else {
+                    list.get(position).setChecked(false);
+                }
+
+
+                position++;
             }
 
         }
         else {
+            int position = 0;
+
             if (items.length != 0) {
                 for (String item : items) {
                     Checkbox_model model = new Checkbox_model();
-                    model.setName(item);
+                    model.setTitle(item);
+                    String splitter1 = "%";
+                    String rows[] = item.split(splitter1);
+
                     list.add(model);
+
+                    if (rows[1] != null && rows[1].equals("1")) {
+                        list.get(position).setChecked(true);
+                    } else {
+                        list.get(position).setChecked(false);
+                    }
+                    position++;
                 }
             }
 
         }
 
-        Detailed_Adapter = new Detailed_Adapter(Detailed_Activity_All_Screens.this,list,R.layout.row_detailed);
-        detailedListView.setAdapter(Detailed_Adapter);
-        detailedListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                CheckBox checkBox = (CheckBox) findViewById(R.id.check);
-                if (checkBox.isChecked()) {
-                    checkBox.setChecked(true);
 
-                } else {
-                    checkBox.setChecked(false);
-                }
-                Toast.makeText(getApplicationContext(), String.valueOf(checkBox.isChecked()), Toast.LENGTH_LONG).show();
-            }
-        });
+
+        Detailed_Adapter = new CustomArrayAdapter(Detailed_Activity_All_Screens.this,list);
+        detailedListView.setAdapter(Detailed_Adapter);
+
         Detailed_Adapter.notifyDataSetChanged();
 
     }
@@ -172,7 +185,6 @@ public class Detailed_Activity_All_Screens extends AppCompatActivity {
 
         // Insert in local DataBase
         database.insertEntry(dbColumn, enteredStructure, dbTable, inspectionID);
-
 
         super.onBackPressed();
     }
@@ -235,12 +247,12 @@ public class Detailed_Activity_All_Screens extends AppCompatActivity {
                             {
 
                                 Checkbox_model model = new Checkbox_model();
-                                model.setName(insertArray[item]);
+                                model.setTitle(insertArray[item]);
 
                                 if (item == insertArray.length -1 ) {
 
 
-                                    model.setName(Add.getText().toString() + "%0");
+                                    model.setTitle(Add.getText().toString() + "%0");
 
                                 }
 
@@ -252,11 +264,11 @@ public class Detailed_Activity_All_Screens extends AppCompatActivity {
                         {
 
                             Checkbox_model model = new Checkbox_model();
-                            model.setName(insertArray[item]);
+                            model.setTitle(insertArray[item]);
 
                             if (item == insertArray.length -1) {
 
-                                model.setName(Add.getText().toString() + "%0");
+                                model.setTitle(Add.getText().toString() + "%0");
 
                             }
 

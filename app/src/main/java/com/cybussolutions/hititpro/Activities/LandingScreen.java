@@ -147,7 +147,11 @@ public class LandingScreen extends AppCompatActivity {
                             }
                             case 13:
                             {
-                              Intent intent= new Intent(LandingScreen.this,Login.class);
+                                SharedPreferences preferences = getSharedPreferences("UserPrefs",MODE_PRIVATE);
+                                SharedPreferences.Editor editor= preferences.edit();
+                                editor.clear();
+                                editor.apply();
+                                 Intent intent= new Intent(LandingScreen.this,Login.class);
                                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 startActivity(intent);
                                 break;

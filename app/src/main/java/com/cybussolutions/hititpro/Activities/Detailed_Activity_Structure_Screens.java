@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
-import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -12,17 +11,12 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.RadioButton;
 import android.widget.Toast;
 
-import com.cybussolutions.hititpro.Adapters.Detailed_Adapter;
 import com.cybussolutions.hititpro.Adapters.Detailed_Adapter_Structure_Screen;
 import com.cybussolutions.hititpro.Model.Checkbox_model;
 import com.cybussolutions.hititpro.R;
@@ -107,7 +101,7 @@ public class Detailed_Activity_Structure_Screens extends AppCompatActivity {
 
             for (String item : row) {
                 Checkbox_model model = new Checkbox_model();
-                model.setName(item);
+                model.setTitle(item);
                 list.add(model);
             }
 
@@ -116,7 +110,7 @@ public class Detailed_Activity_Structure_Screens extends AppCompatActivity {
             if (items.length != 0) {
                 for (String item : items) {
                     Checkbox_model model = new Checkbox_model();
-                    model.setName(item);
+                    model.setTitle(item);
                     list.add(model);
                 }
             }
@@ -225,12 +219,12 @@ public class Detailed_Activity_Structure_Screens extends AppCompatActivity {
                             {
 
                                 Checkbox_model model = new Checkbox_model();
-                                model.setName(insertArray[item]);
+                                model.setTitle(insertArray[item]);
 
                                 if (item == insertArray.length -1 ) {
 
 
-                                    model.setName(Add.getText().toString() + "%0");
+                                    model.setTitle(Add.getText().toString() + "%0");
 
                                 }
 
@@ -242,11 +236,11 @@ public class Detailed_Activity_Structure_Screens extends AppCompatActivity {
                         {
 
                             Checkbox_model model = new Checkbox_model();
-                            model.setName(insertArray[item]);
+                            model.setTitle(insertArray[item]);
 
                             if (item == insertArray.length -1) {
 
-                                model.setName(Add.getText().toString() + "%0");
+                                model.setTitle(Add.getText().toString() + "%0");
 
                             }
 
