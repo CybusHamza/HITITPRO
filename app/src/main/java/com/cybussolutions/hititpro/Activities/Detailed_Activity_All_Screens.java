@@ -120,6 +120,8 @@ public class Detailed_Activity_All_Screens extends AppCompatActivity {
                 position++;
             }
 
+
+
         }
         else {
             int position = 0;
