@@ -66,7 +66,7 @@ public class ProfileFragment extends BaseFragment {
                 intent.putExtra("phone",strcontact);
                 intent.putExtra("adress",stradress);
                 startActivity(intent);
-//                Snackbar.make(view, "Hellooooo !!!!", Snackbar.LENGTH_LONG)
+//              Snackbar.make(view, "Hellooooo !!!!", Snackbar.LENGTH_LONG)
 //                        .setAction("Action", null).show();
             }
         });
