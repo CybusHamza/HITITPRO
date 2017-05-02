@@ -9,6 +9,43 @@
     <include
         android:id="@+id/app_bar"
         layout="@layout/app_bar"/>
+    <LinearLayout
+        android:gravity="center"
+        android:layout_below="@id/app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="5dp"
+       >
+        <ImageButton
+            android:id="@+id/image1"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="5dp"
+            android:src="@android:drawable/ic_menu_gallery"
+            />
+        <ImageButton
+            android:id="@+id/image2"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="5dp"
+            android:src="@android:drawable/ic_menu_gallery"
+           />
+        <ImageButton
+            android:id="@+id/image3"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="5dp"
+            android:src="@android:drawable/ic_menu_gallery"
+           />
+        <ImageButton
+            android:id="@+id/image4"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="5dp"
+            android:src="@android:drawable/ic_menu_gallery"
+            />
+    </LinearLayout>
 
     <Button
         android:id="@+id/button"

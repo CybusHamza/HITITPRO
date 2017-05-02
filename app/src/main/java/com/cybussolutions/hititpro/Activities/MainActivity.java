@@ -15,6 +15,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -35,6 +36,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
@@ -49,6 +51,9 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.cybussolutions.hititpro.Network.End_Points;
 import com.cybussolutions.hititpro.R;
+import com.darsh.multipleimageselect.activities.AlbumSelectActivity;
+import com.darsh.multipleimageselect.helpers.Constants;
+import com.darsh.multipleimageselect.models.Image;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -56,6 +61,7 @@ import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.sql.Time;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -83,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
     private static int IMG_RESULT = 2;
     String ImageDecode;
     View mview;
-    ImageView imageViewLoad;
+    ImageButton image1,image2,image3,image4;
     Button LoadImage;
     LinearLayout linearLayout;
     public int mCurrentShape;
@@ -95,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
     private String mCurrentPhotoPath,ba1,mSavedPhotoName;
 
     Bitmap bm = null;
-    String userId;
+    String userId,uri1,uri2,uri3,uri4;
 
     SharedPreferences sp;
 
@@ -108,6 +114,10 @@ public class MainActivity extends AppCompatActivity {
         toolbar.setTitle("Image Editer");
         setSupportActionBar(toolbar);
        imageView = (DrawingView)findViewById(R.id.drawingview);
+        image1=(ImageButton)findViewById(R.id.image1);
+        image2=(ImageButton)findViewById(R.id.image2);
+        image3=(ImageButton)findViewById(R.id.image3);
+        image4=(ImageButton)findViewById(R.id.image4);
         //spinnerDropDown =(Spinner)findViewById(R.id.spinner2);
         //ArrayAdapter<String> adapter= new ArrayAdapter<String>(this,android.
           //      R.layout.simple_spinner_dropdown_item ,recomend);
@@ -165,6 +175,56 @@ public class MainActivity extends AppCompatActivity {
                // new uploadToServer().execute();
                // imageView.mCurrentShape = DrawingView.SMOOTHLINE;
                 //imageView.reset();
+            }
+        });
+        image1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                imageView=(DrawingView)findViewById(R.id.drawingview);
+                if(uri1==null){
+                    Toast.makeText(getApplicationContext(),"no image selected",Toast.LENGTH_LONG).show();
+                }else {
+                    imageView.mBitmap.eraseColor(Color.TRANSPARENT);
+                    imageView.invalidate();
+                    imageView.setImageBitmap(BitmapFactory.decodeFile(uri1));
+                }
+                //imageView.setImageDrawable(image1.getDrawable());
+            }
+        });
+        image2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                imageView=(DrawingView)findViewById(R.id.drawingview);
+                if(uri2==null){
+                    Toast.makeText(getApplicationContext(),"no image selected",Toast.LENGTH_LONG).show();
+                }else {
+                    imageView.mBitmap.eraseColor(Color.TRANSPARENT);
+                    imageView.setImageBitmap(BitmapFactory.decodeFile(uri2));
+                }
+            }
+        });
+        image3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                imageView=(DrawingView)findViewById(R.id.drawingview);
+                if(uri3==null){
+                    Toast.makeText(getApplicationContext(),"no image selected",Toast.LENGTH_LONG).show();
+                }else {
+                    imageView.mBitmap.eraseColor(Color.TRANSPARENT);
+                    imageView.setImageBitmap(BitmapFactory.decodeFile(uri3));
+                }
+            }
+        });
+        image4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                imageView=(DrawingView)findViewById(R.id.drawingview);
+                if(uri4==null){
+                    Toast.makeText(getApplicationContext(),"no image selected",Toast.LENGTH_LONG).show();
+                }else {
+                    imageView.mBitmap.eraseColor(Color.TRANSPARENT);
+                    imageView.setImageBitmap(BitmapFactory.decodeFile(uri4));
+                }
             }
         });
         b.setOnClickListener(new View.OnClickListener() {
@@ -319,6 +379,7 @@ public class MainActivity extends AppCompatActivity {
     private void upload() {
         intent = new Intent(Intent.ACTION_PICK,
                 MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
         startActivityForResult(intent, IMG_RESULT);
     }
 
@@ -365,11 +426,39 @@ public class MainActivity extends AppCompatActivity {
                // img.setImageBitmap(imageBitmap);
 
             }
-            if (requestCode == IMG_RESULT && resultCode == RESULT_OK
-                    && null != data) {
+            if (requestCode == Constants.REQUEST_CODE && resultCode == RESULT_OK && data != null) {
 
+                ArrayList<Image> images = data.getParcelableArrayListExtra(Constants.INTENT_EXTRA_IMAGES);
+                StringBuffer stringBuffer = new StringBuffer();
+                for (int i = 0, l = images.size(); i < l; i++) {
+                    stringBuffer.append(images.get(i).path + "\n");
+                    Bitmap myBitmap = BitmapFactory.decodeFile(images.get(i).path);
 
-                Uri URI = data.getData();
+                    //ImageView myImage = (ImageView) findViewById(R.id.imageviewTest);
+                    if(i==0){
+                        image1.setImageBitmap(myBitmap);
+                        uri1=images.get(i).path;
+                        image1.setImageURI(Uri.parse(images.get(i).path));
+                    }
+                    if(i==1){
+                        image2.setImageBitmap(myBitmap);
+                        uri2=images.get(i).path;
+                        image2.setImageURI(Uri.parse(images.get(i).path));
+                    }
+                    if(i==2){
+                        image3.setImageBitmap(myBitmap);
+                        uri3=images.get(i).path;
+                        image3.setImageURI(Uri.parse(images.get(i).path));
+                    }
+                    if(i==3){
+                        image4.setImageBitmap(myBitmap);
+                        uri4=images.get(i).path;
+                        image4.setImageURI(Uri.parse(images.get(i).path));
+                    }
+
+                }
+               // textView.setText(stringBuffer.toString());
+                /*Uri URI = data.getData();
                 String[] FILE = {MediaStore.Images.Media.DATA};
 
 
@@ -383,7 +472,7 @@ public class MainActivity extends AppCompatActivity {
                 cursor.close();
                 imageView=(DrawingView)findViewById(R.id.drawingview);
                 mCurrentPhotoPath=ImageDecode;
-                imageView.setImageBitmap(BitmapFactory.decodeFile(ImageDecode));
+                imageView.setImageBitmap(BitmapFactory.decodeFile(ImageDecode));*/
                // imageView.setImageBitmap(BitmapFactory
                  //       .decodeFile(ImageDecode));
 
@@ -467,8 +556,11 @@ public class MainActivity extends AppCompatActivity {
         myAlertDialog.setPositiveButton("Gallery",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface arg0, int arg1) {
+                        Intent intent = new Intent(MainActivity.this, AlbumSelectActivity.class);
+                        intent.putExtra(Constants.INTENT_EXTRA_LIMIT, 4);
+                        startActivityForResult(intent, Constants.REQUEST_CODE);
 
-                        if (ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                       /* if (ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
 
 
                             if (Build.VERSION.SDK_INT > 22) {
@@ -476,11 +568,6 @@ public class MainActivity extends AppCompatActivity {
                                 requestPermissions(new String[]{Manifest.permission
                                                 .WRITE_EXTERNAL_STORAGE},
                                         REQUEST_PERMISSIONS);
-                      /*  Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-                        Uri uri = Uri.fromParts("package", MainActivity.this.getPackageName(), null);
-                        intent.setData(uri);
-                        startActivityForResult(intent, REQUEST_PERMISSION_SETTING);*/
-                                // Toast.makeText(MainActivity.this.getBaseContext(), "Go to Permissions to Grant Storage", Toast.LENGTH_LONG).show();
 
                             }
 
@@ -490,7 +577,7 @@ public class MainActivity extends AppCompatActivity {
                         {
                             upload();
 
-                        }
+                        }*/
 
                     }
                 });

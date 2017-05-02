@@ -42,7 +42,15 @@
             android:name=".Activities.Detailed_Activity_Structure_Screens"
             android:windowSoftInputMode="adjustPan" />
         <activity android:name=".Activities.EditClient" />
-        <activity android:name=".Activities.Edit_Profile"></activity>
+        <activity android:name=".Activities.Edit_Profile" />
+        <activity android:name=".Activities.AddTemplate"></activity>
+        <activity
+            android:name="com.darsh.multipleimageselect.activities.AlbumSelectActivity"
+            android:theme="@style/MultipleImageSelectTheme">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

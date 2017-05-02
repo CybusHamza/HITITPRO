@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -25,6 +26,7 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.cybussolutions.hititpro.Activities.AddTemplate;
 import com.cybussolutions.hititpro.Activities.Start_Inspection;
 import com.cybussolutions.hititpro.Activities.StructureScreensActivity;
 import com.cybussolutions.hititpro.Network.End_Points;
@@ -61,6 +63,7 @@ public class TemplatesFragment extends BaseFragment {
     private List<String> inspection_id_list;
 
     Button review;
+    ImageView add_template;
 
 
     @Nullable
@@ -78,32 +81,39 @@ public class TemplatesFragment extends BaseFragment {
 
         tem_spinner = (Spinner) root.findViewById(R.id.spinner);
         client_spinner = (Spinner) root.findViewById(R.id.client_spinner);
-        inspection_spinner = (Spinner) root.findViewById(R.id.inspection);
+       // inspection_spinner = (Spinner) root.findViewById(R.id.inspection);
         review = (Button) root.findViewById(R.id.button);
+        add_template = (ImageView)root.findViewById(R.id.add_template);
 
         client_spinner.setOnItemSelectedListener(new CustomOnItemSelectedListener_client());
 
+        add_template.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(getActivity(), AddTemplate.class);
+                startActivity(i);
+            }
+        });
         review.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 int client_id =  client_spinner.getSelectedItemPosition();
-                int inspection_id =  inspection_spinner.getSelectedItemPosition();
+               // int inspection_id =  inspection_spinner.getSelectedItemPosition();
                 int template_id =  tem_spinner.getSelectedItemPosition();
 
                 if(review.getText().equals("Start Inspection")){
                         Intent intent=new Intent(getActivity(), Start_Inspection.class);
                         intent.putExtra("client_name",client_spinner.getSelectedItem().toString());
-                        intent.putExtra("client_id",inspection_id_list.get(template_id));
+                        intent.putExtra("client_id",client_id_list.get(client_id));
                         startActivity(intent);
                 }else {
-                    if (client_spinner.getSelectedItem().equals("No Records Founds") && inspection_spinner.getSelectedItem().equals("No Records Founds") && tem_spinner.getSelectedItem().equals("No Records Founds")) {
+                    if (client_spinner.getSelectedItem().equals("No Records Founds") /*&& inspection_spinner.getSelectedItem().equals("No Records Founds")*/ && tem_spinner.getSelectedItem().equals("No Records Founds")) {
                         Toast.makeText(getActivity(), "Please Select Templates", Toast.LENGTH_SHORT).show();
 
-                    } else {
-
+                    }else {
                         Intent intent = new Intent(getActivity(), StructureScreensActivity.class);
-                        intent.putExtra("inspectionId", templateID_list.get(inspection_id));
+                   //     intent.putExtra("inspectionId", inspection_id_list.get(inspection_id));
                         intent.putExtra("client_id", client_id_list.get(client_id));
                         intent.putExtra("template_id", inspection_id_list.get(template_id));
                         intent.putExtra("inspection_type", "old");
@@ -195,14 +205,14 @@ public class TemplatesFragment extends BaseFragment {
                         {
                             template_list  = new ArrayList<>();
                             template_list.add(0, "No Records Founds");
-                            ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>
+                           /* ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>
                                     (getContext(), android.R.layout.simple_spinner_item,template_list);
 
                             dataAdapter.setDropDownViewResource
                                     (android.R.layout.simple_spinner_dropdown_item);
 
-                            inspection_spinner.setAdapter(dataAdapter);
-                            review.setText("Start Inspection");
+                            inspection_spinner.setAdapter(dataAdapter);*/
+                          //  review.setText("Start Inspection");
 
                         }
 
@@ -227,18 +237,18 @@ public class TemplatesFragment extends BaseFragment {
                                 }
 
 
-                                ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>
+                              /*  ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>
                                         (getActivity(), android.R.layout.simple_spinner_item,template_list);
 
                                 dataAdapter.setDropDownViewResource
                                         (android.R.layout.simple_spinner_dropdown_item);
 
-                                inspection_spinner.setAdapter(dataAdapter);
+                                inspection_spinner.setAdapter(dataAdapter);*/
 
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
-                            review.setText("Review Inspection");
+                           // review.setText("Continue");
                         }
                         else
                         {
@@ -320,13 +330,10 @@ public class TemplatesFragment extends BaseFragment {
                     @Override
                     public void onResponse(String response) {
 
-
                         ringProgressDialog.dismiss();
 
                         if(response.equals("\"no record found\""))
                         {
-
-
                             inspection_list= new ArrayList<>();
 
                             inspection_list.add(0,"No Records Founds");
@@ -337,9 +344,9 @@ public class TemplatesFragment extends BaseFragment {
                                     (android.R.layout.simple_spinner_dropdown_item);
 
                             tem_spinner.setAdapter(dataAdapter);
+                            review.setText("Start Inspection");
 
                         }
-
 
                         else if (!(response.equals("0")))
                         {
@@ -355,10 +362,8 @@ public class TemplatesFragment extends BaseFragment {
                                 for(int i=0;i<Array.length();i++) {
 
                                     JSONObject object = new JSONObject(Array.getJSONObject(i).toString());
-
                                     inspection_list.add(object.getString("name"));
                                     inspection_id_list.add(object.getString("ca_id"));
-
                                 }
 
                                 tem_spinner.setAdapter(null);
@@ -374,6 +379,7 @@ public class TemplatesFragment extends BaseFragment {
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
+                            review.setText("Continue");
                         }
 
 

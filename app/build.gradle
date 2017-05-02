@@ -11,6 +11,11 @@ android {
         versionCode 1
         versionName "1.0"
     }
+    repositories {
+        maven {
+            url "https://jitpack.io"
+        }
+    }
     buildTypes {
         release {
             minifyEnabled false
@@ -35,4 +40,5 @@ dependencies {
     compile 'com.github.florent37:materialtextfield:1.0.6'
     compile 'com.jaredrummler:material-spinner:1.1.0'
     compile 'com.android.support:support-v4:24.2.1'
+    compile 'com.github.darsh2:MultipleImageSelect:3474549'
 }

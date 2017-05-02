@@ -321,7 +321,7 @@ public class DrawingView extends ImageView {
                 endPoint = new PointF();
                 invalidate();
 
-                //   isDrawing = true;
+                   isDrawing = true;
                 break;
             case MotionEvent.ACTION_MOVE:
                 float dx = Math.abs(mx - mStartX);
@@ -362,10 +362,10 @@ public class DrawingView extends ImageView {
                 mPath.lineTo(point_x_1, point_y_1);
                 mPath.lineTo(point_x_1, point_y_1);
 
-                mCanvas.drawPath(mPath, mPaint);
+                mCanvas.drawPath(mPath, mPaintFinal);
                 endPoint.x = event.getX();
                 endPoint.y = event.getY();
-             //   isDrawing = false;
+               isDrawing = false;
 
                 invalidate();
                 break;
