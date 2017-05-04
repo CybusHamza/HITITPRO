@@ -43,7 +43,7 @@
             android:windowSoftInputMode="adjustPan" />
         <activity android:name=".Activities.EditClient" />
         <activity android:name=".Activities.Edit_Profile" />
-        <activity android:name=".Activities.AddTemplate"></activity>
+        <activity android:name=".Activities.AddTemplate" />
         <activity
             android:name="com.darsh.multipleimageselect.activities.AlbumSelectActivity"
             android:theme="@style/MultipleImageSelectTheme">
@@ -51,6 +51,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity android:name=".Activities.ShowImages"></activity>
     </application>
 
 </manifest>

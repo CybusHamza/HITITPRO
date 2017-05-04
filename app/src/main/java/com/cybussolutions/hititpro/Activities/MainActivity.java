@@ -43,6 +43,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -54,6 +55,10 @@ import com.cybussolutions.hititpro.R;
 import com.darsh.multipleimageselect.activities.AlbumSelectActivity;
 import com.darsh.multipleimageselect.helpers.Constants;
 import com.darsh.multipleimageselect.models.Image;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -68,23 +73,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
+
+    private static final int MY_SOCKET_TIMEOUT_MS = 10000;
     DrawingView imageView;
     Spinner spinnerDropDown;
-    String[] recomend = {
-            "Select Recommendation",
-            "Monitor",
-            "b",
-            "c",
-            "d"
-    };
 
-    //protected DrawingView mDrawingView;
     private static final int REQUEST_PERMISSIONS=0;
     static final int REQUEST_IMAGE_CAPTURE = 1;
-
-
     Button b,saveImage,drawLine,drawCircle,drawSquare,drawArrow,drawPen;
-   // private static final int SELECT_PICTURE = 100;
+    private static final int SELECT_PICTURE = 100;
     private static final String TAG = "MainActivity";
     private static int IMG_RESULT = 2;
     String ImageDecode;
@@ -101,10 +98,10 @@ public class MainActivity extends AppCompatActivity {
     private String mCurrentPhotoPath,ba1,mSavedPhotoName;
 
     Bitmap bm = null;
-    String userId,uri1,uri2,uri3,uri4;
+    String userId;
 
     SharedPreferences sp;
-
+    SharedPreferences.Editor edit;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -113,22 +110,18 @@ public class MainActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.app_bar);
         toolbar.setTitle("Image Editer");
         setSupportActionBar(toolbar);
-       imageView = (DrawingView)findViewById(R.id.drawingview);
-        image1=(ImageButton)findViewById(R.id.image1);
-        image2=(ImageButton)findViewById(R.id.image2);
-        image3=(ImageButton)findViewById(R.id.image3);
-        image4=(ImageButton)findViewById(R.id.image4);
-        //spinnerDropDown =(Spinner)findViewById(R.id.spinner2);
-        //ArrayAdapter<String> adapter= new ArrayAdapter<String>(this,android.
-          //      R.layout.simple_spinner_dropdown_item ,recomend);
 
-        //spinnerDropDown.setAdapter(adapter);
+        imageView = (DrawingView)findViewById(R.id.drawingview);
 
-       sp=getSharedPreferences("prefs",MODE_PRIVATE);
+        getImages();
 
-       // et=(EditText)findViewById(R.id.comments);
+        if(bm!=null){
+            bm.recycle();
+        }
 
-        b=(Button)findViewById(R.id.button);
+        sp=getSharedPreferences("prefs",MODE_PRIVATE);
+
+        b=(Button)findViewById(R.id.selectButton);
         saveImage=(Button)findViewById(R.id.saveButton);
         drawLine=(Button)findViewById(R.id.button2);
         drawCircle=(Button)findViewById(R.id.button3);
@@ -169,112 +162,61 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                imageView.mCurrentShape = DrawingView.SMOOTHLINE;
                 imageView.reset();
-               // uploadToServer();
+            }
+        });
 
-                // Upload image to server
-               // new uploadToServer().execute();
-               // imageView.mCurrentShape = DrawingView.SMOOTHLINE;
-                //imageView.reset();
-            }
-        });
-        image1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                imageView=(DrawingView)findViewById(R.id.drawingview);
-                if(uri1==null){
-                    Toast.makeText(getApplicationContext(),"no image selected",Toast.LENGTH_LONG).show();
-                }else {
-                    imageView.mBitmap.eraseColor(Color.TRANSPARENT);
-                    imageView.invalidate();
-                    imageView.setImageBitmap(BitmapFactory.decodeFile(uri1));
-                }
-                //imageView.setImageDrawable(image1.getDrawable());
-            }
-        });
-        image2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                imageView=(DrawingView)findViewById(R.id.drawingview);
-                if(uri2==null){
-                    Toast.makeText(getApplicationContext(),"no image selected",Toast.LENGTH_LONG).show();
-                }else {
-                    imageView.mBitmap.eraseColor(Color.TRANSPARENT);
-                    imageView.setImageBitmap(BitmapFactory.decodeFile(uri2));
-                }
-            }
-        });
-        image3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                imageView=(DrawingView)findViewById(R.id.drawingview);
-                if(uri3==null){
-                    Toast.makeText(getApplicationContext(),"no image selected",Toast.LENGTH_LONG).show();
-                }else {
-                    imageView.mBitmap.eraseColor(Color.TRANSPARENT);
-                    imageView.setImageBitmap(BitmapFactory.decodeFile(uri3));
-                }
-            }
-        });
-        image4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                imageView=(DrawingView)findViewById(R.id.drawingview);
-                if(uri4==null){
-                    Toast.makeText(getApplicationContext(),"no image selected",Toast.LENGTH_LONG).show();
-                }else {
-                    imageView.mBitmap.eraseColor(Color.TRANSPARENT);
-                    imageView.setImageBitmap(BitmapFactory.decodeFile(uri4));
-                }
-            }
-        });
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startDialog();
             }
         });
+
         saveImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 try {
                     imageView.buildDrawingCache();
-                     bm = imageView.getDrawingCache();
-                }catch (Exception e){
-                    Toast.makeText(getApplicationContext(),"no image selected",Toast.LENGTH_LONG).show();
+                    bm = imageView.getDrawingCache();
+                } catch (Exception e) {
+                    Toast.makeText(getApplicationContext(), "no image selected", Toast.LENGTH_LONG).show();
                 }
                 if (bm != null) {
-                   // up();
-                    OutputStream fOut = null;
-                    Calendar c = Calendar.getInstance();
-                    System.out.println("Current time => " + c.getTime());
+                    if (sp.getBoolean("flag", false) == true) {
+                        up();
+                    } else {
+                        OutputStream fOut = null;
+                        Calendar c = Calendar.getInstance();
+                        System.out.println("Current time => " + c.getTime());
 
-                    SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                    String formattedDate = df.format(c.getTime());
+                        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                        String formattedDate = df.format(c.getTime());
 
-                    Uri outputFileUri;
-                    try {
-                        File root = new File(Environment.getExternalStorageDirectory()
-                                + File.separator + "folder_name" + File.separator);
-                        root.mkdirs();
-                        File sdImageMainDirectory = new File(root, formattedDate + "myPicName.jpg");
-                        outputFileUri = Uri.fromFile(sdImageMainDirectory);
-                        fOut = new FileOutputStream(sdImageMainDirectory);
-                        Intent intent=new Intent(MainActivity.this,Add_Comments.class);
-                        intent.putExtra("mCurrentPhotoPath",mCurrentPhotoPath);
-                        startActivity(intent);
-                    } catch (Exception e) {
-                        Toast.makeText(getApplicationContext(), "Error occured. Please try again later.",
-                                Toast.LENGTH_SHORT).show();
+                        Uri outputFileUri;
+                        try {
+                            File root = new File(Environment.getExternalStorageDirectory()
+                                    + File.separator + "folder_name" + File.separator);
+                            root.mkdirs();
+                            File sdImageMainDirectory = new File(root, formattedDate + "myPicName.jpg");
+                            outputFileUri = Uri.fromFile(sdImageMainDirectory);
+                            fOut = new FileOutputStream(sdImageMainDirectory);
+                            Intent intent = new Intent(MainActivity.this, Add_Comments.class);
+                            intent.putExtra("mCurrentPhotoPath", mCurrentPhotoPath);
+                            startActivity(intent);
+                        } catch (Exception e) {
+                            Toast.makeText(getApplicationContext(), "Error occured. Please try again later.",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                        try {
+                            bm.compress(Bitmap.CompressFormat.PNG, 100, fOut);
+                            fOut.flush();
+                            fOut.close();
+                        } catch (Exception e) {
+                        }
                     }
-                    try {
-                        bm.compress(Bitmap.CompressFormat.PNG, 100, fOut);
-                        fOut.flush();
-                        fOut.close();
-                    } catch (Exception e) {
-                    }
-                }else {
-                    Toast.makeText(getApplicationContext(),"No image selected",Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), "No image selected", Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -283,6 +225,54 @@ public class MainActivity extends AppCompatActivity {
                     .add(R.id.container1, new ShapeFragment())
                     .commit();
         }
+    }
+
+    private void getImages() {
+        StringRequest stringRequest=new StringRequest(Request.Method.POST, End_Points.GET_IMAGES, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Toast.makeText(getApplicationContext(),response.toString(),Toast.LENGTH_LONG).show();
+               if(!response.equals("0")){
+                   try {
+                       JSONArray jsonArray=new JSONArray(response);
+                       String[] imageName = new String[jsonArray.length()];
+                       for (int i=0;i<jsonArray.length();i++) {
+                           JSONObject jsonObject = new JSONObject(jsonArray.getString(i));
+                           imageName[i]=jsonObject.getString("attachment_saved_name");
+                       }
+                       Intent i=new Intent(MainActivity.this,ShowImages.class);
+                       i.putExtra("imageNames",imageName);
+                       startActivity(i);
+                   } catch (JSONException e) {
+                       e.printStackTrace();
+                   }
+
+               }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(),error.toString(),Toast.LENGTH_LONG).show();
+            }
+        }){
+            @Override
+            public Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("template_id",StructureScreensActivity.template_id);
+                params.put("inspection_id",StructureScreensActivity.inspectionID);
+                params.put("client_id",StructureScreensActivity.client_id);
+                params.put("main_form_name",sp.getString("main_screen",""));
+                params.put("column_name",sp.getString("heading",""));
+                return params;
+            }
+        };
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
+                MY_SOCKET_TIMEOUT_MS,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        RequestQueue requestQueue = Volley.newRequestQueue(MainActivity.this);
+        requestQueue.add(stringRequest);
     }
 
     private void up(){
@@ -319,6 +309,10 @@ public class MainActivity extends AppCompatActivity {
                 return params;
             }
         };
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
+                MY_SOCKET_TIMEOUT_MS,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         RequestQueue requestQueue = Volley.newRequestQueue(MainActivity.this);
         requestQueue.add(stringRequest);
     }
@@ -333,6 +327,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 Toast.makeText(getApplicationContext(),response.toString(),Toast.LENGTH_LONG).show();
+                Intent intent = getIntent();
+                finish();
+                startActivity(intent);
 
             }
         }, new Response.ErrorListener() {
@@ -350,10 +347,10 @@ public class MainActivity extends AppCompatActivity {
                 params.put("main_form_name",sp.getString("main_screen",""));
                 params.put("column_name",sp.getString("heading",""));
                 params.put("attachment_name","test");
-                params.put("attachment_original_name",mCurrentPhotoPath);
+                params.put("attachment_original_name",mSavedPhotoName);/*mCurrentPhotoPath*/
                 params.put("attachment_saved_name",mSavedPhotoName);
-                params.put("image_comments",et.getText().toString());
-                params.put("selrecomd",spinnerDropDown.getSelectedItem().toString());
+                params.put("image_comments",sp.getString("imagecomments",null));
+                params.put("selrecomd",sp.getString("selectrecomend",null));
                 params.put("userid",userId);
                 params.put("attchment_added_date",attachment_added_date);
 
@@ -362,6 +359,10 @@ public class MainActivity extends AppCompatActivity {
                 return params;
             }
         };
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
+                MY_SOCKET_TIMEOUT_MS,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         RequestQueue requestQueue = Volley.newRequestQueue(MainActivity.this);
         requestQueue.add(stringRequest);
     }
@@ -379,7 +380,6 @@ public class MainActivity extends AppCompatActivity {
     private void upload() {
         intent = new Intent(Intent.ACTION_PICK,
                 MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
         startActivityForResult(intent, IMG_RESULT);
     }
 
@@ -397,16 +397,11 @@ public class MainActivity extends AppCompatActivity {
         {
             mx = event.getX();
             my = event.getY();
-
-
             DrawingView drawingView = new DrawingView(MainActivity.this);
-
             drawingView.onTouchEventText(event,mx,my,"hello");
         }
-
         return false;
     }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -426,39 +421,10 @@ public class MainActivity extends AppCompatActivity {
                // img.setImageBitmap(imageBitmap);
 
             }
-            if (requestCode == Constants.REQUEST_CODE && resultCode == RESULT_OK && data != null) {
-
-                ArrayList<Image> images = data.getParcelableArrayListExtra(Constants.INTENT_EXTRA_IMAGES);
-                StringBuffer stringBuffer = new StringBuffer();
-                for (int i = 0, l = images.size(); i < l; i++) {
-                    stringBuffer.append(images.get(i).path + "\n");
-                    Bitmap myBitmap = BitmapFactory.decodeFile(images.get(i).path);
-
-                    //ImageView myImage = (ImageView) findViewById(R.id.imageviewTest);
-                    if(i==0){
-                        image1.setImageBitmap(myBitmap);
-                        uri1=images.get(i).path;
-                        image1.setImageURI(Uri.parse(images.get(i).path));
-                    }
-                    if(i==1){
-                        image2.setImageBitmap(myBitmap);
-                        uri2=images.get(i).path;
-                        image2.setImageURI(Uri.parse(images.get(i).path));
-                    }
-                    if(i==2){
-                        image3.setImageBitmap(myBitmap);
-                        uri3=images.get(i).path;
-                        image3.setImageURI(Uri.parse(images.get(i).path));
-                    }
-                    if(i==3){
-                        image4.setImageBitmap(myBitmap);
-                        uri4=images.get(i).path;
-                        image4.setImageURI(Uri.parse(images.get(i).path));
-                    }
-
-                }
+          //  if (requestCode == Constants.REQUEST_CODE && resultCode == RESULT_OK && data != null) {
+            if (requestCode == IMG_RESULT  && resultCode == RESULT_OK && data != null) {
                // textView.setText(stringBuffer.toString());
-                /*Uri URI = data.getData();
+                Uri URI = data.getData();
                 String[] FILE = {MediaStore.Images.Media.DATA};
 
 
@@ -472,7 +438,7 @@ public class MainActivity extends AppCompatActivity {
                 cursor.close();
                 imageView=(DrawingView)findViewById(R.id.drawingview);
                 mCurrentPhotoPath=ImageDecode;
-                imageView.setImageBitmap(BitmapFactory.decodeFile(ImageDecode));*/
+                imageView.setImageBitmap(BitmapFactory.decodeFile(ImageDecode));
                // imageView.setImageBitmap(BitmapFactory
                  //       .decodeFile(ImageDecode));
 
@@ -514,9 +480,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
 
-
-
-
         if (requestCode == REQUEST_PERMISSIONS) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 //The External Storage Write Permission is granted to you... Continue your left job...
@@ -556,11 +519,11 @@ public class MainActivity extends AppCompatActivity {
         myAlertDialog.setPositiveButton("Gallery",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface arg0, int arg1) {
-                        Intent intent = new Intent(MainActivity.this, AlbumSelectActivity.class);
+                        /*Intent intent = new Intent(MainActivity.this, AlbumSelectActivity.class);
                         intent.putExtra(Constants.INTENT_EXTRA_LIMIT, 4);
-                        startActivityForResult(intent, Constants.REQUEST_CODE);
+                        startActivityForResult(intent, Constants.REQUEST_CODE);*/
 
-                       /* if (ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                        if (ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
 
 
                             if (Build.VERSION.SDK_INT > 22) {
@@ -571,13 +534,10 @@ public class MainActivity extends AppCompatActivity {
 
                             }
 
-                        }
-
-                        else
-                        {
+                        } else {
                             upload();
 
-                        }*/
+                        }
 
                     }
                 });
@@ -601,10 +561,7 @@ public class MainActivity extends AppCompatActivity {
 
                             }
 
-                        }
-
-                        else
-                        {
+                        } else {
                             camera();
 
                         }
@@ -613,5 +570,13 @@ public class MainActivity extends AppCompatActivity {
                 });
         myAlertDialog.show();
     }
-
+    public void onBackPressed(){
+    super.onBackPressed();
+    edit=sp.edit();
+    edit.putString("comments", null);
+    edit.putString("selectrecomend", null);
+    edit.putString("back", null);
+    edit.putBoolean("flag", false);
+    edit.commit();
+    }
 }

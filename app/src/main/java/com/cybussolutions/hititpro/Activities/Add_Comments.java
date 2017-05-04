@@ -1,10 +1,16 @@
 package com.cybussolutions.hititpro.Activities;
 
+import android.Manifest;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Base64;
@@ -16,6 +22,7 @@ import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -35,6 +42,9 @@ import java.util.Map;
  * Created by Rizwan Butt on 26-Apr-17.
  */
 public class Add_Comments extends AppCompatActivity {
+
+    private static final int MY_SOCKET_TIMEOUT_MS = 10000;
+
     EditText etComments;
     RadioGroup radioGroup;
     int pos;
@@ -42,6 +52,8 @@ public class Add_Comments extends AppCompatActivity {
     private String mSavedPhotoName;
 
     SharedPreferences sp;
+    SharedPreferences.Editor edit;
+
     String userId,checkedBox;
     private RadioButton radioButton;
     Button btnSaveImage;
@@ -66,6 +78,7 @@ public class Add_Comments extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 up();
+                startDialog();
             }
         });
         radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
@@ -87,7 +100,8 @@ public class Add_Comments extends AppCompatActivity {
             }
         });
     }
-    private void up(){
+
+    private void up() {
         Calendar c = Calendar.getInstance();
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         final String formattedDate = df.format(c.getTime());
@@ -96,71 +110,117 @@ public class Add_Comments extends AppCompatActivity {
         bm.compress(Bitmap.CompressFormat.JPEG, 50, bao);
         byte[] ba = bao.toByteArray();
         ba1 = Base64.encodeToString(ba, Base64.NO_WRAP);
-        // Toast.makeText(getApplicationContext(),ba1.toString(),Toast.LENGTH_LONG).show();
-        StringRequest stringRequest=new StringRequest(Request.Method.POST, End_Points.UPLOAD, new Response.Listener<String>() {
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, End_Points.UPLOAD, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                mSavedPhotoName=response;
-                Toast.makeText(getApplicationContext(),response.toString(),Toast.LENGTH_LONG).show();
+                mSavedPhotoName = response;
+                Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_LONG).show();
                 uploadToServer();
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(),error.toString(),Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
 
             }
-        }){
+        }) {
             @Override
             public Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
-                params.put("image",ba1);
-                params.put("name",formattedDate);
+                params.put("image", ba1);
+                params.put("name", formattedDate);
                 return params;
             }
         };
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
+                MY_SOCKET_TIMEOUT_MS,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
         RequestQueue requestQueue = Volley.newRequestQueue(Add_Comments.this);
         requestQueue.add(stringRequest);
     }
+
     private void uploadToServer() {
         SharedPreferences pref = getApplicationContext().getSharedPreferences("UserPrefs", MODE_PRIVATE);
 
-        userId = pref.getString("user_id","");
+        userId = pref.getString("user_id", "");
         Calendar c = Calendar.getInstance();
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         final String attachment_added_date = df.format(c.getTime());
-        StringRequest stringRequest=new StringRequest(Request.Method.POST, End_Points.UPLOAD_IMAGE, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, End_Points.UPLOAD_IMAGE, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Toast.makeText(getApplicationContext(),response.toString(),Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_LONG).show();
 
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(),error.toString(),Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
             }
-        }){
+        }) {
             @Override
             public Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
-                params.put("template_id",StructureScreensActivity.template_id);
-                params.put("inspection_id",StructureScreensActivity.inspectionID);
-                params.put("client_id",StructureScreensActivity.client_id);
-                params.put("main_form_name",sp.getString("main_screen",""));
-                params.put("column_name",sp.getString("heading",""));
-                params.put("attachment_name","test");
-                params.put("attachment_original_name",mCurrentPhotoPath);
+                params.put("template_id", StructureScreensActivity.template_id);
+                params.put("inspection_id", StructureScreensActivity.inspectionID);
+                params.put("client_id", StructureScreensActivity.client_id);
+                params.put("main_form_name", sp.getString("main_screen", ""));
+                params.put("column_name", sp.getString("heading", ""));
+                params.put("attachment_name", "test");
+                params.put("attachment_original_name", mCurrentPhotoPath);
                 params.put("attachment_saved_name", mSavedPhotoName);
-                params.put("image_comments",etComments.getText().toString());
-                params.put("selrecomd",checkedBox);
-                params.put("userid",userId);
-                params.put("attchment_added_date",attachment_added_date);
+                params.put("image_comments", etComments.getText().toString());
+                params.put("selrecomd", checkedBox);
+                params.put("userid", userId);
+                params.put("attchment_added_date", attachment_added_date);
 
                 return params;
             }
         };
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
+                MY_SOCKET_TIMEOUT_MS,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         RequestQueue requestQueue = Volley.newRequestQueue(Add_Comments.this);
         requestQueue.add(stringRequest);
+    }
+    private void startDialog() {
+        AlertDialog.Builder myAlertDialog = new AlertDialog.Builder(
+                Add_Comments.this);
+        myAlertDialog.setTitle("Alert");
+        myAlertDialog.setMessage("Do you want to add more pictures");
+
+        myAlertDialog.setPositiveButton("Yes",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        edit = sp.edit();
+                        edit.putString("imagecomments", etComments.getText().toString());
+                        edit.putString("selectrecomend", checkedBox);
+                       // edit.putString("back","add_comments");
+                        edit.putBoolean("flag", true);
+                        edit.commit();
+                        finish();
+                        Intent intent=new Intent(Add_Comments.this,MainActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(intent);
+                    }
+                });
+
+        myAlertDialog.setNegativeButton("No",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        edit = sp.edit();
+                        edit.putString("comments",null);
+                        edit.putString("selectrecomend",null);
+//                      edit.putString("back",null);
+                        edit.putBoolean("flag", true);
+                        edit.commit();
+                        finish();
+                    }
+                });
+        myAlertDialog.show();
     }
 }
