@@ -182,6 +182,7 @@ public class StructureScreenFragment extends BaseFragment {
                 intent.putExtra("items",StructureScreensActivity.foundationSpinnerValues);
                 intent.putExtra("heading",foundationButton.getText().toString());
                 intent.putExtra("column","foundation");
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",PORTFOLIO_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
@@ -198,6 +199,7 @@ public class StructureScreenFragment extends BaseFragment {
                 intent.putExtra("items",StructureScreensActivity.columnsSpinnerValues);
                 intent.putExtra("heading",columnsButton.getText().toString());
                 intent.putExtra("column","columns");
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",PORTFOLIO_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
@@ -214,6 +216,7 @@ public class StructureScreenFragment extends BaseFragment {
                 intent.putExtra("heading",columnsButton.getText().toString());
                 intent.putExtra("column","floor_structure");
                 intent.putExtra("dbTable",PORTFOLIO_TABLE);
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
             }
@@ -228,6 +231,7 @@ public class StructureScreenFragment extends BaseFragment {
                 intent.putExtra("items",StructureScreensActivity.wallStructureSpinnerValues);
                 intent.putExtra("heading",wallStructureSpinner.getText().toString());
                 intent.putExtra("column","wall_structure");
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",PORTFOLIO_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
@@ -244,6 +248,7 @@ public class StructureScreenFragment extends BaseFragment {
                 intent.putExtra("items",StructureScreensActivity.ceilingStructureSpinnerValues);
                 intent.putExtra("heading",ceilingStructureButton.getText().toString());
                 intent.putExtra("column","celling_struture");
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",PORTFOLIO_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
@@ -259,6 +264,7 @@ public class StructureScreenFragment extends BaseFragment {
                 intent.putExtra("items",StructureScreensActivity.roofStructureSpinnerValues);
                 intent.putExtra("heading",columnsButton.getText().toString());
                 intent.putExtra("column","roof_structure");
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",PORTFOLIO_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
@@ -274,6 +280,7 @@ public class StructureScreenFragment extends BaseFragment {
                 intent.putExtra("items",StructureScreensActivity.structureObservationsSpinnerValues);
                 intent.putExtra("heading",roofStructureButton.getText().toString());
                 intent.putExtra("column","observation");
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",PORTFOLIO_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
@@ -288,6 +295,7 @@ public class StructureScreenFragment extends BaseFragment {
                 intent.putExtra("items",StructureScreensActivity.roFoundationSpinnerValues);
                 intent.putExtra("heading",roFoundationButton.getText().toString());
                 intent.putExtra("column","recomnd_foundation");
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",PORTFOLIO_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
@@ -303,6 +311,7 @@ public class StructureScreenFragment extends BaseFragment {
                 intent.putExtra("items",StructureScreensActivity.roCrawlSpacesSpinnerValues);
                 intent.putExtra("heading",roCrawlSpacesButton.getText().toString());
                 intent.putExtra("column","crawl_space");
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",PORTFOLIO_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
@@ -319,6 +328,7 @@ public class StructureScreenFragment extends BaseFragment {
                 intent.putExtra("heading",roFloorsButton.getText().toString());
                 intent.putExtra("column","recomnd_floor");
                 intent.putExtra("dbTable",PORTFOLIO_TABLE);
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
             }
@@ -334,6 +344,7 @@ public class StructureScreenFragment extends BaseFragment {
                 intent.putExtra("heading",roExteriorWallsButton.getText().toString());
                 intent.putExtra("column","exterior_wall");
                 intent.putExtra("dbTable",PORTFOLIO_TABLE);
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
             }
@@ -349,6 +360,7 @@ public class StructureScreenFragment extends BaseFragment {
                 intent.putExtra("heading",roRoofButton.getText().toString());
                 intent.putExtra("column","roof");
                 intent.putExtra("dbTable",PORTFOLIO_TABLE);
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
             }

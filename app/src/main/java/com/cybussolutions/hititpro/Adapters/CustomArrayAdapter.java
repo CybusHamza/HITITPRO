@@ -1,5 +1,6 @@
 package com.cybussolutions.hititpro.Adapters;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -12,15 +13,20 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.cybussolutions.hititpro.Activities.Detailed_Activity_All_Screens;
 import com.cybussolutions.hititpro.Activities.MainActivity;
+import com.cybussolutions.hititpro.Activities.StructureScreensActivity;
 import com.cybussolutions.hititpro.Model.Checkbox_model;
 import com.cybussolutions.hititpro.R;
+import com.cybussolutions.hititpro.Sql_LocalDataBase.Database;
 
+import java.sql.SQLException;
 import java.util.List;
 
 
@@ -32,12 +38,31 @@ public class CustomArrayAdapter extends ArrayAdapter<Checkbox_model> implements
 	private final List<Checkbox_model> list;
 	Context context;
 	AlertDialog b;
+	String topass[],enteredStructure = "";
+	static  int count=0;
+	Database database;
 
-	public CustomArrayAdapter(Context context, List<Checkbox_model> objects) {
+	public CustomArrayAdapter(Context context, List<Checkbox_model> objects,String topass[]) {
 		super(context, 0, objects);
 		layoutInflater = LayoutInflater.from(context);
 		list= objects;
 		this.context = context;
+		this.topass= topass;
+		database= new Database(context);
+
+
+		dbEnterArray = new String[list.size() + 1];
+
+
+		for (int i = 0; i < list.size(); i++) {
+			dbEnterArray[i] = list.get(i).getTitle();
+		}
+
+		/*try {
+			database = database.open();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}*/
 	}
 
 	@Override
@@ -56,6 +81,10 @@ public class CustomArrayAdapter extends ArrayAdapter<Checkbox_model> implements
 			holder.delete = (ImageView) convertView.findViewById(R.id.delete);
 			holder.edit = (ImageView) convertView.findViewById(R.id.edit);
 			holder.imageEditor = (ImageView) convertView.findViewById(R.id.imageEditor);
+
+
+
+
 
 			convertView.setTag(holder);
 		} else {
@@ -80,9 +109,39 @@ public class CustomArrayAdapter extends ArrayAdapter<Checkbox_model> implements
 				final AlertDialog.Builder builder = new AlertDialog.Builder(context);
 				builder.setMessage("Are you sure?").setPositiveButton("Yes", new DialogInterface.OnClickListener() {
 					@Override
-					public void onClick(DialogInterface dialogInterface, int i) {
+					public void onClick(DialogInterface dialogInterface, int t) {
+
+						list.clear();
+						for (int i = 0; i < dbEnterArray.length -1; i++) {
+							Checkbox_model model = new Checkbox_model();
+							model.setTitle(dbEnterArray[i]);
+
+							list.add(model);
+						}
+
 						list.remove(position);
-						notifyDataSetChanged();
+
+
+						dbEnterArray = new String[list.size()];
+
+						for (int i = 0; i < list.size(); i++) {
+							dbEnterArray[i] = list.get(i).getTitle();
+						}
+
+						Intent intent= new Intent(getContext(), Detailed_Activity_All_Screens.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+						intent.putExtra("items",dbEnterArray);
+						intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+						intent.putExtra("heading", topass[0]);
+						intent.putExtra("fromAddapter","edit");
+						intent.putExtra("column", topass[1]);
+						intent.putExtra("dbTable",topass[2]);
+						((Activity)context).finish();
+						context.startActivity(intent);
+
+
+
+
+
 					}
 				})
 						.setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -122,20 +181,15 @@ public class CustomArrayAdapter extends ArrayAdapter<Checkbox_model> implements
 			}
 		});
 
-		dbEnterArray = new String[list.size() + 1];
+
 
 		String splitter = "%";
 		String rows[] = list.get(position).getTitle().split(splitter);
 
+		final Holder finalHolder1 = holder;
 
 
 
-
-
-
-		for (int i = 0; i < list.size(); i++) {
-			dbEnterArray[i] = list.get(i).getTitle();
-		}
 
 		final Checkbox_model row = getItem(position);
 		holder.getTextViewTitle().setText(rows[0]);
@@ -143,7 +197,8 @@ public class CustomArrayAdapter extends ArrayAdapter<Checkbox_model> implements
 		holder.getCheckBox().setChecked(row.isChecked());
 		holder.getCheckBox().setOnClickListener(this);
 
-		changeBackground(getContext(), holder.getCheckBox(),position);
+
+
 
 		return convertView;
 	}
@@ -156,7 +211,19 @@ public class CustomArrayAdapter extends ArrayAdapter<Checkbox_model> implements
 		int position = (Integer) v.getTag();
 		getItem(position).setChecked(checkBox.isChecked());
 
-		changeBackground(CustomArrayAdapter.this.getContext(), checkBox , position);
+		String splitter = "%";
+		String row1[] = list.get(position).getTitle().split(splitter);
+
+		if(checkBox.isChecked())
+		{
+
+			dbEnterArray[position] = row1[0] + "%1";
+		}
+		else
+		{
+			dbEnterArray[position] = row1[0] + "%0";
+		}
+
 
 	}
 	
@@ -165,29 +232,6 @@ public class CustomArrayAdapter extends ArrayAdapter<Checkbox_model> implements
 	 * Set the background of a row based on the value of its checkbox value.
 	 * Checkbox has its own style.
 	 */
-	@SuppressWarnings("deprecation")
-	private void changeBackground(Context context, CheckBox checkBox,int positon) {
-		View row = (View) checkBox.getParent();
-		Drawable drawable = context.getResources().getDrawable(
-				R.drawable.listview_selector_checked);
-		String splitter = "%";
-		String row1[] = list.get(positon).getTitle().split(splitter);
-
-		if (checkBox.isChecked()) {
-			drawable = context.getResources().getDrawable(
-					R.drawable.listview_selector_checked);
-
-			dbEnterArray[positon] = row1[0] + "%1";
-
-
-		} else {
-
-			dbEnterArray[positon] = row1[0] + "%0";
-			drawable = context.getResources().getDrawable(
-					R.drawable.listview_selector);
-		}
-		row.setBackgroundDrawable(drawable);
-	}
 
 	static class Holder {
 		TextView textViewTitle;
@@ -238,8 +282,17 @@ public class CustomArrayAdapter extends ArrayAdapter<Checkbox_model> implements
 
 				// clearing list view
 
+
+			/*	for (int i = 0; i < dbEnterArray.length - 1; i++) {
+					enteredStructure += dbEnterArray[i] + "^";
+				}
+
+				enteredStructure = enteredStructure.substring(0, enteredStructure.length() - 1);
+
+				// Insert in local DataBase*/
+
+
 				list.clear();
-				notifyDataSetChanged();
 
 				for (int item = 0; item < dbEnterArray.length; item++) {
 					Checkbox_model model = new Checkbox_model();
@@ -248,23 +301,46 @@ public class CustomArrayAdapter extends ArrayAdapter<Checkbox_model> implements
 					list.add(model);
 
 					if (item == (dbEnterArray.length - 1)) {
-						list.remove(position);
-
 						if (Add.getText().toString().equals("")) {
 							Toast.makeText(context, "Please Enter Some Data !!", Toast.LENGTH_SHORT).show();
 						} else {
-							model.setTitle(Add.getText().toString() + "%0");
+
+							String row[] =  list.get(position).getTitle().split("%");
+							if(row[1].equals("1"))
+							{
+								model.setTitle(Add.getText().toString() + "%1");
+							}
+							else
+							{
+								model.setTitle(Add.getText().toString() + "%0");
+							}
+
+
+							list.remove(position);
 
 							list.add(position, model);
 
 							list.remove(list.size() - 1);
+
+							for (int i = 0; i < list.size(); i++) {
+								dbEnterArray[i] = list.get(i).getTitle();
+							}
+
 						}
 
 					}
 
 				}
 
-				notifyDataSetChanged();
+				Intent intent= new Intent(getContext(), Detailed_Activity_All_Screens.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+				intent.putExtra("items",dbEnterArray);
+				intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+				intent.putExtra("heading", topass[0]);
+				intent.putExtra("fromAddapter","true");
+				intent.putExtra("column", topass[1]);
+				intent.putExtra("dbTable",topass[2]);
+				((Activity)context).finish();
+				context.startActivity(intent);
 
 				b.dismiss();
 

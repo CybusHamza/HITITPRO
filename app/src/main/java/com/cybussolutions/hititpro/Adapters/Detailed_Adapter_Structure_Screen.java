@@ -20,31 +20,49 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
+import com.cybussolutions.hititpro.Activities.Detailed_Activity_All_Screens;
 import com.cybussolutions.hititpro.Activities.MainActivity;
+import com.cybussolutions.hititpro.Activities.StructureScreensActivity;
 import com.cybussolutions.hititpro.Model.Checkbox_model;
 import com.cybussolutions.hititpro.R;
+import com.cybussolutions.hititpro.Sql_LocalDataBase.Database;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 
-public class Detailed_Adapter_Structure_Screen extends ArrayAdapter<Checkbox_model> {
+public class Detailed_Adapter_Structure_Screen extends ArrayAdapter<Checkbox_model>
+{
 
-    private final ArrayList<Checkbox_model> list;
-    private ArrayList<Checkbox_model> list_temp;
-    private final Activity context;
-    LayoutInflater inflter;
+
+    private LayoutInflater layoutInflater;
     String[] dbEnterArray;
+    private final List<Checkbox_model> list;
+    private List<Checkbox_model> list_temp;
+    Context context;
     AlertDialog b;
-    boolean checkAll_flag = false;
-    boolean checkItem_flag = false;
-    private int selectedPosition = -1;
+    String topass[],enteredStructure = "";
+    static  int count=0;
+    Database database;
 
-    public Detailed_Adapter_Structure_Screen(Activity context, ArrayList<Checkbox_model> list, int resource) {
+
+    public Detailed_Adapter_Structure_Screen(Activity context, ArrayList<Checkbox_model> list, int resource,String topass[]) {
         super(context,resource,list);
+        layoutInflater = LayoutInflater.from(context);
+        this.list= list;
         this.context = context;
-        this.list = list;
+        this.topass= topass;
+        database= new Database(context);
+
+
+        dbEnterArray = new String[list.size() + 1];
+
+
+        for (int i = 0; i < list.size(); i++) {
+            dbEnterArray[i] = list.get(i).getTitle();
+        }
+
     }
 
 
@@ -56,24 +74,26 @@ public class Detailed_Adapter_Structure_Screen extends ArrayAdapter<Checkbox_mod
     @Override
     public View getView(final int position, View convertView, final ViewGroup parent) {
 
-        final ViewHolder viewHolder;
+        Holder holder = null;
+        if (convertView == null) {
+            holder = new Holder();
 
-            inflter = context.getLayoutInflater();
-            convertView = inflter.inflate(R.layout.row_detailed, null);
-            viewHolder = new ViewHolder();
-            viewHolder.text = (TextView) convertView.findViewById(R.id.label);
-            viewHolder.checkbox = (CheckBox) convertView.findViewById(R.id.check);
-            viewHolder.delete = (ImageView) convertView.findViewById(R.id.delete);
-            viewHolder.edit = (ImageView) convertView.findViewById(R.id.edit);
-            viewHolder.imageEditor = (ImageView) convertView.findViewById(R.id.imageEditor);
+            convertView = layoutInflater.inflate(R.layout.row_detailed, parent, false);
+            holder.setCheckBox((CheckBox) convertView
+                    .findViewById(R.id.check));
 
-            convertView.setTag(viewHolder);
-            convertView.setTag(R.id.label, viewHolder.text);
-            convertView.setTag(R.id.check, viewHolder.checkbox);
-       
+            holder.delete = (ImageView) convertView.findViewById(R.id.delete);
+            holder.edit = (ImageView) convertView.findViewById(R.id.edit);
+            holder.imageEditor = (ImageView) convertView.findViewById(R.id.imageEditor);
+
+            convertView.setTag(holder);
+        } else {
+            holder = (Holder) convertView.getTag();
+        }
 
 
         SharedPreferences sp=context.getSharedPreferences("prefs", Context.MODE_PRIVATE);
+
         if(sp.getBoolean("imageButton",true)!=true){
             try {
                 ImageView iv= (ImageView) convertView.findViewById(R.id.imageEditor);
@@ -85,16 +105,94 @@ public class Detailed_Adapter_Structure_Screen extends ArrayAdapter<Checkbox_mod
         }
 
 
+        holder.delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setMessage("Are you sure?").setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int t) {
 
-        viewHolder.checkbox.setOnClickListener(new View.OnClickListener() {
+                        list.clear();
+                        for (int i = 0; i < dbEnterArray.length -1; i++) {
+                            Checkbox_model model = new Checkbox_model();
+                            model.setTitle(dbEnterArray[i]);
+
+                            list.add(model);
+                        }
+
+                        list.remove(position);
+
+
+                        dbEnterArray = new String[list.size()];
+
+                        for (int i = 0; i < list.size(); i++) {
+                            dbEnterArray[i] = list.get(i).getTitle();
+                        }
+
+                        Intent intent= new Intent(getContext(), Detailed_Activity_All_Screens.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                        intent.putExtra("items",dbEnterArray);
+                        intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                        intent.putExtra("heading", topass[0]);
+                        intent.putExtra("fromAddapter","edit");
+                        intent.putExtra("column", topass[1]);
+                        intent.putExtra("dbTable",topass[2]);
+                        ((Activity)context).finish();
+                        context.startActivity(intent);
+
+
+
+
+
+                    }
+                })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+
+
+                            }
+                        }).show();
+
+            }
+        });
+
+
+        holder.imageEditor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    Intent intent=new Intent(context,MainActivity.class);
+
+                    context.startActivity(intent);
+                }catch (Exception e){
+                    Toast.makeText(context,e.toString(),Toast.LENGTH_LONG).show();
+                }
+
+            }
+        });
+
+
+        final Holder finalHolder = holder;
+        holder.edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
+                editItem(position, finalHolder.getTextViewTitle().getText().toString());
 
-                // Here we get the position that we have set for the checkbox using setTag.
+            }
+        });
+
+        holder.checkBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                CheckBox checkBox = (CheckBox) view;
+                int position = (Integer) view.getTag();
+                getItem(position).setChecked(checkBox.isChecked());
 
 
-                if (viewHolder.checkbox.isChecked()) {
+
+                if (checkBox.isChecked()) {
 
                     int size = list.size();
                     list_temp = new ArrayList<>(list);
@@ -117,7 +215,22 @@ public class Detailed_Adapter_Structure_Screen extends ArrayAdapter<Checkbox_mod
                     }
 
 
+                    for (int i = 0; i < list.size(); i++) {
+                        dbEnterArray[i] = list.get(i).getTitle();
+                    }
+
+
                     notifyDataSetChanged();
+
+                    /*Intent intent= new Intent(getContext(), Detailed_Activity_All_Screens.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                    intent.putExtra("items",dbEnterArray);
+                    intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                    intent.putExtra("heading", topass[0]);
+                    intent.putExtra("fromAddapter","true");
+                    intent.putExtra("column", topass[1]);
+                    intent.putExtra("dbTable",topass[2]);
+                    ((Activity)context).finish();
+                    context.startActivity(intent);*/
 
 
                 }
@@ -128,77 +241,27 @@ public class Detailed_Adapter_Structure_Screen extends ArrayAdapter<Checkbox_mod
                         dbEnterArray[i] = row1[0] + "%0";
                     }
                 }
-
             }
-
         });
 
 
-
-        viewHolder.checkbox.setTag(position); // This line is important.
-//
-//        viewHolder.checkbox.setChecked(list.get(position).isSelected());
-
-        dbEnterArray = new String[list.size() + 1];
 
         String splitter = "%";
-        String row[] = list.get(position).getTitle().split(splitter);
+        String rows[] = list.get(position).getTitle().split(splitter);
 
-        if (row[1] != null && row[1].equals("1")) {
-            viewHolder.checkbox.setChecked(true);
-        } else {
-            viewHolder.checkbox.setChecked(false);
-        }
-
-        viewHolder.text.setText(row[0]);
-        for (int i = 0; i < list.size(); i++) {
-            dbEnterArray[i] = list.get(i).getTitle();
-        }
-
-        viewHolder.delete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                builder.setMessage("Are you sure?").setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        list.remove(position);
-                        notifyDataSetChanged();
-                    }
-                })
-                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
+        final Holder finalHolder1 = holder;
 
 
-                            }
-                        }).show();
 
-            }
-        });
-        viewHolder.imageEditor.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                try {
-                    Intent intent=new Intent(context,MainActivity.class);
 
-                    context.startActivity(intent);
-                }catch (Exception e){
-                    Toast.makeText(context,e.toString(),Toast.LENGTH_LONG).show();
-                }
+        final Checkbox_model row = getItem(position);
+        holder.getCheckBox().setText(rows[0]);
+        holder.getCheckBox().setTag(position);
+        holder.getCheckBox().setChecked(row.isChecked());
 
-            }
-        });
 
-        final ViewHolder finalViewHolder = viewHolder;
-        viewHolder.edit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-                editItem(position, finalViewHolder.text.getText().toString());
 
-            }
-        });
 
 
         return convertView;
@@ -213,12 +276,37 @@ public class Detailed_Adapter_Structure_Screen extends ArrayAdapter<Checkbox_mod
 
 
 
+    static class Holder {
+        TextView textViewTitle;
+        TextView textViewSubtitle;
+        CheckBox checkBox;
+        ImageView edit, delete,imageEditor;
+
+        public TextView getTextViewTitle() {
+            return textViewTitle;
+        }
+
+        public void setTextViewTitle(TextView textViewTitle) {
+            this.textViewTitle = textViewTitle;
+        }
+
+
+        public CheckBox getCheckBox() {
+            return checkBox;
+        }
+
+        public void setCheckBox(CheckBox checkBox) {
+            this.checkBox = checkBox;
+        }
+
+    }
+
 
 
     void editItem(final int position, final String text) {
 
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(context);
-        final View dialogView = inflter.inflate(R.layout.add_dalogbox, null);
+        final View dialogView = layoutInflater.inflate(R.layout.add_dalogbox, null);
         dialogBuilder.setView(dialogView);
         dialogBuilder.setCancelable(false);
 
@@ -239,8 +327,17 @@ public class Detailed_Adapter_Structure_Screen extends ArrayAdapter<Checkbox_mod
 
                 // clearing list view
 
+
+			/*	for (int i = 0; i < dbEnterArray.length - 1; i++) {
+					enteredStructure += dbEnterArray[i] + "^";
+				}
+
+				enteredStructure = enteredStructure.substring(0, enteredStructure.length() - 1);
+
+				// Insert in local DataBase*/
+
+
                 list.clear();
-                notifyDataSetChanged();
 
                 for (int item = 0; item < dbEnterArray.length; item++) {
                     Checkbox_model model = new Checkbox_model();
@@ -259,13 +356,26 @@ public class Detailed_Adapter_Structure_Screen extends ArrayAdapter<Checkbox_mod
                             list.add(position, model);
 
                             list.remove(list.size() - 1);
+
+                            for (int i = 0; i < list.size(); i++) {
+                                dbEnterArray[i] = list.get(i).getTitle();
+                            }
+
                         }
 
                     }
 
                 }
 
-                notifyDataSetChanged();
+                Intent intent= new Intent(getContext(), Detailed_Activity_All_Screens.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                intent.putExtra("items",dbEnterArray);
+                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("heading", topass[0]);
+                intent.putExtra("fromAddapter","true");
+                intent.putExtra("column", topass[1]);
+                intent.putExtra("dbTable",topass[2]);
+                ((Activity)context).finish();
+                context.startActivity(intent);
 
                 b.dismiss();
 
@@ -275,11 +385,7 @@ public class Detailed_Adapter_Structure_Screen extends ArrayAdapter<Checkbox_mod
 
     }
 
-    static class ViewHolder {
-        protected TextView text;
-        protected CheckBox checkbox;
-        protected ImageView edit, delete,imageEditor;
-    }
+
 
 
 }
