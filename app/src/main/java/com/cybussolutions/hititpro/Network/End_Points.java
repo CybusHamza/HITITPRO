@@ -21,6 +21,7 @@ public class End_Points {
     public static final String UPLOAD="http://xfer.cybusservices.com/hititpro/upload_image_mobile.php";
 
     public static final String GET_IMAGES=BASE_URL+"getImages";
+    public static final String GET_DEFAULT_COMMENTS=BASE_URL+"getDefaultComments";
 
     public static final String GET_ALL_TEMPLATES = BASE_URL + "getAllTemplates";
     public static final String UPDATELIVE = BASE_URL + "updateOnBackPress";

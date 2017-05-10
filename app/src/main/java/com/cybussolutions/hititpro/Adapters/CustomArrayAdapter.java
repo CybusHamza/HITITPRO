@@ -155,14 +155,59 @@ public class CustomArrayAdapter extends ArrayAdapter<Checkbox_model> implements
 
 			}
 		});
-
+		final Holder finalHolder = holder;
 
 		holder.imageEditor.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				try {
-					Intent intent=new Intent(context,MainActivity.class);
 
+					String name = finalHolder.getTextViewTitle().getText().toString().replaceAll("\\s+","");
+					int pagePosition= 0;
+					switch (topass[2]){
+						case "portfolio":
+							pagePosition= 1;
+							break;
+						case "roofing":
+							pagePosition= 2;
+							break;
+						case "exterior":
+							pagePosition= 3;
+							break;
+						case "interior":
+							pagePosition= 4;
+							break;
+						case "heating":
+							pagePosition= 5;
+							break;
+						case "cooling":
+							pagePosition= 6;
+							break;
+						case "electrical":
+							pagePosition= 7;
+							break;
+						case "insulation":
+							pagePosition= 8;
+							break;
+						case "plumbing":
+							pagePosition= 9;
+							break;
+						case "appliance":
+							pagePosition= 10;
+							break;
+						case "fireplaces":
+							pagePosition= 11;
+							break;
+
+						default:
+							pagePosition= 0;
+
+					}
+
+					String data = pagePosition+"_"+topass[1]+"_"+name;
+
+					Intent intent=new Intent(context,MainActivity.class);
+					intent.putExtra("data",data);
 					context.startActivity(intent);
 				}catch (Exception e){
 					Toast.makeText(context,e.toString(),Toast.LENGTH_LONG).show();
@@ -172,7 +217,7 @@ public class CustomArrayAdapter extends ArrayAdapter<Checkbox_model> implements
 		});
 
 
-		final Holder finalHolder = holder;
+
 		holder.edit.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {

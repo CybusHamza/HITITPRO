@@ -93,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
     float mx,my;
     Intent intent;
     String[] FILE;
+    String data;
 
     EditText et;
     private String mCurrentPhotoPath,ba1,mSavedPhotoName;
@@ -114,6 +115,9 @@ public class MainActivity extends AppCompatActivity {
         imageView = (DrawingView)findViewById(R.id.drawingview);
 
         getImages();
+
+        Intent intent = getIntent();
+        data = intent.getStringExtra("data");
 
         if(bm!=null){
             bm.recycle();
@@ -203,6 +207,7 @@ public class MainActivity extends AppCompatActivity {
                             fOut = new FileOutputStream(sdImageMainDirectory);
                             Intent intent = new Intent(MainActivity.this, Add_Comments.class);
                             intent.putExtra("mCurrentPhotoPath", mCurrentPhotoPath);
+                            intent.putExtra("data", data);
                             startActivity(intent);
                         } catch (Exception e) {
                             Toast.makeText(getApplicationContext(), "Error occured. Please try again later.",

@@ -22,21 +22,30 @@ import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.NoConnectionError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.cybussolutions.hititpro.Network.End_Points;
 import com.cybussolutions.hititpro.R;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 /**
  * Created by Rizwan Butt on 26-Apr-17.
@@ -49,7 +58,7 @@ public class Add_Comments extends AppCompatActivity {
     RadioGroup radioGroup;
     int pos;
     private String ba1,mCurrentPhotoPath;
-    private String mSavedPhotoName;
+    private String mSavedPhotoName,data,defaultText;
 
     SharedPreferences sp;
     SharedPreferences.Editor edit;
@@ -72,6 +81,7 @@ public class Add_Comments extends AppCompatActivity {
 
         Intent i=getIntent();
         mCurrentPhotoPath=i.getStringExtra("mCurrentPhotoPath");
+        data=i.getStringExtra("data");
         etComments= (EditText) findViewById(R.id.comments);
         btnSaveImage=(Button)findViewById(R.id.saveImageButton);
         btnSaveImage.setOnClickListener(new View.OnClickListener() {
@@ -99,6 +109,8 @@ public class Add_Comments extends AppCompatActivity {
 
             }
         });
+
+        getDefaultComments();
     }
 
     private void up() {
@@ -223,4 +235,75 @@ public class Add_Comments extends AppCompatActivity {
                 });
         myAlertDialog.show();
     }
+
+    public void getDefaultComments() {
+
+        final StringRequest request = new StringRequest(Request.Method.POST, End_Points.GET_DEFAULT_COMMENTS,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        try {
+                            JSONArray jsonArray=new JSONArray(response);
+                            for (int i=0;i<jsonArray.length();i++) {
+                                JSONObject object =jsonArray.getJSONObject(i);
+                                defaultText=object.getString("defaulttext");
+                                etComments.setText(defaultText);
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                // ringProgressDialog.dismiss();
+                if (error instanceof NoConnectionError) {
+
+                    new SweetAlertDialog(Add_Comments.this, SweetAlertDialog.ERROR_TYPE)
+                            .setTitleText("Error!")
+                            .setConfirmText("OK").setContentText("No Internet Connection")
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    sDialog.dismiss();
+                                }
+                            })
+                            .show();
+                } else if (error instanceof TimeoutError) {
+
+                    new SweetAlertDialog(Add_Comments.this, SweetAlertDialog.ERROR_TYPE)
+                            .setTitleText("Error!")
+                            .setConfirmText("OK").setContentText("Connection TimeOut! Please check your internet connection.")
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    sDialog.dismiss();
+                                }
+                            })
+                            .show();
+                }
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+
+                Map<String, String> params = new HashMap<>();
+                params.put("fieldid",data);
+                return params;
+            }
+        };
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                MY_SOCKET_TIMEOUT_MS,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        RequestQueue requestQueue = Volley.newRequestQueue(Add_Comments.this);
+        requestQueue.add(request);
+
+    }
+
 }
