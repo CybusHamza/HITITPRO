@@ -10,6 +10,7 @@ import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -268,6 +269,10 @@ public class CustomArrayAdapter extends ArrayAdapter<Checkbox_model> implements
 		// intializing variables
 		final EditText Add = (EditText) dialogView.findViewById(R.id.add_ET);
 		final Button to = (Button) dialogView.findViewById(R.id.add_BT);
+		Add.setSelection(Add.getText().length());
+
+		InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+		imm.showSoftInput(Add, InputMethodManager.SHOW_IMPLICIT);
 
 		Add.setText(text);
 

@@ -24,6 +24,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.cybussolutions.hititpro.Activities.Detailed_Activity_All_Screens;
+import com.cybussolutions.hititpro.Activities.Detailed_Activity_Structure_Screens;
 import com.cybussolutions.hititpro.Activities.StructureScreensActivity;
 import com.cybussolutions.hititpro.Fragments.BaseFragment;
 import com.cybussolutions.hititpro.Network.End_Points;
@@ -155,6 +156,7 @@ public class InteriorScreenFragment extends BaseFragment {
                 intent.putExtra("heading",wall_ceiling.getText().toString());
                 intent.putExtra("column","wall_cieling");
                 intent.putExtra("dbTable",INTERIOR_TABLE);
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
             }
@@ -169,6 +171,7 @@ public class InteriorScreenFragment extends BaseFragment {
                 intent.putExtra("items",StructureScreensActivity.floors_interoirValues);
                 intent.putExtra("heading",floors_interoir.getText().toString());
                 intent.putExtra("column","floors");
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",INTERIOR_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
@@ -184,6 +187,7 @@ public class InteriorScreenFragment extends BaseFragment {
                 intent.putExtra("items",StructureScreensActivity.windowsValues);
                 intent.putExtra("heading",windows.getText().toString());
                 intent.putExtra("column","windows");
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",INTERIOR_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
@@ -199,6 +203,7 @@ public class InteriorScreenFragment extends BaseFragment {
                 intent.putExtra("items",StructureScreensActivity.doorsValues);
                 intent.putExtra("heading",doors.getText().toString());
                 intent.putExtra("column","doors");
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",INTERIOR_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
@@ -211,10 +216,11 @@ public class InteriorScreenFragment extends BaseFragment {
 
                 edit.putBoolean("imageButton",false);
                 edit.commit();
-                Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
+                Intent intent= new Intent(getActivity(), Detailed_Activity_Structure_Screens.class);
                 intent.putExtra("items",StructureScreensActivity.interior_observationsValues);
                 intent.putExtra("heading",interior_observations.getText().toString());
                 intent.putExtra("column","observation");
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",INTERIOR_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
@@ -230,6 +236,7 @@ public class InteriorScreenFragment extends BaseFragment {
                 intent.putExtra("items",StructureScreensActivity.walls_ceilingsValues);
                 intent.putExtra("heading",walls_ceilings.getText().toString());
                 intent.putExtra("column","rwalls_ceiling");
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",INTERIOR_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
@@ -245,6 +252,7 @@ public class InteriorScreenFragment extends BaseFragment {
                 intent.putExtra("items",StructureScreensActivity.floors_roValues);
                 intent.putExtra("heading",floors_ro.getText().toString());
                 intent.putExtra("column","rfloors");
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",INTERIOR_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
@@ -260,6 +268,7 @@ public class InteriorScreenFragment extends BaseFragment {
                 intent.putExtra("items",StructureScreensActivity.windows_roValues);
                 intent.putExtra("heading",windows_ro.getText().toString());
                 intent.putExtra("column","rwindows");
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",INTERIOR_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
@@ -274,6 +283,7 @@ public class InteriorScreenFragment extends BaseFragment {
                 intent.putExtra("items",StructureScreensActivity.doors_roValues);
                 intent.putExtra("heading",doors_ro.getText().toString());
                 intent.putExtra("column","rdoors");
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",INTERIOR_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
@@ -289,6 +299,7 @@ public class InteriorScreenFragment extends BaseFragment {
                 intent.putExtra("items",StructureScreensActivity.counters_cabinetsValues);
                 intent.putExtra("heading",counters_cabinets.getText().toString());
                 intent.putExtra("column","rcounters_cabinets");
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",INTERIOR_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
@@ -304,6 +315,7 @@ public class InteriorScreenFragment extends BaseFragment {
                 intent.putExtra("items",StructureScreensActivity.skylights_roValues);
                 intent.putExtra("heading",skylights_ro.getText().toString());
                 intent.putExtra("column","rskylights");
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",INTERIOR_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
@@ -319,6 +331,7 @@ public class InteriorScreenFragment extends BaseFragment {
                 intent.putExtra("items",StructureScreensActivity.stairways_roValues);
                 intent.putExtra("heading",stairways_ro.getText().toString());
                 intent.putExtra("column","rstairways");
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",INTERIOR_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
@@ -334,6 +347,7 @@ public class InteriorScreenFragment extends BaseFragment {
                 intent.putExtra("items",StructureScreensActivity.basement_roValues);
                 intent.putExtra("heading",basement_ro.getText().toString());
                 intent.putExtra("column","rbasement");
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",INTERIOR_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
@@ -348,6 +362,7 @@ public class InteriorScreenFragment extends BaseFragment {
                 intent.putExtra("items",StructureScreensActivity.environmental_issuesValues);
                 intent.putExtra("heading",environmental_issues.getText().toString());
                 intent.putExtra("column","renvironmentalissues");
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",INTERIOR_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
@@ -362,6 +377,7 @@ public class InteriorScreenFragment extends BaseFragment {
                 intent.putExtra("items",StructureScreensActivity.walls_ceilings_roValues);
                 intent.putExtra("heading",walls_ceilings_ro.getText().toString());
                 intent.putExtra("column","floors_observer");
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",INTERIOR_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
@@ -377,6 +393,7 @@ public class InteriorScreenFragment extends BaseFragment {
                 intent.putExtra("items",StructureScreensActivity.floors_observerValues);
                 intent.putExtra("heading",floors_observer.getText().toString());
                 intent.putExtra("column","floors_observer");
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",INTERIOR_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
@@ -393,6 +410,7 @@ public class InteriorScreenFragment extends BaseFragment {
                 intent.putExtra("heading",windows_observe.getText().toString());
                 intent.putExtra("column","windows_observe");
                 intent.putExtra("dbTable",INTERIOR_TABLE);
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
             }
@@ -408,6 +426,7 @@ public class InteriorScreenFragment extends BaseFragment {
                 intent.putExtra("heading",doors_observation.getText().toString());
                 intent.putExtra("column","doors_observation");
                 intent.putExtra("dbTable",INTERIOR_TABLE);
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
             }
@@ -423,6 +442,7 @@ public class InteriorScreenFragment extends BaseFragment {
                 intent.putExtra("heading",Counters_Cabinets_observation.getText().toString());
                 intent.putExtra("column","Counters_Cabinets_observation");
                 intent.putExtra("dbTable",INTERIOR_TABLE);
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
             }
@@ -438,6 +458,7 @@ public class InteriorScreenFragment extends BaseFragment {
                 intent.putExtra("heading",skylights_obs.getText().toString());
                 intent.putExtra("column","skylights_obs");
                 intent.putExtra("dbTable",INTERIOR_TABLE);
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
             }
@@ -453,6 +474,7 @@ public class InteriorScreenFragment extends BaseFragment {
                 intent.putExtra("heading",basement_observation.getText().toString());
                 intent.putExtra("column","basement_observation");
                 intent.putExtra("dbTable",INTERIOR_TABLE);
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
             }
@@ -468,6 +490,7 @@ public class InteriorScreenFragment extends BaseFragment {
                 intent.putExtra("items",StructureScreensActivity.stairways_observationValues);
                 intent.putExtra("heading",stairways_observation.getText().toString());
                 intent.putExtra("column","stairways_observation");
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",INTERIOR_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
@@ -484,6 +507,7 @@ public class InteriorScreenFragment extends BaseFragment {
                 intent.putExtra("heading",environmental_issues_ro.getText().toString());
                 intent.putExtra("column","environmental_issues_ro");
                 intent.putExtra("dbTable",INTERIOR_TABLE);
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
             }

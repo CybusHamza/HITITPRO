@@ -25,6 +25,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.cybussolutions.hititpro.Activities.Detailed_Activity_All_Screens;
+import com.cybussolutions.hititpro.Activities.Detailed_Activity_Structure_Screens;
 import com.cybussolutions.hititpro.Activities.StructureScreensActivity;
 import com.cybussolutions.hititpro.Fragments.BaseFragment;
 import com.cybussolutions.hititpro.Network.End_Points;
@@ -145,6 +146,7 @@ public class HeatingScreenFragment extends BaseFragment {
                 intent.putExtra("heading",heatingEnergyButton.getText().toString());
                 intent.putExtra("column","energy_source");
                 intent.putExtra("dbTable",HEATING_TABLE);
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
             }
@@ -161,6 +163,7 @@ public class HeatingScreenFragment extends BaseFragment {
                 intent.putExtra("heading",heatingSystemButton.getText().toString());
                 intent.putExtra("column","heatingsystemtype");
                 intent.putExtra("dbTable",HEATING_TABLE);
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
             }
@@ -176,6 +179,7 @@ public class HeatingScreenFragment extends BaseFragment {
                 intent.putExtra("heading",heatingChimneysButton.getText().toString());
                 intent.putExtra("column","vent_flues_chimneys");
                 intent.putExtra("dbTable",HEATING_TABLE);
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
             }
@@ -191,6 +195,7 @@ public class HeatingScreenFragment extends BaseFragment {
                 intent.putExtra("heading",heatingDistribution.getText().toString());
                 intent.putExtra("column","heatdistributionmethods");
                 intent.putExtra("dbTable",HEATING_TABLE);
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
             }
@@ -206,6 +211,7 @@ public class HeatingScreenFragment extends BaseFragment {
                 intent.putExtra("heading",heatingComponentsButton.getText().toString());
                 intent.putExtra("column","othercomponents");
                 intent.putExtra("dbTable",HEATING_TABLE);
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
             }
@@ -216,10 +222,11 @@ public class HeatingScreenFragment extends BaseFragment {
             public void onClick(View view) {
                 edit.putBoolean("imageButton",false);
                 edit.commit();
-                Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
+                Intent intent= new Intent(getActivity(), Detailed_Activity_Structure_Screens.class);
                 intent.putExtra("items",StructureScreensActivity.heatingObservationsButtonValues);
                 intent.putExtra("heading",heatingObservationsButton.getText().toString());
                 intent.putExtra("column","observation");
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",HEATING_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
@@ -235,6 +242,7 @@ public class HeatingScreenFragment extends BaseFragment {
                 intent.putExtra("items",StructureScreensActivity.roFuranceButtonValues);
                 intent.putExtra("heading",roFuranceButton.getText().toString());
                 intent.putExtra("column","rfurnace");
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",HEATING_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
@@ -250,6 +258,7 @@ public class HeatingScreenFragment extends BaseFragment {
                 intent.putExtra("items",StructureScreensActivity.roDuctWorkButtonValues);
                 intent.putExtra("heading",roDuctWorkButton.getText().toString());
                 intent.putExtra("column","rsupplyairductwork");
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",HEATING_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
@@ -266,6 +275,7 @@ public class HeatingScreenFragment extends BaseFragment {
                 intent.putExtra("items",StructureScreensActivity.roBoilerButtonValues);
                 intent.putExtra("heading",roBoilerButton.getText().toString());
                 intent.putExtra("column","boiler");
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",HEATING_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
@@ -281,6 +291,7 @@ public class HeatingScreenFragment extends BaseFragment {
                 intent.putExtra("items",StructureScreensActivity.roCombustionButtonValues);
                 intent.putExtra("heading",roCombustionButton.getText().toString());
                 intent.putExtra("column","combustion_exhaust");
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",HEATING_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
@@ -296,6 +307,7 @@ public class HeatingScreenFragment extends BaseFragment {
                 intent.putExtra("items",StructureScreensActivity.roChimneysButtonValues);
                 intent.putExtra("heading",roChimneysButton.getText().toString());
                 intent.putExtra("column","furnace_chimneys");
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",HEATING_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
@@ -311,6 +323,7 @@ public class HeatingScreenFragment extends BaseFragment {
                 intent.putExtra("items",StructureScreensActivity.roThermostatsButtonValues);
                 intent.putExtra("heading",roThermostatsButton.getText().toString());
                 intent.putExtra("column","thermostats");
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",HEATING_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);

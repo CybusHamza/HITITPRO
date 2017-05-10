@@ -25,6 +25,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.cybussolutions.hititpro.Activities.Detailed_Activity_All_Screens;
+import com.cybussolutions.hititpro.Activities.Detailed_Activity_Structure_Screens;
 import com.cybussolutions.hititpro.Activities.StructureScreensActivity;
 import com.cybussolutions.hititpro.Fragments.BaseFragment;
 import com.cybussolutions.hititpro.Network.End_Points;
@@ -155,6 +156,7 @@ public class ElectricalScreenFragment extends BaseFragment {
                 intent.putExtra("heading",electricalSizeButton.getText().toString());
                 intent.putExtra("column","sizeofservice");
                 intent.putExtra("dbTable",ELECTRICAL_TABLE);
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
             }
@@ -170,6 +172,7 @@ public class ElectricalScreenFragment extends BaseFragment {
                 intent.putExtra("heading",electricalDropButton.getText().toString());
                 intent.putExtra("column","servicedrop");
                 intent.putExtra("dbTable",ELECTRICAL_TABLE);
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
             }
@@ -184,6 +187,7 @@ public class ElectricalScreenFragment extends BaseFragment {
                 intent.putExtra("items",StructureScreensActivity.electricalConductorsButtonValues);
                 intent.putExtra("heading",electricalConductorsButton.getText().toString());
                 intent.putExtra("column","entranceconductors");
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",ELECTRICAL_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
@@ -200,6 +204,7 @@ public class ElectricalScreenFragment extends BaseFragment {
                 intent.putExtra("heading",electricalDisconnectButton.getText().toString());
                 intent.putExtra("column","maindisconnect");
                 intent.putExtra("dbTable",ELECTRICAL_TABLE);
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
             }
@@ -214,6 +219,7 @@ public class ElectricalScreenFragment extends BaseFragment {
                 intent.putExtra("items",StructureScreensActivity.electricalGroundingButtonValues);
                 intent.putExtra("heading",electricalGroundingButton.getText().toString());
                 intent.putExtra("column","grounding");
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",ELECTRICAL_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
@@ -229,6 +235,7 @@ public class ElectricalScreenFragment extends BaseFragment {
                 intent.putExtra("items",StructureScreensActivity.electricalPanelButtonValues);
                 intent.putExtra("heading",electricalPanelButton.getText().toString());
                 intent.putExtra("column","servicepanel");
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",ELECTRICAL_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
@@ -245,6 +252,7 @@ public class ElectricalScreenFragment extends BaseFragment {
                 intent.putExtra("heading",electricalSubpanelButton.getText().toString());
                 intent.putExtra("column","sub_panel");
                 intent.putExtra("dbTable",ELECTRICAL_TABLE);
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
             }
@@ -259,6 +267,7 @@ public class ElectricalScreenFragment extends BaseFragment {
                 intent.putExtra("items",StructureScreensActivity.electricalWiringButtonValues);
                 intent.putExtra("heading",electricalWiringButton.getText().toString());
                 intent.putExtra("column","wiring");
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",ELECTRICAL_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
@@ -275,6 +284,7 @@ public class ElectricalScreenFragment extends BaseFragment {
                 intent.putExtra("heading",electricalMethodButton.getText().toString());
                 intent.putExtra("column","wiring_method");
                 intent.putExtra("dbTable",ELECTRICAL_TABLE);
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
             }
@@ -290,6 +300,7 @@ public class ElectricalScreenFragment extends BaseFragment {
                 intent.putExtra("heading",electricalSwitchesButton.getText().toString());
                 intent.putExtra("column","switches_receptacles");
                 intent.putExtra("dbTable",ELECTRICAL_TABLE);
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
             }
@@ -305,6 +316,7 @@ public class ElectricalScreenFragment extends BaseFragment {
                 intent.putExtra("items",StructureScreensActivity.electricalgfciButtonValues);
                 intent.putExtra("heading",electricalgfciButton.getText().toString());
                 intent.putExtra("column","gfci");
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",ELECTRICAL_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
@@ -320,6 +332,7 @@ public class ElectricalScreenFragment extends BaseFragment {
                 intent.putExtra("items",StructureScreensActivity.electricalSmokeButtonValues);
                 intent.putExtra("heading",electricalSmokeButton.getText().toString());
                 intent.putExtra("column","smoke_codetector");
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",ELECTRICAL_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
@@ -331,11 +344,12 @@ public class ElectricalScreenFragment extends BaseFragment {
             public void onClick(View view) {
                 edit.putBoolean("imageButton",false);
                 edit.commit();
-                Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
+                Intent intent= new Intent(getActivity(), Detailed_Activity_Structure_Screens.class);
                 intent.putExtra("items",StructureScreensActivity.electricalObservationButtonValues);
                 intent.putExtra("heading",electricalObservationButton.getText().toString());
                 intent.putExtra("column","observation");
                 intent.putExtra("dbTable",ELECTRICAL_TABLE);
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
             }
@@ -351,6 +365,7 @@ public class ElectricalScreenFragment extends BaseFragment {
                 intent.putExtra("heading",roEntranceButton.getText().toString());
                 intent.putExtra("column","serviceentrance");
                 intent.putExtra("dbTable",ELECTRICAL_TABLE);
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
             }
@@ -367,6 +382,7 @@ public class ElectricalScreenFragment extends BaseFragment {
                 intent.putExtra("heading",roMainpanelButton.getText().toString());
                 intent.putExtra("column","mainpanel");
                 intent.putExtra("dbTable",ELECTRICAL_TABLE);
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
             }
@@ -382,6 +398,7 @@ public class ElectricalScreenFragment extends BaseFragment {
                 intent.putExtra("heading",roSubpanelButton.getText().toString());
                 intent.putExtra("column","subpanel");
                 intent.putExtra("dbTable",ELECTRICAL_TABLE);
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
             }
@@ -397,6 +414,7 @@ public class ElectricalScreenFragment extends BaseFragment {
                 intent.putExtra("heading",roDistributionButton.getText().toString());
                 intent.putExtra("column","distribution");
                 intent.putExtra("dbTable",ELECTRICAL_TABLE);
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
             }
@@ -412,6 +430,7 @@ public class ElectricalScreenFragment extends BaseFragment {
                 intent.putExtra("heading",roOutletButton.getText().toString());
                 intent.putExtra("column","outlets");
                 intent.putExtra("dbTable",ELECTRICAL_TABLE);
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
             }
@@ -427,6 +446,7 @@ public class ElectricalScreenFragment extends BaseFragment {
                 intent.putExtra("heading",roSwitchesButton.getText().toString());
                 intent.putExtra("column","switches");
                 intent.putExtra("dbTable",ELECTRICAL_TABLE);
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
             }
@@ -442,6 +462,7 @@ public class ElectricalScreenFragment extends BaseFragment {
                 intent.putExtra("heading",roCeilingButton.getText().toString());
                 intent.putExtra("column","lights_ceiling_fans");
                 intent.putExtra("dbTable",ELECTRICAL_TABLE);
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
             }
@@ -457,6 +478,7 @@ public class ElectricalScreenFragment extends BaseFragment {
                 intent.putExtra("heading",roDetectorButton.getText().toString());
                 intent.putExtra("column","smoke_co_detectors");
                 intent.putExtra("dbTable",ELECTRICAL_TABLE);
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
             }

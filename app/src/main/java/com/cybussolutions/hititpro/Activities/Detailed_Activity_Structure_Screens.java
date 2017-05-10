@@ -45,7 +45,7 @@ public class Detailed_Activity_Structure_Screens extends AppCompatActivity {
 
     ListView detailedListView;
     String[] items;
-    String heading, dbColumn, dbTable,userid, enteredStructure = "", inspectionID, fromDataBase;
+    String heading, dbColumn,fromadapter ,dbTable,userid, enteredStructure = "", inspectionID, fromDataBase;
     Detailed_Adapter_Structure_Screen Detailed_Adapter;
     Database database = new Database(this);
     Button addCategory;
@@ -76,6 +76,7 @@ public class Detailed_Activity_Structure_Screens extends AppCompatActivity {
         items = intent.getStringArrayExtra("items");
         heading = intent.getStringExtra("heading");
         dbColumn = intent.getStringExtra("column");
+        fromadapter = intent.getStringExtra("fromAddapter");
         dbTable = intent.getStringExtra("dbTable");
         inspectionID = intent.getStringExtra("inspectionID");
 
@@ -101,8 +102,6 @@ public class Detailed_Activity_Structure_Screens extends AppCompatActivity {
 
         toPass = new String[]{heading,dbColumn,dbTable};
 
-        Cursor cursor = database.getData(dbColumn, dbTable, inspectionID);
-        cursor.moveToFirst();
 
         addCategory.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,34 +110,74 @@ public class Detailed_Activity_Structure_Screens extends AppCompatActivity {
             }
         });
 
-        if (cursor.moveToFirst()) {
-            do {
-                fromDataBase = cursor.getString(0);
-            } while (cursor.moveToNext());
+        if (fromadapter.equals("false")) {
+            Cursor cursor = database.getData(dbColumn, dbTable, inspectionID);
+            cursor.moveToFirst();
+            if (cursor.moveToFirst()) {
+                do {
+                    fromDataBase = cursor.getString(0);
+                } while (cursor.moveToNext());
+
+            }
+
 
         }
-        if (fromDataBase != null) {
+        if (fromDataBase != null && !(dbColumn.equals(""))) {
 
             String splitter = "\\^";
             String[] row = fromDataBase.split(splitter);
 
+            int position = 0;
             for (String item : row) {
                 Checkbox_model model = new Checkbox_model();
                 model.setTitle(item);
+
+                String splitter1 = "%";
+                String rows[] = item.split(splitter1);
+
                 list.add(model);
+
+                if (rows[1] != null && rows[1].equals("1")) {
+                    list.get(position).setChecked(true);
+                } else {
+                    list.get(position).setChecked(false);
+                }
+
+
+                position++;
             }
 
-        }
-        else {
+        } else {
+            int position = 0;
+
             if (items.length != 0) {
-                for (String item : items) {
+
+                int length = 0;
+                if (fromadapter.equals("edit")) {
+                    length = items.length;
+                } else if (fromadapter.equals("true")) {
+                    length = items.length - 1;
+                }
+
+                for (int i = 0; i < length; i++) {
                     Checkbox_model model = new Checkbox_model();
-                    model.setTitle(item);
+                    model.setTitle(items[i]);
+                    String splitter1 = "%";
+                    String rows[] = items[i].split(splitter1);
+
                     list.add(model);
+
+                    if (rows[1] != null && rows[1].equals("1")) {
+                        list.get(position).setChecked(true);
+                    } else {
+                        list.get(position).setChecked(false);
+                    }
+                    position++;
                 }
             }
 
         }
+
 
         Detailed_Adapter = new Detailed_Adapter_Structure_Screen(Detailed_Activity_Structure_Screens.this,list,R.layout.structure_observations,toPass);
         detailedListView.setChoiceMode(android.R.layout.simple_list_item_single_choice);

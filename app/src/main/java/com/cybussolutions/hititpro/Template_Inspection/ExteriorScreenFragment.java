@@ -25,6 +25,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.cybussolutions.hititpro.Activities.Detailed_Activity_All_Screens;
+import com.cybussolutions.hititpro.Activities.Detailed_Activity_Structure_Screens;
 import com.cybussolutions.hititpro.Activities.StructureScreensActivity;
 import com.cybussolutions.hititpro.Fragments.BaseFragment;
 import com.cybussolutions.hititpro.Network.End_Points;
@@ -158,6 +159,7 @@ public class ExteriorScreenFragment extends BaseFragment {
                 intent.putExtra("heading",exteriorWallCoveringButton.getText().toString());
                 intent.putExtra("column","wallcovering");
                 intent.putExtra("dbTable",EXTERIROR_TABLE);
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
             }
@@ -172,6 +174,7 @@ public class ExteriorScreenFragment extends BaseFragment {
                 intent.putExtra("heading",exteriorEavesButton.getText().toString());
                 intent.putExtra("column","eaves_soffits_fascia");
                 intent.putExtra("dbTable",EXTERIROR_TABLE);
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
             }
@@ -186,6 +189,7 @@ public class ExteriorScreenFragment extends BaseFragment {
                 intent.putExtra("heading",exteriorDoorsButton.getText().toString());
                 intent.putExtra("column","exteriordoors");
                 intent.putExtra("dbTable",EXTERIROR_TABLE);
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
             }
@@ -200,6 +204,7 @@ public class ExteriorScreenFragment extends BaseFragment {
                 intent.putExtra("heading",exteriorWindowButton.getText().toString());
                 intent.putExtra("column","windows_doorframes_trim");
                 intent.putExtra("dbTable",EXTERIROR_TABLE);
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
             }
@@ -214,6 +219,7 @@ public class ExteriorScreenFragment extends BaseFragment {
                 intent.putExtra("heading",exteriorDrivewaysButton.getText().toString());
                 intent.putExtra("column","entry_driveways");
                 intent.putExtra("dbTable",EXTERIROR_TABLE);
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
             }
@@ -228,6 +234,7 @@ public class ExteriorScreenFragment extends BaseFragment {
                 intent.putExtra("heading",exteriorWalksButton.getText().toString());
                 intent.putExtra("column","entrywalk_patios");
                 intent.putExtra("dbTable",EXTERIROR_TABLE);
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
             }
@@ -242,6 +249,7 @@ public class ExteriorScreenFragment extends BaseFragment {
                 intent.putExtra("heading",exteriorPorchButton.getText().toString());
                 intent.putExtra("column","porch_decks_steps_railings");
                 intent.putExtra("dbTable",EXTERIROR_TABLE);
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
             }
@@ -256,6 +264,7 @@ public class ExteriorScreenFragment extends BaseFragment {
                 intent.putExtra("heading",exteriorOverheadButton.getText().toString());
                 intent.putExtra("column","overheadgaragedoors");
                 intent.putExtra("dbTable",EXTERIROR_TABLE);
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
             }
@@ -270,6 +279,7 @@ public class ExteriorScreenFragment extends BaseFragment {
                 intent.putExtra("heading",exteriorSurfaceButton.getText().toString());
                 intent.putExtra("column","surfacedrainage");
                 intent.putExtra("dbTable",EXTERIROR_TABLE);
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
             }
@@ -284,6 +294,7 @@ public class ExteriorScreenFragment extends BaseFragment {
                 intent.putExtra("heading",exteriorTrainingButton.getText().toString());
                 intent.putExtra("column","retainingwalls");
                 intent.putExtra("dbTable",EXTERIROR_TABLE);
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
             }
@@ -298,6 +309,7 @@ public class ExteriorScreenFragment extends BaseFragment {
                 intent.putExtra("heading",exteriorFencingButton.getText().toString());
                 intent.putExtra("column","fencing");
                 intent.putExtra("dbTable",EXTERIROR_TABLE);
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
             }
@@ -307,11 +319,12 @@ public class ExteriorScreenFragment extends BaseFragment {
             public void onClick(View view) {
                 edit.putBoolean("imageButton",false);
                 edit.commit();
-                Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
+                Intent intent= new Intent(getActivity(), Detailed_Activity_Structure_Screens.class);
                 intent.putExtra("items",StructureScreensActivity.exteriorObservationButtonValues);
                 intent.putExtra("heading",exteriorObservationButton.getText().toString());
                 intent.putExtra("column","observations");
                 intent.putExtra("dbTable",EXTERIROR_TABLE);
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
             }
@@ -327,6 +340,7 @@ public class ExteriorScreenFragment extends BaseFragment {
                 intent.putExtra("heading",roWallsButton.getText().toString());
                 intent.putExtra("column","rexteriorwalls");
                 intent.putExtra("dbTable",EXTERIROR_TABLE);
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
             }
@@ -341,6 +355,7 @@ public class ExteriorScreenFragment extends BaseFragment {
                 intent.putExtra("heading",roEavesButton.getText().toString());
                 intent.putExtra("column","reaves");
                 intent.putExtra("dbTable",EXTERIROR_TABLE);
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
             }
@@ -355,6 +370,7 @@ public class ExteriorScreenFragment extends BaseFragment {
                 intent.putExtra("heading",roDoorsButton.getText().toString());
                 intent.putExtra("column","rexteriordoors_windows");
                 intent.putExtra("dbTable",EXTERIROR_TABLE);
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
             }
@@ -368,6 +384,7 @@ public class ExteriorScreenFragment extends BaseFragment {
                 intent.putExtra("items",StructureScreensActivity.roGarageButtonValues);
                 intent.putExtra("heading",roGarageButton.getText().toString());
                 intent.putExtra("column","rgrage");
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",EXTERIROR_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
@@ -383,6 +400,7 @@ public class ExteriorScreenFragment extends BaseFragment {
                 intent.putExtra("heading",roPorchesButton.getText().toString());
                 intent.putExtra("column","rporches");
                 intent.putExtra("dbTable",EXTERIROR_TABLE);
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
             }
@@ -397,6 +415,7 @@ public class ExteriorScreenFragment extends BaseFragment {
                 intent.putExtra("heading",roDrivewaysButton.getText().toString());
                 intent.putExtra("column","rdriveway");
                 intent.putExtra("dbTable",EXTERIROR_TABLE);
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
             }
@@ -411,6 +430,7 @@ public class ExteriorScreenFragment extends BaseFragment {
                 intent.putExtra("heading",roStepsButton.getText().toString());
                 intent.putExtra("column","rexteriorsteps_walkways");
                 intent.putExtra("dbTable",EXTERIROR_TABLE);
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
             }
@@ -425,6 +445,7 @@ public class ExteriorScreenFragment extends BaseFragment {
                 intent.putExtra("heading",roDeckButton.getText().toString());
                 intent.putExtra("column","rdeck");
                 intent.putExtra("dbTable",EXTERIROR_TABLE);
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
             }
@@ -439,6 +460,7 @@ public class ExteriorScreenFragment extends BaseFragment {
                 intent.putExtra("heading",roDrainangeButton.getText().toString());
                 intent.putExtra("column","rlotdrainage");
                 intent.putExtra("dbTable",EXTERIROR_TABLE);
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
             }
@@ -453,6 +475,7 @@ public class ExteriorScreenFragment extends BaseFragment {
                 intent.putExtra("heading",roLandscapButton.getText().toString());
                 intent.putExtra("column","rlandscaping");
                 intent.putExtra("dbTable",EXTERIROR_TABLE);
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
             }
@@ -466,6 +489,7 @@ public class ExteriorScreenFragment extends BaseFragment {
                 intent.putExtra("items",StructureScreensActivity.roRetainingButtonValues);
                 intent.putExtra("heading",roRetainingButton.getText().toString());
                 intent.putExtra("column","retainwall");
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",EXTERIROR_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
@@ -481,6 +505,7 @@ public class ExteriorScreenFragment extends BaseFragment {
                 intent.putExtra("heading",roFencingButton.getText().toString());
                 intent.putExtra("column","rfencing");
                 intent.putExtra("dbTable",EXTERIROR_TABLE);
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
             }

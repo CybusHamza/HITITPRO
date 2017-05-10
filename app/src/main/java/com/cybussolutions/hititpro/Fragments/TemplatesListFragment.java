@@ -1,7 +1,6 @@
 package com.cybussolutions.hititpro.Fragments;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -23,7 +22,6 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.cybussolutions.hititpro.Activities.StructureScreensActivity;
 import com.cybussolutions.hititpro.Adapters.Template_Adapter;
 import com.cybussolutions.hititpro.Model.Templates_model;
 import com.cybussolutions.hititpro.Network.End_Points;
@@ -108,7 +106,7 @@ public class TemplatesListFragment extends BaseFragment {
                     public void onResponse(String response) {
 
                         ringProgressDialog.dismiss();
-                        if (response.equals("false")) {
+                        if (response.equals("[]")) {
                             new SweetAlertDialog(getActivity(), SweetAlertDialog.ERROR_TYPE)
                                     .setTitleText("Error!")
                                     .setConfirmText("OK").setContentText("No Clients Found ")

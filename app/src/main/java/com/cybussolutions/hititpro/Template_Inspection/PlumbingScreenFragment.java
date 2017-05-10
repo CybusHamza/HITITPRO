@@ -24,6 +24,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.cybussolutions.hititpro.Activities.Detailed_Activity_All_Screens;
+import com.cybussolutions.hititpro.Activities.Detailed_Activity_Structure_Screens;
 import com.cybussolutions.hititpro.Activities.StructureScreensActivity;
 import com.cybussolutions.hititpro.Fragments.BaseFragment;
 import com.cybussolutions.hititpro.Network.End_Points;
@@ -151,6 +152,7 @@ public class PlumbingScreenFragment extends BaseFragment {
                 intent.putExtra("heading",water_supply_source.getText().toString());
                 intent.putExtra("column","watersupplysource");
                 intent.putExtra("dbTable",PLUMBING_TABLE);
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
             }
@@ -166,6 +168,7 @@ public class PlumbingScreenFragment extends BaseFragment {
                 intent.putExtra("heading",service_pipe_to_house.getText().toString());
                 intent.putExtra("column","servicepipe");
                 intent.putExtra("dbTable",PLUMBING_TABLE);
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
             }
@@ -182,6 +185,7 @@ public class PlumbingScreenFragment extends BaseFragment {
                 intent.putExtra("heading",main_water_valve_location.getText().toString());
                 intent.putExtra("column","mainwatervalvelocation");
                 intent.putExtra("dbTable",PLUMBING_TABLE);
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
             }
@@ -197,6 +201,7 @@ public class PlumbingScreenFragment extends BaseFragment {
                 intent.putExtra("heading",interior_supply_piping.getText().toString());
                 intent.putExtra("column","interiorsupply");
                 intent.putExtra("dbTable",PLUMBING_TABLE);
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
             }
@@ -211,6 +216,7 @@ public class PlumbingScreenFragment extends BaseFragment {
                 intent.putExtra("items", StructureScreensActivity.waste_systemValues);
                 intent.putExtra("heading",waste_system.getText().toString());
                 intent.putExtra("column","wastesystem");
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",PLUMBING_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
@@ -226,6 +232,7 @@ public class PlumbingScreenFragment extends BaseFragment {
                 intent.putExtra("items", StructureScreensActivity.dwv_pipingValues);
                 intent.putExtra("heading",dwv_piping.getText().toString());
                 intent.putExtra("column","strudwvpiping");
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",PLUMBING_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
@@ -242,6 +249,7 @@ public class PlumbingScreenFragment extends BaseFragment {
                 intent.putExtra("items", StructureScreensActivity.water_heaterValues);
                 intent.putExtra("heading",water_heater.getText().toString());
                 intent.putExtra("column","waterheater");
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",PLUMBING_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
@@ -260,6 +268,7 @@ public class PlumbingScreenFragment extends BaseFragment {
                 intent.putExtra("heading",fuel_storage_distribution.getText().toString());
                 intent.putExtra("column","fuelshortage_distribution");
                 intent.putExtra("dbTable",PLUMBING_TABLE);
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
             }
@@ -275,6 +284,7 @@ public class PlumbingScreenFragment extends BaseFragment {
                 intent.putExtra("items", StructureScreensActivity.fuel_shut_off_valvesValues);
                 intent.putExtra("heading",fuel_shut_off_valves.getText().toString());
                 intent.putExtra("column","fuelshutoffvalves");
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",PLUMBING_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
@@ -290,6 +300,7 @@ public class PlumbingScreenFragment extends BaseFragment {
                 intent.putExtra("items", StructureScreensActivity.other_components_plumbingValues);
                 intent.putExtra("heading",other_components_plumbing.getText().toString());
                 intent.putExtra("column","othercomponents");
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",PLUMBING_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
@@ -301,10 +312,11 @@ public class PlumbingScreenFragment extends BaseFragment {
 
                 edit.putBoolean("imageButton",false);
                 edit.commit();
-                Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
+                Intent intent= new Intent(getActivity(), Detailed_Activity_Structure_Screens.class);
                 intent.putExtra("items", StructureScreensActivity.plumbing_observationsValues);
                 intent.putExtra("heading",plumbing_observations.getText().toString());
                 intent.putExtra("column","observation");
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",PLUMBING_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
@@ -320,6 +332,7 @@ public class PlumbingScreenFragment extends BaseFragment {
                 intent.putExtra("heading",water_heater_plimbing.getText().toString());
                 intent.putExtra("column","rwaterheater");
                 intent.putExtra("dbTable",PLUMBING_TABLE);
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
             }
@@ -335,6 +348,7 @@ public class PlumbingScreenFragment extends BaseFragment {
                 intent.putExtra("heading",gas_piping.getText().toString());
                 intent.putExtra("column","gaspiping");
                 intent.putExtra("dbTable",PLUMBING_TABLE);
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
             }
@@ -348,6 +362,7 @@ public class PlumbingScreenFragment extends BaseFragment {
                 intent.putExtra("items", StructureScreensActivity.supply_pipingValues);
                 intent.putExtra("heading",supply_piping.getText().toString());
                 intent.putExtra("column","rsupplypiping");
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",PLUMBING_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
@@ -363,6 +378,7 @@ public class PlumbingScreenFragment extends BaseFragment {
                 intent.putExtra("items", StructureScreensActivity.dwv_piping_observationValues);
                 intent.putExtra("heading",dwv_piping_observation.getText().toString());
                 intent.putExtra("column","dwvpiping");
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",PLUMBING_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
@@ -379,6 +395,7 @@ public class PlumbingScreenFragment extends BaseFragment {
                 intent.putExtra("heading",fixtures.getText().toString());
                 intent.putExtra("column","fixtures");
                 intent.putExtra("dbTable",PLUMBING_TABLE);
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
             }
@@ -393,6 +410,7 @@ public class PlumbingScreenFragment extends BaseFragment {
                 intent.putExtra("items", StructureScreensActivity.sump_pumpValues);
                 intent.putExtra("heading",sump_pump.getText().toString());
                 intent.putExtra("column","sumppump");
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",PLUMBING_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
@@ -408,6 +426,7 @@ public class PlumbingScreenFragment extends BaseFragment {
                 intent.putExtra("items", StructureScreensActivity.waste_ejector_pumpValues);
                 intent.putExtra("heading",waste_ejector_pump.getText().toString());
                 intent.putExtra("column","wasteejectorpump");
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",PLUMBING_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
@@ -423,6 +442,7 @@ public class PlumbingScreenFragment extends BaseFragment {
                 intent.putExtra("items", StructureScreensActivity.water_heater_plumbingValues);
                 intent.putExtra("heading",water_heater_plumbing.getText().toString());
                 intent.putExtra("column","water_heater_plumbing");
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",PLUMBING_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
@@ -438,6 +458,7 @@ public class PlumbingScreenFragment extends BaseFragment {
                 intent.putExtra("items", StructureScreensActivity.gas_piping_plumbingValues);
                 intent.putExtra("heading",gas_piping_plumbing.getText().toString());
                 intent.putExtra("column","gas_piping_plumbing");
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",PLUMBING_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
@@ -454,6 +475,7 @@ public class PlumbingScreenFragment extends BaseFragment {
                 intent.putExtra("heading",supply_plumbing.getText().toString());
                 intent.putExtra("column","supply_plumbing");
                 intent.putExtra("dbTable",PLUMBING_TABLE);
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
             }
@@ -469,6 +491,7 @@ public class PlumbingScreenFragment extends BaseFragment {
                 intent.putExtra("heading",dwv_plumbing.getText().toString());
                 intent.putExtra("column","dwv_plumbing");
                 intent.putExtra("dbTable",PLUMBING_TABLE);
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
             }
@@ -479,10 +502,11 @@ public class PlumbingScreenFragment extends BaseFragment {
 
                 edit.putBoolean("imageButton",true);
                 edit.commit();
-                Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
+                Intent intent= new Intent(getActivity(), Detailed_Activity_Structure_Screens.class);
                 intent.putExtra("items", StructureScreensActivity.fixtures_observationValues);
                 intent.putExtra("heading",fixtures_observation.getText().toString());
                 intent.putExtra("column","fixtures_observation");
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",PLUMBING_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
@@ -499,6 +523,7 @@ public class PlumbingScreenFragment extends BaseFragment {
                 intent.putExtra("items", StructureScreensActivity.sump_pump_plumbingValues);
                 intent.putExtra("heading",sump_pump_plumbing.getText().toString());
                 intent.putExtra("column","sump_pump_plumbing");
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",PLUMBING_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
@@ -515,6 +540,7 @@ public class PlumbingScreenFragment extends BaseFragment {
                 intent.putExtra("items", StructureScreensActivity.waste_ejector_pump_roValues);
                 intent.putExtra("heading",waste_ejector_pump_ro.getText().toString());
                 intent.putExtra("column","waste_ejector_pump_ro");
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",PLUMBING_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);

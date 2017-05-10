@@ -24,6 +24,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.cybussolutions.hititpro.Activities.Detailed_Activity_All_Screens;
+import com.cybussolutions.hititpro.Activities.Detailed_Activity_Structure_Screens;
 import com.cybussolutions.hititpro.Activities.StructureScreensActivity;
 import com.cybussolutions.hititpro.Fragments.BaseFragment;
 import com.cybussolutions.hititpro.Network.End_Points;
@@ -140,6 +141,7 @@ public class RoofingScreenFragment extends BaseFragment {
                 intent.putExtra("heading",roofCoveringButton.getText().toString());
                 intent.putExtra("column","roofcovering");
                 intent.putExtra("dbTable",ROOFING_TABLE);
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
             }
@@ -155,6 +157,7 @@ public class RoofingScreenFragment extends BaseFragment {
                 intent.putExtra("heading",roofFlashingButton.getText().toString());
                 intent.putExtra("column","roofflashing");
                 intent.putExtra("dbTable",ROOFING_TABLE);
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
             }
@@ -169,6 +172,7 @@ public class RoofingScreenFragment extends BaseFragment {
                 intent.putExtra("items",StructureScreensActivity.chimneysButtonValues);
                 intent.putExtra("heading",chimneysButton.getText().toString());
                 intent.putExtra("column","chimneys");
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",ROOFING_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
@@ -183,6 +187,7 @@ public class RoofingScreenFragment extends BaseFragment {
                 intent.putExtra("items",StructureScreensActivity.roofDrainageButtonValues);
                 intent.putExtra("heading",roofDrainageButton.getText().toString());
                 intent.putExtra("column","roofdrainage");
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",ROOFING_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
@@ -199,6 +204,7 @@ public class RoofingScreenFragment extends BaseFragment {
                 intent.putExtra("items",StructureScreensActivity.skyLightsButtonValues);
                 intent.putExtra("heading",skyLightsButton.getText().toString());
                 intent.putExtra("column","skylights");
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",ROOFING_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
@@ -215,6 +221,7 @@ public class RoofingScreenFragment extends BaseFragment {
                 intent.putExtra("items",StructureScreensActivity.methodInspectionButtonValues);
                 intent.putExtra("heading",methodInspectionButton.getText().toString());
                 intent.putExtra("column","methodofinspection");
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",ROOFING_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
@@ -226,10 +233,12 @@ public class RoofingScreenFragment extends BaseFragment {
 
                 edit.putBoolean("imageButton",false);
                 edit.commit();
-                Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
+
+                Intent intent= new Intent(getActivity(), Detailed_Activity_Structure_Screens.class);
                 intent.putExtra("items",StructureScreensActivity.roofingObservationsButtonValues);
                 intent.putExtra("heading",roofingObservationsButton.getText().toString());
                 intent.putExtra("column","observations");
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",ROOFING_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
@@ -246,6 +255,7 @@ public class RoofingScreenFragment extends BaseFragment {
                 intent.putExtra("heading",roSloppedButton.getText().toString());
                 intent.putExtra("column","recommendslopedroofing");
                 intent.putExtra("dbTable",ROOFING_TABLE);
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
             }
@@ -260,6 +270,7 @@ public class RoofingScreenFragment extends BaseFragment {
                 intent.putExtra("items",StructureScreensActivity.roFlatButtonValues);
                 intent.putExtra("heading",roFlatButton.getText().toString());
                 intent.putExtra("column","flatroofing");
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",ROOFING_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
@@ -276,6 +287,7 @@ public class RoofingScreenFragment extends BaseFragment {
                 intent.putExtra("items",StructureScreensActivity.roFlashingButtonValues);
                 intent.putExtra("heading",roFlashingButton.getText().toString());
                 intent.putExtra("column","flashing");
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",ROOFING_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
@@ -291,6 +303,7 @@ public class RoofingScreenFragment extends BaseFragment {
                 intent.putExtra("items",StructureScreensActivity.roChimneyButtonValues);
                 intent.putExtra("heading",roChimneyButton.getText().toString());
                 intent.putExtra("column","recommendchimneys");
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",ROOFING_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
@@ -308,6 +321,7 @@ public class RoofingScreenFragment extends BaseFragment {
                 intent.putExtra("items",StructureScreensActivity.roGutterDownspoutsButtonValues);
                 intent.putExtra("heading",roGutterDownspoutsButton.getText().toString());
                 intent.putExtra("column","guttersdownspouts");
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",ROOFING_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);

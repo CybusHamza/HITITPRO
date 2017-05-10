@@ -25,6 +25,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.cybussolutions.hititpro.Activities.Detailed_Activity_All_Screens;
+import com.cybussolutions.hititpro.Activities.Detailed_Activity_Structure_Screens;
 import com.cybussolutions.hititpro.Activities.StructureScreensActivity;
 import com.cybussolutions.hititpro.Fragments.BaseFragment;
 import com.cybussolutions.hititpro.Network.End_Points;
@@ -149,6 +150,7 @@ public class FirePlaceScreenFragment extends BaseFragment {
                 intent.putExtra("heading",wood_stove_ro.getText().toString());
                 intent.putExtra("column","fireplaceswoodstoves");
                 intent.putExtra("dbTable",FIREPLACE_TABLE);
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
             }
@@ -163,6 +165,7 @@ public class FirePlaceScreenFragment extends BaseFragment {
                 intent.putExtra("heading",wood_stove_ro.getText().toString());
                 intent.putExtra("column","woodcoalstoves");
                 intent.putExtra("dbTable",FIREPLACE_TABLE);
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
             }
@@ -177,6 +180,7 @@ public class FirePlaceScreenFragment extends BaseFragment {
                 intent.putExtra("heading",wood_stove_ro.getText().toString());
                 intent.putExtra("column","ventsflueschimney");
                 intent.putExtra("dbTable",FIREPLACE_TABLE);
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
             }
@@ -186,10 +190,11 @@ public class FirePlaceScreenFragment extends BaseFragment {
             public void onClick(View view) {
                 edit.putBoolean("imageButton",false);
                 edit.commit();
-                Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
+                Intent intent= new Intent(getActivity(), Detailed_Activity_Structure_Screens.class);
                 intent.putExtra("items",StructureScreensActivity.fireplaces_wood_stoves_observationValues);
                 intent.putExtra("heading",wood_stove_ro.getText().toString());
                 intent.putExtra("column","observations");
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",FIREPLACE_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
@@ -204,6 +209,7 @@ public class FirePlaceScreenFragment extends BaseFragment {
                 intent.putExtra("items",StructureScreensActivity.fireplaceValues);
                 intent.putExtra("heading",wood_stove_ro.getText().toString());
                 intent.putExtra("column","recommendationsfireplace");
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",FIREPLACE_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
@@ -218,6 +224,7 @@ public class FirePlaceScreenFragment extends BaseFragment {
                 intent.putExtra("items",StructureScreensActivity.wood_stoveValues);
                 intent.putExtra("heading",wood_stove_ro.getText().toString());
                 intent.putExtra("column","recommendationswood");
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",FIREPLACE_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
@@ -233,6 +240,7 @@ public class FirePlaceScreenFragment extends BaseFragment {
                 intent.putExtra("heading",wood_stove_ro.getText().toString());
                 intent.putExtra("column","fireplace_ro");
                 intent.putExtra("dbTable",FIREPLACE_TABLE);
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
             }
@@ -247,6 +255,7 @@ public class FirePlaceScreenFragment extends BaseFragment {
                 intent.putExtra("items",StructureScreensActivity.wood_stove_roValues);
                 intent.putExtra("heading",wood_stove_ro.getText().toString());
                 intent.putExtra("column","wood_stove_ro");
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",FIREPLACE_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);

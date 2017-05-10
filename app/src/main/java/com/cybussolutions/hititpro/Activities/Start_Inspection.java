@@ -333,8 +333,10 @@ public class Start_Inspection extends AppCompatActivity {
 
                                     JSONObject object = new JSONObject(Array.getJSONObject(i).toString());
 
+
                                     inspection_id_list.add(object.getString("ca_id"));
                                     inspection_list.add(object.getString("name"));
+
 
                                 }
 

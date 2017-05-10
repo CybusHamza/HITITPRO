@@ -25,6 +25,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.cybussolutions.hititpro.Activities.Detailed_Activity_All_Screens;
+import com.cybussolutions.hititpro.Activities.Detailed_Activity_Structure_Screens;
 import com.cybussolutions.hititpro.Activities.StructureScreensActivity;
 import com.cybussolutions.hititpro.Fragments.BaseFragment;
 import com.cybussolutions.hititpro.Network.End_Points;
@@ -141,6 +142,7 @@ public class CoolingScreenFragment extends BaseFragment {
                 intent.putExtra("heading",coolingEnergyButton.getText().toString());
                 intent.putExtra("column","energysource");
                 intent.putExtra("dbTable",COOLING_TABLE);
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
             }
@@ -156,6 +158,7 @@ public class CoolingScreenFragment extends BaseFragment {
                 intent.putExtra("heading",coolingSystemButton.getText().toString());
                 intent.putExtra("column","centralsystemtype");
                 intent.putExtra("dbTable",COOLING_TABLE);
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
             }
@@ -171,6 +174,7 @@ public class CoolingScreenFragment extends BaseFragment {
                 intent.putExtra("heading",coolingEquipmentButton.getText().toString());
                 intent.putExtra("column","throughwallequipment");
                 intent.putExtra("dbTable",COOLING_TABLE);
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
             }
@@ -186,6 +190,7 @@ public class CoolingScreenFragment extends BaseFragment {
                 intent.putExtra("heading",coolingComponentsButton.getText().toString());
                 intent.putExtra("column","othercomponents");
                 intent.putExtra("dbTable",COOLING_TABLE);
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
             }
@@ -196,11 +201,12 @@ public class CoolingScreenFragment extends BaseFragment {
             public void onClick(View view) {
                 edit.putBoolean("imageButton",false);
                 edit.commit();
-                Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
+                Intent intent= new Intent(getActivity(), Detailed_Activity_Structure_Screens.class);
                 intent.putExtra("items",StructureScreensActivity.coolingObservationsButtonValues);
                 intent.putExtra("heading",coolingObservationsButton.getText().toString());
                 intent.putExtra("column","heatobservation");
                 intent.putExtra("dbTable",COOLING_TABLE);
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
             }
@@ -216,6 +222,7 @@ public class CoolingScreenFragment extends BaseFragment {
                 intent.putExtra("heading",roCentralButton.getText().toString());
                 intent.putExtra("column","recomndcentralaircondition");
                 intent.putExtra("dbTable",COOLING_TABLE);
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
             }
@@ -232,6 +239,7 @@ public class CoolingScreenFragment extends BaseFragment {
                 intent.putExtra("heading",roPumpButton.getText().toString());
                 intent.putExtra("column","heatpumps");
                 intent.putExtra("dbTable",COOLING_TABLE);
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
             }
@@ -247,6 +255,7 @@ public class CoolingScreenFragment extends BaseFragment {
                 intent.putExtra("heading",roEvaporatorButton.getText().toString());
                 intent.putExtra("column","evaporator");
                 intent.putExtra("dbTable",COOLING_TABLE);
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
             }
@@ -262,6 +271,7 @@ public class CoolingScreenFragment extends BaseFragment {
                 intent.putExtra("heading",roFansButton.getText().toString());
                 intent.putExtra("column","housefans");
                 intent.putExtra("dbTable",COOLING_TABLE);
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
             }
