@@ -1,8 +1,10 @@
 package com.cybussolutions.hititpro.Activities;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -180,5 +182,40 @@ public class LandingScreen extends AppCompatActivity {
         return headerResult;
     }
 
+    @Override
+    public void onBackPressed() {
+        if (getSupportFragmentManager().getBackStackEntryCount() > 1) {
+            getSupportFragmentManager().popBackStack();
+        }
+        else if(getSupportFragmentManager().getBackStackEntryCount()==1)
+        {
 
+            new AlertDialog.Builder(LandingScreen.this)
+                    .setTitle("Close HitItPro")
+                    .setMessage("Are you sure you want to Close HitItPro? ")
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+
+                            getSupportFragmentManager().popBackStack();
+
+                            finish();
+
+                        }
+                    })
+                    .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    })
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .show();
+
+
+        }
+        else {
+            finish();
+
+            super.onBackPressed();
+        }
+    }
 }

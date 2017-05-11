@@ -81,10 +81,7 @@ public class TemplatesListFragment extends BaseFragment {
         return root;
     }
 
-/*    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_clients, menu);  // Use filter.xml from step 1
-    }*/
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

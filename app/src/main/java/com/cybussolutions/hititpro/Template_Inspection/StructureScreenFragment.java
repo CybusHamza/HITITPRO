@@ -11,7 +11,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,10 +28,8 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.cybussolutions.hititpro.Activities.Detailed_Activity_All_Screens;
 import com.cybussolutions.hititpro.Activities.Detailed_Activity_Structure_Screens;
-import com.cybussolutions.hititpro.Activities.Start_Inspection;
 import com.cybussolutions.hititpro.Activities.StructureScreensActivity;
 import com.cybussolutions.hititpro.Fragments.BaseFragment;
-import com.cybussolutions.hititpro.Fragments.ClientsFragment;
 import com.cybussolutions.hititpro.Network.End_Points;
 import com.cybussolutions.hititpro.R;
 import com.cybussolutions.hititpro.Sql_LocalDataBase.Database;
@@ -60,8 +57,6 @@ public class StructureScreenFragment extends BaseFragment {
     ArrayList<String> datArray = new ArrayList<>();
     FragmentManager manager;
 
-//    ImageView foundationImg, columnsImg, floorStructureImg, wallStructureImg, ceilingStructureImg, roofStructureImg,
-//     structureObservationsImg, roFoundationImg, roCrawlSpacesImg, roFloorsImg, roExteriorWallsImg, roRoofImg;
 
 
     Button foundationButton, columnsButton, floorStructureButton,wallStructureSpinner, ceilingStructureButton, roofStructureButton,
@@ -121,9 +116,7 @@ public class StructureScreenFragment extends BaseFragment {
                 } else {
                     getActivity().finish();
 
-                    //  manager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-                    // getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new ClientsFragment()).commit();
-                }
+               }
             }
         });
 
@@ -176,7 +169,7 @@ public class StructureScreenFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
                 edit.putBoolean("imageButton",false);
-                edit.commit();
+                edit.apply();
 
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",StructureScreensActivity.foundationSpinnerValues);

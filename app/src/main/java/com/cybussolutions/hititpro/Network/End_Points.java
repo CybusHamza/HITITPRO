@@ -17,6 +17,7 @@ public class End_Points {
     public static final String GET_TEMPLATES = BASE_URL + "getTemplates";
     public static final String GET_INSPECTION = BASE_URL + "getInspection";
     public static final String GET_TEMPLATE_DATA = BASE_URL + "getTemplatesData";
+    public static final String DELETE_TEMPLATE = BASE_URL + "deleteTemplate";
     public static final String UPLOAD_IMAGE=BASE_URL+"uploadimagetest";
     public static final String UPLOAD="http://xfer.cybusservices.com/hititpro/upload_image_mobile.php";
 
