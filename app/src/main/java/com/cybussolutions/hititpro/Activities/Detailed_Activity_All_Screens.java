@@ -90,7 +90,6 @@ public class Detailed_Activity_All_Screens extends AppCompatActivity {
 
         toPass = new String[]{heading, dbColumn, dbTable};
 
-
         SharedPreferences pref = getApplicationContext().getSharedPreferences("UserPrefs", MODE_PRIVATE);
         userid = pref.getString("user_id", "");
 
