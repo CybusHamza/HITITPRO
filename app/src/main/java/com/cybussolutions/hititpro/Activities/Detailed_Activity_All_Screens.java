@@ -60,10 +60,12 @@ public class Detailed_Activity_All_Screens extends AppCompatActivity {
     ArrayAdapter<Checkbox_model> adapter;
     ArrayList<String> checkedValue;
     String toPass[];
+    static  boolean isAnyChecked = false;
     String dbEnterArray[];
     ProgressDialog ringProgressDialog;
     private ArrayList<Checkbox_model> list = new ArrayList<>();
     private ArrayList<Checkbox_model> list_temp;
+    HashMap<String,String> totalcount = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -199,6 +201,8 @@ public class Detailed_Activity_All_Screens extends AppCompatActivity {
 
         String[] insertArray = Detailed_Adapter.getDbInsertArray();
 
+
+
         for (int i = 0; i < insertArray.length - 1; i++) {
             enteredStructure += insertArray[i] + "^";
         }
@@ -216,12 +220,29 @@ public class Detailed_Activity_All_Screens extends AppCompatActivity {
     @Override
     public void onBackPressed() {
 
-        update();
+
         String[] insertArray = Detailed_Adapter.getDbInsertArray();
 
+        String splitter = "%";
+
         for (int i = 0; i < insertArray.length - 1; i++) {
+
+            String[] row = insertArray[i].split(splitter);
+
+            if(row[1].equals("1"))
+            {
+                isAnyChecked = true;
+                break;
+            }
+            else
+            {
+                isAnyChecked = false;
+            }
+
             enteredStructure += insertArray[i] + "^";
         }
+
+        update();
 
         enteredStructure = enteredStructure.substring(0, enteredStructure.length() - 1);
 
@@ -398,6 +419,7 @@ public class Detailed_Activity_All_Screens extends AppCompatActivity {
                 params.put("enteredStructure", enteredStructure);
                 params.put("inspection_id", StructureScreensActivity.inspectionID);
                 params.put("added_by", userid);
+                params.put("is_checked", isAnyChecked+"");
                 return params;
             }
         };

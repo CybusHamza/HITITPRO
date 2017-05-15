@@ -33,6 +33,7 @@
         android:layout_height="wrap_content"
         android:text="Inspection Name"
         android:textSize="15sp"
+        android:visibility="gone"
         android:id="@+id/inspection"
         android:typeface="sans"
         android:paddingTop="3dp"
@@ -59,7 +60,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/deleteTemplate"
         android:src="@android:drawable/ic_menu_delete"
-        android:layout_alignTop="@+id/editTemplate"
-        android:layout_alignRight="@+id/inspection"
-        />
+        android:layout_below="@+id/client_name"
+        android:layout_toLeftOf="@+id/editTemplate"
+        android:layout_toStartOf="@+id/editTemplate" />
 </RelativeLayout>

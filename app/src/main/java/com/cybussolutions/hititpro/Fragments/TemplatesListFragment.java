@@ -190,8 +190,8 @@ public class TemplatesListFragment extends BaseFragment {
 
                 Templates_model model =  new Templates_model();
                 templatename=object.getString("name");
-                if(templatename==null||templatename.equals("")){
-                    templatename="No name found";
+                if(templatename==null||templatename.equals("null")){
+                    templatename=object.getString("template_name");
                 }
                 else
                 templatename=object.getString("name");

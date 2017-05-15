@@ -50,35 +50,30 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class TemplatesFragment extends BaseFragment {
 
-    View root;
     private static final int MY_SOCKET_TIMEOUT_MS = 10000;
-    private static String  responceStatic = null;
+    private static String responceStatic = null;
+    View root;
     ProgressDialog ringProgressDialog;
     String id, client_id;
-    Spinner tem_spinner,client_spinner,inspection_spinner;
+    Spinner tem_spinner, client_spinner, inspection_spinner;
     EditText paraEt;
-
+    Button review;
+    ImageView add_template;
     private List<String> client_list = new ArrayList<>();
     private List<String> client_id_list = new ArrayList<>();
     private List<String> para_list = new ArrayList<>();
-
-    private List<String>template_list;
-    private List<String> templateID_list ;
-    private List<String> templateID_date ;
-    private List<String> isStarted ;
-
+    private List<String> template_list;
+    private List<String> templateID_list;
+    private List<String> templateID_date;
+    private List<String> isStarted;
     private List<String> inspection_list;
     private List<String> inspection_id_list;
-
-    Button review;
-    ImageView add_template;
-
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        root= inflater.inflate(R.layout.fragment_templates,container,false);
+        root = inflater.inflate(R.layout.fragment_templates, container, false);
 
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Templates");
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -90,19 +85,19 @@ public class TemplatesFragment extends BaseFragment {
         tem_spinner = (Spinner) root.findViewById(R.id.spinner);
         client_spinner = (Spinner) root.findViewById(R.id.client_spinner);
         paraEt = (EditText) root.findViewById(R.id.et_default_comments);
-       // inspection_spinner = (Spinner) root.findViewById(R.id.inspection);
+        // inspection_spinner = (Spinner) root.findViewById(R.id.inspection);
         review = (Button) root.findViewById(R.id.button);
-        add_template = (ImageView)root.findViewById(R.id.add_template);
+        add_template = (ImageView) root.findViewById(R.id.add_template);
 
         client_spinner.setOnItemSelectedListener(new CustomOnItemSelectedListener_client());
 
         add_template.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int client_id =  client_spinner.getSelectedItemPosition();
+                int client_id = client_spinner.getSelectedItemPosition();
 
-                Intent i=new Intent(getActivity(), AddTemplate.class);
-                i.putExtra("client_id",client_id_list.get(client_id));
+                Intent i = new Intent(getActivity(), AddTemplate.class);
+                i.putExtra("client_id", client_id_list.get(client_id));
                 startActivity(i);
             }
         });
@@ -110,23 +105,22 @@ public class TemplatesFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
 
-                int client_id =  client_spinner.getSelectedItemPosition();
-               // int inspection_id =  inspection_spinner.getSelectedItemPosition();
-                int template_id =  tem_spinner.getSelectedItemPosition();
+                int client_id = client_spinner.getSelectedItemPosition();
+                // int inspection_id =  inspection_spinner.getSelectedItemPosition();
+                int template_id = tem_spinner.getSelectedItemPosition();
 
-                    if(isStarted.get(tem_spinner.getSelectedItemPosition()).equals("0"))
-                    {
-                        prePopulate(inspection_id_list.get(tem_spinner.getSelectedItemPosition()),client_id_list.get(client_spinner.getSelectedItemPosition()));
+                if (isStarted.get(tem_spinner.getSelectedItemPosition()).equals("0")) {
+                    prePopulate(inspection_id_list.get(tem_spinner.getSelectedItemPosition()), client_id_list.get(client_spinner.getSelectedItemPosition()));
 
-                    }
-                else{
-                        Intent intent= new Intent(getActivity(),StructureScreensActivity.class);
-                        intent.putExtra("inspectionId",templateID_list.get(0));
-                        intent.putExtra("client_id",client_id_list.get(client_id));
-                        intent.putExtra("template_id",inspection_id_list.get(template_id));
-                        intent.putExtra("inspection_type","old");
-                        startActivity(intent);
-                    }
+                } else {
+
+                    Intent intent = new Intent(getActivity(), StructureScreensActivity.class);
+                    intent.putExtra("inspectionId", templateID_list.get(0));
+                    intent.putExtra("client_id", client_id_list.get(client_id));
+                    intent.putExtra("template_id", inspection_id_list.get(template_id));
+                    intent.putExtra("inspection_type", "old");
+                    startActivity(intent);
+                }
                        /* Intent intent=new Intent(getActivity(), Start_Inspection.class);
                         intent.putExtra("client_name",client_spinner.getSelectedItem().toString());
                         intent.putExtra("client_id",client_id_list.get(client_id));
@@ -141,69 +135,7 @@ public class TemplatesFragment extends BaseFragment {
         return root;
     }
 
-
-    public class CustomOnItemSelectedListener_client implements AdapterView.OnItemSelectedListener {
-
-        public void onItemSelected(AdapterView<?> parent, View view, final int pos,
-                                   long id) {
-
-            if(client_list.get(pos).equals("No Records Founds"))
-            {
-                client_id = "0";
-            }
-            else {
-                client_id = client_id_list.get(pos);
-
-            }
-
-            getTemplates();
-
-
-        }
-
-        @Override
-        public void onNothingSelected(AdapterView<?> arg0) {
-            // TODO Auto-generated method stub
-
-        }
-
-    }
-
-
-    public class CustomOnItemSelectedListener_inspection implements AdapterView.OnItemSelectedListener {
-
-        public void onItemSelected(AdapterView<?> parent, View view, final int pos,
-                                   long id) {
-
-            String temp_id = null,para;
-
-            if(inspection_list.get(pos).equals("No Records Founds"))
-            {
-                temp_id = "0";
-            }
-            else {
-
-                temp_id = inspection_id_list.get(pos);
-                para = para_list.get(pos);
-
-                paraEt.setText(para);
-
-            }
-
-            getInspections(temp_id);
-
-
-        }
-
-        @Override
-        public void onNothingSelected(AdapterView<?> arg0) {
-            // TODO Auto-generated method stub
-
-        }
-
-    }
-    public void getInspections(final String temp_id)
-    {
+    public void getInspections(final String temp_id) {
         ringProgressDialog = ProgressDialog.show(getActivity(), "", "Please wait ...", true);
         ringProgressDialog.setCancelable(false);
         ringProgressDialog.show();
@@ -216,9 +148,8 @@ public class TemplatesFragment extends BaseFragment {
 
                         ringProgressDialog.dismiss();
 
-                        if(response.equals("\"no record found\""))
-                        {
-                            template_list  = new ArrayList<>();
+                        if (response.equals("\"no record found\"")) {
+                            template_list = new ArrayList<>();
                             template_list.add(0, "No Records Founds");
                            /* ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>
                                     (getContext(), android.R.layout.simple_spinner_item,template_list);
@@ -227,26 +158,22 @@ public class TemplatesFragment extends BaseFragment {
                                     (android.R.layout.simple_spinner_dropdown_item);
 
                             inspection_spinner.setAdapter(dataAdapter);*/
-                          //  review.setText("Start Inspection");
+                            //  review.setText("Start Inspection");
 
-                        }
-
-                        else if (!(response.equals("0")))
-                        {
+                        } else if (!(response.equals("0"))) {
                             try {
 
-                                template_list  = new ArrayList<>();
-                                templateID_list  = new ArrayList<>();
-                                templateID_date   = new ArrayList<>();
-                                para_list   = new ArrayList<>();
+                                template_list = new ArrayList<>();
+                                templateID_list = new ArrayList<>();
+                                templateID_date = new ArrayList<>();
                                 JSONArray Array = new JSONArray(response);
 
-                                for(int i=0;i<Array.length();i++) {
+                                for (int i = 0; i < Array.length(); i++) {
 
                                     JSONObject object = new JSONObject(Array.getJSONObject(i).toString());
 
 
-                                    template_list.add(object.getString("id")+"  "+object.getString("name"));
+                                    template_list.add(object.getString("id") + "  " + object.getString("name"));
                                     templateID_list.add(object.getString("id"));
                                     templateID_date.add(object.getString("added_on"));
 
@@ -265,10 +192,8 @@ public class TemplatesFragment extends BaseFragment {
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
-                           // review.setText("Continue");
-                        }
-                        else
-                        {
+                            // review.setText("Continue");
+                        } else {
                             new SweetAlertDialog(getActivity(), SweetAlertDialog.ERROR_TYPE)
                                     .setTitleText("Error!")
                                     .setConfirmText("OK").setContentText("There Are No Templates Against this Client")
@@ -320,8 +245,8 @@ public class TemplatesFragment extends BaseFragment {
 
                 Map<String, String> params = new HashMap<>();
 
-                params.put("tempid",temp_id);
-                params.put("client_id",client_id);
+                params.put("tempid", temp_id);
+                params.put("client_id", client_id);
 
                 return params;
             }
@@ -336,8 +261,7 @@ public class TemplatesFragment extends BaseFragment {
 
     }
 
-    public void getTemplates()
-    {
+    public void getTemplates() {
         ringProgressDialog = ProgressDialog.show(getActivity(), "", "Please wait ...", true);
         ringProgressDialog.setCancelable(false);
         ringProgressDialog.show();
@@ -349,13 +273,12 @@ public class TemplatesFragment extends BaseFragment {
 
                         ringProgressDialog.dismiss();
 
-                        if(response.equals("\"no record found\""))
-                        {
-                            inspection_list= new ArrayList<>();
+                        if (response.equals("\"no record found\"")) {
+                            inspection_list = new ArrayList<>();
 
-                            inspection_list.add(0,"No Records Founds");
+                            inspection_list.add(0, "No Records Founds");
                             ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>
-                                    (getContext(), android.R.layout.simple_spinner_item,inspection_list);
+                                    (getContext(), android.R.layout.simple_spinner_item, inspection_list);
 
                             dataAdapter.setDropDownViewResource
                                     (android.R.layout.simple_spinner_dropdown_item);
@@ -363,24 +286,29 @@ public class TemplatesFragment extends BaseFragment {
                             tem_spinner.setAdapter(dataAdapter);
                             review.setText("Start Inspection");
 
-                        }
-
-                        else if (!(response.equals("0")))
-                        {
+                        } else if (!(response.equals("0"))) {
                             try {
 
                                 JSONArray Array = new JSONArray(response);
 
-                                inspection_list= new ArrayList<>();
+                                inspection_list = new ArrayList<>();
                                 inspection_id_list = new ArrayList<>();
                                 para_list = new ArrayList<>();
                                 isStarted = new ArrayList<>();
 
 
-                                for(int i=0;i<Array.length();i++) {
+                                for (int i = 0; i < Array.length(); i++) {
 
                                     JSONObject object = new JSONObject(Array.getJSONObject(i).toString());
-                                    inspection_list.add(object.getString("name"));
+                                    if(object.getString("name").equals("null"))
+                                    {
+                                        inspection_list.add(object.getString("template_name"));
+                                    }
+                                    else
+                                    {
+                                        inspection_list.add(object.getString("name"));
+                                    }
+
                                     inspection_id_list.add(object.getString("ca_id"));
                                     para_list.add(object.getString("paragraph_text"));
                                     isStarted.add(object.getString("is_started"));
@@ -389,7 +317,7 @@ public class TemplatesFragment extends BaseFragment {
                                 tem_spinner.setAdapter(null);
 
                                 ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>
-                                        (getActivity(), android.R.layout.simple_spinner_item,inspection_list);
+                                        (getActivity(), android.R.layout.simple_spinner_item, inspection_list);
 
                                 dataAdapter.setDropDownViewResource
                                         (android.R.layout.simple_spinner_dropdown_item);
@@ -400,11 +328,7 @@ public class TemplatesFragment extends BaseFragment {
                                 e.printStackTrace();
                             }
                             review.setText("Continue");
-                        }
-
-
-                        else
-                        {
+                        } else {
                             new SweetAlertDialog(getActivity(), SweetAlertDialog.ERROR_TYPE)
                                     .setTitleText("Error!")
                                     .setConfirmText("OK").setContentText("There Are No Templates Against this Client")
@@ -456,8 +380,8 @@ public class TemplatesFragment extends BaseFragment {
 
                 Map<String, String> params = new HashMap<>();
 
-                params.put("client_id",client_id);
-                params.put("user_id",id);
+                params.put("client_id", client_id);
+                params.put("user_id", id);
 
                 return params;
             }
@@ -471,8 +395,6 @@ public class TemplatesFragment extends BaseFragment {
         requestQueue.add(request);
 
     }
-
-
 
     public void AllClients() {
 
@@ -487,21 +409,18 @@ public class TemplatesFragment extends BaseFragment {
 
                         ringProgressDialog.dismiss();
 
-                        if(response.equals("\"no record found\""))
-                        {
+                        if (response.equals("\"no record found\"")) {
 
-                            client_list.add(0,"No Records Founds");
+                            client_list.add(0, "No Records Founds");
                             ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>
-                                    (getContext(), android.R.layout.simple_spinner_item,client_list);
+                                    (getContext(), android.R.layout.simple_spinner_item, client_list);
 
                             dataAdapter.setDropDownViewResource
                                     (android.R.layout.simple_spinner_dropdown_item);
 
                             client_spinner.setAdapter(dataAdapter);
 
-                        }
-
-                        else if (response.equals("false")) {
+                        } else if (response.equals("false")) {
                             new SweetAlertDialog(getActivity(), SweetAlertDialog.ERROR_TYPE)
                                     .setTitleText("Error!")
                                     .setConfirmText("OK").setContentText("No Clients Found ")
@@ -513,25 +432,23 @@ public class TemplatesFragment extends BaseFragment {
                                         }
                                     })
                                     .show();
-                        }
-
-                        else {
+                        } else {
 
                             try {
 
                                 JSONArray Array = new JSONArray(response);
 
-                                for(int i=0;i<Array.length();i++) {
+                                for (int i = 0; i < Array.length(); i++) {
 
                                     JSONObject object = new JSONObject(Array.getJSONObject(i).toString());
 
-                                    client_list .add(object.getString("client_name"));
-                                    client_id_list .add(object.getString("id"));
+                                    client_list.add(object.getString("client_name"));
+                                    client_id_list.add(object.getString("id"));
 
                                 }
 
                                 ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>
-                                        (getContext(), android.R.layout.simple_spinner_item,client_list);
+                                        (getContext(), android.R.layout.simple_spinner_item, client_list);
 
                                 dataAdapter.setDropDownViewResource
                                         (android.R.layout.simple_spinner_dropdown_item);
@@ -581,7 +498,7 @@ public class TemplatesFragment extends BaseFragment {
             protected Map<String, String> getParams() throws AuthFailureError {
 
                 Map<String, String> params = new HashMap<>();
-                params.put("userid",id);
+                params.put("userid", id);
                 return params;
             }
         };
@@ -595,9 +512,7 @@ public class TemplatesFragment extends BaseFragment {
 
     }
 
-
-    public void prePopulate(final String temId, final String clientId)
-    {
+    public void prePopulate(final String temId, final String clientId) {
         StringRequest request = new StringRequest(Request.Method.POST, End_Points.PRE_POPULATE,
                 new Response.Listener<String>() {
                     @Override
@@ -605,18 +520,14 @@ public class TemplatesFragment extends BaseFragment {
 
                         ringProgressDialog.dismiss();
 
-                        if (!(response.equals("")))
-                        {
-                            Intent intent= new Intent(getActivity(),StructureScreensActivity.class);
-                            intent.putExtra("inspectionId",response);
-                            intent.putExtra("client_id",clientId);
-                            intent.putExtra("template_id",temId);
-                            intent.putExtra("inspection_type","new");
+                        if (!(response.equals(""))) {
+                            Intent intent = new Intent(getActivity(), StructureScreensActivity.class);
+                            intent.putExtra("inspectionId", response);
+                            intent.putExtra("client_id", clientId);
+                            intent.putExtra("template_id", temId);
+                            intent.putExtra("inspection_type", "new");
                             startActivity(intent);
-                        }
-
-                        else
-                        {
+                        } else {
                             new SweetAlertDialog(getActivity(), SweetAlertDialog.ERROR_TYPE)
                                     .setTitleText("Error!")
                                     .setConfirmText("OK").setContentText("There was an Error creating template")
@@ -669,10 +580,10 @@ public class TemplatesFragment extends BaseFragment {
 
                 Map<String, String> params = new HashMap<>();
 
-                params.put("client_id",clientId);
-                params.put("template_id",temId);
-                params.put("pagecover","");
-                params.put("userID",id);
+                params.put("client_id", clientId);
+                params.put("template_id", temId);
+                params.put("pagecover", "");
+                params.put("userID", id);
 
                 return params;
             }
@@ -684,6 +595,62 @@ public class TemplatesFragment extends BaseFragment {
 
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
         requestQueue.add(request);
+
+    }
+
+    public class CustomOnItemSelectedListener_client implements AdapterView.OnItemSelectedListener {
+
+        public void onItemSelected(AdapterView<?> parent, View view, final int pos,
+                                   long id) {
+
+            if (client_list.get(pos).equals("No Records Founds")) {
+                client_id = "0";
+            } else {
+                client_id = client_id_list.get(pos);
+
+            }
+
+            getTemplates();
+
+
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> arg0) {
+            // TODO Auto-generated method stub
+
+        }
+
+    }
+
+    public class CustomOnItemSelectedListener_inspection implements AdapterView.OnItemSelectedListener {
+
+        public void onItemSelected(AdapterView<?> parent, View view, final int pos,
+                                   long id) {
+
+            String temp_id = null, para;
+
+            if (inspection_list.get(pos).equals("No Records Founds")) {
+                temp_id = "0";
+            } else {
+
+                temp_id = inspection_id_list.get(pos);
+                para = para_list.get(pos);
+
+                paraEt.setText(para);
+
+            }
+
+            getInspections(temp_id);
+
+
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> arg0) {
+            // TODO Auto-generated method stub
+
+        }
 
     }
 
