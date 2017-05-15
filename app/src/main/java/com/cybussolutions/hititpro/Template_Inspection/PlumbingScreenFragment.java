@@ -67,7 +67,7 @@ public class PlumbingScreenFragment extends BaseFragment {
         ///////////set title of main screens/////////////////
         sp=getContext().getSharedPreferences("prefs", Context.MODE_PRIVATE);
         edit=sp.edit();
-        edit.putString("main_screen","Plumbing Screen");
+        edit.putString("main_screen","Plumbing");
         edit.commit();
 
         next = (Button) root.findViewById(R.id.next);
@@ -98,7 +98,7 @@ public class PlumbingScreenFragment extends BaseFragment {
         }
 
 
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Plumbing Screen");
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Plumbing");
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.menu);
 

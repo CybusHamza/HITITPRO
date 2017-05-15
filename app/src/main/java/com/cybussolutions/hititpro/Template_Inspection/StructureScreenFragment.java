@@ -125,7 +125,7 @@ public class StructureScreenFragment extends BaseFragment {
             ///////////set title of main screens/////////////////
             sp=getActivity().getSharedPreferences("prefs", Context.MODE_PRIVATE);
             edit=sp.edit();
-            edit.putString("main_screen","Structure Screen");
+            edit.putString("main_screen","Structure");
             edit.commit();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -146,7 +146,7 @@ public class StructureScreenFragment extends BaseFragment {
 
         // image view
 
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Structure Screen");
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Structure");
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.menu);
 

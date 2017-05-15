@@ -72,7 +72,7 @@ public class ElectricalScreenFragment extends BaseFragment {
         ///////////set title of main screens/////////////////
         sp=getContext().getSharedPreferences("prefs", Context.MODE_PRIVATE);
         edit=sp.edit();
-        edit.putString("main_screen","Electrical Screen");
+        edit.putString("main_screen","Electrical");
         edit.commit();
 
         next = (Button) root.findViewById(R.id.next);
@@ -126,7 +126,7 @@ public class ElectricalScreenFragment extends BaseFragment {
         roDetectorButton = (Button) root.findViewById(R.id.ro_dectectors_Button);
 
 
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Electrical Screen");
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Electrical");
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.menu);
 

@@ -165,7 +165,8 @@ public class Detailed_Adapter_Structure_Screen extends ArrayAdapter<Checkbox_mod
             public void onClick(View view) {
                 try {
                     Intent intent=new Intent(context,MainActivity.class);
-
+                    intent.putExtra("dbTable",topass[1]);
+                    intent.putExtra("showImages","false");
                     context.startActivity(intent);
                 }catch (Exception e){
                     Toast.makeText(context,e.toString(),Toast.LENGTH_LONG).show();

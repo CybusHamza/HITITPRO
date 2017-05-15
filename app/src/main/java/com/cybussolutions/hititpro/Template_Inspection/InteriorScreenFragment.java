@@ -70,7 +70,7 @@ public class InteriorScreenFragment extends BaseFragment {
         ///////////set title of main screens/////////////////
         sp=getContext().getSharedPreferences("prefs", Context.MODE_PRIVATE);
         edit=sp.edit();
-        edit.putString("main_screen","Interior Screen");
+        edit.putString("main_screen","Interior");
         edit.commit();
 
         next = (Button) root.findViewById(R.id.next);
@@ -126,7 +126,7 @@ public class InteriorScreenFragment extends BaseFragment {
 
 
 
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Interior Screen");
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Interior");
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.menu);
 

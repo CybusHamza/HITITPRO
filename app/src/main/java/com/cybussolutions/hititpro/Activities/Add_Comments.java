@@ -58,7 +58,7 @@ public class Add_Comments extends AppCompatActivity {
     RadioGroup radioGroup;
     int pos;
     private String ba1,mCurrentPhotoPath;
-    private String mSavedPhotoName,data,defaultText;
+    private String mSavedPhotoName,data,defaultText,attachmentName,tablename;
 
     SharedPreferences sp;
     SharedPreferences.Editor edit;
@@ -81,20 +81,36 @@ public class Add_Comments extends AppCompatActivity {
 
         Intent i=getIntent();
         mCurrentPhotoPath=i.getStringExtra("mCurrentPhotoPath");
+        attachmentName=i.getStringExtra("attachmentName");
         data=i.getStringExtra("data");
+        tablename=i.getStringExtra("dbTable");
         etComments= (EditText) findViewById(R.id.comments);
         btnSaveImage=(Button)findViewById(R.id.saveImageButton);
         btnSaveImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                up();
-                startDialog();
+                String check=etComments.getText().toString();
+                if(!check.equals("")&&radioGroup.getCheckedRadioButtonId()==-1) {
+                    Toast.makeText(getApplicationContext(),"You must select some recommendation",Toast.LENGTH_LONG).show();
+
+                }else{
+                    if (mCurrentPhotoPath == null) {
+                        mSavedPhotoName = "";
+                        mCurrentPhotoPath = "";
+                        uploadToServer();
+                    } else {
+                        up();
+                        startDialog();
+                    }
+                }
             }
         });
         radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
         pos=radioGroup.getCheckedRadioButtonId();
-        radioButton = (RadioButton) findViewById(pos);
-        checkedBox=radioButton.getText().toString();
+        if(pos!=-1) {
+            radioButton = (RadioButton) findViewById(pos);
+            checkedBox = radioButton.getText().toString();
+        }
         radioGroup.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
             @Override
@@ -105,7 +121,7 @@ public class Add_Comments extends AppCompatActivity {
                 pos=radioGroup.getCheckedRadioButtonId();
                 radioButton = (RadioButton) findViewById(pos);
                 checkedBox=radioButton.getText().toString();
-                    //up();
+                //up();
 
             }
         });
@@ -180,14 +196,16 @@ public class Add_Comments extends AppCompatActivity {
                 params.put("inspection_id", StructureScreensActivity.inspectionID);
                 params.put("client_id", StructureScreensActivity.client_id);
                 params.put("main_form_name", sp.getString("main_screen", ""));
-                params.put("column_name", sp.getString("heading", ""));
-                params.put("attachment_name", "test");
+                params.put("column_name", tablename);/*sp.getString("heading", "")*/
+                params.put("element_id",data);
+                params.put("attachment_name", attachmentName);
                 params.put("attachment_original_name", mCurrentPhotoPath);
                 params.put("attachment_saved_name", mSavedPhotoName);
                 params.put("image_comments", etComments.getText().toString());
                 params.put("selrecomd", checkedBox);
                 params.put("userid", userId);
                 params.put("attchment_added_date", attachment_added_date);
+                params.put("dbTable",tablename+"_comments");
 
                 return params;
             }
@@ -211,11 +229,14 @@ public class Add_Comments extends AppCompatActivity {
                         edit = sp.edit();
                         edit.putString("imagecomments", etComments.getText().toString());
                         edit.putString("selectrecomend", checkedBox);
-                       // edit.putString("back","add_comments");
+                        // edit.putString("back","add_comments");
                         edit.putBoolean("flag", true);
                         edit.commit();
                         finish();
                         Intent intent=new Intent(Add_Comments.this,MainActivity.class);
+                        intent.putExtra("dbTable",tablename);
+                        intent.putExtra("data",data);
+                        intent.putExtra("showImages","true");
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
                     }
@@ -305,5 +326,4 @@ public class Add_Comments extends AppCompatActivity {
         requestQueue.add(request);
 
     }
-
 }

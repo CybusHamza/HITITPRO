@@ -208,6 +208,8 @@ public class CustomArrayAdapter extends ArrayAdapter<Checkbox_model> implements
 
 					Intent intent=new Intent(context,MainActivity.class);
 					intent.putExtra("data",data);
+					intent.putExtra("dbTable",topass[1]);
+					intent.putExtra("showImages","false");
 					context.startActivity(intent);
 				}catch (Exception e){
 					Toast.makeText(context,e.toString(),Toast.LENGTH_LONG).show();
@@ -314,6 +316,8 @@ public class CustomArrayAdapter extends ArrayAdapter<Checkbox_model> implements
 		// intializing variables
 		final EditText Add = (EditText) dialogView.findViewById(R.id.add_ET);
 		final Button to = (Button) dialogView.findViewById(R.id.add_BT);
+		final Button cancel=(Button)dialogView.findViewById(R.id.cancel);
+
 		Add.setSelection(Add.getText().length());
 
 		InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -394,6 +398,12 @@ public class CustomArrayAdapter extends ArrayAdapter<Checkbox_model> implements
 
 				b.dismiss();
 
+			}
+		});
+		cancel.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				b.dismiss();
 			}
 		});
 

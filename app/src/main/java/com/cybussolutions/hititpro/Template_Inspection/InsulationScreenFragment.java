@@ -69,7 +69,7 @@ public class InsulationScreenFragment extends BaseFragment {
         ///////////set title of main screens/////////////////
         sp=getContext().getSharedPreferences("prefs", Context.MODE_PRIVATE);
         edit=sp.edit();
-        edit.putString("main_screen","Insulation Screen");
+        edit.putString("main_screen","Insulation");
         edit.commit();
 
         next = (Button) root.findViewById(R.id.next);
@@ -113,7 +113,7 @@ public class InsulationScreenFragment extends BaseFragment {
 
 
 
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Insulation Screen");
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Insulation");
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.menu);
 

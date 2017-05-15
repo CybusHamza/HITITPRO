@@ -70,7 +70,7 @@ public class AppliancesScreenFragment extends BaseFragment {
         ///////////set title of main screens/////////////////
         sp=getContext().getSharedPreferences("prefs", Context.MODE_PRIVATE);
         edit=sp.edit();
-        edit.putString("main_screen","Appliances Screen");
+        edit.putString("main_screen","Appliances");
         edit.commit();
 
         next = (Button) root.findViewById(R.id.next);
@@ -101,7 +101,7 @@ public class AppliancesScreenFragment extends BaseFragment {
         }
 
 
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Appliances Screen");
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Appliances");
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.menu);
 

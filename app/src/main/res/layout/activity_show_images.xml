@@ -38,13 +38,6 @@
             android:layout_marginLeft="5dp"
             android:src="@android:drawable/ic_menu_gallery"
             />
-        <ImageButton
-            android:id="@+id/image4"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginLeft="5dp"
-            android:src="@android:drawable/ic_menu_gallery"
-            />
     </LinearLayout>
     <ImageView
         android:id="@+id/selectedImage"

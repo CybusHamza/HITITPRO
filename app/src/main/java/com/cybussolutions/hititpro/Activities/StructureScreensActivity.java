@@ -86,7 +86,7 @@ public class StructureScreensActivity extends AppCompatActivity {
         setContentView(R.layout.activity_structure_screens);
 
         toolbar = (Toolbar) findViewById(R.id.app_bar);
-        toolbar.setTitle("Structure Screens");
+        toolbar.setTitle("Structure");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 

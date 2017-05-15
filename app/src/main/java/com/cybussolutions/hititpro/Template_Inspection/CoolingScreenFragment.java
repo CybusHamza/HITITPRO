@@ -69,7 +69,7 @@ public class CoolingScreenFragment extends BaseFragment {
         ///////////set title of main screens/////////////////
         sp=getContext().getSharedPreferences("prefs", Context.MODE_PRIVATE);
         edit=sp.edit();
-        edit.putString("main_screen","Cooling Screen");
+        edit.putString("main_screen","Cooling");
         edit.commit();
 
         next = (Button) root.findViewById(R.id.next);
@@ -109,12 +109,12 @@ public class CoolingScreenFragment extends BaseFragment {
         roEvaporatorButton = (Button) root.findViewById(R.id.ro_evaporator_Button);
         roFansButton = (Button) root.findViewById(R.id.ro_fans_Button);
 
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Cooling Screen");
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Cooling");
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.menu);
 
 
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Cooling Screen");
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Cooling");
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.menu);
 

@@ -72,7 +72,7 @@ public class ExteriorScreenFragment extends BaseFragment {
         ///////////set title of main screens/////////////////
         sp=getContext().getSharedPreferences("prefs", Context.MODE_PRIVATE);
         edit=sp.edit();
-        edit.putString("main_screen","Exterior Screen");
+        edit.putString("main_screen","Exterior");
         edit.commit();
 
         next = (Button) root.findViewById(R.id.next);
@@ -129,14 +129,14 @@ public class ExteriorScreenFragment extends BaseFragment {
         roFencingButton = (Button) root.findViewById(R.id.ro_fencing_Button);
 
 
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Exterior Screen");
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Exterior");
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.menu);
 
 
 
 
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Exterior Screen");
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Exterior");
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.menu);
 

@@ -42,6 +42,7 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.android.graphics.CanvasView;
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -72,104 +73,154 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import static android.graphics.Color.BLACK;
+
 public class MainActivity extends AppCompatActivity {
 
     private static final int MY_SOCKET_TIMEOUT_MS = 10000;
-    DrawingView imageView;
-    Spinner spinnerDropDown;
+//    DrawingView imageView;
 
     private static final int REQUEST_PERMISSIONS=0;
     static final int REQUEST_IMAGE_CAPTURE = 1;
-    Button b,saveImage,drawLine,drawCircle,drawSquare,drawArrow,drawPen;
+    Button selectImage,saveImage,drawLine,drawCircle,drawSquare,drawArrow,drawPen,undo,redo;
     private static final int SELECT_PICTURE = 100;
     private static final String TAG = "MainActivity";
     private static int IMG_RESULT = 2;
     String ImageDecode;
-    View mview;
-    ImageButton image1,image2,image3,image4;
-    Button LoadImage;
-    LinearLayout linearLayout;
+
     public int mCurrentShape;
     float mx,my;
     Intent intent;
     String[] FILE;
     String data;
+    String table_name;
 
-    EditText et;
+    EditText etAttachmentName;
     private String mCurrentPhotoPath,ba1,mSavedPhotoName;
 
     Bitmap bm = null;
+    Bitmap scaled=null;
     String userId;
 
     SharedPreferences sp;
     SharedPreferences.Editor edit;
+
+    private CanvasView canvas = null;
+     String showImage;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar;
         toolbar = (Toolbar) findViewById(R.id.app_bar);
-        toolbar.setTitle("Image Editer");
+        toolbar.setTitle("Image Editor");
         setSupportActionBar(toolbar);
 
-        imageView = (DrawingView)findViewById(R.id.drawingview);
-
-        getImages();
+       // imageView = (DrawingView)findViewById(R.id.drawingview);
+        this.canvas = (CanvasView)this.findViewById(R.id.canvas);
 
         Intent intent = getIntent();
         data = intent.getStringExtra("data");
+        table_name=intent.getStringExtra("dbTable");
+        showImage=intent.getStringExtra("showImages");
+        if(showImage.equals("false"))
+        getImages();
 
-        if(bm!=null){
-            bm.recycle();
+        if(scaled!=null){
+            scaled.recycle();
         }
 
         sp=getSharedPreferences("prefs",MODE_PRIVATE);
 
-        b=(Button)findViewById(R.id.selectButton);
+        selectImage=(Button)findViewById(R.id.selectButton);
         saveImage=(Button)findViewById(R.id.saveButton);
-        drawLine=(Button)findViewById(R.id.button2);
-        drawCircle=(Button)findViewById(R.id.button3);
-        drawSquare=(Button)findViewById(R.id.button4);
-        drawArrow=(Button)findViewById(R.id.button5);
-        drawPen=(Button)findViewById(R.id.button6);
+        drawLine=(Button)findViewById(R.id.line);
+        drawCircle=(Button)findViewById(R.id.circle);
+        drawSquare=(Button)findViewById(R.id.square);
+        drawArrow=(Button)findViewById(R.id.arrow);
+        drawPen=(Button)findViewById(R.id.pen);
+        undo= (Button) findViewById(R.id.undo);
+        redo= (Button) findViewById(R.id.redo);
+        etAttachmentName= (EditText) findViewById(R.id.et_attachment_name);
+
+        if(scaled==null){
+            drawLine.setVisibility(View.INVISIBLE);
+            drawCircle.setVisibility(View.INVISIBLE);
+            drawSquare.setVisibility(View.INVISIBLE);
+            drawArrow.setVisibility(View.INVISIBLE);
+            drawPen.setVisibility(View.INVISIBLE);
+            undo.setVisibility(View.INVISIBLE);
+            redo.setVisibility(View.INVISIBLE);
+        }else {
+            drawLine.setVisibility(View.VISIBLE);
+            drawCircle.setVisibility(View.VISIBLE);
+            drawSquare.setVisibility(View.VISIBLE);
+            drawArrow.setVisibility(View.VISIBLE);
+            drawPen.setVisibility(View.VISIBLE);
+            undo.setVisibility(View.VISIBLE);
+            redo.setVisibility(View.VISIBLE);
+        }
 
         drawLine.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                imageView.mCurrentShape = DrawingView.LINE;
-                imageView.reset();
+                /*imageView.mCurrentShape = DrawingView.LINE;
+                imageView.reset();*/
+                canvas.setMode(CanvasView.Mode.DRAW);
+                canvas.setDrawer(CanvasView.Drawer.LINE);
             }
         });
         drawCircle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                imageView.mCurrentShape = DrawingView.CIRCLE;
-                imageView.reset();
+//                imageView.mCurrentShape = DrawingView.CIRCLE;
+//                imageView.reset();
+                canvas.setMode(CanvasView.Mode.DRAW);
+                canvas.setDrawer(CanvasView.Drawer.CIRCLE);
             }
         });
         drawSquare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                imageView.mCurrentShape = DrawingView.SQUARE;
-                imageView.reset();
+               /* imageView.mCurrentShape = DrawingView.SQUARE;
+                imageView.reset();*/
+                canvas.setMode(CanvasView.Mode.DRAW);
+                canvas.setDrawer(CanvasView.Drawer.RECTANGLE);
             }
         });
         drawArrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                imageView.mCurrentShape = DrawingView.ARROW;
-                imageView.reset();
+               /* imageView.mCurrentShape = DrawingView.ARROW;
+                imageView.reset();*/
+                canvas.setMode(CanvasView.Mode.DRAW);
+                canvas.setDrawer(CanvasView.Drawer.ARROW);
             }
         });
         drawPen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               imageView.mCurrentShape = DrawingView.SMOOTHLINE;
-                imageView.reset();
+                canvas.setMode(CanvasView.Mode.DRAW);
+                canvas.setDrawer(CanvasView.Drawer.PEN);
+                /*imageView.mCurrentShape = DrawingView.SMOOTHLINE;
+                imageView.reset();*/
+            }
+        });
+        undo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                canvas.undo();
+            }
+        });
+        redo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               canvas.redo();
             }
         });
 
-        b.setOnClickListener(new View.OnClickListener() {
+        selectImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startDialog();
@@ -180,13 +231,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                try {
-                    imageView.buildDrawingCache();
-                    bm = imageView.getDrawingCache();
-                } catch (Exception e) {
-                    Toast.makeText(getApplicationContext(), "no image selected", Toast.LENGTH_LONG).show();
-                }
-                if (bm != null) {
+
+                if (scaled != null) {
+                    try {
+                        canvas.buildDrawingCache();
+                        scaled=canvas.getDrawingCache();
+                        // scaled = canvas.getDrawingCache();
+                    } catch (Exception e) {
+                        Toast.makeText(getApplicationContext(), "no image selected", Toast.LENGTH_LONG).show();
+                    }
                     if (sp.getBoolean("flag", false) == true) {
                         up();
                     } else {
@@ -199,37 +252,60 @@ public class MainActivity extends AppCompatActivity {
 
                         Uri outputFileUri;
                         try {
-                            File root = new File(Environment.getExternalStorageDirectory()
-                                    + File.separator + "folder_name" + File.separator);
-                            root.mkdirs();
-                            File sdImageMainDirectory = new File(root, formattedDate + "myPicName.jpg");
-                            outputFileUri = Uri.fromFile(sdImageMainDirectory);
-                            fOut = new FileOutputStream(sdImageMainDirectory);
-                            Intent intent = new Intent(MainActivity.this, Add_Comments.class);
-                            intent.putExtra("mCurrentPhotoPath", mCurrentPhotoPath);
-                            intent.putExtra("data", data);
-                            startActivity(intent);
+
+                            String check=etAttachmentName.getText().toString();
+                            if(check.equals("")){
+                                Toast ToastMessage = Toast.makeText(getApplicationContext(),"Plz enter some attachment name",Toast.LENGTH_SHORT);
+                                View toastView = ToastMessage.getView();
+                                toastView.setBackgroundResource(R.color.colorPrimary);
+                                ToastMessage.show();
+                            }
+                            else {
+                                File root = new File(Environment.getExternalStorageDirectory()
+                                        + File.separator + "folder_name" + File.separator);
+                                root.mkdirs();
+                                File sdImageMainDirectory = new File(root, formattedDate + "myPicName.jpg");
+                                outputFileUri = Uri.fromFile(sdImageMainDirectory);
+                                fOut = new FileOutputStream(sdImageMainDirectory);
+                                Intent intent = new Intent(MainActivity.this, Add_Comments.class);
+                                mCurrentPhotoPath=outputFileUri.getPath();
+                                intent.putExtra("mCurrentPhotoPath", mCurrentPhotoPath);
+                                intent.putExtra("attachmentName", etAttachmentName.getText().toString());
+                                intent.putExtra("dbTable",table_name);
+                                intent.putExtra("data", data);
+                                finish();
+                                startActivity(intent);
+                                try {
+                                    scaled.compress(Bitmap.CompressFormat.JPEG,100,fOut);
+                                    // bm.compress(Bitmap.CompressFormat.PNG, 100, fOut);
+                                    fOut.flush();
+                                    fOut.close();
+                                } catch (Exception e) {
+                                }
+                            }
                         } catch (Exception e) {
                             Toast.makeText(getApplicationContext(), "Error occured. Please try again later.",
                                     Toast.LENGTH_SHORT).show();
                         }
-                        try {
-                            bm.compress(Bitmap.CompressFormat.PNG, 100, fOut);
-                            fOut.flush();
-                            fOut.close();
-                        } catch (Exception e) {
-                        }
+
                     }
                 } else {
-                    Toast.makeText(getApplicationContext(), "No image selected", Toast.LENGTH_LONG).show();
+                    mCurrentPhotoPath=null;
+                    Intent intent = new Intent(MainActivity.this, Add_Comments.class);
+                    intent.putExtra("mCurrentPhotoPath", mCurrentPhotoPath);
+                    intent.putExtra("attachmentName","");
+                    intent.putExtra("dbTable",table_name);
+                    intent.putExtra("data", data);
+                    startActivity(intent);
+                    //Toast.makeText(getApplicationContext(), "No image selected", Toast.LENGTH_LONG).show();
                 }
             }
         });
-        if (savedInstanceState == null) {
-            getFragmentManager().beginTransaction()
-                    .add(R.id.container1, new ShapeFragment())
-                    .commit();
-        }
+//        if (savedInstanceState == null) {
+//            getFragmentManager().beginTransaction()
+//                    .add(R.id.container1, new ShapeFragment())
+//                    .commit();
+//        }
     }
 
     private void getImages() {
@@ -237,22 +313,32 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 Toast.makeText(getApplicationContext(),response.toString(),Toast.LENGTH_LONG).show();
-               if(!response.equals("0")){
-                   try {
-                       JSONArray jsonArray=new JSONArray(response);
-                       String[] imageName = new String[jsonArray.length()];
-                       for (int i=0;i<jsonArray.length();i++) {
-                           JSONObject jsonObject = new JSONObject(jsonArray.getString(i));
-                           imageName[i]=jsonObject.getString("attachment_saved_name");
-                       }
-                       Intent i=new Intent(MainActivity.this,ShowImages.class);
-                       i.putExtra("imageNames",imageName);
-                       startActivity(i);
-                   } catch (JSONException e) {
-                       e.printStackTrace();
-                   }
+                if(!response.equals("0")){
+                    int count=0;
+                    try {
+                        JSONArray jsonArray=new JSONArray(response);
+                        String[] imageName = new String[jsonArray.length()];
+                        for (int i=0;i<jsonArray.length();i++) {
+                            JSONObject jsonObject = new JSONObject(jsonArray.getString(i));
+                            if(!jsonObject.getString("attachment_saved_name").equals("")) {
+                                imageName[i] = jsonObject.getString("attachment_saved_name");
+                                count++;
+                            }
+                            else imageName[i]="";
+                        }
+                        if(count>0) {
+                            finish();
+                            Intent i = new Intent(MainActivity.this, ShowImages.class);
+                            i.putExtra("imageNames", imageName);
+                            i.putExtra("dbTable",table_name);
+                            i.putExtra("data",data);
+                            startActivity(i);
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
 
-               }
+                }
 
             }
         }, new Response.ErrorListener() {
@@ -268,7 +354,8 @@ public class MainActivity extends AppCompatActivity {
                 params.put("inspection_id",StructureScreensActivity.inspectionID);
                 params.put("client_id",StructureScreensActivity.client_id);
                 params.put("main_form_name",sp.getString("main_screen",""));
-                params.put("column_name",sp.getString("heading",""));
+                params.put("column_name",table_name);//sp.getString("heading","")
+                params.put("element_id",data);
                 return params;
             }
         };
@@ -289,7 +376,7 @@ public class MainActivity extends AppCompatActivity {
         bm.compress(Bitmap.CompressFormat.JPEG, 50, bao);
         byte[] ba = bao.toByteArray();
         ba1 = Base64.encodeToString(ba,Base64.NO_WRAP);
-       // Toast.makeText(getApplicationContext(),ba1.toString(),Toast.LENGTH_LONG).show();
+        // Toast.makeText(getApplicationContext(),ba1.toString(),Toast.LENGTH_LONG).show();
         StringRequest stringRequest=new StringRequest(Request.Method.POST, End_Points.UPLOAD, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -359,7 +446,7 @@ public class MainActivity extends AppCompatActivity {
                 params.put("userid",userId);
                 params.put("attchment_added_date",attachment_added_date);
 
-               // params.put("user_name", );
+                // params.put("user_name", );
                 //params.put("password", );
                 return params;
             }
@@ -386,6 +473,7 @@ public class MainActivity extends AppCompatActivity {
         intent = new Intent(Intent.ACTION_PICK,
                 MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(intent, IMG_RESULT);
+
     }
 
 
@@ -395,7 +483,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    @Override
+   /* @Override
     public boolean onTouchEvent(MotionEvent event) {
 
         if(ShapeFragment.inputtext.equals("text"))
@@ -406,7 +494,7 @@ public class MainActivity extends AppCompatActivity {
             drawingView.onTouchEventText(event,mx,my,"hello");
         }
         return false;
-    }
+    }*/
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -415,20 +503,31 @@ public class MainActivity extends AppCompatActivity {
 
                 Bundle extras = data.getExtras();
                 Bitmap imageBitmap = (Bitmap) extras.get("data");
-                imageView=(DrawingView)findViewById(R.id.drawingview);
+                int w=canvas.getWidth();
+                int h=canvas.getHeight();
+                scaled=imageBitmap.createScaledBitmap(imageBitmap,w,h,true);
+                //imageView=(DrawingView)findViewById(R.id.drawingview);
                 //imageView.setImageBitmap(imageBitmap);
 
                 // CALL THIS METHOD TO GET THE URI FROM THE BITMAP
                 Uri tempUri = getImageUri(getApplicationContext(), imageBitmap);
-               // Toast.makeText(MainActivity.this,"Here "+ getRealPathFromURI(tempUri),Toast.LENGTH_LONG).show();
+                canvas.drawBitmap(scaled);
+                // Toast.makeText(MainActivity.this,"Here "+ getRealPathFromURI(tempUri),Toast.LENGTH_LONG).show();
                 mCurrentPhotoPath=getPathFromURI(tempUri);
-                imageView.setImageBitmap(BitmapFactory.decodeFile(getRealPathFromURI(tempUri)));
-               // img.setImageBitmap(imageBitmap);
+               // imageView.setImageBitmap(BitmapFactory.decodeFile(getRealPathFromURI(tempUri)));
+                // img.setImageBitmap(imageBitmap);
+                drawLine.setVisibility(View.VISIBLE);
+                drawCircle.setVisibility(View.VISIBLE);
+                drawSquare.setVisibility(View.VISIBLE);
+                drawArrow.setVisibility(View.VISIBLE);
+                drawPen.setVisibility(View.VISIBLE);
+                undo.setVisibility(View.VISIBLE);
+                redo.setVisibility(View.VISIBLE);
 
             }
-          //  if (requestCode == Constants.REQUEST_CODE && resultCode == RESULT_OK && data != null) {
+            //  if (requestCode == Constants.REQUEST_CODE && resultCode == RESULT_OK && data != null) {
             if (requestCode == IMG_RESULT  && resultCode == RESULT_OK && data != null) {
-               // textView.setText(stringBuffer.toString());
+                // textView.setText(stringBuffer.toString());
                 Uri URI = data.getData();
                 String[] FILE = {MediaStore.Images.Media.DATA};
 
@@ -441,11 +540,23 @@ public class MainActivity extends AppCompatActivity {
                 int columnIndex = cursor.getColumnIndex(FILE[0]);
                 ImageDecode = cursor.getString(columnIndex);
                 cursor.close();
-                imageView=(DrawingView)findViewById(R.id.drawingview);
-                mCurrentPhotoPath=ImageDecode;
-                imageView.setImageBitmap(BitmapFactory.decodeFile(ImageDecode));
-               // imageView.setImageBitmap(BitmapFactory
-                 //       .decodeFile(ImageDecode));
+                int w=canvas.getWidth();
+                int h=canvas.getHeight();
+                Bitmap unscaled=BitmapFactory.decodeFile(ImageDecode);
+                scaled=unscaled.createScaledBitmap(unscaled,w,h,true);
+                canvas.drawBitmap(scaled);
+//                imageView=(DrawingView)findViewById(R.id.drawingview);
+               mCurrentPhotoPath=ImageDecode;
+//                imageView.setImageBitmap(BitmapFactory.decodeFile(ImageDecode));
+                drawLine.setVisibility(View.VISIBLE);
+                drawCircle.setVisibility(View.VISIBLE);
+                drawSquare.setVisibility(View.VISIBLE);
+                drawArrow.setVisibility(View.VISIBLE);
+                drawPen.setVisibility(View.VISIBLE);
+                undo.setVisibility(View.VISIBLE);
+                redo.setVisibility(View.VISIBLE);
+                // imageView.setImageBitmap(BitmapFactory
+                //       .decodeFile(ImageDecode));
 
             }
         } catch (Exception e) {
@@ -470,7 +581,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
 
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu, menu);
+        //getMenuInflater().inflate(R.menu.menu, menu);
         return true;
     }
 
@@ -502,6 +613,7 @@ public class MainActivity extends AppCompatActivity {
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
+
     public Uri getImageUri(Context inContext, Bitmap inImage) {
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
@@ -576,12 +688,12 @@ public class MainActivity extends AppCompatActivity {
         myAlertDialog.show();
     }
     public void onBackPressed(){
-    super.onBackPressed();
-    edit=sp.edit();
-    edit.putString("comments", null);
-    edit.putString("selectrecomend", null);
-    edit.putString("back", null);
-    edit.putBoolean("flag", false);
-    edit.commit();
+        super.onBackPressed();
+        edit=sp.edit();
+        edit.putString("comments", null);
+        edit.putString("selectrecomend", null);
+        edit.putString("back", null);
+        edit.putBoolean("flag", false);
+        edit.commit();
     }
 }

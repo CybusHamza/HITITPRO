@@ -43,7 +43,7 @@
             android:id="@+id/radio0"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:checked="true"
+            android:checked="false"
             android:text="Monitor" />
 
         <RadioButton
@@ -61,13 +61,13 @@
             android:id="@+id/radio4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Repair" />
+            android:text="Improve" />
 
         <RadioButton
             android:id="@+id/radio5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Safety Issue" />
+            android:text="Concern" />
 
     </RadioGroup>
 

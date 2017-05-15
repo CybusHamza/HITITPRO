@@ -35,12 +35,12 @@ public class ShapeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-        mDrawingView = (DrawingView) rootView.findViewById(R.id.drawingview);
-        return rootView;
+       // View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+       // mDrawingView = (DrawingView) rootView.findViewById(R.id.drawingview);
+        return null;
     }
 
-    @Override
+   /* @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
         switch (item.getItemId()){
@@ -80,5 +80,5 @@ public class ShapeFragment extends Fragment {
         }
 
         return super.onOptionsItemSelected(item);
-    }
+    }*/
 }

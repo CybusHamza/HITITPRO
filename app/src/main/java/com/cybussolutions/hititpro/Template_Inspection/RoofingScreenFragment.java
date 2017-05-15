@@ -70,7 +70,7 @@ public class RoofingScreenFragment extends BaseFragment {
             ///////////set title of main screens/////////////////
             sp=getActivity().getSharedPreferences("prefs", Context.MODE_PRIVATE);
             edit=sp.edit();
-            edit.putString("main_screen","Roofing Screen");
+            edit.putString("main_screen","Roofing");
             edit.commit();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -112,7 +112,7 @@ public class RoofingScreenFragment extends BaseFragment {
         roGutterDownspoutsButton = (Button) root.findViewById(R.id.ro_gutters_downspouts_Button);
 
 
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Roofing Screen");
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Roofing");
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.menu);
 

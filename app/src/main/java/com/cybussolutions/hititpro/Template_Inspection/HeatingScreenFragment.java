@@ -69,7 +69,7 @@ public class HeatingScreenFragment extends BaseFragment {
         ///////////set title of main screens/////////////////
         sp=getContext().getSharedPreferences("prefs", Context.MODE_PRIVATE);
         edit=sp.edit();
-        edit.putString("main_screen","Heating Screen");
+        edit.putString("main_screen","Heating");
         edit.commit();
 
         next = (Button) root.findViewById(R.id.next);
@@ -118,7 +118,7 @@ public class HeatingScreenFragment extends BaseFragment {
 
 
 
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Heating Screen");
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Heating");
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.menu);
 

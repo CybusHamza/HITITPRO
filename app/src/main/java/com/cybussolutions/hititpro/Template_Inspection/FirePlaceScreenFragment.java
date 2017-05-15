@@ -70,7 +70,7 @@ public class FirePlaceScreenFragment extends BaseFragment {
         ///////////set title of main screens/////////////////
         sp=getContext().getSharedPreferences("prefs", Context.MODE_PRIVATE);
         edit=sp.edit();
-        edit.putString("main_screen","FirePlace Screen");
+        edit.putString("main_screen","FirePlace");
         edit.commit();
 
         save = (Button) root.findViewById(R.id.next);
@@ -101,7 +101,7 @@ public class FirePlaceScreenFragment extends BaseFragment {
             e.printStackTrace();
         }
 
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Fire Place Screen");
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Fire Place");
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.menu);
 
