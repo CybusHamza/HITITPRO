@@ -33,10 +33,25 @@
         <activity android:name=".Activities.Start_Inspection" />
         <activity android:name=".Activities.Add_Client" />
         <activity android:name=".Activities.StructureScreensActivity" />
+        <activity android:name=".Activities.MainActivity" />
+        <activity android:name=".Activities.Add_Comments" />
         <activity
             android:name=".Activities.Detailed_Activity_All_Screens"
-            android:windowSoftInputMode="adjustPan" >
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".Activities.Detailed_Activity_Structure_Screens"
+            android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".Activities.EditClient" />
+        <activity android:name=".Activities.Edit_Profile" />
+        <activity android:name=".Activities.AddTemplate" />
+        <activity
+            android:name="com.darsh.multipleimageselect.activities.AlbumSelectActivity"
+            android:theme="@style/MultipleImageSelectTheme">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
+        <activity android:name=".Activities.ShowImages"></activity>
     </application>
 
 </manifest>

@@ -24,6 +24,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.cybussolutions.hititpro.Activities.Add_Client;
+import com.cybussolutions.hititpro.Activities.EditClient;
 import com.cybussolutions.hititpro.Activities.Start_Inspection;
 import com.cybussolutions.hititpro.Adapters.Client_Adapter;
 import com.cybussolutions.hititpro.Model.Clients_model;
@@ -60,7 +61,7 @@ public class ClientsFragment extends BaseFragment {
         client_list = (ListView) root.findViewById(R.id.client);
         addClient=(ImageView) root.findViewById(R.id.add_client);
 
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Select Client");
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Clients");
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.menu);
 
@@ -82,10 +83,10 @@ public class ClientsFragment extends BaseFragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                Intent intent = new Intent(getActivity(), Start_Inspection.class);
+              /*  Intent intent = new Intent(getActivity(), Start_Inspection.class);
                 intent.putExtra("client_name", list.get(i).getClient_name());
                 intent.putExtra("client_id", list.get(i).getClient_id());
-                startActivity(intent);
+                startActivity(intent);*/
             }
         });
 
@@ -216,6 +217,13 @@ public class ClientsFragment extends BaseFragment {
                 model.setClient_name(object.getString("client_name"));
                 model.setClient_id(object.getString("id"));
                 model.setClient_adress(object.getString("address"));
+                model.setClient_phone(object.getString("phone"));
+                model.setContact_name(object.getString("contactname"));
+                model.set_city(object.getString("city"));
+                model.set_fax(object.getString("fax"));
+                model.set_email(object.getString("email"));
+                model.set_state(object.getString("state"));
+                model.set_zip(object.getString("zip"));
 
                 list.add(model);
             }

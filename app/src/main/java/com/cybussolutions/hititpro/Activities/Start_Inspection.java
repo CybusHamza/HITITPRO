@@ -230,6 +230,8 @@ public class Start_Inspection extends AppCompatActivity {
                         {
                             Intent intent= new Intent(Start_Inspection.this,StructureScreensActivity.class);
                             intent.putExtra("inspectionId",response);
+                            intent.putExtra("client_id",clientId);
+                            intent.putExtra("template_id",temId);
                             intent.putExtra("inspection_type","new");
                             startActivity(intent);
                         }
@@ -331,8 +333,10 @@ public class Start_Inspection extends AppCompatActivity {
 
                                     JSONObject object = new JSONObject(Array.getJSONObject(i).toString());
 
+
                                     inspection_id_list.add(object.getString("ca_id"));
                                     inspection_list.add(object.getString("name"));
+
 
                                 }
 

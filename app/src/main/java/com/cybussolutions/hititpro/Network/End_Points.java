@@ -8,12 +8,24 @@ public class End_Points {
     public static final String LOGIN = BASE_URL + "login";
     public static final String SIGN_UP = BASE_URL + "addUserSignUp";
     public static final String ADD_CLIENT = BASE_URL + "addClient";
+    public static final String UPDATE_CLIENT = BASE_URL + "updateClient";
+    public static final String UPDATE_PROFILE = BASE_URL + "updateProfile";
+
     public static final String GET_CLIENT = BASE_URL + "getClient";
     public static final String START_INSPECTION = BASE_URL + "addTemplate";
     public static final String PRE_POPULATE = BASE_URL + "insertSimpleEnteriesToAllReferenceTables";
     public static final String GET_TEMPLATES = BASE_URL + "getTemplates";
     public static final String GET_INSPECTION = BASE_URL + "getInspection";
     public static final String GET_TEMPLATE_DATA = BASE_URL + "getTemplatesData";
+    public static final String DELETE_TEMPLATE = BASE_URL + "deleteTemplate";
+    public static final String UPLOAD_IMAGE=BASE_URL+"uploadimagetest";
+    public static final String UPLOAD="http://xfer.cybusservices.com/hititpro/upload_image_mobile.php";
+
+    public static final String GET_IMAGES=BASE_URL+"getImages";
+    public static final String GET_DEFAULT_COMMENTS=BASE_URL+"getDefaultComments";
+
+    public static final String GET_ALL_TEMPLATES = BASE_URL + "getAllTemplates";
+    public static final String UPDATELIVE = BASE_URL + "updateOnBackPress";
 
     // sync Forms .
     public static final String SYNC_STRUCTURE = BASE_URL + "syncStructure";

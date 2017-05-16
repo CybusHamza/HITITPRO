@@ -5,26 +5,27 @@ package com.cybussolutions.hititpro.Model;
  */
 public class Checkbox_model {
 
-    private String name;
-    private boolean selected;
+    private String title;
 
-    public Checkbox_model() {
+    private boolean checked;
 
+    public String getTitle()
+    {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title)
+    {
+        this.title = title;
     }
 
-    public String getName() {
-        return name;
+    public boolean isChecked()
+    {
+        return checked;
     }
 
-    public boolean isSelected() {
-        return selected;
-    }
-
-    public void setSelected(boolean selected) {
-        this.selected = selected;
+    public void setChecked(boolean checked)
+    {
+        this.checked = checked;
     }
 }

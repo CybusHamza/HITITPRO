@@ -67,8 +67,8 @@ public class Database {
     static final String DATABASE_INSULATION = "create table " + "insulation" + "( "
             + "id" + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + "template_id  INTEGER, inspection_id INTEGER , client_id INTEGER , is_applicable INTEGER" +
-            ",empty_fields INTEGER ,atticinsulation varchar ,exteriorwallinsulation varchar ,basementwallinsulation varchar " +
-            ",crawlspaceinsulation varchar ,vaporretarders varchar ,roofventilation varchar " +
+            ",empty_fields INTEGER ,atticinsulation varchar ,exteriorwallinsulation varchar ,basementwallinsulation varchar,csv varchar ,efv varchar " +
+            ",crawlspaceinsulation varchar ,vaporretarders varchar ,roofventilation varchar,rfurnace varchar " +
             ",observations varchar ,atticandroof varchar,basement varchar,crawlspace varchar,atticinsulation_comments varchar" +
             ",exteriorwallinsulation_comments varchar,basementwallinsulation_comments varchar" +
             ",crawlspaceinsulation_comments varchar,vaporretarders_comments varchar,roofventilation_comments varchar" +
@@ -113,7 +113,7 @@ public class Database {
             + "id" + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + "template_id  INTEGER, inspection_id INTEGER , client_id INTEGER , is_applicable INTEGER" +
             ",empty_fields INTEGER ,sizeofservice varchar ,servicedrop varchar ,entranceconductors varchar , maindisconnect varchar " +
-            ",grounding varchar ,servicepanel varchar ,sub_panel varchar ,wiring varchar " +
+            ",grounding varchar ,servicepanel varchar ,sub_panel varchar,wiring varchar " +
             ",wiring_method varchar ,switches_receptacles varchar,gfci varchar,smoke_codetector varchar,observation varchar" +
             ",serviceentrance varchar, mainpanel varchar ,subpanel varchar,distribution varchar" +
             ",outlets varchar,switches varchar,lights_ceiling_fans varchar," +

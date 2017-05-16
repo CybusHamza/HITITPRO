@@ -30,8 +30,8 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 public class Add_Client extends AppCompatActivity {
 
 
-    EditText Name,City,ContactName,Address,Phone,Fax,Email;
-    String strName,strCity,strContactName,strAddress,strPhone,strFax,strEmail,userid;
+    EditText Name,City,ContactName,Address,Phone,Fax,Email,State,Zip;
+    String strName,strCity,strContactName,strAddress,strPhone,strFax,strEmail,strState,strZip,userid;
     Button Submit;
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
     String numberPattern = "^[+]?[0-9]{10,13}$+";
@@ -50,6 +50,8 @@ public class Add_Client extends AppCompatActivity {
         Phone = (EditText) findViewById(R.id.client_phone);
         Fax = (EditText) findViewById(R.id.client_fax);
         Email = (EditText) findViewById(R.id.client_email);
+        State = (EditText) findViewById(R.id.client_state);
+        Zip = (EditText) findViewById(R.id.client_zip);
         Submit = (Button) findViewById(R.id.register);
 
         final SharedPreferences pref = getApplicationContext().getSharedPreferences("UserPrefs", MODE_PRIVATE);
@@ -66,6 +68,8 @@ public class Add_Client extends AppCompatActivity {
                 strPhone = Phone.getText().toString();
                 strFax = Fax.getText().toString();
                 strEmail = Email.getText().toString();
+                strState = State.getText().toString();
+                strZip = Zip.getText().toString();
 
                 if(strName.equals("") || strCity.equals("")|| strContactName.equals("")|| strAddress.equals("")
                         || strPhone.equals("")|| strFax.equals("")|| strEmail.equals(""))
@@ -198,8 +202,10 @@ public class Add_Client extends AppCompatActivity {
                 params.put("address", strAddress);
                 params.put("phone", strPhone);
                 params.put("fax", strFax);
-                params.put("email", strFax);
+                params.put("email", strEmail);
                 params.put("addedby",userid);
+                params.put("state",strState);
+                params.put("zip",strZip);
 
                 return params;
             }

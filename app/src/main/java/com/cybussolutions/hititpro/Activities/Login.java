@@ -130,7 +130,7 @@ public class Login extends AppCompatActivity {
                                 email=object.getString("email");;
                                 adress=object.getString("adress");
                                 adress += " ," +object.getString("city");
-                                adress += " ,"+object.getString("country");
+                                adress += " , "+object.getString("country");
                                 phone =object.getString("phone_number");
 
                                 SharedPreferences pref = getApplicationContext().getSharedPreferences("UserPrefs", MODE_PRIVATE);

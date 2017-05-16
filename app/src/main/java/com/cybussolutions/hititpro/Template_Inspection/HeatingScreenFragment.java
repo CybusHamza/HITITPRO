@@ -2,6 +2,7 @@ package com.cybussolutions.hititpro.Template_Inspection;
 
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -24,6 +25,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.cybussolutions.hititpro.Activities.Detailed_Activity_All_Screens;
+import com.cybussolutions.hititpro.Activities.Detailed_Activity_Structure_Screens;
 import com.cybussolutions.hititpro.Activities.StructureScreensActivity;
 import com.cybussolutions.hititpro.Fragments.BaseFragment;
 import com.cybussolutions.hititpro.Network.End_Points;
@@ -53,19 +55,22 @@ public class HeatingScreenFragment extends BaseFragment {
     Button heatingEnergyButton, heatingSystemButton, heatingChimneysButton, heatingDistribution, heatingComponentsButton, heatingObservationsButton,
             roFuranceButton, roDuctWorkButton, roBoilerButton, roCombustionButton, roChimneysButton, roThermostatsButton;
 
-    String[] heatingEnergyButtonValues, heatingSystemButtonValues, heatingChimneysButtonValues, heatingDistributionValues, heatingComponentsButtonValues,
-            heatingObservationsButtonValues, roFuranceButtonValues,
-            roDuctWorkButtonValues, roBoilerButtonValues, roCombustionButtonValues, roChimneysButtonValues,
-            roThermostatsButtonValues;
+
 
     private static final String HEATING_TABLE = "heating";
-
-
+    SharedPreferences sp;
+    SharedPreferences.Editor edit;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         root = inflater.inflate(R.layout.fragment_heating_screen, container, false);
+
+        ///////////set title of main screens/////////////////
+        sp=getContext().getSharedPreferences("prefs", Context.MODE_PRIVATE);
+        edit=sp.edit();
+        edit.putString("main_screen","Heating");
+        edit.commit();
 
         next = (Button) root.findViewById(R.id.next);
         back = (Button) root.findViewById(R.id.back);
@@ -110,28 +115,10 @@ public class HeatingScreenFragment extends BaseFragment {
         roThermostatsButton = (Button) root.findViewById(R.id.ro_thermostats_Button);
 
 
-        heatingEnergyButtonValues = new String[]{"Gas%0", "Electricity%0", "Oil%0","Wood%0","Other%0"};
-        heatingSystemButtonValues = new String[]{"Forced Air Furnace%0", "Air Handler for Heat Pump%0", "Hot Water Boiler%0","Steam Boiler%0","Manufacturer%0","Age%0"};
-        heatingChimneysButtonValues = new String[]{"Metal Single Wal%0l", "Metal Multi-Wall%0", "Plastic%0","Masonry%0","Not Visible%0"};
-        heatingDistributionValues = new String[]{"Ductwork%0", "Radiators%0", "Baseboard Heaters%0", "Other%0"};
-        heatingComponentsButtonValues = new String[]{"Humidifier%0", "Condensate Pump%0", "Electronic Air Cleaner%0", "Other%0"};
-        heatingObservationsButtonValues = new String[]{"SINGLE FURNACE GENERALLY OK DESCRIPTION%0", "MULTIPLE FURNACES GENERALLY OK DESCRIPTION%0", 
-                "NOT OPERATIVE SINGLE FURNACE%0","NOT OPERATIVE IN MULTI FURNACE CONFIGURATION%0"};
-        roFuranceButtonValues = new String[]{"Older Single Unit Needs Service%0","Older Multiple Units Need Service%0",
-                "Replacement Rusted Burner%0 ","Near End of Life Cycle%0", "Replacement Imminent%0","Seal Openings%0",
-                "Flexible Gas Line%0","Sediment Trap Missing/Improper%0","Air Filter Dirty%0","Humidifier Needs Maintenance%0",
-                "Condensate Line Dirty%0","Condensate Pump Inoperative%0","Carbon Monoxide Detected%0","Natural Gas Leak Detected%0"};
-        roDuctWorkButtonValues = new String[]{"No Ductwork in Basement%0", "No Heat/Cooling Supply%0", "Low Flow at Register%0"
-                , "Duct Flow Restricted%0", "Supply Vent Disconnected%0", "Proximity of Furnace Poor%0", "Seal Ductwork%0",
-                "Electronic Dampers Suspect%0","Asbestos Tape on Ductwork%0"};
-        roBoilerButtonValues = new String[]{"Near End of Life %0", "Older Boiler Unit%0", "Older Boiler Unit%0", "Asbestos Covering%0", "Servicing Needed%0"};
-        roCombustionButtonValues = new String[]{"Combustion Air Lacking%0", "Burners Dirty%0", "Burners Rusting%0","Flashback%0", "Back Drafting%0",
-                "Poor Flue Connections%0","Flue Slope%0 ", "Flue Slope%0"};
-        roChimneysButtonValues = new String[]{"Liner Needed%0", "Obstructed Chimney%0"};
-        roThermostatsButtonValues = new String[]{"Inoperative%0", "Loose%0", "Old/Replace%0"};
 
 
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Heating Screen");
+
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Heating");
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.menu);
 
@@ -145,39 +132,21 @@ public class HeatingScreenFragment extends BaseFragment {
             getHeating();
 
         }
-        else {
-            if(!(populate.equals("true")))
-            {
-                database.prePopulateData("energy_source", heatingEnergyButtonValues, HEATING_TABLE, StructureScreensActivity.inspectionID);
-                database.prePopulateData("heatingsystemtype", heatingSystemButtonValues, HEATING_TABLE, StructureScreensActivity.inspectionID);
-                database.prePopulateData("vent_flues_chimneys", heatingChimneysButtonValues, HEATING_TABLE, StructureScreensActivity.inspectionID);
-                database.prePopulateData("heatdistributionmethods", heatingDistributionValues, HEATING_TABLE, StructureScreensActivity.inspectionID);
-                database.prePopulateData("othercomponents", heatingComponentsButtonValues, HEATING_TABLE, StructureScreensActivity.inspectionID);
-                database.prePopulateData("observation", heatingObservationsButtonValues, HEATING_TABLE, StructureScreensActivity.inspectionID);
-                database.prePopulateData("rfurnace", roFuranceButtonValues, HEATING_TABLE, StructureScreensActivity.inspectionID);
-                database.prePopulateData("rsupplyairductwork", roDuctWorkButtonValues, HEATING_TABLE, StructureScreensActivity.inspectionID);
-                database.prePopulateData("boiler", roBoilerButtonValues, HEATING_TABLE, StructureScreensActivity.inspectionID);
-                database.prePopulateData("combustion_exhaust", roCombustionButtonValues, HEATING_TABLE, StructureScreensActivity.inspectionID);
-                database.prePopulateData("furnace_chimneys", roChimneysButtonValues, HEATING_TABLE, StructureScreensActivity.inspectionID);
-                database.prePopulateData("thermostats", roThermostatsButtonValues, HEATING_TABLE, StructureScreensActivity.inspectionID);
 
-                // Saving string
-                editor.putString("isHeating_populated", "true");
-                editor.apply();
-            }
-
-        }
 
       
 
         heatingEnergyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",false);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",heatingEnergyButtonValues);
+                intent.putExtra("items",StructureScreensActivity.heatingEnergyButtonValues);
                 intent.putExtra("heading",heatingEnergyButton.getText().toString());
                 intent.putExtra("column","energy_source");
                 intent.putExtra("dbTable",HEATING_TABLE);
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
             }
@@ -187,11 +156,14 @@ public class HeatingScreenFragment extends BaseFragment {
         heatingSystemButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",false);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",heatingSystemButtonValues);
+                intent.putExtra("items",StructureScreensActivity.heatingSystemButtonValues);
                 intent.putExtra("heading",heatingSystemButton.getText().toString());
                 intent.putExtra("column","heatingsystemtype");
                 intent.putExtra("dbTable",HEATING_TABLE);
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
             }
@@ -200,11 +172,14 @@ public class HeatingScreenFragment extends BaseFragment {
         heatingChimneysButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",false);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",heatingChimneysButtonValues);
+                intent.putExtra("items",StructureScreensActivity.heatingChimneysButtonValues);
                 intent.putExtra("heading",heatingChimneysButton.getText().toString());
                 intent.putExtra("column","vent_flues_chimneys");
                 intent.putExtra("dbTable",HEATING_TABLE);
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
             }
@@ -213,11 +188,14 @@ public class HeatingScreenFragment extends BaseFragment {
         heatingDistribution.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",false);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",heatingDistributionValues);
+                intent.putExtra("items",StructureScreensActivity.heatingDistributionValues);
                 intent.putExtra("heading",heatingDistribution.getText().toString());
                 intent.putExtra("column","heatdistributionmethods");
                 intent.putExtra("dbTable",HEATING_TABLE);
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
             }
@@ -226,11 +204,14 @@ public class HeatingScreenFragment extends BaseFragment {
         heatingComponentsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",false);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",heatingComponentsButtonValues);
+                intent.putExtra("items",StructureScreensActivity.heatingComponentsButtonValues);
                 intent.putExtra("heading",heatingComponentsButton.getText().toString());
                 intent.putExtra("column","othercomponents");
                 intent.putExtra("dbTable",HEATING_TABLE);
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
             }
@@ -239,10 +220,13 @@ public class HeatingScreenFragment extends BaseFragment {
         heatingObservationsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",heatingObservationsButtonValues);
+                edit.putBoolean("imageButton",false);
+                edit.commit();
+                Intent intent= new Intent(getActivity(), Detailed_Activity_Structure_Screens.class);
+                intent.putExtra("items",StructureScreensActivity.heatingObservationsButtonValues);
                 intent.putExtra("heading",heatingObservationsButton.getText().toString());
                 intent.putExtra("column","observation");
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",HEATING_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
@@ -252,10 +236,13 @@ public class HeatingScreenFragment extends BaseFragment {
         roFuranceButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",roFuranceButtonValues);
+                intent.putExtra("items",StructureScreensActivity.roFuranceButtonValues);
                 intent.putExtra("heading",roFuranceButton.getText().toString());
                 intent.putExtra("column","rfurnace");
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",HEATING_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
@@ -265,10 +252,13 @@ public class HeatingScreenFragment extends BaseFragment {
         roDuctWorkButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",roDuctWorkButtonValues);
+                intent.putExtra("items",StructureScreensActivity.roDuctWorkButtonValues);
                 intent.putExtra("heading",roDuctWorkButton.getText().toString());
                 intent.putExtra("column","rsupplyairductwork");
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",HEATING_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
@@ -279,10 +269,13 @@ public class HeatingScreenFragment extends BaseFragment {
         roBoilerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",roBoilerButtonValues);
+                intent.putExtra("items",StructureScreensActivity.roBoilerButtonValues);
                 intent.putExtra("heading",roBoilerButton.getText().toString());
                 intent.putExtra("column","boiler");
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",HEATING_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
@@ -292,10 +285,13 @@ public class HeatingScreenFragment extends BaseFragment {
         roCombustionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",roCombustionButtonValues);
+                intent.putExtra("items",StructureScreensActivity.roCombustionButtonValues);
                 intent.putExtra("heading",roCombustionButton.getText().toString());
                 intent.putExtra("column","combustion_exhaust");
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",HEATING_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
@@ -305,10 +301,13 @@ public class HeatingScreenFragment extends BaseFragment {
         roChimneysButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",roChimneysButtonValues);
+                intent.putExtra("items",StructureScreensActivity.roChimneysButtonValues);
                 intent.putExtra("heading",roChimneysButton.getText().toString());
                 intent.putExtra("column","furnace_chimneys");
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",HEATING_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
@@ -318,10 +317,13 @@ public class HeatingScreenFragment extends BaseFragment {
         roThermostatsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",roThermostatsButtonValues);
+                intent.putExtra("items",StructureScreensActivity.roThermostatsButtonValues);
                 intent.putExtra("heading",roThermostatsButton.getText().toString());
                 intent.putExtra("column","thermostats");
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",HEATING_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
@@ -488,9 +490,9 @@ public class HeatingScreenFragment extends BaseFragment {
                 cursor.moveToFirst();
 
                 Map<String, String> params = new HashMap<>();
-                params.put("template_id", "");
+                params.put("template_id", StructureScreensActivity.template_id);
                 params.put("inspection_id", StructureScreensActivity.inspectionID);
-                params.put("client_id", "2");
+                params.put("client_id", StructureScreensActivity.client_id);
                 params.put("is_applicable", "1");
                 params.put("empty_fields", "0");
                 if(cursor != null) {
@@ -507,6 +509,30 @@ public class HeatingScreenFragment extends BaseFragment {
                     params.put("furnace_chimneys", cursor.getString(16));
                     params.put("thermostats", cursor.getString(17));
                 }
+
+                int isAnyChecked = 0;
+                for(int count=6;count<=17;count++)
+                {
+
+                    String splitter = "\\^";
+                    String[] insertArray = cursor.getString(count).split(splitter);
+
+                    for (String anInsertArray : insertArray) {
+                        String split = "%";
+
+                        String[] row = anInsertArray.split(split);
+
+                        if (row[1].equals("1")) {
+                            isAnyChecked++;
+                            break;
+                        }
+                    }
+
+                }
+
+                int total = 12 - isAnyChecked;
+                params.put("empty_fields", total+"");
+
 
                 return params;
 

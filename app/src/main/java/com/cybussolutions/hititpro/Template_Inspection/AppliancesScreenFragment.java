@@ -2,6 +2,7 @@ package com.cybussolutions.hititpro.Template_Inspection;
 
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -23,6 +24,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.cybussolutions.hititpro.Activities.Detailed_Activity_All_Screens;
+import com.cybussolutions.hititpro.Activities.Detailed_Activity_Structure_Screens;
 import com.cybussolutions.hititpro.Activities.StructureScreensActivity;
 import com.cybussolutions.hititpro.Fragments.BaseFragment;
 import com.cybussolutions.hititpro.Network.End_Points;
@@ -49,14 +51,13 @@ public class AppliancesScreenFragment extends BaseFragment {
     gas_range,built_in_electric_oven,electric_cooktop,gas_cooktop,microwave_oven,dishwasher,waste_disposer,refrigerator,
     wine_cooler,trash_compactor,clothes_washer,clothes_dryer,cooktop_exhaust_fan,central_vacuum,door_bell;
 
-    String[]  appliances_testedValues,laundry_facilityValues,other_components_testedValues,appliance_observationsValues,electric_rangeValues,
-    gas_rangeValues,built_in_electric_ovenValues,electric_cooktopValues,gas_cooktopValues,microwave_ovenValues,dishwasherValues,waste_disposerValues,refrigeratorValues,
-    wine_coolerValues,trash_compactorValues,clothes_washerValues,clothes_dryerValues,cooktop_exhaust_fanValues,central_vacuumValues,door_bellValues;
 
     private static final String APPLIANCE_TABLE = "appliance";
     private static final int MY_SOCKET_TIMEOUT_MS = 10000;
     ProgressDialog ringProgressDialog;
     Database database;
+    SharedPreferences sp;
+    SharedPreferences.Editor edit;
 
 
     @Override
@@ -66,6 +67,11 @@ public class AppliancesScreenFragment extends BaseFragment {
 
 
         root = inflater.inflate(R.layout.fragment_appliances_screen, container, false);
+        ///////////set title of main screens/////////////////
+        sp=getContext().getSharedPreferences("prefs", Context.MODE_PRIVATE);
+        edit=sp.edit();
+        edit.putString("main_screen","Appliances");
+        edit.commit();
 
         next = (Button) root.findViewById(R.id.next);
         back = (Button) root.findViewById(R.id.back);
@@ -95,7 +101,7 @@ public class AppliancesScreenFragment extends BaseFragment {
         }
 
 
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Appliances Screen");
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Appliances");
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.menu);
 
@@ -123,31 +129,6 @@ public class AppliancesScreenFragment extends BaseFragment {
 
 
 
-        appliances_testedValues = new String[]{"Electric Range%0","Gas Range%0","Built-In Electric Oven %0","Electric Cooktop%0",
-                "Gas Cooktop%0","Microwave Oven%0","Dishwasher%0","Waste Disposer%0","Refrigerator%0","Wine Cooler%0","Trash Compactor%0"
-                ,"Clothes Washer%0","Clothes Dryer%0"};
-        laundry_facilityValues = new String[]{"240V Circuit for Dryer%0","Gas Piping for Dryer%0","Vents to Building Exterior%0",
-                "120V Circuit for Washer%0","Waste Standpipe for Washer%0"};
-        other_components_testedValues = new String[]{"Kitchen Exhaust Hood%0","Cooktop Exhaust Fan%0","Central Vacuum%0"
-                ,"Door Bell%0","Instant Hot Water Dispenser%0","Water Conditioning Equipment%0"};
-        appliance_observationsValues = new String[]{"ALL TESTED APPLIANCES OK%0","MOST APPLIANCES NEWER%0","MOST TESTED APPLIANCES OK%0"
-                , "AGING APPLIANCES%0","VERY OLD APPLIANCES%0"};
-        electric_rangeValues = new String[] {"Need Anti-Tip Bracket%0","Burner Inoperative %0","Oven Light Inoperative%0"};
-        gas_rangeValues = new String[]{"Need Anti-Tip Bracket%0","Burner Inoperative %0","Oven Light Inoperative%0"};
-        built_in_electric_ovenValues = new String[]{"Old%0","Inoperative %0","Oven Light Inoperative%0"};
-        electric_cooktopValues = new String[]{"Old%0","Burner Inoperative%0","Inoperative %0"};
-        gas_cooktopValues = new String[]{"Old%0","Burner Inoperative%0","Inoperative %0"};
-        microwave_ovenValues = new String[]{"Inoperative %0","Under Mount Light Inoperative%0"};
-        dishwasherValues= new String[]{"Old%0","Inoperative%0","Leak%0","Loose %0"};
-        waste_disposerValues = new String[]{"Inoperative%0","Needs Wire Clamp%0","Seized%0","Loose%0","Wiring Loose%0"};
-        refrigeratorValues = new String[]{"Old %0","Inoperative%0"};
-        wine_coolerValues = new String[]{"Old %0","Inoperative%0"};
-        trash_compactorValues = new String[]{"Old %0","Inoperative%0"};
-        clothes_washerValues = new String[]{"Old%0","Inoperative%0"};
-        clothes_dryerValues = new String[]{"Old %0","Inoperative%0"};
-        cooktop_exhaust_fanValues = new String[]{"Inoperative%0"};
-        central_vacuumValues = new String[]{"Inoperative%0"};
-        door_bellValues = new String[]{"Inoperative%0","None%0"};
 
 
         SharedPreferences pref = getActivity().getApplicationContext().getSharedPreferences("HititPro", getActivity().MODE_PRIVATE);
@@ -159,49 +140,20 @@ public class AppliancesScreenFragment extends BaseFragment {
             getInsulation();
 
         }
-        else
-        {
-
-            if(!(populate.equals("true")))
-        {
-            database.prePopulateData("appliancestested", appliances_testedValues, APPLIANCE_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("laundryfacility", laundry_facilityValues, APPLIANCE_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("othercomponentstested", other_components_testedValues, APPLIANCE_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("observations", appliance_observationsValues, APPLIANCE_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("relectricrange", electric_rangeValues, APPLIANCE_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("rgasrange", gas_rangeValues, APPLIANCE_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("rbuiltinelectricoven", built_in_electric_ovenValues, APPLIANCE_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("relectriccooktop", electric_cooktopValues, APPLIANCE_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("rgascooktop", gas_cooktopValues, APPLIANCE_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("rmicrowaveoven", microwave_ovenValues, APPLIANCE_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("rdishwasher", dishwasherValues, APPLIANCE_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("rwastedisposer", waste_disposerValues, APPLIANCE_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("rrefrigerator", refrigeratorValues, APPLIANCE_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("rwinecooler", wine_coolerValues, APPLIANCE_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("rtrashcompactor", trash_compactorValues, APPLIANCE_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("rclotheswasher", clothes_washerValues, APPLIANCE_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("rclothesdryer", clothes_dryerValues, APPLIANCE_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("rcooktopexhaustfan", cooktop_exhaust_fanValues, APPLIANCE_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("rcentralvacuum", central_vacuumValues, APPLIANCE_TABLE, StructureScreensActivity.inspectionID);
-            database.prePopulateData("rdoorbell", door_bellValues, APPLIANCE_TABLE, StructureScreensActivity.inspectionID);
-
-            // Saving string
-            editor.putString("isAppliances_populated", "true");
-            editor.apply();
-        }
-
-        }
 
 
 
         appliances_tested.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",false);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",appliances_testedValues);
+                intent.putExtra("items",StructureScreensActivity.appliances_testedValues);
                 intent.putExtra("heading",appliances_tested.getText().toString());
                 intent.putExtra("column","appliancestested");
                 intent.putExtra("dbTable",APPLIANCE_TABLE);
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
             }
@@ -209,11 +161,14 @@ public class AppliancesScreenFragment extends BaseFragment {
         laundry_facility.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",false);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",laundry_facilityValues);
+                intent.putExtra("items",StructureScreensActivity.laundry_facilityValues);
                 intent.putExtra("heading",laundry_facility.getText().toString());
                 intent.putExtra("column","laundryfacility");
                 intent.putExtra("dbTable",APPLIANCE_TABLE);
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
             }
@@ -221,11 +176,14 @@ public class AppliancesScreenFragment extends BaseFragment {
         other_components_tested.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",false);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",other_components_testedValues);
+                intent.putExtra("items",StructureScreensActivity.other_components_testedValues);
                 intent.putExtra("heading",other_components_tested.getText().toString());
                 intent.putExtra("column","othercomponentstested");
                 intent.putExtra("dbTable",APPLIANCE_TABLE);
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
             }
@@ -233,10 +191,13 @@ public class AppliancesScreenFragment extends BaseFragment {
         appliance_observations.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",appliance_observationsValues);
+                edit.putBoolean("imageButton",false);
+                edit.commit();
+                Intent intent= new Intent(getActivity(), Detailed_Activity_Structure_Screens.class);
+                intent.putExtra("items",StructureScreensActivity.appliance_observationsValues);
                 intent.putExtra("heading",appliance_observations.getText().toString());
                 intent.putExtra("column","observations");
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",APPLIANCE_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
@@ -245,10 +206,13 @@ public class AppliancesScreenFragment extends BaseFragment {
         electric_range.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",electric_rangeValues);
+                intent.putExtra("items",StructureScreensActivity.electric_rangeValues);
                 intent.putExtra("heading",electric_range.getText().toString());
                 intent.putExtra("column","relectricrange");
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",APPLIANCE_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
@@ -257,10 +221,13 @@ public class AppliancesScreenFragment extends BaseFragment {
         gas_range.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",gas_rangeValues);
+                intent.putExtra("items",StructureScreensActivity.gas_rangeValues);
                 intent.putExtra("heading",gas_range.getText().toString());
                 intent.putExtra("column","rgasrange");
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",APPLIANCE_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
@@ -269,10 +236,13 @@ public class AppliancesScreenFragment extends BaseFragment {
         built_in_electric_oven.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",built_in_electric_ovenValues);
+                intent.putExtra("items",StructureScreensActivity.built_in_electric_ovenValues);
                 intent.putExtra("heading",built_in_electric_oven.getText().toString());
                 intent.putExtra("column","rbuiltinelectricoven");
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",APPLIANCE_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
@@ -281,10 +251,13 @@ public class AppliancesScreenFragment extends BaseFragment {
         electric_cooktop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",electric_cooktopValues);
+                intent.putExtra("items",StructureScreensActivity.electric_cooktopValues);
                 intent.putExtra("heading",electric_cooktop.getText().toString());
                 intent.putExtra("column","relectriccooktop");
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",APPLIANCE_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
@@ -295,10 +268,13 @@ public class AppliancesScreenFragment extends BaseFragment {
         gas_cooktop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",gas_cooktopValues);
+                intent.putExtra("items",StructureScreensActivity.gas_cooktopValues);
                 intent.putExtra("heading",gas_cooktop.getText().toString());
                 intent.putExtra("column","rgascooktop");
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",APPLIANCE_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
@@ -309,10 +285,13 @@ public class AppliancesScreenFragment extends BaseFragment {
         microwave_oven.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",microwave_ovenValues);
+                intent.putExtra("items",StructureScreensActivity.microwave_ovenValues);
                 intent.putExtra("heading",microwave_oven.getText().toString());
                 intent.putExtra("column","rmicrowaveoven");
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",APPLIANCE_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
@@ -321,10 +300,13 @@ public class AppliancesScreenFragment extends BaseFragment {
         dishwasher.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",dishwasherValues);
+                intent.putExtra("items",StructureScreensActivity.dishwasherValues);
                 intent.putExtra("heading",dishwasher.getText().toString());
                 intent.putExtra("column","rdishwasher");
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",APPLIANCE_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
@@ -333,10 +315,13 @@ public class AppliancesScreenFragment extends BaseFragment {
         waste_disposer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",waste_disposerValues);
+                intent.putExtra("items",StructureScreensActivity.waste_disposerValues);
                 intent.putExtra("heading",waste_disposer.getText().toString());
                 intent.putExtra("column","rwastedisposer");
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",APPLIANCE_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
@@ -345,10 +330,13 @@ public class AppliancesScreenFragment extends BaseFragment {
         refrigerator.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",refrigeratorValues);
+                intent.putExtra("items",StructureScreensActivity.refrigeratorValues);
                 intent.putExtra("heading",refrigerator.getText().toString());
                 intent.putExtra("column","rrefrigerator");
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",APPLIANCE_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
@@ -357,10 +345,13 @@ public class AppliancesScreenFragment extends BaseFragment {
         wine_cooler.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",wine_coolerValues);
+                intent.putExtra("items",StructureScreensActivity.wine_coolerValues);
                 intent.putExtra("heading",wine_cooler.getText().toString());
                 intent.putExtra("column","rwinecooler");
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",APPLIANCE_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
@@ -369,10 +360,13 @@ public class AppliancesScreenFragment extends BaseFragment {
         trash_compactor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",trash_compactorValues);
+                intent.putExtra("items",StructureScreensActivity.trash_compactorValues);
                 intent.putExtra("heading",trash_compactor.getText().toString());
                 intent.putExtra("column","rtrashcompactor");
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",APPLIANCE_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
@@ -381,10 +375,13 @@ public class AppliancesScreenFragment extends BaseFragment {
         clothes_washer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",clothes_washerValues);
+                intent.putExtra("items",StructureScreensActivity.clothes_washerValues);
                 intent.putExtra("heading",clothes_washer.getText().toString());
                 intent.putExtra("column","rclotheswasher");
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",APPLIANCE_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
@@ -394,10 +391,13 @@ public class AppliancesScreenFragment extends BaseFragment {
         clothes_dryer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",clothes_dryerValues);
+                intent.putExtra("items",StructureScreensActivity.clothes_dryerValues);
                 intent.putExtra("heading",clothes_dryer.getText().toString());
                 intent.putExtra("column","rclothesdryer");
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",APPLIANCE_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
@@ -406,10 +406,13 @@ public class AppliancesScreenFragment extends BaseFragment {
         cooktop_exhaust_fan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",cooktop_exhaust_fanValues);
+                intent.putExtra("items",StructureScreensActivity.cooktop_exhaust_fanValues);
                 intent.putExtra("heading",cooktop_exhaust_fan.getText().toString());
                 intent.putExtra("column","rcooktopexhaustfan");
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",APPLIANCE_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
@@ -418,10 +421,13 @@ public class AppliancesScreenFragment extends BaseFragment {
         central_vacuum.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",central_vacuumValues);
+                intent.putExtra("items",StructureScreensActivity.central_vacuumValues);
                 intent.putExtra("heading",central_vacuum.getText().toString());
                 intent.putExtra("column","rcentralvacuum");
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",APPLIANCE_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
@@ -431,10 +437,13 @@ public class AppliancesScreenFragment extends BaseFragment {
         door_bell.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit.putBoolean("imageButton",true);
+                edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",door_bellValues);
+                intent.putExtra("items",StructureScreensActivity.door_bellValues);
                 intent.putExtra("heading",door_bell.getText().toString());
                 intent.putExtra("column","rdoorbell");
+                intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",APPLIANCE_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
@@ -501,9 +510,9 @@ public class AppliancesScreenFragment extends BaseFragment {
                 cursor.moveToFirst();
 
                 Map<String, String> params = new HashMap<>();
-                params.put("template_id", "");
+                params.put("template_id", StructureScreensActivity.template_id);
                 params.put("inspection_id", StructureScreensActivity.inspectionID);
-                params.put("client_id", "2");
+                params.put("client_id", StructureScreensActivity.client_id);
                 params.put("is_applicable", "1");
                 params.put("empty_fields", "0");
                 if(cursor != null) {
@@ -529,6 +538,29 @@ public class AppliancesScreenFragment extends BaseFragment {
                     params.put("rdoorbell", cursor.getString(26));
 
                 }
+
+                int isAnyChecked = 0;
+                for(int count=6;count<=26;count++)
+                {
+
+                    String splitter = "\\^";
+                    String[] insertArray = cursor.getString(count).split(splitter);
+
+                    for (String anInsertArray : insertArray) {
+                        String split = "%";
+
+                        String[] row = anInsertArray.split(split);
+
+                        if (row[1].equals("1")) {
+                            isAnyChecked++;
+                            break;
+                        }
+                    }
+
+                }
+
+                int total = 12 - isAnyChecked;
+                params.put("empty_fields", total+"");
 
                 return params;
             }

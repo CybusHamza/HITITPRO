@@ -1,0 +1,44 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".Activities.MainActivity" >
+
+    <item android:id="@+id/action_line"
+        android:title="@string/action_line"
+        android:orderInCategory="100"
+        android:showAsAction="never" />
+
+    <item android:id="@+id/action_smoothline"
+        android:title="@string/action_smoothline"
+        android:orderInCategory="100"
+        android:showAsAction="never" />
+
+
+    <item android:id="@+id/action_rectangle"
+        android:title="@string/action_rectangle"
+        android:orderInCategory="100"
+        android:showAsAction="never" />
+
+    <item android:id="@+id/action_square"
+        android:title="@string/action_square"
+        android:orderInCategory="100"
+        android:showAsAction="never" />
+
+    <item android:id="@+id/action_circle"
+        android:title="@string/action_circle"
+        android:orderInCategory="100"
+        android:showAsAction="never" />
+
+    <item android:id="@+id/action_triangle"
+        android:title="@string/action_triangle"
+        android:orderInCategory="100"
+        android:showAsAction="never" />
+    <item android:id="@+id/action_arrow"
+        android:title="@string/action_arrow"
+        android:orderInCategory="100"
+        android:showAsAction="never" />
+    <item android:id="@+id/action_text"
+        android:title="@string/action_text"
+        android:orderInCategory="100"
+        android:showAsAction="never" />
+
+</menu>
