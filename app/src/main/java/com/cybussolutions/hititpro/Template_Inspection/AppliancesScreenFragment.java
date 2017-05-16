@@ -539,6 +539,29 @@ public class AppliancesScreenFragment extends BaseFragment {
 
                 }
 
+                int isAnyChecked = 0;
+                for(int count=6;count<=26;count++)
+                {
+
+                    String splitter = "\\^";
+                    String[] insertArray = cursor.getString(count).split(splitter);
+
+                    for (String anInsertArray : insertArray) {
+                        String split = "%";
+
+                        String[] row = anInsertArray.split(split);
+
+                        if (row[1].equals("1")) {
+                            isAnyChecked++;
+                            break;
+                        }
+                    }
+
+                }
+
+                int total = 12 - isAnyChecked;
+                params.put("empty_fields", total+"");
+
                 return params;
             }
         };

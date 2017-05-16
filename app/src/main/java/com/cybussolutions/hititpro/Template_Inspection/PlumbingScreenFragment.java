@@ -721,7 +721,7 @@ public class PlumbingScreenFragment extends BaseFragment {
                 params.put("inspection_id", StructureScreensActivity.inspectionID);
                 params.put("client_id", StructureScreensActivity.client_id);
                 params.put("is_applicable", "1");
-                params.put("empty_fields", "0");
+
                 if(cursor != null) {
                     params.put("watersupplysource", cursor.getString(6));
                     params.put("servicepipe", cursor.getString(7));
@@ -743,6 +743,29 @@ public class PlumbingScreenFragment extends BaseFragment {
                     params.put("wasteejectorpump", cursor.getString(23));
 
                 }
+                int isAnyChecked = 0;
+                for(int count=6;count<=23;count++)
+                {
+
+                    String splitter = "\\^";
+                    String[] insertArray = cursor.getString(count).split(splitter);
+
+                    for (String anInsertArray : insertArray) {
+                        String split = "%";
+
+                        String[] row = anInsertArray.split(split);
+
+                        if (row[1].equals("1")) {
+                            isAnyChecked++;
+                            break;
+                        }
+                    }
+
+                }
+
+                int total = 12 - isAnyChecked;
+                params.put("empty_fields", total+"");
+
 
                 return params;
             }

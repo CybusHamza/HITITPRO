@@ -65,7 +65,13 @@ public class Detailed_Activity_All_Screens extends AppCompatActivity {
     ProgressDialog ringProgressDialog;
     private ArrayList<Checkbox_model> list = new ArrayList<>();
     private ArrayList<Checkbox_model> list_temp;
-    HashMap<String,String> totalcount = new HashMap<>();
+    private static final Map<String, String> myMap;
+    static
+    {
+        myMap = new HashMap<String, String>();
+        myMap.put("portfolio", "16");
+        myMap.put("roofing", "12");
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +85,7 @@ public class Detailed_Activity_All_Screens extends AppCompatActivity {
         }
 
         // receiving values from previous activities
+
 
         final Intent intent = getIntent();
         items = intent.getStringArrayExtra("items");
@@ -237,6 +244,10 @@ public class Detailed_Activity_All_Screens extends AppCompatActivity {
             {
                 isAnyChecked = false;
             }
+
+        }
+
+        for (int i = 0; i < insertArray.length - 1; i++) {
 
             enteredStructure += insertArray[i] + "^";
         }
@@ -418,7 +429,8 @@ public class Detailed_Activity_All_Screens extends AppCompatActivity {
                 params.put("enteredStructure", enteredStructure);
                 params.put("inspection_id", StructureScreensActivity.inspectionID);
                 params.put("added_by", userid);
-                params.put("is_checked", isAnyChecked+"");
+              /*  params.put("is_checked", isAnyChecked+"");
+                params.put("total_fields", myMap.get(dbTable));*/
                 return params;
             }
         };
