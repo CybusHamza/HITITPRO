@@ -42,6 +42,7 @@ public class LandingScreen extends AppCompatActivity {
     int[] drawerImages = new int[]{R.drawable.profile, R.drawable.clients, R.drawable.template,R.drawable.template, R.drawable.user_review, R.drawable.picture,
             R.drawable.settings, R.drawable.logout};
 
+    String activityName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,10 +51,17 @@ public class LandingScreen extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-
+        Intent i=getIntent();
+        activityName=i.getStringExtra("activityName");
 
 
         setupDrawer();
+        if(activityName.equals("addTemplateClass")){
+            getSupportFragmentManager().beginTransaction().replace(R.id.container, new TemplatesFragment()).commit();
+        }else if(activityName.equals("addClientClass")){
+            getSupportFragmentManager().beginTransaction().replace(R.id.container, new ClientsFragment()).commit();
+        }
+        else
         getSupportFragmentManager().beginTransaction().replace(R.id.container, new ProfileFragment()).commit();
 
 

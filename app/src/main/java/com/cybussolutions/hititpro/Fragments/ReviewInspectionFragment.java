@@ -262,12 +262,9 @@ public class ReviewInspectionFragment extends BaseFragment {
                                 tvappliance.setText(objectappliance.get("empty_fields").toString());
                             }
 
-
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-
-
                     }
                 }, new Response.ErrorListener() {
             @Override

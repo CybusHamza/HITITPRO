@@ -75,6 +75,7 @@ public class Start_Inspection extends AppCompatActivity {
         Intent intent = getIntent();
         client =intent.getStringExtra("client_name");
         clientId =intent.getStringExtra("client_id");
+        //int pos=inspection_list.indexOf()
 
         client_name = (TextView) findViewById(R.id.client_name_ins);
         tem_spinner = (Spinner) findViewById(R.id.tem_spinner);
@@ -109,6 +110,7 @@ public class Start_Inspection extends AppCompatActivity {
                 {
 
                     StrtmpName  = tem_spinner.getSelectedItem().toString();
+
                     startInspection();
 
                     ringProgressDialog = ProgressDialog.show(Start_Inspection.this, "", "Please wait ...", true);

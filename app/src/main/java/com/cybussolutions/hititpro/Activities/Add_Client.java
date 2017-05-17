@@ -1,6 +1,7 @@
 package com.cybussolutions.hititpro.Activities;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -151,8 +152,10 @@ public class Add_Client extends AppCompatActivity {
                                         @Override
                                         public void onClick(SweetAlertDialog sDialog) {
                                             sDialog.dismiss();
-
                                             finish();
+                                            Intent intent = new Intent(Add_Client.this, LandingScreen.class);
+                                            intent.putExtra("activityName", "addClientClass");
+                                            startActivity(intent);
 
                                         }
                                     })

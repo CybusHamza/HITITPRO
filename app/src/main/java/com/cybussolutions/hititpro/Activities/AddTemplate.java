@@ -3,12 +3,14 @@ package com.cybussolutions.hititpro.Activities;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
@@ -20,6 +22,7 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.cybussolutions.hititpro.Fragments.TemplatesFragment;
 import com.cybussolutions.hititpro.Network.End_Points;
 import com.cybussolutions.hititpro.R;
 
@@ -49,7 +52,7 @@ public class AddTemplate extends AppCompatActivity {
 
         userId = pref.getString("user_id","");
 
-        Intent intent = getIntent();
+        final Intent intent = getIntent();
         clientId =intent.getStringExtra("client_id");
 
         back= (Button) findViewById(R.id.btn_back);
@@ -62,9 +65,16 @@ public class AddTemplate extends AppCompatActivity {
                 StrtmpName  = name.getText().toString();
                 Strpara = para.getText().toString();
 
-                startInspection();
+                if(!StrtmpName.equals("")) {
+                    startInspection();
 
-                finish();
+                    finish();
+                    Intent intent = new Intent(AddTemplate.this, LandingScreen.class);
+
+                    intent.putExtra("activityName", "addTemplateClass");
+                    startActivity(intent);
+                }else
+                    Toast.makeText(getApplicationContext(),"Plz enter some template name",Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -75,6 +85,7 @@ public class AddTemplate extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+                        Toast.makeText(getApplicationContext(),"Template Added Successfully",Toast.LENGTH_LONG).show();
 
                     }
                 }, new Response.ErrorListener() {

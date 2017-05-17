@@ -38,6 +38,7 @@ public class CanvasView extends View {
     private PointF endPoint;
     public static final float TOUCH_TOLERANCE = 4;
     public static final float TOUCH_STROKE_WIDTH = 5;
+    public static final int NOTHING=0;
     // Enumeration for Mode
     public enum Mode {
         DRAW,
@@ -73,7 +74,7 @@ public class CanvasView extends View {
 
     // Flags
     public Mode mode      = Mode.DRAW;
-    public Drawer drawer  = Drawer.CIRCLE;
+    public Drawer drawer  =Drawer.CIRCLE;
     private boolean isDown = false;
 
     // for Paint

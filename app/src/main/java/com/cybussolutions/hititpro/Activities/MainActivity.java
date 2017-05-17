@@ -152,6 +152,7 @@ public class MainActivity extends AppCompatActivity {
             drawPen.setVisibility(View.INVISIBLE);
             undo.setVisibility(View.INVISIBLE);
             redo.setVisibility(View.INVISIBLE);
+            canvas.setVisibility(View.INVISIBLE);
         }else {
             drawLine.setVisibility(View.VISIBLE);
             drawCircle.setVisibility(View.VISIBLE);
@@ -160,6 +161,8 @@ public class MainActivity extends AppCompatActivity {
             drawPen.setVisibility(View.VISIBLE);
             undo.setVisibility(View.VISIBLE);
             redo.setVisibility(View.VISIBLE);
+            canvas.setVisibility(View.VISIBLE);
+
         }
 
         drawLine.setOnClickListener(new View.OnClickListener() {
@@ -523,6 +526,7 @@ public class MainActivity extends AppCompatActivity {
                 drawPen.setVisibility(View.VISIBLE);
                 undo.setVisibility(View.VISIBLE);
                 redo.setVisibility(View.VISIBLE);
+                canvas.setVisibility(View.VISIBLE);
 
             }
             //  if (requestCode == Constants.REQUEST_CODE && resultCode == RESULT_OK && data != null) {
@@ -555,6 +559,7 @@ public class MainActivity extends AppCompatActivity {
                 drawPen.setVisibility(View.VISIBLE);
                 undo.setVisibility(View.VISIBLE);
                 redo.setVisibility(View.VISIBLE);
+                canvas.setVisibility(View.VISIBLE);
                 // imageView.setImageBitmap(BitmapFactory
                 //       .decodeFile(ImageDecode));
 
