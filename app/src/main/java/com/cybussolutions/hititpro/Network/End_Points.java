@@ -20,6 +20,7 @@ public class End_Points {
     public static final String DELETE_TEMPLATE = BASE_URL + "deleteTemplate";
     public static final String UPLOAD_IMAGE=BASE_URL+"uploadimagetest";
     public static final String UPLOAD="http://xfer.cybusservices.com/hititpro/upload_image_mobile.php";
+    public static final String GET_REVIEW_INSPECTION = BASE_URL + "reviewInspection";
 
     public static final String GET_IMAGES=BASE_URL+"getImages";
     public static final String GET_DEFAULT_COMMENTS=BASE_URL+"getDefaultComments";

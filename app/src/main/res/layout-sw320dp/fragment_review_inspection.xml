@@ -105,6 +105,7 @@
                         android:textColor="@color/black" />
 
                     <TextView
+                        android:id="@+id/structure"
                         style="@style/textview_style"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -133,6 +134,7 @@
                         android:textColor="@color/black" />
 
                     <TextView
+                        android:id="@+id/roofing"
                         style="@style/textview_style"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -161,6 +163,7 @@
                         android:textColor="@color/black" />
 
                     <TextView
+                        android:id="@+id/exterior"
                         style="@style/textview_style"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -189,6 +192,7 @@
                         android:textColor="@color/black" />
 
                     <TextView
+                        android:id="@+id/heating"
                         style="@style/textview_style"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -217,6 +221,7 @@
                         android:textColor="@color/black" />
 
                     <TextView
+                        android:id="@+id/cooling"
                         style="@style/textview_style"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -245,6 +250,147 @@
                         android:textColor="@color/black" />
 
                     <TextView
+                        android:id="@+id/electrical"
+                        style="@style/textview_style"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="sans-serif"
+                        android:gravity="center"
+                        android:text="@string/_0"
+                        android:textColor="@color/black" />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <TextView
+                        style="@style/textview_style"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="sans-serif"
+                        android:gravity="center"
+                        android:text="FirePlaces"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/fireplace"
+                        style="@style/textview_style"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="sans-serif"
+                        android:gravity="center"
+                        android:text="@string/_0"
+                        android:textColor="@color/black" />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <TextView
+                        style="@style/textview_style"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="sans-serif"
+                        android:gravity="center"
+                        android:text="Appliance"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/appliance"
+                        style="@style/textview_style"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="sans-serif"
+                        android:gravity="center"
+                        android:text="@string/_0"
+                        android:textColor="@color/black" />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <TextView
+                        style="@style/textview_style"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="sans-serif"
+                        android:gravity="center"
+                        android:text="Plumbing"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/plumbing"
+                        style="@style/textview_style"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="sans-serif"
+                        android:gravity="center"
+                        android:text="@string/_0"
+                        android:textColor="@color/black" />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <TextView
+                        style="@style/textview_style"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="sans-serif"
+                        android:gravity="center"
+                        android:text="interior"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/interior"
+                        style="@style/textview_style"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="sans-serif"
+                        android:gravity="center"
+                        android:text="@string/_0"
+                        android:textColor="@color/black" />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <TextView
+                        style="@style/textview_style"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="sans-serif"
+                        android:gravity="center"
+                        android:text="insulation"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/insulation"
                         style="@style/textview_style"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

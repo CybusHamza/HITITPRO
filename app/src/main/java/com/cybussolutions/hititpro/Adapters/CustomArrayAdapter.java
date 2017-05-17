@@ -10,6 +10,7 @@ import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -318,12 +319,15 @@ public class CustomArrayAdapter extends ArrayAdapter<Checkbox_model> implements
 		final Button to = (Button) dialogView.findViewById(R.id.add_BT);
 		final Button cancel=(Button)dialogView.findViewById(R.id.cancel);
 
-		Add.setSelection(Add.getText().length());
+		//Add.setSelection(Add.getText().length())
+		Add.requestFocus();
 
-		InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
-		imm.showSoftInput(Add, InputMethodManager.SHOW_IMPLICIT);
 
 		Add.setText(text);
+		Add.setSelection(Add.getText().length());
+		InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+		imm.toggleSoftInput(InputMethodManager.SHOW_FORCED,0);
+		imm.showSoftInput(Add, InputMethodManager.SHOW_IMPLICIT);
 
 		to.setText("Edit Item");
 
@@ -397,6 +401,9 @@ public class CustomArrayAdapter extends ArrayAdapter<Checkbox_model> implements
 				context.startActivity(intent);
 
 				b.dismiss();
+				InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+				imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+				imm.hideSoftInputFromWindow(Add.getWindowToken(), 0);
 
 			}
 		});
@@ -404,6 +411,9 @@ public class CustomArrayAdapter extends ArrayAdapter<Checkbox_model> implements
 			@Override
 			public void onClick(View v) {
 				b.dismiss();
+				InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+				imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+				imm.hideSoftInputFromWindow(Add.getWindowToken(), 0);
 			}
 		});
 

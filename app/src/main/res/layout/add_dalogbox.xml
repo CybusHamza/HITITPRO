@@ -12,11 +12,13 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="50dp"
         android:hint="Item"
-        android:focusable="true"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp" />
+        android:layout_marginRight="20dp"
+        >
+        <requestFocus />
+    </EditText>
 
     <Button
         android:layout_width="wrap_content"

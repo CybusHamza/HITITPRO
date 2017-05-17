@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -309,15 +310,18 @@ public class Detailed_Adapter_Structure_Screen extends ArrayAdapter<Checkbox_mod
         final EditText Add = (EditText) dialogView.findViewById(R.id.add_ET);
         final Button to = (Button) dialogView.findViewById(R.id.add_BT);
         final Button cancel = (Button) dialogView.findViewById(R.id.cancel);
-        Add.setSelection(Add.getText().length());
 
-        InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.showSoftInput(Add, InputMethodManager.SHOW_IMPLICIT);
+
+
 
         Add.setText(text);
+        Add.setSelection(Add.getText().length());
 
         to.setText("Edit Item");
 
+        InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED,0);
+        imm.showSoftInput(Add, InputMethodManager.SHOW_IMPLICIT);
         b = dialogBuilder.create();
         b.show();
 
@@ -326,6 +330,9 @@ public class Detailed_Adapter_Structure_Screen extends ArrayAdapter<Checkbox_mod
             @Override
             public void onClick(View view) {
                 b.dismiss();
+                InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(Add.getWindowToken(), 0);
+                imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
             }
         });
         to.setOnClickListener(new View.OnClickListener() {
@@ -385,6 +392,9 @@ public class Detailed_Adapter_Structure_Screen extends ArrayAdapter<Checkbox_mod
                 context.startActivity(intent);
 
                 b.dismiss();
+                InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+                imm.hideSoftInputFromWindow(Add.getWindowToken(), 0);
 
             }
         });
