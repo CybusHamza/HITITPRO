@@ -74,7 +74,7 @@ public class CanvasView extends View {
 
     // Flags
     public Mode mode      = Mode.DRAW;
-    public Drawer drawer  =Drawer.CIRCLE;
+    public Drawer drawer  =Drawer.PEN;
     private boolean isDown = false;
 
     // for Paint

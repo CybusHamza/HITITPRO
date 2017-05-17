@@ -54,7 +54,7 @@ public class TemplatesFragment extends BaseFragment {
     private static String responceStatic = null;
     View root;
     ProgressDialog ringProgressDialog;
-    String id, client_id;
+    String id, client_id,tempnameSelection,clientid;
     Spinner tem_spinner, client_spinner, inspection_spinner;
     EditText paraEt;
     Button review;
@@ -69,7 +69,7 @@ public class TemplatesFragment extends BaseFragment {
     private List<String> inspection_list;
     private List<String> inspection_id_list;
     private List<String> default_template;
-
+    SharedPreferences.Editor editor;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -80,8 +80,11 @@ public class TemplatesFragment extends BaseFragment {
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.menu);
 
-        final SharedPreferences pref = getActivity().getSharedPreferences("UserPrefs", getActivity().MODE_PRIVATE);
+         final SharedPreferences pref = getActivity().getSharedPreferences("UserPrefs", getActivity().MODE_PRIVATE);
+         editor = pref.edit();
         id = pref.getString("user_id", null);
+        tempnameSelection=pref.getString("tempidselected",null);
+        clientid=pref.getString("client_id",null);
 
         tem_spinner = (Spinner) root.findViewById(R.id.spinner);
         client_spinner = (Spinner) root.findViewById(R.id.client_spinner);
@@ -97,9 +100,12 @@ public class TemplatesFragment extends BaseFragment {
             public void onClick(View v) {
                 int client_id = client_spinner.getSelectedItemPosition();
 
-                Intent i = new Intent(getActivity(), AddTemplate.class);
-                i.putExtra("client_id", client_id_list.get(client_id));
-                startActivity(i);
+                if(!client_spinner.getSelectedItem().equals("Select")) {
+                    Intent i = new Intent(getActivity(), AddTemplate.class);
+                    i.putExtra("client_id", client_id_list.get(client_id));
+                    startActivity(i);
+                }else
+                    Toast.makeText(getContext(),"Plz select client to add new template",Toast.LENGTH_LONG).show();
             }
         });
         review.setOnClickListener(new View.OnClickListener() {
@@ -297,11 +303,15 @@ public class TemplatesFragment extends BaseFragment {
                                 para_list = new ArrayList<>();
                                 isStarted = new ArrayList<>();
                                 default_template = new ArrayList<>();
+                                para_list.add(0,"");
 
+                                inspection_list.add(0,"Select");
+                                inspection_id_list.add(0,"0");
 
                                 for (int i = 0; i < Array.length(); i++) {
 
                                     JSONObject object = new JSONObject(Array.getJSONObject(i).toString());
+
                                     if(object.getString("name").equals("null"))
                                     {
                                         inspection_list.add(object.getString("template_name"));
@@ -326,6 +336,15 @@ public class TemplatesFragment extends BaseFragment {
                                         (android.R.layout.simple_spinner_dropdown_item);
 
                                 tem_spinner.setAdapter(dataAdapter);
+                                if(tempnameSelection!=null){
+                                  //  int pos1=client_list.indexOf(clientid);
+                                    int pos=inspection_list.indexOf(tempnameSelection);
+                                    //client_spinner.setSelection(pos1);
+                                    tem_spinner.setSelection(pos);
+                                    editor.putString("tempidselected",null);
+                                    //editor.putString("client_id",null);
+                                    editor.commit();
+                                }
 
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -440,6 +459,8 @@ public class TemplatesFragment extends BaseFragment {
                             try {
 
                                 JSONArray Array = new JSONArray(response);
+                                client_list.add(0,"Select");
+                                client_id_list.add(0,"0");
 
                                 for (int i = 0; i < Array.length(); i++) {
 
@@ -458,6 +479,12 @@ public class TemplatesFragment extends BaseFragment {
 
                                 client_spinner.setAdapter(dataAdapter);
 
+                                if(clientid!=null){
+                                    int pos1=client_id_list.indexOf(clientid);
+                                    client_spinner.setSelection(pos1);
+                                    editor.putString("client_id",null);
+                                    editor.commit();
+                                }
 
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -614,9 +641,11 @@ public class TemplatesFragment extends BaseFragment {
                 client_id = client_id_list.get(pos);
 
             }
-
-            getTemplates();
-
+            if (!client_list.get(pos).equals("Select")) {
+                getTemplates();
+            }
+            else
+            Toast.makeText(getContext(),"Plz select client",Toast.LENGTH_LONG).show();
 
         }
 
@@ -638,6 +667,7 @@ public class TemplatesFragment extends BaseFragment {
             if (inspection_list.get(pos).equals("No Records Founds")) {
                 temp_id = "0";
             } else {
+               // if(!inspection_list.get(pos).equals("Select"))
 
                 temp_id = inspection_id_list.get(pos);
                 para = para_list.get(pos);

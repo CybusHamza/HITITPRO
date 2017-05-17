@@ -49,7 +49,7 @@ public class AddTemplate extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         SharedPreferences pref = getApplicationContext().getSharedPreferences("UserPrefs", MODE_PRIVATE);
-
+        final SharedPreferences.Editor editor = pref.edit();
         userId = pref.getString("user_id","");
 
         final Intent intent = getIntent();
@@ -70,7 +70,10 @@ public class AddTemplate extends AppCompatActivity {
 
                     finish();
                     Intent intent = new Intent(AddTemplate.this, LandingScreen.class);
-
+                    editor.putString("client_id",clientId);
+                    editor.putString("tempidselected",StrtmpName);
+                    editor.commit();
+                    //intent.putExtra("client_id",cl);
                     intent.putExtra("activityName", "addTemplateClass");
                     startActivity(intent);
                 }else
