@@ -68,6 +68,7 @@ public class TemplatesFragment extends BaseFragment {
     private List<String> isStarted;
     private List<String> inspection_list;
     private List<String> inspection_id_list;
+    private List<String> default_template;
 
     @Nullable
     @Override
@@ -110,7 +111,7 @@ public class TemplatesFragment extends BaseFragment {
                 int template_id = tem_spinner.getSelectedItemPosition();
 
                 if (isStarted.get(tem_spinner.getSelectedItemPosition()).equals("0")) {
-                    prePopulate(inspection_id_list.get(tem_spinner.getSelectedItemPosition()), client_id_list.get(client_spinner.getSelectedItemPosition()));
+                    prePopulate(inspection_id_list.get(tem_spinner.getSelectedItemPosition()), client_id_list.get(client_spinner.getSelectedItemPosition()),default_template.get(tem_spinner.getSelectedItemPosition()));
 
                 } else {
 
@@ -295,6 +296,7 @@ public class TemplatesFragment extends BaseFragment {
                                 inspection_id_list = new ArrayList<>();
                                 para_list = new ArrayList<>();
                                 isStarted = new ArrayList<>();
+                                default_template = new ArrayList<>();
 
 
                                 for (int i = 0; i < Array.length(); i++) {
@@ -312,6 +314,7 @@ public class TemplatesFragment extends BaseFragment {
                                     inspection_id_list.add(object.getString("ca_id"));
                                     para_list.add(object.getString("paragraph_text"));
                                     isStarted.add(object.getString("is_started"));
+                                    default_template.add(object.getString("default_template"));
                                 }
 
                                 tem_spinner.setAdapter(null);
@@ -512,7 +515,7 @@ public class TemplatesFragment extends BaseFragment {
 
     }
 
-    public void prePopulate(final String temId, final String clientId) {
+    public void prePopulate(final String temId, final String clientId , final String default_template ) {
         StringRequest request = new StringRequest(Request.Method.POST, End_Points.PRE_POPULATE,
                 new Response.Listener<String>() {
                     @Override
@@ -525,7 +528,7 @@ public class TemplatesFragment extends BaseFragment {
                             intent.putExtra("inspectionId", response);
                             intent.putExtra("client_id", clientId);
                             intent.putExtra("template_id", temId);
-                            intent.putExtra("inspection_type", "new");
+                            intent.putExtra("inspection_type", "old");
                             startActivity(intent);
                         } else {
                             new SweetAlertDialog(getActivity(), SweetAlertDialog.ERROR_TYPE)
@@ -582,6 +585,8 @@ public class TemplatesFragment extends BaseFragment {
 
                 params.put("client_id", clientId);
                 params.put("template_id", temId);
+                params.put("default_template", default_template);
+                params.put("text_paragraph",paraEt.getText().toString());
                 params.put("pagecover", "");
                 params.put("userID", id);
 
@@ -640,6 +645,11 @@ public class TemplatesFragment extends BaseFragment {
                 paraEt.setText(para);
 
             }
+            if (!(isStarted.get(tem_spinner.getSelectedItemPosition()).equals("0"))) {
+
+                review.setText("Continue");
+            }
+
 
             getInspections(temp_id);
 
