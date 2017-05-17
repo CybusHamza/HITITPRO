@@ -471,6 +471,7 @@ public class TemplatesFragment extends BaseFragment {
 
                                 }
 
+
                                 ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>
                                         (getContext(), android.R.layout.simple_spinner_item, client_list);
 
