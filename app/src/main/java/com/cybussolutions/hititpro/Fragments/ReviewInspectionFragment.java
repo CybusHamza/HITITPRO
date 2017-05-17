@@ -222,21 +222,21 @@ public class ReviewInspectionFragment extends BaseFragment {
                         ringProgressDialog.dismiss();
                         try {
                             JSONObject main=new JSONObject(response);
-                            JSONObject portfolio = new JSONObject();
-                            JSONArray roofing = new JSONArray(main.get("roofing"));
-                            JSONArray plumbing = new JSONArray(main.get("plumbing"));
-                            JSONArray interior = new JSONArray(main.get("interior"));
-                            JSONArray insulation = new JSONArray(main.get("insulation"));
-                            JSONArray heating = new JSONArray(main.get("heating"));
-                            JSONArray fireplaces = new JSONArray(main.get("fireplaces"));
-                            JSONArray exterior = new JSONArray(main.get("exterior"));
-                            JSONArray electrical = new JSONArray(main.get("electrical"));
-                            JSONArray cooling = new JSONArray(main.get("cooling"));
-                            JSONArray appliance = new JSONArray(main.get("appliance"));
+                            JSONArray portfolio = new JSONArray(main.getJSONArray("portfolio").toString());
+                            JSONArray roofing = new JSONArray(main.getJSONArray("roofing").toString());
+                            JSONArray plumbing = new JSONArray(main.getJSONArray("plumbing").toString());
+                            JSONArray interior = new JSONArray(main.getJSONArray("interior").toString());
+                            JSONArray insulation = new JSONArray(main.getJSONArray("insulation").toString());
+                            JSONArray heating = new JSONArray(main.getJSONArray("heating").toString());
+                            JSONArray fireplaces = new JSONArray(main.getJSONArray("fireplaces").toString());
+                            JSONArray exterior = new JSONArray(main.getJSONArray("exterior").toString());
+                            JSONArray electrical = new JSONArray(main.getJSONArray("electrical").toString());
+                            JSONArray cooling = new JSONArray(main.getJSONArray("cooling").toString());
+                            JSONArray appliance = new JSONArray(main.getJSONArray("appliance").toString());
 
 
                             for (int i=0;i<portfolio.length();i++) {
-                                //JSONObject objectportfolio = portfolio.getJSONObject(i);
+                                JSONObject objectportfolio = portfolio.getJSONObject(i);
                                 JSONObject objectroofing = roofing.getJSONObject(i);
                                 JSONObject objectplumbing = plumbing.getJSONObject(i);
                                 JSONObject objectinterior = interior.getJSONObject(i);
@@ -249,7 +249,7 @@ public class ReviewInspectionFragment extends BaseFragment {
                                 JSONObject objectappliance = appliance.getJSONObject(i);
                                 //String port=objectportfolio.getString("empty_fields");
 
-                                //tvportofolio.setText(port);
+                                tvportofolio.setText(objectportfolio.get("empty_fields").toString());
                                 tvroofing.setText(objectroofing.get("empty_fields").toString());
                                 tvplumbing.setText(objectplumbing.get("empty_fields").toString());
                                 tvinterior.setText(objectinterior.get("empty_fields").toString());
