@@ -472,7 +472,7 @@ public class CoolingScreenFragment extends BaseFragment {
 
                 }
 
-                int total = 12 - isAnyChecked;
+                int total = 10 - isAnyChecked;
                 params.put("empty_fields", total+"");
                 return params;
 

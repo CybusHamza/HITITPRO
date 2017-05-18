@@ -628,7 +628,7 @@ public class ExteriorScreenFragment extends BaseFragment {
 
                 }
 
-                int total = 12 - isAnyChecked;
+                int total = 24 - isAnyChecked;
                 params.put("empty_fields", total+"");
 
                 return params;

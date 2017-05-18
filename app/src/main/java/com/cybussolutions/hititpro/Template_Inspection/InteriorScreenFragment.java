@@ -616,7 +616,7 @@ public class InteriorScreenFragment extends BaseFragment {
 
                 }
 
-                int total = 12 - isAnyChecked;
+                int total = 14 - isAnyChecked;
                 params.put("empty_fields", total+"");
 
 
