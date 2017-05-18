@@ -115,18 +115,24 @@ public class TemplatesFragment extends BaseFragment {
                 int client_id = client_spinner.getSelectedItemPosition();
                 // int inspection_id =  inspection_spinner.getSelectedItemPosition();
                 int template_id = tem_spinner.getSelectedItemPosition();
+                if(!client_spinner.getSelectedItem().equals("Select") || !tem_spinner.getSelectedItem().equals("Select")) {
 
-                if (isStarted.get(tem_spinner.getSelectedItemPosition()).equals("0")) {
-                    prePopulate(inspection_id_list.get(tem_spinner.getSelectedItemPosition()), client_id_list.get(client_spinner.getSelectedItemPosition()),default_template.get(tem_spinner.getSelectedItemPosition()));
+                    if (isStarted.get(tem_spinner.getSelectedItemPosition()).equals("0")) {
+                        prePopulate(inspection_id_list.get(tem_spinner.getSelectedItemPosition()), client_id_list.get(client_spinner.getSelectedItemPosition()), default_template.get(tem_spinner.getSelectedItemPosition()));
 
-                } else {
-
-                    Intent intent = new Intent(getActivity(), StructureScreensActivity.class);
-                    intent.putExtra("inspectionId", templateID_list.get(0));
-                    intent.putExtra("client_id", client_id_list.get(client_id));
-                    intent.putExtra("template_id", inspection_id_list.get(template_id));
-                    intent.putExtra("inspection_type", "old");
-                    startActivity(intent);
+                    } else {
+                        //  if(!client_list.get(client_id).equals("Select")) {
+                        Intent intent = new Intent(getActivity(), StructureScreensActivity.class);
+                        intent.putExtra("inspectionId", templateID_list.get(0));
+                        intent.putExtra("client_id", client_id_list.get(client_id));
+                        intent.putExtra("template_id", inspection_id_list.get(template_id));
+                        intent.putExtra("inspection_type", "old");
+                        startActivity(intent);
+                        //}else {
+                        //  Toast.makeText(getContext(),"plz select client to review",Toast.LENGTH_LONG).show();
+                    }
+                }else {
+                    Toast.makeText(getContext(),"plz select client and template to continue",Toast.LENGTH_LONG).show();
                 }
                        /* Intent intent=new Intent(getActivity(), Start_Inspection.class);
                         intent.putExtra("client_name",client_spinner.getSelectedItem().toString());
@@ -304,6 +310,7 @@ public class TemplatesFragment extends BaseFragment {
                                 isStarted = new ArrayList<>();
                                 default_template = new ArrayList<>();
                                 para_list.add(0,"");
+                                isStarted.add(0,"");
 
                                 inspection_list.add(0,"Select");
                                 inspection_id_list.add(0,"0");
@@ -445,7 +452,7 @@ public class TemplatesFragment extends BaseFragment {
                         } else if (response.equals("false")) {
                             new SweetAlertDialog(getActivity(), SweetAlertDialog.ERROR_TYPE)
                                     .setTitleText("Error!")
-                                    .setConfirmText("OK").setContentText("No Clients Found ")
+                                    .setConfirmText("OK").setContentText("No Template Found ")
                                     .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                                         @Override
                                         public void onClick(SweetAlertDialog sDialog) {

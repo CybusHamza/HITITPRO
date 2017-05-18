@@ -116,7 +116,8 @@ public class Edit_Profile extends AppCompatActivity {
                                             editor.putString("city",UserCity.getText().toString());
                                             editor.putString("adress", UserAddress.getText().toString()+" ,"+UserCity.getText().toString()+" , "+UserCountry.getText().toString());
                                             editor.commit();
-                                            finish();
+                                            Intent intent=new Intent(Edit_Profile.this,LandingScreen.class);
+                                            startActivity(intent);
 
                                         }
                                     })
