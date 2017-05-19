@@ -43,21 +43,19 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class Detailed_Activity_Structure_Screens extends AppCompatActivity {
 
+    private static final int MY_SOCKET_TIMEOUT_MS = 10000;
     ListView detailedListView;
     String[] items;
-    String heading, dbColumn,fromadapter ,dbTable,userid, enteredStructure = "", inspectionID, fromDataBase;
+    String heading, dbColumn, fromadapter, dbTable, userid, enteredStructure = "", inspectionID, fromDataBase;
     Detailed_Adapter_Structure_Screen Detailed_Adapter;
     Database database = new Database(this);
     Button addCategory;
     AlertDialog b;
-    private ArrayList<Checkbox_model> list = new ArrayList<>();
-    private ArrayList<Checkbox_model> list_temp ;
     ArrayAdapter<Checkbox_model> adapter;
-    private static final int MY_SOCKET_TIMEOUT_MS = 10000;
-    String toPass[]  ;
-
-    ArrayList <String> checkedValue;
-
+    String toPass[];
+    ArrayList<String> checkedValue;
+    private ArrayList<Checkbox_model> list = new ArrayList<>();
+    private ArrayList<Checkbox_model> list_temp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,9 +78,9 @@ public class Detailed_Activity_Structure_Screens extends AppCompatActivity {
         dbTable = intent.getStringExtra("dbTable");
         inspectionID = intent.getStringExtra("inspectionID");
 
-        SharedPreferences sp=getSharedPreferences("prefs", MODE_PRIVATE);
-        SharedPreferences.Editor editor=sp.edit();
-        editor.putString("heading",heading);
+        SharedPreferences sp = getSharedPreferences("prefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putString("heading", heading);
         editor.commit();
 
         Toolbar toolbar;
@@ -97,13 +95,14 @@ public class Detailed_Activity_Structure_Screens extends AppCompatActivity {
         addCategory = (Button) findViewById(R.id.add_category);
 
         SharedPreferences pref = getApplicationContext().getSharedPreferences("UserPrefs", MODE_PRIVATE);
-        userid =  pref.getString("user_id","");
+        userid = pref.getString("user_id", "");
 
 
-        toPass = new String[]{heading,dbColumn,dbTable};
+        toPass = new String[]{heading, dbColumn, dbTable};
 
 
-        addCategory.setOnClickListener(new View.OnClickListener() {
+        addCategory.setOnClickListener(
+                new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 addDetail();
@@ -179,7 +178,7 @@ public class Detailed_Activity_Structure_Screens extends AppCompatActivity {
         }
 
 
-        Detailed_Adapter = new Detailed_Adapter_Structure_Screen(Detailed_Activity_Structure_Screens.this,list,R.layout.structure_observations,toPass);
+        Detailed_Adapter = new Detailed_Adapter_Structure_Screen(Detailed_Activity_Structure_Screens.this, list, R.layout.structure_observations, toPass);
         detailedListView.setChoiceMode(android.R.layout.simple_list_item_single_choice);
         detailedListView.setAdapter(Detailed_Adapter);
 
@@ -240,7 +239,6 @@ public class Detailed_Activity_Structure_Screens extends AppCompatActivity {
         final Button cancel = (Button) dialogView.findViewById(R.id.cancel);
 
 
-
         b = dialogBuilder.create();
 
 
@@ -255,10 +253,7 @@ public class Detailed_Activity_Structure_Screens extends AppCompatActivity {
 
                 if (Add.getText().toString().equals("")) {
                     Toast.makeText(Detailed_Activity_Structure_Screens.this, "Please Enter Some Data !!", Toast.LENGTH_SHORT).show();
-                }
-
-                else
-                {
+                } else {
 
 
                     String[] insertArray = Detailed_Adapter.getDbInsertArray();
@@ -269,23 +264,19 @@ public class Detailed_Activity_Structure_Screens extends AppCompatActivity {
                     Detailed_Adapter.notifyDataSetChanged();
 
 
-                    for (int item = 0; item <= insertArray.length -1; item++) {
+                    for (int item = 0; item <= insertArray.length - 1; item++) {
 
-                        if(item != 0)
-                        {
-                            if(insertArray[item-1].equals(Add.getText().toString()+"%0") || insertArray[item-1].equals(Add.getText().toString()+"%1") )
-                            {
+                        if (item != 0) {
+                            if (insertArray[item - 1].equals(Add.getText().toString() + "%0") || insertArray[item - 1].equals(Add.getText().toString() + "%1")) {
                                 Toast.makeText(Detailed_Activity_Structure_Screens.this, "Item Already Available", Toast.LENGTH_SHORT).show();
                                 list = new ArrayList<>(list_temp);
                                 break;
-                            }
-                            else
-                            {
+                            } else {
 
                                 Checkbox_model model = new Checkbox_model();
                                 model.setTitle(insertArray[item]);
 
-                                if (item == insertArray.length -1 ) {
+                                if (item == insertArray.length - 1) {
 
 
                                     model.setTitle(Add.getText().toString() + "%0");
@@ -293,19 +284,16 @@ public class Detailed_Activity_Structure_Screens extends AppCompatActivity {
                                 }
 
                                 list.add(model);
-                                if(item>list.size())
-                                {
+                                if (item > list.size()) {
                                     list_temp.add(model);
                                 }
                             }
-                        }
-                        else
-                        {
+                        } else {
 
                             Checkbox_model model = new Checkbox_model();
                             model.setTitle(insertArray[item]);
 
-                            if (item == insertArray.length -1) {
+                            if (item == insertArray.length - 1) {
 
                                 model.setTitle(Add.getText().toString() + "%0");
 
@@ -315,16 +303,9 @@ public class Detailed_Activity_Structure_Screens extends AppCompatActivity {
                         }
 
 
-
-
-
                     }
 
                     Detailed_Adapter.notifyDataSetChanged();
-
-
-
-
 
 
                     b.dismiss();
@@ -344,7 +325,6 @@ public class Detailed_Activity_Structure_Screens extends AppCompatActivity {
     }
 
     public void update() {
-
 
 
         StringRequest request = new StringRequest(Request.Method.POST, End_Points.UPDATELIVE,
@@ -391,11 +371,11 @@ public class Detailed_Activity_Structure_Screens extends AppCompatActivity {
             protected Map<String, String> getParams() throws AuthFailureError {
 
                 Map<String, String> params = new HashMap<>();
-                params.put("dbTable",dbTable);
-                params.put("dbColumn",dbColumn );
-                params.put("enteredStructure",enteredStructure);
-                params.put("inspection_id",StructureScreensActivity.inspectionID);
-                params.put("added_by",userid);
+                params.put("dbTable", dbTable);
+                params.put("dbColumn", dbColumn);
+                params.put("enteredStructure", enteredStructure);
+                params.put("inspection_id", StructureScreensActivity.inspectionID);
+                params.put("added_by", userid);
                 return params;
             }
         };
