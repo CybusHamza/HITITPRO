@@ -1,12 +1,24 @@
 package com.cybussolutions.hititpro.Activities;
 
+import android.Manifest;
 import android.app.ProgressDialog;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -23,6 +35,9 @@ import com.cybussolutions.hititpro.Network.End_Points;
 import com.cybussolutions.hititpro.R;
 
 
+import java.io.ByteArrayOutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,10 +47,18 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class SignupActivity extends AppCompatActivity {
 
+    private static final int REQUEST_PERMISSIONS=0;
+    Intent intent;
+    private static int IMG_RESULT = 2;
+    String ImageDecode;
+    ImageView logo;
+
+    String mCurrentPhotoPath,ba1,mSavedPhotoName;
+
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
-    EditText f_name,l_name,emial,phone,city,adress,country,password;
-    String strf_name,strl_name,stremial,strphone,strcity,stradress,strcountry,strpassword;
-    Button signup;
+    EditText f_name,l_name,emial,phone,website,adress,password,comfirm_password,company_info;
+    String strf_name,strl_name,stremial,strphone,strwebsite,stradress,strcompanyinfo,strpassword;
+    Button signup,attachLogo;
     private static final int MY_SOCKET_TIMEOUT_MS = 10000;
     ProgressDialog ringProgressDialog;
 
@@ -49,12 +72,38 @@ public class SignupActivity extends AppCompatActivity {
         l_name = (EditText) findViewById(R.id.last_name_et);
         emial = (EditText) findViewById(R.id.email_et);
         phone = (EditText) findViewById(R.id.phone_et);
-        city = (EditText) findViewById(R.id.city_et);
+        website = (EditText) findViewById(R.id.website_et);
         adress = (EditText) findViewById(R.id.address_et);
-        country = (EditText) findViewById(R.id.country_et);
+       // country = (EditText) findViewById(R.id.country_et);
         password = (EditText) findViewById(R.id.password_et);
+        comfirm_password=(EditText)findViewById(R.id.confirm_password_et);
+        company_info=(EditText)findViewById(R.id.company_info_et);
 
         signup = (Button) findViewById(R.id.signUp_button);
+        attachLogo = (Button) findViewById(R.id.logo_button);
+
+        logo= (ImageView) findViewById(R.id.logo);
+
+        attachLogo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (ActivityCompat.checkSelfPermission(SignupActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+
+
+                    if (Build.VERSION.SDK_INT > 22) {
+
+                        requestPermissions(new String[]{Manifest.permission
+                                        .WRITE_EXTERNAL_STORAGE},
+                                REQUEST_PERMISSIONS);
+
+                    }
+
+                } else {
+                    attachLogo();
+
+                }
+            }
+        });
 
 
         signup.setOnClickListener(new View.OnClickListener() {
@@ -65,16 +114,16 @@ public class SignupActivity extends AppCompatActivity {
                 strl_name = l_name.getText().toString();
                 stremial = emial.getText().toString();
                 strphone = phone.getText().toString();
-                strcity = city.getText().toString();
+                strwebsite = website.getText().toString();
                 stradress = adress.getText().toString();
-                strcountry = country.getText().toString();
+                strcompanyinfo = company_info.getText().toString();
                 strpassword = password.getText().toString();
 
 
                 // calling for sign up
 
                 if(strf_name.equals("") || strl_name.equals("")|| stremial.equals("")|| strphone.equals("")
-                   || strcity.equals("")|| stradress.equals("")|| strcountry.equals("")|| strpassword.equals(""))
+                   || strwebsite.equals("")|| stradress.equals("")|| strcompanyinfo.equals("")|| strpassword.equals(""))
                 {
                     Toast.makeText(SignupActivity.this, "Fields cannot be empty ", Toast.LENGTH_SHORT).show();
                 }
@@ -82,7 +131,8 @@ public class SignupActivity extends AppCompatActivity {
                 {
                     if(stremial.matches(emailPattern))
                     {
-                        Signup();
+                        uploadlogo();
+                        //Signup();
                     }
                     else {
                         new SweetAlertDialog(SignupActivity.this, SweetAlertDialog.ERROR_TYPE)
@@ -202,9 +252,10 @@ public class SignupActivity extends AppCompatActivity {
                 params.put("first_name", strf_name);
                 params.put("last_name", strl_name);
                 params.put("phone_number", strphone);
-                params.put("city", strcity);
+                params.put("website", strwebsite);
                 params.put("adress", stradress);
-                params.put("country", strcountry);
+                params.put("company_info", strcompanyinfo);
+                params.put("profile_image", mSavedPhotoName);
 
                 return params;
             }
@@ -219,6 +270,87 @@ public class SignupActivity extends AppCompatActivity {
         requestQueue.add(request);
 
 
+    }
+    private void attachLogo() {
+        intent = new Intent(Intent.ACTION_PICK,
+                MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(intent, IMG_RESULT);
+
+    }
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        try {
+
+            //  if (requestCode == Constants.REQUEST_CODE && resultCode == RESULT_OK && data != null) {
+            if (requestCode == IMG_RESULT  && resultCode == RESULT_OK && data != null) {
+                // textView.setText(stringBuffer.toString());
+                Uri URI = data.getData();
+                String[] FILE = {MediaStore.Images.Media.DATA};
+
+
+                Cursor cursor = getContentResolver().query(URI,
+                        FILE, null, null, null);
+
+                cursor.moveToFirst();
+
+                int columnIndex = cursor.getColumnIndex(FILE[0]);
+                ImageDecode = cursor.getString(columnIndex);
+                mCurrentPhotoPath=ImageDecode;
+                int w=logo.getWidth();
+                int h=logo.getHeight();
+                Bitmap unscaled=BitmapFactory.decodeFile(ImageDecode);
+                Bitmap scaled=unscaled.createScaledBitmap(unscaled,w,h,true);
+
+                cursor.close();
+                logo.setImageBitmap(scaled);
+
+
+            }
+        } catch (Exception e) {
+            Toast.makeText(this, "Please try again"+e.toString(), Toast.LENGTH_LONG)
+                    .show();
+        }
+    }
+    private void uploadlogo() {
+        Calendar c = Calendar.getInstance();
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        final String formattedDate = df.format(c.getTime());
+        Bitmap bm = BitmapFactory.decodeFile(mCurrentPhotoPath);
+        ByteArrayOutputStream bao = new ByteArrayOutputStream();
+        bm.compress(Bitmap.CompressFormat.JPEG, 50, bao);
+        byte[] ba = bao.toByteArray();
+        ba1 = Base64.encodeToString(ba, Base64.NO_WRAP);
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, End_Points.UPLOAD, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                mSavedPhotoName = response;
+                Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_LONG).show();
+                Signup();
+                //    uploadToServer();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
+
+            }
+        }) {
+            @Override
+            public Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("image", ba1);
+                params.put("name", formattedDate);
+                return params;
+            }
+        };
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
+                MY_SOCKET_TIMEOUT_MS,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        RequestQueue requestQueue = Volley.newRequestQueue(SignupActivity.this);
+        requestQueue.add(stringRequest);
     }
 
 

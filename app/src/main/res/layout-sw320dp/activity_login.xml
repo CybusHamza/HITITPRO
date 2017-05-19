@@ -91,9 +91,21 @@
         android:layout_marginRight="@dimen/activity_vertical_margin"
         android:background="@drawable/round_corner_button"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="120dp" />
+        android:layout_marginTop="120dp"
+        android:layout_marginBottom="15dp"/>
 
-    <Button
+        <TextView
+            android:id="@+id/forgotPassword"
+            android:layout_width="184dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:gravity="center"
+            android:text="Forgot Password"
+            android:textColor="#89BCEB"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <Button
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:textSize="23sp"

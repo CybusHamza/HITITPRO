@@ -1,12 +1,15 @@
 package com.cybussolutions.hititpro.Activities;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,6 +43,7 @@ public class Login extends AppCompatActivity {
     ProgressDialog ringProgressDialog;
     TextView username, password;
     String strUser,strPass;
+    TextView forgotPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +65,14 @@ public class Login extends AppCompatActivity {
         signup = (Button) findViewById(R.id.signUp_button);
         username = (TextView) findViewById(R.id.username_login);
         password = (TextView) findViewById(R.id.password_login);
+        forgotPassword= (TextView) findViewById(R.id.forgotPassword);
+
+        forgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                forgotPasswordDialog();
+            }
+        });
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -203,6 +215,34 @@ public class Login extends AppCompatActivity {
 
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
         requestQueue.add(request);
+
+    }
+    public void forgotPasswordDialog() {
+        // canvas.setMode(CanvasView.Mode.TEXT);
+        AlertDialog.Builder alert = new AlertDialog.Builder(Login.this);
+        alert.setTitle("Forgot Password"); //Set Alert dialog title here
+        alert.setMessage("Enter Your Email Here"); //Message here
+
+        // Set an EditText view to get user input
+        final EditText input = new EditText(Login.this);
+        alert.setView(input);
+
+        alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                //You will get as string input data in this variable.
+                // here we convert the input to a string and show in a toast.
+                String srt = input.getEditableText().toString();
+
+            } // End of onClick(DialogInterface dialog, int whichButton)
+        }); //End of alert.setPositiveButton
+        alert.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                // Canceled.
+                dialog.cancel();
+            }
+        }); //End of alert.setNegativeButton
+        AlertDialog alertDialog = alert.create();
+        alertDialog.show();
 
     }
 }
