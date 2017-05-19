@@ -3,20 +3,20 @@ package com.cybussolutions.hititpro.Activities;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
-import com.cybussolutions.hititpro.Fragments.ClientsFragment;
-import com.cybussolutions.hititpro.Fragments.InspectionImagesFragment;
 
+import com.cybussolutions.hititpro.Fragments.ClientsFragment;
 import com.cybussolutions.hititpro.Fragments.ProfileFragment;
 import com.cybussolutions.hititpro.Fragments.ReviewInspectionFragment;
-import com.cybussolutions.hititpro.Fragments.SettingsFragment;
 import com.cybussolutions.hititpro.Fragments.TemplatesFragment;
-
 import com.cybussolutions.hititpro.Fragments.TemplatesListFragment;
 import com.cybussolutions.hititpro.R;
 import com.mikepenz.materialdrawer.AccountHeader;
@@ -28,7 +28,8 @@ import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
-
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
 
 public class LandingScreen extends AppCompatActivity {
@@ -36,11 +37,13 @@ public class LandingScreen extends AppCompatActivity {
 
     Drawer drawer;
     Toolbar toolbar;
-
+    String image;
+    Bitmap[] bitmap1;
+    String userName,userEmail;
     // drawer items name icons
-    String[] drawerNames = new String[]{"Profile", "Clients", "Templates","Inspection" ,"Review Inspection", "Inspection Images", "Settings", "Logout"};
-    int[] drawerImages = new int[]{R.drawable.profile, R.drawable.clients, R.drawable.template,R.drawable.template, R.drawable.user_review, R.drawable.picture,
-            R.drawable.settings, R.drawable.logout};
+    String[] drawerNames = new String[]{"Profile", "Clients", "Templates","Inspection" ,"Review Inspection","Logout"};
+    int[] drawerImages = new int[]{R.drawable.profile, R.drawable.clients, R.drawable.template,R.drawable.review, R.drawable.startinspection
+           ,R.drawable.logout};
 
     String activityName;
     @Override
@@ -51,11 +54,43 @@ public class LandingScreen extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        final SharedPreferences pref = getApplicationContext().getSharedPreferences("UserPrefs", MODE_PRIVATE);
+         userName = pref.getString("user_name", null);
+         userEmail = pref.getString("email", null);
+        image = pref.getString("img", null);
+
+
         Intent i=getIntent();
         activityName=i.getStringExtra("activityName");
+        String url = null;
+        bitmap1 = new Bitmap[1];
+
+        url =  "http://xfer.cybusservices.com/hititpro/uploads/inspection/" + image;
+
+        Picasso.with(LandingScreen.this)
+                .load(url)
+                .into(new Target() {
+                    @Override
+                    public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                        bitmap1[0] =bitmap;
+                    }
+
+                    @Override
+                    public void onBitmapFailed(Drawable errorDrawable) {
+
+                        Log.e("here","onBitmapFailed");
+                    }
+
+                    @Override
+                    public void onPrepareLoad(Drawable placeHolderDrawable) {
+                        Log.e("here","onPrepareLoad");
+                    }
+                });
+
 
 
         setupDrawer();
+
         if(activityName.equals("addTemplateClass")){
             getSupportFragmentManager().beginTransaction().replace(R.id.container, new TemplatesFragment()).commit();
         }else if(activityName.equals("addClientClass")){
@@ -63,6 +98,8 @@ public class LandingScreen extends AppCompatActivity {
         }
         else
         getSupportFragmentManager().beginTransaction().replace(R.id.container, new ProfileFragment()).commit();
+
+
 
 
     }
@@ -73,14 +110,10 @@ public class LandingScreen extends AppCompatActivity {
         PrimaryDrawerItem drawerItem3 = new PrimaryDrawerItem().withIdentifier(3).withName(drawerNames[2]).withIcon(drawerImages[2]);
         PrimaryDrawerItem drawerItem4 = new PrimaryDrawerItem().withIdentifier(3).withName(drawerNames[3]).withIcon(drawerImages[3]);
         PrimaryDrawerItem drawerItem5 = new PrimaryDrawerItem().withIdentifier(4).withName(drawerNames[4]).withIcon(drawerImages[4]);
-        PrimaryDrawerItem drawerItem6 = new PrimaryDrawerItem().withIdentifier(5).withName(drawerNames[5]).withIcon(drawerImages[5]);
-        PrimaryDrawerItem drawerItem7 = new PrimaryDrawerItem().withIdentifier(6).withName(drawerNames[6]).withIcon(drawerImages[6]);
-        PrimaryDrawerItem drawerItem8 = new PrimaryDrawerItem().withIdentifier(7).withName(drawerNames[7]).withIcon(drawerImages[7]);
+        PrimaryDrawerItem drawerItem8 = new PrimaryDrawerItem().withIdentifier(5).withName(drawerNames[5]).withIcon(drawerImages[5]);
 
 
-        final SharedPreferences pref = getApplicationContext().getSharedPreferences("UserPrefs", MODE_PRIVATE);
-        String userName = pref.getString("user_name", null);
-        String userEmail = pref.getString("email", null);
+
 
     //create the drawer and remember the `Drawer` drawer object
         drawer = new DrawerBuilder()
@@ -97,10 +130,6 @@ public class LandingScreen extends AppCompatActivity {
                         drawerItem4,
                         new DividerDrawerItem(),
                         drawerItem5,
-                        new DividerDrawerItem(),
-                        drawerItem6,
-                        new DividerDrawerItem(),
-                        drawerItem7,
                         new DividerDrawerItem(),
                         drawerItem8
                 )
@@ -139,19 +168,6 @@ public class LandingScreen extends AppCompatActivity {
                                 break;
                             }
                             case 11: {
-                                fragment = new InspectionImagesFragment();
-                                getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment).commit();
-
-                                break;
-                            }
-                            case 13: {
-                                fragment = new SettingsFragment();
-                                getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment).commit();
-
-
-                                break;
-                            }
-                            case 15: {
                                 SharedPreferences preferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
                                 SharedPreferences.Editor editor = preferences.edit();
                                 editor.clear();
@@ -174,11 +190,17 @@ public class LandingScreen extends AppCompatActivity {
     }
 
     private AccountHeader setupHeader(String name, String email) {
+
+
+
+
+
         AccountHeader headerResult = new AccountHeaderBuilder()
                 .withActivity(this)
                 .withHeaderBackground(R.drawable.house_bkg)
                 .addProfiles(
-                        new ProfileDrawerItem().withName(name).withEmail(email).withIcon(getResources().getDrawable(R.drawable.man))
+
+                        new ProfileDrawerItem().withName(name).withEmail(email).withIcon(bitmap1[0])
                 )
                 .withOnAccountHeaderListener(new AccountHeader.OnAccountHeaderListener() {
                     @Override
@@ -226,4 +248,6 @@ public class LandingScreen extends AppCompatActivity {
             super.onBackPressed();
         }
     }
+
+
 }

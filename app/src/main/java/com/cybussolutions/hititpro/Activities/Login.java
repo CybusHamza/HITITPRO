@@ -133,7 +133,7 @@ public class Login extends AppCompatActivity {
 
                             try {
 
-                                String name,email,adress,phone;
+                                String name,email,adress,phone,img,company_info;
 
                                 JSONObject object = new JSONObject(response);
 
@@ -145,6 +145,8 @@ public class Login extends AppCompatActivity {
                                 adress += " ," +object.getString("city");
                                 adress += " , "+object.getString("country");
                                 phone =object.getString("phone_number");
+                                img =object.getString("profile_image");
+                                company_info =object.getString("company_info");
 
                                 SharedPreferences pref = getApplicationContext().getSharedPreferences("UserPrefs", MODE_PRIVATE);
                                 SharedPreferences.Editor editor = pref.edit();
@@ -154,7 +156,10 @@ public class Login extends AppCompatActivity {
                                 editor.putString("email", email);
                                 editor.putString("adress", adress);
                                 editor.putString("phone", phone);
+                                editor.putString("img", img);
                                 editor.putString("isloggedin","true");
+                                editor.putString("logo","true");
+                                editor.putString("company_info",company_info);
                                 editor.apply();
 
                                 Intent intent = new Intent(Login.this, LandingScreen.class);

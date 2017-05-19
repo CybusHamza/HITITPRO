@@ -5,22 +5,25 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cybussolutions.hititpro.Activities.Edit_Profile;
+import com.cybussolutions.hititpro.Helper.CircleTransform;
+import com.cybussolutions.hititpro.Network.End_Points;
 import com.cybussolutions.hititpro.R;
-
+import com.squareup.picasso.Picasso;
 
 
 public class ProfileFragment extends BaseFragment {
 
     View root;
-    TextView name,adress,contact,email;
+    TextView name,adress,contact,email,nameHeader;
+    ImageView pp;
 
 
 
@@ -39,9 +42,11 @@ public class ProfileFragment extends BaseFragment {
 
 
         name = (TextView) root.findViewById(R.id.nameTV);
+        nameHeader = (TextView) root.findViewById(R.id.name_header);
         email = (TextView) root.findViewById(R.id.emailtv);
         contact = (TextView) root.findViewById(R.id.numbertv);
         adress = (TextView) root.findViewById(R.id.adresstv);
+        pp = (ImageView) root.findViewById(R.id.pp);
 
 
         final SharedPreferences pref = getActivity().getSharedPreferences("UserPrefs", getActivity().MODE_PRIVATE);
@@ -49,12 +54,22 @@ public class ProfileFragment extends BaseFragment {
         final String struserEmail = pref.getString("email", null);
         final String strcontact = pref.getString("phone", null);
         final String stradress = pref.getString("adress", null);
+        final String company_info = pref.getString("company_info", null);
+        final String img = pref.getString("img", null);
 
-        name.setText(struserName);
+        nameHeader.setText(struserName);
+        name.setText(company_info);
         email.setText(struserEmail);
         contact.setText(strcontact);
         adress.setText(stradress);
 
+
+        String url = End_Points.IMAGE_BASE_URL + img;
+        Picasso.with(getActivity())
+                .load(url)
+                .resize(300, 300)
+                .centerCrop().transform(new CircleTransform())
+                .into(pp);
 
         FloatingActionButton fab = (FloatingActionButton) root. findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {

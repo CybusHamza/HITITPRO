@@ -4,6 +4,7 @@ package com.cybussolutions.hititpro.Network;
 public class End_Points {
 
     public static final String BASE_URL = "http://xfer.cybusservices.com/hititpro/Api_Controller/";
+    public static final String IMAGE_BASE_URL = "http://xfer.cybusservices.com/hititpro/uploads/inspection/";
 
     public static final String LOGIN = BASE_URL + "login";
     public static final String SIGN_UP = BASE_URL + "addUserSignUp";
