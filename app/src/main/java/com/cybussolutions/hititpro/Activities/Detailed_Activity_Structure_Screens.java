@@ -98,6 +98,7 @@ public class Detailed_Activity_Structure_Screens extends AppCompatActivity {
         userid = pref.getString("user_id", "");
 
 
+
         toPass = new String[]{heading, dbColumn, dbTable};
 
 
