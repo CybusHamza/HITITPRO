@@ -82,7 +82,7 @@ public class ElectricalScreenFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
                 ElectricalSync();
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new InsulationScreenFragment()).addToBackStack("insulation").commit();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new HeatingScreenFragment()).addToBackStack("heating").commit();
             }
         });
 

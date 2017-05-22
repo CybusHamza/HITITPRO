@@ -14,7 +14,10 @@ import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Base64;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -52,12 +55,13 @@ public class SignupActivity extends AppCompatActivity {
     private static int IMG_RESULT = 2;
     String ImageDecode;
     ImageView logo;
+    int keyDel;
 
     String mCurrentPhotoPath,ba1,mSavedPhotoName;
 
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
-    EditText f_name,l_name,emial,phone,website,adress,password,comfirm_password,company_info;
-    String strf_name,strl_name,stremial,strphone,strwebsite,stradress,strcompanyinfo,strpassword;
+    EditText f_name,l_name,emial,phone,website,adress,password,comfirm_password,company_info,fax;
+    String strf_name,strl_name,stremial,strphone,strwebsite,stradress,strcompanyinfo,strpassword,strconfirmpassword,strfax;
     Button signup,attachLogo;
     private static final int MY_SOCKET_TIMEOUT_MS = 10000;
     ProgressDialog ringProgressDialog;
@@ -72,6 +76,7 @@ public class SignupActivity extends AppCompatActivity {
         l_name = (EditText) findViewById(R.id.last_name_et);
         emial = (EditText) findViewById(R.id.email_et);
         phone = (EditText) findViewById(R.id.phone_et);
+        fax= (EditText) findViewById(R.id.fax_et);
         website = (EditText) findViewById(R.id.website_et);
         adress = (EditText) findViewById(R.id.address_et);
        // country = (EditText) findViewById(R.id.country_et);
@@ -105,7 +110,50 @@ public class SignupActivity extends AppCompatActivity {
             }
         });
 
+        phone.addTextChangedListener(new TextWatcher() {
 
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                phone.setOnKeyListener(new View.OnKeyListener() {
+                    @Override
+                    public boolean onKey(View v, int keyCode, KeyEvent event) {
+
+                        if (keyCode == KeyEvent.KEYCODE_DEL)
+                            keyDel = 1;
+                        return false;
+                    }
+                });
+
+                if (keyDel == 0) {
+                    int len = phone.getText().length();
+                    if(len==1){
+                        phone.setText("("+phone.getText());
+                        phone.setSelection(phone.getText().length());
+                    }
+                    if(len == 4) {
+                        phone.setText(phone.getText() + ")");
+                        phone.setSelection(phone.getText().length());
+                    }
+                    if(len==8){
+                        phone.setText(phone.getText() + "-");
+                        phone.setSelection(phone.getText().length());
+                    }
+                } else {
+                    keyDel = 0;
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable arg0) {
+                // TODO Auto-generated method stub
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
+                // TODO Auto-generated method stub
+            }
+        });
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -118,6 +166,9 @@ public class SignupActivity extends AppCompatActivity {
                 stradress = adress.getText().toString();
                 strcompanyinfo = company_info.getText().toString();
                 strpassword = password.getText().toString();
+                strconfirmpassword=comfirm_password.getText().toString();
+                strfax=fax.getText().toString();
+
 
 
                 // calling for sign up
@@ -129,10 +180,15 @@ public class SignupActivity extends AppCompatActivity {
                 }
                 else
                 {
-                    if(stremial.matches(emailPattern))
+                    if(stremial.matches(emailPattern) && strpassword.length()>=8 && strpassword.equals(strconfirmpassword))
                     {
                         uploadlogo();
                         //Signup();
+                    }else if(strpassword.length()<=7){
+                        Toast.makeText(getApplicationContext(),"Password length can not be less than 8 characters!",Toast.LENGTH_LONG).show();
+                    }
+                    else if(!strpassword.equals(strconfirmpassword)){
+                        Toast.makeText(getApplicationContext(),"Password Mismatches",Toast.LENGTH_LONG).show();
                     }
                     else {
                         new SweetAlertDialog(SignupActivity.this, SweetAlertDialog.ERROR_TYPE)
@@ -256,6 +312,7 @@ public class SignupActivity extends AppCompatActivity {
                 params.put("adress", stradress);
                 params.put("company_info", strcompanyinfo);
                 params.put("profile_image", mSavedPhotoName);
+                params.put("fax",strfax);
 
                 return params;
             }
@@ -333,7 +390,6 @@ public class SignupActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
-
             }
         }) {
             @Override
@@ -352,6 +408,4 @@ public class SignupActivity extends AppCompatActivity {
         RequestQueue requestQueue = Volley.newRequestQueue(SignupActivity.this);
         requestQueue.add(stringRequest);
     }
-
-
 }

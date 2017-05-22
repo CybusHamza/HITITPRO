@@ -14,6 +14,7 @@ import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -49,7 +50,8 @@ public class Detailed_Activity_Structure_Screens extends AppCompatActivity {
     String heading, dbColumn, fromadapter, dbTable, userid, enteredStructure = "", inspectionID, fromDataBase;
     Detailed_Adapter_Structure_Screen Detailed_Adapter;
     Database database = new Database(this);
-    Button addCategory;
+   // Button addCategory;
+   ImageView addCategory;
     AlertDialog b;
     ArrayAdapter<Checkbox_model> adapter;
     String toPass[];
@@ -92,7 +94,7 @@ public class Detailed_Activity_Structure_Screens extends AppCompatActivity {
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.back);
 
         detailedListView = (ListView) findViewById(R.id.details_listview);
-        addCategory = (Button) findViewById(R.id.add_category);
+        addCategory = (ImageView) findViewById(R.id.add_category);
 
         SharedPreferences pref = getApplicationContext().getSharedPreferences("UserPrefs", MODE_PRIVATE);
         userid = pref.getString("user_id", "");

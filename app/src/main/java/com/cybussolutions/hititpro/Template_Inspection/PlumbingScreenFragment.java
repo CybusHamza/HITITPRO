@@ -78,7 +78,7 @@ public class PlumbingScreenFragment extends BaseFragment {
             public void onClick(View v) {
 
                 PlumbingSync();
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new AppliancesScreenFragment()).addToBackStack("appliances").commit();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new InteriorScreenFragment()).addToBackStack("interior").commit();
             }
         });
         back.setOnClickListener(new View.OnClickListener() {

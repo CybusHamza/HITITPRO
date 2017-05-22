@@ -51,7 +51,7 @@
                     android:textColor="@color/black"
                     android:textColorHint="@color/black"
                     android:textSize="15sp"
-                    android:digits="qwertzuiopasdfghjklyxcvbnm"/>
+                    android:digits="qwertzuiopasdfghjklyxcvbnmABCDEFGHIJKLMNOPQRSTUVWXYZ"/>
 
             </com.github.florent37.materialtextfield.MaterialTextField>
 
@@ -77,7 +77,7 @@
                     android:textColor="@color/black"
                     android:textColorHint="@color/black"
                     android:textSize="15sp"
-                    android:digits="qwertzuiopasdfghjklyxcvbnm"/>
+                    android:digits="qwertzuiopasdfghjklyxcvbnmABCDEFGHIJKLMNOPQRSTUVWXYZ"/>
 
             </com.github.florent37.materialtextfield.MaterialTextField>
 
@@ -173,13 +173,37 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/phone"
                     android:inputType="phone"
+                    android:maxLength="14"
                     android:singleLine="true"
                     android:textColor="@color/black"
                     android:textColorHint="@color/black"
                     android:textSize="15sp" />
 
             </com.github.florent37.materialtextfield.MaterialTextField>
+            <com.github.florent37.materialtextfield.MaterialTextField
+                android:id="@+id/fax"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:layout_marginTop="30dp"
+                app:mtf_cardCollapsedHeight="4dp"
+                app:mtf_image="@drawable/user"
+                app:mtf_openKeyboardOnFocus="true">
 
+                <EditText
+                    android:id="@+id/fax_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Fax"
+                    android:inputType="phone"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
+                    android:textSize="15sp" />
+
+            </com.github.florent37.materialtextfield.MaterialTextField>
 
             <com.github.florent37.materialtextfield.MaterialTextField
                 android:id="@+id/website"

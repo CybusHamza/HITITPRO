@@ -56,9 +56,11 @@ public class ProfileFragment extends BaseFragment {
         final String stradress = pref.getString("adress", null);
         final String company_info = pref.getString("company_info", null);
         final String img = pref.getString("img", null);
+        final String website = pref.getString("website", null);
+        final String fax = pref.getString("fax", null);
 
         nameHeader.setText(struserName);
-        name.setText(company_info);
+        name.setText(struserName);
         email.setText(struserEmail);
         contact.setText(strcontact);
         adress.setText(stradress);
@@ -80,6 +82,10 @@ public class ProfileFragment extends BaseFragment {
                 intent.putExtra("email",struserEmail);
                 intent.putExtra("phone",strcontact);
                 intent.putExtra("adress",stradress);
+                intent.putExtra("img",img);
+                intent.putExtra("company_info",company_info);
+                intent.putExtra("website",website);
+                intent.putExtra("fax",fax);
                 startActivity(intent);
 //              Snackbar.make(view, "Hellooooo !!!!", Snackbar.LENGTH_LONG)
 //                        .setAction("Action", null).show();

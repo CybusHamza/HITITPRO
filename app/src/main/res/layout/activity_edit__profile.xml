@@ -96,13 +96,36 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Contact"
+                android:hint="Phone"
                 android:singleLine="true"
                 android:textColor="@color/black"
                 android:inputType="text"
                 android:textColorHint="@color/black"
                 android:textSize="15sp"
                 android:id="@+id/et_user_contact" />
+
+        </com.github.florent37.materialtextfield.MaterialTextField>
+        <com.github.florent37.materialtextfield.MaterialTextField
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            app:mtf_cardCollapsedHeight="4dp"
+            app:mtf_image="@drawable/gender"
+            app:mtf_hasFocus="false"
+            app:mtf_openKeyboardOnFocus="false"
+            android:layout_marginTop="20dp"
+            android:id="@+id/user_fax">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Fax"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:inputType="text"
+                android:textColorHint="@color/black"
+                android:textSize="15sp"
+                android:id="@+id/et_user_fax" />
 
         </com.github.florent37.materialtextfield.MaterialTextField>
 
@@ -115,17 +138,17 @@
             app:mtf_image="@drawable/location"
             app:mtf_openKeyboardOnFocus="false"
             android:layout_marginTop="30dp"
-            android:id="@+id/user_city">
+            android:id="@+id/user_website">
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="City"
+                android:hint="Website"
                 android:singleLine="true"
                 android:textColor="@color/black"
                 android:textColorHint="@color/black"
                 android:textSize="15sp"
-                android:id="@+id/et_user_city" />
+                android:id="@+id/et_user_website" />
 
         </com.github.florent37.materialtextfield.MaterialTextField>
         <com.github.florent37.materialtextfield.MaterialTextField
@@ -159,19 +182,42 @@
             app:mtf_image="@drawable/location"
             app:mtf_openKeyboardOnFocus="false"
             android:layout_marginTop="30dp"
-            android:id="@+id/user_country">
+            android:id="@+id/user_company_info">
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Country"
+                android:hint="Company Information"
                 android:singleLine="true"
                 android:textColor="@color/black"
                 android:textColorHint="@color/black"
                 android:textSize="15sp"
-                android:id="@+id/et_user_country" />
+                android:id="@+id/et_user_company_info" />
 
         </com.github.florent37.materialtextfield.MaterialTextField>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/activity_vertical_margin"
+            android:layout_marginRight="@dimen/activity_vertical_margin"
+            android:layout_marginTop="60dp">
+
+            <Button
+                android:id="@+id/change_logo_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Change Logo"
+                android:typeface="serif"
+                android:layout_marginBottom="@dimen/activity_horizontal_margin"/>
+
+            <ImageView
+                android:id="@+id/logo"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="right"
+                android:background="@android:drawable/ic_menu_gallery"/>
+        </LinearLayout>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

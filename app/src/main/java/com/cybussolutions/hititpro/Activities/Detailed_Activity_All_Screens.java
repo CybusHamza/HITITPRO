@@ -16,6 +16,7 @@ import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -55,7 +56,8 @@ public class Detailed_Activity_All_Screens extends AppCompatActivity {
     String heading, fromadapter, dbColumn, userid, dbTable, enteredStructure = "", inspectionID, fromDataBase;
     CustomArrayAdapter Detailed_Adapter;
     Database database = new Database(this);
-    Button addCategory;
+  //  Button addCategory;
+    ImageView addCategory;
     AlertDialog b;
     ArrayAdapter<Checkbox_model> adapter;
     ArrayList<String> checkedValue;
@@ -114,7 +116,7 @@ public class Detailed_Activity_All_Screens extends AppCompatActivity {
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.back);
 
         detailedListView = (ListView) findViewById(R.id.details_listview);
-        addCategory = (Button) findViewById(R.id.add_category);
+        addCategory = (ImageView) findViewById(R.id.add_category);
 
         if (fromadapter.equals("false")) {
             Cursor cursor = database.getData(dbColumn, dbTable, inspectionID);
@@ -192,11 +194,8 @@ public class Detailed_Activity_All_Screens extends AppCompatActivity {
 
         }
 
-
         Detailed_Adapter = new CustomArrayAdapter(Detailed_Activity_All_Screens.this, list, toPass);
         detailedListView.setAdapter(Detailed_Adapter);
-
-
     }
 
 

@@ -312,9 +312,10 @@ public class TemplatesFragment extends BaseFragment {
                                 para_list.add(0,"");
                                 isStarted.add(0,"");
 
+
                                 inspection_list.add(0,"Select");
                                 inspection_id_list.add(0,"0");
-
+                                default_template.add(0,"");
                                 for (int i = 0; i < Array.length(); i++) {
 
                                     JSONObject object = new JSONObject(Array.getJSONObject(i).toString());

@@ -83,7 +83,7 @@ public class ExteriorScreenFragment extends BaseFragment {
             public void onClick(View v) {
 
                 ExteriorSync();
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new InteriorScreenFragment()).addToBackStack("interior").commit();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new ElectricalScreenFragment()).addToBackStack("electrical").commit();
             }
         });
         back.setOnClickListener(new View.OnClickListener() {

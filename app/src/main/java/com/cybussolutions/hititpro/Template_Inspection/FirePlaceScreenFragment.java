@@ -111,8 +111,8 @@ public class FirePlaceScreenFragment extends BaseFragment {
         fireplace_wood_stove_observations = (Button) root.findViewById(R.id.fireplace_wood_stove_observations);
         fireplace = (Button) root.findViewById(R.id.fireplace);
         wood_stove = (Button) root.findViewById(R.id.wood_stove);
-        fireplace_ro = (Button) root.findViewById(R.id.fireplace_ro);
-        wood_stove_ro = (Button) root.findViewById(R.id.wood_stove_ro);
+        //fireplace_ro = (Button) root.findViewById(R.id.fireplace_ro);
+        //wood_stove_ro = (Button) root.findViewById(R.id.wood_stove_ro);
 
 
 
@@ -147,7 +147,7 @@ public class FirePlaceScreenFragment extends BaseFragment {
                 edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",StructureScreensActivity.fireplaces_wood_stovesValues);
-                intent.putExtra("heading",wood_stove_ro.getText().toString());
+                intent.putExtra("heading",fireplaces_wood_stoves.getText().toString());
                 intent.putExtra("column","fireplaceswoodstoves");
                 intent.putExtra("dbTable",FIREPLACE_TABLE);
                 intent.putExtra("fromAddapter","false");
@@ -162,7 +162,7 @@ public class FirePlaceScreenFragment extends BaseFragment {
                 edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",StructureScreensActivity.wood_coal_stovesValues);
-                intent.putExtra("heading",wood_stove_ro.getText().toString());
+                intent.putExtra("heading",wood_coal_stoves.getText().toString());
                 intent.putExtra("column","woodcoalstoves");
                 intent.putExtra("dbTable",FIREPLACE_TABLE);
                 intent.putExtra("fromAddapter","false");
@@ -177,7 +177,7 @@ public class FirePlaceScreenFragment extends BaseFragment {
                 edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",StructureScreensActivity.vents_flues_chimneyValues);
-                intent.putExtra("heading",wood_stove_ro.getText().toString());
+                intent.putExtra("heading",vents_flues_chimney.getText().toString());
                 intent.putExtra("column","ventsflueschimney");
                 intent.putExtra("dbTable",FIREPLACE_TABLE);
                 intent.putExtra("fromAddapter","false");
@@ -192,7 +192,7 @@ public class FirePlaceScreenFragment extends BaseFragment {
                 edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_Structure_Screens.class);
                 intent.putExtra("items",StructureScreensActivity.fireplaces_wood_stoves_observationValues);
-                intent.putExtra("heading",wood_stove_ro.getText().toString());
+                intent.putExtra("heading",fireplace_wood_stove_observations.getText().toString());
                 intent.putExtra("column","observations");
                 intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",FIREPLACE_TABLE);
@@ -207,7 +207,7 @@ public class FirePlaceScreenFragment extends BaseFragment {
                 edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",StructureScreensActivity.fireplaceValues);
-                intent.putExtra("heading",wood_stove_ro.getText().toString());
+                intent.putExtra("heading",fireplace.getText().toString());
                 intent.putExtra("column","recommendationsfireplace");
                 intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",FIREPLACE_TABLE);
@@ -222,7 +222,7 @@ public class FirePlaceScreenFragment extends BaseFragment {
                 edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",StructureScreensActivity.wood_stoveValues);
-                intent.putExtra("heading",wood_stove_ro.getText().toString());
+                intent.putExtra("heading",wood_stove.getText().toString());
                 intent.putExtra("column","recommendationswood");
                 intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",FIREPLACE_TABLE);
@@ -230,7 +230,7 @@ public class FirePlaceScreenFragment extends BaseFragment {
                 startActivity(intent);
             }
         });
-        fireplace_ro.setOnClickListener(new View.OnClickListener() {
+       /* fireplace_ro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 edit.putBoolean("imageButton",true);
@@ -245,8 +245,8 @@ public class FirePlaceScreenFragment extends BaseFragment {
                 startActivity(intent);
             }
         });
-
-        wood_stove_ro.setOnClickListener(new View.OnClickListener() {
+*/
+ /*       wood_stove_ro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 edit.putBoolean("imageButton",true);
@@ -262,7 +262,7 @@ public class FirePlaceScreenFragment extends BaseFragment {
             }
         });
 
-
+*/
 
 
 

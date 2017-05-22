@@ -177,49 +177,6 @@
 
             </LinearLayout>
 
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:orientation="horizontal">
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/fireplace_ro"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    android:typeface="serif"
-                    android:id="@+id/fireplace_ro"
-                    android:background="@drawable/button_selector"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"/>
-
-            </LinearLayout>
-
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:orientation="horizontal">
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/wood_stove"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    android:typeface="serif"
-                    android:id="@+id/wood_stove_ro"
-                    android:background="@drawable/button_selector"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"/>
-
-            </LinearLayout>
-
-
         </LinearLayout>
 
 

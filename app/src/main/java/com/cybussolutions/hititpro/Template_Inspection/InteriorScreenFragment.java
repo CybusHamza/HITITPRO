@@ -81,7 +81,7 @@ public class InteriorScreenFragment extends BaseFragment {
             public void onClick(View v) {
 
                 InteriorSync();
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new HeatingScreenFragment()).addToBackStack("heating").commit();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new AppliancesScreenFragment()).addToBackStack("appliances").commit();
             }
         });
 

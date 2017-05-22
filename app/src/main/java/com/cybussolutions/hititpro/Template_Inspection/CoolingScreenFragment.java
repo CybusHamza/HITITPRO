@@ -79,7 +79,7 @@ public class CoolingScreenFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
                 CoolingSync();
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new ElectricalScreenFragment()).addToBackStack("electrical").commit();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new InsulationScreenFragment()).addToBackStack("insulation").commit();
             }
         });
 

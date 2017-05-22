@@ -42,6 +42,7 @@ public class ShowImages extends AppCompatActivity {
     ImageView imageView,addNew;
     ImageButton image1,image2,image3,image4;
     EditText imageComments;
+    int count;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +68,7 @@ public class ShowImages extends AppCompatActivity {
         addNew.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(imageNames.length<3) {
+                if(count<3) {
                     Intent intent=new Intent(ShowImages.this,MainActivity.class);
                     intent.putExtra("dbTable",table_name);
                     intent.putExtra("data",data);
@@ -88,6 +89,13 @@ public class ShowImages extends AppCompatActivity {
         imageNames=intent.getStringArrayExtra("imageNames");
         data=intent.getStringExtra("data");
         table_name=intent.getStringExtra("dbTable");
+        for (int i=0;i<imageNames.length;i++){
+            if(imageNames[i].equals("")){
+                count--;
+            }else {
+                count++;
+            }
+        }
 
         if(imageNames.length>0) {
             String url = "http://xfer.cybusservices.com/hititpro/uploads/inspection/" + imageNames[0];
