@@ -49,7 +49,7 @@ public class PlumbingScreenFragment extends BaseFragment {
     Button water_supply_source,service_pipe_to_house,main_water_valve_location,interior_supply_piping,
             waste_system,dwv_piping,water_heater,fuel_storage_distribution,fuel_shut_off_valves,other_components_plumbing,
             plumbing_observations,water_heater_plimbing,gas_piping,supply_piping,dwv_piping_observation,fixtures,sump_pump
-            ,waste_ejector_pump,water_heater_plumbing,gas_piping_plumbing,supply_plumbing,dwv_plumbing,fixtures_observation,sump_pump_plumbing,waste_ejector_pump_ro;
+            ,waste_ejector_pump;
 
 
     private static final String PLUMBING_TABLE = "plumbing";
@@ -120,13 +120,7 @@ public class PlumbingScreenFragment extends BaseFragment {
         fixtures= (Button) root.findViewById(R.id.fixtures);
         sump_pump= (Button) root.findViewById(R.id.sump_pump);
         waste_ejector_pump= (Button) root.findViewById(R.id.waste_ejector_pump);
-        water_heater_plumbing= (Button) root.findViewById(R.id.water_heater_plumbing);
-        gas_piping_plumbing= (Button) root.findViewById(R.id.gas_piping_plumbing);
-        supply_plumbing= (Button) root.findViewById(R.id.supply_plumbing);
-        dwv_plumbing= (Button) root.findViewById(R.id.dwv_plumbing);
-        fixtures_observation= (Button) root.findViewById(R.id.fixtures_observation);
-        sump_pump_plumbing= (Button) root.findViewById(R.id.sump_pump_plumbing);
-        waste_ejector_pump_ro= (Button) root.findViewById(R.id.waste_ejector_pump_ro);
+
 
 
 
@@ -432,120 +426,7 @@ public class PlumbingScreenFragment extends BaseFragment {
                 startActivity(intent);
             }
         });
-        water_heater_plumbing.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-                edit.putBoolean("imageButton",true);
-                edit.commit();
-                Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items", StructureScreensActivity.water_heater_plumbingValues);
-                intent.putExtra("heading",water_heater_plumbing.getText().toString());
-                intent.putExtra("column","water_heater_plumbing");
-                intent.putExtra("fromAddapter","false");
-                intent.putExtra("dbTable",PLUMBING_TABLE);
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
-                startActivity(intent);
-            }
-        });
-        gas_piping_plumbing.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                edit.putBoolean("imageButton",true);
-                edit.commit();
-                Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items", StructureScreensActivity.gas_piping_plumbingValues);
-                intent.putExtra("heading",gas_piping_plumbing.getText().toString());
-                intent.putExtra("column","gas_piping_plumbing");
-                intent.putExtra("fromAddapter","false");
-                intent.putExtra("dbTable",PLUMBING_TABLE);
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
-                startActivity(intent);
-            }
-        });
-        supply_plumbing.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                edit.putBoolean("imageButton",true);
-                edit.commit();
-                Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items", StructureScreensActivity.supply_plumbingValues);
-                intent.putExtra("heading",supply_plumbing.getText().toString());
-                intent.putExtra("column","supply_plumbing");
-                intent.putExtra("dbTable",PLUMBING_TABLE);
-                intent.putExtra("fromAddapter","false");
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
-                startActivity(intent);
-            }
-        });
-        dwv_plumbing.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                edit.putBoolean("imageButton",true);
-                edit.commit();
-                Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items", StructureScreensActivity.dwv_plumbingValues);
-                intent.putExtra("heading",dwv_plumbing.getText().toString());
-                intent.putExtra("column","dwv_plumbing");
-                intent.putExtra("dbTable",PLUMBING_TABLE);
-                intent.putExtra("fromAddapter","false");
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
-                startActivity(intent);
-            }
-        });
-        fixtures_observation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                edit.putBoolean("imageButton",true);
-                edit.commit();
-                Intent intent= new Intent(getActivity(), Detailed_Activity_Structure_Screens.class);
-                intent.putExtra("items", StructureScreensActivity.fixtures_observationValues);
-                intent.putExtra("heading",fixtures_observation.getText().toString());
-                intent.putExtra("column","fixtures_observation");
-                intent.putExtra("fromAddapter","false");
-                intent.putExtra("dbTable",PLUMBING_TABLE);
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
-                startActivity(intent);
-            }
-        });
-
-        sump_pump_plumbing.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                edit.putBoolean("imageButton",true);
-                edit.commit();
-                Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items", StructureScreensActivity.sump_pump_plumbingValues);
-                intent.putExtra("heading",sump_pump_plumbing.getText().toString());
-                intent.putExtra("column","sump_pump_plumbing");
-                intent.putExtra("fromAddapter","false");
-                intent.putExtra("dbTable",PLUMBING_TABLE);
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
-                startActivity(intent);
-            }
-        });
-
-        waste_ejector_pump_ro.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                edit.putBoolean("imageButton",true);
-                edit.commit();
-                Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items", StructureScreensActivity.waste_ejector_pump_roValues);
-                intent.putExtra("heading",waste_ejector_pump_ro.getText().toString());
-                intent.putExtra("column","waste_ejector_pump_ro");
-                intent.putExtra("fromAddapter","false");
-                intent.putExtra("dbTable",PLUMBING_TABLE);
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
-                startActivity(intent);
-            }
-        });
 
 
         return root;
@@ -577,8 +458,8 @@ public class PlumbingScreenFragment extends BaseFragment {
                             database.insertEntry("mainwatervalvelocation", object.getString("mainwatervalvelocation"), PLUMBING_TABLE, StructureScreensActivity.inspectionID);
                             database.insertEntry("interiorsupply", object.getString("interiorsupply"), PLUMBING_TABLE, StructureScreensActivity.inspectionID);
                             database.insertEntry("wastesystem", object.getString("wastesystem"), PLUMBING_TABLE, StructureScreensActivity.inspectionID);
+                            database.insertEntry("strudwvpiping", object.getString("strudwvpiping"), PLUMBING_TABLE, StructureScreensActivity.inspectionID);
                             database.insertEntry("waterheater", object.getString("waterheater"), PLUMBING_TABLE, StructureScreensActivity.inspectionID);
-                            database.insertEntry("rfurnace", object.getString("rfurnace"), PLUMBING_TABLE, StructureScreensActivity.inspectionID);
                             database.insertEntry("fuelshortage_distribution", object.getString("fuelshortage_distribution"), PLUMBING_TABLE, StructureScreensActivity.inspectionID);
                             database.insertEntry("fuelshutoffvalves", object.getString("fuelshutoffvalves"), PLUMBING_TABLE, StructureScreensActivity.inspectionID);
                             database.insertEntry("othercomponents", object.getString("othercomponents"), PLUMBING_TABLE, StructureScreensActivity.inspectionID);
@@ -588,14 +469,8 @@ public class PlumbingScreenFragment extends BaseFragment {
                             database.insertEntry("rsupplypiping", object.getString("rsupplypiping"), PLUMBING_TABLE, StructureScreensActivity.inspectionID);
                             database.insertEntry("dwvpiping", object.getString("dwvpiping"), PLUMBING_TABLE, StructureScreensActivity.inspectionID);
                             database.insertEntry("fixtures", object.getString("fixtures"), PLUMBING_TABLE, StructureScreensActivity.inspectionID);
-                            database.insertEntry("c", object.getString("fixtures"), PLUMBING_TABLE, StructureScreensActivity.inspectionID);
                             database.insertEntry("wasteejectorpump", object.getString("wasteejectorpump"), PLUMBING_TABLE, StructureScreensActivity.inspectionID);
-                            database.insertEntry("gas_piping_plumbing", object.getString("gas_piping_plumbing"), PLUMBING_TABLE, StructureScreensActivity.inspectionID);
-                            database.insertEntry("supply_plumbing", object.getString("supply_plumbing"), PLUMBING_TABLE, StructureScreensActivity.inspectionID);
-                            database.insertEntry("dwv_plumbing", object.getString("dwv_plumbing"), PLUMBING_TABLE, StructureScreensActivity.inspectionID);
-                            database.insertEntry("fixtures_observation", object.getString("fixtures_observation"), PLUMBING_TABLE, StructureScreensActivity.inspectionID);
-                            database.insertEntry("sump_pump_plumbing", object.getString("sump_pump_plumbing"), PLUMBING_TABLE, StructureScreensActivity.inspectionID);
-                            database.insertEntry("waste_ejector_pump_ro", object.getString("waste_ejector_pump_ro"), PLUMBING_TABLE, StructureScreensActivity.inspectionID);
+                            database.insertEntry("sumppump", object.getString("sumppump"), PLUMBING_TABLE, StructureScreensActivity.inspectionID);
 
                         } catch (JSONException e) {
                             e.printStackTrace();

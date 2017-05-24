@@ -297,8 +297,6 @@ public class FirePlaceScreenFragment extends BaseFragment {
                             database.insertEntry("observations",  object.getString("observations"), FIREPLACE_TABLE, StructureScreensActivity.inspectionID);
                             database.insertEntry("recommendationsfireplace",  object.getString("recommendationsfireplace"), FIREPLACE_TABLE, StructureScreensActivity.inspectionID);
                             database.insertEntry("recommendationswood",  object.getString("recommendationswood"), FIREPLACE_TABLE, StructureScreensActivity.inspectionID);
-                            database.insertEntry("fireplace_ro",  object.getString("fireplace_ro"), FIREPLACE_TABLE, StructureScreensActivity.inspectionID);
-                            database.insertEntry("wood_stove_ro",  object.getString("wood_stove_ro"), FIREPLACE_TABLE, StructureScreensActivity.inspectionID);
 
                         } catch (JSONException e) {
                             e.printStackTrace();

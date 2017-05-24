@@ -234,7 +234,7 @@ public class InsulationScreenFragment extends BaseFragment {
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",StructureScreensActivity.CRAWLSPACEVENTILATION_Values);
                 intent.putExtra("heading",CRAWLSPACEVENTILATION.getText().toString());
-                intent.putExtra("column","servicedrop");
+                intent.putExtra("column","csv");
                 intent.putExtra("dbTable",INSULATION_TABLE);
                 intent.putExtra("fromAddapter","false");
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
@@ -250,7 +250,7 @@ public class InsulationScreenFragment extends BaseFragment {
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",StructureScreensActivity.EXHAUSTFANS_VENTS_Values);
                 intent.putExtra("heading",EXHAUSTFANS_VENTS.getText().toString());
-                intent.putExtra("column","servicedrop");
+                intent.putExtra("column","efv");
                 intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",INSULATION_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
@@ -266,7 +266,7 @@ public class InsulationScreenFragment extends BaseFragment {
                 Intent intent= new Intent(getActivity(), Detailed_Activity_Structure_Screens.class);
                 intent.putExtra("items",StructureScreensActivity.Insulation_Ventilation_Observations_Values);
                 intent.putExtra("heading",Insulation_Ventilation_Observations.getText().toString());
-                intent.putExtra("column","servicedrop");
+                intent.putExtra("column","observations");
                 intent.putExtra("dbTable",INSULATION_TABLE);
                 intent.putExtra("fromAddapter","false");
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);

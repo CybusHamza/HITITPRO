@@ -525,8 +525,8 @@ public class ElectricalScreenFragment extends BaseFragment {
                             database.insertEntry("serviceentrance", object.getString("serviceentrance"), ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
                             database.insertEntry("mainpanel", object.getString("mainpanel"), ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
                             database.insertEntry("subpanel", object.getString("subpanel"), ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
-                            database.insertEntry("distribution", object.getString(""), ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
-                            database.insertEntry("outlets", object.getString("distribution"), ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
+                            database.insertEntry("distribution", object.getString("distribution"), ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
+                            database.insertEntry("outlets", object.getString("outlets"), ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
                             database.insertEntry("switches", object.getString("switches"), ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
                             database.insertEntry("lights_ceiling_fans", object.getString("lights_ceiling_fans"), ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
                             database.insertEntry("smoke_co_detectors", object.getString("smoke_co_detectors"), ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);

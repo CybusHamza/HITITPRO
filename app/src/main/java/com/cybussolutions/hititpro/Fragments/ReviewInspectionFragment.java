@@ -1,6 +1,7 @@
 package com.cybussolutions.hititpro.Fragments;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,7 +14,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
@@ -73,6 +73,13 @@ public class ReviewInspectionFragment extends BaseFragment {
         ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.menu);
         final SharedPreferences pref = getActivity().getSharedPreferences("UserPrefs", getActivity().MODE_PRIVATE);
         id = pref.getString("user_id", null);
+        Intent intent= getActivity().getIntent();
+        String from = intent.getStringExtra("from");
+
+        if(from.equals("continued"))
+        {
+
+        }
         AllClients();
         //getTemplates();
 

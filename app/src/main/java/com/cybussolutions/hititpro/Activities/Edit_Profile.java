@@ -176,6 +176,7 @@ public class Edit_Profile extends AppCompatActivity {
                                             editor.putString("fax",Fax.getText().toString());
                                             editor.commit();
                                             Intent intent=new Intent(Edit_Profile.this,LandingScreen.class);
+                                            intent.putExtra("activityName","");
                                             startActivity(intent);
 
                                         }

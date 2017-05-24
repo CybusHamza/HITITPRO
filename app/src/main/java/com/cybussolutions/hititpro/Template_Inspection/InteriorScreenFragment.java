@@ -52,8 +52,7 @@ public class InteriorScreenFragment extends BaseFragment {
 
     Button wall_ceiling,floors_interoir,windows,doors,interior_observations,
             walls_ceilings,floors_ro,windows_ro,doors_ro,counters_cabinets,skylights_ro,
-            stairways_ro,basement_ro,environmental_issues,walls_ceilings_ro,floors_observer,windows_observe,
-    doors_observation,Counters_Cabinets_observation,skylights_obs,basement_observation,stairways_observation,environmental_issues_ro;
+            stairways_ro,basement_ro,environmental_issues;
 
 
 
@@ -114,15 +113,7 @@ public class InteriorScreenFragment extends BaseFragment {
         basement_ro = (Button) root.findViewById(R.id.basement_ro);
         counters_cabinets = (Button) root.findViewById(R.id.counters_cabinets);
         environmental_issues = (Button) root.findViewById(R.id.environmental_issues);
-        walls_ceilings_ro = (Button) root.findViewById(R.id.walls_ceilings_ro);
-        floors_observer = (Button) root.findViewById(R.id.floors_observer);
-        windows_observe = (Button) root.findViewById(R.id.windows_observe);
-        doors_observation = (Button) root.findViewById(R.id.doors_observation);
-        Counters_Cabinets_observation = (Button) root.findViewById(R.id.Counters_Cabinets_observation);
-        skylights_obs = (Button) root.findViewById(R.id.skylights_obs);
-        basement_observation = (Button) root.findViewById(R.id.basement_observation);
-        stairways_observation = (Button) root.findViewById(R.id.stairways);
-        environmental_issues_ro = (Button) root.findViewById(R.id.environmental_issues_ro);
+
 
 
 
@@ -368,150 +359,7 @@ public class InteriorScreenFragment extends BaseFragment {
                 startActivity(intent);
             }
         });
-        walls_ceilings_ro.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                edit.putBoolean("imageButton",true);
-                edit.commit();
-                Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",StructureScreensActivity.walls_ceilings_roValues);
-                intent.putExtra("heading",walls_ceilings_ro.getText().toString());
-                intent.putExtra("column","floors_observer");
-                intent.putExtra("fromAddapter","false");
-                intent.putExtra("dbTable",INTERIOR_TABLE);
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
-                startActivity(intent);
-            }
-        });
 
-        floors_observer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                edit.putBoolean("imageButton",true);
-                edit.commit();
-                Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",StructureScreensActivity.floors_observerValues);
-                intent.putExtra("heading",floors_observer.getText().toString());
-                intent.putExtra("column","floors_observer");
-                intent.putExtra("fromAddapter","false");
-                intent.putExtra("dbTable",INTERIOR_TABLE);
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
-                startActivity(intent);
-            }
-        });
-
-        windows_observe.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                edit.putBoolean("imageButton",true);
-                edit.commit();
-                Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",StructureScreensActivity.windows_observeValues);
-                intent.putExtra("heading",windows_observe.getText().toString());
-                intent.putExtra("column","windows_observe");
-                intent.putExtra("dbTable",INTERIOR_TABLE);
-                intent.putExtra("fromAddapter","false");
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
-                startActivity(intent);
-            }
-        });
-
-        doors_observation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                edit.putBoolean("imageButton",true);
-                edit.commit();
-                Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",StructureScreensActivity.doors_observationValues);
-                intent.putExtra("heading",doors_observation.getText().toString());
-                intent.putExtra("column","doors_observation");
-                intent.putExtra("dbTable",INTERIOR_TABLE);
-                intent.putExtra("fromAddapter","false");
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
-                startActivity(intent);
-            }
-        });
-
-        Counters_Cabinets_observation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                edit.putBoolean("imageButton",true);
-                edit.commit();
-                Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",StructureScreensActivity.Counters_Cabinets_observationValues);
-                intent.putExtra("heading",Counters_Cabinets_observation.getText().toString());
-                intent.putExtra("column","Counters_Cabinets_observation");
-                intent.putExtra("dbTable",INTERIOR_TABLE);
-                intent.putExtra("fromAddapter","false");
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
-                startActivity(intent);
-            }
-        });
-
-        skylights_obs.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                edit.putBoolean("imageButton",true);
-                edit.commit();
-                Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",StructureScreensActivity.skylights_obsValues);
-                intent.putExtra("heading",skylights_obs.getText().toString());
-                intent.putExtra("column","skylights_obs");
-                intent.putExtra("dbTable",INTERIOR_TABLE);
-                intent.putExtra("fromAddapter","false");
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
-                startActivity(intent);
-            }
-        });
-
-        basement_observation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                edit.putBoolean("imageButton",true);
-                edit.commit();
-                Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",StructureScreensActivity.basement_observationValues);
-                intent.putExtra("heading",basement_observation.getText().toString());
-                intent.putExtra("column","basement_observation");
-                intent.putExtra("dbTable",INTERIOR_TABLE);
-                intent.putExtra("fromAddapter","false");
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
-                startActivity(intent);
-            }
-        });
-
-
-        stairways_observation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                edit.putBoolean("imageButton",true);
-                edit.commit();
-                Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",StructureScreensActivity.stairways_observationValues);
-                intent.putExtra("heading",stairways_observation.getText().toString());
-                intent.putExtra("column","stairways_observation");
-                intent.putExtra("fromAddapter","false");
-                intent.putExtra("dbTable",INTERIOR_TABLE);
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
-                startActivity(intent);
-            }
-        });
-
-        environmental_issues_ro.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                edit.putBoolean("imageButton",true);
-                edit.commit();
-                Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
-                intent.putExtra("items",StructureScreensActivity.environmental_issues_roValues);
-                intent.putExtra("heading",environmental_issues_ro.getText().toString());
-                intent.putExtra("column","environmental_issues_ro");
-                intent.putExtra("dbTable",INTERIOR_TABLE);
-                intent.putExtra("fromAddapter","false");
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
-                startActivity(intent);
-            }
-        });
 
 
 
