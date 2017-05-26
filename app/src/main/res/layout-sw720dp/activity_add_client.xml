@@ -9,7 +9,7 @@
     tools:context=".Activities.Add_Client">
 
     <com.github.florent37.materialtextfield.MaterialTextField
-        android:layout_width="300dp"
+        android:layout_width="600dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         app:mtf_cardCollapsedHeight="4dp"
@@ -25,13 +25,13 @@
             android:singleLine="true"
             android:textColor="@color/black"
             android:textColorHint="@color/black"
-            android:textSize="15sp"
+            android:textSize="25sp"
             android:id="@+id/client_name" />
 
     </com.github.florent37.materialtextfield.MaterialTextField>
 
     <com.github.florent37.materialtextfield.MaterialTextField
-        android:layout_width="300dp"
+        android:layout_width="600dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         app:mtf_cardCollapsedHeight="4dp"
@@ -48,13 +48,13 @@
             android:textColor="@color/black"
             android:inputType="textPassword"
             android:textColorHint="@color/black"
-            android:textSize="15sp"
+            android:textSize="25sp"
             android:id="@+id/client_gender" />
 
     </com.github.florent37.materialtextfield.MaterialTextField>
 
     <com.github.florent37.materialtextfield.MaterialTextField
-        android:layout_width="300dp"
+        android:layout_width="600dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         app:mtf_cardCollapsedHeight="4dp"
@@ -70,13 +70,13 @@
             android:singleLine="true"
             android:textColor="@color/black"
             android:textColorHint="@color/black"
-            android:textSize="15sp"
+            android:textSize="25sp"
             android:id="@+id/client_location" />
 
     </com.github.florent37.materialtextfield.MaterialTextField>
 
     <com.github.florent37.materialtextfield.MaterialTextField
-        android:layout_width="300dp"
+        android:layout_width="600dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         app:mtf_cardCollapsedHeight="4dp"
@@ -93,7 +93,7 @@
             android:textColor="@color/black"
             android:inputType="textPassword"
             android:textColorHint="@color/black"
-            android:textSize="15sp"
+            android:textSize="25sp"
             android:id="@+id/client_phone" />
 
     </com.github.florent37.materialtextfield.MaterialTextField>
@@ -103,13 +103,14 @@
         android:layout_height="wrap_content"
         android:text="Register"
         android:id="@+id/register"
-        android:textSize="20sp"
+        android:textSize="25sp"
         android:textColor="@color/white"
         android:textStyle="bold"
         android:typeface="serif"
         android:padding="20dp"
+
         android:background="@drawable/round_corner_button"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="180dp"
         android:layout_gravity="center_horizontal" />
 
 

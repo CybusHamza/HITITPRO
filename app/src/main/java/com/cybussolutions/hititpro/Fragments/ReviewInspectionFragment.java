@@ -74,12 +74,7 @@ public class ReviewInspectionFragment extends BaseFragment {
         final SharedPreferences pref = getActivity().getSharedPreferences("UserPrefs", getActivity().MODE_PRIVATE);
         id = pref.getString("user_id", null);
         Intent intent= getActivity().getIntent();
-        String from = intent.getStringExtra("from");
 
-        if(from.equals("continued"))
-        {
-
-        }
         AllClients();
         //getTemplates();
 

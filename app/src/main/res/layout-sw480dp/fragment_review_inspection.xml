@@ -15,6 +15,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif"
             android:gravity="center"
+            android:textSize="26sp"
             android:text="@string/review"
             android:textStyle="bold" />
 
@@ -24,6 +25,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif"
             android:text="@string/clients"
+            android:textSize="20sp"
             android:textColor="@color/black" />
 
         <Spinner
@@ -38,6 +40,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif"
+            android:textSize="20sp"
             android:text="@string/templates"
             android:textColor="@color/black" />
 
@@ -70,6 +73,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:textSize="18sp"
                         android:fontFamily="sans-serif"
                         android:gravity="center"
                         android:text="@string/sections"
@@ -82,6 +86,7 @@
                         android:layout_weight="1"
                         android:fontFamily="sans-serif"
                         android:gravity="center"
+                        android:textSize="18sp"
                         android:text="@string/incomplete_items"
                         android:textColor="@color/black" />
 
@@ -92,6 +97,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
+                    android:layout_margin="5dp"
                     android:weightSum="2">
 
                     <TextView
@@ -99,17 +105,20 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:textSize="18sp"
                         android:fontFamily="sans-serif"
                         android:gravity="center"
                         android:text="@string/structure"
                         android:textColor="@color/black" />
 
                     <TextView
+                        android:id="@+id/structure"
                         style="@style/textview_style"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:fontFamily="sans-serif"
+                        android:textSize="18sp"
                         android:gravity="center"
                         android:text="@string/_0"
                         android:textColor="@color/black" />
@@ -120,25 +129,29 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:weightSum="2">
+                    android:weightSum="2"
+                    android:layout_margin="5dp">
 
                     <TextView
                         style="@style/textview_style"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:textSize="18sp"
                         android:fontFamily="sans-serif"
                         android:gravity="center"
                         android:text="@string/roofing"
                         android:textColor="@color/black" />
 
                     <TextView
+                        android:id="@+id/roofing"
                         style="@style/textview_style"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:fontFamily="sans-serif"
                         android:gravity="center"
+                        android:textSize="18sp"
                         android:text="@string/_0"
                         android:textColor="@color/black" />
 
@@ -148,6 +161,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
+                    android:layout_margin="5dp"
                     android:weightSum="2">
 
                     <TextView
@@ -157,16 +171,19 @@
                         android:layout_weight="1"
                         android:fontFamily="sans-serif"
                         android:gravity="center"
+                        android:textSize="18sp"
                         android:text="@string/exterior"
                         android:textColor="@color/black" />
 
                     <TextView
+                        android:id="@+id/exterior"
                         style="@style/textview_style"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:fontFamily="sans-serif"
                         android:gravity="center"
+                        android:textSize="18sp"
                         android:text="@string/_0"
                         android:textColor="@color/black" />
 
@@ -176,6 +193,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
+                    android:layout_margin="5dp"
                     android:weightSum="2">
 
                     <TextView
@@ -183,16 +201,20 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:textSize="18sp"
                         android:fontFamily="sans-serif"
                         android:gravity="center"
                         android:text="@string/heating"
                         android:textColor="@color/black" />
 
                     <TextView
+                        android:id="@+id/heating"
                         style="@style/textview_style"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:textSize="18sp"
+
                         android:fontFamily="sans-serif"
                         android:gravity="center"
                         android:text="@string/_0"
@@ -204,7 +226,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:weightSum="2">
+                    android:weightSum="2"
+                    android:layout_margin="5dp">
 
                     <TextView
                         style="@style/textview_style"
@@ -213,14 +236,17 @@
                         android:layout_weight="1"
                         android:fontFamily="sans-serif"
                         android:gravity="center"
+                        android:textSize="18sp"
                         android:text="@string/cooling"
                         android:textColor="@color/black" />
 
                     <TextView
+                        android:id="@+id/cooling"
                         style="@style/textview_style"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:textSize="18sp"
                         android:fontFamily="sans-serif"
                         android:gravity="center"
                         android:text="@string/_0"
@@ -232,6 +258,69 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
+                    android:weightSum="2"
+                    android:layout_margin="5dp">
+
+                    <TextView
+                        style="@style/textview_style"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="sans-serif"
+                        android:gravity="center"
+                        android:textSize="18sp"
+                        android:text="@string/electrical"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/electrical"
+                        style="@style/textview_style"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="sans-serif"
+                        android:gravity="center"
+                        android:textSize="18sp"
+                        android:text="@string/_0"
+                        android:textColor="@color/black" />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    android:layout_margin="5dp">
+
+                    <TextView
+                        style="@style/textview_style"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="sans-serif"
+                        android:gravity="center"
+                        android:textSize="18sp"
+                        android:text="FirePlaces"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/fireplace"
+                        style="@style/textview_style"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="sans-serif"
+                        android:gravity="center"
+                        android:textSize="18sp"
+                        android:text="@string/_0"
+                        android:textColor="@color/black" />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_margin="5dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
                     android:weightSum="2">
 
                     <TextView
@@ -239,10 +328,93 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:textSize="18sp"
                         android:fontFamily="sans-serif"
                         android:gravity="center"
-                        android:text="@string/electrical"
+                        android:text="Appliance"
                         android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/appliance"
+                        style="@style/textview_style"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="sans-serif"
+                        android:gravity="center"
+                        android:textSize="18sp"
+                        android:text="@string/_0"
+                        android:textColor="@color/black" />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_margin="5dp"
+                    android:weightSum="2">
+
+                    <TextView
+                        style="@style/textview_style"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textSize="18sp"
+                        android:fontFamily="sans-serif"
+                        android:gravity="center"
+                        android:text="Plumbing"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/plumbing"
+                        style="@style/textview_style"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="sans-serif"
+                        android:gravity="center"
+                        android:textSize="18sp"
+                        android:text="@string/_0"
+                        android:textColor="@color/black" />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_margin="5dp"
+                    android:weightSum="2">
+
+                    <TextView
+                        style="@style/textview_style"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textSize="18sp"
+                        android:fontFamily="sans-serif"
+                        android:gravity="center"
+                        android:text="interior"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/interior"
+                        style="@style/textview_style"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textSize="18sp"
+                        android:fontFamily="sans-serif"
+                        android:gravity="center"
+                        android:text="@string/_0"
+                        android:textColor="@color/black" />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    android:layout_margin="5dp">
 
                     <TextView
                         style="@style/textview_style"
@@ -251,7 +423,20 @@
                         android:layout_weight="1"
                         android:fontFamily="sans-serif"
                         android:gravity="center"
+                        android:textSize="18sp"
+                        android:text="insulation"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/insulation"
+                        style="@style/textview_style"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="sans-serif"
+                        android:gravity="center"
                         android:text="@string/_0"
+                        android:textSize="18sp"
                         android:textColor="@color/black" />
 
                 </LinearLayout>

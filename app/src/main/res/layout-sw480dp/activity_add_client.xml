@@ -9,7 +9,7 @@
     tools:context=".Activities.Add_Client">
 
     <com.github.florent37.materialtextfield.MaterialTextField
-        android:layout_width="300dp"
+        android:layout_width="400dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         app:mtf_cardCollapsedHeight="4dp"
@@ -31,7 +31,7 @@
     </com.github.florent37.materialtextfield.MaterialTextField>
 
     <com.github.florent37.materialtextfield.MaterialTextField
-        android:layout_width="300dp"
+        android:layout_width="400dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         app:mtf_cardCollapsedHeight="4dp"
@@ -54,7 +54,7 @@
     </com.github.florent37.materialtextfield.MaterialTextField>
 
     <com.github.florent37.materialtextfield.MaterialTextField
-        android:layout_width="300dp"
+        android:layout_width="400dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         app:mtf_cardCollapsedHeight="4dp"
@@ -76,7 +76,7 @@
     </com.github.florent37.materialtextfield.MaterialTextField>
 
     <com.github.florent37.materialtextfield.MaterialTextField
-        android:layout_width="300dp"
+        android:layout_width="400dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         app:mtf_cardCollapsedHeight="4dp"
@@ -109,7 +109,7 @@
         android:typeface="serif"
         android:padding="20dp"
         android:background="@drawable/round_corner_button"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="80dp"
         android:layout_gravity="center_horizontal" />
 
 

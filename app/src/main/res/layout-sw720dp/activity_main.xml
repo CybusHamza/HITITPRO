@@ -1,0 +1,153 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container1"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.MainActivity"
+    tools:ignore="MergeRootFrame" >
+    <include
+        android:id="@+id/app_bar"
+        layout="@layout/app_bar"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/linearLayout"
+        android:layout_below="@+id/et_attachment_name"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center_horizontal"
+            android:background="@android:color/white"
+            android:id="@+id/test">
+
+            <com.android.graphics.CanvasView
+                android:id="@+id/canvas"
+                android:layout_width="595dp"
+                android:layout_height="595dp"
+                android:layout_gravity="center_horizontal" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/saveButton"
+        android:layout_width="390dp"
+        android:layout_height="wrap_content"
+        android:text="Continue"
+        android:layout_gravity="end"
+        android:textSize="27sp"
+        android:layout_alignBaseline="@+id/selectButton"
+        android:layout_alignBottom="@+id/selectButton"
+        android:layout_alignRight="@+id/et_attachment_name"
+        android:layout_alignEnd="@+id/et_attachment_name" />
+
+    <Button
+        android:id="@+id/selectButton"
+        android:layout_width="390dp"
+        android:layout_height="wrap_content"
+        android:text="Select Image"
+        android:textSize="27sp"
+        android:layout_marginBottom="10dp"
+        android:layout_gravity="end"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/redo"
+        android:layout_alignStart="@+id/redo" />
+
+    <Button
+        android:layout_width="159dp"
+        android:layout_height="wrap_content"
+        android:text="@string/action_line"
+        android:id="@+id/line"
+        android:textSize="27sp"
+        android:layout_marginBottom="10dp"
+        android:layout_above="@+id/saveButton"
+        android:layout_alignRight="@+id/saveButton"
+        android:layout_alignEnd="@+id/saveButton" />
+
+    <Button
+        android:layout_width="159dp"
+        android:layout_height="wrap_content"
+        android:text="@string/action_circle"
+        android:id="@+id/circle"
+        android:layout_above="@+id/saveButton"
+        android:layout_toLeftOf="@+id/line"
+        android:textSize="27sp"
+        android:layout_marginBottom="10dp"
+        android:layout_toStartOf="@+id/line" />
+
+    <Button
+        android:layout_width="157dp"
+        android:layout_height="wrap_content"
+        android:text="@string/action_square"
+        android:id="@+id/square"
+        android:textSize="27sp"
+        android:layout_marginBottom="10dp"
+        android:layout_above="@+id/saveButton"
+        android:layout_toLeftOf="@+id/circle"
+        android:layout_toStartOf="@+id/circle" />
+
+    <Button
+        android:layout_width="159dp"
+        android:layout_height="wrap_content"
+        android:text="@string/action_arrow"
+        android:id="@+id/arrow"
+        android:textSize="27sp"
+        android:layout_marginBottom="10dp"
+        android:layout_above="@+id/saveButton"
+        android:layout_toLeftOf="@+id/square"
+        android:layout_toStartOf="@+id/square" />
+
+    <Button
+        android:layout_width="159dp"
+        android:layout_height="wrap_content"
+        android:text="@string/action_smoothline"
+        android:id="@+id/pen"
+        android:textSize="27sp"
+        android:layout_marginBottom="10dp"
+        android:layout_above="@+id/saveButton"
+        android:layout_toLeftOf="@+id/arrow"
+        android:layout_toStartOf="@+id/arrow" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/et_attachment_name"
+        android:hint="attachment name"
+        android:layout_below="@+id/app_bar"
+        android:layout_margin="20dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:id="@+id/redo"
+        android:textSize="27sp"
+        android:layout_marginBottom="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/square"
+        android:layout_alignLeft="@+id/et_attachment_name"
+        android:layout_alignStart="@+id/et_attachment_name"
+        android:layout_toStartOf="@+id/saveButton"
+        android:text="Redo" />
+
+    <Button
+        android:id="@+id/undo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="27sp"
+        android:layout_marginBottom="10dp"       android:layout_above="@+id/square"
+
+        android:layout_alignEnd="@+id/et_attachment_name"
+        android:layout_alignRight="@+id/et_attachment_name"
+        android:layout_toRightOf="@+id/redo"
+        android:text="Undo" />
+
+</RelativeLayout>
