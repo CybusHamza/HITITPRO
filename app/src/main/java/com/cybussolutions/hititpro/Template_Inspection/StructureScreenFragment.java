@@ -271,7 +271,7 @@ public class StructureScreenFragment extends BaseFragment {
                 edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_Structure_Screens.class);
                 intent.putExtra("items",StructureScreensActivity.structureObservationsSpinnerValues);
-                intent.putExtra("heading",roofStructureButton.getText().toString());
+                intent.putExtra("heading",structureObservationsButton.getText().toString());
                 intent.putExtra("column","observation");
                 intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",PORTFOLIO_TABLE);

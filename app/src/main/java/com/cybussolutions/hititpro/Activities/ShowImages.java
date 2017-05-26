@@ -98,22 +98,23 @@ public class ShowImages extends AppCompatActivity {
         }
 
         if(imageNames.length>0) {
-            String url = "http://xfer.cybusservices.com/hititpro/uploads/inspection/" + imageNames[0];
-            Picasso.with(getApplicationContext())
-                    .load(url)
-                    .into(image1);
+            String url = "http://xfer.cybusservices.com/hititpro/uploads/inspection/" + imageNames[0].trim();
+
+                Picasso.with(ShowImages.this)
+                        .load(url)
+                        .into(image1);
         }
 
         if(imageNames.length>1) {
-            String url1 = "http://xfer.cybusservices.com/hititpro/uploads/inspection/" + imageNames[1];
-            Picasso.with(getApplicationContext())
+            String url1 = "http://xfer.cybusservices.com/hititpro/uploads/inspection/" + imageNames[1].trim();
+            Picasso.with(ShowImages.this)
                     .load(url1)
                     .into(image2);
         }
 
         if(imageNames.length>2) {
-            String url2 = "http://xfer.cybusservices.com/hititpro/uploads/inspection/" + imageNames[2];
-            Picasso.with(getApplicationContext())
+            String url2 = "http://xfer.cybusservices.com/hititpro/uploads/inspection/" + imageNames[2].trim();
+            Picasso.with(ShowImages.this)
                     .load(url2)
                     .into(image3);
         }

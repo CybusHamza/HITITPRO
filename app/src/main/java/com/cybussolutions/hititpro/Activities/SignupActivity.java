@@ -93,16 +93,12 @@ public class SignupActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (ActivityCompat.checkSelfPermission(SignupActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-
-
                     if (Build.VERSION.SDK_INT > 22) {
-
                         requestPermissions(new String[]{Manifest.permission
                                         .WRITE_EXTERNAL_STORAGE},
                                 REQUEST_PERMISSIONS);
 
                     }
-
                 } else {
                     attachLogo();
 
@@ -110,7 +106,7 @@ public class SignupActivity extends AppCompatActivity {
             }
         });
 
-        phone.addTextChangedListener(new TextWatcher() {
+       /* phone.addTextChangedListener(new TextWatcher() {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -153,7 +149,7 @@ public class SignupActivity extends AppCompatActivity {
             public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
                 // TODO Auto-generated method stub
             }
-        });
+        });*/
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -205,22 +201,10 @@ public class SignupActivity extends AppCompatActivity {
                     }
 
                 }
-
-
             }
         });
-
-
-
-
     }
-
-
-
-
     public void Signup() {
-
-
         ringProgressDialog = ProgressDialog.show(this, "", "Please wait ...", true);
         ringProgressDialog.setCancelable(false);
         ringProgressDialog.show();

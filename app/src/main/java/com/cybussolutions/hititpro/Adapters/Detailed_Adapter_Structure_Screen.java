@@ -22,23 +22,44 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.NoConnectionError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.TimeoutError;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.cybussolutions.hititpro.Activities.Add_Comments;
 import com.cybussolutions.hititpro.Activities.Detailed_Activity_All_Screens;
 import com.cybussolutions.hititpro.Activities.Detailed_Activity_Structure_Screens;
 import com.cybussolutions.hititpro.Activities.MainActivity;
 import com.cybussolutions.hititpro.Activities.StructureScreensActivity;
 import com.cybussolutions.hititpro.Model.Checkbox_model;
+import com.cybussolutions.hititpro.Network.End_Points;
 import com.cybussolutions.hititpro.R;
 import com.cybussolutions.hititpro.Sql_LocalDataBase.Database;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 
 public class Detailed_Adapter_Structure_Screen extends ArrayAdapter<Checkbox_model>
 {
 
-
+    private static final int MY_SOCKET_TIMEOUT_MS = 10000;
+    String data,defaultText;
     private LayoutInflater layoutInflater;
     String[] dbEnterArray;
     private final List<Checkbox_model> list;
@@ -48,6 +69,7 @@ public class Detailed_Adapter_Structure_Screen extends ArrayAdapter<Checkbox_mod
     String topass[],enteredStructure = "";
     static  int count=0;
     Database database;
+    EditText subEditText;
 
 
     public Detailed_Adapter_Structure_Screen(Activity context, ArrayList<Checkbox_model> list, int resource,String topass[]) {
@@ -192,56 +214,116 @@ public class Detailed_Adapter_Structure_Screen extends ArrayAdapter<Checkbox_mod
             public void onClick(View view) {
                 CheckBox checkBox = (CheckBox) view;
                 int position = (Integer) view.getTag();
-                getItem(position).setChecked(checkBox.isChecked());
-
-
-
-                if (checkBox.isChecked()) {
-
-                    int size = list.size();
-                    list_temp = new ArrayList<>(list);
-                    list.clear();
-                    for(int i=0;i<size;i++){
-                        String splitter = "%";
-                        String row[] = list_temp.get(i).getTitle().split(splitter);
-
-                        Checkbox_model model = new Checkbox_model();
-                        if (i == position) {
-
-                            model.setTitle(row[0]+"%1");
-                        }
-                        else
-                        {
-                            model.setTitle(row[0]+"%0");
-                        }
-
-                        list.add(model);
-                    }
-
-
-                    for (int i = 0; i < list.size(); i++) {
-                        dbEnterArray[i] = list.get(i).getTitle();
-                    }
-
-
-
-                    Intent intent= new Intent(getContext(), Detailed_Activity_Structure_Screens.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                    intent.putExtra("items",dbEnterArray);
-                    intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
-                    intent.putExtra("heading", topass[0]);
-                    intent.putExtra("fromAddapter","true");
-                    intent.putExtra("column", topass[1]);
-                    intent.putExtra("dbTable",topass[2]);
-                    ((Activity)context).finish();
-                    context.startActivity(intent);
-
+                String name = checkBox.getText().toString().replaceAll("\\s+","");
+                String observation_name="";
+                int pagePosition= 0;
+                switch (topass[2]){
+                    case "portfolio":
+                        pagePosition= 1;
+                        observation_name="observation";
+                        break;
+                    case "roofing":
+                        pagePosition= 2;
+                        observation_name="";
+                        break;
+                    case "exterior":
+                        pagePosition= 3;
+                        observation_name="observation";
+                        break;
+                    case "interior":
+                        pagePosition= 9;
+                        observation_name="observation";
+                        break;
+                    case "heating":
+                        pagePosition= 5;
+                        observation_name="Heating_Observations";
+                        break;
+                    case "cooling":
+                        pagePosition= 6;
+                        observation_name="Heating_Observations";
+                        break;
+                    case "electrical":
+                        pagePosition= 4;
+                        observation_name="Electrical_Observations";
+                        break;
+                    case "insulation":
+                        pagePosition= 7;
+                        observation_name="Insulation_Ventilation_Observations";
+                        break;
+                    case "plumbing":
+                        pagePosition= 8;
+                        observation_name="Plumbing_Observations";
+                        break;
+                    case "appliance":
+                        pagePosition= 10;
+                        observation_name="Appliance_Observations";
+                        break;
+                    case "fireplaces":
+                        pagePosition= 11;
+                        observation_name="Fireplaces_Observations";
+                        break;
+                    default:
+                        pagePosition= 0;
 
                 }
+                data = pagePosition+"_"+observation_name+"_"+name;
 
-                else {
-                    for(int i=0;i<list.size();i++){
-                        String row1[]=list.get(i).getTitle().split("%");
-                        dbEnterArray[i] = row1[0] + "%0";
+                if(topass[0].equals("Exterior Observations")||topass[0].equals("Electrical Observations")||topass[0].equals("Structure Observations")
+                        || topass[0].equals("Heating Observations") || topass[0].equals("Cooling/Heat Pump Observations")
+                        || topass[0].equals("Interior Observations")  || topass[0].equals("Insulation / Ventilation Observations")
+                        || topass[0].equals("Plumbing Observations")|| topass[0].equals("Appliance Observations:")
+                        || topass[0].equals("Fireplace / Wood Stove Observations:")){
+
+                    getDefaultComments();
+                    getItem(position).setChecked(checkBox.isChecked());
+
+                    showDialog(position,view);
+                } else {
+                    getItem(position).setChecked(checkBox.isChecked());
+
+
+                    if (checkBox.isChecked()) {
+
+                        int size = list.size();
+                        list_temp = new ArrayList<>(list);
+                        list.clear();
+                        for (int i = 0; i < size; i++) {
+                            String splitter = "%";
+                            String row[] = list_temp.get(i).getTitle().split(splitter);
+
+                            Checkbox_model model = new Checkbox_model();
+                            if (i == position) {
+
+                                model.setTitle(row[0] + "%1");
+                            } else {
+                                model.setTitle(row[0] + "%0");
+                            }
+
+                            list.add(model);
+                        }
+
+
+                        for (int i = 0; i < list.size(); i++) {
+                            dbEnterArray[i] = list.get(i).getTitle();
+                        }
+
+
+                        Intent intent = new Intent(getContext(), Detailed_Activity_Structure_Screens.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                        intent.putExtra("items", dbEnterArray);
+                        intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                        intent.putExtra("heading", topass[0]);
+                        intent.putExtra("fromAddapter", "true");
+                        intent.putExtra("column", topass[1]);
+                        intent.putExtra("dbTable", topass[2]);
+                        ((Activity) context).finish();
+                        context.startActivity(intent);
+
+
+                    } else {
+                        for (int i = 0; i < list.size(); i++) {
+                            String row1[] = list.get(i).getTitle().split("%");
+                            dbEnterArray[i] = row1[0] + "%0";
+                        }
                     }
                 }
             }
@@ -270,6 +352,127 @@ public class Detailed_Adapter_Structure_Screen extends ArrayAdapter<Checkbox_mod
         return convertView;
     }
 
+    private void showDialog(final int position,final View v) {
+        LayoutInflater inflater = LayoutInflater.from(context);
+        final View subView = inflater.inflate(R.layout.dilogue_layout, null);
+       subEditText = (EditText)subView.findViewById(R.id.dialogEditText);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle("Observation Comment");
+        builder.setMessage("Comment:");
+        builder.setView(subView);
+        AlertDialog alertDialog = builder.create();
+
+        builder.setPositiveButton("Save", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                CheckBox checkBox = (CheckBox)v ;
+
+                if (checkBox.isChecked()) {
+
+                    int size = list.size();
+                    list_temp = new ArrayList<>(list);
+                    list.clear();
+                    for (int i = 0; i < size; i++) {
+                        String splitter = "%";
+                        String row[] = list_temp.get(i).getTitle().split(splitter);
+
+                        Checkbox_model model = new Checkbox_model();
+                        if (i == position) {
+
+                            model.setTitle(row[0] + "%1");
+                        } else {
+                            model.setTitle(row[0] + "%0");
+                        }
+
+                        list.add(model);
+                    }
+
+
+                    for (int i = 0; i < list.size(); i++) {
+                        dbEnterArray[i] = list.get(i).getTitle();
+                    }
+
+
+                    Intent intent = new Intent(getContext(), Detailed_Activity_Structure_Screens.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                    intent.putExtra("items", dbEnterArray);
+                    intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                    intent.putExtra("heading", topass[0]);
+                    intent.putExtra("fromAddapter", "true");
+                    intent.putExtra("column", topass[1]);
+                    intent.putExtra("dbTable", topass[2]);
+                    ((Activity) context).finish();
+                    context.startActivity(intent);
+
+
+                } else {
+                    for (int i = 0; i < list.size(); i++) {
+                        String row1[] = list.get(i).getTitle().split("%");
+                        dbEnterArray[i] = row1[0] + "%0";
+                    }
+                }
+
+            }
+        });
+
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                CheckBox checkBox = (CheckBox)v ;
+
+                if (checkBox.isChecked()) {
+
+                    int size = list.size();
+                    list_temp = new ArrayList<>(list);
+                    list.clear();
+                    for (int i = 0; i < size; i++) {
+                        String splitter = "%";
+                        String row[] = list_temp.get(i).getTitle().split(splitter);
+
+                        Checkbox_model model = new Checkbox_model();
+                        if (i == position) {
+
+                            model.setTitle(row[0] + "%1");
+                        } else {
+                            model.setTitle(row[0] + "%0");
+                        }
+
+                        list.add(model);
+                    }
+
+
+                    for (int i = 0; i < list.size(); i++) {
+                        dbEnterArray[i] = list.get(i).getTitle();
+                    }
+
+
+                    Intent intent = new Intent(getContext(), Detailed_Activity_Structure_Screens.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                    intent.putExtra("items", dbEnterArray);
+                    intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                    intent.putExtra("heading", topass[0]);
+                    intent.putExtra("fromAddapter", "true");
+                    intent.putExtra("column", topass[1]);
+                    intent.putExtra("dbTable", topass[2]);
+                    ((Activity) context).finish();
+                    context.startActivity(intent);
+
+
+                } else {
+                    for (int i = 0; i < list.size(); i++) {
+                        String row1[] = list.get(i).getTitle().split("%");
+                        dbEnterArray[i] = row1[0] + "%0";
+                    }
+                }
+                Toast.makeText(context, "Cancel", Toast.LENGTH_LONG).show();
+            }
+        });
+
+        builder.show();
+
+
+
+    }
 
 
     public String[] getDbInsertArray() {
@@ -401,7 +604,77 @@ public class Detailed_Adapter_Structure_Screen extends ArrayAdapter<Checkbox_mod
 
 
     }
+    public void getDefaultComments() {
 
+        final StringRequest request = new StringRequest(Request.Method.POST, End_Points.GET_DEFAULT_COMMENTS,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        try {
+                            JSONArray jsonArray=new JSONArray(response);
+                            for (int i=0;i<jsonArray.length();i++) {
+                                JSONObject object =jsonArray.getJSONObject(i);
+                                defaultText=object.getString("defaulttext");
+                                subEditText.setText(defaultText);
+                               // String test=defaultText;
+                                //etComments.setText(defaultText);
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                // ringProgressDialog.dismiss();
+                if (error instanceof NoConnectionError) {
+
+                    new SweetAlertDialog(context, SweetAlertDialog.ERROR_TYPE)
+                            .setTitleText("Error!")
+                            .setConfirmText("OK").setContentText("No Internet Connection")
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    sDialog.dismiss();
+                                }
+                            })
+                            .show();
+                } else if (error instanceof TimeoutError) {
+
+                    new SweetAlertDialog(context, SweetAlertDialog.ERROR_TYPE)
+                            .setTitleText("Error!")
+                            .setConfirmText("OK").setContentText("Connection TimeOut! Please check your internet connection.")
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    sDialog.dismiss();
+                                }
+                            })
+                            .show();
+                }
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+
+                Map<String, String> params = new HashMap<>();
+                params.put("fieldid",data);
+                return params;
+            }
+        };
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                MY_SOCKET_TIMEOUT_MS,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        requestQueue.add(request);
+
+    }
 
 
 

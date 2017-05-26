@@ -9,6 +9,9 @@ import android.os.Build;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -52,6 +55,8 @@ public class Edit_Profile extends AppCompatActivity {
     private static final int MY_SOCKET_TIMEOUT_MS = 10000;
     ProgressDialog ringProgressDialog;
 
+    int keyDel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,15 +66,15 @@ public class Edit_Profile extends AppCompatActivity {
         userid = pref.getString("user_id", null);
 
         Intent intent = getIntent();
-        username =intent.getStringExtra("user_name");
-        flname=username.split(" ");
-        useremail =intent.getStringExtra("email");
-        usercontact=intent.getStringExtra("phone");
-        useraddress=intent.getStringExtra("adress");
-        companyinfo=intent.getStringExtra("company_info");
-        pic=intent.getStringExtra("img");
-        website=intent.getStringExtra("website");
-        fax=intent.getStringExtra("fax");
+        username = intent.getStringExtra("user_name");
+        flname = username.split(" ");
+        useremail = intent.getStringExtra("email");
+        usercontact = intent.getStringExtra("phone");
+        useraddress = intent.getStringExtra("adress");
+        companyinfo = intent.getStringExtra("company_info");
+        pic = intent.getStringExtra("img");
+        website = intent.getStringExtra("website");
+        fax = intent.getStringExtra("fax");
         //fulladdress=useraddress.split(",");
 
         FirstName = (EditText) findViewById(R.id.et_first_name);
@@ -80,7 +85,7 @@ public class Edit_Profile extends AppCompatActivity {
         Fax = (EditText) findViewById(R.id.et_user_fax);
         CompanyInfo = (EditText) findViewById(R.id.et_user_company_info);
         UserAddress = (EditText) findViewById(R.id.et_user_address);
-        logo= (ImageView) findViewById(R.id.logo);
+        logo = (ImageView) findViewById(R.id.logo);
         changelogo = (Button) findViewById(R.id.change_logo_button);
         changelogo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,14 +109,13 @@ public class Edit_Profile extends AppCompatActivity {
         });
 
 
-
         String url = End_Points.IMAGE_BASE_URL + pic;
         Picasso.with(getApplicationContext())
                 .load(url)
                 .resize(300, 300)
                 .into(logo);
 
-        updateProfile=(Button)findViewById(R.id.update_profile);
+        updateProfile = (Button) findViewById(R.id.update_profile);
         updateProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -126,12 +130,7 @@ public class Edit_Profile extends AppCompatActivity {
         CompanyInfo.setText(companyinfo);
         Website.setText(website);
         Fax.setText(fax);
-
-//        UserCity.setText(fulladdress[1]);
-        UserAddress.setText(useraddress);
-  //      UserCountry.setText(fulladdress[2]);
     }
-
     public void UpdateClient() {
 
         ringProgressDialog = ProgressDialog.show(this, "", "Please wait ...", true);

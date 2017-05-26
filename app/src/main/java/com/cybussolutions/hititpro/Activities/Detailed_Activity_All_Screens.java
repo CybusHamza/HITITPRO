@@ -88,7 +88,6 @@ public class Detailed_Activity_All_Screens extends AppCompatActivity {
 
         // receiving values from previous activities
 
-
         final Intent intent = getIntent();
         items = intent.getStringArrayExtra("items");
         heading = intent.getStringExtra("heading");

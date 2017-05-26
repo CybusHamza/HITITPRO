@@ -33,7 +33,8 @@
                 android:textColor="@color/black"
                 android:textColorHint="@color/black"
                 android:textSize="15sp"
-                android:id="@+id/et_first_name" />
+                android:id="@+id/et_first_name"
+                android:digits="qwertzuiopasdfghjklyxcvbnmABCDEFGHIJKLMNOPQRSTUVWXYZ"/>
 
         </com.github.florent37.materialtextfield.MaterialTextField>
         <com.github.florent37.materialtextfield.MaterialTextField
@@ -55,7 +56,8 @@
                 android:textColor="@color/black"
                 android:textColorHint="@color/black"
                 android:textSize="15sp"
-                android:id="@+id/et_last_name" />
+                android:id="@+id/et_last_name"
+                android:digits="qwertzuiopasdfghjklyxcvbnmABCDEFGHIJKLMNOPQRSTUVWXYZ"/>
 
         </com.github.florent37.materialtextfield.MaterialTextField>
 
@@ -99,10 +101,11 @@
                 android:hint="Phone"
                 android:singleLine="true"
                 android:textColor="@color/black"
-                android:inputType="text"
+                android:inputType="phone"
                 android:textColorHint="@color/black"
                 android:textSize="15sp"
-                android:id="@+id/et_user_contact" />
+                android:id="@+id/et_user_contact"
+                android:maxLength="14"/>
 
         </com.github.florent37.materialtextfield.MaterialTextField>
         <com.github.florent37.materialtextfield.MaterialTextField

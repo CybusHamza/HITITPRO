@@ -176,7 +176,7 @@ public class CustomArrayAdapter extends ArrayAdapter<Checkbox_model> implements
 							pagePosition= 3;
 							break;
 						case "interior":
-							pagePosition= 4;
+							pagePosition= 9;
 							break;
 						case "heating":
 							pagePosition= 5;
@@ -185,13 +185,13 @@ public class CustomArrayAdapter extends ArrayAdapter<Checkbox_model> implements
 							pagePosition= 6;
 							break;
 						case "electrical":
-							pagePosition= 7;
+							pagePosition= 4;
 							break;
 						case "insulation":
-							pagePosition= 8;
+							pagePosition= 7;
 							break;
 						case "plumbing":
-							pagePosition= 9;
+							pagePosition= 8;
 							break;
 						case "appliance":
 							pagePosition= 10;
