@@ -15,7 +15,9 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -315,7 +317,7 @@ public class MainActivity extends AppCompatActivity {
         StringRequest stringRequest=new StringRequest(Request.Method.POST, End_Points.GET_IMAGES, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Toast.makeText(getApplicationContext(),response.toString(),Toast.LENGTH_LONG).show();
+                //Toast.makeText(getApplicationContext(),response.toString(),Toast.LENGTH_LONG).show();
                 if(!response.equals("0")){
                     int count=0;
                     try {
@@ -503,9 +505,9 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         try {
             if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK ) {
-
                 Bundle extras = data.getExtras();
                 Bitmap imageBitmap = (Bitmap) extras.get("data");
+
                 int w=canvas.getWidth();
                 int h=canvas.getHeight();
                 scaled=imageBitmap.createScaledBitmap(imageBitmap,w,h,true);
@@ -527,6 +529,9 @@ public class MainActivity extends AppCompatActivity {
                 undo.setVisibility(View.VISIBLE);
                 redo.setVisibility(View.VISIBLE);
                 canvas.setVisibility(View.VISIBLE);
+                while (canvas.canUndo()){
+                    canvas.historyPointer=canvas.historyPointer-1;
+                }
 
             }
             //  if (requestCode == Constants.REQUEST_CODE && resultCode == RESULT_OK && data != null) {
@@ -560,6 +565,9 @@ public class MainActivity extends AppCompatActivity {
                 undo.setVisibility(View.VISIBLE);
                 redo.setVisibility(View.VISIBLE);
                 canvas.setVisibility(View.VISIBLE);
+                while (canvas.canUndo()){
+                    canvas.historyPointer=canvas.historyPointer-1;
+                }
                 // imageView.setImageBitmap(BitmapFactory
                 //       .decodeFile(ImageDecode));
 

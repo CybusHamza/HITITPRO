@@ -59,7 +59,7 @@ public class Detailed_Adapter_Structure_Screen extends ArrayAdapter<Checkbox_mod
 {
 
     private static final int MY_SOCKET_TIMEOUT_MS = 10000;
-    String data,defaultText;
+    String data,defaultText,observation_comments="";
     private LayoutInflater layoutInflater;
     String[] dbEnterArray;
     private final List<Checkbox_model> list;
@@ -221,46 +221,57 @@ public class Detailed_Adapter_Structure_Screen extends ArrayAdapter<Checkbox_mod
                     case "portfolio":
                         pagePosition= 1;
                         observation_name="observation";
+                        observation_comments="observation_comments";
                         break;
                     case "roofing":
                         pagePosition= 2;
                         observation_name="";
+                        observation_comments="observations_comments";
                         break;
                     case "exterior":
                         pagePosition= 3;
                         observation_name="observation";
+                        observation_comments="observations_comments";
                         break;
                     case "interior":
                         pagePosition= 9;
                         observation_name="observation";
+                        observation_comments="observation_comments";
                         break;
                     case "heating":
                         pagePosition= 5;
                         observation_name="Heating_Observations";
+                        observation_comments="observation_comments";
                         break;
                     case "cooling":
                         pagePosition= 6;
                         observation_name="Heating_Observations";
+                        observation_comments="heatobservation_comments";
                         break;
                     case "electrical":
                         pagePosition= 4;
                         observation_name="Electrical_Observations";
+                        observation_comments="observation_comments";
                         break;
                     case "insulation":
                         pagePosition= 7;
                         observation_name="Insulation_Ventilation_Observations";
+                        observation_comments="observations_comments";
                         break;
                     case "plumbing":
                         pagePosition= 8;
                         observation_name="Plumbing_Observations";
+                        observation_comments="observation_comments";
                         break;
                     case "appliance":
                         pagePosition= 10;
                         observation_name="Appliance_Observations";
+                        observation_comments="observations_comments";
                         break;
                     case "fireplaces":
                         pagePosition= 11;
                         observation_name="Fireplaces_Observations";
+                        observation_comments="observations_comments";
                         break;
                     default:
                         pagePosition= 0;
@@ -268,19 +279,18 @@ public class Detailed_Adapter_Structure_Screen extends ArrayAdapter<Checkbox_mod
                 }
                 data = pagePosition+"_"+observation_name+"_"+name;
 
-                if(topass[0].equals("Exterior Observations")||topass[0].equals("Electrical Observations")||topass[0].equals("Structure Observations")
+                if((topass[0].equals("Exterior Observations")||topass[0].equals("Electrical Observations")||topass[0].equals("Structure Observations")
                         || topass[0].equals("Heating Observations") || topass[0].equals("Cooling/Heat Pump Observations")
                         || topass[0].equals("Interior Observations")  || topass[0].equals("Insulation / Ventilation Observations")
                         || topass[0].equals("Plumbing Observations")|| topass[0].equals("Appliance Observations:")
-                        || topass[0].equals("Fireplace / Wood Stove Observations:")){
+                        || topass[0].equals("Fireplace / Wood Stove Observations:"))&& checkBox.isChecked()){
 
-                    getDefaultComments();
-                    getItem(position).setChecked(checkBox.isChecked());
+                        getDefaultComments();
+                        getItem(position).setChecked(checkBox.isChecked());
 
-                    showDialog(position,view);
+                        showDialog(position, view);
                 } else {
                     getItem(position).setChecked(checkBox.isChecked());
-
 
                     if (checkBox.isChecked()) {
 
@@ -412,6 +422,7 @@ public class Detailed_Adapter_Structure_Screen extends ArrayAdapter<Checkbox_mod
                         dbEnterArray[i] = row1[0] + "%0";
                     }
                 }
+                saveObservationComments();
 
             }
         });
@@ -471,6 +482,68 @@ public class Detailed_Adapter_Structure_Screen extends ArrayAdapter<Checkbox_mod
         builder.show();
 
 
+
+    }
+
+    private void saveObservationComments() {
+        final StringRequest request = new StringRequest(Request.Method.POST, End_Points.SAVE_OBSERVATION_COMMENTS,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Toast.makeText(getContext(),response,Toast.LENGTH_LONG).show();
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                // ringProgressDialog.dismiss();
+                if (error instanceof NoConnectionError) {
+
+                    new SweetAlertDialog(context, SweetAlertDialog.ERROR_TYPE)
+                            .setTitleText("Error!")
+                            .setConfirmText("OK").setContentText("No Internet Connection")
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    sDialog.dismiss();
+                                }
+                            })
+                            .show();
+                } else if (error instanceof TimeoutError) {
+
+                    new SweetAlertDialog(context, SweetAlertDialog.ERROR_TYPE)
+                            .setTitleText("Error!")
+                            .setConfirmText("OK").setContentText("Connection TimeOut! Please check your internet connection.")
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    sDialog.dismiss();
+                                }
+                            })
+                            .show();
+                }
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+
+                Map<String, String> params = new HashMap<>();
+                params.put("observation_comments",subEditText.getText().toString());
+                params.put("template_id",StructureScreensActivity.template_id);
+                params.put("inspection_id",StructureScreensActivity.inspectionID);
+                params.put("client_id",StructureScreensActivity.client_id);
+                params.put("table_name",topass[2]);
+                params.put("observations_comments",observation_comments);
+                return params;
+            }
+        };
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                MY_SOCKET_TIMEOUT_MS,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        requestQueue.add(request);
 
     }
 
@@ -663,6 +736,11 @@ public class Detailed_Adapter_Structure_Screen extends ArrayAdapter<Checkbox_mod
 
                 Map<String, String> params = new HashMap<>();
                 params.put("fieldid",data);
+                params.put("template_id",StructureScreensActivity.template_id);
+                params.put("inspection_id",StructureScreensActivity.inspectionID);
+                params.put("client_id",StructureScreensActivity.client_id);
+                params.put("table_name",topass[2]);
+                params.put("observation_comments",observation_comments);
                 return params;
             }
         };

@@ -107,11 +107,11 @@ public class EditClient extends AppCompatActivity {
                 {
                     if(strEmail.matches(emailPattern))
                     {
-                        if(strPhone.matches(numberPattern))
-                        {
+                        //if(strPhone.matches(numberPattern))
+                        //{
                             UpdateClient();
-                        }
-                        else {
+                       // }
+                       /* else {
                             new SweetAlertDialog(EditClient.this, SweetAlertDialog.ERROR_TYPE)
                                     .setTitleText("Error!")
                                     .setConfirmText("OK").setContentText("Invalid format of Phone number")
@@ -123,7 +123,7 @@ public class EditClient extends AppCompatActivity {
                                         }
                                     })
                                     .show();
-                        }
+                        }*/
                     }
                     else {
                         new SweetAlertDialog(EditClient.this, SweetAlertDialog.ERROR_TYPE)

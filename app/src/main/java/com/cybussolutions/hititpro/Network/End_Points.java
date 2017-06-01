@@ -25,6 +25,8 @@ public class End_Points {
 
     public static final String GET_IMAGES=BASE_URL+"getImages";
     public static final String GET_DEFAULT_COMMENTS=BASE_URL+"getDefaultComments";
+    public static final String GET_DEFAULT_COMMENTS_IMAGES=BASE_URL+"getDefaultCommentsImages";
+    public static final String SAVE_OBSERVATION_COMMENTS=BASE_URL+"saveObservationComments";
     public static final String GET_IMAGE_COMMENTS=BASE_URL+"getImageComments";
 
     public static final String GET_ALL_TEMPLATES = BASE_URL + "getAllTemplates";

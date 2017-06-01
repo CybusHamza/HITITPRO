@@ -29,7 +29,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Select Template"
+        android:text="Select Property"
         android:id="@+id/textView4"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"

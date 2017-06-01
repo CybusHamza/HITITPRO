@@ -5,17 +5,24 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Build;
+import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Base64;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
@@ -32,12 +39,16 @@ import com.cybussolutions.hititpro.Network.End_Points;
 import com.cybussolutions.hititpro.R;
 import com.squareup.picasso.Picasso;
 
+import java.io.ByteArrayOutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class Edit_Profile extends AppCompatActivity {
+    String mCurrentPhotoPath,ba1,mSavedPhotoName;
 
     private static final int REQUEST_PERMISSIONS=0;
     Intent intent;
@@ -62,8 +73,9 @@ public class Edit_Profile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit__profile);
 
-        final SharedPreferences pref = getApplicationContext().getSharedPreferences("UserPrefs", MODE_PRIVATE);
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("UserPrefs", MODE_PRIVATE);
         userid = pref.getString("user_id", null);
+        pic = pref.getString("img",null);
 
         Intent intent = getIntent();
         username = intent.getStringExtra("user_name");
@@ -72,7 +84,6 @@ public class Edit_Profile extends AppCompatActivity {
         usercontact = intent.getStringExtra("phone");
         useraddress = intent.getStringExtra("adress");
         companyinfo = intent.getStringExtra("company_info");
-        pic = intent.getStringExtra("img");
         website = intent.getStringExtra("website");
         fax = intent.getStringExtra("fax");
         //fulladdress=useraddress.split(",");
@@ -102,7 +113,7 @@ public class Edit_Profile extends AppCompatActivity {
                     }
 
                 } else {
-                    //attachLogo();
+                    attachLogo();
 
                 }
             }
@@ -119,7 +130,19 @@ public class Edit_Profile extends AppCompatActivity {
         updateProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String firstName=FirstName.getText().toString();
+                String lastName=LastName.getText().toString();
+                String userEmail=UserEmail.getText().toString();
+                String userContact=UserContact.getText().toString();
+                String companyInfo=CompanyInfo.getText().toString();
+                String userAddress=UserAddress.getText().toString();
+                String website=Website.getText().toString();
+                String fax=Fax.getText().toString();
+                if(firstName.equals("")||lastName.equals("")||userEmail.equals("")||userContact.equals("")||companyInfo.equals("")||userAddress.equals("")||website.equals("")||fax.equals("")){
+                    Toast.makeText(Edit_Profile.this,"Plz fill the empty fields",Toast.LENGTH_LONG).show();
+                }else {
                 UpdateClient();
+                }
             }
         });
 
@@ -128,9 +151,96 @@ public class Edit_Profile extends AppCompatActivity {
         UserEmail.setText(useremail);
         UserContact.setText(usercontact);
         CompanyInfo.setText(companyinfo);
+        UserAddress.setText(useraddress);
         Website.setText(website);
         Fax.setText(fax);
     }
+
+    private void attachLogo() {
+        intent = new Intent(Intent.ACTION_PICK,
+                MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(intent, IMG_RESULT);
+    }
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        try {
+
+            //  if (requestCode == Constants.REQUEST_CODE && resultCode == RESULT_OK && data != null) {
+            if (requestCode == IMG_RESULT  && resultCode == RESULT_OK && data != null) {
+                // textView.setText(stringBuffer.toString());
+                Uri URI = data.getData();
+                String[] FILE = {MediaStore.Images.Media.DATA};
+
+
+                Cursor cursor = getContentResolver().query(URI,
+                        FILE, null, null, null);
+
+                cursor.moveToFirst();
+
+                int columnIndex = cursor.getColumnIndex(FILE[0]);
+                ImageDecode = cursor.getString(columnIndex);
+                mCurrentPhotoPath=ImageDecode;
+                int w=logo.getWidth();
+                int h=logo.getHeight();
+                Bitmap unscaled=BitmapFactory.decodeFile(ImageDecode);
+                Bitmap scaled=unscaled.createScaledBitmap(unscaled,w,h,true);
+
+                cursor.close();
+                logo.setImageBitmap(scaled);
+                uploadlogo();
+
+
+            }
+        } catch (Exception e) {
+            Toast.makeText(this, "Please try again"+e.toString(), Toast.LENGTH_LONG)
+                    .show();
+        }
+    }
+    private void uploadlogo() {
+        Calendar c = Calendar.getInstance();
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        final String formattedDate = df.format(c.getTime());
+        Bitmap bm = BitmapFactory.decodeFile(mCurrentPhotoPath);
+        ByteArrayOutputStream bao = new ByteArrayOutputStream();
+        bm.compress(Bitmap.CompressFormat.JPEG, 50, bao);
+        byte[] ba = bao.toByteArray();
+        ba1 = Base64.encodeToString(ba, Base64.NO_WRAP);
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, End_Points.UPLOAD, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                mSavedPhotoName = response;
+               SharedPreferences pref = getApplicationContext().getSharedPreferences("UserPrefs", MODE_PRIVATE);
+                SharedPreferences.Editor edit=pref.edit();
+                edit.putString("img",mSavedPhotoName);
+                edit.commit();
+                Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_LONG).show();
+                //Signup();
+                //    uploadToServer();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
+            }
+        }) {
+            @Override
+            public Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("image", ba1);
+                params.put("name", formattedDate);
+                return params;
+            }
+        };
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
+                MY_SOCKET_TIMEOUT_MS,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        RequestQueue requestQueue = Volley.newRequestQueue(Edit_Profile.this);
+        requestQueue.add(stringRequest);
+    }
+
     public void UpdateClient() {
 
         ringProgressDialog = ProgressDialog.show(this, "", "Please wait ...", true);
@@ -166,7 +276,7 @@ public class Edit_Profile extends AppCompatActivity {
                                             SharedPreferences.Editor editor = pref.edit();
                                             editor.putString("user_name", FirstName.getText().toString()+" "+LastName.getText().toString());
                                             editor.putString("email", UserEmail.getText().toString());
-                                            editor.putString("img", pic);
+                                           // editor.putString("img", pic);
                                             editor.putString("phone",UserContact.getText().toString());
                                            // editor.putString("city",UserCity.getText().toString());
                                             editor.putString("adress", UserAddress.getText().toString());

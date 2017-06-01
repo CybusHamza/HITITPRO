@@ -115,21 +115,24 @@ public class TemplatesFragment extends BaseFragment {
                 int client_id = client_spinner.getSelectedItemPosition();
                 // int inspection_id =  inspection_spinner.getSelectedItemPosition();
                 int template_id = tem_spinner.getSelectedItemPosition();
-                if(!client_spinner.getSelectedItem().equals("Select") || !tem_spinner.getSelectedItem().equals("Select")) {
+                if(client_spinner.getSelectedItem().toString()!="Select") {
+                    if(tem_spinner.getSelectedItem().toString()!="Select") {
+                        if (isStarted.get(tem_spinner.getSelectedItemPosition()).equals("0")) {
+                            prePopulate(inspection_id_list.get(tem_spinner.getSelectedItemPosition()), client_id_list.get(client_spinner.getSelectedItemPosition()), default_template.get(tem_spinner.getSelectedItemPosition()));
 
-                    if (isStarted.get(tem_spinner.getSelectedItemPosition()).equals("0")) {
-                        prePopulate(inspection_id_list.get(tem_spinner.getSelectedItemPosition()), client_id_list.get(client_spinner.getSelectedItemPosition()), default_template.get(tem_spinner.getSelectedItemPosition()));
-
-                    } else {
-                        //  if(!client_list.get(client_id).equals("Select")) {
-                        Intent intent = new Intent(getActivity(), StructureScreensActivity.class);
-                        intent.putExtra("inspectionId", templateID_list.get(0));
-                        intent.putExtra("client_id", client_id_list.get(client_id));
-                        intent.putExtra("template_id", inspection_id_list.get(template_id));
-                        intent.putExtra("inspection_type", "old");
-                        startActivity(intent);
-                        //}else {
-                        //  Toast.makeText(getContext(),"plz select client to review",Toast.LENGTH_LONG).show();
+                        } else {
+                            //  if(!client_list.get(client_id).equals("Select")) {
+                            Intent intent = new Intent(getActivity(), StructureScreensActivity.class);
+                            intent.putExtra("inspectionId", templateID_list.get(0));
+                            intent.putExtra("client_id", client_id_list.get(client_id));
+                            intent.putExtra("template_id", inspection_id_list.get(template_id));
+                            intent.putExtra("inspection_type", "old");
+                            startActivity(intent);
+                            //}else {
+                            //  Toast.makeText(getContext(),"plz select client to review",Toast.LENGTH_LONG).show();
+                        }
+                    }else {
+                        Toast.makeText(getContext(),"plz select client and template to continue",Toast.LENGTH_LONG).show();
                     }
                 }else {
                     Toast.makeText(getContext(),"plz select client and template to continue",Toast.LENGTH_LONG).show();
@@ -653,8 +656,10 @@ public class TemplatesFragment extends BaseFragment {
             if (!client_list.get(pos).equals("Select")) {
                 getTemplates();
             }
-            else
-            Toast.makeText(getContext(),"Plz select client",Toast.LENGTH_LONG).show();
+            else{
+                //Toast.makeText(getContext(),"Plz select client",Toast.LENGTH_LONG).show();
+            }
+
 
         }
 

@@ -51,7 +51,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Cotact Name"
+                android:hint="Contact Name"
                 android:singleLine="true"
                 android:textColor="@color/black"
                 android:textColorHint="@color/black"
@@ -74,7 +74,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Adress"
+                android:hint="Address"
                 android:singleLine="true"
                 android:textColor="@color/black"
                 android:inputType="text"
@@ -169,7 +169,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="yourname@website.com"
+                android:hint="Email"
                 android:singleLine="true"
                 android:textColor="@color/black"
                 android:inputType="textEmailAddress"

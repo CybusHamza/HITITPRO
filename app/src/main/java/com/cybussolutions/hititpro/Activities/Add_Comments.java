@@ -259,7 +259,7 @@ public class Add_Comments extends AppCompatActivity {
 
     public void getDefaultComments() {
 
-        final StringRequest request = new StringRequest(Request.Method.POST, End_Points.GET_DEFAULT_COMMENTS,
+        final StringRequest request = new StringRequest(Request.Method.POST, End_Points.GET_DEFAULT_COMMENTS_IMAGES,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {

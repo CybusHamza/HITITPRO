@@ -61,8 +61,8 @@ public class CanvasView extends View {
     private Canvas canvas   = null;
     private Bitmap bitmap   = null;
 
-    private List<Path> pathLists  = new ArrayList<Path>();
-    private List<Paint> paintLists = new ArrayList<Paint>();
+    public List<Path> pathLists  = new ArrayList<Path>();
+    public List<Paint> paintLists = new ArrayList<Paint>();
 
     private final Paint emptyPaint = new Paint();
 
@@ -70,7 +70,7 @@ public class CanvasView extends View {
     private int baseColor = Color.WHITE;
 
     // for Undo, Redo
-    private int historyPointer = 0;
+    public int historyPointer = 0;
 
     // Flags
     public Mode mode      = Mode.DRAW;
@@ -215,7 +215,7 @@ public class CanvasView extends View {
      * 
      * @param path the instance of Path
      */
-    private void updateHistory(Path path) {
+    public void updateHistory(Path path) {
         if (this.historyPointer == this.pathLists.size()) {
             this.pathLists.add(path);
             this.paintLists.add(this.createPaint());
