@@ -152,6 +152,7 @@ public class StructureScreenFragment extends BaseFragment {
 
 
 
+
         SharedPreferences pref = getActivity().getApplicationContext().getSharedPreferences("HititPro", getActivity().MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
         String populate = pref.getString("isStructure_populated","");
