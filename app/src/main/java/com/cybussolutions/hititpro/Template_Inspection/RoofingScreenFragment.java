@@ -134,6 +134,7 @@ public class RoofingScreenFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
                 edit.putBoolean("imageButton",false);
+                edit.putBoolean("addObservationButton",true);
                 edit.commit();
 
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
@@ -151,6 +152,7 @@ public class RoofingScreenFragment extends BaseFragment {
             public void onClick(View view) {
 
                 edit.putBoolean("imageButton",false);
+                edit.putBoolean("addObservationButton",true);
                 edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",StructureScreensActivity.roofFlashingButtonValues);
@@ -167,6 +169,7 @@ public class RoofingScreenFragment extends BaseFragment {
             public void onClick(View view) {
 
                 edit.putBoolean("imageButton",false);
+                edit.putBoolean("addObservationButton",true);
                 edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",StructureScreensActivity.chimneysButtonValues);
@@ -182,6 +185,7 @@ public class RoofingScreenFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
                 edit.putBoolean("imageButton",false);
+                edit.putBoolean("addObservationButton",true);
                 edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",StructureScreensActivity.roofDrainageButtonValues);
@@ -198,6 +202,7 @@ public class RoofingScreenFragment extends BaseFragment {
             public void onClick(View view) {
 
                 edit.putBoolean("imageButton",false);
+                edit.putBoolean("addObservationButton",true);
                 edit.commit();
 
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
@@ -216,6 +221,7 @@ public class RoofingScreenFragment extends BaseFragment {
             public void onClick(View view) {
 
                 edit.putBoolean("imageButton",false);
+                edit.putBoolean("addObservationButton",true);
                 edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",StructureScreensActivity.methodInspectionButtonValues);
@@ -232,6 +238,7 @@ public class RoofingScreenFragment extends BaseFragment {
             public void onClick(View view) {
 
                 edit.putBoolean("imageButton",false);
+                edit.putBoolean("addObservationButton",false);
                 edit.commit();
 
                 Intent intent= new Intent(getActivity(), Detailed_Activity_Structure_Screens.class);
@@ -249,6 +256,7 @@ public class RoofingScreenFragment extends BaseFragment {
             public void onClick(View view) {
 
                 edit.putBoolean("imageButton",true);
+                edit.putBoolean("addObservationButton",true);
                 edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",StructureScreensActivity.roSloppedButtonValues);
@@ -265,6 +273,7 @@ public class RoofingScreenFragment extends BaseFragment {
             public void onClick(View view) {
 
                 edit.putBoolean("imageButton",true);
+                edit.putBoolean("addObservationButton",true);
                 edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",StructureScreensActivity.roFlatButtonValues);
@@ -281,6 +290,7 @@ public class RoofingScreenFragment extends BaseFragment {
             public void onClick(View view) {
 
                 edit.putBoolean("imageButton",true);
+                edit.putBoolean("addObservationButton",true);
                 edit.commit();
 
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
@@ -298,6 +308,7 @@ public class RoofingScreenFragment extends BaseFragment {
             public void onClick(View view) {
 
                 edit.putBoolean("imageButton",true);
+                edit.putBoolean("addObservationButton",true);
                 edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",StructureScreensActivity.roChimneyButtonValues);
@@ -315,6 +326,7 @@ public class RoofingScreenFragment extends BaseFragment {
             public void onClick(View view) {
 
                 edit.putBoolean("imageButton",true);
+                edit.putBoolean("addObservationButton",true);
                 edit.commit();
 
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);

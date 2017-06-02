@@ -140,6 +140,7 @@ public class HeatingScreenFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
                 edit.putBoolean("imageButton",false);
+                edit.putBoolean("addObservationButton",true);
                 edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",StructureScreensActivity.heatingEnergyButtonValues);
@@ -157,6 +158,7 @@ public class HeatingScreenFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
                 edit.putBoolean("imageButton",false);
+                edit.putBoolean("addObservationButton",true);
                 edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",StructureScreensActivity.heatingSystemButtonValues);
@@ -173,6 +175,7 @@ public class HeatingScreenFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
                 edit.putBoolean("imageButton",false);
+                edit.putBoolean("addObservationButton",true);
                 edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",StructureScreensActivity.heatingChimneysButtonValues);
@@ -189,6 +192,7 @@ public class HeatingScreenFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
                 edit.putBoolean("imageButton",false);
+                edit.putBoolean("addObservationButton",true);
                 edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",StructureScreensActivity.heatingDistributionValues);
@@ -205,6 +209,7 @@ public class HeatingScreenFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
                 edit.putBoolean("imageButton",false);
+                edit.putBoolean("addObservationButton",true);
                 edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",StructureScreensActivity.heatingComponentsButtonValues);
@@ -221,6 +226,7 @@ public class HeatingScreenFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
                 edit.putBoolean("imageButton",false);
+                edit.putBoolean("addObservationButton",false);
                 edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_Structure_Screens.class);
                 intent.putExtra("items",StructureScreensActivity.heatingObservationsButtonValues);
@@ -237,6 +243,7 @@ public class HeatingScreenFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
                 edit.putBoolean("imageButton",true);
+                edit.putBoolean("addObservationButton",true);
                 edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",StructureScreensActivity.roFuranceButtonValues);
@@ -253,6 +260,7 @@ public class HeatingScreenFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
                 edit.putBoolean("imageButton",true);
+                edit.putBoolean("addObservationButton",true);
                 edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",StructureScreensActivity.roDuctWorkButtonValues);
@@ -270,6 +278,7 @@ public class HeatingScreenFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
                 edit.putBoolean("imageButton",true);
+                edit.putBoolean("addObservationButton",true);
                 edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",StructureScreensActivity.roBoilerButtonValues);
@@ -286,6 +295,7 @@ public class HeatingScreenFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
                 edit.putBoolean("imageButton",true);
+                edit.putBoolean("addObservationButton",true);
                 edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",StructureScreensActivity.roCombustionButtonValues);
@@ -302,6 +312,7 @@ public class HeatingScreenFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
                 edit.putBoolean("imageButton",true);
+                edit.putBoolean("addObservationButton",true);
                 edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",StructureScreensActivity.roChimneysButtonValues);
@@ -318,6 +329,7 @@ public class HeatingScreenFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
                 edit.putBoolean("imageButton",true);
+                edit.putBoolean("addObservationButton",true);
                 edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",StructureScreensActivity.roThermostatsButtonValues);

@@ -140,6 +140,7 @@ public class PlumbingScreenFragment extends BaseFragment {
             public void onClick(View view) {
 
                 edit.putBoolean("imageButton",false);
+                edit.putBoolean("addObservationButton",true);
                 edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items", StructureScreensActivity.water_supply_sourceValues);
@@ -156,6 +157,7 @@ public class PlumbingScreenFragment extends BaseFragment {
             public void onClick(View view) {
 
                 edit.putBoolean("imageButton",false);
+                edit.putBoolean("addObservationButton",true);
                 edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items", StructureScreensActivity.service_pipe_to_houseValues);
@@ -172,6 +174,7 @@ public class PlumbingScreenFragment extends BaseFragment {
             public void onClick(View view) {
 
                 edit.putBoolean("imageButton",false);
+                edit.putBoolean("addObservationButton",true);
                 edit.commit();
 
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
@@ -189,6 +192,7 @@ public class PlumbingScreenFragment extends BaseFragment {
             public void onClick(View view) {
 
                 edit.putBoolean("imageButton",false);
+                edit.putBoolean("addObservationButton",true);
                 edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items", StructureScreensActivity.interior_supply_pipingValues);
@@ -205,6 +209,7 @@ public class PlumbingScreenFragment extends BaseFragment {
             public void onClick(View view) {
 
                 edit.putBoolean("imageButton",false);
+                edit.putBoolean("addObservationButton",true);
                 edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items", StructureScreensActivity.waste_systemValues);
@@ -221,6 +226,7 @@ public class PlumbingScreenFragment extends BaseFragment {
             public void onClick(View view) {
 
                 edit.putBoolean("imageButton",false);
+                edit.putBoolean("addObservationButton",true);
                 edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items", StructureScreensActivity.dwv_pipingValues);
@@ -238,6 +244,7 @@ public class PlumbingScreenFragment extends BaseFragment {
             public void onClick(View view) {
 
                 edit.putBoolean("imageButton",false);
+                edit.putBoolean("addObservationButton",true);
                 edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items", StructureScreensActivity.water_heaterValues);
@@ -256,6 +263,7 @@ public class PlumbingScreenFragment extends BaseFragment {
             public void onClick(View view) {
 
                 edit.putBoolean("imageButton",false);
+                edit.putBoolean("addObservationButton",true);
                 edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items", StructureScreensActivity.fuel_storage_distributionValues);
@@ -273,6 +281,7 @@ public class PlumbingScreenFragment extends BaseFragment {
             public void onClick(View view) {
 
                 edit.putBoolean("imageButton",false);
+                edit.putBoolean("addObservationButton",true);
                 edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items", StructureScreensActivity.fuel_shut_off_valvesValues);
@@ -289,6 +298,7 @@ public class PlumbingScreenFragment extends BaseFragment {
             public void onClick(View view) {
 
                 edit.putBoolean("imageButton",false);
+                edit.putBoolean("addObservationButton",true);
                 edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items", StructureScreensActivity.other_components_plumbingValues);
@@ -305,6 +315,7 @@ public class PlumbingScreenFragment extends BaseFragment {
             public void onClick(View view) {
 
                 edit.putBoolean("imageButton",false);
+                edit.putBoolean("addObservationButton",false);
                 edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_Structure_Screens.class);
                 intent.putExtra("items", StructureScreensActivity.plumbing_observationsValues);
@@ -320,6 +331,7 @@ public class PlumbingScreenFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
                 edit.putBoolean("imageButton",true);
+                edit.putBoolean("addObservationButton",true);
                 edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items", StructureScreensActivity.water_heater_plimbingValues);
@@ -336,6 +348,7 @@ public class PlumbingScreenFragment extends BaseFragment {
             public void onClick(View view) {
 
                 edit.putBoolean("imageButton",true);
+                edit.putBoolean("addObservationButton",true);
                 edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items", StructureScreensActivity.gas_pipingValues);
@@ -351,6 +364,7 @@ public class PlumbingScreenFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
                 edit.putBoolean("imageButton",true);
+                edit.putBoolean("addObservationButton",true);
                 edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items", StructureScreensActivity.supply_pipingValues);
@@ -367,6 +381,7 @@ public class PlumbingScreenFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
                 edit.putBoolean("imageButton",true);
+                edit.putBoolean("addObservationButton",true);
                 edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items", StructureScreensActivity.dwv_piping_observationValues);
@@ -383,6 +398,7 @@ public class PlumbingScreenFragment extends BaseFragment {
             public void onClick(View view) {
 
                 edit.putBoolean("imageButton",true);
+                edit.putBoolean("addObservationButton",true);
                 edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items", StructureScreensActivity.fixturesValues);
@@ -399,6 +415,7 @@ public class PlumbingScreenFragment extends BaseFragment {
             public void onClick(View view) {
 
                 edit.putBoolean("imageButton",true);
+                edit.putBoolean("addObservationButton",true);
                 edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items", StructureScreensActivity.sump_pumpValues);
@@ -415,6 +432,7 @@ public class PlumbingScreenFragment extends BaseFragment {
             public void onClick(View view) {
 
                 edit.putBoolean("imageButton",true);
+                edit.putBoolean("addObservationButton",true);
                 edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items", StructureScreensActivity.waste_ejector_pumpValues);

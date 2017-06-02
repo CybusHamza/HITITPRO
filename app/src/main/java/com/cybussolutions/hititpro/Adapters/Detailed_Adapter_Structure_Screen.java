@@ -126,8 +126,8 @@ public class Detailed_Adapter_Structure_Screen extends ArrayAdapter<Checkbox_mod
 
             }catch (Exception e){
             }
-
         }
+
 
 
         holder.delete.setOnClickListener(new View.OnClickListener() {

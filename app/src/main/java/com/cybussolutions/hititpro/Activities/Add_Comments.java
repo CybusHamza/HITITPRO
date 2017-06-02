@@ -90,8 +90,12 @@ public class Add_Comments extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String check=etComments.getText().toString();
-                if(!check.equals("")&&radioGroup.getCheckedRadioButtonId()==-1) {
-                    Toast.makeText(getApplicationContext(),"You must select some recommendation",Toast.LENGTH_LONG).show();
+                String messageToast="You must select some recommendation";
+                if(check.equals("") || check==""){
+                    messageToast="Please enter some comment";
+                }
+                if((check.equals("")|| check=="")|| radioGroup.getCheckedRadioButtonId()==-1) {
+                    Toast.makeText(getApplicationContext(),messageToast,Toast.LENGTH_LONG).show();
 
                 }else{
                     if (mCurrentPhotoPath == null) {

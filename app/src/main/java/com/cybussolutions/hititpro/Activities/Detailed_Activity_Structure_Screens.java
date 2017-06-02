@@ -1,6 +1,7 @@
 package com.cybussolutions.hititpro.Activities;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -98,8 +99,9 @@ public class Detailed_Activity_Structure_Screens extends AppCompatActivity {
 
         SharedPreferences pref = getApplicationContext().getSharedPreferences("UserPrefs", MODE_PRIVATE);
         userid = pref.getString("user_id", "");
-
-
+        if(sp.getBoolean("addObservationButton",true)==false){
+                addCategory.setVisibility(View.INVISIBLE);
+        }
 
         toPass = new String[]{heading, dbColumn, dbTable};
 

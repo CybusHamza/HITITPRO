@@ -36,7 +36,8 @@ public class EditClient extends AppCompatActivity {
     String strName,strCity,strContactName,strAddress,strPhone,strFax,strEmail,strState,strZip,userid;
     Button Update;
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
-    String numberPattern = "^[+]?[0-9]{10,13}$+";
+    String numberPattern1 = "^[+]?[0-9]{10,13}$+";
+    String numberPattern = "^([0-9\\+]|\\(\\d{1,3}\\))[0-9\\-\\. ]{3,15}$";
     private static final int MY_SOCKET_TIMEOUT_MS = 10000;
     ProgressDialog ringProgressDialog;
 
@@ -107,11 +108,11 @@ public class EditClient extends AppCompatActivity {
                 {
                     if(strEmail.matches(emailPattern))
                     {
-                        //if(strPhone.matches(numberPattern))
-                        //{
+                        if(strPhone.matches(numberPattern))
+                        {
                             UpdateClient();
-                       // }
-                       /* else {
+                       }
+                        else {
                             new SweetAlertDialog(EditClient.this, SweetAlertDialog.ERROR_TYPE)
                                     .setTitleText("Error!")
                                     .setConfirmText("OK").setContentText("Invalid format of Phone number")
@@ -123,7 +124,7 @@ public class EditClient extends AppCompatActivity {
                                         }
                                     })
                                     .show();
-                        }*/
+                        }
                     }
                     else {
                         new SweetAlertDialog(EditClient.this, SweetAlertDialog.ERROR_TYPE)
