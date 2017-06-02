@@ -105,51 +105,52 @@ public class SignupActivity extends AppCompatActivity {
                 }
             }
         });
+        phone.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-       /* phone.addTextChangedListener(new TextWatcher() {
+            }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-                phone.setOnKeyListener(new View.OnKeyListener() {
-                    @Override
-                    public boolean onKey(View v, int keyCode, KeyEvent event) {
+            }
 
-                        if (keyCode == KeyEvent.KEYCODE_DEL)
-                            keyDel = 1;
-                        return false;
-                    }
-                });
-
-                if (keyDel == 0) {
-                    int len = phone.getText().length();
-                    if(len==1){
-                        phone.setText("("+phone.getText());
-                        phone.setSelection(phone.getText().length());
-                    }
-                    if(len == 4) {
-                        phone.setText(phone.getText() + ")");
-                        phone.setSelection(phone.getText().length());
-                    }
-                    if(len==8){
-                        phone.setText(phone.getText() + "-");
-                        phone.setSelection(phone.getText().length());
-                    }
-                } else {
-                    keyDel = 0;
+            @Override
+            public void afterTextChanged(Editable s) {
+                if(s.length()==10 && (!phone.getText().toString().contains("(")||!phone.getText().toString().contains(")")||!phone.getText().toString().contains(" ")|| !phone.getText().toString().contains("-"))){
+                    String strPhone=phone.getText().toString();
+                    String subPhone1=strPhone.substring(0,3);
+                    String subPhone2=strPhone.substring(3,6);
+                    String subPhone3=strPhone.substring(6,10);
+                    phone.setText("("+subPhone1+") "+subPhone2+"-"+subPhone3);
                 }
+
+            }
+        });
+        fax.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
             }
 
             @Override
-            public void afterTextChanged(Editable arg0) {
-                // TODO Auto-generated method stub
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
             }
 
             @Override
-            public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
-                // TODO Auto-generated method stub
+            public void afterTextChanged(Editable s) {
+                if(s.length()==10 && (!fax.getText().toString().contains("(")||!fax.getText().toString().contains(")")||!fax.getText().toString().contains(" ")|| !fax.getText().toString().contains("-"))){
+                    String strPhone=fax.getText().toString();
+                    String subPhone1=strPhone.substring(0,3);
+                    String subPhone2=strPhone.substring(3,6);
+                    String subPhone3=strPhone.substring(6,10);
+                    fax.setText("("+subPhone1+") "+subPhone2+"-"+subPhone3);
+                }
+
             }
-        });*/
+        });
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

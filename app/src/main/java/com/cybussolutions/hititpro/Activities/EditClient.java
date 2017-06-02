@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -84,6 +86,52 @@ public class EditClient extends AppCompatActivity {
 
         final SharedPreferences pref = getApplicationContext().getSharedPreferences("UserPrefs", MODE_PRIVATE);
         userid = pref.getString("user_id", null);
+        Phone.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if(s.length()==10 && (!Phone.getText().toString().contains("(")||!Phone.getText().toString().contains(")")||!Phone.getText().toString().contains(" ")|| !Phone.getText().toString().contains("-"))){
+                    String strPhone=Phone.getText().toString();
+                    String subPhone1=strPhone.substring(0,3);
+                    String subPhone2=strPhone.substring(3,6);
+                    String subPhone3=strPhone.substring(6,10);
+                    Phone.setText("("+subPhone1+") "+subPhone2+"-"+subPhone3);
+                }
+
+            }
+        });
+        Fax.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if(s.length()==10 && (!Fax.getText().toString().contains("(")||!Fax.getText().toString().contains(")")||!Fax.getText().toString().contains(" ")|| !Fax.getText().toString().contains("-"))){
+                    String strPhone=Fax.getText().toString();
+                    String subPhone1=strPhone.substring(0,3);
+                    String subPhone2=strPhone.substring(3,6);
+                    String subPhone3=strPhone.substring(6,10);
+                    Fax.setText("("+subPhone1+") "+subPhone2+"-"+subPhone3);
+                }
+
+            }
+        });
 
         Update.setOnClickListener(new View.OnClickListener() {
             @Override

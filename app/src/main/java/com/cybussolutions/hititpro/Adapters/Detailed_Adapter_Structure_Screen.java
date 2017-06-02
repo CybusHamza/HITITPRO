@@ -127,6 +127,12 @@ public class Detailed_Adapter_Structure_Screen extends ArrayAdapter<Checkbox_mod
             }catch (Exception e){
             }
         }
+        if(sp.getBoolean("addObservationButton",true)==false){
+            holder.delete = (ImageView) convertView.findViewById(R.id.delete);
+            holder.edit = (ImageView) convertView.findViewById(R.id.edit);
+            holder.delete.setVisibility(View.INVISIBLE);
+            holder.edit.setVisibility(View.INVISIBLE);
+        }
 
 
 

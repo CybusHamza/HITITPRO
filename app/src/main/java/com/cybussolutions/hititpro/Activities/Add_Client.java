@@ -32,7 +32,7 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class Add_Client extends AppCompatActivity {
 
-
+    Boolean firstTime=true;
     EditText Name,City,ContactName,Address,Phone,Fax,Email,State,Zip;
     String strName,strCity,strContactName,strAddress,strPhone,strFax,strEmail,strState,strZip,userid;
     Button Submit;
@@ -73,7 +73,7 @@ public class Add_Client extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if(s.length()==10){
+                if(s.length()==10 && (!Phone.getText().toString().contains("(")||!Phone.getText().toString().contains(")")||!Phone.getText().toString().contains(" ")|| !Phone.getText().toString().contains("-"))){
                     String strPhone=Phone.getText().toString();
                     String subPhone1=strPhone.substring(0,3);
                     String subPhone2=strPhone.substring(3,6);
@@ -83,7 +83,29 @@ public class Add_Client extends AppCompatActivity {
 
             }
         });
+        Fax.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if(s.length()==10 && (!Fax.getText().toString().contains("(")||!Fax.getText().toString().contains(")")||!Fax.getText().toString().contains(" ")|| !Fax.getText().toString().contains("-"))){
+                    String strPhone=Fax.getText().toString();
+                    String subPhone1=strPhone.substring(0,3);
+                    String subPhone2=strPhone.substring(3,6);
+                    String subPhone3=strPhone.substring(6,10);
+                    Fax.setText("("+subPhone1+") "+subPhone2+"-"+subPhone3);
+                }
+
+            }
+        });
 
         Submit.setOnClickListener(new View.OnClickListener() {
             @Override

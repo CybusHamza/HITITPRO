@@ -154,6 +154,53 @@ public class Edit_Profile extends AppCompatActivity {
         UserAddress.setText(useraddress);
         Website.setText(website);
         Fax.setText(fax);
+        UserContact.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if(s.length()==10 && (!UserContact.getText().toString().contains("(")||!UserContact.getText().toString().contains(")")||!UserContact.getText().toString().contains(" ")|| !UserContact.getText().toString().contains("-"))){
+                    String strPhone=UserContact.getText().toString();
+                    String subPhone1=strPhone.substring(0,3);
+                    String subPhone2=strPhone.substring(3,6);
+                    String subPhone3=strPhone.substring(6,10);
+                    UserContact.setText("("+subPhone1+") "+subPhone2+"-"+subPhone3);
+                }
+
+            }
+        });
+        Fax.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if(s.length()==10 && (!Fax.getText().toString().contains("(")||!Fax.getText().toString().contains(")")||!Fax.getText().toString().contains(" ")|| !Fax.getText().toString().contains("-"))){
+                    String strPhone=Fax.getText().toString();
+                    String subPhone1=strPhone.substring(0,3);
+                    String subPhone2=strPhone.substring(3,6);
+                    String subPhone3=strPhone.substring(6,10);
+                    Fax.setText("("+subPhone1+") "+subPhone2+"-"+subPhone3);
+                }
+
+            }
+        });
+
     }
 
     private void attachLogo() {

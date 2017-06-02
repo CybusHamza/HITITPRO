@@ -286,7 +286,7 @@ public class InsulationScreenFragment extends BaseFragment {
         Attic_Roof.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                edit.putBoolean("imageButton",false);
+                edit.putBoolean("imageButton",true);
                 edit.putBoolean("addObservationButton",true);
                 edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
@@ -303,7 +303,7 @@ public class InsulationScreenFragment extends BaseFragment {
         Basement.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                edit.putBoolean("imageButton",false);
+                edit.putBoolean("imageButton",true);
                 edit.putBoolean("addObservationButton",true);
                 edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
@@ -320,7 +320,7 @@ public class InsulationScreenFragment extends BaseFragment {
         CrawlSpace.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                edit.putBoolean("imageButton",false);
+                edit.putBoolean("imageButton",true);
                 edit.putBoolean("addObservationButton",true);
                 edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
