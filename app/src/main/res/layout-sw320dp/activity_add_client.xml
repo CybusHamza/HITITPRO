@@ -122,7 +122,8 @@
             android:inputType="phone"
             android:textColorHint="@color/black"
             android:textSize="15sp"
-            android:id="@+id/client_phone" />
+            android:id="@+id/client_phone"
+            android:maxLength="14"/>
 
     </com.github.florent37.materialtextfield.MaterialTextField>
 
@@ -145,7 +146,8 @@
             android:inputType="phone"
             android:textColorHint="@color/black"
             android:textSize="15sp"
-            android:id="@+id/client_fax" />
+            android:id="@+id/client_fax"
+            android:maxLength="14"/>
 
     </com.github.florent37.materialtextfield.MaterialTextField>
 

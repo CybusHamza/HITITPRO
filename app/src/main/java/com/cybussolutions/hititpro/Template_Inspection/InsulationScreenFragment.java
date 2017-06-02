@@ -134,6 +134,7 @@ public class InsulationScreenFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
                 edit.putBoolean("imageButton",false);
+                edit.putBoolean("addObservationButton",true);
                 edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",StructureScreensActivity.ATTIC_INSULATION_Values);
@@ -150,6 +151,7 @@ public class InsulationScreenFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
                 edit.putBoolean("imageButton",false);
+                edit.putBoolean("addObservationButton",true);
                 edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",StructureScreensActivity.EXTERIORWALLINSULATION_Values);
@@ -166,6 +168,7 @@ public class InsulationScreenFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
                 edit.putBoolean("imageButton",false);
+                edit.putBoolean("addObservationButton",true);
                 edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",StructureScreensActivity.BASEMENTWALLINSULATION_Values);
@@ -182,6 +185,7 @@ public class InsulationScreenFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
                 edit.putBoolean("imageButton",false);
+                edit.putBoolean("addObservationButton",true);
                 edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",StructureScreensActivity.CRAWLSPACEINSULATION_Values);
@@ -198,6 +202,7 @@ public class InsulationScreenFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
                 edit.putBoolean("imageButton",false);
+                edit.putBoolean("addObservationButton",true);
                 edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",StructureScreensActivity.VAPORRETARDERS_Values);
@@ -214,6 +219,7 @@ public class InsulationScreenFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
                 edit.putBoolean("imageButton",false);
+                edit.putBoolean("addObservationButton",true);
                 edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",StructureScreensActivity.ROOFVENTILATION_Values);
@@ -230,6 +236,7 @@ public class InsulationScreenFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
                 edit.putBoolean("imageButton",false);
+                edit.putBoolean("addObservationButton",true);
                 edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",StructureScreensActivity.CRAWLSPACEVENTILATION_Values);
@@ -246,6 +253,7 @@ public class InsulationScreenFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
                 edit.putBoolean("imageButton",false);
+                edit.putBoolean("addObservationButton",true);
                 edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",StructureScreensActivity.EXHAUSTFANS_VENTS_Values);
@@ -262,6 +270,7 @@ public class InsulationScreenFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
                 edit.putBoolean("imageButton",false);
+                edit.putBoolean("addObservationButton",false);
                 edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_Structure_Screens.class);
                 intent.putExtra("items",StructureScreensActivity.Insulation_Ventilation_Observations_Values);
@@ -277,7 +286,8 @@ public class InsulationScreenFragment extends BaseFragment {
         Attic_Roof.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                edit.putBoolean("imageButton",false);
+                edit.putBoolean("imageButton",true);
+                edit.putBoolean("addObservationButton",true);
                 edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",StructureScreensActivity.Attic_Roof_Values);
@@ -293,7 +303,8 @@ public class InsulationScreenFragment extends BaseFragment {
         Basement.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                edit.putBoolean("imageButton",false);
+                edit.putBoolean("imageButton",true);
+                edit.putBoolean("addObservationButton",true);
                 edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",StructureScreensActivity.Basement_Values);
@@ -309,7 +320,8 @@ public class InsulationScreenFragment extends BaseFragment {
         CrawlSpace.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                edit.putBoolean("imageButton",false);
+                edit.putBoolean("imageButton",true);
+                edit.putBoolean("addObservationButton",true);
                 edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",StructureScreensActivity.CrawlSpace_Values);
