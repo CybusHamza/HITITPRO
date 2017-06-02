@@ -125,7 +125,7 @@ public class StructureScreensActivity extends AppCompatActivity {
 
             new AlertDialog.Builder(StructureScreensActivity.this)
                     .setTitle("Close Inspection")
-                    .setMessage("Are you sure you want to Close this Inspection? This Will remove all un synced data !!")
+                    .setMessage("Are you sure you want to Close this Inspection")
                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
 

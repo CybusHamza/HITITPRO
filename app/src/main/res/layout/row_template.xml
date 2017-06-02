@@ -26,8 +26,11 @@
         android:paddingTop="3dp"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
+        android:paddingBottom="10dp"
         android:text="Template Name"
-        android:layout_below="@+id/client_name"/>
+        android:layout_below="@+id/client_name"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -46,21 +49,23 @@
         android:layout_below="@+id/template"/>
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
         android:id="@+id/editTemplate"
-        android:src="@android:drawable/ic_menu_edit"
-        android:paddingRight="10dp"
-        android:layout_alignTop="@+id/template"
+        android:src="@drawable/edit_selector"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_alignTop="@+id/deleteTemplate"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="15dp"
         android:id="@+id/deleteTemplate"
-        android:src="@android:drawable/ic_menu_delete"
-        android:layout_below="@+id/client_name"
+        android:src="@drawable/delet_selector"
+        android:layout_alignParentTop="true"
         android:layout_toLeftOf="@+id/editTemplate"
         android:layout_toStartOf="@+id/editTemplate" />
 </RelativeLayout>

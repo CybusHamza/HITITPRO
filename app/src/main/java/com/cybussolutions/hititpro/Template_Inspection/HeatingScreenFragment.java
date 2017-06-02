@@ -120,8 +120,8 @@ public class HeatingScreenFragment extends BaseFragment {
 
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Heating");
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.menu);
 
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.back);
         SharedPreferences pref = getActivity().getApplicationContext().getSharedPreferences("HititPro", getActivity().MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
         String populate = pref.getString("isHeating_populated","");

@@ -131,14 +131,9 @@ public class ExteriorScreenFragment extends BaseFragment {
 
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Exterior");
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.menu);
 
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.back);
 
-
-
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Exterior");
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.menu);
 
 
 

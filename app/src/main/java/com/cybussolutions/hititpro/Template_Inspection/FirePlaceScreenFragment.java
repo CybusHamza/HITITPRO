@@ -103,8 +103,8 @@ public class FirePlaceScreenFragment extends BaseFragment {
 
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Fire Place");
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.menu);
 
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.back);
         fireplaces_wood_stoves = (Button) root.findViewById(R.id.fireplaces_wood_stoves);
         wood_coal_stoves = (Button) root.findViewById(R.id.wood_coal_stoves);
         vents_flues_chimney = (Button) root.findViewById(R.id.vents_flues_chimney);

@@ -28,19 +28,15 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.cybussolutions.hititpro.Activities.AddTemplate;
-import com.cybussolutions.hititpro.Activities.Start_Inspection;
 import com.cybussolutions.hititpro.Activities.StructureScreensActivity;
 import com.cybussolutions.hititpro.Network.End_Points;
 import com.cybussolutions.hititpro.R;
-import com.cybussolutions.hititpro.Template_Inspection.StructureScreenFragment;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.DateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -692,6 +688,10 @@ public class TemplatesFragment extends BaseFragment {
             if (!(isStarted.get(tem_spinner.getSelectedItemPosition()).equals("0"))) {
 
                 review.setText("Continue");
+            }
+            else
+            {
+                review.setText("Start Inspection");
             }
 
 

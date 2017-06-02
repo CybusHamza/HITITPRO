@@ -103,7 +103,8 @@ public class AppliancesScreenFragment extends BaseFragment {
 
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Appliances");
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.menu);
+
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.back);
 
         appliances_tested = (Button) root.findViewById(R.id.appliances_tested);
         laundry_facility = (Button) root.findViewById(R.id.laundry_facility);
@@ -574,6 +575,8 @@ public class AppliancesScreenFragment extends BaseFragment {
         requestQueue.add(request);
 
     }
+
+
 
     private void getInsulation() {
         ringProgressDialog = ProgressDialog.show(getActivity(), "", "Please wait ...", true);

@@ -109,15 +109,12 @@ public class CoolingScreenFragment extends BaseFragment {
         roEvaporatorButton = (Button) root.findViewById(R.id.ro_evaporator_Button);
         roFansButton = (Button) root.findViewById(R.id.ro_fans_Button);
 
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Cooling");
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.menu);
 
 
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Cooling");
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.menu);
 
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.back);
 
         SharedPreferences pref = getActivity().getApplicationContext().getSharedPreferences("HititPro", getActivity().MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
