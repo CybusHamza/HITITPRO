@@ -36,7 +36,7 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="@string/water_supply_source"
                     android:textSize="15sp"
@@ -59,7 +59,7 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/service_pipe_to_house"
                     android:textSize="15sp"
@@ -79,7 +79,7 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/main_water_valve_location"
                     android:textSize="15sp"
@@ -99,7 +99,7 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/interior_supply_piping"
                     android:textSize="15sp"
@@ -118,7 +118,7 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/waste_system"
                     android:textSize="15sp"
@@ -138,7 +138,7 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/dwv_piping"
                     android:textSize="15sp"
@@ -163,7 +163,7 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/water_heater"
                     android:textSize="15sp"
@@ -184,7 +184,7 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/fuel_storage_distribution"
                     android:textSize="15sp"
@@ -206,7 +206,7 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/fuel_shut_off_valves"
                     android:textSize="15sp"
@@ -230,7 +230,7 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/other_components_plumbing"
                     android:textSize="15sp"
@@ -259,7 +259,7 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/plumbing_observations"
                     android:textSize="15sp"
@@ -290,7 +290,7 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/water_heater_plimbing"
                     android:textSize="15sp"
@@ -309,7 +309,7 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/gas_piping"
                     android:textSize="15sp"
@@ -329,7 +329,7 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/supply_piping"
                     android:textSize="15sp"
@@ -348,7 +348,7 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/dwv_piping"
                     android:textSize="15sp"
@@ -366,7 +366,7 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/fixtures"
                     android:textSize="15sp"
@@ -384,7 +384,7 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/sump_pump"
                     android:textSize="15sp"
@@ -402,7 +402,7 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/waste_ejector_pump"
                     android:textSize="15sp"
@@ -420,7 +420,7 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/water_heater_plumbing"
                     android:textSize="15sp"
@@ -438,7 +438,7 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/gas_piping_plumbing"
                     android:textSize="15sp"
@@ -456,7 +456,7 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/supply_plumbing"
                     android:textSize="15sp"
@@ -474,7 +474,7 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/dwv_plumbing"
                     android:textSize="15sp"
@@ -493,7 +493,7 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/fixtures"
                     android:textSize="15sp"
@@ -513,7 +513,7 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/sump_pump_plumbing"
                     android:textSize="15sp"
@@ -532,7 +532,7 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/waste_ejector_pump_ro"
                     android:textSize="15sp"

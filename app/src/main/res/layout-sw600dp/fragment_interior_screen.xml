@@ -104,7 +104,14 @@
                     android:layout_marginRight="10dp"/>
 
             </LinearLayout>
-
+            <TextView
+                style="@style/textview_heading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif"
+                android:gravity="center"
+                android:text="Interior Observations"
+                android:textStyle="bold" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"

@@ -36,7 +36,7 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="@string/attic_insulation"
                     android:textSize="15sp"
@@ -59,7 +59,7 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/exterior_wall_insulation"
                     android:textSize="15sp"
@@ -79,7 +79,7 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/basement_wall_insulation"
                     android:textSize="15sp"
@@ -99,7 +99,7 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/crawl_space_insulation"
                     android:textSize="15sp"
@@ -118,7 +118,7 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/vapor_retarders"
                     android:textSize="15sp"
@@ -139,7 +139,7 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/roof_ventilation"
                     android:textSize="15sp"
@@ -160,7 +160,7 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/crawl_space_ventilation"
                     android:textSize="15sp"
@@ -181,7 +181,7 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/exhaust_fans_vents"
                     android:textSize="15sp"
@@ -210,7 +210,7 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/insulation_ventilation_observations"
                     android:textSize="15sp"
@@ -223,7 +223,14 @@
 
             </LinearLayout>
 
-
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif"
+                android:gravity="center"
+                android:text="Recommendations Insulation / Ventilation"
+                android:textStyle="bold"
+                style="@style/textview_heading"/>
 
 
 
@@ -234,7 +241,7 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/attic_and_roof"
                     android:textSize="15sp"
@@ -254,7 +261,7 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/basement"
                     android:textSize="15sp"
@@ -273,7 +280,7 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/crawl_space"
                     android:textSize="15sp"
