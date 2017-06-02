@@ -318,6 +318,9 @@ public class Add_Comments extends AppCompatActivity {
 
                 Map<String, String> params = new HashMap<>();
                 params.put("fieldid",data);
+                params.put("template_id",StructureScreensActivity.template_id);
+                params.put("client_id",StructureScreensActivity.client_id);
+                params.put("inspection_id",StructureScreensActivity.inspectionID);
                 return params;
             }
         };

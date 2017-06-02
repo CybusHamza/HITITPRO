@@ -337,7 +337,7 @@ public class Detailed_Activity_Structure_Screens extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
 
-                        Toast.makeText(Detailed_Activity_Structure_Screens.this, response, Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(Detailed_Activity_Structure_Screens.this, response, Toast.LENGTH_SHORT).show();
 
 
                     }
