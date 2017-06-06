@@ -17,7 +17,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Base64;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -36,7 +35,6 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.cybussolutions.hititpro.Network.End_Points;
 import com.cybussolutions.hititpro.R;
-
 
 import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;
@@ -206,9 +204,7 @@ public class SignupActivity extends AppCompatActivity {
         });
     }
     public void Signup() {
-        ringProgressDialog = ProgressDialog.show(this, "", "Please wait ...", true);
-        ringProgressDialog.setCancelable(false);
-        ringProgressDialog.show();
+
 
         StringRequest request = new StringRequest(Request.Method.POST, End_Points.SIGN_UP,
                 new Response.Listener<String>() {
@@ -216,7 +212,6 @@ public class SignupActivity extends AppCompatActivity {
                     public void onResponse(String response) {
 
 
-                        ringProgressDialog.dismiss();
                         if (response.equals("User already Registered with an this Email Adress")) {
                             new SweetAlertDialog(SignupActivity.this, SweetAlertDialog.ERROR_TYPE)
                                     .setTitleText("Error!")
@@ -252,7 +247,7 @@ public class SignupActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
 
-                ringProgressDialog.dismiss();
+
                 if (error instanceof NoConnectionError) {
 
                     new SweetAlertDialog(SignupActivity.this, SweetAlertDialog.ERROR_TYPE)
@@ -363,9 +358,14 @@ public class SignupActivity extends AppCompatActivity {
         byte[] ba = bao.toByteArray();
         ba1 = Base64.encodeToString(ba, Base64.NO_WRAP);
 
+        ringProgressDialog = ProgressDialog.show(this, "", "Please wait ...", true);
+        ringProgressDialog.setCancelable(false);
+        ringProgressDialog.show();
+
         StringRequest stringRequest = new StringRequest(Request.Method.POST, End_Points.UPLOAD, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
+                ringProgressDialog.dismiss();
                 mSavedPhotoName = response;
                 Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_LONG).show();
                 Signup();
@@ -374,6 +374,7 @@ public class SignupActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                ringProgressDialog.dismiss();
                 Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
             }
         }) {

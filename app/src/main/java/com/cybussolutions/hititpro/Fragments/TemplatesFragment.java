@@ -287,8 +287,15 @@ public class TemplatesFragment extends BaseFragment {
 
                         if (response.equals("\"no record found\"")) {
                             inspection_list = new ArrayList<>();
+                            inspection_id_list = new ArrayList<>();
+                            isStarted = new ArrayList<>();
+                            default_template = new ArrayList<>();
 
-                            inspection_list.add(0, "No Records Founds");
+                            inspection_list.add(0, "No Templates Founds");
+                            inspection_id_list.add(0, "No Templates Founds");
+                            para_list.add(0, "No Templates Founds");
+                            isStarted.add(0, "No Templates Founds");
+                            default_template.add(0, "No Templates Founds");
                             ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>
                                     (getContext(), android.R.layout.simple_spinner_item, inspection_list);
 
@@ -440,7 +447,8 @@ public class TemplatesFragment extends BaseFragment {
 
                         if (response.equals("\"no record found\"")) {
 
-                            client_list.add(0, "No Records Founds");
+                            client_list.add(0, "No Client Founds");
+                            client_id_list.add(0,"No Data");
                             ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>
                                     (getContext(), android.R.layout.simple_spinner_item, client_list);
 

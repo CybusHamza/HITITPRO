@@ -48,6 +48,65 @@
             android:layout_height="50dp"
             android:background="@drawable/dropdown_bg" />
 
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:orientation="horizontal"
+           android:layout_margin="10dp"
+           android:weightSum="2">
+
+           <TextView
+               android:id="@+id/textView7"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_marginLeft="50dp"
+               android:layout_weight="1"
+               android:text=" Total Fields             : "
+               android:textColor="#000"
+               android:textStyle="bold" />
+
+           <TextView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text=" 156 "
+               android:textStyle="bold"
+               android:layout_weight="1"
+               android:textColor="#000"
+
+               android:layout_marginLeft="50dp"/>
+
+       </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="10dp"
+            android:weightSum="2">
+
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:layout_weight="1"
+                android:text=" Remaining Fields    : "
+                android:textColor="#000"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="  "
+                android:textStyle="bold"
+                android:id="@+id/remainig"
+                android:layout_weight="1"
+                android:textColor="#000"
+
+                android:layout_marginLeft="50dp"/>
+
+        </LinearLayout>
+
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -70,16 +129,19 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:textStyle="bold"
                         android:fontFamily="sans-serif"
                         android:gravity="center"
                         android:text="@string/sections"
                         android:textColor="@color/black" />
 
                     <TextView
+                        android:id="@+id/textView6"
                         style="@style/textview_style"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:textStyle="bold"
                         android:fontFamily="sans-serif"
                         android:gravity="center"
                         android:text="@string/incomplete_items"

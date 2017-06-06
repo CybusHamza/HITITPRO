@@ -15,7 +15,6 @@
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif"
             android:gravity="center"
-            android:textSize="26sp"
             android:text="@string/review"
             android:textStyle="bold" />
 
@@ -25,7 +24,6 @@
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif"
             android:text="@string/clients"
-            android:textSize="20sp"
             android:textColor="@color/black" />
 
         <Spinner
@@ -40,7 +38,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif"
-            android:textSize="20sp"
             android:text="@string/templates"
             android:textColor="@color/black" />
 
@@ -50,6 +47,64 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@drawable/dropdown_bg" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="10dp"
+            android:weightSum="2">
+
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:layout_weight="1"
+                android:text=" Total Fields    : "
+                android:textColor="#000"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" 156 "
+                android:textStyle="bold"
+                android:layout_weight="1"
+                android:textColor="#000"
+
+                android:layout_marginLeft="50dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="10dp"
+            android:weightSum="2">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:layout_weight="1"
+                android:text=" Total Fields    : "
+                android:textColor="#000"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="  "
+                android:textStyle="bold"
+                android:id="@+id/remainig"
+                android:layout_weight="1"
+                android:textColor="#000"
+
+                android:layout_marginLeft="50dp"/>
+
+        </LinearLayout>
 
         <ScrollView
             android:layout_width="match_parent"
@@ -73,20 +128,21 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:textSize="18sp"
+                        android:textStyle="bold"
                         android:fontFamily="sans-serif"
                         android:gravity="center"
                         android:text="@string/sections"
                         android:textColor="@color/black" />
 
                     <TextView
+                        android:id="@+id/textView6"
                         style="@style/textview_style"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:textStyle="bold"
                         android:fontFamily="sans-serif"
                         android:gravity="center"
-                        android:textSize="18sp"
                         android:text="@string/incomplete_items"
                         android:textColor="@color/black" />
 
@@ -97,7 +153,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_margin="5dp"
                     android:weightSum="2">
 
                     <TextView
@@ -105,7 +160,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:textSize="18sp"
                         android:fontFamily="sans-serif"
                         android:gravity="center"
                         android:text="@string/structure"
@@ -118,7 +172,6 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:fontFamily="sans-serif"
-                        android:textSize="18sp"
                         android:gravity="center"
                         android:text="@string/_0"
                         android:textColor="@color/black" />
@@ -129,15 +182,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:weightSum="2"
-                    android:layout_margin="5dp">
+                    android:weightSum="2">
 
                     <TextView
                         style="@style/textview_style"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:textSize="18sp"
                         android:fontFamily="sans-serif"
                         android:gravity="center"
                         android:text="@string/roofing"
@@ -151,7 +202,6 @@
                         android:layout_weight="1"
                         android:fontFamily="sans-serif"
                         android:gravity="center"
-                        android:textSize="18sp"
                         android:text="@string/_0"
                         android:textColor="@color/black" />
 
@@ -161,7 +211,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_margin="5dp"
                     android:weightSum="2">
 
                     <TextView
@@ -171,7 +220,6 @@
                         android:layout_weight="1"
                         android:fontFamily="sans-serif"
                         android:gravity="center"
-                        android:textSize="18sp"
                         android:text="@string/exterior"
                         android:textColor="@color/black" />
 
@@ -183,7 +231,6 @@
                         android:layout_weight="1"
                         android:fontFamily="sans-serif"
                         android:gravity="center"
-                        android:textSize="18sp"
                         android:text="@string/_0"
                         android:textColor="@color/black" />
 
@@ -193,7 +240,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_margin="5dp"
                     android:weightSum="2">
 
                     <TextView
@@ -201,7 +247,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:textSize="18sp"
                         android:fontFamily="sans-serif"
                         android:gravity="center"
                         android:text="@string/heating"
@@ -213,8 +258,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:textSize="18sp"
-
                         android:fontFamily="sans-serif"
                         android:gravity="center"
                         android:text="@string/_0"
@@ -226,8 +269,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:weightSum="2"
-                    android:layout_margin="5dp">
+                    android:weightSum="2">
 
                     <TextView
                         style="@style/textview_style"
@@ -236,7 +278,6 @@
                         android:layout_weight="1"
                         android:fontFamily="sans-serif"
                         android:gravity="center"
-                        android:textSize="18sp"
                         android:text="@string/cooling"
                         android:textColor="@color/black" />
 
@@ -246,7 +287,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:textSize="18sp"
                         android:fontFamily="sans-serif"
                         android:gravity="center"
                         android:text="@string/_0"
@@ -258,8 +298,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:weightSum="2"
-                    android:layout_margin="5dp">
+                    android:weightSum="2">
 
                     <TextView
                         style="@style/textview_style"
@@ -268,7 +307,6 @@
                         android:layout_weight="1"
                         android:fontFamily="sans-serif"
                         android:gravity="center"
-                        android:textSize="18sp"
                         android:text="@string/electrical"
                         android:textColor="@color/black" />
 
@@ -280,7 +318,6 @@
                         android:layout_weight="1"
                         android:fontFamily="sans-serif"
                         android:gravity="center"
-                        android:textSize="18sp"
                         android:text="@string/_0"
                         android:textColor="@color/black" />
 
@@ -289,8 +326,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:weightSum="2"
-                    android:layout_margin="5dp">
+                    android:weightSum="2">
 
                     <TextView
                         style="@style/textview_style"
@@ -299,7 +335,6 @@
                         android:layout_weight="1"
                         android:fontFamily="sans-serif"
                         android:gravity="center"
-                        android:textSize="18sp"
                         android:text="FirePlaces"
                         android:textColor="@color/black" />
 
@@ -311,14 +346,12 @@
                         android:layout_weight="1"
                         android:fontFamily="sans-serif"
                         android:gravity="center"
-                        android:textSize="18sp"
                         android:text="@string/_0"
                         android:textColor="@color/black" />
 
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_margin="5dp"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:weightSum="2">
@@ -328,7 +361,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:textSize="18sp"
                         android:fontFamily="sans-serif"
                         android:gravity="center"
                         android:text="Appliance"
@@ -342,7 +374,6 @@
                         android:layout_weight="1"
                         android:fontFamily="sans-serif"
                         android:gravity="center"
-                        android:textSize="18sp"
                         android:text="@string/_0"
                         android:textColor="@color/black" />
 
@@ -351,7 +382,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_margin="5dp"
                     android:weightSum="2">
 
                     <TextView
@@ -359,7 +389,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:textSize="18sp"
                         android:fontFamily="sans-serif"
                         android:gravity="center"
                         android:text="Plumbing"
@@ -373,7 +402,6 @@
                         android:layout_weight="1"
                         android:fontFamily="sans-serif"
                         android:gravity="center"
-                        android:textSize="18sp"
                         android:text="@string/_0"
                         android:textColor="@color/black" />
 
@@ -382,7 +410,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_margin="5dp"
                     android:weightSum="2">
 
                     <TextView
@@ -390,7 +417,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:textSize="18sp"
                         android:fontFamily="sans-serif"
                         android:gravity="center"
                         android:text="interior"
@@ -402,7 +428,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:textSize="18sp"
                         android:fontFamily="sans-serif"
                         android:gravity="center"
                         android:text="@string/_0"
@@ -413,8 +438,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:weightSum="2"
-                    android:layout_margin="5dp">
+                    android:weightSum="2">
 
                     <TextView
                         style="@style/textview_style"
@@ -423,7 +447,6 @@
                         android:layout_weight="1"
                         android:fontFamily="sans-serif"
                         android:gravity="center"
-                        android:textSize="18sp"
                         android:text="insulation"
                         android:textColor="@color/black" />
 
@@ -436,7 +459,6 @@
                         android:fontFamily="sans-serif"
                         android:gravity="center"
                         android:text="@string/_0"
-                        android:textSize="18sp"
                         android:textColor="@color/black" />
 
                 </LinearLayout>

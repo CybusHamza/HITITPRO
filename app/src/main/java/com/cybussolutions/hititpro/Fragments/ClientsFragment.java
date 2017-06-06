@@ -24,8 +24,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.cybussolutions.hititpro.Activities.Add_Client;
-import com.cybussolutions.hititpro.Activities.EditClient;
-import com.cybussolutions.hititpro.Activities.Start_Inspection;
 import com.cybussolutions.hititpro.Adapters.Client_Adapter;
 import com.cybussolutions.hititpro.Model.Clients_model;
 import com.cybussolutions.hititpro.Network.End_Points;
@@ -127,7 +125,7 @@ public class ClientsFragment extends BaseFragment {
                     public void onResponse(String response) {
 
                         ringProgressDialog.dismiss();
-                        if (response.equals("false")) {
+                        if (response.equals("\"no record found\"")) {
                             new SweetAlertDialog(getActivity(), SweetAlertDialog.ERROR_TYPE)
                                     .setTitleText("Error!")
                                     .setConfirmText("OK").setContentText("No Clients Found ")

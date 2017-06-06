@@ -48,7 +48,7 @@ public class ReviewInspectionFragment extends BaseFragment {
     ListView remainingInspectionsListview;
     ProgressDialog ringProgressDialog;
     String id, client_id;
-    TextView tvportofolio,tvroofing,tvplumbing,tvinterior,tvinsulation,tvheating,tvfireplaces,tvexterior,tvelectrical,tvcooling,tvappliance;
+    TextView tvportofolio,tvroofing,remainig,tvplumbing,tvinterior,tvinsulation,tvheating,tvfireplaces,tvexterior,tvelectrical,tvcooling,tvappliance;
 
 
     private List<String> client_list = new ArrayList<>();
@@ -88,6 +88,7 @@ public class ReviewInspectionFragment extends BaseFragment {
         tvheating=(TextView)root.findViewById(R.id.heating);
         tvfireplaces=(TextView)root.findViewById(R.id.fireplace);
         tvexterior=(TextView)root.findViewById(R.id.exterior);
+        remainig=(TextView)root.findViewById(R.id.remainig);
         tvelectrical=(TextView)root.findViewById(R.id.electrical);
         tvcooling=(TextView)root.findViewById(R.id.cooling);
         tvappliance=(TextView)root.findViewById(R.id.appliance);
@@ -237,6 +238,7 @@ public class ReviewInspectionFragment extends BaseFragment {
                             JSONArray appliance = new JSONArray(main.getJSONArray("appliance").toString());
 
 
+                            int total = 0;
                             for (int i=0;i<portfolio.length();i++) {
                                 JSONObject objectportfolio = portfolio.getJSONObject(i);
                                 JSONObject objectroofing = roofing.getJSONObject(i);
@@ -252,16 +254,29 @@ public class ReviewInspectionFragment extends BaseFragment {
                                 //String port=objectportfolio.getString("empty_fields");
 
                                 tvportofolio.setText(objectportfolio.get("empty_fields").toString());
+                                total = total+ Integer.parseInt(objectportfolio.get("empty_fields").toString());
                                 tvroofing.setText(objectroofing.get("empty_fields").toString());
+                                total = total+ Integer.parseInt(objectroofing.get("empty_fields").toString());
                                 tvplumbing.setText(objectplumbing.get("empty_fields").toString());
+                                total = total+ Integer.parseInt(objectplumbing.get("empty_fields").toString());
                                 tvinterior.setText(objectinterior.get("empty_fields").toString());
+                                total = total+ Integer.parseInt(objectinterior.get("empty_fields").toString());
                                 tvinsulation.setText(objectinsulation.get("empty_fields").toString());
+                                total = total+ Integer.parseInt(objectinsulation.get("empty_fields").toString());
                                 tvheating.setText(objectheating.get("empty_fields").toString());
+                                total = total+ Integer.parseInt(objectheating.get("empty_fields").toString());
                                 tvfireplaces.setText(objectfireplaces.get("empty_fields").toString());
+                                total = total+ Integer.parseInt(objectfireplaces.get("empty_fields").toString());
                                 tvexterior.setText(objectexterior.get("empty_fields").toString());
+                                total = total+ Integer.parseInt(objectexterior.get("empty_fields").toString());
                                 tvelectrical.setText(objectelectrical.get("empty_fields").toString());
+                                total = total+ Integer.parseInt(objectelectrical.get("empty_fields").toString());
                                 tvcooling.setText(objectcooling.get("empty_fields").toString());
+                                total = total+ Integer.parseInt(objectcooling.get("empty_fields").toString());
                                 tvappliance.setText(objectappliance.get("empty_fields").toString());
+                                total = total+ Integer.parseInt(objectappliance.get("empty_fields").toString());
+
+                                remainig.setText(total+"");
                             }
 
                         } catch (JSONException e) {
