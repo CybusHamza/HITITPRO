@@ -236,7 +236,6 @@ public class StructureScreenFragment extends BaseFragment {
             }
         });
 
-
         ceilingStructureButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

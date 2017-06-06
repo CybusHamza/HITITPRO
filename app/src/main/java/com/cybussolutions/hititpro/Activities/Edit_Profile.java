@@ -65,7 +65,7 @@ public class Edit_Profile extends AppCompatActivity {
 
     private static final int MY_SOCKET_TIMEOUT_MS = 10000;
     ProgressDialog ringProgressDialog;
-
+    SharedPreferences pref;
     int keyDel;
 
     @Override
@@ -73,7 +73,7 @@ public class Edit_Profile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit__profile);
 
-        SharedPreferences pref = getApplicationContext().getSharedPreferences("UserPrefs", MODE_PRIVATE);
+        pref = getApplicationContext().getSharedPreferences("UserPrefs", MODE_PRIVATE);
         userid = pref.getString("user_id", null);
         pic = pref.getString("img",null);
 
@@ -120,7 +120,7 @@ public class Edit_Profile extends AppCompatActivity {
         });
 
 
-        String url = End_Points.IMAGE_BASE_URL + pic;
+        String url = End_Points.IMAGE_BASE_URL + pic.trim();
         Picasso.with(getApplicationContext())
                 .load(url)
                 .resize(300, 300)
@@ -138,9 +138,12 @@ public class Edit_Profile extends AppCompatActivity {
                 String userAddress=UserAddress.getText().toString();
                 String website=Website.getText().toString();
                 String fax=Fax.getText().toString();
+                pref = getApplicationContext().getSharedPreferences("UserPrefs", MODE_PRIVATE);
+                pic=pref.getString("img",null);
                 if(firstName.equals("")||lastName.equals("")||userEmail.equals("")||userContact.equals("")||companyInfo.equals("")||userAddress.equals("")||website.equals("")||fax.equals("")){
                     Toast.makeText(Edit_Profile.this,"Plz fill the empty fields",Toast.LENGTH_LONG).show();
                 }else {
+
                 UpdateClient();
                 }
             }
@@ -384,6 +387,7 @@ public class Edit_Profile extends AppCompatActivity {
                 params.put("adress", UserAddress.getText().toString());
                 params.put("website",Website.getText().toString());
                 params.put("fax",Fax.getText().toString());
+                params.put("profile_image",pic);
                // params.put("country",UserCountry.getText().toString());
                 params.put("id", userid);
 

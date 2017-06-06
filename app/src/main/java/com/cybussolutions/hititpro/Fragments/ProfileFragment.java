@@ -65,8 +65,7 @@ public class ProfileFragment extends BaseFragment {
         contact.setText(strcontact);
         adress.setText(stradress);
 
-
-        String url = End_Points.IMAGE_BASE_URL + img;
+        String url = End_Points.IMAGE_BASE_URL + img.trim();
         Picasso.with(getActivity())
                 .load(url)
                 .resize(300, 300)

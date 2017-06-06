@@ -191,10 +191,6 @@ public class LandingScreen extends AppCompatActivity {
 
     private AccountHeader setupHeader(String name, String email) {
 
-
-
-
-
         AccountHeader headerResult = new AccountHeaderBuilder()
                 .withActivity(this)
                 .withHeaderBackground(R.drawable.house_bkg)

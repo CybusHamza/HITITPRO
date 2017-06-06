@@ -154,7 +154,7 @@ public class ShowImages extends AppCompatActivity {
     }
     public void getDefaultComments() {
 
-        final StringRequest request = new StringRequest(Request.Method.POST, End_Points.GET_IMAGE_COMMENTS,
+        final StringRequest request = new StringRequest(Request.Method.POST, End_Points.GET_DEFAULT_COMMENTS_IMAGES,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -164,7 +164,7 @@ public class ShowImages extends AppCompatActivity {
                             for (int i=0;i<jsonArray.length();i++) {
                                 JSONObject object =jsonArray.getJSONObject(i);
 
-                               String imageText=object.getString("image_comments");
+                               String imageText=object.getString("defaulttext");
                                 imageComments.setText(imageText);
                                 //etComments.setText(defaultText);
                             }
@@ -211,6 +211,9 @@ public class ShowImages extends AppCompatActivity {
 
                 Map<String, String> params = new HashMap<>();
                 params.put("fieldid",data);
+                params.put("template_id",StructureScreensActivity.template_id);
+                params.put("client_id",StructureScreensActivity.client_id);
+                params.put("inspection_id",StructureScreensActivity.inspectionID);
                 return params;
             }
         };
