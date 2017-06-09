@@ -195,7 +195,6 @@ public class LandingScreen extends AppCompatActivity {
                 .withActivity(this)
                 .withHeaderBackground(R.drawable.house_bkg)
                 .addProfiles(
-
                         new ProfileDrawerItem().withName(name).withEmail(email).withIcon(bitmap1[0])
                 )
                 .withOnAccountHeaderListener(new AccountHeader.OnAccountHeaderListener() {

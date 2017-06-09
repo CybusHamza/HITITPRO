@@ -46,7 +46,7 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 public class FirePlaceScreenFragment extends BaseFragment {
 
     View root;
-    Button save, back;
+    Button save, back,next;
 
     Button fireplaces_wood_stoves,wood_coal_stoves,vents_flues_chimney,fireplace_wood_stove_observations,
     fireplace,wood_stove,fireplace_ro,wood_stove_ro;
@@ -73,15 +73,31 @@ public class FirePlaceScreenFragment extends BaseFragment {
         edit.putString("main_screen","FirePlace");
         edit.commit();
 
-        save = (Button) root.findViewById(R.id.next);
+        next = (Button) root.findViewById(R.id.next);
         back = (Button) root.findViewById(R.id.back);
-
+        save = (Button) root.findViewById(R.id.save);
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                sp=getActivity().getSharedPreferences("prefs", Context.MODE_PRIVATE);
+                edit=sp.edit();
+                edit.putBoolean("FirePlaceScreenFragment",true);
+                edit.commit();
+                Toast.makeText(getContext(),"Saved Successfully",Toast.LENGTH_LONG).show();
 
+            }
+        });
+
+        next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sp=getActivity().getSharedPreferences("prefs", Context.MODE_PRIVATE);
+                if(sp.getBoolean("FirePlaceScreenFragment",false)==true) {
                 FirePlaceSync();
                 Toast.makeText(getActivity(), "Finish", Toast.LENGTH_SHORT).show();
+                }else {
+                    Toast.makeText(getContext(),"Please save it to proceed",Toast.LENGTH_LONG).show();
+                }
             }
         });
 

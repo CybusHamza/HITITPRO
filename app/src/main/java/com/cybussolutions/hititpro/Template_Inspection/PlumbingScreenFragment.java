@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
@@ -44,7 +45,7 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 public class PlumbingScreenFragment extends BaseFragment {
 
     View root;
-    Button next, back;
+    Button next, back,save;
 
     Button water_supply_source,service_pipe_to_house,main_water_valve_location,interior_supply_piping,
             waste_system,dwv_piping,water_heater,fuel_storage_distribution,fuel_shut_off_valves,other_components_plumbing,
@@ -72,13 +73,29 @@ public class PlumbingScreenFragment extends BaseFragment {
 
         next = (Button) root.findViewById(R.id.next);
         back = (Button) root.findViewById(R.id.back);
+        save = (Button) root.findViewById(R.id.save);
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sp=getActivity().getSharedPreferences("prefs", Context.MODE_PRIVATE);
+                edit=sp.edit();
+                edit.putBoolean("PlumbingScreenFragment",true);
+                edit.commit();
+                Toast.makeText(getContext(),"Saved Successfully",Toast.LENGTH_LONG).show();
+
+            }
+        });
 
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                sp=getActivity().getSharedPreferences("prefs", Context.MODE_PRIVATE);
+                if(sp.getBoolean("PlumbingScreenFragment",false)==true) {
                 PlumbingSync();
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new InteriorScreenFragment()).addToBackStack("interior").commit();
+                }else {
+                    Toast.makeText(getContext(),"Please save it to proceed",Toast.LENGTH_LONG).show();
+                }
             }
         });
         back.setOnClickListener(new View.OnClickListener() {

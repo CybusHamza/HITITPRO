@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
@@ -45,7 +46,7 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 public class RoofingScreenFragment extends BaseFragment {
 
     View root;
-    Button next, back;
+    Button next, back,save;
     Database database;
     private static final String ROOFING_TABLE = "roofing";
     private static final int MY_SOCKET_TIMEOUT_MS = 10000;
@@ -78,14 +79,30 @@ public class RoofingScreenFragment extends BaseFragment {
 
         next = (Button) root.findViewById(R.id.next);
         back = (Button) root.findViewById(R.id.back);
+        save = (Button) root.findViewById(R.id.save);
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sp=getActivity().getSharedPreferences("prefs", Context.MODE_PRIVATE);
+                edit=sp.edit();
+                edit.putBoolean("RoofingScreenFragment",true);
+                edit.commit();
+                Toast.makeText(getContext(),"Saved Successfully",Toast.LENGTH_LONG).show();
+
+            }
+        });
 
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                sp=getActivity().getSharedPreferences("prefs", Context.MODE_PRIVATE);
+                if(sp.getBoolean("RoofingScreenFragment",false)==true) {
                 StructureSync();
 
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new ExteriorScreenFragment()).addToBackStack("exterior").commit();
+                }else {
+                    Toast.makeText(getContext(),"Please save it to proceed",Toast.LENGTH_LONG).show();
+                }
             }
         });
         back.setOnClickListener(new View.OnClickListener() {

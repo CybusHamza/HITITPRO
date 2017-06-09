@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
@@ -44,7 +45,7 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class InsulationScreenFragment extends BaseFragment {
 
-    Button next, back;
+    Button next, back,save;
     View root;
 
     Button ATTIC_INSULATION,EXTERIORWALLINSULATION,BASEMENTWALLINSULATION,CRAWLSPACEINSULATION,
@@ -74,13 +75,30 @@ public class InsulationScreenFragment extends BaseFragment {
 
         next = (Button) root.findViewById(R.id.next);
         back = (Button) root.findViewById(R.id.back);
+        save = (Button) root.findViewById(R.id.save);
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sp=getActivity().getSharedPreferences("prefs", Context.MODE_PRIVATE);
+                edit=sp.edit();
+                edit.putBoolean("InsulationScreenFragment",true);
+                edit.commit();
+                Toast.makeText(getContext(),"Saved Successfully",Toast.LENGTH_LONG).show();
+
+            }
+        });
 
 
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                sp=getActivity().getSharedPreferences("prefs", Context.MODE_PRIVATE);
+                if(sp.getBoolean("InsulationScreenFragment",false)==true) {
                 InsulationSync();
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new PlumbingScreenFragment()).addToBackStack("plumbing").commit();
+                }else {
+                    Toast.makeText(getContext(),"Please save it to proceed",Toast.LENGTH_LONG).show();
+                }
             }
         });
         back.setOnClickListener(new View.OnClickListener() {
