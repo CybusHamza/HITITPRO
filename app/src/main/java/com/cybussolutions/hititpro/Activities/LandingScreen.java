@@ -41,7 +41,7 @@ public class LandingScreen extends AppCompatActivity {
     Bitmap[] bitmap1;
     String userName,userEmail;
     // drawer items name icons
-    String[] drawerNames = new String[]{"Profile", "Clients", "Templates","Inspection" ,"Review Inspection","Logout"};
+    String[] drawerNames = new String[]{"Profile", "Clients", "Inspection List","Create Inspection" ,"Review Inspection","Logout"};
     int[] drawerImages = new int[]{R.drawable.profile, R.drawable.clients, R.drawable.template,R.drawable.review, R.drawable.startinspection
            ,R.drawable.logout};
 

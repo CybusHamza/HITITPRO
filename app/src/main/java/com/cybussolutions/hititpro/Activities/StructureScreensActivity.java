@@ -8,9 +8,9 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
+import com.cybussolutions.hititpro.R;
 import com.cybussolutions.hititpro.Sql_LocalDataBase.Database;
 import com.cybussolutions.hititpro.Template_Inspection.StructureScreenFragment;
-import com.cybussolutions.hititpro.R;
 
 import java.sql.SQLException;
 
@@ -21,6 +21,8 @@ public class StructureScreensActivity extends AppCompatActivity {
     public static String inspection_type;
     public static String client_id;
     public static String template_id;
+    public static boolean is_saved;
+    public static String is_notemplate;
 
     public static String[] foundationSpinnerValues, columnsSpinnerValues, floorStructureSpinnerValues, wallStructureSpinnerValues, ceilingStructureSpinnerValues, roofStructureSpinnerValues,
             structureObservationsSpinnerValues, roFoundationSpinnerValues, roCrawlSpacesSpinnerValues, roFloorsValues, roExteriorWallsValues, roRoofValues;
@@ -101,9 +103,11 @@ public class StructureScreensActivity extends AppCompatActivity {
         }
         inspectionID = intent.getStringExtra("inspectionId");
         inspection_type = intent.getStringExtra("inspection_type");
-
+        is_saved = false;
+        is_notemplate = intent.getStringExtra("is_notemplate");
         client_id = intent.getStringExtra("client_id");
         template_id = intent.getStringExtra("template_id");
+
 
 
         prePopulatelocal();

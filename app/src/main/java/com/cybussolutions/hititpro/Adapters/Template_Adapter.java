@@ -4,18 +4,14 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
@@ -27,17 +23,10 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.cybussolutions.hititpro.Activities.EditClient;
-import com.cybussolutions.hititpro.Activities.LandingScreen;
 import com.cybussolutions.hititpro.Activities.StructureScreensActivity;
-import com.cybussolutions.hititpro.Model.Clients_model;
 import com.cybussolutions.hititpro.Model.Templates_model;
 import com.cybussolutions.hititpro.Network.End_Points;
 import com.cybussolutions.hititpro.R;
-
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -50,14 +39,16 @@ public class Template_Adapter extends BaseAdapter {
     Context context;
     LayoutInflater inflter;
     View view;
+    String from;
     private static final int MY_SOCKET_TIMEOUT_MS = 10000;
     ProgressDialog ringProgressDialog;
 
 
-    public Template_Adapter(ArrayList<Templates_model> arrayList, Context context)
+    public Template_Adapter(ArrayList<Templates_model> arrayList, Context context,String from)
     {
         this.arrayList=arrayList;
         this.context=context;
+        this.from = from;
         inflter = (LayoutInflater.from(context));
 
 
@@ -84,6 +75,8 @@ public class Template_Adapter extends BaseAdapter {
         View v = convertView;
         ViewHolder viewholder = null;
 
+
+
         if (convertView == null) {
             LayoutInflater li = (LayoutInflater) context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -100,11 +93,39 @@ public class Template_Adapter extends BaseAdapter {
             viewholder.template.setTextSize(15);
             viewholder.editTemplate=(ImageView)v.findViewById(R.id.editTemplate);
             viewholder.deleteTemplate=(ImageView)v.findViewById(R.id.deleteTemplate);
+            viewholder.archiveTemp=(ImageView)v.findViewById(R.id.archive);
             v.setTag(viewholder);
         } else {
             viewholder = (ViewHolder) v.getTag();
         }
 
+        if(from.equals("archive"))
+        {
+            viewholder.archiveTemp.setVisibility(View.GONE);
+        }
+        viewholder.archiveTemp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new AlertDialog.Builder(context)
+                        .setTitle("Archive Template")
+                        .setMessage("Are you sure you want to Archive this Template!")
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+
+                                archive(position);
+
+                            }
+                        })
+                        .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        })
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .show();
+
+            }
+        });
         viewholder.name.setText(arrayList.get(position).getClient_name());
         viewholder.inspection.setText(arrayList.get(position).get_inspection());
         viewholder.template.setText(arrayList.get(position).get_template());
@@ -115,7 +136,9 @@ public class Template_Adapter extends BaseAdapter {
                 intent.putExtra("inspectionId", arrayList.get(position).get_inspection_id());
                 intent.putExtra("client_id", arrayList.get(position).getClient_id());
                 intent.putExtra("template_id", arrayList.get(position).get_template_id());
+                intent.putExtra("template_id", arrayList.get(position).get_template_id());
                 intent.putExtra("inspection_type", "old");
+                intent.putExtra("is_notemplate", "false");
                 context.startActivity(intent);
             }
         });
@@ -152,7 +175,7 @@ public class Template_Adapter extends BaseAdapter {
 
     class ViewHolder{
         protected TextView name,template,inspection;
-        ImageView editTemplate,deleteTemplate;
+        ImageView editTemplate,deleteTemplate,archiveTemp;
 
 
     }
@@ -164,6 +187,75 @@ public class Template_Adapter extends BaseAdapter {
         ringProgressDialog.show();
 
         StringRequest request = new StringRequest(Request.Method.POST, End_Points.DELETE_TEMPLATE,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        ringProgressDialog.dismiss();
+
+                        arrayList.remove(position);
+
+                        notifyDataSetChanged();
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                ringProgressDialog.dismiss();
+                if (error instanceof NoConnectionError) {
+
+                    new SweetAlertDialog(context, SweetAlertDialog.ERROR_TYPE)
+                            .setTitleText("Error!")
+                            .setConfirmText("OK").setContentText("No Internet Connection")
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    sDialog.dismiss();
+                                }
+                            })
+                            .show();
+                } else if (error instanceof TimeoutError) {
+
+                    new SweetAlertDialog(context, SweetAlertDialog.ERROR_TYPE)
+                            .setTitleText("Error!")
+                            .setConfirmText("OK").setContentText("Connection TimeOut! Please check your internet connection.")
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    sDialog.dismiss();
+                                }
+                            })
+                            .show();
+                }
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+
+                Map<String, String> params = new HashMap<>();
+                params.put("client_id",arrayList.get(position).getClient_id());
+                params.put("ca_id",arrayList.get(position).get_template_id());
+                return params;
+            }
+        };
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                MY_SOCKET_TIMEOUT_MS,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        requestQueue.add(request);
+
+    }
+
+    public void archive(final int position) {
+
+        ringProgressDialog = ProgressDialog.show(context, "", "Please wait ...", true);
+        ringProgressDialog.setCancelable(false);
+        ringProgressDialog.show();
+
+        StringRequest request = new StringRequest(Request.Method.POST, End_Points.ARCHHIVE_TEMPLATE,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {

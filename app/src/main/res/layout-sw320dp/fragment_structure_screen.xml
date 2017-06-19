@@ -334,6 +334,7 @@
             android:layout_marginLeft="20dp"
             android:textColor="@color/black"
             android:background="@color/White"
+            android:id="@+id/title"
             android:textStyle="bold"
 
             />

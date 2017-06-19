@@ -1,9 +1,9 @@
 package com.cybussolutions.hititpro.Fragments;
 
+
 import android.app.ProgressDialog;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
@@ -39,8 +39,10 @@ import java.util.Map;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
-
-public class TemplatesListFragment extends BaseFragment {
+/**
+ * A simple {@link Fragment} subclass.
+ */
+public class ArchiveList  extends BaseFragment {
 
     View root;
     private ArrayList<Templates_model> list = new ArrayList<>();
@@ -49,33 +51,32 @@ public class TemplatesListFragment extends BaseFragment {
     String id;
     private static final int MY_SOCKET_TIMEOUT_MS = 10000;
     ProgressDialog ringProgressDialog;
-    Button archive;
     Fragment fragment = null;
     String templatename,inspectionname;
+    Button active ;
 
-    @Nullable
+
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(final LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
 
-        root = inflater.inflate(R.layout.fragment_list_templates, container, false);
+        root = inflater.inflate(R.layout.fragment_archive_list, container, false);
 
         templates_list = (ListView) root.findViewById(R.id.templates_list);
+        active = (Button) root.findViewById(R.id.active);
 
-        archive = (Button) root.findViewById(R.id.archive);
-
-        archive.setOnClickListener(new View.OnClickListener() {
+        active.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                fragment = new ArchiveList();
+                fragment = new TemplatesListFragment();
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment).commit();
 
             }
         });
-
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Inspection List");
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.menu);
-
 
 
 
@@ -96,8 +97,6 @@ public class TemplatesListFragment extends BaseFragment {
         return root;
     }
 
-
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -112,7 +111,7 @@ public class TemplatesListFragment extends BaseFragment {
         ringProgressDialog.setCancelable(false);
         ringProgressDialog.show();
 
-        StringRequest request = new StringRequest(Request.Method.POST, End_Points.GET_ALL_TEMPLATES,
+        StringRequest request = new StringRequest(Request.Method.POST, End_Points.GET_ARCHIVE_TEMPLATE_DATA,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -135,7 +134,7 @@ public class TemplatesListFragment extends BaseFragment {
 
                             parseJson(response);
 
-                            Template_Adapter client_adapter = new Template_Adapter(list, getActivity(),"template");
+                            Template_Adapter client_adapter = new Template_Adapter(list, getActivity(),"archive");
                             templates_list.setAdapter(client_adapter);
 
 
@@ -209,7 +208,7 @@ public class TemplatesListFragment extends BaseFragment {
                     templatename=object.getString("template_name");
                 }
                 else
-                templatename=object.getString("name");
+                    templatename=object.getString("name");
 
                 inspectionname=object.getString("inspection_name");
                 if(inspectionname==null || inspectionname.equals("")){
@@ -235,5 +234,5 @@ public class TemplatesListFragment extends BaseFragment {
         return  list;
     }
 
-}
 
+}

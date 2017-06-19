@@ -2,17 +2,21 @@ package com.cybussolutions.hititpro.Template_Inspection;
 
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -43,12 +47,16 @@ import java.util.Map;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
+import static android.content.Context.MODE_PRIVATE;
+
 
 public class ElectricalScreenFragment extends BaseFragment {
 
     View root;
     Button next, back,save;
+    TextView title;
 
+    AlertDialog b;
     Button electricalSizeButton, electricalDropButton, electricalConductorsButton, electricalDisconnectButton, electricalGroundingButton,
             electricalPanelButton, electricalSubpanelButton, electricalWiringButton, electricalMethodButton,
             electricalSwitchesButton, electricalgfciButton, electricalSmokeButton, electricalObservationButton,
@@ -71,7 +79,7 @@ public class ElectricalScreenFragment extends BaseFragment {
         root = inflater.inflate(R.layout.fragment_electrical_screen, container, false);
 
         ///////////set title of main screens/////////////////
-        sp=getContext().getSharedPreferences("prefs", Context.MODE_PRIVATE);
+        sp=getContext().getSharedPreferences("prefs", MODE_PRIVATE);
         edit=sp.edit();
         edit.putString("main_screen","Electrical");
         edit.commit();
@@ -79,26 +87,29 @@ public class ElectricalScreenFragment extends BaseFragment {
         next = (Button) root.findViewById(R.id.next);
         back = (Button) root.findViewById(R.id.back);
         save = (Button) root.findViewById(R.id.save);
+        if(!(StructureScreensActivity.is_notemplate.equals("true")))
+        {
+            save.setVisibility(View.GONE);
+            title.setText("    Page 4 of Page 11");
+        }
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sp=getActivity().getSharedPreferences("prefs", Context.MODE_PRIVATE);
-                edit=sp.edit();
-                edit.putBoolean("ElectricalScreenFragment",true);
-                edit.commit();
-
+                if(!StructureScreensActivity.is_saved)
+                {
+                    addDetail();
+                }
+                else
+                {
+                    Toast.makeText(getContext(),"Saved Successfully",Toast.LENGTH_LONG).show();
+                }
             }
         });
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sp=getActivity().getSharedPreferences("prefs", Context.MODE_PRIVATE);
-                if(sp.getBoolean("ElectricalScreenFragment",false)==true) {
                 ElectricalSync();
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new HeatingScreenFragment()).addToBackStack("heating").commit();
-                }else {
-                    Toast.makeText(getContext(),"Please save it to proceed",Toast.LENGTH_LONG).show();
-                }
+
             }
         });
 
@@ -648,6 +659,7 @@ public class ElectricalScreenFragment extends BaseFragment {
                     public void onResponse(String response) {
 
                         ringProgressDialog.dismiss();
+                        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new HeatingScreenFragment()).addToBackStack("heating").commit();
 
                     }
                 }, new Response.ErrorListener() {
@@ -757,6 +769,133 @@ public class ElectricalScreenFragment extends BaseFragment {
 
     }
 
+    void addDetail() {
+
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
+        LayoutInflater inflater = getActivity().getLayoutInflater();
+        final View dialogView = inflater.inflate(R.layout.savetemp, null);
+        dialogBuilder.setView(dialogView);
+        dialogBuilder.setCancelable(true);
+
+        // intializing variables
+        final EditText tmpName = (EditText) dialogView.findViewById(R.id.tmpName);
+        final Button save = (Button) dialogView.findViewById(R.id.Savenotemp);
+        final CheckBox isdefault = (CheckBox) dialogView.findViewById(R.id.checkDefault);
+
+
+        isdefault.setVisibility(View.GONE);
+        b = dialogBuilder.create();
+
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(tmpName.getText().toString().equals(""))
+                {
+                    Toast.makeText(getActivity(), "Please Enter Template name", Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    if(isdefault.isChecked())
+                    {
+                        saveNoTemp(tmpName.getText().toString(),true);
+                    }
+                    else
+                    {
+                        saveNoTemp(tmpName.getText().toString(),false);
+                    }
+
+                }
+
+            }
+        });
+
+        b.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+
+
+        b.show();
+
+
+
+    }
+
+    public void saveNoTemp(final String txt, final boolean check) {
+
+        ringProgressDialog = ProgressDialog.show(getActivity(), "Please wait ...", "Saving Template ...", true);
+        ringProgressDialog.setCancelable(false);
+        ringProgressDialog.show();
+
+        StringRequest request = new StringRequest(Request.Method.POST, End_Points.SAVE_NOTEMP,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        ringProgressDialog.dismiss();
+                        StructureScreensActivity.is_saved=true;
+                        sp=getActivity().getSharedPreferences("prefs", MODE_PRIVATE);
+                        edit=sp.edit();
+                        edit.putBoolean("StructureScreenFragment",true);
+                        edit.commit();
+                        Toast.makeText(getContext(),"Saved Successfully",Toast.LENGTH_LONG).show();
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                ringProgressDialog.dismiss();
+                if (error instanceof NoConnectionError) {
+
+                    new SweetAlertDialog(getActivity(), SweetAlertDialog.ERROR_TYPE)
+                            .setTitleText("Error!")
+                            .setConfirmText("OK").setContentText("No Internet Connection")
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    sDialog.dismiss();
+                                }
+                            })
+                            .show();
+                } else if (error instanceof TimeoutError) {
+
+                    new SweetAlertDialog(getActivity(), SweetAlertDialog.ERROR_TYPE)
+                            .setTitleText("Error!")
+                            .setConfirmText("OK").setContentText("Connection TimeOut! Please check your internet connection.")
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    sDialog.dismiss();
+                                }
+                            })
+                            .show();
+                }
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+
+
+
+                Map<String, String> params = new HashMap<>();
+
+                SharedPreferences pref = getActivity().getSharedPreferences("UserPrefs", MODE_PRIVATE);
+                String  user = pref.getString("user_id","");
+
+                params.put("name", txt);
+                params.put("isDefault", String.valueOf(check));
+                params.put("client_id", StructureScreensActivity.client_id);
+                params.put("added_by", user);
+
+                return params;
+            }
+        };
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                MY_SOCKET_TIMEOUT_MS,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+        requestQueue.add(request);
+
+    }
 
 
 

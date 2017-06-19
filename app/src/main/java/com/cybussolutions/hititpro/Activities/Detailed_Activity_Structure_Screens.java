@@ -1,12 +1,11 @@
 package com.cybussolutions.hititpro.Activities;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -380,6 +379,7 @@ public class Detailed_Activity_Structure_Screens extends AppCompatActivity {
                 params.put("dbColumn", dbColumn);
                 params.put("enteredStructure", enteredStructure);
                 params.put("inspection_id", StructureScreensActivity.inspectionID);
+                params.put("client_id", StructureScreensActivity.client_id);
                 params.put("added_by", userid);
                 return params;
             }

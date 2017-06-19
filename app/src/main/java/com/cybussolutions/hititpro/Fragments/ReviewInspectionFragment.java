@@ -363,7 +363,16 @@ public class ReviewInspectionFragment extends BaseFragment {
                         } else if (!(response.equals("0"))) {
                             try {
 
-                                JSONArray Array = new JSONArray(response);
+                                JSONObject obj = new JSONObject(response);
+
+
+
+                                String objRes =  obj.getString("primary");
+
+
+                                JSONArray Array = new JSONArray(objRes);
+
+
 
                                 inspection_list = new ArrayList<>();
                                 inspection_id_list = new ArrayList<>();
@@ -386,6 +395,31 @@ public class ReviewInspectionFragment extends BaseFragment {
                                     inspection_id_list.add(object.getString("ca_id"));
                                     para_list.add(object.getString("paragraph_text"));
                                     isStarted.add(object.getString("is_started"));
+                                }
+
+                                String objdef =  obj.getString("default");
+
+                                if(!objdef.equals("No Data"))
+                                {
+                                    JSONArray Arraydef = new JSONArray(objdef);
+
+                                    for (int i = 0; i < Arraydef.length(); i++) {
+
+                                        JSONObject object = new JSONObject(Arraydef.getJSONObject(i).toString());
+
+                                        if(!(inspection_list.contains(object.getString("name"))))
+                                        {
+                                            inspection_list.add(object.getString("name"));
+
+                                            inspection_id_list.add(object.getString("ca_id"));
+                                            para_list.add(object.getString("paragraph_text"));
+                                            isStarted.add("0");
+
+                                        }
+
+
+
+                                    }
                                 }
 
                                 templateSpinner.setAdapter(null);

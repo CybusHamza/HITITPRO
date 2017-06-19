@@ -1,13 +1,12 @@
 package com.cybussolutions.hititpro.Activities;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -35,9 +34,6 @@ import com.cybussolutions.hititpro.Model.Checkbox_model;
 import com.cybussolutions.hititpro.Network.End_Points;
 import com.cybussolutions.hititpro.R;
 import com.cybussolutions.hititpro.Sql_LocalDataBase.Database;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -378,12 +374,13 @@ public class Detailed_Activity_All_Screens extends AppCompatActivity {
     public void update() {
 
 
+
         StringRequest request = new StringRequest(Request.Method.POST, End_Points.UPDATELIVE,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
 
-                       // Toast.makeText(Detailed_Activity_All_Screens.this, response, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Detailed_Activity_All_Screens.this, response, Toast.LENGTH_SHORT).show();
 
 
                     }
@@ -393,6 +390,7 @@ public class Detailed_Activity_All_Screens extends AppCompatActivity {
 
                 if (error instanceof NoConnectionError) {
 
+
                     new SweetAlertDialog(Detailed_Activity_All_Screens.this, SweetAlertDialog.ERROR_TYPE)
                             .setTitleText("Error!")
                             .setConfirmText("OK").setContentText("No Internet Connection")
@@ -400,6 +398,7 @@ public class Detailed_Activity_All_Screens extends AppCompatActivity {
                                 @Override
                                 public void onClick(SweetAlertDialog sDialog) {
                                     sDialog.dismiss();
+
                                 }
                             })
                             .show();
@@ -426,6 +425,7 @@ public class Detailed_Activity_All_Screens extends AppCompatActivity {
                 params.put("dbColumn", dbColumn);
                 params.put("enteredStructure", enteredStructure);
                 params.put("inspection_id", StructureScreensActivity.inspectionID);
+                params.put("client_id", StructureScreensActivity.client_id);
                 params.put("added_by", userid);
               /*  params.put("is_checked", isAnyChecked+"");
                 params.put("total_fields", myMap.get(dbTable));*/

@@ -3,9 +3,8 @@ package com.cybussolutions.hititpro.Activities;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
@@ -22,7 +21,6 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.cybussolutions.hititpro.Fragments.TemplatesFragment;
 import com.cybussolutions.hititpro.Network.End_Points;
 import com.cybussolutions.hititpro.R;
 
@@ -143,6 +141,7 @@ public class AddTemplate extends AppCompatActivity {
                 params.put("added_by",userId);
                 params.put("modified_by",userId);
                 params.put("date",time);
+                params.put("isDefault","0");
                 return params;
             }
         };

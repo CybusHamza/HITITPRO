@@ -18,7 +18,9 @@ public class End_Points {
     public static final String GET_TEMPLATES = BASE_URL + "getTemplates";
     public static final String GET_INSPECTION = BASE_URL + "getInspection";
     public static final String GET_TEMPLATE_DATA = BASE_URL + "getTemplatesData";
+    public static final String GET_ARCHIVE_TEMPLATE_DATA = BASE_URL + "getArchiveAllTemplates";
     public static final String DELETE_TEMPLATE = BASE_URL + "deleteTemplate";
+    public static final String ARCHHIVE_TEMPLATE = BASE_URL + "archiveTempate";
     public static final String UPLOAD_IMAGE=BASE_URL+"uploadimagetest";
     public static final String UPLOAD="http://xfer.cybusservices.com/hititpro/upload_image_mobile.php";
     public static final String GET_REVIEW_INSPECTION = BASE_URL + "reviewInspection";
@@ -41,6 +43,7 @@ public class End_Points {
     public static final String SYNC_COOLING = BASE_URL + "syncColling";
     public static final String SYNC_ELECTRICAL = BASE_URL + "syncElectrical";
     public static final String SYNC_INSULATION = BASE_URL + "syncInsulation";
+    public static final String SAVE_NOTEMP = BASE_URL + "saveNoTemplate";
     public static final String SYNC_PLUMBING = BASE_URL + "syncPlumbing";
     public static final String SYNC_APPLIANCES = BASE_URL + "syncAppliances";
     public static final String SYNC_FIREPLACE = BASE_URL + "syncFirePlace";

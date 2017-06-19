@@ -62,6 +62,7 @@ public class TemplatesFragment extends BaseFragment {
     private List<String> templateID_list;
     private List<String> templateID_date;
     private List<String> isStarted;
+    private List<String> isdefault;
     private List<String> inspection_list;
     private List<String> inspection_id_list;
     private List<String> default_template;
@@ -72,7 +73,7 @@ public class TemplatesFragment extends BaseFragment {
 
         root = inflater.inflate(R.layout.fragment_templates, container, false);
 
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Templates");
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Create Inspection");
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.menu);
 
@@ -108,36 +109,43 @@ public class TemplatesFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
 
-                int client_id = client_spinner.getSelectedItemPosition();
-                // int inspection_id =  inspection_spinner.getSelectedItemPosition();
-                int template_id = tem_spinner.getSelectedItemPosition();
-                if(client_spinner.getSelectedItem().toString()!="Select") {
-                    if(tem_spinner.getSelectedItem().toString()!="Select") {
-                        if (isStarted.get(tem_spinner.getSelectedItemPosition()).equals("0")) {
-                            prePopulate(inspection_id_list.get(tem_spinner.getSelectedItemPosition()), client_id_list.get(client_spinner.getSelectedItemPosition()), default_template.get(tem_spinner.getSelectedItemPosition()));
+                if (paraEt.getText().toString().equals("")) {
+                    Toast.makeText(getActivity(), "No Paragraph added", Toast.LENGTH_SHORT).show();
+                } else {
 
+
+                    int client_id = client_spinner.getSelectedItemPosition();
+                    // int inspection_id =  inspection_spinner.getSelectedItemPosition();
+                    int template_id = tem_spinner.getSelectedItemPosition();
+                    if (!client_spinner.getSelectedItem().toString().equals("Select")) {
+                        if (!tem_spinner.getSelectedItem().toString().equals("Select")) {
+                            if (isStarted.get(tem_spinner.getSelectedItemPosition()).equals("0")) {
+                                prePopulate(inspection_id_list.get(tem_spinner.getSelectedItemPosition()),tem_spinner.getSelectedItem().toString(),isdefault.get(tem_spinner.getSelectedItemPosition()), client_id_list.get(client_spinner.getSelectedItemPosition()), default_template.get(tem_spinner.getSelectedItemPosition()));
+
+                            } else {
+                                //  if(!client_list.get(client_id).equals("Select")) {
+                                Intent intent = new Intent(getActivity(), StructureScreensActivity.class);
+                                intent.putExtra("inspectionId", templateID_list.get(0));
+                                intent.putExtra("client_id", client_id_list.get(client_id));
+                                intent.putExtra("is_notemplate","false");
+                                intent.putExtra("template_id", inspection_id_list.get(template_id));
+                                intent.putExtra("inspection_type", "old");
+                                startActivity(intent);
+                                //}else {
+                                //  Toast.makeText(getContext(),"plz select client to review",Toast.LENGTH_LONG).show();
+                            }
                         } else {
-                            //  if(!client_list.get(client_id).equals("Select")) {
-                            Intent intent = new Intent(getActivity(), StructureScreensActivity.class);
-                            intent.putExtra("inspectionId", templateID_list.get(0));
-                            intent.putExtra("client_id", client_id_list.get(client_id));
-                            intent.putExtra("template_id", inspection_id_list.get(template_id));
-                            intent.putExtra("inspection_type", "old");
-                            startActivity(intent);
-                            //}else {
-                            //  Toast.makeText(getContext(),"plz select client to review",Toast.LENGTH_LONG).show();
+                            Toast.makeText(getContext(), "plz select client and template to continue", Toast.LENGTH_LONG).show();
                         }
-                    }else {
-                        Toast.makeText(getContext(),"plz select client and template to continue",Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(getContext(), "plz select client and template to continue", Toast.LENGTH_LONG).show();
                     }
-                }else {
-                    Toast.makeText(getContext(),"plz select client and template to continue",Toast.LENGTH_LONG).show();
-                }
                        /* Intent intent=new Intent(getActivity(), Start_Inspection.class);
                         intent.putExtra("client_name",client_spinner.getSelectedItem().toString());
                         intent.putExtra("client_id",client_id_list.get(client_id));
                         startActivity(intent);*/
 
+                }
             }
         });
         tem_spinner.setOnItemSelectedListener(new CustomOnItemSelectedListener_inspection());
@@ -289,6 +297,7 @@ public class TemplatesFragment extends BaseFragment {
                             inspection_list = new ArrayList<>();
                             inspection_id_list = new ArrayList<>();
                             isStarted = new ArrayList<>();
+                            isdefault = new ArrayList<>();
                             default_template = new ArrayList<>();
 
                             inspection_list.add(0, "No Templates Founds");
@@ -308,12 +317,20 @@ public class TemplatesFragment extends BaseFragment {
                         } else if (!(response.equals("0"))) {
                             try {
 
-                                JSONArray Array = new JSONArray(response);
+                                JSONObject obj = new JSONObject(response);
+
+
+
+                                String objRes =  obj.getString("primary");
+
+
+                                JSONArray Array = new JSONArray(objRes);
 
                                 inspection_list = new ArrayList<>();
                                 inspection_id_list = new ArrayList<>();
                                 para_list = new ArrayList<>();
                                 isStarted = new ArrayList<>();
+                                isdefault = new ArrayList<>();
                                 default_template = new ArrayList<>();
                                 para_list.add(0,"");
                                 isStarted.add(0,"");
@@ -321,7 +338,23 @@ public class TemplatesFragment extends BaseFragment {
 
                                 inspection_list.add(0,"Select");
                                 inspection_id_list.add(0,"0");
+                                isdefault.add(0,"0");
                                 default_template.add(0,"");
+
+
+                                inspection_list.add(1,"No Template");
+                                inspection_id_list.add(1,"0");
+                                default_template.add(1,"");
+                                para_list.add(1,"");
+                                isdefault.add(1,"");
+                                isStarted.add(1,"0");
+                                default_template.add(1,"");
+
+
+
+
+
+
                                 for (int i = 0; i < Array.length(); i++) {
 
                                     JSONObject object = new JSONObject(Array.getJSONObject(i).toString());
@@ -337,9 +370,41 @@ public class TemplatesFragment extends BaseFragment {
 
                                     inspection_id_list.add(object.getString("ca_id"));
                                     para_list.add(object.getString("paragraph_text"));
+                                    isdefault.add(object.getString("isDefault"));
                                     isStarted.add(object.getString("is_started"));
                                     default_template.add(object.getString("default_template"));
+
+
                                 }
+
+                                String objdef =  obj.getString("default");
+
+                                if(!objdef.equals("No Data"))
+                                {
+                                    JSONArray Arraydef = new JSONArray(objdef);
+
+                                    for (int i = 0; i < Arraydef.length(); i++) {
+
+                                        JSONObject object = new JSONObject(Arraydef.getJSONObject(i).toString());
+
+                                        if(!(inspection_list.contains(object.getString("name"))))
+                                        {
+                                            inspection_list.add(object.getString("name"));
+
+                                            inspection_id_list.add(object.getString("ca_id"));
+                                            para_list.add(object.getString("paragraph_text"));
+                                            isStarted.add("0");
+                                            isdefault.add(object.getString("isDefault"));
+                                            default_template.add(object.getString("default_template"));
+
+                                        }
+
+
+
+                                    }
+                                }
+
+
 
                                 tem_spinner.setAdapter(null);
 
@@ -363,7 +428,6 @@ public class TemplatesFragment extends BaseFragment {
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
-                            review.setText("Continue");
                         } else {
                             new SweetAlertDialog(getActivity(), SweetAlertDialog.ERROR_TYPE)
                                     .setTitleText("Error!")
@@ -558,7 +622,7 @@ public class TemplatesFragment extends BaseFragment {
 
     }
 
-    public void prePopulate(final String temId, final String clientId , final String default_template ) {
+    public void prePopulate(final String temId,final String temname, final String isDefault,final String clientId , final String default_template ) {
         StringRequest request = new StringRequest(Request.Method.POST, End_Points.PRE_POPULATE,
                 new Response.Listener<String>() {
                     @Override
@@ -567,9 +631,18 @@ public class TemplatesFragment extends BaseFragment {
                         ringProgressDialog.dismiss();
 
                         if (!(response.equals(""))) {
+
+
                             Intent intent = new Intent(getActivity(), StructureScreensActivity.class);
                             intent.putExtra("inspectionId", response);
                             intent.putExtra("client_id", clientId);
+                            if(response.equals("0")){
+                                intent.putExtra("is_notemplate", "true");
+                            }
+                            else
+                            {
+                                intent.putExtra("is_notemplate", "false");
+                            }
                             intent.putExtra("template_id", temId);
                             intent.putExtra("inspection_type", "old");
                             startActivity(intent);
@@ -631,6 +704,8 @@ public class TemplatesFragment extends BaseFragment {
                 params.put("default_template", default_template);
                 params.put("text_paragraph",paraEt.getText().toString());
                 params.put("pagecover", "");
+                params.put("temp_name",temname);
+                params.put("isDeault",isDefault);
                 params.put("userID", id);
 
                 return params;
@@ -653,14 +728,14 @@ public class TemplatesFragment extends BaseFragment {
 
             if (client_list.get(pos).equals("No Records Founds")) {
                 client_id = "0";
-            } else {
+            }
+            else {
                 client_id = client_id_list.get(pos);
 
             }
             if (!client_list.get(pos).equals("Select")) {
                 getTemplates();
-            }
-            else{
+            } else {
                 //Toast.makeText(getContext(),"Plz select client",Toast.LENGTH_LONG).show();
             }
 
@@ -684,7 +759,11 @@ public class TemplatesFragment extends BaseFragment {
 
             if (inspection_list.get(pos).equals("No Records Founds")) {
                 temp_id = "0";
-            } else {
+            }
+            else if (inspection_list.get(pos).equals("No Template") && pos ==1) {
+                temp_id = "";
+            }
+            else {
                // if(!inspection_list.get(pos).equals("Select"))
 
                 temp_id = inspection_id_list.get(pos);
