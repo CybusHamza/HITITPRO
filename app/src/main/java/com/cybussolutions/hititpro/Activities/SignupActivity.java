@@ -164,8 +164,6 @@ public class SignupActivity extends AppCompatActivity {
                 strconfirmpassword=comfirm_password.getText().toString();
                 strfax=fax.getText().toString();
 
-
-
                 // calling for sign up
 
                 if(strf_name.equals("") || strl_name.equals("")|| stremial.equals("")|| strphone.equals("")
@@ -367,7 +365,7 @@ public class SignupActivity extends AppCompatActivity {
             public void onResponse(String response) {
                 ringProgressDialog.dismiss();
                 mSavedPhotoName = response;
-                Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_LONG).show();
+                //Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_LONG).show();
                 Signup();
                 //    uploadToServer();
             }

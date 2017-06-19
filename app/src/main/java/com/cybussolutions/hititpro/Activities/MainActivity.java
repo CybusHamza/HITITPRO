@@ -246,7 +246,14 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "no image selected", Toast.LENGTH_LONG).show();
                     }
                     if (sp.getBoolean("flag", false) == true) {
-                        up();
+                        String check=etAttachmentName.getText().toString();
+                        if(check.equals("")){
+                            Toast.makeText(getApplicationContext(),"Plz enter some attachment name",Toast.LENGTH_SHORT);
+                        }
+                        else {
+                            up();
+                        }
+
                     } else {
                         OutputStream fOut = null;
                         Calendar c = Calendar.getInstance();

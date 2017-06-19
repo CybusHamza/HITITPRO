@@ -264,7 +264,7 @@ public class Edit_Profile extends AppCompatActivity {
                 SharedPreferences.Editor edit=pref.edit();
                 edit.putString("img",mSavedPhotoName);
                 edit.commit();
-                Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_LONG).show();
+              //  Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_LONG).show();
                 //Signup();
                 //    uploadToServer();
             }

@@ -159,7 +159,7 @@ public class StructureScreenFragment extends BaseFragment {
             ///////////set title of main screens/////////////////
             sp=getActivity().getSharedPreferences("prefs", MODE_PRIVATE);
             edit=sp.edit();
-            edit.putString("main_screen","Structure");
+            edit.putString("main_screen","portfolio");
             edit.commit();
         } catch (SQLException e) {
             e.printStackTrace();

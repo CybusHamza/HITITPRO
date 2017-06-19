@@ -142,8 +142,8 @@ public class Login extends AppCompatActivity {
                                 name += " " + object.getString("last_name");
                                 email=object.getString("email");;
                                 adress=object.getString("adress");
-                                adress += " ," +object.getString("city");
-                                adress += " , "+object.getString("country");
+                               // adress += " ," +object.getString("city");
+                                //adress += " , "+object.getString("country");
                                 phone =object.getString("phone_number");
                                 img =object.getString("profile_image");
                                 company_info =object.getString("company_info");
