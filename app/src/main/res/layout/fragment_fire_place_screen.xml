@@ -206,6 +206,7 @@
             android:text="Step11 out of step 11"
             android:textSize="20sp"
             android:layout_weight="3"
+            android:id="@+id/title"
             android:paddingTop="10dp"
             android:layout_marginLeft="20dp"
             android:textAlignment="center"

@@ -450,6 +450,7 @@
             android:paddingTop="10dp"
             android:layout_marginLeft="20dp"
             android:textColor="@color/black"
+            android:id="@+id/title"
             android:background="@color/White"
             android:textStyle="bold"
 

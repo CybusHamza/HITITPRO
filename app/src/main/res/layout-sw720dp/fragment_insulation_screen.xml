@@ -36,7 +36,7 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="@string/attic_insulation"
                     android:textSize="15sp"
@@ -59,7 +59,7 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/exterior_wall_insulation"
                     android:textSize="15sp"
@@ -79,7 +79,7 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/basement_wall_insulation"
                     android:textSize="15sp"
@@ -99,7 +99,7 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/crawl_space_insulation"
                     android:textSize="15sp"
@@ -118,7 +118,7 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/vapor_retarders"
                     android:textSize="15sp"
@@ -139,7 +139,7 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/roof_ventilation"
                     android:textSize="15sp"
@@ -160,7 +160,7 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/crawl_space_ventilation"
                     android:textSize="15sp"
@@ -181,7 +181,7 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/exhaust_fans_vents"
                     android:textSize="15sp"
@@ -210,7 +210,7 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/insulation_ventilation_observations"
                     android:textSize="15sp"
@@ -223,6 +223,7 @@
 
             </LinearLayout>
 
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -233,15 +234,13 @@
                 style="@style/textview_heading"/>
 
 
-
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:orientation="horizontal">
 
                 <Button
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/attic_and_roof"
                     android:textSize="15sp"
@@ -261,7 +260,7 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/basement"
                     android:textSize="15sp"
@@ -280,7 +279,7 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/crawl_space"
                     android:textSize="15sp"
@@ -301,7 +300,6 @@
 
 
     </ScrollView>
-
     <LinearLayout
         android:id="@+id/buttonContainer"
         android:layout_width="match_parent"
@@ -309,33 +307,43 @@
         android:layout_alignParentBottom="true"
         android:orientation="horizontal"
         android:background="@color/White"
+        android:weightSum="5"
         >
 
         <Button
             android:id="@+id/back"
             android:layout_width="70dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/previous"
+            android:layout_weight="1"
+            android:background="@drawable/previous_selector"
             />
 
         <TextView
-            android:layout_width="650dp"
-            android:layout_height="wrap_content"
-            android:text="Step 7 out of step 11"
+            android:layout_width="220dp"
+            android:layout_height="match_parent"
+            android:text="Page 7 of 11"
             android:textSize="20sp"
-            android:textAlignment="center"
+            android:layout_weight="3"
+            android:paddingTop="10dp"
+            android:id="@+id/title"
+            android:layout_marginLeft="20dp"
             android:textColor="@color/black"
+            android:background="@color/White"
             android:textStyle="bold"
 
             />
-
-
-
         <Button
-            android:id="@+id/next"
+            android:id="@+id/save"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/next"
+            android:text="Save"
+            android:layout_marginRight="10dp"/>
+        <Button
+            android:id="@+id/next"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/next_selector"
             />
 
     </LinearLayout>

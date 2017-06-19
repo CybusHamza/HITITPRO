@@ -84,6 +84,7 @@ public class AppliancesScreenFragment extends BaseFragment {
 
         next = (Button) root.findViewById(R.id.next);
         back = (Button) root.findViewById(R.id.back);
+        title = (TextView) root.findViewById(R.id.title);
         save = (Button) root.findViewById(R.id.save);
         if(!(StructureScreensActivity.is_notemplate.equals("true")))
         {
@@ -584,14 +585,14 @@ public class AppliancesScreenFragment extends BaseFragment {
                     params.put("rtrashcompactor", cursor.getString(20));
                     params.put("rclotheswasher", cursor.getString(21));
                     params.put("rclothesdryer", cursor.getString(22));
-                    params.put("rcooktopexhaustfan", cursor.getString(24));
-                    params.put("rcentralvacuum", cursor.getString(25));
-                    params.put("rdoorbell", cursor.getString(26));
+                    params.put("rcooktopexhaustfan", cursor.getString(23));
+                    params.put("rcentralvacuum", cursor.getString(24));
+                    params.put("rdoorbell", cursor.getString(25));
 
                 }
 
                 int isAnyChecked = 0;
-                for(int count=6;count<=26;count++)
+                for(int count=6;count<=25;count++)
                 {
 
                     String splitter = "\\^";

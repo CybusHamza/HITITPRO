@@ -459,11 +459,12 @@
         android:id="@+id/buttonContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:orientation="horizontal"
         android:background="@color/White"
         android:weightSum="5"
-        >
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
         <Button
             android:id="@+id/back"
@@ -479,6 +480,7 @@
             android:text="Page 10 of 11"
             android:textSize="20sp"
             android:layout_weight="3"
+            android:id="@+id/title"
             android:paddingTop="10dp"
             android:layout_marginLeft="20dp"
             android:textColor="@color/black"

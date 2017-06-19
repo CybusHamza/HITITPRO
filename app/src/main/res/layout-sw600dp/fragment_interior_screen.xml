@@ -104,6 +104,7 @@
                     android:layout_marginRight="10dp"/>
 
             </LinearLayout>
+
             <TextView
                 style="@style/textview_heading"
                 android:layout_width="match_parent"
@@ -112,6 +113,7 @@
                 android:gravity="center"
                 android:text="Interior Observations"
                 android:textStyle="bold" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
@@ -342,16 +344,23 @@
         <TextView
             android:layout_width="220dp"
             android:layout_height="match_parent"
-            android:text="Step 9 out of step 11"
+            android:text="Page 9 of 11"
             android:textSize="20sp"
             android:layout_weight="3"
+            android:id="@+id/title"
             android:paddingTop="10dp"
-            android:textAlignment="center"
+            android:layout_marginLeft="20dp"
             android:textColor="@color/black"
             android:background="@color/White"
             android:textStyle="bold"
 
             />
+        <Button
+            android:id="@+id/save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Save"
+            android:layout_marginRight="10dp"/>
 
         <Button
             android:id="@+id/next"

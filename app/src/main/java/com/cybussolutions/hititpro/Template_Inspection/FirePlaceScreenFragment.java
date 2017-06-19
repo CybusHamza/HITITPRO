@@ -82,6 +82,7 @@ public class FirePlaceScreenFragment extends BaseFragment {
 
         next = (Button) root.findViewById(R.id.next);
         back = (Button) root.findViewById(R.id.back);
+        title = (TextView) root.findViewById(R.id.title);
         save = (Button) root.findViewById(R.id.save);
         if(!(StructureScreensActivity.is_notemplate.equals("true")))
         {
@@ -409,7 +410,9 @@ public class FirePlaceScreenFragment extends BaseFragment {
                     @Override
                     public void onResponse(String response) {
 
+
                         ringProgressDialog.dismiss();
+                        Toast.makeText(getActivity(), "Finishes", Toast.LENGTH_SHORT).show();
 
                     }
                 }, new Response.ErrorListener() {

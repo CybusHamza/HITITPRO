@@ -4,10 +4,8 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.widget.Toast;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 
 public class Database {
@@ -64,11 +62,13 @@ public class Database {
             ",rcounters_cabinets_comments varchar ,rskylights_comments varchar " +
             ",rstairways_comments varchar ,rbasement_comments varchar ,renvironmentalissues_comments varchar " +
             ",addedby  INTEGER ,addedon  INTEGER );); ";
+
+
     static final String DATABASE_INSULATION = "create table " + "insulation" + "( "
             + "id" + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + "template_id  INTEGER, inspection_id INTEGER , client_id INTEGER , is_applicable INTEGER" +
             ",empty_fields INTEGER ,atticinsulation varchar ,exteriorwallinsulation varchar ,basementwallinsulation varchar,csv varchar ,efv varchar " +
-            ",crawlspaceinsulation varchar ,vaporretarders varchar ,roofventilation varchar,rfurnace varchar " +
+            ",crawlspaceinsulation varchar ,vaporretarders varchar ,roofventilation varchar " +
             ",observations varchar ,atticandroof varchar,basement varchar,crawlspace varchar,atticinsulation_comments varchar" +
             ",exteriorwallinsulation_comments varchar,basementwallinsulation_comments varchar" +
             ",crawlspaceinsulation_comments varchar,vaporretarders_comments varchar,roofventilation_comments varchar" +

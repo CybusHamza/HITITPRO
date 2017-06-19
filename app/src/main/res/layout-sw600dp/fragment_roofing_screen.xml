@@ -14,6 +14,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/White"
             android:orientation="vertical">
 
             <TextView
@@ -153,7 +154,6 @@
                     android:layout_marginRight="10dp"/>
 
             </LinearLayout>
-
             <TextView
                 style="@style/textview_heading"
                 android:layout_width="match_parent"
@@ -310,33 +310,44 @@
         android:layout_alignParentBottom="true"
         android:orientation="horizontal"
         android:background="@color/White"
+        android:weightSum="5"
         >
 
         <Button
             android:id="@+id/back"
-            android:layout_width="wrap_content"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/previous"
+            android:layout_weight="1"
+            android:background="@drawable/previous_selector"
             />
 
         <TextView
-            android:layout_width="420dp"
-            android:layout_height="wrap_content"
-            android:text="Step 2 out of step 11"
+            android:layout_width="220dp"
+            android:layout_height="match_parent"
+            android:text="Page 2 of 11"
             android:textSize="20sp"
-            android:textAlignment="center"
+            android:layout_weight="3"
+            android:paddingTop="10dp"
+            android:id="@+id/title"
+            android:layout_marginLeft="20dp"
             android:textColor="@color/black"
+            android:background="@color/White"
             android:textStyle="bold"
 
             />
-
-
+        <Button
+            android:id="@+id/save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Save"
+            android:layout_marginRight="10dp"/>
 
         <Button
             android:id="@+id/next"
-            android:layout_width="wrap_content"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/next"
+            android:layout_weight="1"
+            android:background="@drawable/next_selector"
             />
 
     </LinearLayout>

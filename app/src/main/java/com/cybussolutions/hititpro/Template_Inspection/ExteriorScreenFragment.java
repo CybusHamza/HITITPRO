@@ -87,6 +87,7 @@ public class ExteriorScreenFragment extends BaseFragment {
         next = (Button) root.findViewById(R.id.next);
         back = (Button) root.findViewById(R.id.back);
         save = (Button) root.findViewById(R.id.save);
+        title = (TextView) root.findViewById(R.id.title);
         if(!(StructureScreensActivity.is_notemplate.equals("true")))
         {
             save.setVisibility(View.GONE);

@@ -1,16 +1,12 @@
 package com.cybussolutions.hititpro.Activities;
 
-import android.Manifest;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Base64;
@@ -47,9 +43,6 @@ import java.util.Map;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
-/**
- * Created by Rizwan Butt on 26-Apr-17.
- */
 public class Add_Comments extends AppCompatActivity {
 
     private static final int MY_SOCKET_TIMEOUT_MS = 10000;

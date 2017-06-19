@@ -347,6 +347,7 @@
             android:text="Page 9 of 11"
             android:textSize="20sp"
             android:layout_weight="3"
+            android:id="@+id/title"
             android:paddingTop="10dp"
             android:layout_marginLeft="20dp"
             android:textColor="@color/black"

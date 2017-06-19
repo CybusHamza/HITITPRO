@@ -83,6 +83,7 @@ public class CoolingScreenFragment extends BaseFragment {
 
         next = (Button) root.findViewById(R.id.next);
         back = (Button) root.findViewById(R.id.back);
+        title = (TextView) root.findViewById(R.id.title);
         save = (Button) root.findViewById(R.id.save);
         if(!(StructureScreensActivity.is_notemplate.equals("true")))
         {
@@ -476,20 +477,19 @@ public class CoolingScreenFragment extends BaseFragment {
                 params.put("is_applicable", "1");
                 params.put("empty_fields", "0");
                 if(cursor != null) {
-                    params.put("energysource", cursor.getString(6));
+                    params.put("energy_source", cursor.getString(6));
                     params.put("centralsystemtype", cursor.getString(7));
                     params.put("throughwallequipment", cursor.getString(8));
-                    params.put("heatdistributionmethods", cursor.getString(9));
-                    params.put("othercomponents", cursor.getString(10));
-                    params.put("heatobservation", cursor.getString(11));
-                    params.put("recomndcentralaircondition", cursor.getString(12));
-                    params.put("heatpumps", cursor.getString(13));
-                    params.put("evaporator", cursor.getString(14));
-                    params.put("housefans", cursor.getString(15));
+                    params.put("othercomponents", cursor.getString(9));
+                    params.put("heatobservation", cursor.getString(10));
+                    params.put("recomndcentralaircondition", cursor.getString(11));
+                    params.put("heatpumps", cursor.getString(12));
+                    params.put("evaporator", cursor.getString(13));
+                    params.put("housefans", cursor.getString(14));
 
                 }
                 int isAnyChecked = 0;
-                for(int count=6;count<=15;count++)
+                for(int count=6;count<=14;count++)
                 {
 
                     String splitter = "\\^";

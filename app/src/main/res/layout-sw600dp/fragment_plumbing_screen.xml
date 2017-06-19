@@ -414,136 +414,6 @@
                     android:layout_marginRight="10dp"/>
 
             </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:orientation="horizontal">
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/water_heater_plumbing"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    android:typeface="serif"
-                    android:id="@+id/water_heater_plumbing"
-                    android:background="@drawable/button_selector"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"/>
-
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:orientation="horizontal">
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/gas_piping_plumbing"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    android:typeface="serif"
-                    android:id="@+id/gas_piping_plumbing"
-                    android:background="@drawable/button_selector"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"/>
-
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:orientation="horizontal">
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/supply_plumbing"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    android:typeface="serif"
-                    android:id="@+id/supply_plumbing"
-                    android:background="@drawable/button_selector"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"/>
-
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:orientation="horizontal">
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/dwv_plumbing"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    android:typeface="serif"
-                    android:id="@+id/dwv_plumbing"
-                    android:background="@drawable/button_selector"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:orientation="horizontal">
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/fixtures"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    android:typeface="serif"
-                    android:id="@+id/fixtures_observation"
-                    android:background="@drawable/button_selector"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"/>
-
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:orientation="horizontal">
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/sump_pump_plumbing"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    android:typeface="serif"
-                    android:id="@+id/sump_pump_plumbing"
-                    android:background="@drawable/button_selector"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:orientation="horizontal">
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/waste_ejector_pump_ro"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    android:typeface="serif"
-                    android:id="@+id/waste_ejector_pump_ro"
-                    android:background="@drawable/button_selector"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"/>
-
-            </LinearLayout>
 
 
 
@@ -560,32 +430,43 @@
         android:layout_alignParentBottom="true"
         android:orientation="horizontal"
         android:background="@color/White"
+        android:weightSum="5"
         >
 
         <Button
             android:id="@+id/back"
             android:layout_width="70dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:background="@drawable/previous_selector"
             />
 
         <TextView
-            android:layout_width="460dp"
-            android:layout_height="wrap_content"
-            android:text="Step 9 out of step 11"
+            android:layout_width="220dp"
+            android:layout_height="match_parent"
+            android:text="Page 8 of 11"
             android:textSize="20sp"
-            android:textAlignment="center"
+            android:layout_weight="3"
+            android:paddingTop="10dp"
+            android:layout_marginLeft="20dp"
             android:textColor="@color/black"
+            android:id="@+id/title"
+            android:background="@color/White"
             android:textStyle="bold"
 
             />
-
-
+        <Button
+            android:id="@+id/save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Save"
+            android:layout_marginRight="10dp"/>
 
         <Button
             android:id="@+id/next"
             android:layout_width="70dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:background="@drawable/next_selector"
             />
 
