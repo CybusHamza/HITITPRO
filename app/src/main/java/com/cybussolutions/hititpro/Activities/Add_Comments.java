@@ -56,6 +56,7 @@ public class Add_Comments extends AppCompatActivity {
 
     EditText etComments;
     RadioGroup radioGroup;
+
     int pos;
     private String ba1,mCurrentPhotoPath;
     private String mSavedPhotoName,data,defaultText,attachmentName,tablename;
