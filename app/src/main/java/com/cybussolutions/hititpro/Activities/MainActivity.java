@@ -449,7 +449,8 @@ public class MainActivity extends AppCompatActivity {
                 params.put("inspection_id",StructureScreensActivity.inspectionID);
                 params.put("client_id",StructureScreensActivity.client_id);
                 params.put("main_form_name",sp.getString("main_screen",""));
-                params.put("column_name",sp.getString("heading",""));
+                params.put("column_name",table_name);
+                params.put("element_id",data);
                 params.put("attachment_name","test");
                 params.put("attachment_original_name",mSavedPhotoName);/*mCurrentPhotoPath*/
                 params.put("attachment_saved_name",mSavedPhotoName);
