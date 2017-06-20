@@ -1,6 +1,7 @@
 package com.cybussolutions.hititpro.Activities;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -44,6 +45,7 @@ import java.util.Map;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class Add_Comments extends AppCompatActivity {
+    ProgressDialog ringProgressDialog;
 
     private static final int MY_SOCKET_TIMEOUT_MS = 10000;
 
@@ -60,6 +62,7 @@ public class Add_Comments extends AppCompatActivity {
     String userId,checkedBox;
     private RadioButton radioButton;
     Button btnSaveImage;
+    String clientId,templateId,inspectionId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +81,9 @@ public class Add_Comments extends AppCompatActivity {
         attachmentName=i.getStringExtra("attachmentName");
         data=i.getStringExtra("data");
         tablename=i.getStringExtra("dbTable");
+        clientId=i.getStringExtra("clientId");
+        templateId=i.getStringExtra("templateId");
+        inspectionId=i.getStringExtra("inspectionId");
         etComments= (EditText) findViewById(R.id.comments);
         btnSaveImage=(Button)findViewById(R.id.saveImageButton);
         btnSaveImage.setOnClickListener(new View.OnClickListener() {
@@ -92,7 +98,7 @@ public class Add_Comments extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),messageToast,Toast.LENGTH_LONG).show();
 
                 }else{
-                    if (mCurrentPhotoPath == null) {
+                    if (mCurrentPhotoPath == null || mCurrentPhotoPath=="") {
                         mSavedPhotoName = "";
                         mCurrentPhotoPath = "";
                         uploadToServer();
@@ -141,7 +147,7 @@ public class Add_Comments extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 mSavedPhotoName = response;
-                Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_LONG).show();
+              //  Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_LONG).show();
                 uploadToServer();
             }
         }, new Response.ErrorListener() {
@@ -169,6 +175,9 @@ public class Add_Comments extends AppCompatActivity {
     }
 
     private void uploadToServer() {
+        ringProgressDialog = ProgressDialog.show(this, "Please wait ...", "Uploading data ...", true);
+        ringProgressDialog.setCancelable(false);
+        ringProgressDialog.show();
         SharedPreferences pref = getApplicationContext().getSharedPreferences("UserPrefs", MODE_PRIVATE);
 
         userId = pref.getString("user_id", "");
@@ -178,12 +187,15 @@ public class Add_Comments extends AppCompatActivity {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, End_Points.UPLOAD_IMAGE, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_LONG).show();
+                ringProgressDialog.dismiss();
+
+                //Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_LONG).show();
 
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                ringProgressDialog.dismiss();
                 Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
             }
         }) {
@@ -312,9 +324,9 @@ public class Add_Comments extends AppCompatActivity {
 
                 Map<String, String> params = new HashMap<>();
                 params.put("fieldid",data);
-                params.put("template_id",StructureScreensActivity.template_id);
-                params.put("client_id",StructureScreensActivity.client_id);
-                params.put("inspection_id",StructureScreensActivity.inspectionID);
+                params.put("template_id",templateId);
+                params.put("client_id",clientId);
+                params.put("inspection_id",inspectionId);
                 return params;
             }
         };

@@ -103,6 +103,10 @@ public class ShowImages extends AppCompatActivity {
                 Picasso.with(ShowImages.this)
                         .load(url)
                         .into(image1);
+
+            Picasso.with(ShowImages.this)
+                    .load(url)
+                    .into(imageView);
         }
 
         if(imageNames.length>1) {
@@ -118,6 +122,7 @@ public class ShowImages extends AppCompatActivity {
                     .load(url2)
                     .into(image3);
         }
+
         imageView.setImageDrawable(image1.getDrawable());
         /*if(imageNames.length>3) {
             String url3 = "http://xfer.cybusservices.com/hititpro/uploads/inspection/" + imageNames[3];

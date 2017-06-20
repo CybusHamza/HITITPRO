@@ -211,6 +211,9 @@ public class CustomArrayAdapter extends ArrayAdapter<Checkbox_model> implements
 					intent.putExtra("data",data);
 					intent.putExtra("dbTable",topass[1]);
 					intent.putExtra("showImages","false");
+					intent.putExtra("clientId",StructureScreensActivity.client_id);
+					intent.putExtra("inspectionId",StructureScreensActivity.inspectionID);
+					intent.putExtra("templateId",StructureScreensActivity.template_id);
 					context.startActivity(intent);
 				}catch (Exception e){
 					Toast.makeText(context,e.toString(),Toast.LENGTH_LONG).show();

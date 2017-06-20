@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DownloadManager;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -75,9 +76,13 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
+
 import static android.graphics.Color.BLACK;
 
 public class MainActivity extends AppCompatActivity {
+
+    ProgressDialog ringProgressDialog;
 
     private static final int MY_SOCKET_TIMEOUT_MS = 10000;
 //    DrawingView imageView;
@@ -99,6 +104,7 @@ public class MainActivity extends AppCompatActivity {
 
     EditText etAttachmentName;
     private String mCurrentPhotoPath,ba1,mSavedPhotoName;
+    String mainFormName;
 
     Bitmap bm = null;
     Bitmap scaled=null;
@@ -108,12 +114,14 @@ public class MainActivity extends AppCompatActivity {
     SharedPreferences.Editor edit;
 
     private CanvasView canvas = null;
-     String showImage;
+     String showImage,clientId,templateId,inspectionId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        sp=getSharedPreferences("prefs",MODE_PRIVATE);
+        mainFormName=sp.getString("main_screen","");
         Toolbar toolbar;
         toolbar = (Toolbar) findViewById(R.id.app_bar);
         toolbar.setTitle("Image Editor");
@@ -126,6 +134,9 @@ public class MainActivity extends AppCompatActivity {
         data = intent.getStringExtra("data");
         table_name=intent.getStringExtra("dbTable");
         showImage=intent.getStringExtra("showImages");
+        clientId=intent.getStringExtra("clientId");
+        templateId=intent.getStringExtra("templateId");
+        inspectionId=intent.getStringExtra("inspectionId");
         if(showImage.equals("false"))
         getImages();
 
@@ -133,7 +144,7 @@ public class MainActivity extends AppCompatActivity {
             scaled.recycle();
         }
 
-        sp=getSharedPreferences("prefs",MODE_PRIVATE);
+
 
         selectImage=(Button)findViewById(R.id.selectButton);
         saveImage=(Button)findViewById(R.id.saveButton);
@@ -215,13 +226,21 @@ public class MainActivity extends AppCompatActivity {
         undo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                canvas.undo();
+                if(canvas.canUndo()) {
+                    canvas.undo();
+                }else {
+                    Toast.makeText(MainActivity.this,"Nothing to undo",Toast.LENGTH_LONG).show();
+                }
             }
         });
         redo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               canvas.redo();
+                if(canvas.canRedo()) {
+                    canvas.redo();
+                }else {
+                    Toast.makeText(MainActivity.this,"Nothing to redo",Toast.LENGTH_LONG).show();
+                }
             }
         });
 
@@ -308,6 +327,9 @@ public class MainActivity extends AppCompatActivity {
                     intent.putExtra("attachmentName","");
                     intent.putExtra("dbTable",table_name);
                     intent.putExtra("data", data);
+                    intent.putExtra("clientId",clientId);
+                    intent.putExtra("inspectionId",inspectionId);
+                    intent.putExtra("templateId",templateId);
                     startActivity(intent);
                     //Toast.makeText(getApplicationContext(), "No image selected", Toast.LENGTH_LONG).show();
                 }
@@ -325,7 +347,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 //Toast.makeText(getApplicationContext(),response.toString(),Toast.LENGTH_LONG).show();
-                if(!response.equals("0")){
+                if(!response.equals("0") && response!=null){
                     int count=0;
                     try {
                         JSONArray jsonArray=new JSONArray(response);
@@ -362,10 +384,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
-                params.put("template_id",StructureScreensActivity.template_id);
-                params.put("inspection_id",StructureScreensActivity.inspectionID);
-                params.put("client_id",StructureScreensActivity.client_id);
-                params.put("main_form_name",sp.getString("main_screen",""));
+                params.put("template_id",templateId);
+                params.put("inspection_id",inspectionId);
+                params.put("client_id",clientId);
+                params.put("main_form_name",mainFormName);
                 params.put("column_name",table_name);//sp.getString("heading","")
                 params.put("element_id",data);
                 return params;
@@ -380,6 +402,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void up(){
+        ringProgressDialog = ProgressDialog.show(this, "Please wait ...", "Uploading data ...", true);
+        ringProgressDialog.setCancelable(false);
+        ringProgressDialog.show();
         Calendar c = Calendar.getInstance();
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         final String formattedDate = df.format(c.getTime());
@@ -393,7 +418,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 mSavedPhotoName=response;
-                Toast.makeText(getApplicationContext(),response.toString(),Toast.LENGTH_LONG).show();
+                //Toast.makeText(getApplicationContext(),response.toString(),Toast.LENGTH_LONG).show();
                 uploadToServer();
             }
         }, new Response.ErrorListener() {
@@ -421,6 +446,7 @@ public class MainActivity extends AppCompatActivity {
         requestQueue.add(stringRequest);
     }
     private void uploadToServer() {
+
         SharedPreferences pref = getApplicationContext().getSharedPreferences("UserPrefs", MODE_PRIVATE);
 
         userId = pref.getString("user_id","");
@@ -430,25 +456,41 @@ public class MainActivity extends AppCompatActivity {
         StringRequest stringRequest=new StringRequest(Request.Method.POST, End_Points.UPLOAD_IMAGE, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Toast.makeText(getApplicationContext(),response.toString(),Toast.LENGTH_LONG).show();
-                Intent intent = getIntent();
-                finish();
-                startActivity(intent);
+                ringProgressDialog.dismiss();
+                new SweetAlertDialog(MainActivity.this, SweetAlertDialog.SUCCESS_TYPE)
+                        .setTitleText("Success!")
+                        .setConfirmText("OK").setContentText("Successful")
+                        .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                            @Override
+                            public void onClick(SweetAlertDialog sDialog) {
+                                sDialog.dismiss();
+                                Intent intent = getIntent();
+                                finish();
+                                startActivity(intent);
+
+                                //finish();
+
+                            }
+                        })
+                        .show();
+               // Toast.makeText(getApplicationContext(),response.toString(),Toast.LENGTH_LONG).show();
+
 
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                ringProgressDialog.dismiss();
                 Toast.makeText(getApplicationContext(),error.toString(),Toast.LENGTH_LONG).show();
             }
         }){
             @Override
             public Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
-                params.put("template_id",StructureScreensActivity.template_id);
-                params.put("inspection_id",StructureScreensActivity.inspectionID);
-                params.put("client_id",StructureScreensActivity.client_id);
-                params.put("main_form_name",sp.getString("main_screen",""));
+                params.put("template_id",templateId);
+                params.put("inspection_id",inspectionId);
+                params.put("client_id",clientId);
+                params.put("main_form_name",mainFormName);
                 params.put("column_name",table_name);
                 params.put("element_id",data);
                 params.put("attachment_name","test");
@@ -540,6 +582,8 @@ public class MainActivity extends AppCompatActivity {
                 while (canvas.canUndo()){
                     canvas.historyPointer=canvas.historyPointer-1;
                 }
+                canvas.setMode(CanvasView.Mode.DRAW);
+                canvas.setDrawer(CanvasView.Drawer.PEN);
 
             }
             //  if (requestCode == Constants.REQUEST_CODE && resultCode == RESULT_OK && data != null) {
@@ -576,6 +620,8 @@ public class MainActivity extends AppCompatActivity {
                 while (canvas.canUndo()){
                     canvas.historyPointer=canvas.historyPointer-1;
                 }
+                canvas.setMode(CanvasView.Mode.DRAW);
+                canvas.setDrawer(CanvasView.Drawer.PEN);
                 // imageView.setImageBitmap(BitmapFactory
                 //       .decodeFile(ImageDecode));
 
