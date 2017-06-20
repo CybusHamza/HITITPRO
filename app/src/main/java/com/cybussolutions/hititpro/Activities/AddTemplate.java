@@ -134,7 +134,7 @@ public class AddTemplate extends AppCompatActivity {
 
                 Map<String, String> params = new HashMap<>();
                 params.put("name",StrtmpName);
-                params.put("default_template","");
+                params.put("default_template","9999");
                 params.put("is_started","0");
                 params.put("paragraph_text",Strpara);
                 params.put("client_id",clientId);

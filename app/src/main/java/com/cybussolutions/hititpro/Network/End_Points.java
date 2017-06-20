@@ -16,6 +16,7 @@ public class End_Points {
     public static final String START_INSPECTION = BASE_URL + "addTemplate";
     public static final String PRE_POPULATE = BASE_URL + "insertSimpleEnteriesToAllReferenceTables";
     public static final String GET_TEMPLATES = BASE_URL + "getTemplates";
+    public static final String GET_TEMPLATES_REVIEW = BASE_URL + "getTemplatesreview";
     public static final String GET_INSPECTION = BASE_URL + "getInspection";
     public static final String GET_TEMPLATE_DATA = BASE_URL + "getTemplatesData";
     public static final String GET_ARCHIVE_TEMPLATE_DATA = BASE_URL + "getArchiveAllTemplates";

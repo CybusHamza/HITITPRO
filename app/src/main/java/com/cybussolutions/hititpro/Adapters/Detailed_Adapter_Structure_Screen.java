@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,13 +13,10 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
@@ -32,8 +28,6 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.cybussolutions.hititpro.Activities.Add_Comments;
-import com.cybussolutions.hititpro.Activities.Detailed_Activity_All_Screens;
 import com.cybussolutions.hititpro.Activities.Detailed_Activity_Structure_Screens;
 import com.cybussolutions.hititpro.Activities.MainActivity;
 import com.cybussolutions.hititpro.Activities.StructureScreensActivity;
@@ -48,7 +42,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -231,7 +224,7 @@ public class Detailed_Adapter_Structure_Screen extends ArrayAdapter<Checkbox_mod
                         break;
                     case "roofing":
                         pagePosition= 2;
-                        observation_name="";
+                        observation_name="roofingobservations";
                         observation_comments="observations_comments";
                         break;
                     case "exterior":
@@ -288,7 +281,7 @@ public class Detailed_Adapter_Structure_Screen extends ArrayAdapter<Checkbox_mod
                 if((topass[0].equals("Exterior Observations")||topass[0].equals("Electrical Observations")||topass[0].equals("Structure Observations")
                         || topass[0].equals("Heating Observations") || topass[0].equals("Cooling/Heat Pump Observations")
                         || topass[0].equals("Interior Observations")  || topass[0].equals("Insulation / Ventilation Observations")
-                        || topass[0].equals("Plumbing Observations")|| topass[0].equals("Appliance Observations:")
+                        || topass[0].equals("Plumbing Observations")||  topass[0].equals("Roofing Observations") || topass[0].equals("Appliance Observations:")
                         || topass[0].equals("Fireplace / Wood Stove Observations:"))&& checkBox.isChecked()){
 
                         getDefaultComments();

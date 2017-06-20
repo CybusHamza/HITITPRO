@@ -32,6 +32,7 @@ import com.cybussolutions.hititpro.Activities.Detailed_Activity_All_Screens;
 import com.cybussolutions.hititpro.Activities.Detailed_Activity_Structure_Screens;
 import com.cybussolutions.hititpro.Activities.StructureScreensActivity;
 import com.cybussolutions.hititpro.Fragments.BaseFragment;
+import com.cybussolutions.hititpro.Fragments.Setp13_review;
 import com.cybussolutions.hititpro.Network.End_Points;
 import com.cybussolutions.hititpro.R;
 import com.cybussolutions.hititpro.Sql_LocalDataBase.Database;
@@ -412,7 +413,8 @@ public class FirePlaceScreenFragment extends BaseFragment {
 
 
                         ringProgressDialog.dismiss();
-                        Toast.makeText(getActivity(), "Finishes", Toast.LENGTH_SHORT).show();
+                        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new Setp13_review()).addToBackStack("review").commit();
+
 
                     }
                 }, new Response.ErrorListener() {

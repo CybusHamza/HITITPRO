@@ -344,7 +344,6 @@ public class TemplatesFragment extends BaseFragment {
 
                                 inspection_list.add(1,"No Template");
                                 inspection_id_list.add(1,"0");
-                                default_template.add(1,"");
                                 para_list.add(1,"");
                                 isdefault.add(1,"");
                                 isStarted.add(1,"0");

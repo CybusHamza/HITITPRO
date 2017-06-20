@@ -341,7 +341,7 @@ public class ReviewInspectionFragment extends BaseFragment {
         ringProgressDialog.setCancelable(false);
         ringProgressDialog.show();
 
-        StringRequest request = new StringRequest(Request.Method.POST, End_Points.GET_TEMPLATES,
+        StringRequest request = new StringRequest(Request.Method.POST, End_Points.GET_TEMPLATES_REVIEW,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
