@@ -104,7 +104,7 @@ public class Add_Comments extends AppCompatActivity {
                         uploadToServer();
                     } else {
                         up();
-                        startDialog();
+                       // startDialog();
                     }
                 }
             }
@@ -188,6 +188,22 @@ public class Add_Comments extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 ringProgressDialog.dismiss();
+                new SweetAlertDialog(Add_Comments.this, SweetAlertDialog.SUCCESS_TYPE)
+                        .setTitleText("Success!")
+                        .setConfirmText("OK").setContentText("Successful")
+                        .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                            @Override
+                            public void onClick(SweetAlertDialog sDialog) {
+                                sDialog.dismiss();
+                                if (mCurrentPhotoPath != null && mCurrentPhotoPath!="" ) {
+                                    startDialog();
+                                }else {
+                                    finish();
+                                }
+                            }
+                        })
+                        .show();
+
 
                 //Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_LONG).show();
 
@@ -196,7 +212,7 @@ public class Add_Comments extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 ringProgressDialog.dismiss();
-                Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
+               // Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
             }
         }) {
             @Override
@@ -247,6 +263,9 @@ public class Add_Comments extends AppCompatActivity {
                         intent.putExtra("dbTable",tablename);
                         intent.putExtra("data",data);
                         intent.putExtra("showImages","true");
+                        intent.putExtra("clientId",clientId);
+                        intent.putExtra("inspectionId",inspectionId);
+                        intent.putExtra("templateId",templateId);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
                     }
@@ -313,6 +332,7 @@ public class Add_Comments extends AppCompatActivity {
                                 @Override
                                 public void onClick(SweetAlertDialog sDialog) {
                                     sDialog.dismiss();
+                                    finish();
                                 }
                             })
                             .show();

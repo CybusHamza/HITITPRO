@@ -73,11 +73,17 @@ public class ShowImages extends AppCompatActivity {
                     intent.putExtra("dbTable",table_name);
                     intent.putExtra("data",data);
                     intent.putExtra("showImages","true");
+                    intent.putExtra("clientId",StructureScreensActivity.client_id);
+                    intent.putExtra("inspectionId",StructureScreensActivity.inspectionID);
+                    intent.putExtra("templateId",StructureScreensActivity.template_id);
                     startActivity(intent);
                 }else {
                     Intent intent=new Intent(ShowImages.this,Add_Comments.class);
                     intent.putExtra("dbTable",table_name);
                     intent.putExtra("data",data);
+                    intent.putExtra("clientId",StructureScreensActivity.client_id);
+                    intent.putExtra("inspectionId",StructureScreensActivity.inspectionID);
+                    intent.putExtra("templateId",StructureScreensActivity.template_id);
                     startActivity(intent);
                     Toast.makeText(getApplicationContext(), "you cannot upload more photos", Toast.LENGTH_LONG).show();
                 }

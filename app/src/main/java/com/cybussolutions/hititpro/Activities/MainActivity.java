@@ -304,6 +304,9 @@ public class MainActivity extends AppCompatActivity {
                                 intent.putExtra("attachmentName", etAttachmentName.getText().toString());
                                 intent.putExtra("dbTable",table_name);
                                 intent.putExtra("data", data);
+                                intent.putExtra("clientId",clientId);
+                                intent.putExtra("inspectionId",inspectionId);
+                                intent.putExtra("templateId",templateId);
                                 finish();
                                 startActivity(intent);
                                 try {
@@ -343,9 +346,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void getImages() {
+        ringProgressDialog = ProgressDialog.show(this, "Please wait ...", "Getting data ...", true);
+        ringProgressDialog.setCancelable(false);
+        ringProgressDialog.show();
         StringRequest stringRequest=new StringRequest(Request.Method.POST, End_Points.GET_IMAGES, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
+                ringProgressDialog.dismiss();
                 //Toast.makeText(getApplicationContext(),response.toString(),Toast.LENGTH_LONG).show();
                 if(!response.equals("0") && response!=null){
                     int count=0;
@@ -370,6 +377,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
+                        ringProgressDialog.dismiss();
                     }
 
                 }
@@ -378,6 +386,7 @@ public class MainActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                ringProgressDialog.dismiss();
                 Toast.makeText(getApplicationContext(),error.toString(),Toast.LENGTH_LONG).show();
             }
         }){
@@ -424,8 +433,8 @@ public class MainActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                ringProgressDialog.dismiss();
                 Toast.makeText(getApplicationContext(),error.toString(),Toast.LENGTH_LONG).show();
-
             }
         }){
             @Override
@@ -465,6 +474,9 @@ public class MainActivity extends AppCompatActivity {
                             public void onClick(SweetAlertDialog sDialog) {
                                 sDialog.dismiss();
                                 Intent intent = getIntent();
+                                intent.putExtra("clientId",clientId);
+                                intent.putExtra("inspectionId",inspectionId);
+                                intent.putExtra("templateId",templateId);
                                 finish();
                                 startActivity(intent);
 
@@ -481,7 +493,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 ringProgressDialog.dismiss();
-                Toast.makeText(getApplicationContext(),error.toString(),Toast.LENGTH_LONG).show();
+              //  Toast.makeText(getApplicationContext(),error.toString(),Toast.LENGTH_LONG).show();
             }
         }){
             @Override
@@ -500,6 +512,7 @@ public class MainActivity extends AppCompatActivity {
                 params.put("selrecomd",sp.getString("selectrecomend",null));
                 params.put("userid",userId);
                 params.put("attchment_added_date",attachment_added_date);
+                params.put("dbTable",table_name+"_comments");
 
                 // params.put("user_name", );
                 //params.put("password", );
