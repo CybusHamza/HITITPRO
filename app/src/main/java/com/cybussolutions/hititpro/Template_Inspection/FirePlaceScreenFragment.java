@@ -181,7 +181,7 @@ public class FirePlaceScreenFragment extends BaseFragment {
                 intent.putExtra("column","fireplaceswoodstoves");
                 intent.putExtra("dbTable",FIREPLACE_TABLE);
                 intent.putExtra("fromAddapter","false");
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -197,7 +197,7 @@ public class FirePlaceScreenFragment extends BaseFragment {
                 intent.putExtra("column","woodcoalstoves");
                 intent.putExtra("dbTable",FIREPLACE_TABLE);
                 intent.putExtra("fromAddapter","false");
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -213,7 +213,7 @@ public class FirePlaceScreenFragment extends BaseFragment {
                 intent.putExtra("column","ventsflueschimney");
                 intent.putExtra("dbTable",FIREPLACE_TABLE);
                 intent.putExtra("fromAddapter","false");
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -229,7 +229,7 @@ public class FirePlaceScreenFragment extends BaseFragment {
                 intent.putExtra("column","observations");
                 intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",FIREPLACE_TABLE);
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -245,7 +245,7 @@ public class FirePlaceScreenFragment extends BaseFragment {
                 intent.putExtra("column","recommendationsfireplace");
                 intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",FIREPLACE_TABLE);
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -261,7 +261,7 @@ public class FirePlaceScreenFragment extends BaseFragment {
                 intent.putExtra("column","recommendationswood");
                 intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",FIREPLACE_TABLE);
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -276,7 +276,7 @@ public class FirePlaceScreenFragment extends BaseFragment {
                 intent.putExtra("column","fireplace_ro");
                 intent.putExtra("dbTable",FIREPLACE_TABLE);
                 intent.putExtra("fromAddapter","false");
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -292,7 +292,7 @@ public class FirePlaceScreenFragment extends BaseFragment {
                 intent.putExtra("column","wood_stove_ro");
                 intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",FIREPLACE_TABLE);
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -326,12 +326,12 @@ public class FirePlaceScreenFragment extends BaseFragment {
                             JSONObject object = jsonArray.getJSONObject(0);
 
 
-                            database.insertEntry("fireplaceswoodstoves",  object.getString("fireplaceswoodstoves"), FIREPLACE_TABLE, StructureScreensActivity.inspectionID);
-                            database.insertEntry("woodcoalstoves",  object.getString("woodcoalstoves"), FIREPLACE_TABLE, StructureScreensActivity.inspectionID);
-                            database.insertEntry("ventsflueschimney",  object.getString("ventsflueschimney"), FIREPLACE_TABLE, StructureScreensActivity.inspectionID);
-                            database.insertEntry("observations",  object.getString("observations"), FIREPLACE_TABLE, StructureScreensActivity.inspectionID);
-                            database.insertEntry("recommendationsfireplace",  object.getString("recommendationsfireplace"), FIREPLACE_TABLE, StructureScreensActivity.inspectionID);
-                            database.insertEntry("recommendationswood",  object.getString("recommendationswood"), FIREPLACE_TABLE, StructureScreensActivity.inspectionID);
+                            database.insertEntry("fireplaceswoodstoves",  object.getString("fireplaceswoodstoves"), FIREPLACE_TABLE, StructureScreensActivity.template_id);
+                            database.insertEntry("woodcoalstoves",  object.getString("woodcoalstoves"), FIREPLACE_TABLE, StructureScreensActivity.template_id);
+                            database.insertEntry("ventsflueschimney",  object.getString("ventsflueschimney"), FIREPLACE_TABLE, StructureScreensActivity.template_id);
+                            database.insertEntry("observations",  object.getString("observations"), FIREPLACE_TABLE, StructureScreensActivity.template_id);
+                            database.insertEntry("recommendationsfireplace",  object.getString("recommendationsfireplace"), FIREPLACE_TABLE, StructureScreensActivity.template_id);
+                            database.insertEntry("recommendationswood",  object.getString("recommendationswood"), FIREPLACE_TABLE, StructureScreensActivity.template_id);
 
                         } catch (JSONException e) {
                             e.printStackTrace();

@@ -213,7 +213,7 @@ public class StructureScreenFragment extends BaseFragment {
                 intent.putExtra("column","foundation");
                 intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",PORTFOLIO_TABLE);
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
 
             }
@@ -231,7 +231,7 @@ public class StructureScreenFragment extends BaseFragment {
                 intent.putExtra("column","columns");
                 intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",PORTFOLIO_TABLE);
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -248,7 +248,7 @@ public class StructureScreenFragment extends BaseFragment {
                 intent.putExtra("column","floor_structure");
                 intent.putExtra("dbTable",PORTFOLIO_TABLE);
                 intent.putExtra("fromAddapter","false");
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -265,7 +265,7 @@ public class StructureScreenFragment extends BaseFragment {
                 intent.putExtra("column","wall_structure");
                 intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",PORTFOLIO_TABLE);
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -282,7 +282,7 @@ public class StructureScreenFragment extends BaseFragment {
                 intent.putExtra("column","celling_struture");
                 intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",PORTFOLIO_TABLE);
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -299,7 +299,7 @@ public class StructureScreenFragment extends BaseFragment {
                 intent.putExtra("column","roof_structure");
                 intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",PORTFOLIO_TABLE);
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -316,7 +316,7 @@ public class StructureScreenFragment extends BaseFragment {
                 intent.putExtra("column","observation");
                 intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",PORTFOLIO_TABLE);
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -332,7 +332,7 @@ public class StructureScreenFragment extends BaseFragment {
                 intent.putExtra("column","recomnd_foundation");
                 intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",PORTFOLIO_TABLE);
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -349,7 +349,7 @@ public class StructureScreenFragment extends BaseFragment {
                 intent.putExtra("column","crawl_space");
                 intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",PORTFOLIO_TABLE);
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -366,7 +366,7 @@ public class StructureScreenFragment extends BaseFragment {
                 intent.putExtra("column","recomnd_floor");
                 intent.putExtra("dbTable",PORTFOLIO_TABLE);
                 intent.putExtra("fromAddapter","false");
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -383,7 +383,7 @@ public class StructureScreenFragment extends BaseFragment {
                 intent.putExtra("column","exterior_wall");
                 intent.putExtra("dbTable",PORTFOLIO_TABLE);
                 intent.putExtra("fromAddapter","false");
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -400,7 +400,7 @@ public class StructureScreenFragment extends BaseFragment {
                 intent.putExtra("column","roof");
                 intent.putExtra("dbTable",PORTFOLIO_TABLE);
                 intent.putExtra("fromAddapter","false");
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -425,6 +425,8 @@ public class StructureScreenFragment extends BaseFragment {
                     public void onResponse(String response) {
 
                         ringProgressDialog.dismiss();
+
+
 
                         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new RoofingScreenFragment()).addToBackStack("roofing").commit();
 
@@ -464,10 +466,21 @@ public class StructureScreenFragment extends BaseFragment {
         }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
+                Cursor cursor = null;
+/*
+                if(!(StructureScreensActivity.is_notemplate.equals("true")))
+                {
+
+                }
+               else {
+                    cursor =  database.getTable(PORTFOLIO_TABLE,"0");
+
+                }*/
 
 
-                Cursor cursor = database.getTable(PORTFOLIO_TABLE,StructureScreensActivity.inspectionID);
-                cursor.moveToFirst();
+                cursor =database.getTable(PORTFOLIO_TABLE,StructureScreensActivity.template_id);
+
+
 
                     Map<String, String> params = new HashMap<>();
                     params.put("template_id", StructureScreensActivity.template_id);
@@ -475,7 +488,10 @@ public class StructureScreenFragment extends BaseFragment {
                     params.put("client_id", StructureScreensActivity.client_id);
                     params.put("is_applicable", "1");
 
+                cursor.moveToFirst();
+
                 if(cursor != null) {
+
                     params.put("foundation", cursor.getString(6));
                     params.put("columns", cursor.getString(7));
                     params.put("floor_structure", cursor.getString(8));
@@ -548,18 +564,18 @@ public class StructureScreenFragment extends BaseFragment {
                                 JSONObject object = jsonArray.getJSONObject(0);
 
 
-                    database.insertEntry("foundation",object.getString("foundation"),PORTFOLIO_TABLE,StructureScreensActivity.inspectionID);
-                    database.insertEntry("columns",object.getString("columns"),PORTFOLIO_TABLE,StructureScreensActivity.inspectionID);
-                    database.insertEntry("floor_structure",object.getString("floor_structure"),PORTFOLIO_TABLE,StructureScreensActivity.inspectionID);
-                    database.insertEntry("wall_structure",object.getString("wall_structure"),PORTFOLIO_TABLE,StructureScreensActivity.inspectionID);
-                    database.insertEntry("celling_struture",object.getString("celling_struture"),PORTFOLIO_TABLE,StructureScreensActivity.inspectionID);
-                    database.insertEntry("roof_structure",object.getString("roof_structure"),PORTFOLIO_TABLE,StructureScreensActivity.inspectionID);
-                    database.insertEntry("observation",object.getString("observation"),PORTFOLIO_TABLE,StructureScreensActivity.inspectionID);
-                    database.insertEntry("recomnd_foundation",object.getString("recomnd_foundation"),PORTFOLIO_TABLE,StructureScreensActivity.inspectionID);
-                    database.insertEntry("crawl_space",object.getString("crawl_space"),PORTFOLIO_TABLE,StructureScreensActivity.inspectionID);
-                    database.insertEntry("recomnd_floor",object.getString("recomnd_floor"),PORTFOLIO_TABLE,StructureScreensActivity.inspectionID);
-                    database.insertEntry("exterior_wall",object.getString("exterior_wall"),PORTFOLIO_TABLE,StructureScreensActivity.inspectionID);
-                    database.insertEntry("roof",object.getString("roof"),PORTFOLIO_TABLE,StructureScreensActivity.inspectionID);
+                    database.insertEntry("foundation",object.getString("foundation"),PORTFOLIO_TABLE,StructureScreensActivity.template_id);
+                    database.insertEntry("columns",object.getString("columns"),PORTFOLIO_TABLE,StructureScreensActivity.template_id);
+                    database.insertEntry("floor_structure",object.getString("floor_structure"),PORTFOLIO_TABLE,StructureScreensActivity.template_id);
+                    database.insertEntry("wall_structure",object.getString("wall_structure"),PORTFOLIO_TABLE,StructureScreensActivity.template_id);
+                    database.insertEntry("celling_struture",object.getString("celling_struture"),PORTFOLIO_TABLE,StructureScreensActivity.template_id);
+                    database.insertEntry("roof_structure",object.getString("roof_structure"),PORTFOLIO_TABLE,StructureScreensActivity.template_id);
+                    database.insertEntry("observation",object.getString("observation"),PORTFOLIO_TABLE,StructureScreensActivity.template_id);
+                    database.insertEntry("recomnd_foundation",object.getString("recomnd_foundation"),PORTFOLIO_TABLE,StructureScreensActivity.template_id);
+                    database.insertEntry("crawl_space",object.getString("crawl_space"),PORTFOLIO_TABLE,StructureScreensActivity.template_id);
+                    database.insertEntry("recomnd_floor",object.getString("recomnd_floor"),PORTFOLIO_TABLE,StructureScreensActivity.template_id);
+                    database.insertEntry("exterior_wall",object.getString("exterior_wall"),PORTFOLIO_TABLE,StructureScreensActivity.template_id);
+                    database.insertEntry("roof",object.getString("roof"),PORTFOLIO_TABLE,StructureScreensActivity.template_id);
 
 
                         } catch (JSONException e) {
@@ -654,6 +670,7 @@ public class StructureScreenFragment extends BaseFragment {
                 }
                 else
                 {
+                    b.dismiss();
                     if(isdefault.isChecked())
                     {
                         saveNoTemp(tmpName.getText().toString(),true);
@@ -690,6 +707,23 @@ public class StructureScreenFragment extends BaseFragment {
 
                         ringProgressDialog.dismiss();
                         StructureScreensActivity.is_saved=true;
+
+                        String resp[];
+
+                        resp = response.split("%");
+
+
+                        StructureScreensActivity.inspectionID = resp[1];
+                        StructureScreensActivity.template_id = resp[0];
+
+
+
+                        database.updateIds();
+
+
+
+
+
                         sp=getActivity().getSharedPreferences("prefs", MODE_PRIVATE);
                         edit=sp.edit();
                         edit.putBoolean("StructureScreenFragment",true);

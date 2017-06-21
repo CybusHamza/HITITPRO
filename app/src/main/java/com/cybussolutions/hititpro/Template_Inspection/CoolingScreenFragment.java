@@ -171,7 +171,7 @@ public class CoolingScreenFragment extends BaseFragment {
                 intent.putExtra("column","energysource");
                 intent.putExtra("dbTable",COOLING_TABLE);
                 intent.putExtra("fromAddapter","false");
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -188,7 +188,7 @@ public class CoolingScreenFragment extends BaseFragment {
                 intent.putExtra("column","centralsystemtype");
                 intent.putExtra("dbTable",COOLING_TABLE);
                 intent.putExtra("fromAddapter","false");
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -205,7 +205,7 @@ public class CoolingScreenFragment extends BaseFragment {
                 intent.putExtra("column","throughwallequipment");
                 intent.putExtra("dbTable",COOLING_TABLE);
                 intent.putExtra("fromAddapter","false");
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -222,7 +222,7 @@ public class CoolingScreenFragment extends BaseFragment {
                 intent.putExtra("column","othercomponents");
                 intent.putExtra("dbTable",COOLING_TABLE);
                 intent.putExtra("fromAddapter","false");
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -239,7 +239,7 @@ public class CoolingScreenFragment extends BaseFragment {
                 intent.putExtra("column","heatobservation");
                 intent.putExtra("dbTable",COOLING_TABLE);
                 intent.putExtra("fromAddapter","false");
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -256,7 +256,7 @@ public class CoolingScreenFragment extends BaseFragment {
                 intent.putExtra("column","recomndcentralaircondition");
                 intent.putExtra("dbTable",COOLING_TABLE);
                 intent.putExtra("fromAddapter","false");
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -274,7 +274,7 @@ public class CoolingScreenFragment extends BaseFragment {
                 intent.putExtra("column","heatpumps");
                 intent.putExtra("dbTable",COOLING_TABLE);
                 intent.putExtra("fromAddapter","false");
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -291,7 +291,7 @@ public class CoolingScreenFragment extends BaseFragment {
                 intent.putExtra("column","evaporator");
                 intent.putExtra("dbTable",COOLING_TABLE);
                 intent.putExtra("fromAddapter","false");
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -308,7 +308,7 @@ public class CoolingScreenFragment extends BaseFragment {
                 intent.putExtra("column","housefans");
                 intent.putExtra("dbTable",COOLING_TABLE);
                 intent.putExtra("fromAddapter","false");
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -338,15 +338,15 @@ public class CoolingScreenFragment extends BaseFragment {
 
                             JSONObject object = jsonArray.getJSONObject(0);
 
-                            database.insertEntry("energysource",object.getString("energysource"),COOLING_TABLE,StructureScreensActivity.inspectionID);
-                            database.insertEntry("centralsystemtype",object.getString("centralsystemtype"),COOLING_TABLE,StructureScreensActivity.inspectionID);
-                            database.insertEntry("throughwallequipment",object.getString("throughwallequipment"),COOLING_TABLE,StructureScreensActivity.inspectionID);
-                            database.insertEntry("othercomponents",object.getString("othercomponents"),COOLING_TABLE,StructureScreensActivity.inspectionID);
-                            database.insertEntry("heatobservation",object.getString("heatobservation"),COOLING_TABLE,StructureScreensActivity.inspectionID);
-                            database.insertEntry("recomndcentralaircondition",object.getString("recomndcentralaircondition"),COOLING_TABLE,StructureScreensActivity.inspectionID);
-                            database.insertEntry("heatpumps",object.getString("heatpumps"),COOLING_TABLE,StructureScreensActivity.inspectionID);
-                            database.insertEntry("evaporator",object.getString("evaporator"),COOLING_TABLE,StructureScreensActivity.inspectionID);
-                            database.insertEntry("housefans",object.getString("housefans"),COOLING_TABLE,StructureScreensActivity.inspectionID);
+                            database.insertEntry("energysource",object.getString("energysource"),COOLING_TABLE,StructureScreensActivity.template_id);
+                            database.insertEntry("centralsystemtype",object.getString("centralsystemtype"),COOLING_TABLE,StructureScreensActivity.template_id);
+                            database.insertEntry("throughwallequipment",object.getString("throughwallequipment"),COOLING_TABLE,StructureScreensActivity.template_id);
+                            database.insertEntry("othercomponents",object.getString("othercomponents"),COOLING_TABLE,StructureScreensActivity.template_id);
+                            database.insertEntry("heatobservation",object.getString("heatobservation"),COOLING_TABLE,StructureScreensActivity.template_id);
+                            database.insertEntry("recomndcentralaircondition",object.getString("recomndcentralaircondition"),COOLING_TABLE,StructureScreensActivity.template_id);
+                            database.insertEntry("heatpumps",object.getString("heatpumps"),COOLING_TABLE,StructureScreensActivity.template_id);
+                            database.insertEntry("evaporator",object.getString("evaporator"),COOLING_TABLE,StructureScreensActivity.template_id);
+                            database.insertEntry("housefans",object.getString("housefans"),COOLING_TABLE,StructureScreensActivity.template_id);
 
 
                         } catch (JSONException e) {
@@ -467,7 +467,7 @@ public class CoolingScreenFragment extends BaseFragment {
             protected Map<String, String> getParams() throws AuthFailureError {
 
 
-                Cursor cursor = database.getTable(COOLING_TABLE,StructureScreensActivity.inspectionID);
+                Cursor cursor = database.getTable(COOLING_TABLE,StructureScreensActivity.template_id);
                 cursor.moveToFirst();
 
                 Map<String, String> params = new HashMap<>();
@@ -586,10 +586,27 @@ public class CoolingScreenFragment extends BaseFragment {
 
                         ringProgressDialog.dismiss();
                         StructureScreensActivity.is_saved=true;
+
+                        String resp[];
+
+                        resp = response.split("%");
+
+
+                        StructureScreensActivity.inspectionID = resp[1];
+                        StructureScreensActivity.template_id = resp[0];
+
+
+
+                        database.updateIds();
+
+
+
+
+
                         sp=getActivity().getSharedPreferences("prefs", MODE_PRIVATE);
                         edit=sp.edit();
                         edit.putBoolean("StructureScreenFragment",true);
-                        edit.commit();
+                        edit.apply();
                         Toast.makeText(getContext(),"Saved Successfully",Toast.LENGTH_LONG).show();
                     }
                 }, new Response.ErrorListener() {
@@ -651,8 +668,6 @@ public class CoolingScreenFragment extends BaseFragment {
         requestQueue.add(request);
 
     }
-
-
 
 
 }

@@ -5,6 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.cybussolutions.hititpro.Activities.StructureScreensActivity;
+
 import java.sql.SQLException;
 
 
@@ -199,9 +201,21 @@ public class Database {
           //  Toast.makeText(context, res + " /  saved", Toast.LENGTH_SHORT).show();
         }
     }
-
+    public void clearDb()
+    {
+        clearTable(PORTFOLIO_TABLE);
+        clearTable(ROOFING_TABLE);
+        clearTable(PLUMBING_TABLE);
+        clearTable(INTERIOR_TABLE);
+        clearTable(INSULATION_TABLE);
+        clearTable(HEATING_TABLE);
+        clearTable(FIREPLACE_TABLE);
+        clearTable(EXTERIROR_TABLE);
+        clearTable(ELECTRICAL_TABLE);
+        clearTable(COOLING_TABLE);
+        clearTable(APPLIANCE_TABLE);
+    }
     public void prePopulateData(String columnName, String Value[], String tableName, String tempID) {
-
 
         String selectQuery = "SELECT  * FROM " + tableName + " WHERE template_id = " + tempID;
         db = dbHelper.getReadableDatabase();
@@ -238,6 +252,37 @@ public class Database {
 
 
 
+
+    }
+
+    public  void updateIds()
+    {
+        ContentValues newValues = new ContentValues();
+        newValues.put("template_id", StructureScreensActivity.template_id);
+        newValues.put("inspection_id", StructureScreensActivity.inspectionID);
+
+        int res = db.update(PLUMBING_TABLE, newValues, "template_id" + "=" + 0,
+                null);
+        int res1 = db.update(PORTFOLIO_TABLE, newValues, "template_id" + "=" + 0,
+                null);
+        int res2 = db.update(INSULATION_TABLE, newValues, "template_id" + "=" + 0,
+                null);;
+        int res3 = db.update(INTERIOR_TABLE, newValues, "template_id" + "=" + 0,
+                null);;
+        int res4 = db.update(ELECTRICAL_TABLE, newValues, "template_id" + "=" + 0,
+                null);
+        int res5 = db.update(EXTERIROR_TABLE, newValues, "template_id" + "=" + 0,
+                null);
+        int res6 = db.update(ROOFING_TABLE, newValues, "template_id" + "=" + 0,
+                null);
+        int res7 = db.update(APPLIANCE_TABLE, newValues, "template_id" + "=" + 0,
+                null);
+        int res8 = db.update(FIREPLACE_TABLE, newValues, "template_id" + "=" + 0,
+                null);
+        int res9 =db.update(HEATING_TABLE, newValues, "template_id" + "=" + 0,
+                null);
+        int res10 = db.update(COOLING_TABLE, newValues, "template_id" + "=" + 0,
+                null);
 
     }
 

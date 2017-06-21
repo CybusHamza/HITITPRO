@@ -40,8 +40,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import cn.pedant.SweetAlert.SweetAlertDialog;
-
 
 public class Detailed_Activity_All_Screens extends AppCompatActivity {
 
@@ -390,30 +388,13 @@ public class Detailed_Activity_All_Screens extends AppCompatActivity {
 
                 if (error instanceof NoConnectionError) {
 
+                    Toast.makeText(Detailed_Activity_All_Screens.this, " Data not Synced due to no internet connection", Toast.LENGTH_SHORT).show();
 
-                    new SweetAlertDialog(Detailed_Activity_All_Screens.this, SweetAlertDialog.ERROR_TYPE)
-                            .setTitleText("Error!")
-                            .setConfirmText("OK").setContentText("No Internet Connection")
-                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                                @Override
-                                public void onClick(SweetAlertDialog sDialog) {
-                                    sDialog.dismiss();
 
-                                }
-                            })
-                            .show();
                 } else if (error instanceof TimeoutError) {
 
-                    new SweetAlertDialog(Detailed_Activity_All_Screens.this, SweetAlertDialog.ERROR_TYPE)
-                            .setTitleText("Error!")
-                            .setConfirmText("OK").setContentText("Connection TimeOut! Please check your internet connection.")
-                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                                @Override
-                                public void onClick(SweetAlertDialog sDialog) {
-                                    sDialog.dismiss();
-                                }
-                            })
-                            .show();
+
+                    Toast.makeText(Detailed_Activity_All_Screens.this, " Data not Synced due to Connection time out please try again", Toast.LENGTH_SHORT).show();
                 }
             }
         }) {

@@ -186,7 +186,7 @@ public class AppliancesScreenFragment extends BaseFragment {
                 intent.putExtra("column","appliancestested");
                 intent.putExtra("dbTable",APPLIANCE_TABLE);
                 intent.putExtra("fromAddapter","false");
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -202,7 +202,7 @@ public class AppliancesScreenFragment extends BaseFragment {
                 intent.putExtra("column","laundryfacility");
                 intent.putExtra("dbTable",APPLIANCE_TABLE);
                 intent.putExtra("fromAddapter","false");
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -218,7 +218,7 @@ public class AppliancesScreenFragment extends BaseFragment {
                 intent.putExtra("column","othercomponentstested");
                 intent.putExtra("dbTable",APPLIANCE_TABLE);
                 intent.putExtra("fromAddapter","false");
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -234,7 +234,7 @@ public class AppliancesScreenFragment extends BaseFragment {
                 intent.putExtra("column","observations");
                 intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",APPLIANCE_TABLE);
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -250,7 +250,7 @@ public class AppliancesScreenFragment extends BaseFragment {
                 intent.putExtra("column","relectricrange");
                 intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",APPLIANCE_TABLE);
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -266,7 +266,7 @@ public class AppliancesScreenFragment extends BaseFragment {
                 intent.putExtra("column","rgasrange");
                 intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",APPLIANCE_TABLE);
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -282,7 +282,7 @@ public class AppliancesScreenFragment extends BaseFragment {
                 intent.putExtra("column","rbuiltinelectricoven");
                 intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",APPLIANCE_TABLE);
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -298,7 +298,7 @@ public class AppliancesScreenFragment extends BaseFragment {
                 intent.putExtra("column","relectriccooktop");
                 intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",APPLIANCE_TABLE);
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -316,7 +316,7 @@ public class AppliancesScreenFragment extends BaseFragment {
                 intent.putExtra("column","rgascooktop");
                 intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",APPLIANCE_TABLE);
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -334,7 +334,7 @@ public class AppliancesScreenFragment extends BaseFragment {
                 intent.putExtra("column","rmicrowaveoven");
                 intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",APPLIANCE_TABLE);
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -350,7 +350,7 @@ public class AppliancesScreenFragment extends BaseFragment {
                 intent.putExtra("column","rdishwasher");
                 intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",APPLIANCE_TABLE);
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -366,7 +366,7 @@ public class AppliancesScreenFragment extends BaseFragment {
                 intent.putExtra("column","rwastedisposer");
                 intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",APPLIANCE_TABLE);
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -382,7 +382,7 @@ public class AppliancesScreenFragment extends BaseFragment {
                 intent.putExtra("column","rrefrigerator");
                 intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",APPLIANCE_TABLE);
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -398,7 +398,7 @@ public class AppliancesScreenFragment extends BaseFragment {
                 intent.putExtra("column","rwinecooler");
                 intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",APPLIANCE_TABLE);
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -414,7 +414,7 @@ public class AppliancesScreenFragment extends BaseFragment {
                 intent.putExtra("column","rtrashcompactor");
                 intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",APPLIANCE_TABLE);
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -430,7 +430,7 @@ public class AppliancesScreenFragment extends BaseFragment {
                 intent.putExtra("column","rclotheswasher");
                 intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",APPLIANCE_TABLE);
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -447,7 +447,7 @@ public class AppliancesScreenFragment extends BaseFragment {
                 intent.putExtra("column","rclothesdryer");
                 intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",APPLIANCE_TABLE);
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -463,7 +463,7 @@ public class AppliancesScreenFragment extends BaseFragment {
                 intent.putExtra("column","rcooktopexhaustfan");
                 intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",APPLIANCE_TABLE);
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -479,7 +479,7 @@ public class AppliancesScreenFragment extends BaseFragment {
                 intent.putExtra("column","rcentralvacuum");
                 intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",APPLIANCE_TABLE);
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -558,7 +558,7 @@ public class AppliancesScreenFragment extends BaseFragment {
             protected Map<String, String> getParams() throws AuthFailureError {
 
 
-                Cursor cursor = database.getTable(APPLIANCE_TABLE,StructureScreensActivity.inspectionID);
+                Cursor cursor = database.getTable(APPLIANCE_TABLE,StructureScreensActivity.template_id);
                 cursor.moveToFirst();
 
                 Map<String, String> params = new HashMap<>();
@@ -650,26 +650,26 @@ public class AppliancesScreenFragment extends BaseFragment {
                             JSONObject object = jsonArray.getJSONObject(0);
 
 
-                            database.insertEntry("appliancestested", object.getString("appliancestested"), APPLIANCE_TABLE, StructureScreensActivity.inspectionID);
-                            database.insertEntry("laundryfacility", object.getString("laundryfacility"), APPLIANCE_TABLE, StructureScreensActivity.inspectionID);
-                            database.insertEntry("othercomponentstested", object.getString("othercomponentstested"), APPLIANCE_TABLE, StructureScreensActivity.inspectionID);
-                            database.insertEntry("observations", object.getString("observations"), APPLIANCE_TABLE, StructureScreensActivity.inspectionID);
-                            database.insertEntry("relectricrange", object.getString("relectricrange"), APPLIANCE_TABLE, StructureScreensActivity.inspectionID);
-                            database.insertEntry("rgasrange", object.getString("rgasrange"), APPLIANCE_TABLE, StructureScreensActivity.inspectionID);
-                            database.insertEntry("rbuiltinelectricoven", object.getString("rbuiltinelectricoven"), APPLIANCE_TABLE, StructureScreensActivity.inspectionID);
-                            database.insertEntry("relectriccooktop", object.getString("relectriccooktop"), APPLIANCE_TABLE, StructureScreensActivity.inspectionID);
-                            database.insertEntry("rgascooktop", object.getString("rgascooktop"), APPLIANCE_TABLE, StructureScreensActivity.inspectionID);
-                            database.insertEntry("rmicrowaveoven", object.getString("rmicrowaveoven"), APPLIANCE_TABLE, StructureScreensActivity.inspectionID);
-                            database.insertEntry("rdishwasher", object.getString("rdishwasher"), APPLIANCE_TABLE, StructureScreensActivity.inspectionID);
-                            database.insertEntry("rwastedisposer", object.getString("rwastedisposer"), APPLIANCE_TABLE, StructureScreensActivity.inspectionID);
-                            database.insertEntry("rrefrigerator", object.getString("rrefrigerator"), APPLIANCE_TABLE, StructureScreensActivity.inspectionID);
-                            database.insertEntry("rwinecooler", object.getString("rwinecooler"), APPLIANCE_TABLE, StructureScreensActivity.inspectionID);
-                            database.insertEntry("rtrashcompactor", object.getString("rtrashcompactor"), APPLIANCE_TABLE, StructureScreensActivity.inspectionID);
-                            database.insertEntry("rclotheswasher", object.getString("rclotheswasher"), APPLIANCE_TABLE, StructureScreensActivity.inspectionID);
-                            database.insertEntry("rclothesdryer", object.getString("rclothesdryer"), APPLIANCE_TABLE, StructureScreensActivity.inspectionID);
-                            database.insertEntry("rcooktopexhaustfan", object.getString("rcooktopexhaustfan"), APPLIANCE_TABLE, StructureScreensActivity.inspectionID);
-                            database.insertEntry("rcentralvacuum", object.getString("rcentralvacuum"), APPLIANCE_TABLE, StructureScreensActivity.inspectionID);
-                            database.insertEntry("rdoorbell", object.getString("rdoorbell"), APPLIANCE_TABLE, StructureScreensActivity.inspectionID);
+                            database.insertEntry("appliancestested", object.getString("appliancestested"), APPLIANCE_TABLE, StructureScreensActivity.template_id);
+                            database.insertEntry("laundryfacility", object.getString("laundryfacility"), APPLIANCE_TABLE, StructureScreensActivity.template_id);
+                            database.insertEntry("othercomponentstested", object.getString("othercomponentstested"), APPLIANCE_TABLE, StructureScreensActivity.template_id);
+                            database.insertEntry("observations", object.getString("observations"), APPLIANCE_TABLE, StructureScreensActivity.template_id);
+                            database.insertEntry("relectricrange", object.getString("relectricrange"), APPLIANCE_TABLE, StructureScreensActivity.template_id);
+                            database.insertEntry("rgasrange", object.getString("rgasrange"), APPLIANCE_TABLE, StructureScreensActivity.template_id);
+                            database.insertEntry("rbuiltinelectricoven", object.getString("rbuiltinelectricoven"), APPLIANCE_TABLE, StructureScreensActivity.template_id);
+                            database.insertEntry("relectriccooktop", object.getString("relectriccooktop"), APPLIANCE_TABLE, StructureScreensActivity.template_id);
+                            database.insertEntry("rgascooktop", object.getString("rgascooktop"), APPLIANCE_TABLE, StructureScreensActivity.template_id);
+                            database.insertEntry("rmicrowaveoven", object.getString("rmicrowaveoven"), APPLIANCE_TABLE, StructureScreensActivity.template_id);
+                            database.insertEntry("rdishwasher", object.getString("rdishwasher"), APPLIANCE_TABLE, StructureScreensActivity.template_id);
+                            database.insertEntry("rwastedisposer", object.getString("rwastedisposer"), APPLIANCE_TABLE, StructureScreensActivity.template_id);
+                            database.insertEntry("rrefrigerator", object.getString("rrefrigerator"), APPLIANCE_TABLE, StructureScreensActivity.template_id);
+                            database.insertEntry("rwinecooler", object.getString("rwinecooler"), APPLIANCE_TABLE, StructureScreensActivity.template_id);
+                            database.insertEntry("rtrashcompactor", object.getString("rtrashcompactor"), APPLIANCE_TABLE, StructureScreensActivity.template_id);
+                            database.insertEntry("rclotheswasher", object.getString("rclotheswasher"), APPLIANCE_TABLE, StructureScreensActivity.template_id);
+                            database.insertEntry("rclothesdryer", object.getString("rclothesdryer"), APPLIANCE_TABLE, StructureScreensActivity.template_id);
+                            database.insertEntry("rcooktopexhaustfan", object.getString("rcooktopexhaustfan"), APPLIANCE_TABLE, StructureScreensActivity.template_id);
+                            database.insertEntry("rcentralvacuum", object.getString("rcentralvacuum"), APPLIANCE_TABLE, StructureScreensActivity.template_id);
+                            database.insertEntry("rdoorbell", object.getString("rdoorbell"), APPLIANCE_TABLE, StructureScreensActivity.template_id);
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -784,7 +784,6 @@ public class AppliancesScreenFragment extends BaseFragment {
 
 
     }
-
     public void saveNoTemp(final String txt, final boolean check) {
 
         ringProgressDialog = ProgressDialog.show(getActivity(), "Please wait ...", "Saving Template ...", true);
@@ -798,10 +797,27 @@ public class AppliancesScreenFragment extends BaseFragment {
 
                         ringProgressDialog.dismiss();
                         StructureScreensActivity.is_saved=true;
+
+                        String resp[];
+
+                        resp = response.split("%");
+
+
+                        StructureScreensActivity.inspectionID = resp[1];
+                        StructureScreensActivity.template_id = resp[0];
+
+
+
+                        database.updateIds();
+
+
+
+
+
                         sp=getActivity().getSharedPreferences("prefs", MODE_PRIVATE);
                         edit=sp.edit();
                         edit.putBoolean("StructureScreenFragment",true);
-                        edit.commit();
+                        edit.apply();
                         Toast.makeText(getContext(),"Saved Successfully",Toast.LENGTH_LONG).show();
                     }
                 }, new Response.ErrorListener() {
@@ -863,5 +879,6 @@ public class AppliancesScreenFragment extends BaseFragment {
         requestQueue.add(request);
 
     }
+
 
 }

@@ -175,7 +175,7 @@ public class RoofingScreenFragment extends BaseFragment {
                 intent.putExtra("column","roofcovering");
                 intent.putExtra("dbTable",ROOFING_TABLE);
                 intent.putExtra("fromAddapter","false");
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -192,7 +192,7 @@ public class RoofingScreenFragment extends BaseFragment {
                 intent.putExtra("column","roofflashing");
                 intent.putExtra("dbTable",ROOFING_TABLE);
                 intent.putExtra("fromAddapter","false");
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -209,7 +209,7 @@ public class RoofingScreenFragment extends BaseFragment {
                 intent.putExtra("column","chimneys");
                 intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",ROOFING_TABLE);
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -225,7 +225,7 @@ public class RoofingScreenFragment extends BaseFragment {
                 intent.putExtra("column","roofdrainage");
                 intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",ROOFING_TABLE);
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -243,7 +243,7 @@ public class RoofingScreenFragment extends BaseFragment {
                 intent.putExtra("column","skylights");
                 intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",ROOFING_TABLE);
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
 
             }
@@ -261,7 +261,7 @@ public class RoofingScreenFragment extends BaseFragment {
                 intent.putExtra("column","methodofinspection");
                 intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",ROOFING_TABLE);
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -279,7 +279,7 @@ public class RoofingScreenFragment extends BaseFragment {
                 intent.putExtra("column","observations");
                 intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",ROOFING_TABLE);
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -296,7 +296,7 @@ public class RoofingScreenFragment extends BaseFragment {
                 intent.putExtra("column","recommendslopedroofing");
                 intent.putExtra("dbTable",ROOFING_TABLE);
                 intent.putExtra("fromAddapter","false");
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -313,7 +313,7 @@ public class RoofingScreenFragment extends BaseFragment {
                 intent.putExtra("column","flatroofing");
                 intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",ROOFING_TABLE);
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -331,7 +331,7 @@ public class RoofingScreenFragment extends BaseFragment {
                 intent.putExtra("column","flashing");
                 intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",ROOFING_TABLE);
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -348,7 +348,7 @@ public class RoofingScreenFragment extends BaseFragment {
                 intent.putExtra("column","recommendchimneys");
                 intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",ROOFING_TABLE);
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -367,7 +367,7 @@ public class RoofingScreenFragment extends BaseFragment {
                 intent.putExtra("column","guttersdownspouts");
                 intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",ROOFING_TABLE);
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -433,14 +433,14 @@ public class RoofingScreenFragment extends BaseFragment {
             protected Map<String, String> getParams() throws AuthFailureError {
 
 
-                Cursor cursor = database.getTable(ROOFING_TABLE,StructureScreensActivity.inspectionID);
+                Cursor cursor = database.getTable(ROOFING_TABLE,StructureScreensActivity.template_id);
                 cursor.moveToFirst();
 
 
 
                 Map<String, String> params = new HashMap<>();
                 params.put("template_id", StructureScreensActivity.template_id);
-                params.put("inspection_id", StructureScreensActivity.inspectionID);
+                params.put("inspection_id", StructureScreensActivity.template_id);
                 params.put("client_id", StructureScreensActivity.client_id);
                 params.put("is_applicable", "1");
                 if(cursor != null) {
@@ -516,18 +516,18 @@ public class RoofingScreenFragment extends BaseFragment {
 
                             JSONObject object = jsonArray.getJSONObject(0);
 
-                            database.insertEntry("roofcovering",object.getString("roofcovering"),ROOFING_TABLE,StructureScreensActivity.inspectionID);
-                            database.insertEntry("roofflashing",object.getString("roofflashing"),ROOFING_TABLE,StructureScreensActivity.inspectionID);
-                            database.insertEntry("chimneys",object.getString("chimneys"),ROOFING_TABLE,StructureScreensActivity.inspectionID);
-                            database.insertEntry("roofdrainage",object.getString("roofdrainage"),ROOFING_TABLE,StructureScreensActivity.inspectionID);
-                            database.insertEntry("skylights",object.getString("skylights"),ROOFING_TABLE,StructureScreensActivity.inspectionID);
-                            database.insertEntry("methodofinspection",object.getString("methodofinspection"),ROOFING_TABLE,StructureScreensActivity.inspectionID);
-                            database.insertEntry("observations",object.getString("observations"),ROOFING_TABLE,StructureScreensActivity.inspectionID);
-                            database.insertEntry("recommendslopedroofing",object.getString("recommendslopedroofing"),ROOFING_TABLE,StructureScreensActivity.inspectionID);
-                            database.insertEntry("flatroofing",object.getString("flatroofing"),ROOFING_TABLE,StructureScreensActivity.inspectionID);
-                            database.insertEntry("flashing",object.getString("flashing"),ROOFING_TABLE,StructureScreensActivity.inspectionID);
-                            database.insertEntry("recommendchimneys",object.getString("recommendchimneys"),ROOFING_TABLE,StructureScreensActivity.inspectionID);
-                            database.insertEntry("guttersdownspouts",object.getString("guttersdownspouts"),ROOFING_TABLE,StructureScreensActivity.inspectionID);
+                            database.insertEntry("roofcovering",object.getString("roofcovering"),ROOFING_TABLE,StructureScreensActivity.template_id);
+                            database.insertEntry("roofflashing",object.getString("roofflashing"),ROOFING_TABLE,StructureScreensActivity.template_id);
+                            database.insertEntry("chimneys",object.getString("chimneys"),ROOFING_TABLE,StructureScreensActivity.template_id);
+                            database.insertEntry("roofdrainage",object.getString("roofdrainage"),ROOFING_TABLE,StructureScreensActivity.template_id);
+                            database.insertEntry("skylights",object.getString("skylights"),ROOFING_TABLE,StructureScreensActivity.template_id);
+                            database.insertEntry("methodofinspection",object.getString("methodofinspection"),ROOFING_TABLE,StructureScreensActivity.template_id);
+                            database.insertEntry("observations",object.getString("observations"),ROOFING_TABLE,StructureScreensActivity.template_id);
+                            database.insertEntry("recommendslopedroofing",object.getString("recommendslopedroofing"),ROOFING_TABLE,StructureScreensActivity.template_id);
+                            database.insertEntry("flatroofing",object.getString("flatroofing"),ROOFING_TABLE,StructureScreensActivity.template_id);
+                            database.insertEntry("flashing",object.getString("flashing"),ROOFING_TABLE,StructureScreensActivity.template_id);
+                            database.insertEntry("recommendchimneys",object.getString("recommendchimneys"),ROOFING_TABLE,StructureScreensActivity.template_id);
+                            database.insertEntry("guttersdownspouts",object.getString("guttersdownspouts"),ROOFING_TABLE,StructureScreensActivity.template_id);
 
 
                         } catch (JSONException e) {
@@ -658,10 +658,27 @@ public class RoofingScreenFragment extends BaseFragment {
 
                         ringProgressDialog.dismiss();
                         StructureScreensActivity.is_saved=true;
+
+                        String resp[];
+
+                        resp = response.split("%");
+
+
+                        StructureScreensActivity.inspectionID = resp[1];
+                        StructureScreensActivity.template_id = resp[0];
+
+
+
+                        database.updateIds();
+
+
+
+
+
                         sp=getActivity().getSharedPreferences("prefs", MODE_PRIVATE);
                         edit=sp.edit();
                         edit.putBoolean("StructureScreenFragment",true);
-                        edit.commit();
+                        edit.apply();
                         Toast.makeText(getContext(),"Saved Successfully",Toast.LENGTH_LONG).show();
                     }
                 }, new Response.ErrorListener() {
@@ -723,5 +740,6 @@ public class RoofingScreenFragment extends BaseFragment {
         requestQueue.add(request);
 
     }
+
 
 }

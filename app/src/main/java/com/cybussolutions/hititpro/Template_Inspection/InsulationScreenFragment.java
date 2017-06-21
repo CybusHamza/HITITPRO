@@ -173,7 +173,7 @@ public class InsulationScreenFragment extends BaseFragment {
                 intent.putExtra("column","atticinsulation");
                 intent.putExtra("dbTable",INSULATION_TABLE);
                 intent.putExtra("fromAddapter","false");
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -190,7 +190,7 @@ public class InsulationScreenFragment extends BaseFragment {
                 intent.putExtra("column","exteriorwallinsulation");
                 intent.putExtra("dbTable",INSULATION_TABLE);
                 intent.putExtra("fromAddapter","false");
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -207,7 +207,7 @@ public class InsulationScreenFragment extends BaseFragment {
                 intent.putExtra("column","basementwallinsulation");
                 intent.putExtra("dbTable",INSULATION_TABLE);
                 intent.putExtra("fromAddapter","false");
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -224,7 +224,7 @@ public class InsulationScreenFragment extends BaseFragment {
                 intent.putExtra("column","crawlspaceinsulation");
                 intent.putExtra("dbTable",INSULATION_TABLE);
                 intent.putExtra("fromAddapter","false");
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -241,7 +241,7 @@ public class InsulationScreenFragment extends BaseFragment {
                 intent.putExtra("column","vaporretarders");
                 intent.putExtra("dbTable",INSULATION_TABLE);
                 intent.putExtra("fromAddapter","false");
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -258,7 +258,7 @@ public class InsulationScreenFragment extends BaseFragment {
                 intent.putExtra("column","roofventilation");
                 intent.putExtra("dbTable",INSULATION_TABLE);
                 intent.putExtra("fromAddapter","false");
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -275,7 +275,7 @@ public class InsulationScreenFragment extends BaseFragment {
                 intent.putExtra("column","csv");
                 intent.putExtra("dbTable",INSULATION_TABLE);
                 intent.putExtra("fromAddapter","false");
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -292,7 +292,7 @@ public class InsulationScreenFragment extends BaseFragment {
                 intent.putExtra("column","efv");
                 intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",INSULATION_TABLE);
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -309,7 +309,7 @@ public class InsulationScreenFragment extends BaseFragment {
                 intent.putExtra("column","observations");
                 intent.putExtra("dbTable",INSULATION_TABLE);
                 intent.putExtra("fromAddapter","false");
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -326,7 +326,7 @@ public class InsulationScreenFragment extends BaseFragment {
                 intent.putExtra("column","atticandroof");
                 intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",INSULATION_TABLE);
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -343,7 +343,7 @@ public class InsulationScreenFragment extends BaseFragment {
                 intent.putExtra("column","basement");
                 intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",INSULATION_TABLE);
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -360,7 +360,7 @@ public class InsulationScreenFragment extends BaseFragment {
                 intent.putExtra("column","crawlspace");
                 intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",INSULATION_TABLE);
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -389,18 +389,18 @@ public class InsulationScreenFragment extends BaseFragment {
 
                             JSONObject object = jsonArray.getJSONObject(0);
 
-                            database.insertEntry("atticinsulation", object.getString("atticinsulation"), INSULATION_TABLE, StructureScreensActivity.inspectionID);
-                            database.insertEntry("exteriorwallinsulation", object.getString("exteriorwallinsulation"), INSULATION_TABLE, StructureScreensActivity.inspectionID);
-                            database.insertEntry("basementwallinsulation", object.getString("basementwallinsulation"), INSULATION_TABLE, StructureScreensActivity.inspectionID);
-                            database.insertEntry("csv", object.getString("csv"), INSULATION_TABLE, StructureScreensActivity.inspectionID);
-                            database.insertEntry("efv", object.getString("efv"), INSULATION_TABLE, StructureScreensActivity.inspectionID);
-                            database.insertEntry("crawlspaceinsulation", object.getString("crawlspaceinsulation"), INSULATION_TABLE, StructureScreensActivity.inspectionID);
-                            database.insertEntry("vaporretarders", object.getString("vaporretarders"), INSULATION_TABLE, StructureScreensActivity.inspectionID);
-                            database.insertEntry("roofventilation", object.getString("roofventilation"), INSULATION_TABLE, StructureScreensActivity.inspectionID);
-                            database.insertEntry("observations", object.getString("observations"), INSULATION_TABLE, StructureScreensActivity.inspectionID);
-                            database.insertEntry("atticandroof", object.getString("atticandroof"), INSULATION_TABLE, StructureScreensActivity.inspectionID);
-                            database.insertEntry("basement", object.getString("basement"), INSULATION_TABLE, StructureScreensActivity.inspectionID);
-                            database.insertEntry("crawlspace", object.getString("crawlspace"), INSULATION_TABLE, StructureScreensActivity.inspectionID);
+                            database.insertEntry("atticinsulation", object.getString("atticinsulation"), INSULATION_TABLE, StructureScreensActivity.template_id);
+                            database.insertEntry("exteriorwallinsulation", object.getString("exteriorwallinsulation"), INSULATION_TABLE, StructureScreensActivity.template_id);
+                            database.insertEntry("basementwallinsulation", object.getString("basementwallinsulation"), INSULATION_TABLE, StructureScreensActivity.template_id);
+                            database.insertEntry("csv", object.getString("csv"), INSULATION_TABLE, StructureScreensActivity.template_id);
+                            database.insertEntry("efv", object.getString("efv"), INSULATION_TABLE, StructureScreensActivity.template_id);
+                            database.insertEntry("crawlspaceinsulation", object.getString("crawlspaceinsulation"), INSULATION_TABLE, StructureScreensActivity.template_id);
+                            database.insertEntry("vaporretarders", object.getString("vaporretarders"), INSULATION_TABLE, StructureScreensActivity.template_id);
+                            database.insertEntry("roofventilation", object.getString("roofventilation"), INSULATION_TABLE, StructureScreensActivity.template_id);
+                            database.insertEntry("observations", object.getString("observations"), INSULATION_TABLE, StructureScreensActivity.template_id);
+                            database.insertEntry("atticandroof", object.getString("atticandroof"), INSULATION_TABLE, StructureScreensActivity.template_id);
+                            database.insertEntry("basement", object.getString("basement"), INSULATION_TABLE, StructureScreensActivity.template_id);
+                            database.insertEntry("crawlspace", object.getString("crawlspace"), INSULATION_TABLE, StructureScreensActivity.template_id);
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -520,7 +520,7 @@ public class InsulationScreenFragment extends BaseFragment {
             protected Map<String, String> getParams() throws AuthFailureError {
 
 
-                Cursor cursor = database.getTable(INSULATION_TABLE,StructureScreensActivity.inspectionID);
+                Cursor cursor = database.getTable(INSULATION_TABLE,StructureScreensActivity.template_id);
                 cursor.moveToFirst();
 
                 Map<String, String> params = new HashMap<>();
@@ -642,10 +642,27 @@ public class InsulationScreenFragment extends BaseFragment {
 
                         ringProgressDialog.dismiss();
                         StructureScreensActivity.is_saved=true;
+
+                        String resp[];
+
+                        resp = response.split("%");
+
+
+                        StructureScreensActivity.inspectionID = resp[1];
+                        StructureScreensActivity.template_id = resp[0];
+
+
+
+                        database.updateIds();
+
+
+
+
+
                         sp=getActivity().getSharedPreferences("prefs", MODE_PRIVATE);
                         edit=sp.edit();
                         edit.putBoolean("StructureScreenFragment",true);
-                        edit.commit();
+                        edit.apply();
                         Toast.makeText(getContext(),"Saved Successfully",Toast.LENGTH_LONG).show();
                     }
                 }, new Response.ErrorListener() {
@@ -707,6 +724,7 @@ public class InsulationScreenFragment extends BaseFragment {
         requestQueue.add(request);
 
     }
+
 
 
 }

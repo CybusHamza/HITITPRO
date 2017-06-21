@@ -180,7 +180,7 @@ public class PlumbingScreenFragment extends BaseFragment {
                 intent.putExtra("column","watersupplysource");
                 intent.putExtra("dbTable",PLUMBING_TABLE);
                 intent.putExtra("fromAddapter","false");
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -197,7 +197,7 @@ public class PlumbingScreenFragment extends BaseFragment {
                 intent.putExtra("column","servicepipe");
                 intent.putExtra("dbTable",PLUMBING_TABLE);
                 intent.putExtra("fromAddapter","false");
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -215,7 +215,7 @@ public class PlumbingScreenFragment extends BaseFragment {
                 intent.putExtra("column","mainwatervalvelocation");
                 intent.putExtra("dbTable",PLUMBING_TABLE);
                 intent.putExtra("fromAddapter","false");
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -232,7 +232,7 @@ public class PlumbingScreenFragment extends BaseFragment {
                 intent.putExtra("column","interiorsupply");
                 intent.putExtra("dbTable",PLUMBING_TABLE);
                 intent.putExtra("fromAddapter","false");
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -249,7 +249,7 @@ public class PlumbingScreenFragment extends BaseFragment {
                 intent.putExtra("column","wastesystem");
                 intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",PLUMBING_TABLE);
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -266,7 +266,7 @@ public class PlumbingScreenFragment extends BaseFragment {
                 intent.putExtra("column","strudwvpiping");
                 intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",PLUMBING_TABLE);
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -284,7 +284,7 @@ public class PlumbingScreenFragment extends BaseFragment {
                 intent.putExtra("column","waterheater");
                 intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",PLUMBING_TABLE);
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -303,7 +303,7 @@ public class PlumbingScreenFragment extends BaseFragment {
                 intent.putExtra("column","fuelshortage_distribution");
                 intent.putExtra("dbTable",PLUMBING_TABLE);
                 intent.putExtra("fromAddapter","false");
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -321,7 +321,7 @@ public class PlumbingScreenFragment extends BaseFragment {
                 intent.putExtra("column","fuelshutoffvalves");
                 intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",PLUMBING_TABLE);
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -338,7 +338,7 @@ public class PlumbingScreenFragment extends BaseFragment {
                 intent.putExtra("column","othercomponents");
                 intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",PLUMBING_TABLE);
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -355,7 +355,7 @@ public class PlumbingScreenFragment extends BaseFragment {
                 intent.putExtra("column","observation");
                 intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",PLUMBING_TABLE);
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -371,7 +371,7 @@ public class PlumbingScreenFragment extends BaseFragment {
                 intent.putExtra("column","rwaterheater");
                 intent.putExtra("dbTable",PLUMBING_TABLE);
                 intent.putExtra("fromAddapter","false");
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -388,7 +388,7 @@ public class PlumbingScreenFragment extends BaseFragment {
                 intent.putExtra("column","gaspiping");
                 intent.putExtra("dbTable",PLUMBING_TABLE);
                 intent.putExtra("fromAddapter","false");
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -404,7 +404,7 @@ public class PlumbingScreenFragment extends BaseFragment {
                 intent.putExtra("column","rsupplypiping");
                 intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",PLUMBING_TABLE);
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -421,7 +421,7 @@ public class PlumbingScreenFragment extends BaseFragment {
                 intent.putExtra("column","dwvpiping");
                 intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",PLUMBING_TABLE);
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -455,7 +455,7 @@ public class PlumbingScreenFragment extends BaseFragment {
                 intent.putExtra("column","sumppump");
                 intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",PLUMBING_TABLE);
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -472,7 +472,7 @@ public class PlumbingScreenFragment extends BaseFragment {
                 intent.putExtra("column","wasteejectorpump");
                 intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",PLUMBING_TABLE);
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -503,24 +503,24 @@ public class PlumbingScreenFragment extends BaseFragment {
 
                             JSONObject object = jsonArray.getJSONObject(0);
 
-                            database.insertEntry("watersupplysource", object.getString("watersupplysource"), PLUMBING_TABLE, StructureScreensActivity.inspectionID);
-                            database.insertEntry("servicepipe", object.getString("servicepipe"), PLUMBING_TABLE, StructureScreensActivity.inspectionID);
-                            database.insertEntry("mainwatervalvelocation", object.getString("mainwatervalvelocation"), PLUMBING_TABLE, StructureScreensActivity.inspectionID);
-                            database.insertEntry("interiorsupply", object.getString("interiorsupply"), PLUMBING_TABLE, StructureScreensActivity.inspectionID);
-                            database.insertEntry("wastesystem", object.getString("wastesystem"), PLUMBING_TABLE, StructureScreensActivity.inspectionID);
-                            database.insertEntry("strudwvpiping", object.getString("strudwvpiping"), PLUMBING_TABLE, StructureScreensActivity.inspectionID);
-                            database.insertEntry("waterheater", object.getString("waterheater"), PLUMBING_TABLE, StructureScreensActivity.inspectionID);
-                            database.insertEntry("fuelshortage_distribution", object.getString("fuelshortage_distribution"), PLUMBING_TABLE, StructureScreensActivity.inspectionID);
-                            database.insertEntry("fuelshutoffvalves", object.getString("fuelshutoffvalves"), PLUMBING_TABLE, StructureScreensActivity.inspectionID);
-                            database.insertEntry("othercomponents", object.getString("othercomponents"), PLUMBING_TABLE, StructureScreensActivity.inspectionID);
-                            database.insertEntry("observation", object.getString("observation"), PLUMBING_TABLE, StructureScreensActivity.inspectionID);
-                            database.insertEntry("rwaterheater", object.getString("rwaterheater"), PLUMBING_TABLE, StructureScreensActivity.inspectionID);
-                            database.insertEntry("gaspiping", object.getString("gaspiping"), PLUMBING_TABLE, StructureScreensActivity.inspectionID);
-                            database.insertEntry("rsupplypiping", object.getString("rsupplypiping"), PLUMBING_TABLE, StructureScreensActivity.inspectionID);
-                            database.insertEntry("dwvpiping", object.getString("dwvpiping"), PLUMBING_TABLE, StructureScreensActivity.inspectionID);
-                            database.insertEntry("fixtures", object.getString("fixtures"), PLUMBING_TABLE, StructureScreensActivity.inspectionID);
-                            database.insertEntry("wasteejectorpump", object.getString("wasteejectorpump"), PLUMBING_TABLE, StructureScreensActivity.inspectionID);
-                            database.insertEntry("sumppump", object.getString("sumppump"), PLUMBING_TABLE, StructureScreensActivity.inspectionID);
+                            database.insertEntry("watersupplysource", object.getString("watersupplysource"), PLUMBING_TABLE, StructureScreensActivity.template_id);
+                            database.insertEntry("servicepipe", object.getString("servicepipe"), PLUMBING_TABLE, StructureScreensActivity.template_id);
+                            database.insertEntry("mainwatervalvelocation", object.getString("mainwatervalvelocation"), PLUMBING_TABLE, StructureScreensActivity.template_id);
+                            database.insertEntry("interiorsupply", object.getString("interiorsupply"), PLUMBING_TABLE, StructureScreensActivity.template_id);
+                            database.insertEntry("wastesystem", object.getString("wastesystem"), PLUMBING_TABLE, StructureScreensActivity.template_id);
+                            database.insertEntry("strudwvpiping", object.getString("strudwvpiping"), PLUMBING_TABLE, StructureScreensActivity.template_id);
+                            database.insertEntry("waterheater", object.getString("waterheater"), PLUMBING_TABLE, StructureScreensActivity.template_id);
+                            database.insertEntry("fuelshortage_distribution", object.getString("fuelshortage_distribution"), PLUMBING_TABLE, StructureScreensActivity.template_id);
+                            database.insertEntry("fuelshutoffvalves", object.getString("fuelshutoffvalves"), PLUMBING_TABLE, StructureScreensActivity.template_id);
+                            database.insertEntry("othercomponents", object.getString("othercomponents"), PLUMBING_TABLE, StructureScreensActivity.template_id);
+                            database.insertEntry("observation", object.getString("observation"), PLUMBING_TABLE, StructureScreensActivity.template_id);
+                            database.insertEntry("rwaterheater", object.getString("rwaterheater"), PLUMBING_TABLE, StructureScreensActivity.template_id);
+                            database.insertEntry("gaspiping", object.getString("gaspiping"), PLUMBING_TABLE, StructureScreensActivity.template_id);
+                            database.insertEntry("rsupplypiping", object.getString("rsupplypiping"), PLUMBING_TABLE, StructureScreensActivity.template_id);
+                            database.insertEntry("dwvpiping", object.getString("dwvpiping"), PLUMBING_TABLE, StructureScreensActivity.template_id);
+                            database.insertEntry("fixtures", object.getString("fixtures"), PLUMBING_TABLE, StructureScreensActivity.template_id);
+                            database.insertEntry("wasteejectorpump", object.getString("wasteejectorpump"), PLUMBING_TABLE, StructureScreensActivity.template_id);
+                            database.insertEntry("sumppump", object.getString("sumppump"), PLUMBING_TABLE, StructureScreensActivity.template_id);
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -639,7 +639,7 @@ public class PlumbingScreenFragment extends BaseFragment {
             protected Map<String, String> getParams() throws AuthFailureError {
 
 
-                Cursor cursor = database.getTable(PLUMBING_TABLE,StructureScreensActivity.inspectionID);
+                Cursor cursor = database.getTable(PLUMBING_TABLE,StructureScreensActivity.template_id);
                 cursor.moveToFirst();
 
                 Map<String, String> params = new HashMap<>();
@@ -768,10 +768,27 @@ public class PlumbingScreenFragment extends BaseFragment {
 
                         ringProgressDialog.dismiss();
                         StructureScreensActivity.is_saved=true;
+
+                        String resp[];
+
+                        resp = response.split("%");
+
+
+                        StructureScreensActivity.inspectionID = resp[1];
+                        StructureScreensActivity.template_id = resp[0];
+
+
+
+                        database.updateIds();
+
+
+
+
+
                         sp=getActivity().getSharedPreferences("prefs", MODE_PRIVATE);
                         edit=sp.edit();
                         edit.putBoolean("StructureScreenFragment",true);
-                        edit.commit();
+                        edit.apply();
                         Toast.makeText(getContext(),"Saved Successfully",Toast.LENGTH_LONG).show();
                     }
                 }, new Response.ErrorListener() {
@@ -833,6 +850,7 @@ public class PlumbingScreenFragment extends BaseFragment {
         requestQueue.add(request);
 
     }
+
 
 
 }

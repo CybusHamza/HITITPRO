@@ -185,7 +185,7 @@ public class ExteriorScreenFragment extends BaseFragment {
                 intent.putExtra("column","wallcovering");
                 intent.putExtra("dbTable",EXTERIROR_TABLE);
                 intent.putExtra("fromAddapter","false");
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -201,7 +201,7 @@ public class ExteriorScreenFragment extends BaseFragment {
                 intent.putExtra("column","eaves_soffits_fascia");
                 intent.putExtra("dbTable",EXTERIROR_TABLE);
                 intent.putExtra("fromAddapter","false");
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -217,7 +217,7 @@ public class ExteriorScreenFragment extends BaseFragment {
                 intent.putExtra("column","exteriordoors");
                 intent.putExtra("dbTable",EXTERIROR_TABLE);
                 intent.putExtra("fromAddapter","false");
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -233,7 +233,7 @@ public class ExteriorScreenFragment extends BaseFragment {
                 intent.putExtra("column","windows_doorframes_trim");
                 intent.putExtra("dbTable",EXTERIROR_TABLE);
                 intent.putExtra("fromAddapter","false");
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -249,7 +249,7 @@ public class ExteriorScreenFragment extends BaseFragment {
                 intent.putExtra("column","entry_driveways");
                 intent.putExtra("dbTable",EXTERIROR_TABLE);
                 intent.putExtra("fromAddapter","false");
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -265,7 +265,7 @@ public class ExteriorScreenFragment extends BaseFragment {
                 intent.putExtra("column","entrywalk_patios");
                 intent.putExtra("dbTable",EXTERIROR_TABLE);
                 intent.putExtra("fromAddapter","false");
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -281,7 +281,7 @@ public class ExteriorScreenFragment extends BaseFragment {
                 intent.putExtra("column","porch_decks_steps_railings");
                 intent.putExtra("dbTable",EXTERIROR_TABLE);
                 intent.putExtra("fromAddapter","false");
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -297,7 +297,7 @@ public class ExteriorScreenFragment extends BaseFragment {
                 intent.putExtra("column","overheadgaragedoors");
                 intent.putExtra("dbTable",EXTERIROR_TABLE);
                 intent.putExtra("fromAddapter","false");
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -313,7 +313,7 @@ public class ExteriorScreenFragment extends BaseFragment {
                 intent.putExtra("column","surfacedrainage");
                 intent.putExtra("dbTable",EXTERIROR_TABLE);
                 intent.putExtra("fromAddapter","false");
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -329,7 +329,7 @@ public class ExteriorScreenFragment extends BaseFragment {
                 intent.putExtra("column","retainingwalls");
                 intent.putExtra("dbTable",EXTERIROR_TABLE);
                 intent.putExtra("fromAddapter","false");
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -345,7 +345,7 @@ public class ExteriorScreenFragment extends BaseFragment {
                 intent.putExtra("column","fencing");
                 intent.putExtra("dbTable",EXTERIROR_TABLE);
                 intent.putExtra("fromAddapter","false");
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -361,7 +361,7 @@ public class ExteriorScreenFragment extends BaseFragment {
                 intent.putExtra("column","observations");
                 intent.putExtra("dbTable",EXTERIROR_TABLE);
                 intent.putExtra("fromAddapter","false");
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -378,7 +378,7 @@ public class ExteriorScreenFragment extends BaseFragment {
                 intent.putExtra("column","rexteriorwalls");
                 intent.putExtra("dbTable",EXTERIROR_TABLE);
                 intent.putExtra("fromAddapter","false");
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -394,7 +394,7 @@ public class ExteriorScreenFragment extends BaseFragment {
                 intent.putExtra("column","reaves");
                 intent.putExtra("dbTable",EXTERIROR_TABLE);
                 intent.putExtra("fromAddapter","false");
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -410,7 +410,7 @@ public class ExteriorScreenFragment extends BaseFragment {
                 intent.putExtra("column","rexteriordoors_windows");
                 intent.putExtra("dbTable",EXTERIROR_TABLE);
                 intent.putExtra("fromAddapter","false");
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -426,7 +426,7 @@ public class ExteriorScreenFragment extends BaseFragment {
                 intent.putExtra("column","rgrage");
                 intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",EXTERIROR_TABLE);
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -442,7 +442,7 @@ public class ExteriorScreenFragment extends BaseFragment {
                 intent.putExtra("column","rporches");
                 intent.putExtra("dbTable",EXTERIROR_TABLE);
                 intent.putExtra("fromAddapter","false");
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -458,7 +458,7 @@ public class ExteriorScreenFragment extends BaseFragment {
                 intent.putExtra("column","rdriveway");
                 intent.putExtra("dbTable",EXTERIROR_TABLE);
                 intent.putExtra("fromAddapter","false");
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -474,7 +474,7 @@ public class ExteriorScreenFragment extends BaseFragment {
                 intent.putExtra("column","rexteriorsteps_walkways");
                 intent.putExtra("dbTable",EXTERIROR_TABLE);
                 intent.putExtra("fromAddapter","false");
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -490,7 +490,7 @@ public class ExteriorScreenFragment extends BaseFragment {
                 intent.putExtra("column","rdeck");
                 intent.putExtra("dbTable",EXTERIROR_TABLE);
                 intent.putExtra("fromAddapter","false");
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -506,7 +506,7 @@ public class ExteriorScreenFragment extends BaseFragment {
                 intent.putExtra("column","rlotdrainage");
                 intent.putExtra("dbTable",EXTERIROR_TABLE);
                 intent.putExtra("fromAddapter","false");
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -522,7 +522,7 @@ public class ExteriorScreenFragment extends BaseFragment {
                 intent.putExtra("column","rlandscaping");
                 intent.putExtra("dbTable",EXTERIROR_TABLE);
                 intent.putExtra("fromAddapter","false");
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -619,7 +619,7 @@ public class ExteriorScreenFragment extends BaseFragment {
             protected Map<String, String> getParams() throws AuthFailureError {
 
 
-                Cursor cursor = database.getTable(EXTERIROR_TABLE,StructureScreensActivity.inspectionID);
+                Cursor cursor = database.getTable(EXTERIROR_TABLE,StructureScreensActivity.template_id);
                 cursor.moveToFirst();
 
 
@@ -717,30 +717,30 @@ public class ExteriorScreenFragment extends BaseFragment {
 
                             JSONObject object = jsonArray.getJSONObject(0);
 
-                            database.insertEntry("wallcovering",object.getString("wallcovering"),EXTERIROR_TABLE,StructureScreensActivity.inspectionID);
-                            database.insertEntry("eaves_soffits_fascia",object.getString("eaves_soffits_fascia"),EXTERIROR_TABLE,StructureScreensActivity.inspectionID);
-                            database.insertEntry("exteriordoors",object.getString("exteriordoors"),EXTERIROR_TABLE,StructureScreensActivity.inspectionID);
-                            database.insertEntry("windows_doorframes_trim",object.getString("windows_doorframes_trim"),EXTERIROR_TABLE,StructureScreensActivity.inspectionID);
-                            database.insertEntry("entry_driveways",object.getString("entry_driveways"),EXTERIROR_TABLE,StructureScreensActivity.inspectionID);
-                            database.insertEntry("entrywalk_patios",object.getString("entrywalk_patios"),EXTERIROR_TABLE,StructureScreensActivity.inspectionID);
-                            database.insertEntry("porch_decks_steps_railings",object.getString("porch_decks_steps_railings"),EXTERIROR_TABLE,StructureScreensActivity.inspectionID);
-                            database.insertEntry("overheadgaragedoors",object.getString("overheadgaragedoors"),EXTERIROR_TABLE,StructureScreensActivity.inspectionID);
-                            database.insertEntry("surfacedrainage",object.getString("surfacedrainage"),EXTERIROR_TABLE,StructureScreensActivity.inspectionID);
-                            database.insertEntry("retainingwalls",object.getString("retainingwalls"),EXTERIROR_TABLE,StructureScreensActivity.inspectionID);
-                            database.insertEntry("fencing",object.getString("fencing"),EXTERIROR_TABLE,StructureScreensActivity.inspectionID);
-                            database.insertEntry("observations",object.getString("observations"),EXTERIROR_TABLE,StructureScreensActivity.inspectionID);
-                            database.insertEntry("rexteriorwalls",object.getString("rexteriorwalls"),EXTERIROR_TABLE,StructureScreensActivity.inspectionID);
-                            database.insertEntry("reaves",object.getString("reaves"),EXTERIROR_TABLE,StructureScreensActivity.inspectionID);
-                            database.insertEntry("rexteriordoors_windows",object.getString("rexteriordoors_windows"),EXTERIROR_TABLE,StructureScreensActivity.inspectionID);
-                            database.insertEntry("rgrage",object.getString("rgrage"),EXTERIROR_TABLE,StructureScreensActivity.inspectionID);
-                            database.insertEntry("rporches",object.getString("rporches"),EXTERIROR_TABLE,StructureScreensActivity.inspectionID);
-                            database.insertEntry("rdriveway",object.getString("rdriveway"),EXTERIROR_TABLE,StructureScreensActivity.inspectionID);
-                            database.insertEntry("rexteriorsteps_walkways",object.getString("rexteriorsteps_walkways"),EXTERIROR_TABLE,StructureScreensActivity.inspectionID);
-                            database.insertEntry("rdeck",object.getString("rdeck"),EXTERIROR_TABLE,StructureScreensActivity.inspectionID);
-                            database.insertEntry("rlotdrainage",object.getString("rlotdrainage"),EXTERIROR_TABLE,StructureScreensActivity.inspectionID);
-                            database.insertEntry("rlandscaping",object.getString("rlandscaping"),EXTERIROR_TABLE,StructureScreensActivity.inspectionID);
-                            database.insertEntry("retainwall",object.getString("retainwall"),EXTERIROR_TABLE,StructureScreensActivity.inspectionID);
-                            database.insertEntry("rfencing",object.getString("rfencing"),EXTERIROR_TABLE,StructureScreensActivity.inspectionID);
+                            database.insertEntry("wallcovering",object.getString("wallcovering"),EXTERIROR_TABLE,StructureScreensActivity.template_id);
+                            database.insertEntry("eaves_soffits_fascia",object.getString("eaves_soffits_fascia"),EXTERIROR_TABLE,StructureScreensActivity.template_id);
+                            database.insertEntry("exteriordoors",object.getString("exteriordoors"),EXTERIROR_TABLE,StructureScreensActivity.template_id);
+                            database.insertEntry("windows_doorframes_trim",object.getString("windows_doorframes_trim"),EXTERIROR_TABLE,StructureScreensActivity.template_id);
+                            database.insertEntry("entry_driveways",object.getString("entry_driveways"),EXTERIROR_TABLE,StructureScreensActivity.template_id);
+                            database.insertEntry("entrywalk_patios",object.getString("entrywalk_patios"),EXTERIROR_TABLE,StructureScreensActivity.template_id);
+                            database.insertEntry("porch_decks_steps_railings",object.getString("porch_decks_steps_railings"),EXTERIROR_TABLE,StructureScreensActivity.template_id);
+                            database.insertEntry("overheadgaragedoors",object.getString("overheadgaragedoors"),EXTERIROR_TABLE,StructureScreensActivity.template_id);
+                            database.insertEntry("surfacedrainage",object.getString("surfacedrainage"),EXTERIROR_TABLE,StructureScreensActivity.template_id);
+                            database.insertEntry("retainingwalls",object.getString("retainingwalls"),EXTERIROR_TABLE,StructureScreensActivity.template_id);
+                            database.insertEntry("fencing",object.getString("fencing"),EXTERIROR_TABLE,StructureScreensActivity.template_id);
+                            database.insertEntry("observations",object.getString("observations"),EXTERIROR_TABLE,StructureScreensActivity.template_id);
+                            database.insertEntry("rexteriorwalls",object.getString("rexteriorwalls"),EXTERIROR_TABLE,StructureScreensActivity.template_id);
+                            database.insertEntry("reaves",object.getString("reaves"),EXTERIROR_TABLE,StructureScreensActivity.template_id);
+                            database.insertEntry("rexteriordoors_windows",object.getString("rexteriordoors_windows"),EXTERIROR_TABLE,StructureScreensActivity.template_id);
+                            database.insertEntry("rgrage",object.getString("rgrage"),EXTERIROR_TABLE,StructureScreensActivity.template_id);
+                            database.insertEntry("rporches",object.getString("rporches"),EXTERIROR_TABLE,StructureScreensActivity.template_id);
+                            database.insertEntry("rdriveway",object.getString("rdriveway"),EXTERIROR_TABLE,StructureScreensActivity.template_id);
+                            database.insertEntry("rexteriorsteps_walkways",object.getString("rexteriorsteps_walkways"),EXTERIROR_TABLE,StructureScreensActivity.template_id);
+                            database.insertEntry("rdeck",object.getString("rdeck"),EXTERIROR_TABLE,StructureScreensActivity.template_id);
+                            database.insertEntry("rlotdrainage",object.getString("rlotdrainage"),EXTERIROR_TABLE,StructureScreensActivity.template_id);
+                            database.insertEntry("rlandscaping",object.getString("rlandscaping"),EXTERIROR_TABLE,StructureScreensActivity.template_id);
+                            database.insertEntry("retainwall",object.getString("retainwall"),EXTERIROR_TABLE,StructureScreensActivity.template_id);
+                            database.insertEntry("rfencing",object.getString("rfencing"),EXTERIROR_TABLE,StructureScreensActivity.template_id);
 
 
                         } catch (JSONException e) {
@@ -871,10 +871,27 @@ public class ExteriorScreenFragment extends BaseFragment {
 
                         ringProgressDialog.dismiss();
                         StructureScreensActivity.is_saved=true;
+
+                        String resp[];
+
+                        resp = response.split("%");
+
+
+                        StructureScreensActivity.inspectionID = resp[1];
+                        StructureScreensActivity.template_id = resp[0];
+
+
+
+                        database.updateIds();
+
+
+
+
+
                         sp=getActivity().getSharedPreferences("prefs", MODE_PRIVATE);
                         edit=sp.edit();
                         edit.putBoolean("StructureScreenFragment",true);
-                        edit.commit();
+                        edit.apply();
                         Toast.makeText(getContext(),"Saved Successfully",Toast.LENGTH_LONG).show();
                     }
                 }, new Response.ErrorListener() {

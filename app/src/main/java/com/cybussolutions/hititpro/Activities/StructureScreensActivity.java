@@ -165,6 +165,7 @@ public class StructureScreensActivity extends AppCompatActivity {
         {
 
             //Structure Screen
+           database.clearDb();
 
             foundationSpinnerValues = new String[]{"Poured Concrete%0", "Slab On Grade%0", "Concrete Block%0", "Masonry Block%0", "Piers%0", "Basement Configuration%0", "Crawl Space%0", "Basement/Crawl Space Configuration%0"};
             columnsSpinnerValues = new String[]{"Steel%0", "Wood%0", "Concrete Block%0", "Wood%0"};

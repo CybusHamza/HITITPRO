@@ -14,16 +14,17 @@
         android:textColor="#000"
         android:id="@+id/txt"
         />
+
     <EditText
         android:id="@+id/tmpName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:layout_margin="10dp"
-        android:inputType="textPersonName"
-        android:text="Name"
         android:layout_below="@+id/txt"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_margin="10dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Template Name" />
 
     <CheckBox
         android:layout_width="wrap_content"

@@ -177,7 +177,7 @@ public class HeatingScreenFragment extends BaseFragment {
                 intent.putExtra("column","energy_source");
                 intent.putExtra("dbTable",HEATING_TABLE);
                 intent.putExtra("fromAddapter","false");
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -195,7 +195,7 @@ public class HeatingScreenFragment extends BaseFragment {
                 intent.putExtra("column","heatingsystemtype");
                 intent.putExtra("dbTable",HEATING_TABLE);
                 intent.putExtra("fromAddapter","false");
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -212,7 +212,7 @@ public class HeatingScreenFragment extends BaseFragment {
                 intent.putExtra("column","vent_flues_chimneys");
                 intent.putExtra("dbTable",HEATING_TABLE);
                 intent.putExtra("fromAddapter","false");
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -229,7 +229,7 @@ public class HeatingScreenFragment extends BaseFragment {
                 intent.putExtra("column","heatdistributionmethods");
                 intent.putExtra("dbTable",HEATING_TABLE);
                 intent.putExtra("fromAddapter","false");
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -246,7 +246,7 @@ public class HeatingScreenFragment extends BaseFragment {
                 intent.putExtra("column","othercomponents");
                 intent.putExtra("dbTable",HEATING_TABLE);
                 intent.putExtra("fromAddapter","false");
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -263,7 +263,7 @@ public class HeatingScreenFragment extends BaseFragment {
                 intent.putExtra("column","observation");
                 intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",HEATING_TABLE);
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -280,7 +280,7 @@ public class HeatingScreenFragment extends BaseFragment {
                 intent.putExtra("column","rfurnace");
                 intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",HEATING_TABLE);
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -297,7 +297,7 @@ public class HeatingScreenFragment extends BaseFragment {
                 intent.putExtra("column","rsupplyairductwork");
                 intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",HEATING_TABLE);
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -315,7 +315,7 @@ public class HeatingScreenFragment extends BaseFragment {
                 intent.putExtra("column","boiler");
                 intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",HEATING_TABLE);
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -332,7 +332,7 @@ public class HeatingScreenFragment extends BaseFragment {
                 intent.putExtra("column","combustion_exhaust");
                 intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",HEATING_TABLE);
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -349,7 +349,7 @@ public class HeatingScreenFragment extends BaseFragment {
                 intent.putExtra("column","furnace_chimneys");
                 intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",HEATING_TABLE);
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -366,7 +366,7 @@ public class HeatingScreenFragment extends BaseFragment {
                 intent.putExtra("column","thermostats");
                 intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",HEATING_TABLE);
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -396,18 +396,18 @@ public class HeatingScreenFragment extends BaseFragment {
 
                             JSONObject object = jsonArray.getJSONObject(0);
 
-                            database.insertEntry("energy_source",object.getString("energy_source"),HEATING_TABLE,StructureScreensActivity.inspectionID);
-                            database.insertEntry("heatingsystemtype",object.getString("heatingsystemtype"),HEATING_TABLE,StructureScreensActivity.inspectionID);
-                            database.insertEntry("vent_flues_chimneys",object.getString("vent_flues_chimneys"),HEATING_TABLE,StructureScreensActivity.inspectionID);
-                            database.insertEntry("heatdistributionmethods",object.getString("heatdistributionmethods"),HEATING_TABLE,StructureScreensActivity.inspectionID);
-                            database.insertEntry("othercomponents",object.getString("othercomponents"),HEATING_TABLE,StructureScreensActivity.inspectionID);
-                            database.insertEntry("observation",object.getString("observation"),HEATING_TABLE,StructureScreensActivity.inspectionID);
-                            database.insertEntry("rfurnace",object.getString("rfurnace"),HEATING_TABLE,StructureScreensActivity.inspectionID);
-                            database.insertEntry("rsupplyairductwork",object.getString("rsupplyairductwork"),HEATING_TABLE,StructureScreensActivity.inspectionID);
-                            database.insertEntry("boiler",object.getString("boiler"),HEATING_TABLE,StructureScreensActivity.inspectionID);
-                            database.insertEntry("combustion_exhaust",object.getString("combustion_exhaust"),HEATING_TABLE,StructureScreensActivity.inspectionID);
-                            database.insertEntry("furnace_chimneys",object.getString("furnace_chimneys"),HEATING_TABLE,StructureScreensActivity.inspectionID);
-                            database.insertEntry("thermostats",object.getString("thermostats"),HEATING_TABLE,StructureScreensActivity.inspectionID);
+                            database.insertEntry("energy_source",object.getString("energy_source"),HEATING_TABLE,StructureScreensActivity.template_id);
+                            database.insertEntry("heatingsystemtype",object.getString("heatingsystemtype"),HEATING_TABLE,StructureScreensActivity.template_id);
+                            database.insertEntry("vent_flues_chimneys",object.getString("vent_flues_chimneys"),HEATING_TABLE,StructureScreensActivity.template_id);
+                            database.insertEntry("heatdistributionmethods",object.getString("heatdistributionmethods"),HEATING_TABLE,StructureScreensActivity.template_id);
+                            database.insertEntry("othercomponents",object.getString("othercomponents"),HEATING_TABLE,StructureScreensActivity.template_id);
+                            database.insertEntry("observation",object.getString("observation"),HEATING_TABLE,StructureScreensActivity.template_id);
+                            database.insertEntry("rfurnace",object.getString("rfurnace"),HEATING_TABLE,StructureScreensActivity.template_id);
+                            database.insertEntry("rsupplyairductwork",object.getString("rsupplyairductwork"),HEATING_TABLE,StructureScreensActivity.template_id);
+                            database.insertEntry("boiler",object.getString("boiler"),HEATING_TABLE,StructureScreensActivity.template_id);
+                            database.insertEntry("combustion_exhaust",object.getString("combustion_exhaust"),HEATING_TABLE,StructureScreensActivity.template_id);
+                            database.insertEntry("furnace_chimneys",object.getString("furnace_chimneys"),HEATING_TABLE,StructureScreensActivity.template_id);
+                            database.insertEntry("thermostats",object.getString("thermostats"),HEATING_TABLE,StructureScreensActivity.template_id);
 
 
                         } catch (JSONException e) {
@@ -528,7 +528,7 @@ public class HeatingScreenFragment extends BaseFragment {
             protected Map<String, String> getParams() throws AuthFailureError {
 
 
-                Cursor cursor = database.getTable(HEATING_TABLE,StructureScreensActivity.inspectionID);
+                Cursor cursor = database.getTable(HEATING_TABLE,StructureScreensActivity.template_id);
                 cursor.moveToFirst();
 
                 Map<String, String> params = new HashMap<>();
@@ -652,10 +652,27 @@ public class HeatingScreenFragment extends BaseFragment {
 
                         ringProgressDialog.dismiss();
                         StructureScreensActivity.is_saved=true;
+
+                        String resp[];
+
+                        resp = response.split("%");
+
+
+                        StructureScreensActivity.inspectionID = resp[1];
+                        StructureScreensActivity.template_id = resp[0];
+
+
+
+                        database.updateIds();
+
+
+
+
+
                         sp=getActivity().getSharedPreferences("prefs", MODE_PRIVATE);
                         edit=sp.edit();
                         edit.putBoolean("StructureScreenFragment",true);
-                        edit.commit();
+                        edit.apply();
                         Toast.makeText(getContext(),"Saved Successfully",Toast.LENGTH_LONG).show();
                     }
                 }, new Response.ErrorListener() {
@@ -719,6 +736,8 @@ public class HeatingScreenFragment extends BaseFragment {
     }
 
 
-   
+
+
+
 
 }

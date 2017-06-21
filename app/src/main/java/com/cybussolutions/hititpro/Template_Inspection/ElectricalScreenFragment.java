@@ -186,7 +186,7 @@ public class ElectricalScreenFragment extends BaseFragment {
                 intent.putExtra("column","sizeofservice");
                 intent.putExtra("dbTable",ELECTRICAL_TABLE);
                 intent.putExtra("fromAddapter","false");
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -203,7 +203,7 @@ public class ElectricalScreenFragment extends BaseFragment {
                 intent.putExtra("column","servicedrop");
                 intent.putExtra("dbTable",ELECTRICAL_TABLE);
                 intent.putExtra("fromAddapter","false");
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -220,7 +220,7 @@ public class ElectricalScreenFragment extends BaseFragment {
                 intent.putExtra("column","entranceconductors");
                 intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",ELECTRICAL_TABLE);
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -237,7 +237,7 @@ public class ElectricalScreenFragment extends BaseFragment {
                 intent.putExtra("column","maindisconnect");
                 intent.putExtra("dbTable",ELECTRICAL_TABLE);
                 intent.putExtra("fromAddapter","false");
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -254,7 +254,7 @@ public class ElectricalScreenFragment extends BaseFragment {
                 intent.putExtra("column","grounding");
                 intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",ELECTRICAL_TABLE);
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -271,7 +271,7 @@ public class ElectricalScreenFragment extends BaseFragment {
                 intent.putExtra("column","servicepanel");
                 intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",ELECTRICAL_TABLE);
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -288,7 +288,7 @@ public class ElectricalScreenFragment extends BaseFragment {
                 intent.putExtra("column","sub_panel");
                 intent.putExtra("dbTable",ELECTRICAL_TABLE);
                 intent.putExtra("fromAddapter","false");
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -305,7 +305,7 @@ public class ElectricalScreenFragment extends BaseFragment {
                 intent.putExtra("column","wiring");
                 intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",ELECTRICAL_TABLE);
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -322,7 +322,7 @@ public class ElectricalScreenFragment extends BaseFragment {
                 intent.putExtra("column","wiring_method");
                 intent.putExtra("dbTable",ELECTRICAL_TABLE);
                 intent.putExtra("fromAddapter","false");
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -339,7 +339,7 @@ public class ElectricalScreenFragment extends BaseFragment {
                 intent.putExtra("column","switches_receptacles");
                 intent.putExtra("dbTable",ELECTRICAL_TABLE);
                 intent.putExtra("fromAddapter","false");
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -357,7 +357,7 @@ public class ElectricalScreenFragment extends BaseFragment {
                 intent.putExtra("column","gfci");
                 intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",ELECTRICAL_TABLE);
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -374,7 +374,7 @@ public class ElectricalScreenFragment extends BaseFragment {
                 intent.putExtra("column","smoke_codetector");
                 intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",ELECTRICAL_TABLE);
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -391,7 +391,7 @@ public class ElectricalScreenFragment extends BaseFragment {
                 intent.putExtra("column","observation");
                 intent.putExtra("dbTable",ELECTRICAL_TABLE);
                 intent.putExtra("fromAddapter","false");
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -408,7 +408,7 @@ public class ElectricalScreenFragment extends BaseFragment {
                 intent.putExtra("column","serviceentrance");
                 intent.putExtra("dbTable",ELECTRICAL_TABLE);
                 intent.putExtra("fromAddapter","false");
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -426,7 +426,7 @@ public class ElectricalScreenFragment extends BaseFragment {
                 intent.putExtra("column","mainpanel");
                 intent.putExtra("dbTable",ELECTRICAL_TABLE);
                 intent.putExtra("fromAddapter","false");
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -443,7 +443,7 @@ public class ElectricalScreenFragment extends BaseFragment {
                 intent.putExtra("column","subpanel");
                 intent.putExtra("dbTable",ELECTRICAL_TABLE);
                 intent.putExtra("fromAddapter","false");
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -460,7 +460,7 @@ public class ElectricalScreenFragment extends BaseFragment {
                 intent.putExtra("column","distribution");
                 intent.putExtra("dbTable",ELECTRICAL_TABLE);
                 intent.putExtra("fromAddapter","false");
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -477,7 +477,7 @@ public class ElectricalScreenFragment extends BaseFragment {
                 intent.putExtra("column","outlets");
                 intent.putExtra("dbTable",ELECTRICAL_TABLE);
                 intent.putExtra("fromAddapter","false");
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -494,7 +494,7 @@ public class ElectricalScreenFragment extends BaseFragment {
                 intent.putExtra("column","switches");
                 intent.putExtra("dbTable",ELECTRICAL_TABLE);
                 intent.putExtra("fromAddapter","false");
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -511,7 +511,7 @@ public class ElectricalScreenFragment extends BaseFragment {
                 intent.putExtra("column","lights_ceiling_fans");
                 intent.putExtra("dbTable",ELECTRICAL_TABLE);
                 intent.putExtra("fromAddapter","false");
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -528,7 +528,7 @@ public class ElectricalScreenFragment extends BaseFragment {
                 intent.putExtra("column","smoke_co_detectors");
                 intent.putExtra("dbTable",ELECTRICAL_TABLE);
                 intent.putExtra("fromAddapter","false");
-                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
         });
@@ -558,27 +558,27 @@ public class ElectricalScreenFragment extends BaseFragment {
 
                             JSONObject object = jsonArray.getJSONObject(0);
 
-                            database.insertEntry("sizeofservice", object.getString("sizeofservice"), ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
-                            database.insertEntry("servicedrop", object.getString("servicedrop"), ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
-                            database.insertEntry("entranceconductors", object.getString("entranceconductors"), ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
-                            database.insertEntry("maindisconnect", object.getString("maindisconnect"), ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
-                            database.insertEntry("grounding", object.getString("grounding"), ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
-                            database.insertEntry("servicepanel", object.getString("servicepanel"), ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
-                            database.insertEntry("sub_panel", object.getString("sub_panel"), ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
-                            database.insertEntry("wiring", object.getString("wiring") ,ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
-                            database.insertEntry("wiring_method", object.getString("wiring_method"), ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
-                            database.insertEntry("switches_receptacles", object.getString("switches_receptacles"),ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
-                            database.insertEntry("gfci", object.getString("gfci"), ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
-                            database.insertEntry("smoke_codetector", object.getString("smoke_codetector"), ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
-                            database.insertEntry("observation", object.getString("observation"), ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
-                            database.insertEntry("serviceentrance", object.getString("serviceentrance"), ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
-                            database.insertEntry("mainpanel", object.getString("mainpanel"), ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
-                            database.insertEntry("subpanel", object.getString("subpanel"), ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
-                            database.insertEntry("distribution", object.getString("distribution"), ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
-                            database.insertEntry("outlets", object.getString("outlets"), ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
-                            database.insertEntry("switches", object.getString("switches"), ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
-                            database.insertEntry("lights_ceiling_fans", object.getString("lights_ceiling_fans"), ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
-                            database.insertEntry("smoke_co_detectors", object.getString("smoke_co_detectors"), ELECTRICAL_TABLE, StructureScreensActivity.inspectionID);
+                            database.insertEntry("sizeofservice", object.getString("sizeofservice"), ELECTRICAL_TABLE, StructureScreensActivity.template_id);
+                            database.insertEntry("servicedrop", object.getString("servicedrop"), ELECTRICAL_TABLE, StructureScreensActivity.template_id);
+                            database.insertEntry("entranceconductors", object.getString("entranceconductors"), ELECTRICAL_TABLE, StructureScreensActivity.template_id);
+                            database.insertEntry("maindisconnect", object.getString("maindisconnect"), ELECTRICAL_TABLE, StructureScreensActivity.template_id);
+                            database.insertEntry("grounding", object.getString("grounding"), ELECTRICAL_TABLE, StructureScreensActivity.template_id);
+                            database.insertEntry("servicepanel", object.getString("servicepanel"), ELECTRICAL_TABLE, StructureScreensActivity.template_id);
+                            database.insertEntry("sub_panel", object.getString("sub_panel"), ELECTRICAL_TABLE, StructureScreensActivity.template_id);
+                            database.insertEntry("wiring", object.getString("wiring") ,ELECTRICAL_TABLE, StructureScreensActivity.template_id);
+                            database.insertEntry("wiring_method", object.getString("wiring_method"), ELECTRICAL_TABLE, StructureScreensActivity.template_id);
+                            database.insertEntry("switches_receptacles", object.getString("switches_receptacles"),ELECTRICAL_TABLE, StructureScreensActivity.template_id);
+                            database.insertEntry("gfci", object.getString("gfci"), ELECTRICAL_TABLE, StructureScreensActivity.template_id);
+                            database.insertEntry("smoke_codetector", object.getString("smoke_codetector"), ELECTRICAL_TABLE, StructureScreensActivity.template_id);
+                            database.insertEntry("observation", object.getString("observation"), ELECTRICAL_TABLE, StructureScreensActivity.template_id);
+                            database.insertEntry("serviceentrance", object.getString("serviceentrance"), ELECTRICAL_TABLE, StructureScreensActivity.template_id);
+                            database.insertEntry("mainpanel", object.getString("mainpanel"), ELECTRICAL_TABLE, StructureScreensActivity.template_id);
+                            database.insertEntry("subpanel", object.getString("subpanel"), ELECTRICAL_TABLE, StructureScreensActivity.template_id);
+                            database.insertEntry("distribution", object.getString("distribution"), ELECTRICAL_TABLE, StructureScreensActivity.template_id);
+                            database.insertEntry("outlets", object.getString("outlets"), ELECTRICAL_TABLE, StructureScreensActivity.template_id);
+                            database.insertEntry("switches", object.getString("switches"), ELECTRICAL_TABLE, StructureScreensActivity.template_id);
+                            database.insertEntry("lights_ceiling_fans", object.getString("lights_ceiling_fans"), ELECTRICAL_TABLE, StructureScreensActivity.template_id);
+                            database.insertEntry("smoke_co_detectors", object.getString("smoke_co_detectors"), ELECTRICAL_TABLE, StructureScreensActivity.template_id);
 
 
                         } catch (JSONException e) {
