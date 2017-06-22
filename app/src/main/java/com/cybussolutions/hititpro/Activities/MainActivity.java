@@ -48,9 +48,11 @@ import android.widget.Toast;
 import com.android.graphics.CanvasView;
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.NoConnectionError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
@@ -66,7 +68,9 @@ import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.OutputStream;
 import java.sql.Time;
 import java.text.SimpleDateFormat;
@@ -81,6 +85,8 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 import static android.graphics.Color.BLACK;
 
 public class MainActivity extends AppCompatActivity {
+
+    static int mainActivityCount= 0;
 
     ProgressDialog ringProgressDialog;
 
@@ -364,6 +370,7 @@ public class MainActivity extends AppCompatActivity {
                             if(!jsonObject.getString("attachment_saved_name").equals("")) {
                                 imageName[i] = jsonObject.getString("attachment_saved_name");
                                 count++;
+                                mainActivityCount++;
                             }
                             else imageName[i]="";
                         }
@@ -376,8 +383,10 @@ public class MainActivity extends AppCompatActivity {
                             startActivity(i);
                         }
                     } catch (JSONException e) {
+
                         e.printStackTrace();
                         ringProgressDialog.dismiss();
+
                     }
 
                 }
@@ -387,6 +396,34 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 ringProgressDialog.dismiss();
+                if (error instanceof NoConnectionError) {
+
+                    new SweetAlertDialog(MainActivity.this, SweetAlertDialog.ERROR_TYPE)
+                            .setTitleText("Error!")
+                            .setConfirmText("OK").setContentText("No Internet Connection")
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    sDialog.dismiss();
+                                    finish();
+                                }
+                            })
+                            .show();
+                } else if (error instanceof TimeoutError) {
+
+                    new SweetAlertDialog(MainActivity.this, SweetAlertDialog.ERROR_TYPE)
+                            .setTitleText("Error!")
+                            .setConfirmText("OK").setContentText("Connection TimeOut! Please check your internet connection.")
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    sDialog.dismiss();
+                                    finish();
+
+                                }
+                            })
+                            .show();
+                }
                 Toast.makeText(getApplicationContext(),error.toString(),Toast.LENGTH_LONG).show();
             }
         }){
@@ -414,9 +451,34 @@ public class MainActivity extends AppCompatActivity {
         ringProgressDialog = ProgressDialog.show(this, "Please wait ...", "Uploading data ...", true);
         ringProgressDialog.setCancelable(false);
         ringProgressDialog.show();
+        OutputStream fOut = null;
         Calendar c = Calendar.getInstance();
+        System.out.println("Current time => " + c.getTime());
+
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         final String formattedDate = df.format(c.getTime());
+
+        Uri outputFileUri;
+        File root = new File(Environment.getExternalStorageDirectory()
+                + File.separator + "folder_name" + File.separator);
+        root.mkdirs();
+        File sdImageMainDirectory = new File(root, formattedDate + "myPicName.jpg");
+        outputFileUri = Uri.fromFile(sdImageMainDirectory);
+        try {
+            fOut = new FileOutputStream(sdImageMainDirectory);
+            scaled.compress(Bitmap.CompressFormat.JPEG,100,fOut);
+            // bm.compress(Bitmap.CompressFormat.PNG, 100, fOut);
+            fOut.flush();
+            fOut.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        mCurrentPhotoPath=outputFileUri.getPath();
+       // Calendar c = Calendar.getInstance();
+        //SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        //final String formattedDate = df.format(c.getTime());
         Bitmap bm = BitmapFactory.decodeFile(mCurrentPhotoPath);
         ByteArrayOutputStream bao = new ByteArrayOutputStream();
         bm.compress(Bitmap.CompressFormat.JPEG, 50, bao);
@@ -466,6 +528,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 ringProgressDialog.dismiss();
+                mainActivityCount++;
                 new SweetAlertDialog(MainActivity.this, SweetAlertDialog.SUCCESS_TYPE)
                         .setTitleText("Success!")
                         .setConfirmText("OK").setContentText("Successful")
@@ -477,6 +540,7 @@ public class MainActivity extends AppCompatActivity {
                                 intent.putExtra("clientId",clientId);
                                 intent.putExtra("inspectionId",inspectionId);
                                 intent.putExtra("templateId",templateId);
+                                intent.putExtra("showImages","false");
                                 finish();
                                 startActivity(intent);
 
@@ -620,7 +684,7 @@ public class MainActivity extends AppCompatActivity {
                 scaled=unscaled.createScaledBitmap(unscaled,w,h,true);
                 canvas.drawBitmap(scaled);
 //                imageView=(DrawingView)findViewById(R.id.drawingview);
-               mCurrentPhotoPath=ImageDecode;
+                mCurrentPhotoPath=ImageDecode;
 //                imageView.setImageBitmap(BitmapFactory.decodeFile(ImageDecode));
                 drawLine.setVisibility(View.VISIBLE);
                 drawCircle.setVisibility(View.VISIBLE);
@@ -676,17 +740,16 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
 
-        if (requestCode == REQUEST_PERMISSIONS) {
+        if (requestCode == REQUEST_PERMISSIONS || requestCode==REQUEST_IMAGE_CAPTURE) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 //The External Storage Write Permission is granted to you... Continue your left job...
-                if(requestCode==IMG_RESULT) {
+                if(requestCode==0) {
                     upload();
                 }
-                if(requestCode==REQUEST_IMAGE_CAPTURE){
+                else if(requestCode==1){
                     camera();
                 }
             } else {
-
 
                 Toast.makeText(MainActivity.this, "Permission Denied", Toast.LENGTH_SHORT).show();
             }

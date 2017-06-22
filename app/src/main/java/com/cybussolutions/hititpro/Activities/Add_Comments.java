@@ -86,6 +86,11 @@ public class Add_Comments extends AppCompatActivity {
         inspectionId=i.getStringExtra("inspectionId");
         etComments= (EditText) findViewById(R.id.comments);
         btnSaveImage=(Button)findViewById(R.id.saveImageButton);
+        if(mCurrentPhotoPath == null || mCurrentPhotoPath==""){
+            btnSaveImage.setText("Save Comments");
+        }else {
+            btnSaveImage.setText("Save Image");
+        }
         btnSaveImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -101,6 +106,7 @@ public class Add_Comments extends AppCompatActivity {
                     if (mCurrentPhotoPath == null || mCurrentPhotoPath=="") {
                         mSavedPhotoName = "";
                         mCurrentPhotoPath = "";
+                        attachmentName="";
                         uploadToServer();
                     } else {
                         up();
@@ -134,6 +140,9 @@ public class Add_Comments extends AppCompatActivity {
     }
 
     private void up() {
+        ringProgressDialog = ProgressDialog.show(this, "Please wait ...", "Uploading data ...", true);
+        ringProgressDialog.setCancelable(false);
+        ringProgressDialog.show();
         Calendar c = Calendar.getInstance();
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         final String formattedDate = df.format(c.getTime());
@@ -146,13 +155,43 @@ public class Add_Comments extends AppCompatActivity {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, End_Points.UPLOAD, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
+
                 mSavedPhotoName = response;
+                MainActivity.mainActivityCount++;
               //  Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_LONG).show();
                 uploadToServer();
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                ringProgressDialog.dismiss();
+                if (error instanceof NoConnectionError) {
+                    new SweetAlertDialog(Add_Comments.this, SweetAlertDialog.ERROR_TYPE)
+                            .setTitleText("Error!")
+                            .setConfirmText("OK").setContentText("No Internet Connection")
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    sDialog.dismiss();
+                                    finish();
+                                }
+                            })
+                            .show();
+                } else if (error instanceof TimeoutError) {
+
+                    new SweetAlertDialog(Add_Comments.this, SweetAlertDialog.ERROR_TYPE)
+                            .setTitleText("Error!")
+                            .setConfirmText("OK").setContentText("Connection TimeOut! Please check your internet connection.")
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    sDialog.dismiss();
+                                    finish();
+
+                                }
+                            })
+                            .show();
+                }
                 Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
 
             }
@@ -175,9 +214,11 @@ public class Add_Comments extends AppCompatActivity {
     }
 
     private void uploadToServer() {
-        ringProgressDialog = ProgressDialog.show(this, "Please wait ...", "Uploading data ...", true);
-        ringProgressDialog.setCancelable(false);
-        ringProgressDialog.show();
+        if (mCurrentPhotoPath == null || mCurrentPhotoPath=="") {
+            ringProgressDialog = ProgressDialog.show(this, "Please wait ...", "Uploading data ...", true);
+            ringProgressDialog.setCancelable(false);
+            ringProgressDialog.show();
+        }
         SharedPreferences pref = getApplicationContext().getSharedPreferences("UserPrefs", MODE_PRIVATE);
 
         userId = pref.getString("user_id", "");
@@ -195,7 +236,7 @@ public class Add_Comments extends AppCompatActivity {
                             @Override
                             public void onClick(SweetAlertDialog sDialog) {
                                 sDialog.dismiss();
-                                if (mCurrentPhotoPath != null && mCurrentPhotoPath!="" ) {
+                                if (mCurrentPhotoPath != null && mCurrentPhotoPath!=""  && MainActivity.mainActivityCount<4) {
                                     startDialog();
                                 }else {
                                     finish();
@@ -212,6 +253,32 @@ public class Add_Comments extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 ringProgressDialog.dismiss();
+                if (error instanceof NoConnectionError) {
+
+                    new SweetAlertDialog(Add_Comments.this, SweetAlertDialog.ERROR_TYPE)
+                            .setTitleText("Error!")
+                            .setConfirmText("OK").setContentText("No Internet Connection")
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    sDialog.dismiss();
+                                }
+                            })
+                            .show();
+                } else if (error instanceof TimeoutError) {
+
+                    new SweetAlertDialog(Add_Comments.this, SweetAlertDialog.ERROR_TYPE)
+                            .setTitleText("Error!")
+                            .setConfirmText("OK").setContentText("Connection TimeOut! Please check your internet connection.")
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    sDialog.dismiss();
+
+                                }
+                            })
+                            .show();
+                }
                // Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
             }
         }) {

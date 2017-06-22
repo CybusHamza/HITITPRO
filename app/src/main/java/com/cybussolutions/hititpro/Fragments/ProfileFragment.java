@@ -59,11 +59,12 @@ public class ProfileFragment extends BaseFragment {
         final String website = pref.getString("website", null);
         final String fax = pref.getString("fax", null);
 
+        String address=stradress.replaceAll(","," ");
         nameHeader.setText(struserName);
         name.setText(struserName);
         email.setText(struserEmail);
         contact.setText(strcontact);
-        adress.setText(stradress);
+        adress.setText(address);
 
         String url = End_Points.IMAGE_BASE_URL + img.trim();
         Picasso.with(getActivity())

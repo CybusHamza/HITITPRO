@@ -217,6 +217,7 @@ public class Edit_Profile extends AppCompatActivity {
 
             //  if (requestCode == Constants.REQUEST_CODE && resultCode == RESULT_OK && data != null) {
             if (requestCode == IMG_RESULT  && resultCode == RESULT_OK && data != null) {
+
                 // textView.setText(stringBuffer.toString());
                 Uri URI = data.getData();
                 String[] FILE = {MediaStore.Images.Media.DATA};
@@ -402,5 +403,20 @@ public class Edit_Profile extends AppCompatActivity {
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
         requestQueue.add(request);
 
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+
+        if (requestCode == REQUEST_PERMISSIONS) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                //The External Storage Write Permission is granted to you... Continue your left job...
+               attachLogo();
+            } else {
+
+
+                Toast.makeText(Edit_Profile.this, "Permission Denied", Toast.LENGTH_SHORT).show();
+            }
+        }
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 }

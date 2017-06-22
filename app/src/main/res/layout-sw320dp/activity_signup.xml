@@ -198,6 +198,7 @@
                     android:layout_height="wrap_content"
                     android:hint="Fax"
                     android:inputType="phone"
+                    android:maxLength="14"
                     android:singleLine="true"
                     android:textColor="@color/black"
                     android:textColorHint="@color/black"

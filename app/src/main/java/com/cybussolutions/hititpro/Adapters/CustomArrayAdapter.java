@@ -214,6 +214,11 @@ public class CustomArrayAdapter extends ArrayAdapter<Checkbox_model> implements
 					intent.putExtra("clientId",StructureScreensActivity.client_id);
 					intent.putExtra("inspectionId",StructureScreensActivity.inspectionID);
 					intent.putExtra("templateId",StructureScreensActivity.template_id);
+					SharedPreferences sp1=context.getSharedPreferences("prefs",Context.MODE_PRIVATE);
+					SharedPreferences.Editor edit1 = sp1.edit();
+					// edit.putString("back","add_comments");
+					edit1.putBoolean("flag", false);
+					edit1.commit();
 					context.startActivity(intent);
 				}catch (Exception e){
 					Toast.makeText(context,e.toString(),Toast.LENGTH_LONG).show();

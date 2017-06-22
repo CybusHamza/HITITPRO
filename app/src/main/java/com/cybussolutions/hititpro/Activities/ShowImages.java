@@ -37,6 +37,7 @@ public class ShowImages extends AppCompatActivity {
 
     private static final int MY_SOCKET_TIMEOUT_MS = 10000;
 
+    static int showImagesCounter=0;
     String ImageName,data,table_name;
     String[] imageNames;
     ImageView imageView,addNew;
@@ -76,6 +77,7 @@ public class ShowImages extends AppCompatActivity {
                     intent.putExtra("clientId",StructureScreensActivity.client_id);
                     intent.putExtra("inspectionId",StructureScreensActivity.inspectionID);
                     intent.putExtra("templateId",StructureScreensActivity.template_id);
+                    finish();
                     startActivity(intent);
                 }else {
                     Intent intent=new Intent(ShowImages.this,Add_Comments.class);
@@ -84,6 +86,7 @@ public class ShowImages extends AppCompatActivity {
                     intent.putExtra("clientId",StructureScreensActivity.client_id);
                     intent.putExtra("inspectionId",StructureScreensActivity.inspectionID);
                     intent.putExtra("templateId",StructureScreensActivity.template_id);
+                    showImagesCounter=3;
                     startActivity(intent);
                     Toast.makeText(getApplicationContext(), "you cannot upload more photos", Toast.LENGTH_LONG).show();
                 }
