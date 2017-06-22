@@ -2,6 +2,7 @@ package com.cybussolutions.hititpro.Activities;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -11,7 +12,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Base64;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -236,7 +239,7 @@ public class Add_Comments extends AppCompatActivity {
                             @Override
                             public void onClick(SweetAlertDialog sDialog) {
                                 sDialog.dismiss();
-                                if (mCurrentPhotoPath != null && mCurrentPhotoPath!=""  && MainActivity.mainActivityCount<4) {
+                                if (mCurrentPhotoPath != null && mCurrentPhotoPath!="" && MainActivity.mainActivityCount<3) {
                                     startDialog();
                                 }else {
                                     finish();
@@ -426,4 +429,5 @@ public class Add_Comments extends AppCompatActivity {
         requestQueue.add(request);
 
     }
+
 }

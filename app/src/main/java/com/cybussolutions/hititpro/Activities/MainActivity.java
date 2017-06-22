@@ -15,10 +15,12 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
+import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -36,6 +38,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -273,7 +276,7 @@ public class MainActivity extends AppCompatActivity {
                     if (sp.getBoolean("flag", false) == true) {
                         String check=etAttachmentName.getText().toString();
                         if(check.equals("")){
-                            Toast.makeText(getApplicationContext(),"Plz enter some attachment name",Toast.LENGTH_SHORT);
+                            Toast.makeText(getApplicationContext(),"Plz enter some attachment name",Toast.LENGTH_LONG).show();
                         }
                         else {
                             up();
@@ -359,8 +362,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 ringProgressDialog.dismiss();
+                mainActivityCount=0;
                 //Toast.makeText(getApplicationContext(),response.toString(),Toast.LENGTH_LONG).show();
                 if(!response.equals("0") && response!=null){
+
                     int count=0;
                     try {
                         JSONArray jsonArray=new JSONArray(response);
@@ -680,9 +685,70 @@ public class MainActivity extends AppCompatActivity {
                 cursor.close();
                 int w=canvas.getWidth();
                 int h=canvas.getHeight();
+                /* Get the size of the image */
+                BitmapFactory.Options bmOptions = new BitmapFactory.Options();
+                bmOptions.inJustDecodeBounds = true;
+                BitmapFactory.decodeFile(ImageDecode, bmOptions);
+                int photoW = bmOptions.outWidth;
+                int photoH = bmOptions.outHeight;
+
+		/* Figure out which way needs to be reduced less */
+                int scaleFactor = 1;
+                if ((w > 0) || (h > 0)) {
+                    scaleFactor = Math.min(photoW/w, photoH/h);
+                }
+
+		/* Set bitmap options to scale the image decode target */
+                bmOptions.inJustDecodeBounds = false;
+                bmOptions.inSampleSize = scaleFactor;
+                bmOptions.inPurgeable = true;
+
                 Bitmap unscaled=BitmapFactory.decodeFile(ImageDecode);
                 scaled=unscaled.createScaledBitmap(unscaled,w,h,true);
-                canvas.drawBitmap(scaled);
+
+               Uri tempUri = getImageUri(getApplicationContext(), scaled);
+                String Data_Path = tempUri.getPath();
+                try
+                {
+                    ExifInterface exif = new ExifInterface(ImageDecode);
+                    int exifOrientation = exif.getAttributeInt(
+                            ExifInterface.TAG_ORIENTATION,
+                            ExifInterface.ORIENTATION_NORMAL);
+                    Log.v("MainController", "Orient: " + exifOrientation);
+                    int rotate = 0;
+                    switch (exifOrientation)
+                    {
+                        case ExifInterface.ORIENTATION_ROTATE_90:
+                            rotate = 90;
+                            break;
+                        case ExifInterface.ORIENTATION_ROTATE_180:
+                            rotate = 180;
+                            break;
+                        case ExifInterface.ORIENTATION_ROTATE_270:
+                            rotate = 270;
+                            break;
+                    }
+                    Log.v("MainController", "Rotation: " + rotate);
+                    if (rotate != 0)
+                    {
+                        // Getting width & height of the given image.
+                        int w1 = canvas.getWidth();
+                        int h1 = canvas.getHeight();
+                        // Setting pre rotate
+                        Matrix mtx = new Matrix();
+                        mtx.preRotate(rotate);
+                        // Rotating Bitmap
+                        scaled = Bitmap.createBitmap(scaled, 0, 0, w1, h1, mtx, false);
+                        canvas.drawBitmap(scaled);
+                    }else {
+                        canvas.drawBitmap(scaled);
+                    }
+
+                }
+                catch (IOException e)
+                {
+                    Log.e("MainController", "Couldn't correct orientation: " + e.toString());
+                }
 //                imageView=(DrawingView)findViewById(R.id.drawingview);
                 mCurrentPhotoPath=ImageDecode;
 //                imageView.setImageBitmap(BitmapFactory.decodeFile(ImageDecode));
@@ -839,4 +905,12 @@ public class MainActivity extends AppCompatActivity {
         edit.putBoolean("flag", false);
         edit.commit();
     }
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        InputMethodManager imm = (InputMethodManager)getSystemService(Context.
+                INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+        return true;
+    }
+
 }

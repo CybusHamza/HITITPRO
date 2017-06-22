@@ -158,6 +158,7 @@ public class CustomArrayAdapter extends ArrayAdapter<Checkbox_model> implements
 		});
 		final Holder finalHolder = holder;
 
+
 		holder.imageEditor.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
@@ -206,20 +207,23 @@ public class CustomArrayAdapter extends ArrayAdapter<Checkbox_model> implements
 					}
 
 					String data = pagePosition+"_"+topass[1]+"_"+name;
-
-					Intent intent=new Intent(context,MainActivity.class);
-					intent.putExtra("data",data);
-					intent.putExtra("dbTable",topass[1]);
-					intent.putExtra("showImages","false");
-					intent.putExtra("clientId",StructureScreensActivity.client_id);
-					intent.putExtra("inspectionId",StructureScreensActivity.inspectionID);
-					intent.putExtra("templateId",StructureScreensActivity.template_id);
-					SharedPreferences sp1=context.getSharedPreferences("prefs",Context.MODE_PRIVATE);
-					SharedPreferences.Editor edit1 = sp1.edit();
-					// edit.putString("back","add_comments");
-					edit1.putBoolean("flag", false);
-					edit1.commit();
-					context.startActivity(intent);
+					if(finalHolder.checkBox.isChecked()) {
+						Intent intent = new Intent(context, MainActivity.class);
+						intent.putExtra("data", data);
+						intent.putExtra("dbTable", topass[1]);
+						intent.putExtra("showImages", "false");
+						intent.putExtra("clientId", StructureScreensActivity.client_id);
+						intent.putExtra("inspectionId", StructureScreensActivity.inspectionID);
+						intent.putExtra("templateId", StructureScreensActivity.template_id);
+						SharedPreferences sp1 = context.getSharedPreferences("prefs", Context.MODE_PRIVATE);
+						SharedPreferences.Editor edit1 = sp1.edit();
+						// edit.putString("back","add_comments");
+						edit1.putBoolean("flag", false);
+						edit1.commit();
+						context.startActivity(intent);
+					}else {
+						Toast.makeText(context,"Please Checked this item before editing",Toast.LENGTH_LONG).show();
+					}
 				}catch (Exception e){
 					Toast.makeText(context,e.toString(),Toast.LENGTH_LONG).show();
 				}
