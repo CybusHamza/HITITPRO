@@ -699,7 +699,7 @@ public class ElectricalScreenFragment extends BaseFragment {
             protected Map<String, String> getParams() throws AuthFailureError {
 
 
-                Cursor cursor = database.getTable(ELECTRICAL_TABLE,StructureScreensActivity.inspectionID);
+                Cursor cursor = database.getTable(ELECTRICAL_TABLE,StructureScreensActivity.template_id);
                 cursor.moveToFirst();
 
                 Map<String, String> params = new HashMap<>();
