@@ -4,7 +4,9 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/house_bkg">
+    android:background="@drawable/house_bkg"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
 
     <TextView
         android:layout_width="wrap_content"
@@ -21,54 +23,33 @@
         />
 
 
-    <com.github.florent37.materialtextfield.MaterialTextField
-        android:layout_width="match_parent"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        app:mtf_cardCollapsedHeight="4dp"
-        app:mtf_image="@drawable/user"
-        app:mtf_openKeyboardOnFocus="true"
-        android:layout_marginTop="30dp"
-        android:id="@+id/login">
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Email"
+            android:layout_margin="20dp"
             android:singleLine="true"
-            android:textColor="@color/black"
-            android:textColorHint="@color/black"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
             android:textSize="15sp"
             android:id="@+id/username_login" />
 
-    </com.github.florent37.materialtextfield.MaterialTextField>
 
-    <com.github.florent37.materialtextfield.MaterialTextField
-        android:layout_width="match_parent"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        app:mtf_cardCollapsedHeight="4dp"
-        app:mtf_image="@drawable/password"
-        app:mtf_openKeyboardOnFocus="true"
-        android:layout_marginTop="20dp"
-        android:id="@+id/password">
+
 
         <EditText
+            android:layout_margin="20dp"
+            android:id="@+id/password_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Password"
-            android:singleLine="true"
-            android:textColor="@color/black"
             android:inputType="textPassword"
-            android:textColorHint="@color/black"
-            android:textSize="15sp"
-            android:id="@+id/password_login" />
+            android:singleLine="true"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:textSize="15sp" />
 
-    </com.github.florent37.materialtextfield.MaterialTextField>
 
     <LinearLayout
         android:layout_width="match_parent"

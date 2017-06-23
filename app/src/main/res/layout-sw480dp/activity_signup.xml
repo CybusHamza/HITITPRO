@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/house_bkg"
     android:orientation="vertical">
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -14,6 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+
             <TextView
                 android:id="@+id/Header_image"
                 android:layout_width="wrap_content"
@@ -34,15 +36,15 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginLeft="@dimen/activity_horizontal_margin"
                 android:layout_marginRight="@dimen/activity_horizontal_margin"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="20dp"
                 app:mtf_cardCollapsedHeight="4dp"
-                app:mtf_image="@drawable/user"
-                app:mtf_openKeyboardOnFocus="true">
+                app:mtf_image="@drawable/user">
 
                 <EditText
                     android:id="@+id/fist_name_et"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:digits="qwertzuiopasdfghjklyxcvbnmABCDEFGHIJKLMNOPQRSTUVWXYZ"
                     android:hint="@string/firt_name"
                     android:inputType="text"
                     android:singleLine="true"
@@ -62,12 +64,13 @@
                 android:layout_marginTop="20dp"
                 app:mtf_cardCollapsedHeight="4dp"
                 app:mtf_image="@drawable/user"
-                app:mtf_openKeyboardOnFocus="true">
+                >
 
                 <EditText
                     android:id="@+id/last_name_et"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:digits="qwertzuiopasdfghjklyxcvbnmABCDEFGHIJKLMNOPQRSTUVWXYZ"
                     android:hint="@string/last_name"
                     android:inputType="text"
                     android:singleLine="true"
@@ -87,7 +90,7 @@
                 android:layout_marginTop="30dp"
                 app:mtf_cardCollapsedHeight="4dp"
                 app:mtf_image="@drawable/user"
-                app:mtf_openKeyboardOnFocus="true">
+                >
 
                 <EditText
                     android:id="@+id/email_et"
@@ -95,6 +98,56 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/email"
                     android:inputType="textEmailAddress"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
+                    android:textSize="15sp" />
+
+            </com.github.florent37.materialtextfield.MaterialTextField>
+
+            <com.github.florent37.materialtextfield.MaterialTextField
+                android:id="@+id/password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:layout_marginTop="20dp"
+                app:mtf_cardCollapsedHeight="4dp"
+                app:mtf_image="@drawable/password"
+                >
+
+                <EditText
+                    android:id="@+id/password_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/password"
+                    android:inputType="textPassword"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
+                    android:textSize="15sp" />
+
+            </com.github.florent37.materialtextfield.MaterialTextField>
+
+            <com.github.florent37.materialtextfield.MaterialTextField
+                android:id="@+id/confirm_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:layout_marginTop="20dp"
+                app:mtf_cardCollapsedHeight="4dp"
+                app:mtf_image="@drawable/password"
+                >
+
+                <EditText
+                    android:id="@+id/confirm_password_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/confirm_password"
+                    android:inputType="textPassword"
                     android:singleLine="true"
                     android:textColor="@color/black"
                     android:textColorHint="@color/black"
@@ -112,7 +165,7 @@
                 android:layout_marginTop="30dp"
                 app:mtf_cardCollapsedHeight="4dp"
                 app:mtf_image="@drawable/user"
-                app:mtf_openKeyboardOnFocus="true">
+                >
 
                 <EditText
                     android:id="@+id/phone_et"
@@ -120,6 +173,7 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/phone"
                     android:inputType="phone"
+                    android:maxLength="14"
                     android:singleLine="true"
                     android:textColor="@color/black"
                     android:textColorHint="@color/black"
@@ -127,9 +181,8 @@
 
             </com.github.florent37.materialtextfield.MaterialTextField>
 
-
             <com.github.florent37.materialtextfield.MaterialTextField
-                android:id="@+id/city"
+                android:id="@+id/fax"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -138,14 +191,39 @@
                 android:layout_marginTop="30dp"
                 app:mtf_cardCollapsedHeight="4dp"
                 app:mtf_image="@drawable/user"
-                app:mtf_openKeyboardOnFocus="true">
+                >
 
                 <EditText
-                    android:id="@+id/city_et"
+                    android:id="@+id/fax_et"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/city"
+                    android:hint="Fax"
                     android:inputType="phone"
+                    android:maxLength="14"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
+                    android:textSize="15sp" />
+
+            </com.github.florent37.materialtextfield.MaterialTextField>
+
+            <com.github.florent37.materialtextfield.MaterialTextField
+                android:id="@+id/website"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:layout_marginTop="30dp"
+                app:mtf_cardCollapsedHeight="4dp"
+                app:mtf_image="@drawable/user"
+                >
+
+                <EditText
+                    android:id="@+id/website_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Website"
                     android:singleLine="true"
                     android:textColor="@color/black"
                     android:textColorHint="@color/black"
@@ -163,14 +241,13 @@
                 android:layout_marginTop="30dp"
                 app:mtf_cardCollapsedHeight="4dp"
                 app:mtf_image="@drawable/user"
-                app:mtf_openKeyboardOnFocus="true">
+                >
 
                 <EditText
                     android:id="@+id/address_et"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/address"
-                    android:inputType="phone"
                     android:singleLine="true"
                     android:textColor="@color/black"
                     android:textColorHint="@color/black"
@@ -179,7 +256,7 @@
             </com.github.florent37.materialtextfield.MaterialTextField>
 
             <com.github.florent37.materialtextfield.MaterialTextField
-                android:id="@+id/country"
+                android:id="@+id/company_info"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -188,74 +265,49 @@
                 android:layout_marginTop="30dp"
                 app:mtf_cardCollapsedHeight="4dp"
                 app:mtf_image="@drawable/user"
-                app:mtf_openKeyboardOnFocus="true">
+                >
 
                 <EditText
-                    android:id="@+id/country_et"
+                    android:id="@+id/company_info_et"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/country"
-                    android:inputType="phone"
+                    android:hint="Company Information"
                     android:singleLine="true"
                     android:textColor="@color/black"
                     android:textColorHint="@color/black"
                     android:textSize="15sp" />
 
             </com.github.florent37.materialtextfield.MaterialTextField>
-            <com.github.florent37.materialtextfield.MaterialTextField
-                android:id="@+id/username"
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                android:layout_marginRight="@dimen/activity_horizontal_margin"
-                android:layout_marginTop="30dp"
-                app:mtf_cardCollapsedHeight="4dp"
-                app:mtf_image="@drawable/user"
-                app:mtf_openKeyboardOnFocus="true">
+                android:layout_marginLeft="@dimen/activity_vertical_margin"
+                android:layout_marginRight="@dimen/activity_vertical_margin"
+                android:layout_marginTop="60dp"
+                android:orientation="horizontal">
 
-                <EditText
-                    android:id="@+id/username_et"
-                    android:layout_width="match_parent"
+                <Button
+                    android:id="@+id/logo_button"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="@string/username"
-                    android:inputType="phone"
-                    android:singleLine="true"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/black"
-                    android:textSize="15sp" />
+                    android:layout_marginBottom="@dimen/activity_horizontal_margin"
+                    android:text="Attach Logo"
+                    android:typeface="serif" />
 
-            </com.github.florent37.materialtextfield.MaterialTextField>
-            <com.github.florent37.materialtextfield.MaterialTextField
-                android:layout_width="match_parent"
-                android:layout_marginRight="@dimen/activity_horizontal_margin"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                app:mtf_cardCollapsedHeight="4dp"
-                app:mtf_image="@drawable/password"
-                app:mtf_openKeyboardOnFocus="true"
-                android:layout_marginTop="20dp"
-                android:id="@+id/password">
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/password"
-                    android:singleLine="true"
-                    android:textColor="@color/black"
-                    android:inputType="textPassword"
-                    android:textColorHint="@color/black"
-                    android:textSize="15sp"
-                    android:id="@+id/password_et" />
-
-            </com.github.florent37.materialtextfield.MaterialTextField>
-
+                <ImageView
+                    android:id="@+id/logo"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="right"
+                    android:background="@android:drawable/ic_menu_gallery" />
+            </LinearLayout>
 
             <Button
                 android:id="@+id/signUp_button"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:layout_marginBottom="@dimen/activity_horizontal_margin"
                 android:layout_marginLeft="@dimen/activity_vertical_margin"
                 android:layout_marginRight="@dimen/activity_vertical_margin"
                 android:layout_marginTop="60dp"
@@ -264,12 +316,10 @@
                 android:textColor="@color/LightCoral"
                 android:textSize="23sp"
                 android:textStyle="bold"
-                android:typeface="serif"
-                android:layout_marginBottom="@dimen/activity_horizontal_margin"/>
+                android:typeface="serif" />
 
         </LinearLayout>
     </ScrollView>
-
 
 
 </LinearLayout>

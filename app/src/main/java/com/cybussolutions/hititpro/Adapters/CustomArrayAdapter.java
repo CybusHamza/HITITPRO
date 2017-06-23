@@ -6,16 +6,13 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -28,7 +25,6 @@ import com.cybussolutions.hititpro.Model.Checkbox_model;
 import com.cybussolutions.hititpro.R;
 import com.cybussolutions.hititpro.Sql_LocalDataBase.Database;
 
-import java.sql.SQLException;
 import java.util.List;
 
 
@@ -205,8 +201,9 @@ public class CustomArrayAdapter extends ArrayAdapter<Checkbox_model> implements
 							pagePosition= 0;
 
 					}
+					String new_s = topass[0].toLowerCase().replaceAll("[ /]", "_");
 
-					String data = pagePosition+"_"+topass[1]+"_"+name;
+					String data = pagePosition+"_"+new_s+"_"+name;
 					if(finalHolder.checkBox.isChecked()) {
 						Intent intent = new Intent(context, MainActivity.class);
 						intent.putExtra("data", data);

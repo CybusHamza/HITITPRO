@@ -21,8 +21,8 @@
         android:layout_below="@+id/app_bar" />
     <ImageView
         android:id="@+id/add_category"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_gravity="bottom|right"
         android:src="@drawable/fab_add"
         app:layout_anchorGravity="bottom|right|end"

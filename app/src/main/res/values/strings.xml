@@ -42,7 +42,7 @@
     <string name="surface_drainage">SURFACE DRAINAGE</string>
     <string name="retaining_walls">RETAINING WALLS</string>
     <string name="fencing">FENCING</string>
-    <string name="exterior_walls">EXTERIOR WALLS</string>
+    <string name="exterior_walls">EXTERIOR WALL</string>
     <string name="eaves">EAVES</string>
     <string name="exterior_doors_windows">EXTERIOR DOORS/WINDOWS</string>
     <string name="garage">GARAGE</string>
@@ -95,7 +95,7 @@
     <string name="ceiling_structure">CEILING STRUCTURE</string>
     <string name="roof_structure">ROOF STRUCTURE</string>
     <string name="foundations">FOUNDATIONS</string>
-    <string name="crawl_spaces">CRAWL SPACES</string>
+    <string name="crawl_spaces">CRAWL SPACE</string>
     <string name="floors">FLOORS</string>
     <string name="roof">ROOF</string>
     <string name="review">Review</string>

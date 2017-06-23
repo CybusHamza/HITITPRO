@@ -5,9 +5,10 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -49,7 +50,7 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         SharedPreferences preferences = getSharedPreferences("UserPrefs",MODE_PRIVATE);
         String islogged = preferences.getString("isloggedin","");
 
@@ -73,6 +74,7 @@ public class Login extends AppCompatActivity {
                 forgotPasswordDialog();
             }
         });
+
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override

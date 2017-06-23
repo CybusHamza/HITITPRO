@@ -234,8 +234,8 @@ public class Detailed_Adapter_Structure_Screen extends ArrayAdapter<Checkbox_mod
                         break;
                     case "interior":
                         pagePosition= 9;
-                        observation_name="observation";
-                        observation_comments="observation_comments";
+                        observation_name="Interior_Observations";
+                        observation_comments="Interior_Observations";
                         break;
                     case "heating":
                         pagePosition= 5;
@@ -269,7 +269,7 @@ public class Detailed_Adapter_Structure_Screen extends ArrayAdapter<Checkbox_mod
                         break;
                     case "fireplaces":
                         pagePosition= 11;
-                        observation_name="Fireplaces_Observations";
+                        observation_name="observations";
                         observation_comments="observations_comments";
                         break;
                     default:
