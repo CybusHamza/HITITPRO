@@ -212,12 +212,13 @@
                 android:layout_height="wrap_content"
                 android:text="Change Logo"
                 android:typeface="serif"
+                android:layout_marginLeft="30dp"
                 android:layout_marginBottom="@dimen/activity_horizontal_margin"/>
 
             <ImageView
                 android:id="@+id/logo"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
                 android:layout_gravity="right"
                 android:background="@android:drawable/ic_menu_gallery"/>
         </LinearLayout>

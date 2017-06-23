@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -33,6 +34,8 @@ import java.util.Map;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
+import static com.cybussolutions.hititpro.R.drawable.del;
+
 public class ShowImages extends AppCompatActivity {
 
     private static final int MY_SOCKET_TIMEOUT_MS = 10000;
@@ -40,10 +43,12 @@ public class ShowImages extends AppCompatActivity {
     static int showImagesCounter=0;
     String ImageName,data,table_name;
     String[] imageNames;
-    ImageView imageView,addNew;
-    ImageButton image1,image2,image3,image4;
-    EditText imageComments;
+    ImageView imageView,imageView1,imageView2,addNew;
+//    ImageButton image1,image2,image3,image4;
+//    EditText imageComments;
+    TextView imageComments1,imageComments2,imageComments3;
     int count;
+    ImageView deleteImageButton1,deleteImageButton2,deleteImageButton3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,11 +62,19 @@ public class ShowImages extends AppCompatActivity {
 
         getDefaultComments();
         imageView= (ImageView) findViewById(R.id.selectedImage);
-
+        imageView1= (ImageView) findViewById(R.id.selectedImage1);
+        imageView2= (ImageView) findViewById(R.id.selectedImage2);
+        deleteImageButton1= (ImageView) findViewById(R.id.delete1);
+        deleteImageButton2= (ImageView) findViewById(R.id.delete2);
+        deleteImageButton3= (ImageView) findViewById(R.id.delete3);
+/*
         image1= (ImageButton) findViewById(R.id.image1);
         image2= (ImageButton) findViewById(R.id.image2);
         image3= (ImageButton) findViewById(R.id.image3);
-        imageComments= (EditText) findViewById(R.id.imageComments);
+        imageComments= (EditText) findViewById(R.id.imageComments);*/
+        imageComments1= (TextView) findViewById(R.id.tvImageComments1);
+       // imageComments2= (TextView) findViewById(R.id.tvImageComments2);
+        //imageComments3= (TextView) findViewById(R.id.tvImageComments3);
 //        image4= (ImageButton) findViewById(R.id.image4);
 
         addNew= (ImageView) findViewById(R.id.add_pic);
@@ -109,30 +122,42 @@ public class ShowImages extends AppCompatActivity {
         if(imageNames.length>0) {
             String url = "http://xfer.cybusservices.com/hititpro/uploads/inspection/" + imageNames[0].trim();
 
-                Picasso.with(ShowImages.this)
+                /*Picasso.with(ShowImages.this)
                         .load(url)
-                        .into(image1);
+                        .into(image1);*/
 
             Picasso.with(ShowImages.this)
                     .load(url)
                     .into(imageView);
+           // deleteImageButton1.setImageDrawable(getResources().getDrawable(del));
+            deleteImageButton1.setVisibility(View.VISIBLE);
         }
 
         if(imageNames.length>1) {
             String url1 = "http://xfer.cybusservices.com/hititpro/uploads/inspection/" + imageNames[1].trim();
+           /* Picasso.with(ShowImages.this)
+                    .load(url1)
+                    .into(image2);*/
             Picasso.with(ShowImages.this)
                     .load(url1)
-                    .into(image2);
+                    .into(imageView1);
+//            deleteImageButton2.setImageDrawable(getResources().getDrawable(del));
+            deleteImageButton2.setVisibility(View.VISIBLE);
         }
 
         if(imageNames.length>2) {
             String url2 = "http://xfer.cybusservices.com/hititpro/uploads/inspection/" + imageNames[2].trim();
+            /*Picasso.with(ShowImages.this)
+                    .load(url2)
+                    .into(image3);*/
             Picasso.with(ShowImages.this)
                     .load(url2)
-                    .into(image3);
+                    .into(imageView2);
+          //  deleteImageButton3.setImageDrawable(getResources().getDrawable(del));
+            deleteImageButton3.setVisibility(View.VISIBLE);
         }
 
-        imageView.setImageDrawable(image1.getDrawable());
+        //imageView.setImageDrawable(image1.getDrawable());
         /*if(imageNames.length>3) {
             String url3 = "http://xfer.cybusservices.com/hititpro/uploads/inspection/" + imageNames[3];
             Picasso.with(getApplicationContext())
@@ -140,7 +165,7 @@ public class ShowImages extends AppCompatActivity {
                     .into(image4);
         }*/
 
-        image1.setOnClickListener(new View.OnClickListener() {
+        /*image1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 imageView.setImageDrawable(image1.getDrawable());
@@ -158,7 +183,7 @@ public class ShowImages extends AppCompatActivity {
             public void onClick(View v) {
                 imageView.setImageDrawable(image3.getDrawable());
             }
-        });
+        });*/
        /* image4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -179,7 +204,10 @@ public class ShowImages extends AppCompatActivity {
                                 JSONObject object =jsonArray.getJSONObject(i);
 
                                String imageText=object.getString("defaulttext");
-                                imageComments.setText(imageText);
+                                //imageComments.setText(imageText);
+                                imageComments1.setText(imageText);
+                                //imageComments2.setText(imageText);
+                                //imageComments3.setText(imageText);
                                 //etComments.setText(defaultText);
                             }
 
