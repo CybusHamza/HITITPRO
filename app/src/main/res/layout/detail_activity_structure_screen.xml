@@ -17,6 +17,7 @@
         android:layout_height="match_parent"
         android:id="@+id/details_listview"
         android:choiceMode="singleChoice"
+        android:clickable="false"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/app_bar" />
     <ImageView
