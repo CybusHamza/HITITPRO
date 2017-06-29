@@ -135,11 +135,6 @@ public class CustomArrayAdapter extends ArrayAdapter<Checkbox_model> implements
 						intent.putExtra("dbTable",topass[2]);
 						((Activity)context).finish();
 						context.startActivity(intent);
-
-
-
-
-
 					}
 				})
 						.setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -159,7 +154,23 @@ public class CustomArrayAdapter extends ArrayAdapter<Checkbox_model> implements
 			@Override
 			public void onClick(View view) {
 				try {
+					finalHolder.checkBox.setChecked(true);
 
+
+					getItem(position).setChecked(finalHolder.checkBox.isChecked());
+
+					String splitter = "%";
+					String row1[] = list.get(position).getTitle().split(splitter);
+
+					if(finalHolder.checkBox.isChecked())
+					{
+
+						dbEnterArray[position] = row1[0] + "%1";
+					}
+					else
+					{
+						dbEnterArray[position] = row1[0] + "%0";
+					}
 					String name = finalHolder.getTextViewTitle().getText().toString().replaceAll("\\s+","");
 					int pagePosition= 0;
 					switch (topass[2]){

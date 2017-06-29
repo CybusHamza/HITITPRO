@@ -2,6 +2,7 @@ package com.cybussolutions.hititpro.Activities;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -12,11 +13,13 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -189,6 +192,23 @@ public class Detailed_Activity_All_Screens extends AppCompatActivity {
 
         Detailed_Adapter = new CustomArrayAdapter(Detailed_Activity_All_Screens.this, list, toPass);
         detailedListView.setAdapter(Detailed_Adapter);
+
+        detailedListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String selectedSweet = detailedListView.getItemAtPosition(position).toString();
+
+
+                TextView textView = (TextView) view.findViewById(R.id.textViewTitle);
+                String text = textView.getText().toString();
+                AlertDialog.Builder builder = new AlertDialog.Builder(Detailed_Activity_All_Screens.this);
+                builder.setTitle("").setMessage(text);
+
+
+                builder.show();
+            }
+        });
+
     }
 
 
