@@ -18,6 +18,7 @@ import com.cybussolutions.hititpro.Fragments.ProfileFragment;
 import com.cybussolutions.hititpro.Fragments.ReviewInspectionFragment;
 import com.cybussolutions.hititpro.Fragments.TemplatesFragment;
 import com.cybussolutions.hititpro.Fragments.TemplatesListFragment;
+import com.cybussolutions.hititpro.Helper.CircleTransform;
 import com.cybussolutions.hititpro.R;
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
@@ -44,7 +45,7 @@ public class LandingScreen extends AppCompatActivity {
     String[] drawerNames = new String[]{"Profile", "Clients", "Inspection List","Create Inspection" ,"Review Inspection","Logout"};
     int[] drawerImages = new int[]{R.drawable.profile, R.drawable.clients, R.drawable.template,R.drawable.review, R.drawable.startinspection
            ,R.drawable.logout};
-
+    String url = null;
     String activityName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,17 +63,22 @@ public class LandingScreen extends AppCompatActivity {
 
         Intent i=getIntent();
         activityName=i.getStringExtra("activityName");
-        String url = null;
+
         bitmap1 = new Bitmap[1];
 
-        url =  "http://xfer.cybusservices.com/hititpro/uploads/inspection/" + image;
+        url =  "http://xfer.cybusservices.com/hititpro/uploads/inspection/" + image.trim();
+
+
+
 
         Picasso.with(LandingScreen.this)
-                .load(url)
+                .load(url) .resize(300, 300)
+                .centerCrop().transform(new CircleTransform())
                 .into(new Target() {
                     @Override
                     public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
                         bitmap1[0] =bitmap;
+
                     }
 
                     @Override
@@ -89,7 +95,6 @@ public class LandingScreen extends AppCompatActivity {
 
 
 
-        setupDrawer();
 
         if(activityName.equals("addTemplateClass")){
             getSupportFragmentManager().beginTransaction().replace(R.id.container, new TemplatesFragment()).commit();
@@ -100,7 +105,7 @@ public class LandingScreen extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction().replace(R.id.container, new ProfileFragment()).commit();
 
 
-
+        setupDrawer();
 
     }
 
@@ -187,23 +192,34 @@ public class LandingScreen extends AppCompatActivity {
                 })
                 .build();
 
+
+
+
+
     }
 
-    private AccountHeader setupHeader(String name, String email) {
+    private AccountHeader setupHeader(final String name, final String email) {
 
         AccountHeader headerResult = new AccountHeaderBuilder()
                 .withActivity(this)
                 .withHeaderBackground(R.drawable.house_bkg)
+
                 .addProfiles(
                         new ProfileDrawerItem().withName(name).withEmail(email).withIcon(bitmap1[0])
+
                 )
                 .withOnAccountHeaderListener(new AccountHeader.OnAccountHeaderListener() {
                     @Override
                     public boolean onProfileChanged(View view, IProfile profile, boolean currentProfile) {
-                        return false;
+                        new ProfileDrawerItem().withName(name).withEmail(email).withIcon(bitmap1[0]);
+
+                        return  true;
                     }
                 })
                 .build();
+
+
+
         return headerResult;
     }
 
