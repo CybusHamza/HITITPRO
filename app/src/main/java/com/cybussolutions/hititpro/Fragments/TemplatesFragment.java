@@ -761,6 +761,7 @@ public class TemplatesFragment extends BaseFragment {
             }
             else if (inspection_list.get(pos).equals("No Template") && pos ==1) {
                 temp_id = "";
+                paraEt.setText("");
             }
             else {
                // if(!inspection_list.get(pos).equals("Select"))

@@ -178,7 +178,7 @@ public class Database {
 
 
     public void insertEntry(String columnName, String Value, String tableName, String tempID) {
-        String selectQuery = "SELECT  * FROM " + tableName + " WHERE template_id = " + tempID;
+        String selectQuery = "SELECT  * FROM " + tableName + " WHERE template_id = " + StructureScreensActivity.template_id;
         db = dbHelper.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
 
@@ -187,9 +187,9 @@ public class Database {
             // update
             ContentValues newValues = new ContentValues();
             newValues.put(columnName, Value);
-            int res = db.update(tableName, newValues, "template_id" + "=" + tempID,
+            int res = db.update(tableName, newValues, "template_id =" + StructureScreensActivity.template_id,
                     null);
-          //  Toast.makeText(context, res + "/ updated", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(context, res + "/ updated", Toast.LENGTH_SHORT).show();
 
         } else {
             //save
@@ -198,7 +198,7 @@ public class Database {
             newValues.put(columnName, Value);
             newValues.put("template_id", tempID);
             long res = db.insert(tableName, null, newValues);
-          //  Toast.makeText(context, res + " /  saved", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(context, res + " /  saved", Toast.LENGTH_SHORT).show();
         }
     }
     public void clearDb()
@@ -292,7 +292,7 @@ public class Database {
 
         db = dbHelper.getReadableDatabase();
 
-        String selectQuery = "SELECT " + columnName + " FROM " + tablename + " WHERE template_id = " + inspectionId;
+        String selectQuery = "SELECT " + columnName + " FROM " + tablename + " WHERE template_id = " + StructureScreensActivity.template_id;
         Cursor cursor = db.rawQuery(selectQuery, null);
         return cursor;
     }

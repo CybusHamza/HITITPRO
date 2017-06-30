@@ -19,9 +19,13 @@
         android:id="@+id/details_listview"
         android:layout_centerHorizontal="true"
         android:clickable="false"
+        android:dividerHeight="2dp"
+        android:divider="@color/colorPrimary"
         android:listSelector="@android:color/transparent"
         android:focusableInTouchMode="false"
-        android:layout_below="@+id/app_bar" />
+        android:layout_below="@+id/app_bar"
+        android:layout_above="@+id/add_category"
+        />
     <ImageView
         android:id="@+id/add_category"
         android:layout_width="50dp"
@@ -32,6 +36,6 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_margin="20dp" />
+        android:layout_margin="5dp" />
 
 </RelativeLayout>

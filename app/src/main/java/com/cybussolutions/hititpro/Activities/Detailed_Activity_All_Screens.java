@@ -2,7 +2,6 @@ package com.cybussolutions.hititpro.Activities;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -159,7 +158,11 @@ public class Detailed_Activity_All_Screens extends AppCompatActivity {
                 position++;
             }
 
-        } else {
+        } else if(fromDataBase == null) {
+            Toast.makeText(this, "Error while retreving data !! ", Toast.LENGTH_SHORT).show();
+        }
+
+        else {
             int position = 0;
 
             if (items.length != 0) {
@@ -215,7 +218,7 @@ public class Detailed_Activity_All_Screens extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        update();
+
 
         String[] insertArray = Detailed_Adapter.getDbInsertArray();
 
@@ -229,6 +232,7 @@ public class Detailed_Activity_All_Screens extends AppCompatActivity {
 
         // Insert in local DataBase
         database.insertEntry(dbColumn, enteredStructure, dbTable, inspectionID);
+        update();
 
         finish();
 
@@ -241,23 +245,6 @@ public class Detailed_Activity_All_Screens extends AppCompatActivity {
 
         String[] insertArray = Detailed_Adapter.getDbInsertArray();
 
-        String splitter = "%";
-
-        for (int i = 0; i < insertArray.length - 1; i++) {
-
-            String[] row = insertArray[i].split(splitter);
-
-            if(row[1].equals("1"))
-            {
-                isAnyChecked = true;
-                break;
-            }
-            else
-            {
-                isAnyChecked = false;
-            }
-
-        }
 
         for (int i = 0; i < insertArray.length - 1; i++) {
 

@@ -169,7 +169,7 @@ public class RoofingScreenFragment extends BaseFragment {
                 edit.putBoolean("addObservationButton",true);
                 edit.commit();
 
-                Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
+                 Intent intent= new Intent(getActivity(), Detailed_Activity_All_Screens.class);
                 intent.putExtra("items",StructureScreensActivity.roofCoveringButtonValues);
                 intent.putExtra("heading",roofCoveringButton.getText().toString());
                 intent.putExtra("column","roofcovering");

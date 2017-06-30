@@ -18,7 +18,14 @@
         android:layout_height="match_parent"
         android:id="@+id/details_listview"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/app_bar" />
+        android:clickable="false"
+        android:dividerHeight="4dp"
+        android:divider="@color/colorPrimary"
+        android:listSelector="@android:color/transparent"
+        android:focusableInTouchMode="false"
+        android:layout_below="@+id/app_bar"
+        android:layout_above="@+id/add_category"
+        />
     <ImageView
         android:id="@+id/add_category"
         android:layout_width="80dp"
@@ -26,11 +33,9 @@
         android:layout_gravity="bottom|right"
         android:src="@drawable/fab_add"
         app:layout_anchorGravity="bottom|right|end"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="22dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="20dp" />
+        android:layout_margin="10dp" />
 
 </RelativeLayout>

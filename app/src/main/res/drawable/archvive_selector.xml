@@ -7,7 +7,7 @@
         android:drawable="@drawable/archive_red" />
  
     <item
-        android:drawable="@drawable/archive"
+        android:drawable="@drawable/archive_black"
         />
  
 </selector>
