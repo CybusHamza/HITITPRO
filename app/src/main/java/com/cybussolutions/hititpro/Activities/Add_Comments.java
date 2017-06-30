@@ -66,6 +66,7 @@ public class Add_Comments extends AppCompatActivity {
     private RadioButton radioButton;
     Button btnSaveImage;
     String clientId,templateId,inspectionId;
+   // String[] imageNames;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,6 +88,7 @@ public class Add_Comments extends AppCompatActivity {
         clientId=i.getStringExtra("clientId");
         templateId=i.getStringExtra("templateId");
         inspectionId=i.getStringExtra("inspectionId");
+       // imageNames=i.getStringArrayExtra("imageNames");
         etComments= (EditText) findViewById(R.id.comments);
         btnSaveImage=(Button)findViewById(R.id.saveImageButton);
         if(mCurrentPhotoPath == null || mCurrentPhotoPath==""){
@@ -242,7 +244,15 @@ public class Add_Comments extends AppCompatActivity {
                                 if (mCurrentPhotoPath != null && mCurrentPhotoPath!="" && MainActivity.mainActivityCount<3) {
                                     startDialog();
                                 }else {
+                                   /* Intent intent=new Intent(Add_Comments.this,ShowImages.class);
+                                    intent.putExtra("dbTable",tablename);
+                                    intent.putExtra("data",data);
+                                    intent.putExtra("clientId",StructureScreensActivity.client_id);
+                                    intent.putExtra("inspectionId",StructureScreensActivity.inspectionID);
+                                    intent.putExtra("templateId",StructureScreensActivity.template_id);
+                                    intent.putExtra("imageNames", imageNames);*/
                                     finish();
+                                  //  startActivity(intent);
                                 }
                             }
                         })

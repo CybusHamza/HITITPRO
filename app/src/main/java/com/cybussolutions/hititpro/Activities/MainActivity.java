@@ -135,7 +135,6 @@ public class MainActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.app_bar);
         toolbar.setTitle("Image Editor");
         setSupportActionBar(toolbar);
-
        // imageView = (DrawingView)findViewById(R.id.drawingview);
         this.canvas = (CanvasView)this.findViewById(R.id.canvas);
 
@@ -295,10 +294,11 @@ public class MainActivity extends AppCompatActivity {
 
                             String check=etAttachmentName.getText().toString();
                             if(check.equals("")){
-                                Toast ToastMessage = Toast.makeText(getApplicationContext(),"Plz enter some attachment name",Toast.LENGTH_SHORT);
-                                View toastView = ToastMessage.getView();
-                                toastView.setBackgroundResource(R.color.colorPrimary);
-                                ToastMessage.show();
+                               // Toast ToastMessage =
+                                 Toast.makeText(getApplicationContext(),"Plz enter some attachment name",Toast.LENGTH_SHORT).show();
+//                                View toastView = ToastMessage.getView();
+//                                toastView.setBackgroundResource(R.color.colorPrimary);
+//                                ToastMessage.show();
                             }
                             else {
                                 File root = new File(Environment.getExternalStorageDirectory()

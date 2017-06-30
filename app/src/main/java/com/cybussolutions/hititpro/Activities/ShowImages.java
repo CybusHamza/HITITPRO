@@ -1,9 +1,14 @@
 package com.cybussolutions.hititpro.Activities;
 
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -38,6 +43,8 @@ import static com.cybussolutions.hititpro.R.drawable.del;
 
 public class ShowImages extends AppCompatActivity {
 
+    ProgressDialog ringProgressDialog;
+
     private static final int MY_SOCKET_TIMEOUT_MS = 10000;
 
     static int showImagesCounter=0;
@@ -59,7 +66,7 @@ public class ShowImages extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.app_bar);
         toolbar.setTitle("View Images");
         setSupportActionBar(toolbar);
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getDefaultComments();
         imageView= (ImageView) findViewById(R.id.selectedImage);
         imageView1= (ImageView) findViewById(R.id.selectedImage1);
@@ -99,6 +106,8 @@ public class ShowImages extends AppCompatActivity {
                     intent.putExtra("clientId",StructureScreensActivity.client_id);
                     intent.putExtra("inspectionId",StructureScreensActivity.inspectionID);
                     intent.putExtra("templateId",StructureScreensActivity.template_id);
+                   // intent.putExtra("imageNames", imageNames);
+                    //finish();
                     showImagesCounter=3;
                     startActivity(intent);
                     Toast.makeText(getApplicationContext(), "you cannot upload more photos", Toast.LENGTH_LONG).show();
@@ -190,6 +199,25 @@ public class ShowImages extends AppCompatActivity {
                 imageView.setImageDrawable(image4.getDrawable());
             }
         });*/
+
+       deleteImageButton1.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+                startDialog(imageNames[0]);
+           }
+       });
+        deleteImageButton2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startDialog(imageNames[1]);
+            }
+        });
+        deleteImageButton3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startDialog(imageNames[2]);
+            }
+        });
     }
     public void getDefaultComments() {
 
@@ -256,6 +284,119 @@ public class ShowImages extends AppCompatActivity {
                 params.put("template_id",StructureScreensActivity.template_id);
                 params.put("client_id",StructureScreensActivity.client_id);
                 params.put("inspection_id",StructureScreensActivity.inspectionID);
+                return params;
+            }
+        };
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                MY_SOCKET_TIMEOUT_MS,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        RequestQueue requestQueue = Volley.newRequestQueue(ShowImages.this);
+        requestQueue.add(request);
+
+    }
+    public void onResume(){
+        super.onResume();
+        getDefaultComments();
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                finish();
+                onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+    private void startDialog(final String imageName) {
+        AlertDialog.Builder myAlertDialog = new AlertDialog.Builder(
+                ShowImages.this);
+        myAlertDialog.setTitle("Alert");
+        myAlertDialog.setMessage("Do you want to delete picture");
+
+        myAlertDialog.setPositiveButton("Yes",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        ringProgressDialog = ProgressDialog.show(ShowImages.this, "Please wait ...", "Deleting Image ...", true);
+                        ringProgressDialog.setCancelable(false);
+                        ringProgressDialog.show();
+                        deleteImage(imageName);
+                    }
+                });
+
+        myAlertDialog.setNegativeButton("No",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface arg0, int arg1) {
+
+                    }
+                });
+        myAlertDialog.show();
+    }
+
+    public void deleteImage(final String imageName) {
+
+        final StringRequest request = new StringRequest(Request.Method.POST, End_Points.DELETE_PICTURE,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        ringProgressDialog.dismiss();
+                        new SweetAlertDialog(ShowImages.this, SweetAlertDialog.SUCCESS_TYPE)
+                                .setTitleText("Success!")
+                                .setConfirmText("OK").setContentText("Image Deleted Successfully")
+                                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                    @Override
+                                    public void onClick(SweetAlertDialog sDialog) {
+                                        sDialog.dismiss();
+                                        finish();
+                                    }
+                                })
+                                .show();
+                                }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                 ringProgressDialog.dismiss();
+                if (error instanceof NoConnectionError) {
+
+                    new SweetAlertDialog(ShowImages.this, SweetAlertDialog.ERROR_TYPE)
+                            .setTitleText("Error!")
+                            .setConfirmText("OK").setContentText("No Internet Connection")
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    sDialog.dismiss();
+                                }
+                            })
+                            .show();
+                } else if (error instanceof TimeoutError) {
+
+                    new SweetAlertDialog(ShowImages.this, SweetAlertDialog.ERROR_TYPE)
+                            .setTitleText("Error!")
+                            .setConfirmText("OK").setContentText("Connection TimeOut! Please check your internet connection.")
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    sDialog.dismiss();
+                                }
+                            })
+                            .show();
+                }
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+
+                Map<String, String> params = new HashMap<>();
+                params.put("element_id",data);
+                params.put("template_id",StructureScreensActivity.template_id);
+                params.put("client_id",StructureScreensActivity.client_id);
+                params.put("inspection_id",StructureScreensActivity.inspectionID);
+                params.put("imageName",imageName);
                 return params;
             }
         };

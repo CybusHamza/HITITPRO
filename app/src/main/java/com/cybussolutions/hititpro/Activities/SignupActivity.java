@@ -393,4 +393,19 @@ public class SignupActivity extends AppCompatActivity {
         RequestQueue requestQueue = Volley.newRequestQueue(SignupActivity.this);
         requestQueue.add(stringRequest);
     }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+
+        if (requestCode == REQUEST_PERMISSIONS) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                //The External Storage Write Permission is granted to you... Continue your left job...
+                attachLogo();
+            } else {
+
+
+                Toast.makeText(SignupActivity.this, "Permission Denied", Toast.LENGTH_SHORT).show();
+            }
+        }
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
 }
