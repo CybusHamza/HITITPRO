@@ -70,7 +70,7 @@ public class ReviewInspectionFragment extends BaseFragment {
         root= inflater.inflate(R.layout.fragment_review_inspection,container,false);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Review Inspection");
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.menu);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.menu_black);
         final SharedPreferences pref = getActivity().getSharedPreferences("UserPrefs", getActivity().MODE_PRIVATE);
         id = pref.getString("user_id", null);
         Intent intent= getActivity().getIntent();

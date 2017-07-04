@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-
+<RelativeLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <include
+        android:id="@+id/app_bar"
+        layout="@layout/app_bar"/>
 <ScrollView android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
+    android:layout_below="@id/app_bar"
     xmlns:android="http://schemas.android.com/apk/res/android" >
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -207,8 +213,9 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Zip e.g. 333333"
+            android:hint="Zip"
             android:singleLine="true"
+            android:inputType="number"
             android:textColor="@color/black"
             android:textColorHint="@color/black"
             android:textSize="15sp"
@@ -219,14 +226,14 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Register"
+        android:text="Add Client"
         android:id="@+id/register"
         android:textSize="20sp"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textStyle="bold"
         android:typeface="serif"
         android:padding="20dp"
-        android:background="@drawable/round_corner_button"
+        android:background="@drawable/outline_active_style"
         android:layout_marginTop="40dp"
         android:layout_marginBottom="20dp"
         android:layout_gravity="center_horizontal" />
@@ -234,3 +241,4 @@
 
 </LinearLayout>
     </ScrollView>
+</RelativeLayout>

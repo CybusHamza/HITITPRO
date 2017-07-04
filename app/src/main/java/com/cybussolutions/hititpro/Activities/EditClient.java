@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -49,6 +50,10 @@ public class EditClient extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_client);
+        Toolbar toolbar;
+        toolbar = (Toolbar) findViewById(R.id.app_bar);
+        toolbar.setTitle("Edit Client");
+        setSupportActionBar(toolbar);
 
         Intent intent = getIntent();
         clientId =intent.getStringExtra("client_id");

@@ -174,7 +174,7 @@ public class SignupActivity extends AppCompatActivity {
                 }
                 else
                 {
-                    if(stremial.matches(emailPattern) && strpassword.length()>=8 && strpassword.equals(strconfirmpassword))
+                    if(stremial.matches(emailPattern) && strpassword.length()>=8 && strpassword.equals(strconfirmpassword) && mCurrentPhotoPath!=null )
                     {
                         uploadlogo();
                         //Signup();
@@ -183,6 +183,9 @@ public class SignupActivity extends AppCompatActivity {
                     }
                     else if(!strpassword.equals(strconfirmpassword)){
                         Toast.makeText(getApplicationContext(),"Password Mismatches",Toast.LENGTH_LONG).show();
+                    }
+                    else if(mCurrentPhotoPath==null){
+                        Toast.makeText(getApplicationContext(),"Please attach logo first to proceed",Toast.LENGTH_LONG).show();
                     }
                     else {
                         new SweetAlertDialog(SignupActivity.this, SweetAlertDialog.ERROR_TYPE)
@@ -348,6 +351,9 @@ public class SignupActivity extends AppCompatActivity {
         }
     }
     private void uploadlogo() {
+        ringProgressDialog = ProgressDialog.show(this, "", "Please wait ...", true);
+        ringProgressDialog.setCancelable(false);
+        ringProgressDialog.show();
         Calendar c = Calendar.getInstance();
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         final String formattedDate = df.format(c.getTime());
@@ -357,9 +363,6 @@ public class SignupActivity extends AppCompatActivity {
         byte[] ba = bao.toByteArray();
         ba1 = Base64.encodeToString(ba, Base64.NO_WRAP);
 
-        ringProgressDialog = ProgressDialog.show(this, "", "Please wait ...", true);
-        ringProgressDialog.setCancelable(false);
-        ringProgressDialog.show();
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, End_Points.UPLOAD, new Response.Listener<String>() {
             @Override
@@ -374,6 +377,33 @@ public class SignupActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 ringProgressDialog.dismiss();
+                if (error instanceof NoConnectionError) {
+
+                    new SweetAlertDialog(SignupActivity.this, SweetAlertDialog.ERROR_TYPE)
+                            .setTitleText("Error!")
+                            .setConfirmText("OK").setContentText("No Internet Connection")
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    sDialog.dismiss();
+
+                                }
+                            })
+                            .show();
+                } else if (error instanceof TimeoutError) {
+
+                    new SweetAlertDialog(SignupActivity.this, SweetAlertDialog.ERROR_TYPE)
+                            .setTitleText("Error!")
+                            .setConfirmText("OK").setContentText("Connection TimeOut! Please check your internet connection.")
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    sDialog.dismiss();
+
+                                }
+                            })
+                            .show();
+                }
                 Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
             }
         }) {

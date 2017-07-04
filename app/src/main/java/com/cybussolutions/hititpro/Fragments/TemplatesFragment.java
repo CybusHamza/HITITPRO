@@ -75,7 +75,7 @@ public class TemplatesFragment extends BaseFragment {
 
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Create Inspection");
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.menu);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.menu_black);
 
          final SharedPreferences pref = getActivity().getSharedPreferences("UserPrefs", getActivity().MODE_PRIVATE);
          editor = pref.edit();
@@ -88,11 +88,11 @@ public class TemplatesFragment extends BaseFragment {
         paraEt = (EditText) root.findViewById(R.id.et_default_comments);
         // inspection_spinner = (Spinner) root.findViewById(R.id.inspection);
         review = (Button) root.findViewById(R.id.button);
-        add_template = (ImageView) root.findViewById(R.id.add_template);
+       // add_template = (ImageView) root.findViewById(R.id.add_template);
 
         client_spinner.setOnItemSelectedListener(new CustomOnItemSelectedListener_client());
 
-        add_template.setOnClickListener(new View.OnClickListener() {
+      /*  add_template.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int client_id = client_spinner.getSelectedItemPosition();
@@ -104,7 +104,7 @@ public class TemplatesFragment extends BaseFragment {
                 }else
                     Toast.makeText(getContext(),"Plz select client to add new template",Toast.LENGTH_LONG).show();
             }
-        });
+        });*/
         review.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

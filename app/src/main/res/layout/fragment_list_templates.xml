@@ -20,7 +20,8 @@
             android:layout_height="60dp"
             android:layout_weight="1"
             android:background="@drawable/outline_active_style"
-            android:text="Active Inspections" />
+            android:text="Active Inspections"
+            android:textStyle="bold"/>
 
         <Button
             android:layout_width="0dp"
@@ -30,6 +31,7 @@
             android:id="@+id/archive"
             android:background="@drawable/outline_style"
             android:text="Archive Inspections"
+            android:textStyle="bold"
             />
 
     </LinearLayout>

@@ -36,7 +36,7 @@ public class ProfileFragment extends BaseFragment {
         // set toolbar with main activity
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Profile");
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.menu);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.menu_black);
 
 
 

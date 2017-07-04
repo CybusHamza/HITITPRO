@@ -14,6 +14,7 @@ import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Base64;
@@ -72,7 +73,10 @@ public class Edit_Profile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit__profile);
-
+        Toolbar toolbar;
+        toolbar = (Toolbar) findViewById(R.id.app_bar);
+        toolbar.setTitle("Edit User");
+        setSupportActionBar(toolbar);
         pref = getApplicationContext().getSharedPreferences("UserPrefs", MODE_PRIVATE);
         userid = pref.getString("user_id", null);
         pic = pref.getString("img",null);

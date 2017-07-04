@@ -69,7 +69,7 @@ public class Start_Inspection extends AppCompatActivity {
         toolbar.setTitle("Start inspection");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
+        toolbar.setTitleTextColor(getResources().getColor(android.R.color.black));
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.back);
 
         Intent intent = getIntent();

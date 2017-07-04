@@ -74,7 +74,7 @@ public class TemplatesListFragment extends BaseFragment {
 
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Inspection List");
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.menu);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.menu_black);
 
 
 
@@ -220,7 +220,7 @@ public class TemplatesListFragment extends BaseFragment {
 
                 model.setClient_name("Client Name: "+object.getString("client_name"));
                 model.setClient_id(object.getString("client_id"));
-                model.set_template("Template: "+templatename);
+                model.set_template("Property: "+templatename);
                 model.set_template_id(object.getString("template_id"));
                 model.set_inspection("Inspection: "+inspectionname);
                 model.set_inspection_id(object.getString("inspection_id"));
