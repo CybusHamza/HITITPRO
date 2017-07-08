@@ -24,8 +24,10 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.cybussolutions.hititpro.Fragments.ClientsFragment;
 import com.cybussolutions.hititpro.Network.End_Points;
 import com.cybussolutions.hititpro.R;
+import com.cybussolutions.hititpro.Template_Inspection.FirePlaceScreenFragment;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -231,7 +233,6 @@ public class EditClient extends AppCompatActivity {
                                         @Override
                                         public void onClick(SweetAlertDialog sDialog) {
                                             sDialog.dismiss();
-
                                             finish();
 
                                         }

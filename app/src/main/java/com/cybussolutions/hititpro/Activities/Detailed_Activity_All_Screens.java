@@ -107,8 +107,8 @@ public class Detailed_Activity_All_Screens extends AppCompatActivity {
         toolbar.setTitle(heading);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.back);
+        toolbar.setTitleTextColor(getResources().getColor(android.R.color.black));
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.back_btn);
 
         detailedListView = (ListView) findViewById(R.id.details_listview);
         addCategory = (ImageView) findViewById(R.id.add_category);
