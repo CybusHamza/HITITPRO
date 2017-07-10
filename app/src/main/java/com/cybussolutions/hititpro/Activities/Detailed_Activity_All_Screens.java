@@ -107,7 +107,7 @@ public class Detailed_Activity_All_Screens extends AppCompatActivity {
         toolbar.setTitle(heading);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
+        toolbar.setTitleTextColor(getResources().getColor(android.R.color.black));
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.back);
 
         detailedListView = (ListView) findViewById(R.id.details_listview);
@@ -133,7 +133,7 @@ public class Detailed_Activity_All_Screens extends AppCompatActivity {
         });
 
 
-        if (fromDataBase != null && !(dbColumn.equals(""))) {
+        if (fromadapter.equals("false") ) {
 
             String splitter = "\\^";
             String[] row = fromDataBase.split(splitter);
@@ -157,9 +157,6 @@ public class Detailed_Activity_All_Screens extends AppCompatActivity {
 
                 position++;
             }
-
-        } else if(fromDataBase == null) {
-            Toast.makeText(this, "Error while retreving data !! ", Toast.LENGTH_SHORT).show();
         }
 
         else {

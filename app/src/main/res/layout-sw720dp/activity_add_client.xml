@@ -1,117 +1,166 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+<RelativeLayout android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:background="@drawable/house_bkg"
-    tools:context=".Activities.Add_Client">
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <include
+        android:id="@+id/app_bar"
+        layout="@layout/app_bar"/>
+    <ScrollView android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:layout_below="@id/app_bar"
+        xmlns:android="http://schemas.android.com/apk/res/android" >
 
-    <com.github.florent37.materialtextfield.MaterialTextField
-        android:layout_width="600dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        app:mtf_cardCollapsedHeight="4dp"
-        app:mtf_image="@drawable/user"
-        app:mtf_openKeyboardOnFocus="true"
-        android:layout_marginTop="30dp"
-        android:id="@+id/name">
-
-        <EditText
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Client Name"
-            android:singleLine="true"
-            android:textColor="@color/black"
-            android:textColorHint="@color/black"
-            android:textSize="25sp"
-            android:id="@+id/client_name" />
-
-    </com.github.florent37.materialtextfield.MaterialTextField>
-
-    <com.github.florent37.materialtextfield.MaterialTextField
-        android:layout_width="600dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        app:mtf_cardCollapsedHeight="4dp"
-        app:mtf_image="@drawable/gender"
-        app:mtf_openKeyboardOnFocus="true"
-        android:layout_marginTop="20dp"
-        android:id="@+id/gender">
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Gender"
-            android:singleLine="true"
-            android:textColor="@color/black"
-            android:inputType="textPassword"
-            android:textColorHint="@color/black"
-            android:textSize="25sp"
-            android:id="@+id/client_gender" />
-
-    </com.github.florent37.materialtextfield.MaterialTextField>
-
-    <com.github.florent37.materialtextfield.MaterialTextField
-        android:layout_width="600dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        app:mtf_cardCollapsedHeight="4dp"
-        app:mtf_image="@drawable/location"
-        app:mtf_openKeyboardOnFocus="true"
-        android:layout_marginTop="30dp"
-        android:id="@+id/location">
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Location"
-            android:singleLine="true"
-            android:textColor="@color/black"
-            android:textColorHint="@color/black"
-            android:textSize="25sp"
-            android:id="@+id/client_location" />
-
-    </com.github.florent37.materialtextfield.MaterialTextField>
-
-    <com.github.florent37.materialtextfield.MaterialTextField
-        android:layout_width="600dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        app:mtf_cardCollapsedHeight="4dp"
-        app:mtf_image="@drawable/phone"
-        app:mtf_openKeyboardOnFocus="true"
-        android:layout_marginTop="20dp"
-        android:id="@+id/phone">
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Password"
-            android:singleLine="true"
-            android:textColor="@color/black"
-            android:inputType="textPassword"
-            android:textColorHint="@color/black"
-            android:textSize="25sp"
-            android:id="@+id/client_phone" />
-
-    </com.github.florent37.materialtextfield.MaterialTextField>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Register"
-        android:id="@+id/register"
-        android:textSize="25sp"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        android:typeface="serif"
-        android:padding="20dp"
-
-        android:background="@drawable/round_corner_button"
-        android:layout_marginTop="180dp"
-        android:layout_gravity="center_horizontal" />
+            android:layout_height="match_parent"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:orientation="vertical"
+            tools:context=".Activities.Add_Client">
 
 
-</LinearLayout>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Client Name"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:layout_margin="10dp"
+                android:textColorHint="@color/black"
+                android:textSize="15sp"
+                android:id="@+id/client_name" />
+
+
+
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Contact Name"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:layout_margin="10dp"
+                android:textColorHint="@color/black"
+                android:textSize="15sp"
+                android:id="@+id/client_contact_name" />
+
+
+
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Address"
+                android:singleLine="true"
+                android:layout_margin="10dp"
+                android:textColor="@color/black"
+                android:inputType="text"
+                android:textColorHint="@color/black"
+                android:textSize="15sp"
+                android:id="@+id/client_adress" />
+
+
+
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="City"
+                android:singleLine="true"
+                android:layout_margin="10dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black"
+                android:textSize="15sp"
+                android:id="@+id/client_location" />
+
+
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Phone Number"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:inputType="phone"
+                android:textColorHint="@color/black"
+                android:textSize="15sp"
+                android:layout_margin="10dp"
+                android:id="@+id/client_phone"
+                android:maxLength="14"/>
+
+
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Fax Number"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:inputType="phone"
+                android:layout_margin="10dp"
+                android:textColorHint="@color/black"
+                android:textSize="15sp"
+                android:id="@+id/client_fax"
+                android:maxLength="14"/>
+
+
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Email"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:inputType="textEmailAddress"
+                android:textColorHint="@color/black"
+                android:textSize="15sp"
+                android:layout_margin="10dp"
+                android:id="@+id/client_email" />
+
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="State"
+                android:singleLine="true"
+                android:layout_margin="10dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black"
+                android:textSize="15sp"
+                android:id="@+id/client_state" />
+
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Zip"
+                android:singleLine="true"
+                android:layout_margin="10dp"
+                android:inputType="number"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black"
+                android:textSize="15sp"
+                android:id="@+id/client_zip" />
+
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Add Client"
+                android:id="@+id/register"
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:typeface="serif"
+                android:padding="20dp"
+                android:background="@drawable/outline_active_style"
+                android:layout_marginTop="40dp"
+                android:layout_marginBottom="20dp"
+                android:layout_gravity="center_horizontal" />
+
+
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

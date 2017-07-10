@@ -27,7 +27,6 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.cybussolutions.hititpro.Activities.AddTemplate;
 import com.cybussolutions.hititpro.Activities.StructureScreensActivity;
 import com.cybussolutions.hititpro.Network.End_Points;
 import com.cybussolutions.hititpro.R;
@@ -135,10 +134,10 @@ public class TemplatesFragment extends BaseFragment {
                                 //  Toast.makeText(getContext(),"plz select client to review",Toast.LENGTH_LONG).show();
                             }
                         } else {
-                            Toast.makeText(getContext(), "plz select client and template to continue", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getContext(), "plz select client and Property to continue", Toast.LENGTH_LONG).show();
                         }
                     } else {
-                        Toast.makeText(getContext(), "plz select client and template to continue", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(), "plz select client and Property to continue", Toast.LENGTH_LONG).show();
                     }
                        /* Intent intent=new Intent(getActivity(), Start_Inspection.class);
                         intent.putExtra("client_name",client_spinner.getSelectedItem().toString());
@@ -216,7 +215,7 @@ public class TemplatesFragment extends BaseFragment {
                         } else {
                             new SweetAlertDialog(getActivity(), SweetAlertDialog.ERROR_TYPE)
                                     .setTitleText("Error!")
-                                    .setConfirmText("OK").setContentText("There Are No Templates Against this Client")
+                                    .setConfirmText("OK").setContentText("There are no registered Properties Against this client")
                                     .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                                         @Override
                                         public void onClick(SweetAlertDialog sDialog) {
@@ -300,11 +299,11 @@ public class TemplatesFragment extends BaseFragment {
                             isdefault = new ArrayList<>();
                             default_template = new ArrayList<>();
 
-                            inspection_list.add(0, "No Templates Founds");
-                            inspection_id_list.add(0, "No Templates Founds");
-                            para_list.add(0, "No Templates Founds");
-                            isStarted.add(0, "No Templates Founds");
-                            default_template.add(0, "No Templates Founds");
+                            inspection_list.add(0, "No Property Founds");
+                            inspection_id_list.add(0, "No Property Founds");
+                            para_list.add(0, "No Property Founds");
+                            isStarted.add(0, "No Property Founds");
+                            default_template.add(0, "No Property Founds");
                             ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>
                                     (getContext(), android.R.layout.simple_spinner_item, inspection_list);
 
@@ -312,7 +311,7 @@ public class TemplatesFragment extends BaseFragment {
                                     (android.R.layout.simple_spinner_dropdown_item);
 
                             tem_spinner.setAdapter(dataAdapter);
-                            review.setText("Start Inspection");
+                           // review.setText("Start Inspection");
 
                         } else if (!(response.equals("0"))) {
                             try {
@@ -342,7 +341,7 @@ public class TemplatesFragment extends BaseFragment {
                                 default_template.add(0,"");
 
 
-                                inspection_list.add(1,"No Template");
+                                inspection_list.add(1,"No Property");
                                 inspection_id_list.add(1,"0");
                                 para_list.add(1,"");
                                 isdefault.add(1,"");
@@ -430,7 +429,7 @@ public class TemplatesFragment extends BaseFragment {
                         } else {
                             new SweetAlertDialog(getActivity(), SweetAlertDialog.ERROR_TYPE)
                                     .setTitleText("Error!")
-                                    .setConfirmText("OK").setContentText("There Are No Templates Against this Client")
+                                    .setConfirmText("OK").setContentText("There are no Properties against this client")
                                     .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                                         @Override
                                         public void onClick(SweetAlertDialog sDialog) {
@@ -523,7 +522,7 @@ public class TemplatesFragment extends BaseFragment {
                         } else if (response.equals("false")) {
                             new SweetAlertDialog(getActivity(), SweetAlertDialog.ERROR_TYPE)
                                     .setTitleText("Error!")
-                                    .setConfirmText("OK").setContentText("No Template Found ")
+                                    .setConfirmText("OK").setContentText("No Property Found ")
                                     .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                                         @Override
                                         public void onClick(SweetAlertDialog sDialog) {
@@ -648,7 +647,7 @@ public class TemplatesFragment extends BaseFragment {
                         } else {
                             new SweetAlertDialog(getActivity(), SweetAlertDialog.ERROR_TYPE)
                                     .setTitleText("Error!")
-                                    .setConfirmText("OK").setContentText("There was an Error creating template")
+                                    .setConfirmText("OK").setContentText("There was an error creating Property")
                                     .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                                         @Override
                                         public void onClick(SweetAlertDialog sDialog) {
@@ -759,7 +758,7 @@ public class TemplatesFragment extends BaseFragment {
             if (inspection_list.get(pos).equals("No Records Founds")) {
                 temp_id = "0";
             }
-            else if (inspection_list.get(pos).equals("No Template") && pos ==1) {
+            else if (inspection_list.get(pos).equals("No Property") && pos ==1) {
                 temp_id = "";
                 paraEt.setText("");
             }
@@ -772,14 +771,22 @@ public class TemplatesFragment extends BaseFragment {
                 paraEt.setText(para);
 
             }
-            if (!(isStarted.get(tem_spinner.getSelectedItemPosition()).equals("0"))) {
-
-                review.setText("Continue");
-            }
-            else
+            if(pos>0)
             {
-                review.setText("Start Inspection");
+                if (!(isStarted.get(tem_spinner.getSelectedItemPosition()).equals("0"))) {
+
+                    review.setText("Continue");
+                }
+                else
+                {
+                    review.setText(" Start Inspection");
+                }
             }
+            else{
+                review.setText(" Start Inspection");
+            }
+
+
 
 
             getInspections(temp_id);

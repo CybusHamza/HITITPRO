@@ -5,78 +5,48 @@
     <include
         android:id="@+id/app_bar"
         layout="@layout/app_bar"/>
-<ScrollView android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fillViewport="true"
-    android:layout_below="@id/app_bar"
-    xmlns:android="http://schemas.android.com/apk/res/android" >
-
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
+    <ScrollView android:layout_width="match_parent"
         android:layout_height="match_parent"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:orientation="vertical"
-        android:background="@drawable/house_bkg"
-        tools:context=".Activities.Add_Client">
+        android:fillViewport="true"
+        android:layout_below="@id/app_bar"
+        xmlns:android="http://schemas.android.com/apk/res/android" >
 
-        <com.github.florent37.materialtextfield.MaterialTextField
-            android:layout_width="600dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            app:mtf_cardCollapsedHeight="4dp"
-            app:mtf_image="@drawable/user"
-            app:mtf_hasFocus="true"
-            app:mtf_openKeyboardOnFocus="false"
-            android:layout_marginTop="30dp"
-            android:id="@+id/first_name">
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:orientation="vertical"
+            tools:context=".Activities.Add_Client">
+
+
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="First Name"
                 android:singleLine="true"
+                android:layout_margin="10dp"
                 android:textColor="@color/black"
                 android:textColorHint="@color/black"
                 android:textSize="15sp"
                 android:id="@+id/et_first_name"
-                android:digits="qwertzuiopasdfghjklyxcvbnmABCDEFGHIJKLMNOPQRSTUVWXYZ"/>
+                android:digits="1234567890qwertzuiopasdfghjklyxcvbnmABCDEFGHIJKLMNOPQRSTUVWXYZ"/>
 
-        </com.github.florent37.materialtextfield.MaterialTextField>
-        <com.github.florent37.materialtextfield.MaterialTextField
-            android:layout_width="600dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            app:mtf_cardCollapsedHeight="4dp"
-            app:mtf_image="@drawable/user"
-            app:mtf_hasFocus="false"
-            app:mtf_openKeyboardOnFocus="false"
-            android:layout_marginTop="30dp"
-            android:id="@+id/last_name">
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Last Name"
+                android:layout_margin="10dp"
                 android:singleLine="true"
                 android:textColor="@color/black"
                 android:textColorHint="@color/black"
                 android:textSize="15sp"
                 android:id="@+id/et_last_name"
-                android:digits="qwertzuiopasdfghjklyxcvbnmABCDEFGHIJKLMNOPQRSTUVWXYZ"/>
+                android:digits="1234567890qwertzuiopasdfghjklyxcvbnmABCDEFGHIJKLMNOPQRSTUVWXYZ"/>
 
-        </com.github.florent37.materialtextfield.MaterialTextField>
 
-        <com.github.florent37.materialtextfield.MaterialTextField
-            android:layout_width="600dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            app:mtf_cardCollapsedHeight="4dp"
-            app:mtf_image="@drawable/user"
-            app:mtf_hasFocus="false"
-            app:mtf_openKeyboardOnFocus="false"
-            android:layout_marginTop="30dp"
-            android:id="@+id/user_email">
 
             <EditText
                 android:layout_width="match_parent"
@@ -84,22 +54,12 @@
                 android:hint="Email"
                 android:singleLine="true"
                 android:textColor="@color/black"
+                android:layout_margin="10dp"
                 android:textColorHint="@color/black"
                 android:textSize="15sp"
                 android:id="@+id/et_user_email" />
 
-        </com.github.florent37.materialtextfield.MaterialTextField>
 
-        <com.github.florent37.materialtextfield.MaterialTextField
-            android:layout_width="600dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            app:mtf_cardCollapsedHeight="4dp"
-            app:mtf_image="@drawable/gender"
-            app:mtf_hasFocus="false"
-            app:mtf_openKeyboardOnFocus="false"
-            android:layout_marginTop="20dp"
-            android:id="@+id/user_contact">
 
             <EditText
                 android:layout_width="match_parent"
@@ -108,90 +68,49 @@
                 android:singleLine="true"
                 android:textColor="@color/black"
                 android:inputType="phone"
+                android:layout_margin="10dp"
                 android:textColorHint="@color/black"
                 android:textSize="15sp"
                 android:id="@+id/et_user_contact"
                 android:maxLength="14"/>
 
-        </com.github.florent37.materialtextfield.MaterialTextField>
-        <com.github.florent37.materialtextfield.MaterialTextField
-            android:layout_width="600dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            app:mtf_cardCollapsedHeight="4dp"
-            app:mtf_image="@drawable/gender"
-            app:mtf_hasFocus="false"
-            app:mtf_openKeyboardOnFocus="false"
-            android:layout_marginTop="20dp"
-            android:id="@+id/user_fax">
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Fax"
                 android:singleLine="true"
+                android:layout_margin="10dp"
                 android:textColor="@color/black"
                 android:inputType="text"
                 android:textColorHint="@color/black"
                 android:textSize="15sp"
                 android:id="@+id/et_user_fax" />
 
-        </com.github.florent37.materialtextfield.MaterialTextField>
-
-        <com.github.florent37.materialtextfield.MaterialTextField
-            android:layout_width="600dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            app:mtf_cardCollapsedHeight="4dp"
-            app:mtf_hasFocus="false"
-            app:mtf_image="@drawable/location"
-            app:mtf_openKeyboardOnFocus="false"
-            android:layout_marginTop="30dp"
-            android:id="@+id/user_website">
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Website"
                 android:singleLine="true"
+                android:layout_margin="10dp"
                 android:textColor="@color/black"
                 android:textColorHint="@color/black"
                 android:textSize="15sp"
                 android:id="@+id/et_user_website" />
 
-        </com.github.florent37.materialtextfield.MaterialTextField>
-        <com.github.florent37.materialtextfield.MaterialTextField
-            android:layout_width="600dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            app:mtf_cardCollapsedHeight="4dp"
-            app:mtf_hasFocus="false"
-            app:mtf_image="@drawable/location"
-            app:mtf_openKeyboardOnFocus="false"
-            android:layout_marginTop="30dp"
-            android:id="@+id/user_address">
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Address"
                 android:singleLine="true"
+                android:layout_margin="10dp"
                 android:textColor="@color/black"
                 android:textColorHint="@color/black"
                 android:textSize="15sp"
                 android:id="@+id/et_user_address" />
 
-        </com.github.florent37.materialtextfield.MaterialTextField>
-        <com.github.florent37.materialtextfield.MaterialTextField
-            android:layout_width="600dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            app:mtf_cardCollapsedHeight="4dp"
-            app:mtf_hasFocus="false"
-            app:mtf_image="@drawable/location"
-            app:mtf_openKeyboardOnFocus="false"
-            android:layout_marginTop="30dp"
-            android:id="@+id/user_company_info">
 
             <EditText
                 android:layout_width="match_parent"
@@ -199,50 +118,60 @@
                 android:hint="Company Information"
                 android:singleLine="true"
                 android:textColor="@color/black"
+                android:layout_margin="10dp"
                 android:textColorHint="@color/black"
                 android:textSize="15sp"
                 android:id="@+id/et_user_company_info" />
 
-        </com.github.florent37.materialtextfield.MaterialTextField>
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/activity_vertical_margin"
-            android:layout_marginRight="@dimen/activity_vertical_margin"
-            android:layout_marginTop="60dp">
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/activity_vertical_margin"
+                android:layout_weight="3"
+                android:layout_marginRight="@dimen/activity_vertical_margin"
+                android:layout_marginTop="60dp">
+
+                <Button
+                    android:id="@+id/change_logo_button"
+                    android:layout_width="0dp"
+                    android:layout_height="150dp"
+                    android:text="Change Logo"
+                    android:background="@drawable/outline_active_style"
+                    android:layout_weight="1.25"
+                    android:typeface="serif"
+                    android:textSize="40sp"
+                    android:layout_gravity="center"
+                    android:padding="10dp"/>
+
+                <ImageView
+                    android:id="@+id/logo"
+                    android:layout_width="0dp"
+                    android:layout_height="250dp"
+                    android:layout_weight="1.5"
+                    android:layout_marginLeft="30dp"
+
+                    android:layout_gravity="right|center"
+                    android:background="@android:drawable/ic_menu_gallery"/>
+            </LinearLayout>
 
             <Button
-                android:id="@+id/change_logo_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Change Logo"
-                android:typeface="serif"
-                android:layout_marginBottom="@dimen/activity_horizontal_margin"/>
+                android:id="@+id/update_profile"
+                android:layout_width="400dp"
+                android:layout_height="150dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="40dp"
+                android:background="@drawable/outline_active_style"
+                android:padding="20dp"
+                android:text="Update"
 
-            <ImageView
-                android:id="@+id/logo"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_gravity="right"
-                android:background="@android:drawable/ic_menu_gallery"/>
+                android:textColor="@color/black"
+                android:textSize="50sp"
+                android:textStyle="bold"
+                android:typeface="serif" />
+
+
         </LinearLayout>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Update"
-            android:id="@+id/update_profile"
-            android:textSize="20sp"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            android:typeface="serif"
-            android:padding="20dp"
-            android:background="@drawable/outline_active_style"
-            android:layout_marginTop="40dp"
-            android:layout_marginBottom="20dp"
-            android:layout_gravity="center_horizontal" />
-
-
-    </LinearLayout>
-</ScrollView>
-    </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>

@@ -3,15 +3,14 @@ package com.cybussolutions.hititpro.Activities;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -232,7 +231,11 @@ public class EditClient extends AppCompatActivity {
                                         public void onClick(SweetAlertDialog sDialog) {
                                             sDialog.dismiss();
 
+                                            Intent intent = new Intent(EditClient.this, LandingScreen.class);
                                             finish();
+                                            startActivity(intent);
+
+
 
                                         }
                                     })

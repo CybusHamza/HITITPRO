@@ -30,7 +30,6 @@ import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
-import com.mikepenz.materialize.color.Material;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
@@ -204,7 +203,7 @@ public class LandingScreen extends AppCompatActivity {
 
         AccountHeader headerResult = new AccountHeaderBuilder()
                 .withActivity(this)
-                .withHeaderBackground(R.color.yellow)
+                .withHeaderBackground(R.color.LightYellow)
                 .withTextColor(Color.BLACK)
                 .addProfiles(
                         new ProfileDrawerItem().withName(name).withEmail(email).withIcon(bitmap1[0])
