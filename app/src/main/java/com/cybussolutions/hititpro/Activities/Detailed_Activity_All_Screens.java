@@ -133,7 +133,7 @@ public class Detailed_Activity_All_Screens extends AppCompatActivity {
         });
 
 
-        if (fromDataBase != null && !(dbColumn.equals(""))) {
+        if ((fromadapter.equals("false"))) {
 
             String splitter = "\\^";
             String[] row = fromDataBase.split(splitter);
@@ -158,10 +158,7 @@ public class Detailed_Activity_All_Screens extends AppCompatActivity {
                 position++;
             }
 
-        } else if(fromDataBase == null) {
-            Toast.makeText(this, "Error while retreving data !! ", Toast.LENGTH_SHORT).show();
         }
-
         else {
             int position = 0;
 
