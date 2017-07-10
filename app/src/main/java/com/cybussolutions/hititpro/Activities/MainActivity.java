@@ -300,7 +300,7 @@ public class MainActivity extends AppCompatActivity {
                             String check=etAttachmentName.getText().toString();
                             if(check.equals("")){
                                // Toast ToastMessage =
-                                 Toast.makeText(getApplicationContext(),"Plz enter some attachment name",Toast.LENGTH_SHORT).show();
+                                 Toast.makeText(getApplicationContext(),"Please enter attachment name",Toast.LENGTH_SHORT).show();
 //                                View toastView = ToastMessage.getView();
 //                                toastView.setBackgroundResource(R.color.colorPrimary);
 //                                ToastMessage.show();
@@ -353,6 +353,7 @@ public class MainActivity extends AppCompatActivity {
                     intent.putExtra("inspectionId",inspectionId);
                     intent.putExtra("templateId",templateId);
                     startActivity(intent);
+                    finish();
                     //Toast.makeText(getApplicationContext(), "No image selected", Toast.LENGTH_LONG).show();
                 }
             }
@@ -715,7 +716,7 @@ public class MainActivity extends AppCompatActivity {
                 bmOptions.inSampleSize = scaleFactor;
                 bmOptions.inPurgeable = true;
 
-                Bitmap unscaled=BitmapFactory.decodeFile(ImageDecode);
+                Bitmap unscaled=decodeSampledBitmapFromResource(ImageDecode, w, h);
                 scaled=unscaled.createScaledBitmap(unscaled,w,h,true);
 
                Uri tempUri = getImageUri(getApplicationContext(), scaled);
@@ -923,6 +924,48 @@ public class MainActivity extends AppCompatActivity {
                 INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
         return true;
+    }
+
+    public static int calculateInSampleSize(BitmapFactory.Options options,
+                                            int reqWidth, int reqHeight) {
+        // Raw height and width of image
+        final int height = options.outHeight;
+        final int width = options.outWidth;
+        int inSampleSize = 1;
+
+        if (height > reqHeight || width > reqWidth) {
+
+            // Calculate ratios of height and width to requested height and
+            // width
+            final int heightRatio = Math.round((float) height
+                    / (float) reqHeight);
+            final int widthRatio = Math.round((float) width / (float) reqWidth);
+
+            // Choose the smallest ratio as inSampleSize value, this will
+            // guarantee
+            // a final image with both dimensions larger than or equal to the
+            // requested height and width.
+            inSampleSize = heightRatio < widthRatio ? heightRatio : widthRatio;
+        }
+
+        return inSampleSize;
+    }
+
+    public static Bitmap decodeSampledBitmapFromResource(String path,
+                                                         int reqWidth, int reqHeight) {
+        Log.d("path", path);
+        // First decode with inJustDecodeBounds=true to check dimensions
+        final BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+        BitmapFactory.decodeFile(path, options);
+
+        // Calculate inSampleSize
+        options.inSampleSize = calculateInSampleSize(options, reqWidth,
+                reqHeight);
+
+        // Decode bitmap with inSampleSize set
+        options.inJustDecodeBounds = false;
+        return BitmapFactory.decodeFile(path, options);
     }
 
 }
