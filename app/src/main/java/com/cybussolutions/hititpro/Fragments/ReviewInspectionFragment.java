@@ -397,7 +397,7 @@ public class ReviewInspectionFragment extends BaseFragment {
                                     isStarted.add(object.getString("is_started"));
                                 }
 
-                                String objdef =  obj.getString("default");
+                            /*    String objdef =  obj.getString("default");
 
                                 if(!objdef.equals("No Data"))
                                 {
@@ -420,7 +420,7 @@ public class ReviewInspectionFragment extends BaseFragment {
 
 
                                     }
-                                }
+                                }*/
 
                                 templateSpinner.setAdapter(null);
 

@@ -136,7 +136,8 @@ public class Template_Adapter extends BaseAdapter {
                 intent.putExtra("inspectionId", arrayList.get(position).get_inspection_id());
                 intent.putExtra("client_id", arrayList.get(position).getClient_id());
                 intent.putExtra("template_id", arrayList.get(position).get_template_id());
-                intent.putExtra("template_id", arrayList.get(position).get_template_id());
+                intent.putExtra("template_name", arrayList.get(position).get_template());
+                intent.putExtra("client_name", arrayList.get(position).getClient_name());
                 intent.putExtra("inspection_type", "old");
                 intent.putExtra("is_notemplate", "false");
                 context.startActivity(intent);

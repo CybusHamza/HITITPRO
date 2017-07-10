@@ -55,8 +55,6 @@ public class Setp13_review extends BaseFragment {
 
         root= inflater.inflate(R.layout.fragment_setp13_review, container, false);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Review Inspection");
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.menu);
         final SharedPreferences pref = getActivity().getSharedPreferences("UserPrefs", getActivity().MODE_PRIVATE);
         id = pref.getString("user_id", null);
 
@@ -76,6 +74,10 @@ public class Setp13_review extends BaseFragment {
         tvappliance=(TextView)root.findViewById(R.id.appliance);
 
         getReviewInspection();
+
+        clientsSpinner.setText(StructureScreensActivity.c_name);
+        templateSpinner.setText(StructureScreensActivity.temp_name);
+
 
         return root;
     }

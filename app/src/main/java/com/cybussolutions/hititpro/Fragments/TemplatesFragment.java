@@ -119,7 +119,7 @@ public class TemplatesFragment extends BaseFragment {
                     if (!client_spinner.getSelectedItem().toString().equals("Select")) {
                         if (!tem_spinner.getSelectedItem().toString().equals("Select")) {
                             if (isStarted.get(tem_spinner.getSelectedItemPosition()).equals("0")) {
-                                prePopulate(inspection_id_list.get(tem_spinner.getSelectedItemPosition()),tem_spinner.getSelectedItem().toString(),isdefault.get(tem_spinner.getSelectedItemPosition()), client_id_list.get(client_spinner.getSelectedItemPosition()), default_template.get(tem_spinner.getSelectedItemPosition()));
+                                prePopulate(inspection_id_list.get(tem_spinner.getSelectedItemPosition()),client_spinner.getSelectedItem().toString(),tem_spinner.getSelectedItem().toString(),tem_spinner.getSelectedItem().toString(),isdefault.get(tem_spinner.getSelectedItemPosition()), client_id_list.get(client_spinner.getSelectedItemPosition()), default_template.get(tem_spinner.getSelectedItemPosition()));
 
                             } else {
                                 //  if(!client_list.get(client_id).equals("Select")) {
@@ -127,6 +127,8 @@ public class TemplatesFragment extends BaseFragment {
                                 intent.putExtra("inspectionId", templateID_list.get(0));
                                 intent.putExtra("client_id", client_id_list.get(client_id));
                                 intent.putExtra("is_notemplate","false");
+                                intent.putExtra("client_name",client_spinner.getSelectedItem().toString());
+                                intent.putExtra("template_name",tem_spinner.getSelectedItem().toString());
                                 intent.putExtra("template_id", inspection_id_list.get(template_id));
                                 intent.putExtra("inspection_type", "old");
                                 startActivity(intent);
@@ -620,7 +622,7 @@ public class TemplatesFragment extends BaseFragment {
 
     }
 
-    public void prePopulate(final String temId,final String temname, final String isDefault,final String clientId , final String default_template ) {
+    public void prePopulate(final String temId, final String client_id, final String tempid , final String temname, final String isDefault, final String clientId , final String default_template ) {
         StringRequest request = new StringRequest(Request.Method.POST, End_Points.PRE_POPULATE,
                 new Response.Listener<String>() {
                     @Override
@@ -634,6 +636,9 @@ public class TemplatesFragment extends BaseFragment {
                             Intent intent = new Intent(getActivity(), StructureScreensActivity.class);
                             intent.putExtra("inspectionId", response);
                             intent.putExtra("client_id", clientId);
+                            intent.putExtra("client_name",client_id);
+                            intent.putExtra("template_name",tempid);
+
                             if(response.equals("0")){
                                 intent.putExtra("is_notemplate", "true");
                             }

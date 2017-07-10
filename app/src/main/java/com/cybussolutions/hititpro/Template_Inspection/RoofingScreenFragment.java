@@ -624,11 +624,11 @@ public class RoofingScreenFragment extends BaseFragment {
                 {
                     if(isdefault.isChecked())
                     {
-                        saveNoTemp(tmpName.getText().toString(),true);
+                        saveNoTemp(tmpName.getText().toString(),"1");
                     }
                     else
                     {
-                        saveNoTemp(tmpName.getText().toString(),false);
+                        saveNoTemp(tmpName.getText().toString(),"0");
                     }
 
                 }
@@ -645,7 +645,7 @@ public class RoofingScreenFragment extends BaseFragment {
 
     }
 
-    public void saveNoTemp(final String txt, final boolean check) {
+    public void saveNoTemp(final String txt, final String check) {
 
         ringProgressDialog = ProgressDialog.show(getActivity(), "Please wait ...", "Saving Template ...", true);
         ringProgressDialog.setCancelable(false);
@@ -724,7 +724,7 @@ public class RoofingScreenFragment extends BaseFragment {
                 String  user = pref.getString("user_id","");
 
                 params.put("name", txt);
-                params.put("isDefault", String.valueOf(check));
+                params.put("isDefault", check);
                 params.put("client_id", StructureScreensActivity.client_id);
                 params.put("added_by", user);
 
