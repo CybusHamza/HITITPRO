@@ -125,6 +125,8 @@ public class MainActivity extends AppCompatActivity {
     private CanvasView canvas = null;
      String showImage,clientId,templateId,inspectionId;
 
+    String attachment_name;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -145,6 +147,8 @@ public class MainActivity extends AppCompatActivity {
         clientId=intent.getStringExtra("clientId");
         templateId=intent.getStringExtra("templateId");
         inspectionId=intent.getStringExtra("inspectionId");
+        attachment_name=intent.getStringExtra("attachmentName");
+
         if(showImage.equals("false"))
         getImages();
 
@@ -164,6 +168,7 @@ public class MainActivity extends AppCompatActivity {
         undo= (Button) findViewById(R.id.undo);
         redo= (Button) findViewById(R.id.redo);
         etAttachmentName= (EditText) findViewById(R.id.et_attachment_name);
+        etAttachmentName.setText(attachment_name);
 
         if(scaled==null){
             drawLine.setVisibility(View.INVISIBLE);
@@ -374,6 +379,7 @@ public class MainActivity extends AppCompatActivity {
                             JSONObject jsonObject = new JSONObject(jsonArray.getString(i));
                             if(!jsonObject.getString("attachment_saved_name").equals("")) {
                                 imageName[i] = jsonObject.getString("attachment_saved_name");
+                                attachment_name=jsonObject.getString("attachment_name");
                                 count++;
                                 mainActivityCount++;
                             }
@@ -385,6 +391,7 @@ public class MainActivity extends AppCompatActivity {
                             i.putExtra("imageNames", imageName);
                             i.putExtra("dbTable",table_name);
                             i.putExtra("data",data);
+                            i.putExtra("attachmentName",attachment_name);
                             startActivity(i);
                         }
                     } catch (JSONException e) {
@@ -574,7 +581,7 @@ public class MainActivity extends AppCompatActivity {
                 params.put("main_form_name",mainFormName);
                 params.put("column_name",table_name);
                 params.put("element_id",data);
-                params.put("attachment_name","test");
+                params.put("attachment_name",etAttachmentName.getText().toString());
                 params.put("attachment_original_name",mSavedPhotoName);/*mCurrentPhotoPath*/
                 params.put("attachment_saved_name",mSavedPhotoName);
                 params.put("image_comments",sp.getString("imagecomments",null));

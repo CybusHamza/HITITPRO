@@ -76,7 +76,7 @@ public class ArchiveList  extends BaseFragment {
         });
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Inspection List");
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.menu);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.menu_black);
 
 
 

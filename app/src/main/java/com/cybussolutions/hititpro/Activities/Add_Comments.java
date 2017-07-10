@@ -54,6 +54,7 @@ public class Add_Comments extends AppCompatActivity {
 
     EditText etComments;
     RadioGroup radioGroup;
+    String recomendation;
 
     int pos;
     private String ba1,mCurrentPhotoPath;
@@ -104,7 +105,7 @@ public class Add_Comments extends AppCompatActivity {
                 if(check.equals("") || check==""){
                     messageToast="Please enter some comment";
                 }
-                if((check.equals("")|| check=="")|| radioGroup.getCheckedRadioButtonId()==-1) {
+                if((!check.equals("")|| check!="")&& radioGroup.getCheckedRadioButtonId()==-1) {
                     Toast.makeText(getApplicationContext(),messageToast,Toast.LENGTH_LONG).show();
 
                 }else{
@@ -346,6 +347,7 @@ public class Add_Comments extends AppCompatActivity {
                         intent.putExtra("clientId",clientId);
                         intent.putExtra("inspectionId",inspectionId);
                         intent.putExtra("templateId",templateId);
+                        intent.putExtra("attachmentName",attachmentName);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
                     }
@@ -379,6 +381,31 @@ public class Add_Comments extends AppCompatActivity {
                                 JSONObject object =jsonArray.getJSONObject(i);
                                 defaultText=object.getString("defaulttext");
                                 etComments.setText(defaultText);
+                                recomendation=object.getString("selrecomd");
+                                if(recomendation.equals("Monitor")){
+                                    radioButton= (RadioButton) findViewById(R.id.radio0);
+                                    radioButton.setChecked(true);
+                                }
+                                else if(recomendation.equals("Repair")){
+                                    radioButton= (RadioButton) findViewById(R.id.radio1);
+                                    radioButton.setChecked(true);
+                                }
+                                else if(recomendation.equals("Safety Issue")){
+                                    radioButton= (RadioButton) findViewById(R.id.radio3);
+                                    radioButton.setChecked(true);
+                                }
+                                else if(recomendation.equals("Improve")){
+                                    radioButton= (RadioButton) findViewById(R.id.radio4);
+                                    radioButton.setChecked(true);
+                                }
+                                else if(recomendation.equals("Concern")){
+                                    radioButton= (RadioButton) findViewById(R.id.radio5);
+                                    radioButton.setChecked(true);
+                                }else {
+                                    radioGroup.clearCheck();
+                                }
+
+
                             }
 
                         } catch (JSONException e) {

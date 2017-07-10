@@ -134,7 +134,7 @@ public class AppliancesScreenFragment extends BaseFragment {
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Appliances");
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.back);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.back_btn);
 
         appliances_tested = (Button) root.findViewById(R.id.appliances_tested);
         laundry_facility = (Button) root.findViewById(R.id.laundry_facility);

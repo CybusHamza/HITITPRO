@@ -133,7 +133,7 @@ public class PlumbingScreenFragment extends BaseFragment {
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Plumbing");
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.back);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.back_btn);
         water_supply_source= (Button) root.findViewById(R.id.water_supply_source);
         service_pipe_to_house= (Button) root.findViewById(R.id.service_pipe_to_house);
         main_water_valve_location= (Button) root.findViewById(R.id.main_water_valve_location);

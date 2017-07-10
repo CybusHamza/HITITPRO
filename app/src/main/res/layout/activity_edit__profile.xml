@@ -148,7 +148,7 @@
                     android:layout_weight="1.5"
                     android:layout_marginLeft="30dp"
                     android:layout_gravity="right"
-                    android:background="@android:drawable/ic_menu_gallery"/>
+                   />
             </LinearLayout>
 
             <Button

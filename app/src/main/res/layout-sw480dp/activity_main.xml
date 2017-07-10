@@ -16,8 +16,7 @@
         android:id="@+id/linearLayout"
         android:layout_below="@+id/et_attachment_name"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="52dp">
+        android:layout_alignParentStart="true">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -29,8 +28,8 @@
 
             <com.android.graphics.CanvasView
                 android:id="@+id/canvas"
-                android:layout_width="480dp"
-                android:layout_height="480dp"
+                android:layout_width="280dp"
+                android:layout_height="280dp"
                 android:layout_gravity="center_horizontal" />
         </LinearLayout>
 
@@ -38,11 +37,9 @@
 
     <Button
         android:id="@+id/saveButton"
-        android:layout_width="300dp"
+        android:layout_width="230dp"
         android:layout_height="wrap_content"
         android:text="Continue"
-        android:textSize="25sp"
-        android:layout_marginBottom="10dp"
         android:layout_gravity="end"
         android:layout_alignParentBottom="true"
         android:layout_toRightOf="@+id/selectButton"
@@ -50,54 +47,44 @@
 
     <Button
         android:id="@+id/selectButton"
-        android:layout_width="300dp"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:text="Select Image"
         android:layout_gravity="end"
-        android:textSize="25sp"
-        android:layout_marginBottom="10dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
     <Button
-        android:layout_width="127dp"
+        android:layout_width="77dp"
         android:layout_height="wrap_content"
         android:text="@string/action_line"
         android:id="@+id/line"
-        android:textSize="25sp"
-        android:layout_marginBottom="10dp"
         android:layout_above="@+id/saveButton"
         android:layout_alignRight="@+id/saveButton"
         android:layout_alignEnd="@+id/saveButton" />
 
     <Button
-        android:layout_width="127dp"
+        android:layout_width="77dp"
         android:layout_height="wrap_content"
         android:text="@string/action_circle"
         android:id="@+id/circle"
-        android:textSize="25sp"
-        android:layout_marginBottom="10dp"
         android:layout_above="@+id/saveButton"
         android:layout_toLeftOf="@+id/line"
         android:layout_toStartOf="@+id/line" />
 
     <Button
-        android:layout_width="127dp"
+        android:layout_width="77dp"
         android:layout_height="wrap_content"
         android:text="@string/action_square"
         android:id="@+id/square"
-        android:textSize="25sp"
-        android:layout_marginBottom="10dp"
         android:layout_above="@+id/saveButton"
         android:layout_toLeftOf="@+id/circle"
         android:layout_toStartOf="@+id/circle" />
 
     <Button
-        android:layout_width="127dp"
+        android:layout_width="77dp"
         android:layout_height="wrap_content"
-        android:textSize="25sp"
-        android:layout_marginBottom="10dp"
         android:text="@string/action_arrow"
         android:id="@+id/arrow"
         android:layout_above="@+id/saveButton"
@@ -105,13 +92,11 @@
         android:layout_toStartOf="@+id/square" />
 
     <Button
-        android:layout_width="127dp"
+        android:layout_width="77dp"
         android:layout_height="wrap_content"
         android:text="@string/action_smoothline"
         android:id="@+id/pen"
         android:layout_above="@+id/saveButton"
-        android:textSize="25sp"
-        android:layout_marginBottom="10dp"
         android:layout_toLeftOf="@+id/arrow"
         android:layout_toStartOf="@+id/arrow" />
 
@@ -119,9 +104,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/et_attachment_name"
-        android:hint="attachment name"
+        android:hint="Enter Attachment Name"
         android:layout_below="@+id/app_bar"
         android:layout_margin="5dp"
+        android:maxLines="1"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
@@ -130,10 +116,7 @@
     <Button
         android:id="@+id/redo"
         android:layout_width="wrap_content"
-
         android:layout_height="wrap_content"
-        android:textSize="25sp"
-        android:layout_marginBottom="10dp"
         android:layout_above="@+id/square"
         android:layout_alignLeft="@+id/et_attachment_name"
         android:layout_alignStart="@+id/et_attachment_name"
@@ -143,8 +126,6 @@
     <Button
         android:id="@+id/undo"
         android:layout_width="wrap_content"
-        android:textSize="25sp"
-        android:layout_marginBottom="10dp"
         android:layout_height="wrap_content"
         android:layout_above="@+id/square"
         android:layout_alignEnd="@+id/et_attachment_name"

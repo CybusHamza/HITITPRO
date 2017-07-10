@@ -65,7 +65,7 @@ public class Edit_Profile extends AppCompatActivity {
     ImageView logo;
 
     private static final int MY_SOCKET_TIMEOUT_MS = 10000;
-    ProgressDialog ringProgressDialog;
+    ProgressDialog ringProgressDialog,ringProgressDialog1;
     SharedPreferences pref;
     int keyDel;
 
@@ -75,7 +75,7 @@ public class Edit_Profile extends AppCompatActivity {
         setContentView(R.layout.activity_edit__profile);
         Toolbar toolbar;
         toolbar = (Toolbar) findViewById(R.id.app_bar);
-        toolbar.setTitle("Edit User");
+        toolbar.setTitle("Edit Profile");
         setSupportActionBar(toolbar);
         pref = getApplicationContext().getSharedPreferences("UserPrefs", MODE_PRIVATE);
         userid = pref.getString("user_id", null);
@@ -252,6 +252,9 @@ public class Edit_Profile extends AppCompatActivity {
         }
     }
     private void uploadlogo() {
+        ringProgressDialog1 = ProgressDialog.show(this, "", "Please wait ...", true);
+        ringProgressDialog1.setCancelable(false);
+        ringProgressDialog1.show();
         Calendar c = Calendar.getInstance();
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         final String formattedDate = df.format(c.getTime());
@@ -264,6 +267,7 @@ public class Edit_Profile extends AppCompatActivity {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, End_Points.UPLOAD, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
+                ringProgressDialog1.dismiss();
                 mSavedPhotoName = response;
                SharedPreferences pref = getApplicationContext().getSharedPreferences("UserPrefs", MODE_PRIVATE);
                 SharedPreferences.Editor edit=pref.edit();
@@ -276,6 +280,7 @@ public class Edit_Profile extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                ringProgressDialog1.dismiss();
                 Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
             }
         }) {

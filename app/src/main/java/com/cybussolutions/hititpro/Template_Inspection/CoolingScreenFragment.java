@@ -144,7 +144,7 @@ public class CoolingScreenFragment extends BaseFragment {
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Cooling");
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.back);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.back_btn);
 
         SharedPreferences pref = getActivity().getApplicationContext().getSharedPreferences("HititPro", getActivity().MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();

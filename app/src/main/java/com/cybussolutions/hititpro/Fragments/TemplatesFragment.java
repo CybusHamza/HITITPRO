@@ -136,10 +136,10 @@ public class TemplatesFragment extends BaseFragment {
                                 //  Toast.makeText(getContext(),"plz select client to review",Toast.LENGTH_LONG).show();
                             }
                         } else {
-                            Toast.makeText(getContext(), "plz select client and Property to continue", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getContext(), "please select client and Property to continue", Toast.LENGTH_LONG).show();
                         }
                     } else {
-                        Toast.makeText(getContext(), "plz select client and Property to continue", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(), "select the property type and start inspection", Toast.LENGTH_LONG).show();
                     }
                        /* Intent intent=new Intent(getActivity(), Start_Inspection.class);
                         intent.putExtra("client_name",client_spinner.getSelectedItem().toString());
@@ -403,8 +403,6 @@ public class TemplatesFragment extends BaseFragment {
 
                                     }
                                 }
-
-
 
                                 tem_spinner.setAdapter(null);
 

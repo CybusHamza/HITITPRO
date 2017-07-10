@@ -104,7 +104,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/et_attachment_name"
-        android:hint="attachment name"
+        android:hint="Enter Attachment Name"
         android:layout_below="@+id/app_bar"
         android:layout_margin="5dp"
         android:maxLines="1"

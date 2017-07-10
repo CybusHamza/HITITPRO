@@ -109,7 +109,7 @@
                     android:layout_height="30dp"
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="@dimen/activity_horizontal_margin"
-                    android:src="@drawable/userpp" />
+                    android:src="@drawable/profile" />
 
                 <TextView
                     android:id="@+id/nameTV"
@@ -201,7 +201,7 @@
                     android:layout_height="30dp"
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="@dimen/activity_horizontal_margin"
-                    android:src="@drawable/location1" />
+                    android:src="@drawable/location" />
 
                 <TextView
                     android:id="@+id/adresstv"

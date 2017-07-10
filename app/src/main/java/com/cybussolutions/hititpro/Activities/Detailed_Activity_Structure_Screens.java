@@ -91,7 +91,7 @@ public class Detailed_Activity_Structure_Screens extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setTitleTextColor(getResources().getColor(android.R.color.black));
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.back);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.back_btn);
 
         detailedListView = (ListView) findViewById(R.id.details_listview);
         addCategory = (ImageView) findViewById(R.id.add_category);

@@ -1,8 +1,13 @@
 package com.cybussolutions.hititpro.Activities;
 
+import android.app.Fragment;
+
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -25,6 +30,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.cybussolutions.hititpro.Fragments.ClientsFragment;
+import com.cybussolutions.hititpro.Fragments.ProfileFragment;
 import com.cybussolutions.hititpro.Network.End_Points;
 import com.cybussolutions.hititpro.R;
 import com.cybussolutions.hititpro.Template_Inspection.FirePlaceScreenFragment;
@@ -33,6 +39,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
+
+import static com.cybussolutions.hititpro.R.id.container;
 
 public class EditClient extends AppCompatActivity {
 
@@ -234,8 +242,10 @@ public class EditClient extends AppCompatActivity {
                                         public void onClick(SweetAlertDialog sDialog) {
                                             sDialog.dismiss();
                                             finish();
-
-                                        }
+                                            Intent intent = new Intent(EditClient.this, LandingScreen.class);
+                                            intent.putExtra("activityName", "editClientClass");
+                                            startActivity(intent);
+                                         }
                                     })
                                     .show();
                         }

@@ -56,6 +56,7 @@ public class ShowImages extends AppCompatActivity {
     TextView imageComments1,imageComments2,imageComments3;
     int count;
     ImageView deleteImageButton1,deleteImageButton2,deleteImageButton3;
+    String attachment_name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,6 +98,7 @@ public class ShowImages extends AppCompatActivity {
                     intent.putExtra("clientId",StructureScreensActivity.client_id);
                     intent.putExtra("inspectionId",StructureScreensActivity.inspectionID);
                     intent.putExtra("templateId",StructureScreensActivity.template_id);
+                    intent.putExtra("attachmentName",attachment_name);
                     finish();
                     startActivity(intent);
                 }else {
@@ -106,6 +108,7 @@ public class ShowImages extends AppCompatActivity {
                     intent.putExtra("clientId",StructureScreensActivity.client_id);
                     intent.putExtra("inspectionId",StructureScreensActivity.inspectionID);
                     intent.putExtra("templateId",StructureScreensActivity.template_id);
+                    intent.putExtra("attachmentName",attachment_name);
                    // intent.putExtra("imageNames", imageNames);
                     //finish();
                     showImagesCounter=3;
@@ -120,6 +123,7 @@ public class ShowImages extends AppCompatActivity {
         imageNames=intent.getStringArrayExtra("imageNames");
         data=intent.getStringExtra("data");
         table_name=intent.getStringExtra("dbTable");
+        attachment_name=intent.getStringExtra("attachmentName");
         for (int i=0;i<imageNames.length;i++){
             if(imageNames[i].equals("")){
                 count--;

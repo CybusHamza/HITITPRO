@@ -117,7 +117,8 @@ public class Login extends AppCompatActivity {
 
                         ringProgressDialog.dismiss();
                         if (response.equals("false")) {
-                            new SweetAlertDialog(Login.this, SweetAlertDialog.ERROR_TYPE)
+                            Toast.makeText(Login.this, "Incorrect Username or Password", Toast.LENGTH_SHORT).show();
+                           /* new SweetAlertDialog(Login.this, SweetAlertDialog.ERROR_TYPE)
                                     .setTitleText("Error!")
                                     .setConfirmText("OK").setContentText("Incorrect Username or Password")
                                     .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
@@ -127,7 +128,7 @@ public class Login extends AppCompatActivity {
 
                                         }
                                     })
-                                    .show();
+                                    .show();*/
                         }
                         else {
 

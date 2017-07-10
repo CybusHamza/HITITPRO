@@ -188,7 +188,8 @@ public class SignupActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(),"Please attach logo first to proceed",Toast.LENGTH_LONG).show();
                     }
                     else {
-                        new SweetAlertDialog(SignupActivity.this, SweetAlertDialog.ERROR_TYPE)
+                        Toast.makeText(getApplicationContext(),"Invalid format of email address",Toast.LENGTH_LONG).show();
+                       /* new SweetAlertDialog(SignupActivity.this, SweetAlertDialog.ERROR_TYPE)
                                 .setTitleText("Error!")
                                 .setConfirmText("OK").setContentText("Invalid format of email adress")
                                 .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
@@ -198,7 +199,7 @@ public class SignupActivity extends AppCompatActivity {
 
                                     }
                                 })
-                                .show();
+                                .show();*/
                     }
 
                 }
