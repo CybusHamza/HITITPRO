@@ -138,6 +138,7 @@ public class Detailed_Activity_All_Screens extends AppCompatActivity {
             String splitter = "\\^";
             String[] row = fromDataBase.split(splitter);
 
+
             int position = 0;
             for (String item : row) {
                 Checkbox_model model = new Checkbox_model();
