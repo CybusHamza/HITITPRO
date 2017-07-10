@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorPrimaryDark">#FFFFC100</color>
     <color name="colorAccent">#FF4081</color>
     <color name="white">#FFFFFF</color>
-    <color name="yellow">#fff200</color>
     <color name="fuchsia">#FF00FF</color>
     <color name="red">#FF0000</color>
     <color name="silver">#C0C0C0</color>
@@ -21,7 +20,7 @@
     <color name="black">#000000</color>
     <color name="White">#FFFFFF</color>
     <color name="Ivory">#FFFFF0</color>
-    <color name="LightYellow">#FFFFE0</color>
+    <color name="LightYellow">#FFFFD600</color>
     <color name="Yellow">#fff200</color>
     <color name="Snow">#FFFAFA</color>
     <color name="FloralWhite">#FFFAF0</color>

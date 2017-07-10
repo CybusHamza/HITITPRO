@@ -104,7 +104,7 @@ public class Start_Inspection extends AppCompatActivity {
 
                 if(tem_spinner.getSelectedItem().equals("Select a Template"))
                 {
-                    Toast.makeText(Start_Inspection.this, "Please Select A Template ", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Start_Inspection.this, "Please Select A Property ", Toast.LENGTH_SHORT).show();
                 }
                 else
                 {
@@ -242,7 +242,7 @@ public class Start_Inspection extends AppCompatActivity {
                        {
                            new SweetAlertDialog(Start_Inspection.this, SweetAlertDialog.ERROR_TYPE)
                                    .setTitleText("Error!")
-                                   .setConfirmText("OK").setContentText("There was an Error creating template")
+                                   .setConfirmText("OK").setContentText("There was an Error creating Property")
                                    .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                                        @Override
                                        public void onClick(SweetAlertDialog sDialog) {
@@ -359,7 +359,7 @@ public class Start_Inspection extends AppCompatActivity {
                         }
                         else
                         {
-                            inspection_list.add(0,"Select a Template");
+                            inspection_list.add(0,"Select a Property");
 
                             ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>
                                     (Start_Inspection.this, android.R.layout.simple_spinner_item,inspection_list);
@@ -462,7 +462,7 @@ public class Start_Inspection extends AppCompatActivity {
         to.setText("Create and Start");
 
 
-        Add.setHint("Template Name");
+        Add.setHint("Property Name");
         b = dialogBuilder.create();
 
         b.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
@@ -475,7 +475,7 @@ public class Start_Inspection extends AppCompatActivity {
 
                 if(Add.getText().toString().equals(""))
                 {
-                    Toast.makeText(Start_Inspection.this, "Enter Template Name", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Start_Inspection.this, "Enter Property Name", Toast.LENGTH_SHORT).show();
                 }
                 else
                 {

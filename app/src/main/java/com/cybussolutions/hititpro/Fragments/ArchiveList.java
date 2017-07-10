@@ -120,7 +120,7 @@ public class ArchiveList  extends BaseFragment {
                         if (response.equals("[]")) {
                             new SweetAlertDialog(getActivity(), SweetAlertDialog.ERROR_TYPE)
                                     .setTitleText("Error!")
-                                    .setConfirmText("OK").setContentText("No Record Found on Template Screen")
+                                    .setConfirmText("OK").setContentText("No record found of archive Property ")
                                     .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                                         @Override
                                         public void onClick(SweetAlertDialog sDialog) {

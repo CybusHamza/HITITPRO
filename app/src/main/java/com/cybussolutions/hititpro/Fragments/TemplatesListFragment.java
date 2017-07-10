@@ -121,7 +121,7 @@ public class TemplatesListFragment extends BaseFragment {
                         if (response.equals("[]")) {
                             new SweetAlertDialog(getActivity(), SweetAlertDialog.ERROR_TYPE)
                                     .setTitleText("Error!")
-                                    .setConfirmText("OK").setContentText("No Template Found ")
+                                    .setConfirmText("OK").setContentText("No Property Found ")
                                     .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                                         @Override
                                         public void onClick(SweetAlertDialog sDialog) {
