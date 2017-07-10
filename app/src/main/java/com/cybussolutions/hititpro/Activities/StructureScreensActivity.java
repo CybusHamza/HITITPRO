@@ -7,8 +7,6 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.MotionEvent;
-import android.view.inputmethod.InputMethodManager;
 
 import com.cybussolutions.hititpro.R;
 import com.cybussolutions.hititpro.Sql_LocalDataBase.Database;
@@ -23,6 +21,8 @@ public class StructureScreensActivity extends AppCompatActivity {
     public static String inspection_type;
     public static String client_id;
     public static String template_id;
+    public static String c_name;
+    public static String temp_name;
     public static boolean is_saved;
     public static String is_notemplate;
 
@@ -109,6 +109,8 @@ public class StructureScreensActivity extends AppCompatActivity {
         is_notemplate = intent.getStringExtra("is_notemplate");
         client_id = intent.getStringExtra("client_id");
         template_id = intent.getStringExtra("template_id");
+        c_name = intent.getStringExtra("client_name");
+        temp_name = intent.getStringExtra("template_name");
 
 
 

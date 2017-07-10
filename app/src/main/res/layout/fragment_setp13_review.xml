@@ -18,33 +18,28 @@
             android:text="@string/review"
             android:textStyle="bold" />
 
-        <TextView
-            style="@style/textview_style"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif"
-            android:text="@string/clients"
-            android:textColor="@color/black" />
+
 
         <TextView
             android:id="@+id/review_clients_spinner"
             style="@style/dropdown_style"
+            android:padding="15dp"
+            android:textStyle="bold"
+            android:textSize="15sp"
             android:layout_width="match_parent"
+            android:textColor="@color/black"
             android:layout_height="50dp"
             android:background="@drawable/dropdown_bg" />
 
-        <TextView
-            style="@style/textview_style"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif"
-            android:text="@string/templates"
-            android:textColor="@color/black" />
 
         <TextView
             android:id="@+id/review_templates_spinner"
             style="@style/dropdown_style"
             android:layout_width="match_parent"
+            android:padding="15dp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="15sp"
             android:layout_height="50dp"
             android:background="@drawable/dropdown_bg" />
 
