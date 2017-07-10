@@ -616,6 +616,7 @@ public class HeatingScreenFragment extends BaseFragment {
                 }
                 else
                 {
+                    b.dismiss();
                     if(isdefault.isChecked())
                     {
                         saveNoTemp(tmpName.getText().toString(),true);

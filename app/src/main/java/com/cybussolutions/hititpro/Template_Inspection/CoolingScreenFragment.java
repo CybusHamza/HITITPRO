@@ -549,9 +549,10 @@ public class CoolingScreenFragment extends BaseFragment {
                     Toast.makeText(getActivity(), "Please Enter Template name", Toast.LENGTH_SHORT).show();
                 }
                 else
-                {
+                {   b.dismiss();
                     if(isdefault.isChecked())
                     {
+
                         saveNoTemp(tmpName.getText().toString(),true);
                     }
                     else

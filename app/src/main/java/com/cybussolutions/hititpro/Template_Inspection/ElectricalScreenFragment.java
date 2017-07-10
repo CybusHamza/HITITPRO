@@ -796,8 +796,10 @@ public class ElectricalScreenFragment extends BaseFragment {
                 }
                 else
                 {
+                    b.dismiss();
                     if(isdefault.isChecked())
                     {
+
                         saveNoTemp(tmpName.getText().toString(),true);
                     }
                     else
@@ -832,10 +834,27 @@ public class ElectricalScreenFragment extends BaseFragment {
 
                         ringProgressDialog.dismiss();
                         StructureScreensActivity.is_saved=true;
+
+                        String resp[];
+
+                        resp = response.split("%");
+
+
+                        StructureScreensActivity.inspectionID = resp[1];
+                        StructureScreensActivity.template_id = resp[0];
+
+
+
+                        database.updateIds();
+
+
+
+
+
                         sp=getActivity().getSharedPreferences("prefs", MODE_PRIVATE);
                         edit=sp.edit();
                         edit.putBoolean("StructureScreenFragment",true);
-                        edit.commit();
+                        edit.apply();
                         Toast.makeText(getContext(),"Saved Successfully",Toast.LENGTH_LONG).show();
                     }
                 }, new Response.ErrorListener() {

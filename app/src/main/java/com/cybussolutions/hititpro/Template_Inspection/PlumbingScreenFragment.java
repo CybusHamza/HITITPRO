@@ -732,6 +732,7 @@ public class PlumbingScreenFragment extends BaseFragment {
                 }
                 else
                 {
+                    b.dismiss();
                     if(isdefault.isChecked())
                     {
                         saveNoTemp(tmpName.getText().toString(),true);

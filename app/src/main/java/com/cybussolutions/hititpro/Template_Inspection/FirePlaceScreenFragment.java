@@ -526,13 +526,23 @@ public class FirePlaceScreenFragment extends BaseFragment {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(isdefault.isChecked())
+                if(tmpName.getText().toString().equals(""))
                 {
-                    saveNoTemp(tmpName.getText().toString(),"1");
+                    Toast.makeText(getActivity(), "Please Enter Template name", Toast.LENGTH_SHORT).show();
                 }
                 else
                 {
-                    saveNoTemp(tmpName.getText().toString(),"0");
+                    b.dismiss();
+                    if(isdefault.isChecked())
+                    {
+
+                        saveNoTemp(tmpName.getText().toString(),"1");
+                    }
+                    else
+                    {
+                        saveNoTemp(tmpName.getText().toString(),"0");
+                    }
+
                 }
 
             }
@@ -559,6 +569,29 @@ public class FirePlaceScreenFragment extends BaseFragment {
                     public void onResponse(String response) {
 
                         ringProgressDialog.dismiss();
+                        StructureScreensActivity.is_saved=true;
+
+                        String resp[];
+
+                        resp = response.split("%");
+
+
+                        StructureScreensActivity.inspectionID = resp[1];
+                        StructureScreensActivity.template_id = resp[0];
+
+
+
+                        database.updateIds();
+
+
+
+
+
+                        sp=getActivity().getSharedPreferences("prefs", MODE_PRIVATE);
+                        edit=sp.edit();
+                        edit.putBoolean("StructureScreenFragment",true);
+                        edit.apply();
+                        Toast.makeText(getContext(),"Saved Successfully",Toast.LENGTH_LONG).show();
 
                     }
                 }, new Response.ErrorListener() {
