@@ -308,10 +308,14 @@ public class MainActivity extends AppCompatActivity {
                             else {
                                 File root = new File(Environment.getExternalStorageDirectory()
                                         + File.separator + "folder_name" + File.separator);
-                                root.mkdirs();
+                                if (!root.exists()) {
+
+                                    root.mkdirs();
+                                }
+                               // root.mkdirs();
                                 File sdImageMainDirectory = new File(root, formattedDate + "myPicName.jpg");
                                 outputFileUri = Uri.fromFile(sdImageMainDirectory);
-                                fOut = new FileOutputStream(sdImageMainDirectory);
+
                                 Intent intent = new Intent(MainActivity.this, Add_Comments.class);
                                 mCurrentPhotoPath=outputFileUri.getPath();
                                 intent.putExtra("mCurrentPhotoPath", mCurrentPhotoPath);
@@ -324,6 +328,7 @@ public class MainActivity extends AppCompatActivity {
                                 finish();
                                 startActivity(intent);
                                 try {
+                                    fOut = new FileOutputStream(sdImageMainDirectory);
                                     scaled.compress(Bitmap.CompressFormat.JPEG,100,fOut);
                                     // bm.compress(Bitmap.CompressFormat.PNG, 100, fOut);
                                     fOut.flush();

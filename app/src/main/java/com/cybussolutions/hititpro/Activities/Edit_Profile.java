@@ -113,7 +113,6 @@ public class Edit_Profile extends AppCompatActivity {
                         requestPermissions(new String[]{Manifest.permission
                                         .WRITE_EXTERNAL_STORAGE},
                                 REQUEST_PERMISSIONS);
-
                     }
 
                 } else {
