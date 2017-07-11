@@ -119,6 +119,9 @@ public class Add_Comments extends AppCompatActivity {
                         attachmentName="";
                         uploadToServer();
                     } else {
+                        if(radioGroup.getCheckedRadioButtonId()==-1){
+                            checkedBox="";
+                        }
                         up();
                        // startDialog();
                     }
