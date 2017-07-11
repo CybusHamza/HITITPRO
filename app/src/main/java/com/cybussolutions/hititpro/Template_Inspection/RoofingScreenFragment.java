@@ -228,6 +228,7 @@ public class RoofingScreenFragment extends BaseFragment {
                 intent.putExtra("items",StructureScreensActivity.roofDrainageButtonValues);
                 intent.putExtra("heading",roofDrainageButton.getText().toString());
                 intent.putExtra("column","roofdrainage");
+                intent.putExtra("tag","sloped_roofing");
                 intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",ROOFING_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.template_id);
@@ -283,6 +284,7 @@ public class RoofingScreenFragment extends BaseFragment {
                 intent.putExtra("heading",roofingObservationsButton.getText().toString());
                 intent.putExtra("column","observations");
                 intent.putExtra("fromAddapter","false");
+                intent.putExtra("fromAddapter","roofingobservations");
                 intent.putExtra("dbTable",ROOFING_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
@@ -299,6 +301,7 @@ public class RoofingScreenFragment extends BaseFragment {
                 intent.putExtra("items",StructureScreensActivity.roSloppedButtonValues);
                 intent.putExtra("heading",roSloppedButton.getText().toString());
                 intent.putExtra("column","recommendslopedroofing");
+                intent.putExtra("tag","sloped_roofing");
                 intent.putExtra("dbTable",ROOFING_TABLE);
                 intent.putExtra("fromAddapter","false");
                 intent.putExtra("inspectionID", StructureScreensActivity.template_id);
@@ -316,6 +319,7 @@ public class RoofingScreenFragment extends BaseFragment {
                 intent.putExtra("items",StructureScreensActivity.roFlatButtonValues);
                 intent.putExtra("heading",roFlatButton.getText().toString());
                 intent.putExtra("column","flatroofing");
+                intent.putExtra("tag","flatroofing");
                 intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",ROOFING_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.template_id);
@@ -334,6 +338,7 @@ public class RoofingScreenFragment extends BaseFragment {
                 intent.putExtra("items",StructureScreensActivity.roFlashingButtonValues);
                 intent.putExtra("heading",roFlashingButton.getText().toString());
                 intent.putExtra("column","flashing");
+                intent.putExtra("tag","flashing");
                 intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",ROOFING_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.template_id);
@@ -352,6 +357,7 @@ public class RoofingScreenFragment extends BaseFragment {
                 intent.putExtra("heading",roChimneyButton.getText().toString());
                 intent.putExtra("column","recommendchimneys");
                 intent.putExtra("fromAddapter","false");
+                intent.putExtra("tag","chimeys");
                 intent.putExtra("dbTable",ROOFING_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
@@ -371,6 +377,7 @@ public class RoofingScreenFragment extends BaseFragment {
                 intent.putExtra("heading",roGutterDownspoutsButton.getText().toString());
                 intent.putExtra("column","guttersdownspouts");
                 intent.putExtra("fromAddapter","false");
+                intent.putExtra("tag","gutters_downspouts");
                 intent.putExtra("dbTable",ROOFING_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
@@ -615,7 +622,7 @@ public class RoofingScreenFragment extends BaseFragment {
         final CheckBox isdefault = (CheckBox) dialogView.findViewById(R.id.checkDefault);
 
 
-        isdefault.setVisibility(View.GONE);
+      //  isdefault.setVisibility(View.GONE);
         b = dialogBuilder.create();
 
         save.setOnClickListener(new View.OnClickListener() {

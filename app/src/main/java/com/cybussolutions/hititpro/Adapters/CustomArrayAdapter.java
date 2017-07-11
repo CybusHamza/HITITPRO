@@ -42,7 +42,7 @@ public class CustomArrayAdapter extends ArrayAdapter<Checkbox_model> implements
 	static  int count=0;
 	Database database;
 
-	public CustomArrayAdapter(Context context, List<Checkbox_model> objects,String topass[]) {
+	public CustomArrayAdapter(Context context, List<Checkbox_model> objects,String topass[] ) {
 		super(context, 0, objects);
 		layoutInflater = LayoutInflater.from(context);
 		list= objects;
@@ -216,7 +216,7 @@ public class CustomArrayAdapter extends ArrayAdapter<Checkbox_model> implements
 					}
 					String new_s = topass[0].toLowerCase().replaceAll("[ /]", "_");
 
-					String data = pagePosition+"_"+new_s+"_"+name;
+					String data = pagePosition+"_"+topass[3]+"_"+name;
 					if(finalHolder.checkBox.isChecked()) {
 						Intent intent = new Intent(context, MainActivity.class);
 						intent.putExtra("data", data);
@@ -375,7 +375,7 @@ public class CustomArrayAdapter extends ArrayAdapter<Checkbox_model> implements
 
 				new SweetAlertDialog(context, SweetAlertDialog.WARNING_TYPE)
 						.setTitleText("Are You Sure!")
-						.setConfirmText("OK").setContentText("If you edit this label , associated images will be removed")
+						.setConfirmText("OK").setContentText("If there are any associated images  with this label , they  will be removed")
 						.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
 							@Override
 							public void onClick(SweetAlertDialog sDialog) {

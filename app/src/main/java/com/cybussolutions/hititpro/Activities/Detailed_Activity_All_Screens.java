@@ -59,7 +59,7 @@ public class Detailed_Activity_All_Screens extends AppCompatActivity {
     ArrayList<String> checkedValue;
     String toPass[];
     static  boolean isAnyChecked = false;
-    String dbEnterArray[];
+    String dbEnterArray[],tag;
     ProgressDialog ringProgressDialog;
     private ArrayList<Checkbox_model> list = new ArrayList<>();
     private ArrayList<Checkbox_model> list_temp;
@@ -91,8 +91,9 @@ public class Detailed_Activity_All_Screens extends AppCompatActivity {
         dbColumn = intent.getStringExtra("column");
         dbTable = intent.getStringExtra("dbTable");
         inspectionID = intent.getStringExtra("inspectionID");
+        tag = intent.getStringExtra("tag");
 
-        toPass = new String[]{heading, dbColumn, dbTable};
+        toPass = new String[]{heading, dbColumn, dbTable,tag};
 
         SharedPreferences pref = getApplicationContext().getSharedPreferences("UserPrefs", MODE_PRIVATE);
         userid = pref.getString("user_id", "");

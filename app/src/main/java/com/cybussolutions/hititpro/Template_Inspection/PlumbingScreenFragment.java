@@ -32,7 +32,6 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.cybussolutions.hititpro.Activities.Detailed_Activity_All_Screens;
 import com.cybussolutions.hititpro.Activities.Detailed_Activity_Structure_Screens;
-import com.cybussolutions.hititpro.Activities.LandingScreen;
 import com.cybussolutions.hititpro.Activities.StructureScreensActivity;
 import com.cybussolutions.hititpro.Fragments.BaseFragment;
 import com.cybussolutions.hititpro.Fragments.TemplatesFragment;
@@ -360,6 +359,7 @@ public class PlumbingScreenFragment extends BaseFragment {
                 intent.putExtra("heading",plumbing_observations.getText().toString());
                 intent.putExtra("column","observation");
                 intent.putExtra("fromAddapter","false");
+                intent.putExtra("tag","Plumbing_Observations");
                 intent.putExtra("dbTable",PLUMBING_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
@@ -375,6 +375,7 @@ public class PlumbingScreenFragment extends BaseFragment {
                 intent.putExtra("items", StructureScreensActivity.water_heater_plimbingValues);
                 intent.putExtra("heading",water_heater_plimbing.getText().toString());
                 intent.putExtra("column","rwaterheater");
+                intent.putExtra("tag","rWATER_HEATER");
                 intent.putExtra("dbTable",PLUMBING_TABLE);
                 intent.putExtra("fromAddapter","false");
                 intent.putExtra("inspectionID", StructureScreensActivity.template_id);
@@ -726,7 +727,7 @@ public class PlumbingScreenFragment extends BaseFragment {
         final CheckBox isdefault = (CheckBox) dialogView.findViewById(R.id.checkDefault);
 
 
-        isdefault.setVisibility(View.GONE);
+       // isdefault.setVisibility(View.GONE);
         b = dialogBuilder.create();
 
         save.setOnClickListener(new View.OnClickListener() {
@@ -741,11 +742,11 @@ public class PlumbingScreenFragment extends BaseFragment {
                     b.dismiss();
                     if(isdefault.isChecked())
                     {
-                        saveNoTemp(tmpName.getText().toString(),true);
+                        saveNoTemp(tmpName.getText().toString(),"1");
                     }
                     else
                     {
-                        saveNoTemp(tmpName.getText().toString(),false);
+                        saveNoTemp(tmpName.getText().toString(),"0");
                     }
 
                 }
@@ -762,7 +763,7 @@ public class PlumbingScreenFragment extends BaseFragment {
 
     }
 
-    public void saveNoTemp(final String txt, final boolean check) {
+    public void saveNoTemp(final String txt, final String check) {
 
         ringProgressDialog = ProgressDialog.show(getActivity(), "Please wait ...", "Saving Template ...", true);
         ringProgressDialog.setCancelable(false);

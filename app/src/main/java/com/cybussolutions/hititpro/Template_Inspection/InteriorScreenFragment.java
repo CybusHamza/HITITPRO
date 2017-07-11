@@ -649,7 +649,7 @@ public class InteriorScreenFragment extends BaseFragment {
         final CheckBox isdefault = (CheckBox) dialogView.findViewById(R.id.checkDefault);
 
 
-        isdefault.setVisibility(View.GONE);
+      //  isdefault.setVisibility(View.GONE);
         b = dialogBuilder.create();
 
         save.setOnClickListener(new View.OnClickListener() {
@@ -664,11 +664,11 @@ public class InteriorScreenFragment extends BaseFragment {
                     b.dismiss();
                     if(isdefault.isChecked())
                     {
-                        saveNoTemp(tmpName.getText().toString(),true);
+                        saveNoTemp(tmpName.getText().toString(),"1");
                     }
                     else
                     {
-                        saveNoTemp(tmpName.getText().toString(),false);
+                        saveNoTemp(tmpName.getText().toString(),"0");
                     }
 
                 }
@@ -685,7 +685,7 @@ public class InteriorScreenFragment extends BaseFragment {
 
     }
 
-    public void saveNoTemp(final String txt, final boolean check) {
+    public void saveNoTemp(final String txt, final String check) {
 
         ringProgressDialog = ProgressDialog.show(getActivity(), "Please wait ...", "Saving Template ...", true);
         ringProgressDialog.setCancelable(false);

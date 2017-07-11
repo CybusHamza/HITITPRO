@@ -54,7 +54,7 @@ public class Detailed_Activity_Structure_Screens extends AppCompatActivity {
    ImageView addCategory;
     AlertDialog b;
     ArrayAdapter<Checkbox_model> adapter;
-    String toPass[];
+    String toPass[],tag;
     ArrayList<String> checkedValue;
     private ArrayList<Checkbox_model> list = new ArrayList<>();
     private ArrayList<Checkbox_model> list_temp;
@@ -79,6 +79,7 @@ public class Detailed_Activity_Structure_Screens extends AppCompatActivity {
         fromadapter = intent.getStringExtra("fromAddapter");
         dbTable = intent.getStringExtra("dbTable");
         inspectionID = intent.getStringExtra("inspectionID");
+        tag = intent.getStringExtra("tag");
 
         SharedPreferences sp = getSharedPreferences("prefs", MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
@@ -103,7 +104,7 @@ public class Detailed_Activity_Structure_Screens extends AppCompatActivity {
                 addCategory.setVisibility(View.INVISIBLE);
         }
 
-        toPass = new String[]{heading, dbColumn, dbTable};
+        toPass = new String[]{heading, dbColumn, dbTable,tag};
 
 
         addCategory.setOnClickListener(

@@ -214,6 +214,7 @@ public class StructureScreenFragment extends BaseFragment {
                 intent.putExtra("items",StructureScreensActivity.foundationSpinnerValues);
                 intent.putExtra("heading",foundationButton.getText().toString());
                 intent.putExtra("column","foundation");
+                intent.putExtra("tag","recomnd_foundation");
                 intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",PORTFOLIO_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.template_id);
@@ -317,6 +318,7 @@ public class StructureScreenFragment extends BaseFragment {
                 intent.putExtra("items",StructureScreensActivity.structureObservationsSpinnerValues);
                 intent.putExtra("heading",structureObservationsButton.getText().toString());
                 intent.putExtra("column","observation");
+                intent.putExtra("tag","observation");
                 intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",PORTFOLIO_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.template_id);
@@ -334,6 +336,7 @@ public class StructureScreenFragment extends BaseFragment {
                 intent.putExtra("heading",roFoundationButton.getText().toString());
                 intent.putExtra("column","recomnd_foundation");
                 intent.putExtra("fromAddapter","false");
+                intent.putExtra("tag","recomnd_foundation");
                 intent.putExtra("dbTable",PORTFOLIO_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
@@ -350,6 +353,7 @@ public class StructureScreenFragment extends BaseFragment {
                 intent.putExtra("items",StructureScreensActivity.roCrawlSpacesSpinnerValues);
                 intent.putExtra("heading",roCrawlSpacesButton.getText().toString());
                 intent.putExtra("column","crawl_space");
+                intent.putExtra("tag","crawl_space");
                 intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",PORTFOLIO_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.template_id);
@@ -367,6 +371,7 @@ public class StructureScreenFragment extends BaseFragment {
                 intent.putExtra("items",StructureScreensActivity.roFloorsValues);
                 intent.putExtra("heading",roFloorsButton.getText().toString());
                 intent.putExtra("column","recomnd_floor");
+                intent.putExtra("tag","recomnd_floor");
                 intent.putExtra("dbTable",PORTFOLIO_TABLE);
                 intent.putExtra("fromAddapter","false");
                 intent.putExtra("inspectionID", StructureScreensActivity.template_id);
@@ -384,6 +389,7 @@ public class StructureScreenFragment extends BaseFragment {
                 intent.putExtra("items",StructureScreensActivity.roExteriorWallsValues);
                 intent.putExtra("heading",roExteriorWallsButton.getText().toString());
                 intent.putExtra("column","exterior_wall");
+                intent.putExtra("tag","exterior_wall");
                 intent.putExtra("dbTable",PORTFOLIO_TABLE);
                 intent.putExtra("fromAddapter","false");
                 intent.putExtra("inspectionID", StructureScreensActivity.template_id);
@@ -401,6 +407,7 @@ public class StructureScreenFragment extends BaseFragment {
                 intent.putExtra("items",StructureScreensActivity.roRoofValues);
                 intent.putExtra("heading",roRoofButton.getText().toString());
                 intent.putExtra("column","roof");
+                intent.putExtra("tag","roof");
                 intent.putExtra("dbTable",PORTFOLIO_TABLE);
                 intent.putExtra("fromAddapter","false");
                 intent.putExtra("inspectionID", StructureScreensActivity.template_id);
@@ -660,7 +667,7 @@ public class StructureScreenFragment extends BaseFragment {
         final Button save = (Button) dialogView.findViewById(R.id.Savenotemp);
         final CheckBox isdefault = (CheckBox) dialogView.findViewById(R.id.checkDefault);
 
-        isdefault.setVisibility(View.GONE);
+     //   isdefault.setVisibility(View.GONE);
 
         b = dialogBuilder.create();
 

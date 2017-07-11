@@ -276,7 +276,7 @@ public class Detailed_Adapter_Structure_Screen extends ArrayAdapter<Checkbox_mod
                         pagePosition= 0;
 
                 }
-                data = pagePosition+"_"+observation_name+"_"+name;
+                data = pagePosition+"_"+topass[3]+"_"+name;
 
                 if((topass[0].equals("Exterior Observations")||topass[0].equals("Electrical Observations")||topass[0].equals("Structure Observations")
                         || topass[0].equals("Heating Observations") || topass[0].equals("Cooling/Heat Pump Observations")
