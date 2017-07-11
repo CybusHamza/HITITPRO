@@ -63,6 +63,7 @@ public class ClientsFragment extends BaseFragment {
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.menu_black);
 
+
   /*      String[] client_name = new String[]{"Hamza Bin Tariq", "Zaeem Sattar", "Noor Siddiqui", "Maria Talib"};
         for (String aClient_name : client_name) {
             Clients_model model = new Clients_model();

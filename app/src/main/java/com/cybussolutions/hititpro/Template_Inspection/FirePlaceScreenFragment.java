@@ -3,12 +3,14 @@ package com.cybussolutions.hititpro.Template_Inspection;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -30,6 +32,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.cybussolutions.hititpro.Activities.Detailed_Activity_All_Screens;
 import com.cybussolutions.hititpro.Activities.Detailed_Activity_Structure_Screens;
+import com.cybussolutions.hititpro.Activities.LandingScreen;
 import com.cybussolutions.hititpro.Activities.StructureScreensActivity;
 import com.cybussolutions.hititpro.Fragments.BaseFragment;
 import com.cybussolutions.hititpro.Fragments.Setp13_review;
@@ -135,6 +138,8 @@ public class FirePlaceScreenFragment extends BaseFragment {
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.back_btn);
+        setHasOptionsMenu(true);
+
         fireplaces_wood_stoves = (Button) root.findViewById(R.id.fireplaces_wood_stoves);
         wood_coal_stoves = (Button) root.findViewById(R.id.wood_coal_stoves);
         vents_flues_chimney = (Button) root.findViewById(R.id.vents_flues_chimney);
@@ -657,7 +662,37 @@ public class FirePlaceScreenFragment extends BaseFragment {
         requestQueue.add(request);
 
     }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if(id == R.id.cancel_btn){
+            new android.support.v7.app.AlertDialog.Builder(getActivity())
+                    .setTitle("Close Form")
+                    .setMessage("Are you sure you want to Close Form !!")
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent intent=new Intent(getActivity(),LandingScreen.class);
+                            intent.putExtra("activityName", "StructureScreen");
+                            startActivity(intent);
+                            getActivity().finish();
 
+
+
+                        }
+                    })
+                    .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    })
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .show();
+            //Do whatever you want to do
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 
 
 

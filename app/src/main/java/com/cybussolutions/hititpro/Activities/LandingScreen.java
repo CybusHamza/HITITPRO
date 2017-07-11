@@ -1,6 +1,6 @@
 package com.cybussolutions.hititpro.Activities;
 
-import android.content.DialogInterface;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -8,6 +8,8 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -32,6 +34,9 @@ import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
+
+import java.io.FileDescriptor;
+import java.io.PrintWriter;
 
 
 public class LandingScreen extends AppCompatActivity {
@@ -93,7 +98,6 @@ public class LandingScreen extends AppCompatActivity {
                         Log.e("here","onPrepareLoad");
                     }
                 });
-
 
 
 
@@ -228,39 +232,17 @@ public class LandingScreen extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (getSupportFragmentManager().getBackStackEntryCount() > 1) {
-            getSupportFragmentManager().popBackStack();
+        int count=getFragmentManager().getBackStackEntryCount();
+        while(getFragmentManager().getBackStackEntryCount() > 0) {
+            getFragmentManager().popBackStack(null, 0);
         }
-        else if(getSupportFragmentManager().getBackStackEntryCount()==1)
-        {
+        Intent a = new Intent(Intent.ACTION_MAIN);
+        a.addCategory(Intent.CATEGORY_HOME);
+        a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(a);
 
-            new AlertDialog.Builder(LandingScreen.this)
-                    .setTitle("Close HitItPro")
-                    .setMessage("Are you sure you want to Close HitItPro? ")
-                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
+        super.onBackPressed();
 
-                            getSupportFragmentManager().popBackStack();
-
-                            finish();
-
-                        }
-                    })
-                    .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-
-                        }
-                    })
-                    .setIcon(android.R.drawable.ic_dialog_alert)
-                    .show();
-
-
-        }
-        else {
-            finish();
-
-            super.onBackPressed();
-        }
     }
 
 
