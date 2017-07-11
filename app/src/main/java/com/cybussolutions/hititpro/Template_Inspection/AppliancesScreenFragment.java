@@ -165,9 +165,6 @@ public class AppliancesScreenFragment extends BaseFragment {
 
 
 
-
-
-
         SharedPreferences pref = getActivity().getApplicationContext().getSharedPreferences("HititPro", getActivity().MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
         String populate = pref.getString("isAppliances_populated","");
@@ -177,9 +174,6 @@ public class AppliancesScreenFragment extends BaseFragment {
             getInsulation();
 
         }
-
-
-
         appliances_tested.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -896,9 +890,9 @@ public class AppliancesScreenFragment extends BaseFragment {
                     .setMessage("Are you sure you want to Close Form !!")
                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
-                            Intent intent=new Intent(getActivity(),LandingScreen.class);
+                            /*Intent intent=new Intent(getActivity(),LandingScreen.class);
                             intent.putExtra("activityName", "StructureScreen");
-                            startActivity(intent);
+                            startActivity(intent);*/
                             getActivity().finish();
 
 

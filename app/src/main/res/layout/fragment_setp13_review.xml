@@ -32,8 +32,9 @@
                 android:layout_marginBottom="5dp"
                 android:layout_marginRight="5dp"
                 android:layout_marginTop="5dp"
+                android:padding="5dp"
                 android:background="@drawable/outline_active_style"
-                android:text="Exit" />
+                android:text="Save and Finish" />
         </LinearLayout>
 
 

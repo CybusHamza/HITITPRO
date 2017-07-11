@@ -756,9 +756,9 @@ public class RoofingScreenFragment extends BaseFragment {
                     .setMessage("Are you sure you want to Close Form !!")
                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
-                            Intent intent=new Intent(getActivity(),LandingScreen.class);
+                            /*Intent intent=new Intent(getActivity(),LandingScreen.class);
                             intent.putExtra("activityName", "StructureScreen");
-                            startActivity(intent);
+                            startActivity(intent);*/
                             getActivity().finish();
 
 

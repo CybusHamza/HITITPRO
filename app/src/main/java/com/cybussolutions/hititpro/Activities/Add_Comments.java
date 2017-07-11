@@ -50,7 +50,7 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 public class Add_Comments extends AppCompatActivity {
     ProgressDialog ringProgressDialog;
 
-    private static final int MY_SOCKET_TIMEOUT_MS = 10000;
+    private static final int MY_SOCKET_TIMEOUT_MS = 15000;
 
     EditText etComments;
     RadioGroup radioGroup;
@@ -102,14 +102,18 @@ public class Add_Comments extends AppCompatActivity {
             public void onClick(View v) {
                 String check=etComments.getText().toString();
                 String messageToast="You must select some recommendation";
-                if(check.equals("") || check==""){
+                /*if(check.equals("") || check==""){
                     messageToast="Please enter some comment";
-                }
-                if((!check.equals("")|| check!="")&& radioGroup.getCheckedRadioButtonId()==-1) {
+                }*/
+               // Boolean b=(check!="") && (radioGroup.getCheckedRadioButtonId()==-1);
+                if(!etComments.getText().toString().equals("") && (radioGroup.getCheckedRadioButtonId()==-1)) {
                     Toast.makeText(getApplicationContext(),messageToast,Toast.LENGTH_LONG).show();
 
                 }else{
                     if (mCurrentPhotoPath == null || mCurrentPhotoPath=="") {
+                        if(radioGroup.getCheckedRadioButtonId()==-1){
+                            checkedBox="";
+                        }
                         mSavedPhotoName = "";
                         mCurrentPhotoPath = "";
                         attachmentName="";

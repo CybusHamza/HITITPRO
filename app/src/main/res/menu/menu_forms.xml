@@ -2,7 +2,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <!-- Search, should appear as action button -->
     <item android:id="@+id/cancel_btn"
-        android:icon="@drawable/archive"
+        android:icon="@drawable/cancel"
+
         android:title="Cancel"
         app:showAsAction="always" />
 
