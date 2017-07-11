@@ -46,6 +46,7 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 public class TemplatesFragment extends BaseFragment {
 
     private static final int MY_SOCKET_TIMEOUT_MS = 10000;
+    public static String myparah_no_temp = "";
     private static String responceStatic = null;
     View root;
     ProgressDialog ringProgressDialog;
@@ -65,10 +66,11 @@ public class TemplatesFragment extends BaseFragment {
     private List<String> inspection_list;
     private List<String> inspection_id_list;
     private List<String> default_template;
+
     SharedPreferences.Editor editor;
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(final LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         root = inflater.inflate(R.layout.fragment_templates, container, false);
 
@@ -108,9 +110,6 @@ public class TemplatesFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
 
-                if (paraEt.getText().toString().equals("")) {
-                    Toast.makeText(getActivity(), "No Paragraph added", Toast.LENGTH_SHORT).show();
-                } else {
 
 
                     int client_id = client_spinner.getSelectedItemPosition();
@@ -118,6 +117,7 @@ public class TemplatesFragment extends BaseFragment {
                     int template_id = tem_spinner.getSelectedItemPosition();
                     if (!client_spinner.getSelectedItem().toString().equals("Select")) {
                         if (!tem_spinner.getSelectedItem().toString().equals("Select")) {
+                           myparah_no_temp= paraEt.getText().toString();
                             if (isStarted.get(tem_spinner.getSelectedItemPosition()).equals("0")) {
                                 prePopulate(inspection_id_list.get(tem_spinner.getSelectedItemPosition()),client_spinner.getSelectedItem().toString(),tem_spinner.getSelectedItem().toString(),tem_spinner.getSelectedItem().toString(),isdefault.get(tem_spinner.getSelectedItemPosition()), client_id_list.get(client_spinner.getSelectedItemPosition()), default_template.get(tem_spinner.getSelectedItemPosition()));
 
@@ -146,11 +146,10 @@ public class TemplatesFragment extends BaseFragment {
                         intent.putExtra("client_id",client_id_list.get(client_id));
                         startActivity(intent);*/
 
-                }
+
             }
         });
         tem_spinner.setOnItemSelectedListener(new CustomOnItemSelectedListener_inspection());
-
         AllClients();
 
         return root;
@@ -628,11 +627,24 @@ public class TemplatesFragment extends BaseFragment {
 
                         ringProgressDialog.dismiss();
 
+
+
                         if (!(response.equals(""))) {
 
 
                             Intent intent = new Intent(getActivity(), StructureScreensActivity.class);
-                            intent.putExtra("inspectionId", response);
+
+                            if(response.startsWith("defult"))
+                            {
+                                String temp[] ;
+                                temp = response.split(" ");
+                                intent.putExtra("inspectionId", temp[1]);
+                            }
+                            else
+                            {
+
+                                intent.putExtra("inspectionId",response);
+                            }
                             intent.putExtra("client_id", clientId);
                             intent.putExtra("client_name",client_id);
                             intent.putExtra("template_name",tempid);
@@ -644,7 +656,18 @@ public class TemplatesFragment extends BaseFragment {
                             {
                                 intent.putExtra("is_notemplate", "false");
                             }
-                            intent.putExtra("template_id", temId);
+                            if(response.startsWith("defult")){
+
+                                String temp[] ;
+                                temp = response.split(" ");
+                                intent.putExtra("template_id", temp[2]);
+                            }
+                            else
+                            {
+                                intent.putExtra("template_id", temId);
+                            }
+
+
                             intent.putExtra("inspection_type", "old");
                             startActivity(intent);
                         } else {

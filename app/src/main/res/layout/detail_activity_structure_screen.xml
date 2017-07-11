@@ -17,6 +17,8 @@
         android:layout_height="match_parent"
         android:id="@+id/details_listview"
         android:choiceMode="singleChoice"
+        android:divider="#000"
+        android:dividerHeight="1dp"
         android:clickable="false"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/app_bar" />

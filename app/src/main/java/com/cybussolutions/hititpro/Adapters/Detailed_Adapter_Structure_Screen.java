@@ -672,6 +672,8 @@ public class Detailed_Adapter_Structure_Screen extends ArrayAdapter<Checkbox_mod
                                 ((Activity)context).finish();
                                 context.startActivity(intent);
 
+
+
                                 b.dismiss();
                                 InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
                                 imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);

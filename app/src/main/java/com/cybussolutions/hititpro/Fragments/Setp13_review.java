@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
@@ -44,7 +45,7 @@ public class Setp13_review extends BaseFragment {
     ProgressDialog ringProgressDialog;
     String id, client_id;
     TextView tvportofolio,tvroofing,remainig,tvplumbing,tvinterior,tvinsulation,tvheating,tvfireplaces,tvexterior,tvelectrical,tvcooling,tvappliance;
-
+    Button Exit;
     private static final int MY_SOCKET_TIMEOUT_MS = 10000;
 
 
@@ -60,6 +61,7 @@ public class Setp13_review extends BaseFragment {
 
         clientsSpinner= (TextView) root.findViewById(R.id.review_clients_spinner);
         templateSpinner=(TextView) root.findViewById(R.id.review_templates_spinner);
+        Exit=(Button) root.findViewById(R.id.exit);
         tvportofolio=(TextView)root.findViewById(R.id.structure);
         tvroofing=(TextView)root.findViewById(R.id.roofing);
         tvplumbing=(TextView)root.findViewById(R.id.plumbing);
@@ -75,6 +77,36 @@ public class Setp13_review extends BaseFragment {
 
         getReviewInspection();
 
+
+        Exit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+                new SweetAlertDialog(getActivity(), SweetAlertDialog.WARNING_TYPE)
+                        .setTitleText("Are You Sure!")
+                        .setConfirmText("OK").setContentText("If you edit this label , associated images will be removed")
+                        .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                            @Override
+                            public void onClick(SweetAlertDialog sDialog) {
+
+                                getActivity().finish();
+                            }
+                                                 }
+                        ).showCancelButton(true)
+                        .setCancelText("Cancel")
+                        .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                            @Override
+                            public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                sweetAlertDialog.dismiss();
+
+                            }
+                        })
+                        .show();
+
+
+            }
+        });
         clientsSpinner.setText(StructureScreensActivity.c_name);
         templateSpinner.setText(StructureScreensActivity.temp_name);
 
@@ -125,27 +157,27 @@ public class Setp13_review extends BaseFragment {
                                 //String port=objectportfolio.getString("empty_fields");
 
                                 tvportofolio.setText(objectportfolio.get("empty_fields").toString());
-                                total = total+ Integer.parseInt(objectportfolio.get("empty_fields").toString());
+                                total = total+ Integer.parseInt(tvportofolio.getText().toString());
                                 tvroofing.setText(objectroofing.get("empty_fields").toString());
-                                total = total+ Integer.parseInt(objectroofing.get("empty_fields").toString());
+                                total = total+ Integer.parseInt(tvroofing.getText().toString());
                                 tvplumbing.setText(objectplumbing.get("empty_fields").toString());
-                                total = total+ Integer.parseInt(objectplumbing.get("empty_fields").toString());
+                                total = total+ Integer.parseInt(tvplumbing.getText().toString());
                                 tvinterior.setText(objectinterior.get("empty_fields").toString());
-                                total = total+ Integer.parseInt(objectinterior.get("empty_fields").toString());
+                                total = total+ Integer.parseInt(tvinterior.getText().toString());
                                 tvinsulation.setText(objectinsulation.get("empty_fields").toString());
-                                total = total+ Integer.parseInt(objectinsulation.get("empty_fields").toString());
+                                total = total+ Integer.parseInt(tvinsulation.getText().toString());
                                 tvheating.setText(objectheating.get("empty_fields").toString());
-                                total = total+ Integer.parseInt(objectheating.get("empty_fields").toString());
+                                total = total+ Integer.parseInt(tvheating.getText().toString());
                                 tvfireplaces.setText(objectfireplaces.get("empty_fields").toString());
-                                total = total+ Integer.parseInt(objectfireplaces.get("empty_fields").toString());
+                                total = total+ Integer.parseInt(tvfireplaces.getText().toString());
                                 tvexterior.setText(objectexterior.get("empty_fields").toString());
-                                total = total+ Integer.parseInt(objectexterior.get("empty_fields").toString());
+                                total = total+ Integer.parseInt(tvexterior.getText().toString());
                                 tvelectrical.setText(objectelectrical.get("empty_fields").toString());
-                                total = total+ Integer.parseInt(objectelectrical.get("empty_fields").toString());
+                                total = total+ Integer.parseInt(tvelectrical.getText().toString());
                                 tvcooling.setText(objectcooling.get("empty_fields").toString());
-                                total = total+ Integer.parseInt(objectcooling.get("empty_fields").toString());
+                                total = total+ Integer.parseInt(tvcooling.getText().toString());
                                 tvappliance.setText(objectappliance.get("empty_fields").toString());
-                                total = total+ Integer.parseInt(objectappliance.get("empty_fields").toString());
+                                total = total+ Integer.parseInt(tvappliance.getText().toString());
 
                                 remainig.setText(total+"");
                             }

@@ -20,7 +20,7 @@
         android:layout_centerHorizontal="true"
         android:clickable="false"
         android:dividerHeight="2dp"
-        android:divider="@color/colorPrimary"
+        android:divider="#000"
         android:listSelector="@android:color/transparent"
         android:focusableInTouchMode="false"
         android:layout_below="@+id/app_bar"

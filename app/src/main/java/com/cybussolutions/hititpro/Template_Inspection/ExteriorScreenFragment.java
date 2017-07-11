@@ -33,6 +33,7 @@ import com.cybussolutions.hititpro.Activities.Detailed_Activity_All_Screens;
 import com.cybussolutions.hititpro.Activities.Detailed_Activity_Structure_Screens;
 import com.cybussolutions.hititpro.Activities.StructureScreensActivity;
 import com.cybussolutions.hititpro.Fragments.BaseFragment;
+import com.cybussolutions.hititpro.Fragments.TemplatesFragment;
 import com.cybussolutions.hititpro.Network.End_Points;
 import com.cybussolutions.hititpro.R;
 import com.cybussolutions.hititpro.Sql_LocalDataBase.Database;
@@ -939,6 +940,7 @@ public class ExteriorScreenFragment extends BaseFragment {
 
                 params.put("name", txt);
                 params.put("isDefault", String.valueOf(check));
+                params.put("parah", TemplatesFragment.myparah_no_temp);
                 params.put("client_id", StructureScreensActivity.client_id);
                 params.put("added_by", user);
 
