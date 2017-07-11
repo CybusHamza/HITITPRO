@@ -11,6 +11,7 @@ public class End_Points {
     public static final String ADD_CLIENT = BASE_URL + "addClient";
     public static final String UPDATE_CLIENT = BASE_URL + "updateClient";
     public static final String UPDATE_PROFILE = BASE_URL + "updateProfile";
+    public static final String DELETE_CLIENT = BASE_URL + "deleteClient";
 
 
     public static final String DELETE_PICTURE = BASE_URL + "deletePicture";

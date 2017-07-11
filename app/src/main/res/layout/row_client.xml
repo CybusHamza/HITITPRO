@@ -53,4 +53,13 @@
         android:layout_alignTop="@+id/client_phone"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/deleteClient"
+        android:src="@android:drawable/ic_menu_delete"
+        android:paddingRight="10dp"
+        android:layout_toLeftOf="@id/editClient"
+        android:layout_alignTop="@+id/client_phone"
+       />
 </RelativeLayout>
