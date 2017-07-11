@@ -159,9 +159,9 @@ public class ElectricalScreenFragment extends BaseFragment {
 
 
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Electrical");
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        /*((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.back_btn);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.back_btn);*/
         setHasOptionsMenu(true);
 
         SharedPreferences pref = getActivity().getApplicationContext().getSharedPreferences("HititPro", getActivity().MODE_PRIVATE);
@@ -377,6 +377,7 @@ public class ElectricalScreenFragment extends BaseFragment {
                 intent.putExtra("heading",electricalSmokeButton.getText().toString());
                 intent.putExtra("column","smoke_codetector");
                 intent.putExtra("fromAddapter","false");
+              //  intent.putExtra("tag","SMOKE_CO_DETECTORS1");
                 intent.putExtra("dbTable",ELECTRICAL_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
@@ -395,6 +396,7 @@ public class ElectricalScreenFragment extends BaseFragment {
                 intent.putExtra("column","observation");
                 intent.putExtra("dbTable",ELECTRICAL_TABLE);
                 intent.putExtra("fromAddapter","false");
+                intent.putExtra("tag","Electrical_Observations");
                 intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
@@ -412,6 +414,7 @@ public class ElectricalScreenFragment extends BaseFragment {
                 intent.putExtra("column","serviceentrance");
                 intent.putExtra("dbTable",ELECTRICAL_TABLE);
                 intent.putExtra("fromAddapter","false");
+                intent.putExtra("tag","SERVICE_ENTRANCE");
                 intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
@@ -430,6 +433,7 @@ public class ElectricalScreenFragment extends BaseFragment {
                 intent.putExtra("column","mainpanel");
                 intent.putExtra("dbTable",ELECTRICAL_TABLE);
                 intent.putExtra("fromAddapter","false");
+                intent.putExtra("tag","MAIN_PANEL");
                 intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
@@ -447,6 +451,7 @@ public class ElectricalScreenFragment extends BaseFragment {
                 intent.putExtra("column","subpanel");
                 intent.putExtra("dbTable",ELECTRICAL_TABLE);
                 intent.putExtra("fromAddapter","false");
+                intent.putExtra("tag","SUB_PANEL1");
                 intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
@@ -464,6 +469,7 @@ public class ElectricalScreenFragment extends BaseFragment {
                 intent.putExtra("column","distribution");
                 intent.putExtra("dbTable",ELECTRICAL_TABLE);
                 intent.putExtra("fromAddapter","false");
+                intent.putExtra("tag","DISTRIBUTION_WIRING");
                 intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
@@ -481,6 +487,7 @@ public class ElectricalScreenFragment extends BaseFragment {
                 intent.putExtra("column","outlets");
                 intent.putExtra("dbTable",ELECTRICAL_TABLE);
                 intent.putExtra("fromAddapter","false");
+                intent.putExtra("tag","OUTLETS");
                 intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
@@ -498,6 +505,7 @@ public class ElectricalScreenFragment extends BaseFragment {
                 intent.putExtra("column","switches");
                 intent.putExtra("dbTable",ELECTRICAL_TABLE);
                 intent.putExtra("fromAddapter","false");
+                intent.putExtra("tag","SWITCHES1");
                 intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
@@ -515,6 +523,7 @@ public class ElectricalScreenFragment extends BaseFragment {
                 intent.putExtra("column","lights_ceiling_fans");
                 intent.putExtra("dbTable",ELECTRICAL_TABLE);
                 intent.putExtra("fromAddapter","false");
+                intent.putExtra("tag","LIGHTS_CEILINGFANS");
                 intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
@@ -532,6 +541,7 @@ public class ElectricalScreenFragment extends BaseFragment {
                 intent.putExtra("column","smoke_co_detectors");
                 intent.putExtra("dbTable",ELECTRICAL_TABLE);
                 intent.putExtra("fromAddapter","false");
+                intent.putExtra("tag","SMOKE_CO_DETECTORS1");
                 intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }

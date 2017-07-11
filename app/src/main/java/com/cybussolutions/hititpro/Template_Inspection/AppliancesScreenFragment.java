@@ -136,9 +136,9 @@ public class AppliancesScreenFragment extends BaseFragment {
 
 
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Appliances");
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        /*((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.back_btn);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.back_btn);*/
         setHasOptionsMenu(true);
 
 
@@ -233,6 +233,7 @@ public class AppliancesScreenFragment extends BaseFragment {
                 intent.putExtra("heading",appliance_observations.getText().toString());
                 intent.putExtra("column","observations");
                 intent.putExtra("fromAddapter","false");
+                intent.putExtra("tag","Observations");
                 intent.putExtra("dbTable",APPLIANCE_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
@@ -249,6 +250,7 @@ public class AppliancesScreenFragment extends BaseFragment {
                 intent.putExtra("heading",electric_range.getText().toString());
                 intent.putExtra("column","relectricrange");
                 intent.putExtra("fromAddapter","false");
+                intent.putExtra("tag","Electric");
                 intent.putExtra("dbTable",APPLIANCE_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
@@ -265,6 +267,7 @@ public class AppliancesScreenFragment extends BaseFragment {
                 intent.putExtra("heading",gas_range.getText().toString());
                 intent.putExtra("column","rgasrange");
                 intent.putExtra("fromAddapter","false");
+                intent.putExtra("tag","Gas");
                 intent.putExtra("dbTable",APPLIANCE_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
@@ -281,6 +284,7 @@ public class AppliancesScreenFragment extends BaseFragment {
                 intent.putExtra("heading",built_in_electric_oven.getText().toString());
                 intent.putExtra("column","rbuiltinelectricoven");
                 intent.putExtra("fromAddapter","false");
+                intent.putExtra("tag","Built_In_Electric");
                 intent.putExtra("dbTable",APPLIANCE_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
@@ -297,6 +301,7 @@ public class AppliancesScreenFragment extends BaseFragment {
                 intent.putExtra("heading",electric_cooktop.getText().toString());
                 intent.putExtra("column","relectriccooktop");
                 intent.putExtra("fromAddapter","false");
+                intent.putExtra("tag","Electric_Cooktop");
                 intent.putExtra("dbTable",APPLIANCE_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
@@ -315,6 +320,7 @@ public class AppliancesScreenFragment extends BaseFragment {
                 intent.putExtra("heading",gas_cooktop.getText().toString());
                 intent.putExtra("column","rgascooktop");
                 intent.putExtra("fromAddapter","false");
+                intent.putExtra("tag","Gas_Cooktop");
                 intent.putExtra("dbTable",APPLIANCE_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
@@ -333,6 +339,7 @@ public class AppliancesScreenFragment extends BaseFragment {
                 intent.putExtra("heading",microwave_oven.getText().toString());
                 intent.putExtra("column","rmicrowaveoven");
                 intent.putExtra("fromAddapter","false");
+                intent.putExtra("tag","Microwave_Oven");
                 intent.putExtra("dbTable",APPLIANCE_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
@@ -349,6 +356,7 @@ public class AppliancesScreenFragment extends BaseFragment {
                 intent.putExtra("heading",dishwasher.getText().toString());
                 intent.putExtra("column","rdishwasher");
                 intent.putExtra("fromAddapter","false");
+                intent.putExtra("tag","Dishwasher");
                 intent.putExtra("dbTable",APPLIANCE_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
@@ -365,6 +373,7 @@ public class AppliancesScreenFragment extends BaseFragment {
                 intent.putExtra("heading",waste_disposer.getText().toString());
                 intent.putExtra("column","rwastedisposer");
                 intent.putExtra("fromAddapter","false");
+                intent.putExtra("tag","Waste_Disposer");
                 intent.putExtra("dbTable",APPLIANCE_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
@@ -381,6 +390,7 @@ public class AppliancesScreenFragment extends BaseFragment {
                 intent.putExtra("heading",refrigerator.getText().toString());
                 intent.putExtra("column","rrefrigerator");
                 intent.putExtra("fromAddapter","false");
+                intent.putExtra("tag","Refrigerator");
                 intent.putExtra("dbTable",APPLIANCE_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
@@ -397,6 +407,7 @@ public class AppliancesScreenFragment extends BaseFragment {
                 intent.putExtra("heading",wine_cooler.getText().toString());
                 intent.putExtra("column","rwinecooler");
                 intent.putExtra("fromAddapter","false");
+                intent.putExtra("tag","Wine_Cooler");
                 intent.putExtra("dbTable",APPLIANCE_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
@@ -413,6 +424,7 @@ public class AppliancesScreenFragment extends BaseFragment {
                 intent.putExtra("heading",trash_compactor.getText().toString());
                 intent.putExtra("column","rtrashcompactor");
                 intent.putExtra("fromAddapter","false");
+                intent.putExtra("tag","Trash_Compactor");
                 intent.putExtra("dbTable",APPLIANCE_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
@@ -429,6 +441,7 @@ public class AppliancesScreenFragment extends BaseFragment {
                 intent.putExtra("heading",clothes_washer.getText().toString());
                 intent.putExtra("column","rclotheswasher");
                 intent.putExtra("fromAddapter","false");
+                intent.putExtra("tag","Clothes_Washer");
                 intent.putExtra("dbTable",APPLIANCE_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
@@ -446,6 +459,7 @@ public class AppliancesScreenFragment extends BaseFragment {
                 intent.putExtra("heading",clothes_dryer.getText().toString());
                 intent.putExtra("column","rclothesdryer");
                 intent.putExtra("fromAddapter","false");
+                intent.putExtra("tag","Clothes_Dryer");
                 intent.putExtra("dbTable",APPLIANCE_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
@@ -462,6 +476,7 @@ public class AppliancesScreenFragment extends BaseFragment {
                 intent.putExtra("heading",cooktop_exhaust_fan.getText().toString());
                 intent.putExtra("column","rcooktopexhaustfan");
                 intent.putExtra("fromAddapter","false");
+                intent.putExtra("tag","Cooktop_Exhaust_Fan");
                 intent.putExtra("dbTable",APPLIANCE_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
@@ -478,6 +493,7 @@ public class AppliancesScreenFragment extends BaseFragment {
                 intent.putExtra("heading",central_vacuum.getText().toString());
                 intent.putExtra("column","rcentralvacuum");
                 intent.putExtra("fromAddapter","false");
+                intent.putExtra("tag","Central_Vacuum");
                 intent.putExtra("dbTable",APPLIANCE_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
@@ -495,6 +511,7 @@ public class AppliancesScreenFragment extends BaseFragment {
                 intent.putExtra("heading",door_bell.getText().toString());
                 intent.putExtra("column","rdoorbell");
                 intent.putExtra("fromAddapter","false");
+                intent.putExtra("tag","Door_Bell");
                 intent.putExtra("dbTable",APPLIANCE_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);

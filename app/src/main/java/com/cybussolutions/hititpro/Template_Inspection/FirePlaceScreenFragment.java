@@ -135,9 +135,9 @@ public class FirePlaceScreenFragment extends BaseFragment {
         }
 
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Fire Place");
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        /*((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.back_btn);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.back_btn);*/
         setHasOptionsMenu(true);
 
         fireplaces_wood_stoves = (Button) root.findViewById(R.id.fireplaces_wood_stoves);
@@ -234,6 +234,7 @@ public class FirePlaceScreenFragment extends BaseFragment {
                 intent.putExtra("heading",fireplace_wood_stove_observations.getText().toString());
                 intent.putExtra("column","observations");
                 intent.putExtra("fromAddapter","false");
+                intent.putExtra("tag","observation");
                 intent.putExtra("dbTable",FIREPLACE_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
@@ -250,6 +251,7 @@ public class FirePlaceScreenFragment extends BaseFragment {
                 intent.putExtra("heading",fireplace.getText().toString());
                 intent.putExtra("column","recommendationsfireplace");
                 intent.putExtra("fromAddapter","false");
+                intent.putExtra("tag","FIREPLACE");
                 intent.putExtra("dbTable",FIREPLACE_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
@@ -266,6 +268,7 @@ public class FirePlaceScreenFragment extends BaseFragment {
                 intent.putExtra("heading",wood_stove.getText().toString());
                 intent.putExtra("column","recommendationswood");
                 intent.putExtra("fromAddapter","false");
+                intent.putExtra("tag","WOOD_STOVE");
                 intent.putExtra("dbTable",FIREPLACE_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);

@@ -146,9 +146,9 @@ public class CoolingScreenFragment extends BaseFragment {
 
 
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Cooling");
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        /*((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.back_btn);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.back_btn);*/
         setHasOptionsMenu(true);
 
 
@@ -245,6 +245,7 @@ public class CoolingScreenFragment extends BaseFragment {
                 intent.putExtra("column","heatobservation");
                 intent.putExtra("dbTable",COOLING_TABLE);
                 intent.putExtra("fromAddapter","false");
+                intent.putExtra("tag","Heating_Observations");
                 intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
@@ -262,6 +263,7 @@ public class CoolingScreenFragment extends BaseFragment {
                 intent.putExtra("column","recomndcentralaircondition");
                 intent.putExtra("dbTable",COOLING_TABLE);
                 intent.putExtra("fromAddapter","false");
+                intent.putExtra("tag","CENTRAL_AIR_CONDITIONING");
                 intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
@@ -280,6 +282,7 @@ public class CoolingScreenFragment extends BaseFragment {
                 intent.putExtra("column","heatpumps");
                 intent.putExtra("dbTable",COOLING_TABLE);
                 intent.putExtra("fromAddapter","false");
+                intent.putExtra("tag","HEAT_PUMPS");
                 intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
@@ -297,6 +300,7 @@ public class CoolingScreenFragment extends BaseFragment {
                 intent.putExtra("column","evaporator");
                 intent.putExtra("dbTable",COOLING_TABLE);
                 intent.putExtra("fromAddapter","false");
+                intent.putExtra("tag","EVAPORATOR_COOLERS");
                 intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
@@ -314,6 +318,7 @@ public class CoolingScreenFragment extends BaseFragment {
                 intent.putExtra("column","housefans");
                 intent.putExtra("dbTable",COOLING_TABLE);
                 intent.putExtra("fromAddapter","false");
+                intent.putExtra("tag","HOUSE_FANS");
                 intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
             }
