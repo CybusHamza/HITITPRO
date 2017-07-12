@@ -135,6 +135,7 @@ public class CustomArrayAdapter extends ArrayAdapter<Checkbox_model> implements
 						intent.putExtra("fromAddapter","edit");
 						intent.putExtra("column", topass[1]);
 						intent.putExtra("dbTable",topass[2]);
+						intent.putExtra("tag",topass[3]);
 						((Activity)context).finish();
 						context.startActivity(intent);
 					}
@@ -221,6 +222,7 @@ public class CustomArrayAdapter extends ArrayAdapter<Checkbox_model> implements
 						Intent intent = new Intent(context, MainActivity.class);
 						intent.putExtra("data", data);
 						intent.putExtra("dbTable", topass[1]);
+						intent.putExtra("tag", topass[3]);
 						intent.putExtra("showImages", "false");
 						intent.putExtra("clientId", StructureScreensActivity.client_id);
 						intent.putExtra("inspectionId", StructureScreensActivity.inspectionID);
@@ -427,6 +429,7 @@ public class CustomArrayAdapter extends ArrayAdapter<Checkbox_model> implements
 								intent.putExtra("fromAddapter","true");
 								intent.putExtra("column", topass[1]);
 								intent.putExtra("dbTable",topass[2]);
+								intent.putExtra("tag",topass[3]);
 								((Activity)context).finish();
 								context.startActivity(intent);
 

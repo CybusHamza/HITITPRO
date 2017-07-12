@@ -161,6 +161,7 @@ public class Detailed_Adapter_Structure_Screen extends ArrayAdapter<Checkbox_mod
                         intent.putExtra("fromAddapter","edit");
                         intent.putExtra("column", topass[1]);
                         intent.putExtra("dbTable",topass[2]);
+                        intent.putExtra("tag",topass[3]);
                         ((Activity)context).finish();
                         context.startActivity(intent);
 
@@ -324,6 +325,7 @@ public class Detailed_Adapter_Structure_Screen extends ArrayAdapter<Checkbox_mod
                         intent.putExtra("fromAddapter", "true");
                         intent.putExtra("column", topass[1]);
                         intent.putExtra("dbTable", topass[2]);
+                        intent.putExtra("tag", topass[3]);
                         ((Activity) context).finish();
                         context.startActivity(intent);
 
@@ -411,6 +413,7 @@ public class Detailed_Adapter_Structure_Screen extends ArrayAdapter<Checkbox_mod
                     intent.putExtra("fromAddapter", "true");
                     intent.putExtra("column", topass[1]);
                     intent.putExtra("dbTable", topass[2]);
+                    intent.putExtra("tag", topass[3]);
                     ((Activity) context).finish();
                     context.startActivity(intent);
 
@@ -464,6 +467,7 @@ public class Detailed_Adapter_Structure_Screen extends ArrayAdapter<Checkbox_mod
                     intent.putExtra("fromAddapter", "true");
                     intent.putExtra("column", topass[1]);
                     intent.putExtra("dbTable", topass[2]);
+                    intent.putExtra("tag", topass[3]);
                     ((Activity) context).finish();
                     context.startActivity(intent);
 
@@ -669,6 +673,7 @@ public class Detailed_Adapter_Structure_Screen extends ArrayAdapter<Checkbox_mod
                                 intent.putExtra("fromAddapter","true");
                                 intent.putExtra("column", topass[1]);
                                 intent.putExtra("dbTable",topass[2]);
+                                intent.putExtra("tag",topass[3]);
                                 ((Activity)context).finish();
                                 context.startActivity(intent);
 

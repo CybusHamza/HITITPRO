@@ -32,7 +32,6 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.cybussolutions.hititpro.Activities.Detailed_Activity_All_Screens;
 import com.cybussolutions.hititpro.Activities.Detailed_Activity_Structure_Screens;
-import com.cybussolutions.hititpro.Activities.LandingScreen;
 import com.cybussolutions.hititpro.Activities.StructureScreensActivity;
 import com.cybussolutions.hititpro.Fragments.BaseFragment;
 import com.cybussolutions.hititpro.Fragments.TemplatesFragment;
@@ -150,9 +149,9 @@ public class RoofingScreenFragment extends BaseFragment {
 
 
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Roofing");
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+       /* ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.back_btn);
-        setHasOptionsMenu(true);
+       */ setHasOptionsMenu(true);
 
         SharedPreferences pref = getActivity().getApplicationContext().getSharedPreferences("HititPro", getActivity().MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();

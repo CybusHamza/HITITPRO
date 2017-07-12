@@ -136,8 +136,10 @@ public class StructureScreenFragment extends BaseFragment {
                                 public void onClick(DialogInterface dialog, int which) {
 
                                     getActivity().getSupportFragmentManager().popBackStack();
-
+                                    Intent intent = new Intent(getActivity(),LandingScreen.class);
+                                    intent.putExtra("activityName","addClientClass");
                                     getActivity().finish();
+                                    startActivity(intent);
 
                                 }
                             })
@@ -184,9 +186,9 @@ public class StructureScreenFragment extends BaseFragment {
         // image view
 
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Structure");
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+       /* ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.back_btn);
-
+*/
         setHasOptionsMenu(true);
 
 

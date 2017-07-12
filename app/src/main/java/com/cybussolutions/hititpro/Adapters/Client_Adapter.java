@@ -10,10 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
@@ -29,7 +27,6 @@ import com.cybussolutions.hititpro.Activities.EditClient;
 import com.cybussolutions.hititpro.Model.Clients_model;
 import com.cybussolutions.hititpro.Network.End_Points;
 import com.cybussolutions.hititpro.R;
-
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -103,7 +100,7 @@ public class Client_Adapter extends BaseAdapter {
             @Override
             public void onClick(View v) { new AlertDialog.Builder(context)
                     .setTitle("Delete Client")
-                    .setMessage("Are you sure you want to delete client!!")
+                    .setMessage("If you delete client, all associated properties will also be deleted. Do you really want to delete ")
                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                             /*Intent intent=new Intent(getActivity(),LandingScreen.class);

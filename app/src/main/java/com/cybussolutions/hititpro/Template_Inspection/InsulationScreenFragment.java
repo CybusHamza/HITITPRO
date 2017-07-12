@@ -32,7 +32,6 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.cybussolutions.hititpro.Activities.Detailed_Activity_All_Screens;
 import com.cybussolutions.hititpro.Activities.Detailed_Activity_Structure_Screens;
-import com.cybussolutions.hititpro.Activities.LandingScreen;
 import com.cybussolutions.hititpro.Activities.StructureScreensActivity;
 import com.cybussolutions.hititpro.Fragments.BaseFragment;
 import com.cybussolutions.hititpro.Fragments.TemplatesFragment;
@@ -149,10 +148,10 @@ public class InsulationScreenFragment extends BaseFragment {
 
 
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Insulation");
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+       /* ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.back_btn);
-        setHasOptionsMenu(true);
+       */ setHasOptionsMenu(true);
 
 
         SharedPreferences pref = getActivity().getApplicationContext().getSharedPreferences("HititPro", getActivity().MODE_PRIVATE);
@@ -313,6 +312,7 @@ public class InsulationScreenFragment extends BaseFragment {
                 intent.putExtra("items",StructureScreensActivity.Insulation_Ventilation_Observations_Values);
                 intent.putExtra("heading",Insulation_Ventilation_Observations.getText().toString());
                 intent.putExtra("column","observations");
+                intent.putExtra("tag","Insulation_Ventilation_Observation");
                 intent.putExtra("dbTable",INSULATION_TABLE);
                 intent.putExtra("fromAddapter","false");
                 intent.putExtra("inspectionID", StructureScreensActivity.template_id);
@@ -331,6 +331,7 @@ public class InsulationScreenFragment extends BaseFragment {
                 intent.putExtra("heading",Attic_Roof.getText().toString());
                 intent.putExtra("column","atticandroof");
                 intent.putExtra("fromAddapter","false");
+                intent.putExtra("tag","Attic_and_Roof");
                 intent.putExtra("dbTable",INSULATION_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
@@ -347,6 +348,7 @@ public class InsulationScreenFragment extends BaseFragment {
                 intent.putExtra("items",StructureScreensActivity.Basement_Values);
                 intent.putExtra("heading",Basement.getText().toString());
                 intent.putExtra("column","basement");
+                intent.putExtra("tag","Basement");
                 intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",INSULATION_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.template_id);
@@ -364,6 +366,7 @@ public class InsulationScreenFragment extends BaseFragment {
                 intent.putExtra("items",StructureScreensActivity.CrawlSpace_Values);
                 intent.putExtra("heading",CrawlSpace.getText().toString());
                 intent.putExtra("column","crawlspace");
+                intent.putExtra("tag","Crawl_Space");
                 intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",INSULATION_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.template_id);

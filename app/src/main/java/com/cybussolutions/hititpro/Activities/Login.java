@@ -57,7 +57,7 @@ public class Login extends AppCompatActivity {
         if(islogged.equals("true"))
         {
             Intent intent = new Intent(Login.this,LandingScreen.class);
-            intent.putExtra("activityName","");
+            intent.putExtra("activityName","addClientClass");
             finish();
             startActivity(intent);
 
@@ -170,7 +170,7 @@ public class Login extends AppCompatActivity {
                                 editor.apply();
 
                                 Intent intent = new Intent(Login.this, LandingScreen.class);
-                                intent.putExtra("activityName","");
+                                intent.putExtra("activityName","addClientClass");
                                 startActivity(intent);
                                 finish();
 

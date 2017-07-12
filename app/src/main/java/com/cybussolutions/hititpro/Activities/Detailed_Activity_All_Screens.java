@@ -355,6 +355,7 @@ public class Detailed_Activity_All_Screens extends AppCompatActivity {
                     intent.putExtra("fromAddapter", "edit");
                     intent.putExtra("column", toPass[1]);
                     intent.putExtra("dbTable", toPass[2]);
+                    intent.putExtra("tag", toPass[3]);
                     finish();
                     startActivity(intent);
 

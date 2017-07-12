@@ -620,6 +620,12 @@ public class TemplatesFragment extends BaseFragment {
     }
 
     public void prePopulate(final String temId, final String client_id, final String tempid , final String temname, final String isDefault, final String clientId , final String default_template ) {
+
+        ringProgressDialog = ProgressDialog.show(getActivity(), "", "Please wait ...", true);
+        ringProgressDialog.setCancelable(false);
+        ringProgressDialog.show();
+
+
         StringRequest request = new StringRequest(Request.Method.POST, End_Points.PRE_POPULATE,
                 new Response.Listener<String>() {
                     @Override

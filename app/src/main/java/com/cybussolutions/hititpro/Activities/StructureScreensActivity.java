@@ -9,7 +9,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MenuItem;
 
 import com.cybussolutions.hititpro.R;
 import com.cybussolutions.hititpro.Sql_LocalDataBase.Database;
@@ -94,8 +93,8 @@ public class StructureScreensActivity extends AppCompatActivity {
 
         toolbar = (Toolbar) findViewById(R.id.app_bar);
         toolbar.setTitle("Structure");
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        setSupportActionBar(toolbar);/*
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);*/
 
         Intent intent= getIntent();
 
@@ -142,7 +141,10 @@ public class StructureScreensActivity extends AppCompatActivity {
 
                             getSupportFragmentManager().popBackStack();
 
+                            Intent intent = new Intent(StructureScreensActivity.this,LandingScreen.class);
+                            intent.putExtra("activityName","addClientClass");
                             finish();
+                            startActivity(intent);
 
                         }
                     })

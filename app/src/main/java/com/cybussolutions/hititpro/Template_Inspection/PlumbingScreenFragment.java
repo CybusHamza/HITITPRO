@@ -134,10 +134,10 @@ public class PlumbingScreenFragment extends BaseFragment {
 
 
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Plumbing");
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        /*((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.back_btn);
-        setHasOptionsMenu(true);
+      */  setHasOptionsMenu(true);
 
         water_supply_source= (Button) root.findViewById(R.id.water_supply_source);
         service_pipe_to_house= (Button) root.findViewById(R.id.service_pipe_to_house);
@@ -393,6 +393,7 @@ public class PlumbingScreenFragment extends BaseFragment {
                 intent.putExtra("items", StructureScreensActivity.gas_pipingValues);
                 intent.putExtra("heading",gas_piping.getText().toString());
                 intent.putExtra("column","gaspiping");
+                intent.putExtra("tag","GAS_PIPING");
                 intent.putExtra("dbTable",PLUMBING_TABLE);
                 intent.putExtra("fromAddapter","false");
                 intent.putExtra("inspectionID", StructureScreensActivity.template_id);
@@ -409,6 +410,7 @@ public class PlumbingScreenFragment extends BaseFragment {
                 intent.putExtra("items", StructureScreensActivity.supply_pipingValues);
                 intent.putExtra("heading",supply_piping.getText().toString());
                 intent.putExtra("column","rsupplypiping");
+                intent.putExtra("tag","SUPPLY_PIPING");
                 intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",PLUMBING_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.template_id);
@@ -426,6 +428,7 @@ public class PlumbingScreenFragment extends BaseFragment {
                 intent.putExtra("items", StructureScreensActivity.dwv_piping_observationValues);
                 intent.putExtra("heading",dwv_piping_observation.getText().toString());
                 intent.putExtra("column","dwvpiping");
+                intent.putExtra("tag","DWV_PIPING");
                 intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",PLUMBING_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.template_id);
@@ -444,6 +447,7 @@ public class PlumbingScreenFragment extends BaseFragment {
                 intent.putExtra("heading",fixtures.getText().toString());
                 intent.putExtra("column","fixtures");
                 intent.putExtra("dbTable",PLUMBING_TABLE);
+                intent.putExtra("tag","FIXTURES");
                 intent.putExtra("fromAddapter","false");
                 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                 startActivity(intent);
@@ -461,6 +465,7 @@ public class PlumbingScreenFragment extends BaseFragment {
                 intent.putExtra("heading",sump_pump.getText().toString());
                 intent.putExtra("column","sumppump");
                 intent.putExtra("fromAddapter","false");
+                intent.putExtra("tag","SUMP_PUMP");
                 intent.putExtra("dbTable",PLUMBING_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);
@@ -477,6 +482,7 @@ public class PlumbingScreenFragment extends BaseFragment {
                 intent.putExtra("items", StructureScreensActivity.waste_ejector_pumpValues);
                 intent.putExtra("heading",waste_ejector_pump.getText().toString());
                 intent.putExtra("column","wasteejectorpump");
+                intent.putExtra("tag","WASTE_EJECTOR_PUMP");
                 intent.putExtra("fromAddapter","false");
                 intent.putExtra("dbTable",PLUMBING_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.template_id);
