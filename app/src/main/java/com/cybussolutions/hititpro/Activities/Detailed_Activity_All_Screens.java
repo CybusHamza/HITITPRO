@@ -304,8 +304,8 @@ public class Detailed_Activity_All_Screens extends AppCompatActivity {
 
                         if (item != 0) {
                             if (insertArray[item - 1].equals(Add.getText().toString() + "%0") || insertArray[item - 1].equals(Add.getText().toString() + "%1")) {
-                                Toast.makeText(Detailed_Activity_All_Screens.this, "Item Already Available", Toast.LENGTH_SHORT).show();
-                                list = new ArrayList<>(list_temp);
+                                Toast.makeText(Detailed_Activity_All_Screens.this, "Item Already Exists", Toast.LENGTH_SHORT).show();
+                                //list = new ArrayList<>(list_temp);
                                 break;
                             } else {
 

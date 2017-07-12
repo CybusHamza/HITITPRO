@@ -283,7 +283,7 @@ public class RoofingScreenFragment extends BaseFragment {
                 intent.putExtra("heading",roofingObservationsButton.getText().toString());
                 intent.putExtra("column","observations");
                 intent.putExtra("fromAddapter","false");
-                intent.putExtra("fromAddapter","roofingobservations");
+                intent.putExtra("tag","roofingobservations");
                 intent.putExtra("dbTable",ROOFING_TABLE);
                 intent.putExtra("inspectionID", StructureScreensActivity.template_id);
                 startActivity(intent);

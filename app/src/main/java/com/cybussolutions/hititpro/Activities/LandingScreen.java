@@ -8,9 +8,6 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -34,9 +31,6 @@ import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
-
-import java.io.FileDescriptor;
-import java.io.PrintWriter;
 
 
 public class LandingScreen extends AppCompatActivity {
@@ -131,6 +125,7 @@ public class LandingScreen extends AppCompatActivity {
         drawer = new DrawerBuilder()
                 .withActivity(this)
                 .withToolbar(toolbar)
+                .withDrawerWidthDp(300)
                 .withAccountHeader(setupHeader(userName, userEmail))
                 .addDrawerItems(
                         drawerItem1,
@@ -212,13 +207,13 @@ public class LandingScreen extends AppCompatActivity {
                 .withHeaderBackground(R.color.LightYellow)
                 .withTextColor(Color.BLACK)
                 .addProfiles(
-                        new ProfileDrawerItem().withName(name).withEmail(email).withIcon(bitmap1[0])
+                        new ProfileDrawerItem().withName(name).withEmail(email).withIcon(R.drawable.app_icon)
 
                 )
                 .withOnAccountHeaderListener(new AccountHeader.OnAccountHeaderListener() {
                     @Override
                     public boolean onProfileChanged(View view, IProfile profile, boolean currentProfile) {
-                        new ProfileDrawerItem().withName(name).withEmail(email).withIcon(bitmap1[0]);
+                        new ProfileDrawerItem().withName(name).withEmail(email);
 
                         return  true;
                     }

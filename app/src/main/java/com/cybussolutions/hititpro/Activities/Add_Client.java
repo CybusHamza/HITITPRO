@@ -126,8 +126,8 @@ public class Add_Client extends AppCompatActivity {
                 strState = State.getText().toString();
                 strZip = Zip.getText().toString();
 
-                if(strName.equals("") || strCity.equals("")|| strContactName.equals("")|| strAddress.equals("")
-                        || strPhone.equals("")|| strFax.equals("")|| strEmail.equals(""))
+                if(strName.equals("") || strCity.equals("")||  strAddress.equals("")
+                        || strPhone.equals("") || strZip.equals("") ||strState .equals("") )
                 {
                     Toast.makeText(Add_Client.this, "Fields cannot be empty ", Toast.LENGTH_SHORT).show();
                 }

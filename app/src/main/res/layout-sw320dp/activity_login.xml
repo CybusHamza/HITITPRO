@@ -11,10 +11,11 @@
     <ImageView
         android:id="@+id/Header_image"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="80dp"
         android:layout_gravity="center_horizontal"
-        android:layout_margin="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginLeft="18dp"
+        android:layout_marginRight="18dp"
+        android:layout_marginTop="40dp"
         android:background="@drawable/hititpro_logo"
         android:text="@string/hit_it_pro"
         android:textColor="#FFFFFF"
@@ -29,7 +30,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Email"
-            android:layout_margin="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="60dp"
             android:singleLine="true"
             android:textColor="@color/black"
             android:textColorHint="@color/black"
@@ -37,19 +40,17 @@
             android:id="@+id/username_login" />
 
 
-
-
-        <EditText
-            android:layout_margin="20dp"
-            android:id="@+id/password_login"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Password"
-            android:inputType="textPassword"
-            android:singleLine="true"
-            android:textColor="@color/black"
-            android:textColorHint="@color/black"
-            android:textSize="15sp" />
+    <EditText
+        android:id="@+id/password_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:singleLine="true"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:textSize="15sp" />
 
 
     <LinearLayout
@@ -69,9 +70,9 @@
             android:layout_marginLeft="@dimen/activity_vertical_margin"
             android:layout_marginRight="@dimen/activity_vertical_margin"
 
-            android:background="@drawable/round_corner_button"
+            android:background="@drawable/outline_active_style"
             android:text="Login"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textSize="23sp"
             android:textStyle="bold"
             android:typeface="serif" />

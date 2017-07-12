@@ -10,7 +10,7 @@
         android:typeface="sans"
         android:textSize="13sp"
         android:textStyle="bold"
-        android:textColor="@color/colorPrimary"
+        android:textColor="#3F51B5"
         android:paddingTop="10dp"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
@@ -45,21 +45,21 @@
             android:layout_below="@+id/client_phone"/>
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:id="@+id/editClient"
-        android:src="@android:drawable/ic_menu_edit"
+        android:src="@drawable/edit_selector"
         android:paddingRight="10dp"
         android:layout_alignTop="@+id/client_phone"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:id="@+id/deleteClient"
-        android:src="@android:drawable/ic_menu_delete"
+        android:src="@drawable/delet_selector"
         android:paddingRight="10dp"
-        android:layout_toLeftOf="@id/editClient"
-        android:layout_alignTop="@+id/client_phone"
-       />
+        android:layout_alignTop="@+id/editClient"
+        android:layout_toLeftOf="@+id/editClient"
+        android:layout_toStartOf="@+id/editClient" />
 </RelativeLayout>

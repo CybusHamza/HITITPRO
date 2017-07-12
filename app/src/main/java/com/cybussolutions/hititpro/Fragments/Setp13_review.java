@@ -2,6 +2,7 @@ package com.cybussolutions.hititpro.Fragments;
 
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -22,6 +23,7 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.cybussolutions.hititpro.Activities.LandingScreen;
 import com.cybussolutions.hititpro.Activities.StructureScreensActivity;
 import com.cybussolutions.hititpro.Network.End_Points;
 import com.cybussolutions.hititpro.R;
@@ -83,14 +85,17 @@ public class Setp13_review extends BaseFragment {
             public void onClick(View view) {
 
 
-                new SweetAlertDialog(getActivity(), SweetAlertDialog.WARNING_TYPE)
-                        .setTitleText("Are You Sure!")
-                        .setConfirmText("OK").setContentText("If you edit this label , associated images will be removed")
+                new SweetAlertDialog(getActivity(), SweetAlertDialog.SUCCESS_TYPE)
+                        .setTitleText("Done")
+                        .setConfirmText("OK").setContentText("Your data has been successfully saved ! ")
                         .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                             @Override
                             public void onClick(SweetAlertDialog sDialog) {
 
                                 getActivity().finish();
+                                Intent intent = new Intent(getActivity(),LandingScreen.class);
+                                intent.putExtra("activityName","addTemplateClass");
+                                startActivity(intent);
                             }
                                                  }
                         ).showCancelButton(true)
