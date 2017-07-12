@@ -89,7 +89,7 @@
         android:id="@+id/textView5"
         android:textStyle="bold"
         android:textSize="15dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:textColor="#000"
         android:layout_below="@+id/spinner"
         android:layout_centerVertical="true"

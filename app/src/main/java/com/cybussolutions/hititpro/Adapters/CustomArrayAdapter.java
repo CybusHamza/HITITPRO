@@ -373,86 +373,150 @@ public class CustomArrayAdapter extends ArrayAdapter<Checkbox_model> implements
 				enteredStructure = enteredStructure.substring(0, enteredStructure.length() - 1);
 
 				// Insert in local DataBase*/
+				SharedPreferences sp=context.getSharedPreferences("prefs", Context.MODE_PRIVATE);
 
+				if(!sp.getBoolean("imageButton", true)){
 
-				new SweetAlertDialog(context, SweetAlertDialog.WARNING_TYPE)
-						.setTitleText("Are You Sure!")
-						.setConfirmText("OK").setContentText("If there are any associated images  with this label , they  will be removed")
-						.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-							@Override
-							public void onClick(SweetAlertDialog sDialog) {
-								sDialog.dismiss();
-								list.clear();
+					list.clear();
 
-								for (int item = 0; item < dbEnterArray.length; item++) {
-									Checkbox_model model = new Checkbox_model();
-									model.setTitle(dbEnterArray[item]);
+					for (int item = 0; item < dbEnterArray.length; item++) {
+						Checkbox_model model = new Checkbox_model();
+						model.setTitle(dbEnterArray[item]);
 
-									list.add(model);
+						list.add(model);
 
-									if (item == (dbEnterArray.length - 1)) {
-										if (Add.getText().toString().equals("")) {
-											Toast.makeText(context, "Please Enter Some Data !!", Toast.LENGTH_SHORT).show();
-										} else {
+						if (item == (dbEnterArray.length - 1)) {
+							if (Add.getText().toString().equals("")) {
+								Toast.makeText(context, "Please Enter Some Data !!", Toast.LENGTH_SHORT).show();
+							} else {
 
-											String row[] =  list.get(position).getTitle().split("%");
-											if(row[1].equals("1"))
-											{
-												model.setTitle(Add.getText().toString() + "%1");
-											}
-											else
-											{
-												model.setTitle(Add.getText().toString() + "%0");
-											}
-
-
-											list.remove(position);
-
-											list.add(position, model);
-
-											list.remove(list.size() - 1);
-
-											for (int i = 0; i < list.size(); i++) {
-												dbEnterArray[i] = list.get(i).getTitle();
-											}
-
-										}
-
-									}
-
+								String row[] =  list.get(position).getTitle().split("%");
+								if(row[1].equals("1"))
+								{
+									model.setTitle(Add.getText().toString() + "%1");
+								}
+								else
+								{
+									model.setTitle(Add.getText().toString() + "%0");
 								}
 
-								Intent intent= new Intent(getContext(), Detailed_Activity_All_Screens.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-								intent.putExtra("items",dbEnterArray);
-								intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
-								intent.putExtra("heading", topass[0]);
-								intent.putExtra("fromAddapter","true");
-								intent.putExtra("column", topass[1]);
-								intent.putExtra("dbTable",topass[2]);
-								intent.putExtra("tag",topass[3]);
-								((Activity)context).finish();
-								context.startActivity(intent);
 
-								b.dismiss();
-								InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
-								imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
-								imm.hideSoftInputFromWindow(Add.getWindowToken(), 0);
+								list.remove(position);
+
+								list.add(position, model);
+
+								list.remove(list.size() - 1);
+
+								for (int i = 0; i < list.size(); i++) {
+									dbEnterArray[i] = list.get(i).getTitle();
+								}
+
 							}
+
 						}
-						).showCancelButton(true)
-						.setCancelText("Cancel")
-						.setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
-					@Override
-					public void onClick(SweetAlertDialog sweetAlertDialog) {
-						sweetAlertDialog.dismiss();
-						b.dismiss();
+
 					}
-				})
-						.show();
+
+					Intent intent= new Intent(getContext(), Detailed_Activity_All_Screens.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+					intent.putExtra("items",dbEnterArray);
+					intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+					intent.putExtra("heading", topass[0]);
+					intent.putExtra("fromAddapter","true");
+					intent.putExtra("column", topass[1]);
+					intent.putExtra("dbTable",topass[2]);
+					intent.putExtra("tag",topass[3]);
+					((Activity)context).finish();
+					context.startActivity(intent);
+
+					b.dismiss();
+					InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+					imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+					imm.hideSoftInputFromWindow(Add.getWindowToken(), 0);
+				}
+
+				else{
+					new SweetAlertDialog(context, SweetAlertDialog.WARNING_TYPE)
+							.setTitleText("Are You Sure!")
+							.setConfirmText("OK").setContentText("If there are any associated images  with this label , they  will be removed")
+							.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+														 @Override
+														 public void onClick(SweetAlertDialog sDialog) {
+															 sDialog.dismiss();
+															 list.clear();
+
+															 for (int item = 0; item < dbEnterArray.length; item++) {
+																 Checkbox_model model = new Checkbox_model();
+																 model.setTitle(dbEnterArray[item]);
+
+																 list.add(model);
+
+																 if (item == (dbEnterArray.length - 1)) {
+																	 if (Add.getText().toString().equals("")) {
+																		 Toast.makeText(context, "Please Enter Some Data !!", Toast.LENGTH_SHORT).show();
+																	 } else {
+
+																		 String row[] =  list.get(position).getTitle().split("%");
+																		 if(row[1].equals("1"))
+																		 {
+																			 model.setTitle(Add.getText().toString() + "%1");
+																		 }
+																		 else
+																		 {
+																			 model.setTitle(Add.getText().toString() + "%0");
+																		 }
+
+
+																		 list.remove(position);
+
+																		 list.add(position, model);
+
+																		 list.remove(list.size() - 1);
+
+																		 for (int i = 0; i < list.size(); i++) {
+																			 dbEnterArray[i] = list.get(i).getTitle();
+																		 }
+
+																	 }
+
+																 }
+
+															 }
+
+															 Intent intent= new Intent(getContext(), Detailed_Activity_All_Screens.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+															 intent.putExtra("items",dbEnterArray);
+															 intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+															 intent.putExtra("heading", topass[0]);
+															 intent.putExtra("fromAddapter","true");
+															 intent.putExtra("column", topass[1]);
+															 intent.putExtra("dbTable",topass[2]);
+															 intent.putExtra("tag",topass[3]);
+															 ((Activity)context).finish();
+															 context.startActivity(intent);
+
+															 b.dismiss();
+															 InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+															 imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+															 imm.hideSoftInputFromWindow(Add.getWindowToken(), 0);
+														 }
+													 }
+							).showCancelButton(true)
+							.setCancelText("Cancel")
+							.setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+								@Override
+								public void onClick(SweetAlertDialog sweetAlertDialog) {
+									sweetAlertDialog.dismiss();
+									b.dismiss();
+								}
+							})
+							.show();
+				}
+
 
 
 			}
 		});
+
+
 		cancel.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
