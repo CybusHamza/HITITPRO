@@ -110,7 +110,6 @@ public class Edit_Profile extends AppCompatActivity {
             public void onClick(View v) {
                 if (ActivityCompat.checkSelfPermission(Edit_Profile.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
 
-
                     if (Build.VERSION.SDK_INT > 22) {
 
                         requestPermissions(new String[]{Manifest.permission

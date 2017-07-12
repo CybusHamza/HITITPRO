@@ -205,7 +205,7 @@ public class Add_Comments extends AppCompatActivity {
                             })
                             .show();
                 }
-                Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
+             //   Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
 
             }
         }) {

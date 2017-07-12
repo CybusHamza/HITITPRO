@@ -63,6 +63,7 @@ public class Detailed_Adapter_Structure_Screen extends ArrayAdapter<Checkbox_mod
     static  int count=0;
     Database database;
     EditText subEditText;
+    String userId;
 
 
     public Detailed_Adapter_Structure_Screen(Activity context, ArrayList<Checkbox_model> list, int resource,String topass[]) {
@@ -215,64 +216,42 @@ public class Detailed_Adapter_Structure_Screen extends ArrayAdapter<Checkbox_mod
                 CheckBox checkBox = (CheckBox) view;
                 int position = (Integer) view.getTag();
                 String name = checkBox.getText().toString().replaceAll("\\s+","");
-                String observation_name="";
                 int pagePosition= 0;
                 switch (topass[2]){
                     case "portfolio":
                         pagePosition= 1;
-                        observation_name="observation";
-                        observation_comments="observation_comments";
                         break;
                     case "roofing":
                         pagePosition= 2;
-                        observation_name="roofingobservations";
-                        observation_comments="observations_comments";
                         break;
                     case "exterior":
                         pagePosition= 3;
-                        observation_name="observation";
-                        observation_comments="observations_comments";
                         break;
                     case "interior":
                         pagePosition= 9;
-                        observation_name="Interior_Observations";
-                        observation_comments="Interior_Observations";
                         break;
                     case "heating":
                         pagePosition= 5;
-                        observation_name="Heating_Observations";
-                        observation_comments="observation_comments";
                         break;
                     case "cooling":
                         pagePosition= 6;
-                        observation_name="Heating_Observations";
-                        observation_comments="heatobservation_comments";
                         break;
                     case "electrical":
                         pagePosition= 4;
-                        observation_name="Electrical_Observations";
-                        observation_comments="observation_comments";
                         break;
                     case "insulation":
                         pagePosition= 7;
-                        observation_name="Insulation_Ventilation_Observations";
-                        observation_comments="observations_comments";
                         break;
                     case "plumbing":
                         pagePosition= 8;
-                        observation_name="Plumbing_Observations";
-                        observation_comments="observation_comments";
                         break;
                     case "appliance":
                         pagePosition= 10;
-                        observation_name="Appliance_Observations";
-                        observation_comments="observations_comments";
                         break;
                     case "fireplaces":
                         pagePosition= 11;
-                        observation_name="observations";
-                        observation_comments="observations_comments";
                         break;
+
                     default:
                         pagePosition= 0;
 
@@ -489,6 +468,9 @@ public class Detailed_Adapter_Structure_Screen extends ArrayAdapter<Checkbox_mod
     }
 
     private void saveObservationComments() {
+        SharedPreferences pref = context.getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
+
+        userId = pref.getString("user_id","");
         final StringRequest request = new StringRequest(Request.Method.POST, End_Points.SAVE_OBSERVATION_COMMENTS,
                 new Response.Listener<String>() {
                     @Override
@@ -529,14 +511,16 @@ public class Detailed_Adapter_Structure_Screen extends ArrayAdapter<Checkbox_mod
         }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-
                 Map<String, String> params = new HashMap<>();
                 params.put("observation_comments",subEditText.getText().toString());
                 params.put("template_id",StructureScreensActivity.template_id);
                 params.put("inspection_id",StructureScreensActivity.inspectionID);
                 params.put("client_id",StructureScreensActivity.client_id);
                 params.put("table_name",topass[2]);
-                params.put("observations_comments",observation_comments);
+                params.put("column_name",topass[1]);
+                params.put("element_id",data);
+                params.put("userid",userId);
+                //params.put("observations_comments",observation_comments);
                 return params;
             }
         };
@@ -750,7 +734,7 @@ public class Detailed_Adapter_Structure_Screen extends ArrayAdapter<Checkbox_mod
         }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-
+               
                 Map<String, String> params = new HashMap<>();
                 params.put("fieldid",data);
                 params.put("template_id",StructureScreensActivity.template_id);
