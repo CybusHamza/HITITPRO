@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
@@ -86,6 +87,7 @@ public class Template_Adapter extends BaseAdapter {
             viewholder.name = (TextView) v.findViewById(R.id.client_name);
             viewholder.template = (TextView) v.findViewById(R.id.template);
             viewholder.inspection=(TextView)v.findViewById(R.id.inspection);
+            viewholder.inspection=(TextView)v.findViewById(R.id.inspection);
             viewholder.name.setTypeface(face, Typeface.BOLD);
             viewholder.name.setTextSize(17);
             viewholder.inspection.setTypeface(face);
@@ -94,6 +96,7 @@ public class Template_Adapter extends BaseAdapter {
             viewholder.editTemplate=(ImageView)v.findViewById(R.id.editTemplate);
             viewholder.deleteTemplate=(ImageView)v.findViewById(R.id.deleteTemplate);
             viewholder.archiveTemp=(ImageView)v.findViewById(R.id.archive);
+            viewholder.donwloadTemplate=(ImageView)v.findViewById(R.id.download);
             v.setTag(viewholder);
         } else {
             viewholder = (ViewHolder) v.getTag();
@@ -103,6 +106,13 @@ public class Template_Adapter extends BaseAdapter {
         {
             viewholder.archiveTemp.setVisibility(View.GONE);
         }
+
+        viewholder.donwloadTemplate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(context, "Download Report is not available", Toast.LENGTH_SHORT).show();
+            }
+        });
         viewholder.archiveTemp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -176,7 +186,7 @@ public class Template_Adapter extends BaseAdapter {
 
     class ViewHolder{
         protected TextView name,template,inspection;
-        ImageView editTemplate,deleteTemplate,archiveTemp;
+        ImageView editTemplate,deleteTemplate,archiveTemp,donwloadTemplate;
 
 
     }

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -13,27 +12,35 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@color/white"
             android:orientation="vertical">
 
             <ImageView
                 android:id="@+id/Header_image"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_height="80dp"
                 android:layout_gravity="center_horizontal"
-                android:layout_margin="20dp"
                 android:layout_marginTop="20dp"
+                android:layout_margin="20dp"
                 android:background="@drawable/hititpro_logo"
                 android:textColor="#FFFFFF"
                 android:textSize="35sp"
                 android:textStyle="bold"
                 android:typeface="serif" />
-
+            <TextView
+                android:id="@+id/fist_name_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="@string/firt_name"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
 
             <EditText
                 android:id="@+id/fist_name_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_margin="5dp"
                 android:digits="123456789qwertzuiopasdfghjklyxcvbnmABCDEFGHIJKLMNOPQRSTUVWXYZ"
                 android:hint="@string/firt_name"
                 android:inputType="text"
@@ -41,109 +48,171 @@
                 android:textColor="@color/black"
                 android:textSize="15sp" />
 
-
+            <TextView
+                android:id="@+id/last_name_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="@string/last_name"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
             <EditText
                 android:id="@+id/last_name_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_margin="5dp"
                 android:digits="123456789qwertzuiopasdfghjklyxcvbnmABCDEFGHIJKLMNOPQRSTUVWXYZ"
                 android:hint="@string/last_name"
                 android:inputType="text"
                 android:singleLine="true"
                 android:textColor="@color/black"
                 android:textSize="15sp" />
-
+            <TextView
+                android:id="@+id/email_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="@string/email"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
 
             <EditText
                 android:id="@+id/email_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_margin="5dp"
                 android:hint="@string/email"
                 android:inputType="textEmailAddress"
                 android:singleLine="true"
                 android:textColor="@color/black"
                 android:textSize="15sp" />
 
-
+            <TextView
+                android:id="@+id/password_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="@string/password"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
             <EditText
                 android:id="@+id/password_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_margin="5dp"
                 android:hint="@string/password"
                 android:inputType="textPassword"
                 android:singleLine="true"
                 android:textColor="@color/black"
                 android:textSize="15sp" />
-
+            <TextView
+                android:id="@+id/confirm_password_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="@string/confirm_password"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
 
             <EditText
                 android:id="@+id/confirm_password_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_margin="5dp"
                 android:hint="@string/confirm_password"
                 android:inputType="textPassword"
                 android:singleLine="true"
                 android:textColor="@color/black"
                 android:textSize="15sp" />
 
-
+            <TextView
+                android:id="@+id/phone_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="@string/phone"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
             <EditText
                 android:id="@+id/phone_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_margin="5dp"
                 android:hint="@string/phone"
                 android:inputType="phone"
                 android:maxLength="14"
                 android:singleLine="true"
                 android:textColor="@color/black"
                 android:textSize="15sp" />
-
+            <TextView
+                android:id="@+id/fax_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="Fax"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
 
             <EditText
                 android:id="@+id/fax_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_margin="5dp"
                 android:hint="Fax"
                 android:inputType="phone"
                 android:maxLength="14"
                 android:singleLine="true"
                 android:textColor="@color/black"
                 android:textSize="15sp" />
-
+            <TextView
+                android:id="@+id/website_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:text="Website"
+                android:textSize="15sp" />
 
             <EditText
                 android:id="@+id/website_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_margin="5dp"
                 android:hint="Website"
                 android:singleLine="true"
                 android:textColor="@color/black"
                 android:textSize="15sp" />
-
+            <TextView
+                android:id="@+id/address_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="@string/address"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
 
             <EditText
                 android:id="@+id/address_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_margin="5dp"
                 android:hint="@string/address"
                 android:singleLine="true"
                 android:textColor="@color/black"
                 android:textSize="15sp" />
-
+            <TextView
+                android:id="@+id/company_info_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="Company Information"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
 
             <EditText
                 android:id="@+id/company_info_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_margin="5dp"
                 android:hint="Company Information"
                 android:singleLine="true"
                 android:textColor="@color/black"
@@ -156,28 +225,36 @@
                 android:layout_marginLeft="@dimen/activity_vertical_margin"
                 android:layout_marginRight="@dimen/activity_vertical_margin"
                 android:layout_marginTop="60dp"
+                android:layout_weight="3"
                 android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/logo_button"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:layout_marginBottom="@dimen/activity_horizontal_margin"
+                    android:layout_weight="1.25"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/outline_active_style"
+                    android:padding="5dp"
                     android:text="Attach Logo"
                     android:typeface="serif" />
 
                 <ImageView
                     android:id="@+id/logo"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="0dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1.5"
+                    android:layout_marginLeft="30dp"
                     android:layout_gravity="right"
-                    android:background="@android:drawable/ic_menu_gallery" />
+                    />
             </LinearLayout>
 
             <Button
                 android:id="@+id/signUp_button"
                 android:layout_width="match_parent"
-                android:layout_height="57dp"
+                android:layout_height="50dp"
                 android:layout_marginBottom="@dimen/activity_horizontal_margin"
                 android:layout_marginLeft="@dimen/activity_vertical_margin"
                 android:layout_marginRight="@dimen/activity_vertical_margin"
@@ -185,7 +262,7 @@
                 android:background="@drawable/outline_active_style"
                 android:text="@string/sign_up"
                 android:textColor="@color/black"
-                android:textSize="30sp"
+                android:textSize="23sp"
                 android:textStyle="bold"
                 android:typeface="serif" />
 

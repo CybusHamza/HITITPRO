@@ -33,6 +33,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.cybussolutions.hititpro.Activities.Detailed_Activity_All_Screens;
 import com.cybussolutions.hititpro.Activities.Detailed_Activity_Structure_Screens;
+import com.cybussolutions.hititpro.Activities.LandingScreen;
 import com.cybussolutions.hititpro.Activities.StructureScreensActivity;
 import com.cybussolutions.hititpro.Fragments.BaseFragment;
 import com.cybussolutions.hititpro.Fragments.TemplatesFragment;
@@ -758,9 +759,9 @@ public class HeatingScreenFragment extends BaseFragment {
                     .setMessage("Are you sure you want to Close Form !!")
                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
-                           /* Intent intent=new Intent(getActivity(),LandingScreen.class);
-                            intent.putExtra("activityName", "StructureScreen");
-                            startActivity(intent);*/
+                            Intent intent=new Intent(getActivity(),LandingScreen.class);
+                            intent.putExtra("activityName", "addTemplateClass");
+                            startActivity(intent);
                             getActivity().finish();
 
 

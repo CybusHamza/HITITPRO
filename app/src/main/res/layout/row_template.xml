@@ -12,7 +12,7 @@
         android:text="Client Name"
         android:id="@+id/client_name"
         android:typeface="sans"
-        android:textSize="13sp"
+        android:textSize="20sp"
         android:textStyle="bold"
         android:textColor="#3F51B5"
         android:paddingTop="10dp"
@@ -23,14 +23,15 @@
         android:id="@+id/template"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="13sp"
+        android:textSize="20dp"
+
         android:typeface="sans"
         android:textStyle="bold"
         android:textColor="#515050"
         android:paddingTop="3dp"
         android:paddingLeft="20dp"
         android:paddingRight="0dp"
-        android:paddingBottom="10dp"
+        android:paddingBottom="20dp"
         android:text=""
         android:layout_marginEnd="130dp"
         android:layout_below="@+id/client_name"
@@ -40,7 +41,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Inspection Name"
-        android:textSize="15sp"
+        android:textSize="20dp"
         android:visibility="gone"
         android:id="@+id/inspection"
         android:typeface="sans"
@@ -53,37 +54,180 @@
         android:layout_marginRight="40dp"
         android:layout_below="@+id/template"/>
 
-    <ImageView
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:id="@+id/editTemplate"
-        android:src="@drawable/edit_selector"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_alignTop="@+id/deleteTemplate"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginBottom="5dp"
+        android:layout_above="@+id/box"
+        android:orientation="horizontal">
+        <View
 
-    <ImageView
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:layout_marginTop="15dp"
-        android:id="@+id/deleteTemplate"
-        android:src="@drawable/delet_selector"
-        android:layout_alignParentTop="true"
-        android:layout_toLeftOf="@+id/editTemplate"
-        android:layout_toStartOf="@+id/editTemplate" />
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="13dp"
+            android:background="#C0C0C0"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="4"
+        android:id="@+id/box"
+        android:layout_below="@+id/template"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
 
 
 
-    <ImageView
-        android:id="@+id/archive"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:layout_marginRight="10dp"
-        android:src="@drawable/archvive_selector"
-        android:layout_alignTop="@+id/deleteTemplate"
-        android:layout_toLeftOf="@+id/deleteTemplate"
-        android:layout_toStartOf="@+id/deleteTemplate" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/editTemplate"
+                android:layout_width="20dp"
+                android:layout_height="25dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignTop="@+id/deleteTemplate"
+                android:layout_gravity="center"
+                 android:src="@drawable/edit_selector" />
+
+            <!-- <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textStyle="bold"
+                android:layout_margin="3dp"
+                android:text="Edit"
+                />-->
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="1dp"
+            android:layout_height="30dp"
+            android:orientation="vertical">
+            <View
+
+                android:layout_width="3dp"
+                android:layout_marginBottom="5dp"
+                android:layout_height="30dp"
+                android:background="#C0C0C0"/>
+        </LinearLayout>
+
+        <LinearLayout
+        android:layout_width="wrap_content"
+        android:orientation="vertical"
+        android:layout_weight="1"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="25dp"
+            android:id="@+id/deleteTemplate"
+            android:layout_gravity="center"
+            android:src="@drawable/delet_selector"
+            android:layout_alignParentTop="true"
+            android:layout_toLeftOf="@+id/editTemplate"
+            android:layout_toStartOf="@+id/editTemplate" />
+
+     <!--   <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:layout_margin="3dp"
+            android:text="Delete"
+            />-->
+    </LinearLayout>
+        <LinearLayout
+            android:layout_width="1dp"
+            android:layout_height="30dp"
+            android:orientation="vertical">
+            <View
+                android:layout_width="3dp"
+                android:layout_height="30dp"
+                android:layout_marginBottom="13dp"
+                android:background="#C0C0C0"/>
+        </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:orientation="vertical"
+        android:layout_weight="1"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/download"
+            android:layout_width="20dp"
+            android:layout_height="25dp"
+            android:layout_alignTop="@+id/deleteTemplate"
+            android:layout_gravity="center"
+            android:layout_toLeftOf="@+id/deleteTemplate"
+            android:layout_toStartOf="@+id/deleteTemplate"
+            android:src="@drawable/download_selector" />
+        <!--   <TextView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_gravity="center"
+               android:textStyle="bold"
+               android:layout_margin="3dp"
+               android:text="Download"
+               />-->
+    </LinearLayout>
+        <LinearLayout
+            android:layout_width="1dp"
+            android:layout_height="30dp"
+            android:orientation="vertical">
+            <View
+                android:layout_width="3dp"
+                android:layout_height="30dp"
+                android:layout_marginBottom="13dp"
+                android:background="#C0C0C0"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/archive"
+                android:layout_width="20dp"
+                android:layout_height="25dp"
+                android:layout_alignTop="@+id/deleteTemplate"
+                android:layout_gravity="center"
+                  android:layout_toLeftOf="@+id/deleteTemplate"
+                android:layout_toStartOf="@+id/deleteTemplate"
+                android:src="@drawable/archvive_selector" />
+
+           <!-- <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="3dp"
+                android:text="Archive"
+                android:textStyle="bold" />-->
+        </LinearLayout>
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/box"
+        android:orientation="horizontal">
+        <View
+
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="13dp"
+            android:background="#C0C0C0"/>
+    </LinearLayout>
+
 </RelativeLayout>

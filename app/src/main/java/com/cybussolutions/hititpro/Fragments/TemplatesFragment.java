@@ -136,10 +136,10 @@ public class TemplatesFragment extends BaseFragment {
                                 //  Toast.makeText(getContext(),"plz select client to review",Toast.LENGTH_LONG).show();
                             }
                         } else {
-                            Toast.makeText(getContext(), "please select client and Property to continue", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getContext(), "Select template and start inspection", Toast.LENGTH_LONG).show();
                         }
                     } else {
-                        Toast.makeText(getContext(), "select the property type and start inspection", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(), "Please select client and Template to continue", Toast.LENGTH_LONG).show();
                     }
                        /* Intent intent=new Intent(getActivity(), Start_Inspection.class);
                         intent.putExtra("client_name",client_spinner.getSelectedItem().toString());
@@ -300,11 +300,11 @@ public class TemplatesFragment extends BaseFragment {
                             isdefault = new ArrayList<>();
                             default_template = new ArrayList<>();
 
-                            inspection_list.add(0, "No Property Founds");
-                            inspection_id_list.add(0, "No Property Founds");
-                            para_list.add(0, "No Property Founds");
-                            isStarted.add(0, "No Property Founds");
-                            default_template.add(0, "No Property Founds");
+                            inspection_list.add(0, "No Template Founds");
+                            inspection_id_list.add(0, "No Template Founds");
+                            para_list.add(0, "No Template Founds");
+                            isStarted.add(0, "No Template Founds");
+                            default_template.add(0, "No Template Founds");
                             ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>
                                     (getContext(), android.R.layout.simple_spinner_item, inspection_list);
 
@@ -342,7 +342,7 @@ public class TemplatesFragment extends BaseFragment {
                                 default_template.add(0,"");
 
 
-                                inspection_list.add(1,"No Property");
+                                inspection_list.add(1,"No Template");
                                 inspection_id_list.add(1,"0");
                                 para_list.add(1,"");
                                 isdefault.add(1,"");
@@ -521,7 +521,7 @@ public class TemplatesFragment extends BaseFragment {
                         } else if (response.equals("false")) {
                             new SweetAlertDialog(getActivity(), SweetAlertDialog.ERROR_TYPE)
                                     .setTitleText("Error!")
-                                    .setConfirmText("OK").setContentText("No Property Found ")
+                                    .setConfirmText("OK").setContentText("No Template Found ")
                                     .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                                         @Override
                                         public void onClick(SweetAlertDialog sDialog) {
@@ -679,7 +679,7 @@ public class TemplatesFragment extends BaseFragment {
                         } else {
                             new SweetAlertDialog(getActivity(), SweetAlertDialog.ERROR_TYPE)
                                     .setTitleText("Error!")
-                                    .setConfirmText("OK").setContentText("There was an error creating Property")
+                                    .setConfirmText("OK").setContentText("There was an error creating Template")
                                     .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                                         @Override
                                         public void onClick(SweetAlertDialog sDialog) {
@@ -790,7 +790,7 @@ public class TemplatesFragment extends BaseFragment {
             if (inspection_list.get(pos).equals("No Records Founds")) {
                 temp_id = "0";
             }
-            else if (inspection_list.get(pos).equals("No Property") && pos ==1) {
+            else if (inspection_list.get(pos).equals("No Template") && pos ==1) {
                 temp_id = "";
                 paraEt.setText("");
             }
