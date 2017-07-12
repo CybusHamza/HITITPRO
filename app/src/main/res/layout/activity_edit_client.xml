@@ -18,7 +18,14 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:orientation="vertical"
         tools:context=".Activities.Add_Client">
-
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Client Name"
+            android:textColor="@color/black"
+            android:layout_margin="10dp"
+            android:textSize="15sp"
+            />
 
             <EditText
                 android:layout_width="match_parent"
@@ -26,12 +33,18 @@
                 android:hint="Client Name"
                 android:singleLine="true"
                 android:textColor="@color/black"
-                android:textColorHint="@color/black"
                 android:textSize="15sp"
                 android:layout_margin="10dp"
                 android:id="@+id/client_name" />
 
-
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Contact Name"
+            android:textColor="@color/black"
+            android:layout_margin="10dp"
+            android:textSize="15sp"
+            />
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -39,10 +52,16 @@
                 android:singleLine="true"
                 android:layout_margin="10dp"
                 android:textColor="@color/black"
-                android:textColorHint="@color/black"
                 android:textSize="15sp"
                 android:id="@+id/client_contact_name" />
-
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Address"
+            android:textColor="@color/black"
+            android:layout_margin="10dp"
+            android:textSize="15sp"
+            />
 
 
             <EditText
@@ -53,11 +72,17 @@
                 android:textColor="@color/black"
                 android:inputType="text"
                 android:layout_margin="10dp"
-                android:textColorHint="@color/black"
                 android:textSize="15sp"
                 android:id="@+id/client_adress" />
 
-
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="City"
+            android:textColor="@color/black"
+            android:layout_margin="10dp"
+            android:textSize="15sp"
+            />
 
             <EditText
                 android:layout_width="match_parent"
@@ -66,10 +91,16 @@
                 android:layout_margin="10dp"
                 android:singleLine="true"
                 android:textColor="@color/black"
-                android:textColorHint="@color/black"
                 android:textSize="15sp"
                 android:id="@+id/client_location" />
-
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Phone Number"
+            android:textColor="@color/black"
+            android:layout_margin="10dp"
+            android:textSize="15sp"
+            />
 
             <EditText
                 android:layout_width="match_parent"
@@ -79,12 +110,18 @@
                 android:textColor="@color/black"
                 android:inputType="phone"
                 android:layout_margin="10dp"
-                android:textColorHint="@color/black"
                 android:textSize="15sp"
                 android:id="@+id/client_phone"
                 android:maxLength="14"/>
 
-
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Fax Number"
+            android:textColor="@color/black"
+            android:layout_margin="10dp"
+            android:textSize="15sp"
+            />
 
             <EditText
                 android:layout_width="match_parent"
@@ -94,12 +131,18 @@
                 android:textColor="@color/black"
                 android:inputType="phone"
                 android:layout_margin="10dp"
-                android:textColorHint="@color/black"
                 android:textSize="15sp"
                 android:id="@+id/client_fax"
                 android:maxLength="14"/>
 
-
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Email"
+            android:textColor="@color/black"
+            android:layout_margin="10dp"
+            android:textSize="15sp"
+            />
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -108,10 +151,16 @@
                 android:layout_margin="10dp"
                 android:textColor="@color/black"
                 android:inputType="textEmailAddress"
-                android:textColorHint="@color/black"
                 android:textSize="15sp"
                 android:id="@+id/client_email" />
-
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="State"
+            android:textColor="@color/black"
+            android:layout_margin="10dp"
+            android:textSize="15sp"
+            />
 
             <EditText
                 android:layout_width="match_parent"
@@ -120,11 +169,17 @@
                 android:singleLine="true"
                 android:layout_margin="10dp"
                 android:textColor="@color/black"
-                android:textColorHint="@color/black"
                 android:textSize="15sp"
                 android:id="@+id/client_state" />
 
-
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Zip"
+            android:textColor="@color/black"
+            android:layout_margin="10dp"
+            android:textSize="15sp"
+            />
 
             <EditText
                 android:layout_width="match_parent"
@@ -132,14 +187,13 @@
                 android:hint="Zip e.g. 333333"
                 android:singleLine="true"
                 android:textColor="@color/black"
-                android:textColorHint="@color/black"
                 android:textSize="15sp"
                 android:layout_margin="10dp"
                 android:id="@+id/client_zip" />
 
 
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Update"
             android:id="@+id/update"
@@ -149,8 +203,10 @@
             android:typeface="serif"
             android:padding="20dp"
             android:background="@drawable/outline_active_style"
-            android:layout_marginTop="40dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="@dimen/activity_horizontal_margin"
+            android:layout_marginLeft="@dimen/activity_vertical_margin"
+            android:layout_marginRight="@dimen/activity_vertical_margin"
+            android:layout_marginTop="60dp"
             android:layout_gravity="center_horizontal" />
 
 

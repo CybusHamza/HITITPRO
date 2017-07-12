@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -51,7 +52,8 @@ public class Add_Client extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.app_bar);
         toolbar.setTitle("Add Client");
         setSupportActionBar(toolbar);
-
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.back_btn);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Name = (EditText) findViewById(R.id.client_name);
         City = (EditText) findViewById(R.id.client_location);
         ContactName = (EditText) findViewById(R.id.client_contact_name);
@@ -276,5 +278,16 @@ public class Add_Client extends AppCompatActivity {
         requestQueue.add(request);
 
     }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
 
+                // I do not want this...
+                // Home as up button is to navigate to Home-Activity not previous acitivity
+                super.onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }

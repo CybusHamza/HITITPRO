@@ -186,7 +186,7 @@ public class Add_Comments extends AppCompatActivity {
                                 @Override
                                 public void onClick(SweetAlertDialog sDialog) {
                                     sDialog.dismiss();
-                                    finish();
+                                    //finish();
                                 }
                             })
                             .show();
@@ -199,7 +199,7 @@ public class Add_Comments extends AppCompatActivity {
                                 @Override
                                 public void onClick(SweetAlertDialog sDialog) {
                                     sDialog.dismiss();
-                                    finish();
+                                   // finish();
 
                                 }
                             })

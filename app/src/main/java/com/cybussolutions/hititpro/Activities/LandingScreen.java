@@ -107,12 +107,11 @@ public class LandingScreen extends AppCompatActivity {
 
 
         setupDrawer();
-
     }
 
     private void setupDrawer() {
-        PrimaryDrawerItem drawerItem1 = new PrimaryDrawerItem().withIdentifier(1).withName(drawerNames[0]).withIcon(drawerImages[0]);
-        PrimaryDrawerItem drawerItem2 = new PrimaryDrawerItem().withIdentifier(2).withName(drawerNames[1]).withIcon(drawerImages[1]);
+        PrimaryDrawerItem drawerItem1 = new PrimaryDrawerItem().withIdentifier(2).withName(drawerNames[0]).withIcon(drawerImages[0]);
+        PrimaryDrawerItem drawerItem2 = new PrimaryDrawerItem().withIdentifier(1).withName(drawerNames[1]).withIcon(drawerImages[1]);
         PrimaryDrawerItem drawerItem3 = new PrimaryDrawerItem().withIdentifier(3).withName(drawerNames[2]).withIcon(drawerImages[2]);
         PrimaryDrawerItem drawerItem4 = new PrimaryDrawerItem().withIdentifier(3).withName(drawerNames[3]).withIcon(drawerImages[3]);
         PrimaryDrawerItem drawerItem5 = new PrimaryDrawerItem().withIdentifier(4).withName(drawerNames[4]).withIcon(drawerImages[4]);
@@ -127,6 +126,7 @@ public class LandingScreen extends AppCompatActivity {
                 .withToolbar(toolbar)
                 .withDrawerWidthDp(300)
                 .withAccountHeader(setupHeader(userName, userEmail))
+                .withSelectedItem(1)
                 .addDrawerItems(
                         drawerItem1,
                         new DividerDrawerItem(),
