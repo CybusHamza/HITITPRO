@@ -42,5 +42,6 @@ dependencies {
     compile 'com.googlecode.libphonenumber:libphonenumber:6.2'
     compile 'com.github.darsh2:MultipleImageSelect:3474549'
     compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
 }

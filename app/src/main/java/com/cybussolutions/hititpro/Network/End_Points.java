@@ -5,6 +5,9 @@ public class End_Points {
 
     public static final String BASE_URL = "http://xfer.cybusservices.com/hititpro/Api_Controller/";
     public static final String IMAGE_BASE_URL = "http://xfer.cybusservices.com/hititpro/uploads/inspection/";
+    public static final String PDF_BASRURL = "http://xfer.cybusservices.com/hititpro/uploads/reports/";
+    public static final String UPLOAD="http://xfer.cybusservices.com/hititpro/upload_image_mobile.php";
+
 
     public static final String LOGIN = BASE_URL + "login";
     public static final String SIGN_UP = BASE_URL + "addUserSignUp";
@@ -29,7 +32,7 @@ public class End_Points {
     public static final String UPDATE_PASS = BASE_URL + "updatePass";
     public static final String ARCHHIVE_TEMPLATE = BASE_URL + "archiveTempate";
     public static final String UPLOAD_IMAGE=BASE_URL+"uploadimagetest";
-    public static final String UPLOAD="http://xfer.cybusservices.com/hititpro/upload_image_mobile.php";
+    public static final String GENRATE_PDF=BASE_URL+"generateReport";
     public static final String GET_REVIEW_INSPECTION = BASE_URL + "reviewInspection";
 
     public static final String GET_IMAGES=BASE_URL+"getImages";

@@ -41,8 +41,7 @@
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".Activities.Detailed_Activity_Structure_Screens"
-            android:windowSoftInputMode="adjustPan"
-            />
+            android:windowSoftInputMode="adjustPan" />
         <activity android:name=".Activities.EditClient" />
         <activity android:name=".Activities.Edit_Profile" />
         <activity android:name=".Activities.AddTemplate" />
@@ -53,7 +52,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activities.ShowImages"></activity>
+        <activity android:name=".Activities.ShowImages" />
     </application>
 
 </manifest>
