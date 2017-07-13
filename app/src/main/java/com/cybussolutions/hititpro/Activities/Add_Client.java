@@ -137,7 +137,7 @@ public class Add_Client extends AppCompatActivity {
                 {
                     if(strEmail.matches(emailPattern))
                     {
-                        if(strPhone.matches(numberPattern) && strFax.matches(numberPattern))
+                        if(strPhone.matches(numberPattern))
                         {
                             AddClient();
                         }

@@ -35,7 +35,6 @@ import com.cybussolutions.hititpro.Activities.Detailed_Activity_Structure_Screen
 import com.cybussolutions.hititpro.Activities.LandingScreen;
 import com.cybussolutions.hititpro.Activities.StructureScreensActivity;
 import com.cybussolutions.hititpro.Fragments.BaseFragment;
-import com.cybussolutions.hititpro.Fragments.Setp13_review;
 import com.cybussolutions.hititpro.Fragments.TemplatesFragment;
 import com.cybussolutions.hititpro.Network.End_Points;
 import com.cybussolutions.hititpro.R;
@@ -422,8 +421,22 @@ public class FirePlaceScreenFragment extends BaseFragment {
 
 
                         ringProgressDialog.dismiss();
-                        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new Setp13_review()).addToBackStack("review").commit();
+                     //   getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new Setp13_review()).addToBackStack("review").commit();
 
+                        new SweetAlertDialog(getActivity(), SweetAlertDialog.SUCCESS_TYPE)
+                                .setTitleText("Done !")
+                                .setConfirmText("OK").setContentText("You have Successfully Completed this inspection")
+                                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                    @Override
+                                    public void onClick(SweetAlertDialog sDialog) {
+                                        sDialog.dismiss();
+                                        getActivity().finish();
+                                        Intent intent = new Intent(getActivity(),LandingScreen.class);
+                                        intent.putExtra("activityName","addTemplateClass");
+                                        startActivity(intent);
+                                    }
+                                })
+                                .show();
 
                     }
                 }, new Response.ErrorListener() {

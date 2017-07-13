@@ -115,8 +115,11 @@ public class TemplatesFragment extends BaseFragment {
                     int client_id = client_spinner.getSelectedItemPosition();
                     // int inspection_id =  inspection_spinner.getSelectedItemPosition();
                     int template_id = tem_spinner.getSelectedItemPosition();
-                    if (!client_spinner.getSelectedItem().toString().equals("Select")) {
-                        if (!tem_spinner.getSelectedItem().toString().equals("Select")) {
+                    String client= client_spinner.getSelectedItem().toString();
+                    String template= tem_spinner.getSelectedItem().toString();
+
+                    if (!client.equals("No Client Found")) {
+                        if (!template.equals("No Template Found")) {
                            myparah_no_temp= paraEt.getText().toString();
                             if (isStarted.get(tem_spinner.getSelectedItemPosition()).equals("0")) {
                                 prePopulate(inspection_id_list.get(tem_spinner.getSelectedItemPosition()),client_spinner.getSelectedItem().toString(),tem_spinner.getSelectedItem().toString(),tem_spinner.getSelectedItem().toString(),isdefault.get(tem_spinner.getSelectedItemPosition()), client_id_list.get(client_spinner.getSelectedItemPosition()), default_template.get(tem_spinner.getSelectedItemPosition()));
@@ -293,18 +296,18 @@ public class TemplatesFragment extends BaseFragment {
 
                         ringProgressDialog.dismiss();
 
-                        if (response.equals("\"no record found\"")) {
+                        if (response.equals("{\"primary\":\"no record found\"}")) {
                             inspection_list = new ArrayList<>();
                             inspection_id_list = new ArrayList<>();
                             isStarted = new ArrayList<>();
                             isdefault = new ArrayList<>();
                             default_template = new ArrayList<>();
 
-                            inspection_list.add(0, "No Template Founds");
-                            inspection_id_list.add(0, "No Template Founds");
-                            para_list.add(0, "No Template Founds");
-                            isStarted.add(0, "No Template Founds");
-                            default_template.add(0, "No Template Founds");
+                            inspection_list.add(0, "No Template Found");
+                            inspection_id_list.add(0, "No Template Found");
+                            para_list.add(0, "No Template Found");
+                            isStarted.add(0, "No Template Found");
+                            default_template.add(0, "No Template Found");
                             ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>
                                     (getContext(), android.R.layout.simple_spinner_item, inspection_list);
 
@@ -332,11 +335,11 @@ public class TemplatesFragment extends BaseFragment {
                                 isStarted = new ArrayList<>();
                                 isdefault = new ArrayList<>();
                                 default_template = new ArrayList<>();
-                                para_list.add(0,"");
-                                isStarted.add(0,"");
+                          /*      para_list.add(0,"");
+                                isStarted.add(0,"");*/
 
 
-                                inspection_list.add(0,"Select");
+                             /*   inspection_list.add(0,"Select");
                                 inspection_id_list.add(0,"0");
                                 isdefault.add(0,"0");
                                 default_template.add(0,"");
@@ -347,7 +350,7 @@ public class TemplatesFragment extends BaseFragment {
                                 para_list.add(1,"");
                                 isdefault.add(1,"");
                                 isStarted.add(1,"0");
-                                default_template.add(1,"");
+                                default_template.add(1,"");*/
 
 
 
@@ -376,7 +379,7 @@ public class TemplatesFragment extends BaseFragment {
 
                                 }
 
-                                String objdef =  obj.getString("default");
+                               /* String objdef =  obj.getString("default");
 
                                 if(!objdef.equals("No Data"))
                                 {
@@ -401,7 +404,7 @@ public class TemplatesFragment extends BaseFragment {
 
 
                                     }
-                                }
+                                }*/
 
                                 tem_spinner.setAdapter(null);
 
@@ -508,7 +511,7 @@ public class TemplatesFragment extends BaseFragment {
 
                         if (response.equals("\"no record found\"")) {
 
-                            client_list.add(0, "No Client Founds");
+                            client_list.add(0, "No Client Found");
                             client_id_list.add(0,"No Data");
                             ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>
                                     (getContext(), android.R.layout.simple_spinner_item, client_list);
@@ -756,7 +759,7 @@ public class TemplatesFragment extends BaseFragment {
         public void onItemSelected(AdapterView<?> parent, View view, final int pos,
                                    long id) {
 
-            if (client_list.get(pos).equals("No Records Founds")) {
+            if (client_list.get(pos).equals("No Client Founds")) {
                 client_id = "0";
             }
             else {

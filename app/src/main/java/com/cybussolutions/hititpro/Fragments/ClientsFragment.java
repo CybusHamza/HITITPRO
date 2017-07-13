@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
@@ -47,6 +48,8 @@ public class ClientsFragment extends BaseFragment {
     ListView client_list;
     ImageView addClient;
     String id;
+    TextView textnoclient,textAddclient;
+    ImageView pictureadd,clientimg;
     private static final int MY_SOCKET_TIMEOUT_MS = 10000;
     ProgressDialog ringProgressDialog;
 
@@ -58,6 +61,10 @@ public class ClientsFragment extends BaseFragment {
 
         client_list = (ListView) root.findViewById(R.id.client);
         addClient=(ImageView) root.findViewById(R.id.add_client);
+        textnoclient=(TextView) root.findViewById(R.id.textclient);
+        textAddclient=(TextView) root.findViewById(R.id.noclientText);
+        pictureadd=(ImageView) root.findViewById(R.id.img_id);
+        clientimg=(ImageView) root.findViewById(R.id.clientimg);
 
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Clients");
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -127,17 +134,11 @@ public class ClientsFragment extends BaseFragment {
 
                         ringProgressDialog.dismiss();
                         if (response.equals("\"no record found\"")) {
-                            new SweetAlertDialog(getActivity(), SweetAlertDialog.ERROR_TYPE)
-                                    .setTitleText("Error!")
-                                    .setConfirmText("OK").setContentText("No Clients Found ")
-                                    .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                                        @Override
-                                        public void onClick(SweetAlertDialog sDialog) {
-                                            sDialog.dismiss();
 
-                                        }
-                                    })
-                                    .show();
+                            textAddclient.setVisibility(View.VISIBLE);
+                            textnoclient.setVisibility(View.VISIBLE);
+                            pictureadd.setVisibility(View.VISIBLE);
+                            clientimg.setVisibility(View.VISIBLE);
                         }
                         else {
 

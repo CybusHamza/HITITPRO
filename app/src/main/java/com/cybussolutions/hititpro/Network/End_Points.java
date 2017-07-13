@@ -25,6 +25,8 @@ public class End_Points {
     public static final String GET_TEMPLATE_DATA = BASE_URL + "getTemplatesData";
     public static final String GET_ARCHIVE_TEMPLATE_DATA = BASE_URL + "getArchiveAllTemplates";
     public static final String DELETE_TEMPLATE = BASE_URL + "deleteTemplate";
+    public static final String CEHCK_PASS = BASE_URL + "checkpas";
+    public static final String UPDATE_PASS = BASE_URL + "updatePass";
     public static final String ARCHHIVE_TEMPLATE = BASE_URL + "archiveTempate";
     public static final String UPLOAD_IMAGE=BASE_URL+"uploadimagetest";
     public static final String UPLOAD="http://xfer.cybusservices.com/hititpro/upload_image_mobile.php";

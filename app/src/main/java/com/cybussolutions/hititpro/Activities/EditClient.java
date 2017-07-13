@@ -1,15 +1,10 @@
 package com.cybussolutions.hititpro.Activities;
 
-import android.app.Fragment;
-
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -17,7 +12,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -30,18 +24,13 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.cybussolutions.hititpro.Fragments.ClientsFragment;
-import com.cybussolutions.hititpro.Fragments.ProfileFragment;
 import com.cybussolutions.hititpro.Network.End_Points;
 import com.cybussolutions.hititpro.R;
-import com.cybussolutions.hititpro.Template_Inspection.FirePlaceScreenFragment;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
-
-import static com.cybussolutions.hititpro.R.id.container;
 
 public class EditClient extends AppCompatActivity {
 
@@ -165,8 +154,8 @@ public class EditClient extends AppCompatActivity {
                 strState = State.getText().toString();
                 strZip = Zip.getText().toString();
 
-                if(strName.equals("") || strCity.equals("")|| strContactName.equals("")|| strAddress.equals("")
-                        || strPhone.equals("")|| strFax.equals("")|| strEmail.equals(""))
+                if(strName.equals("") || strCity.equals("")|| strAddress.equals("")
+                        || strPhone.equals("")||  strEmail.equals(""))
                 {
                     Toast.makeText(EditClient.this, "Fields cannot be empty ", Toast.LENGTH_SHORT).show();
                 }

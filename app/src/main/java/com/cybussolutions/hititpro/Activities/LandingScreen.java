@@ -14,8 +14,8 @@ import android.util.Log;
 import android.view.View;
 
 import com.cybussolutions.hititpro.Fragments.ClientsFragment;
+import com.cybussolutions.hititpro.Fragments.Forgot_password;
 import com.cybussolutions.hititpro.Fragments.ProfileFragment;
-import com.cybussolutions.hititpro.Fragments.ReviewInspectionFragment;
 import com.cybussolutions.hititpro.Fragments.TemplatesFragment;
 import com.cybussolutions.hititpro.Fragments.TemplatesListFragment;
 import com.cybussolutions.hititpro.Helper.CircleTransform;
@@ -42,8 +42,8 @@ public class LandingScreen extends AppCompatActivity {
     Bitmap[] bitmap1;
     String userName,userEmail;
     // drawer items name icons
-    String[] drawerNames = new String[]{"Profile", "Clients", "Inspection List","Create Inspection" ,"Review Inspection","Logout"};
-    int[] drawerImages = new int[]{R.drawable.profile, R.drawable.clients, R.drawable.template,R.drawable.review, R.drawable.startinspection
+    String[] drawerNames = new String[]{"Profile", "Clients", "Inspection List","Create Inspection","Change Password" ,"Logout"};
+    int[] drawerImages = new int[]{R.drawable.profile, R.drawable.clients, R.drawable.template,R.drawable.startinspection, R.drawable.forgot_pass
            ,R.drawable.logout};
     String url = null;
     String activityName;
@@ -170,7 +170,7 @@ public class LandingScreen extends AppCompatActivity {
                                 break;
                             }
                             case 9: {
-                                fragment = new ReviewInspectionFragment();
+                                fragment = new Forgot_password();
                                 getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment).commit();
                                 break;
                             }

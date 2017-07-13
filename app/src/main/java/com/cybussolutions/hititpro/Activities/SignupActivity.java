@@ -36,6 +36,9 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.cybussolutions.hititpro.Network.End_Points;
 import com.cybussolutions.hititpro.R;
+import com.google.i18n.phonenumbers.NumberParseException;
+import com.google.i18n.phonenumbers.PhoneNumberUtil;
+import com.google.i18n.phonenumbers.Phonenumber;
 
 import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;
@@ -55,7 +58,9 @@ public class SignupActivity extends AppCompatActivity {
     String ImageDecode;
     ImageView logo;
     int keyDel;
-
+    public static Phonenumber.PhoneNumber phonenumberProto;
+    PhoneNumberUtil phoneNumberUtil;
+    Boolean isValid;
     String mCurrentPhotoPath,ba1,mSavedPhotoName;
 
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
@@ -87,6 +92,9 @@ public class SignupActivity extends AppCompatActivity {
         attachLogo = (Button) findViewById(R.id.logo_button);
 
         logo= (ImageView) findViewById(R.id.logo);
+
+        phoneNumberUtil = PhoneNumberUtil.getInstance();
+        phonenumberProto = new Phonenumber.PhoneNumber();
 
         attachLogo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -167,28 +175,62 @@ public class SignupActivity extends AppCompatActivity {
 
                 // calling for sign up
 
-                if(strf_name.equals("") || strl_name.equals("")|| stremial.equals("")|| strphone.equals("")
-                   || strwebsite.equals("")|| stradress.equals("")|| strcompanyinfo.equals("")|| strpassword.equals(""))
-                {
-                    Toast.makeText(SignupActivity.this, "Fields cannot be empty ", Toast.LENGTH_SHORT).show();
-                }
-                else
-                {
-                    if(stremial.matches(emailPattern) && strpassword.length()>=8 && strpassword.equals(strconfirmpassword) && mCurrentPhotoPath!=null )
+
+
+                    if(strf_name.equals("") || strl_name.equals("")|| stremial.equals("")|| strphone.equals("") ||
+                             stradress.equals("") || strpassword.equals(""))
                     {
-                        uploadlogo();
-                        //Signup();
-                    }else if(strpassword.length()<=7){
-                        Toast.makeText(getApplicationContext(),"Password length can not be less than 8 characters!",Toast.LENGTH_LONG).show();
+
+                        Toast.makeText(SignupActivity.this, "Fields cannot be empty ", Toast.LENGTH_SHORT).show();
                     }
-                    else if(!strpassword.equals(strconfirmpassword)){
-                        Toast.makeText(getApplicationContext(),"Password Mismatches",Toast.LENGTH_LONG).show();
-                    }
-                    else if(mCurrentPhotoPath==null){
-                        Toast.makeText(getApplicationContext(),"Please attach logo first to proceed",Toast.LENGTH_LONG).show();
-                    }
-                    else {
-                        Toast.makeText(getApplicationContext(),"Invalid format of email address",Toast.LENGTH_LONG).show();
+                    else
+                    {
+                        if(stremial.matches(emailPattern) && strpassword.length()>=8 && strpassword.equals(strconfirmpassword) && mCurrentPhotoPath!=null )
+                        {
+                            try {
+
+
+                                phonenumberProto = phoneNumberUtil.parse(strphone, "US");
+                                // Toast.makeText(getApplicationContext(),"number is entered",Toast.LENGTH_SHORT).show();
+                                isValid = phoneNumberUtil
+                                        .isValidNumber(phonenumberProto);
+                            } catch (NumberParseException e) {
+
+
+                            } catch (NullPointerException e) {
+                                e.printStackTrace();
+                            }
+
+                            //catch (Exception e) {
+                            //  e.printStackTrace();
+                            //}
+
+                            if (!(isValid)) {
+                                // String internationalFormat = phoneNumberUtil.format(phonenumberProto,PhoneNumberUtil.PhoneNumberFormat.INTERNATIONAL);
+                                Toast.makeText(
+                                        getApplicationContext(),
+                                        "INVALID phone format: " + strphone,
+                                        Toast.LENGTH_SHORT).show();
+                                return;
+                            }else{
+
+                                    uploadlogo();
+
+                            }
+
+
+                            //Signup();
+                        }else if(strpassword.length()<=7){
+                            Toast.makeText(getApplicationContext(),"Password length can not be less than 8 characters!",Toast.LENGTH_LONG).show();
+                        }
+                        else if(!strpassword.equals(strconfirmpassword)){
+                            Toast.makeText(getApplicationContext(),"Password Mismatches",Toast.LENGTH_LONG).show();
+                        }
+                        else if(mCurrentPhotoPath==null){
+                            Toast.makeText(getApplicationContext(),"Please attach logo first to proceed",Toast.LENGTH_LONG).show();
+                        }
+                        else {
+                            Toast.makeText(getApplicationContext(),"Invalid format of email address",Toast.LENGTH_LONG).show();
                        /* new SweetAlertDialog(SignupActivity.this, SweetAlertDialog.ERROR_TYPE)
                                 .setTitleText("Error!")
                                 .setConfirmText("OK").setContentText("Invalid format of email adress")
@@ -200,9 +242,12 @@ public class SignupActivity extends AppCompatActivity {
                                     }
                                 })
                                 .show();*/
+                        }
+
                     }
 
-                }
+
+
             }
         });
     }
