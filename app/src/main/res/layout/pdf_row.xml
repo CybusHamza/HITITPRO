@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+  <ImageView
+      android:layout_width="60dp"
+      android:layout_height="60dp"
+      android:background="@drawable/pdf"
+      android:layout_margin="10dp"
+      android:id="@id/img"
+      />
+
+    <TextView
+        android:id="@+id/pdf_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/img"
+        android:layout_toEndOf="@+id/img"
+        android:textColor="@color/blue"
+        android:layout_margin="2dp"
+        android:layout_toRightOf="@+id/img"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/client"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/gray"
+        android:text="TextView"
+        android:layout_marginTop="2dp"
+        android:textStyle="bold"
+        android:layout_below="@+id/pdf_name"
+        android:layout_alignLeft="@+id/pdf_name"
+        android:layout_alignStart="@+id/pdf_name" />
+
+    <TextView
+        android:id="@+id/date_created"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/DarkGray"
+        android:text="TextView"
+        android:layout_marginTop="2dp"
+        android:layout_below="@+id/client"
+        android:layout_alignLeft="@+id/client"
+        android:layout_alignStart="@+id/client" />
+
+</RelativeLayout>

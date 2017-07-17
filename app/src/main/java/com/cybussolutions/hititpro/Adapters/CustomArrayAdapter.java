@@ -30,9 +30,9 @@ import java.util.List;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
 
-public class CustomArrayAdapter extends ArrayAdapter<Checkbox_model> implements
-		View.OnClickListener {
-	
+	public class CustomArrayAdapter extends ArrayAdapter<Checkbox_model> implements
+			View.OnClickListener {
+
 	private LayoutInflater layoutInflater;
 	String[] dbEnterArray;
 	private final List<Checkbox_model> list;

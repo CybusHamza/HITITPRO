@@ -6,10 +6,13 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -48,6 +51,7 @@ public class ClientsFragment extends BaseFragment {
     ListView client_list;
     ImageView addClient;
     String id;
+    EditText search;
     TextView textnoclient,textAddclient;
     ImageView pictureadd,clientimg;
     private static final int MY_SOCKET_TIMEOUT_MS = 10000;
@@ -65,6 +69,7 @@ public class ClientsFragment extends BaseFragment {
         textAddclient=(TextView) root.findViewById(R.id.noclientText);
         pictureadd=(ImageView) root.findViewById(R.id.img_id);
         clientimg=(ImageView) root.findViewById(R.id.clientimg);
+        search=(EditText) root.findViewById(R.id.search);
 
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Clients");
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -78,6 +83,45 @@ public class ClientsFragment extends BaseFragment {
 
             list.add(model);
         }*/
+
+        search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+
+                String nameToSearch = search.getText().toString();
+                ArrayList<Clients_model> filteredLeaves = new ArrayList<Clients_model>();
+
+                for (Clients_model data : list) {
+                    if (data.getClient_name().toLowerCase().contains(nameToSearch.toLowerCase()) || data.getClient_phone().toLowerCase().equalsIgnoreCase(nameToSearch.toLowerCase())) {
+                        filteredLeaves.add(data);
+                    }
+
+
+                }
+                /*leaveDatas.clear();
+                leaveDatas.addAll(filteredLeaves);
+                leaves_adapter.notifyDataSetChanged();*/
+                Client_Adapter client_adapter = new Client_Adapter(filteredLeaves, getActivity());
+                client_list.setAdapter(client_adapter);
+
+            }                //     listView.setAdapter(leaves_adapter);
+
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+
+            }
+        });
+
+
+
 
 
         final SharedPreferences pref = getActivity().getSharedPreferences("UserPrefs", getActivity().MODE_PRIVATE);

@@ -344,7 +344,7 @@ public class Template_Adapter extends BaseAdapter {
 
                       /*  Intent intent = new Intent(context, PdfView.class);
                         context.startActivity(intent);*/
-                        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(End_Points.PDF_BASRURL+response));
+                        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://m1.cybussolutions.com/hititpro/uploads/reports/"+response));
                         context. startActivity(browserIntent);
 
 

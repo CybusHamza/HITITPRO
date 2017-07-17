@@ -3,10 +3,10 @@ package com.cybussolutions.hititpro.Network;
 
 public class End_Points {
 
-    public static final String BASE_URL = "http://xfer.cybusservices.com/hititpro/Api_Controller/";
-    public static final String IMAGE_BASE_URL = "http://xfer.cybusservices.com/hititpro/uploads/inspection/";
-    public static final String PDF_BASRURL = "http://xfer.cybusservices.com/hititpro/uploads/reports/";
-    public static final String UPLOAD="http://xfer.cybusservices.com/hititpro/upload_image_mobile.php";
+    public static final String BASE_URL = "http://m1.cybussolutions.com/hititpro/Api_Controller/";
+    public static final String IMAGE_BASE_URL = "http://m1.cybussolutions.com/hititpro/uploads/inspection/";
+    public static final String PDF_BASRURL = "http://m1.cybussolutions.com/hititpro/uploads/reports/";
+    public static final String UPLOAD="http://m1.cybussolutions.com/hititpro/upload_image_mobile.php";
 
 
     public static final String LOGIN = BASE_URL + "login";
@@ -15,10 +15,7 @@ public class End_Points {
     public static final String UPDATE_CLIENT = BASE_URL + "updateClient";
     public static final String UPDATE_PROFILE = BASE_URL + "updateProfile";
     public static final String DELETE_CLIENT = BASE_URL + "deleteClient";
-
-
     public static final String DELETE_PICTURE = BASE_URL + "deletePicture";
-
     public static final String GET_CLIENT = BASE_URL + "getClient";
     public static final String START_INSPECTION = BASE_URL + "addTemplate";
     public static final String PRE_POPULATE = BASE_URL + "insertSimpleEnteriesToAllReferenceTables";
@@ -34,13 +31,13 @@ public class End_Points {
     public static final String UPLOAD_IMAGE=BASE_URL+"uploadimagetest";
     public static final String GENRATE_PDF=BASE_URL+"generateReport";
     public static final String GET_REVIEW_INSPECTION = BASE_URL + "reviewInspection";
+    public static final String GETPDF = BASE_URL + "getReportsClents";
 
     public static final String GET_IMAGES=BASE_URL+"getImages";
     public static final String GET_DEFAULT_COMMENTS=BASE_URL+"getDefaultComments";
     public static final String GET_DEFAULT_COMMENTS_IMAGES=BASE_URL+"getDefaultCommentsImages";
     public static final String SAVE_OBSERVATION_COMMENTS=BASE_URL+"saveObservationComments";
     public static final String GET_IMAGE_COMMENTS=BASE_URL+"getImageComments";
-
     public static final String GET_ALL_TEMPLATES = BASE_URL + "getAllTemplates";
     public static final String UPDATELIVE = BASE_URL + "updateOnBackPress";
 

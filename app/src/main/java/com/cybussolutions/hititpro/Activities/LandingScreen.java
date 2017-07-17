@@ -18,6 +18,7 @@ import com.cybussolutions.hititpro.Fragments.Forgot_password;
 import com.cybussolutions.hititpro.Fragments.ProfileFragment;
 import com.cybussolutions.hititpro.Fragments.TemplatesFragment;
 import com.cybussolutions.hititpro.Fragments.TemplatesListFragment;
+import com.cybussolutions.hititpro.Fragments.pdfFragment;
 import com.cybussolutions.hititpro.Helper.CircleTransform;
 import com.cybussolutions.hititpro.R;
 import com.mikepenz.materialdrawer.AccountHeader;
@@ -42,9 +43,9 @@ public class LandingScreen extends AppCompatActivity {
     Bitmap[] bitmap1;
     String userName,userEmail;
     // drawer items name icons
-    String[] drawerNames = new String[]{"Profile", "Clients", "Inspection List","Create Inspection","Change Password" ,"Logout"};
+    String[] drawerNames = new String[]{"Profile", "Clients", "Inspection List","Create Inspection","Change Password","Genrated PDF" ,"Logout"};
     int[] drawerImages = new int[]{R.drawable.profile, R.drawable.clients, R.drawable.template,R.drawable.startinspection, R.drawable.forgot_pass
-           ,R.drawable.logout};
+         ,R.drawable.pdf_blck  ,R.drawable.logout};
     String url = null;
     String activityName;
     @Override
@@ -116,6 +117,7 @@ public class LandingScreen extends AppCompatActivity {
         PrimaryDrawerItem drawerItem4 = new PrimaryDrawerItem().withIdentifier(3).withName(drawerNames[3]).withIcon(drawerImages[3]);
         PrimaryDrawerItem drawerItem5 = new PrimaryDrawerItem().withIdentifier(4).withName(drawerNames[4]).withIcon(drawerImages[4]);
         PrimaryDrawerItem drawerItem8 = new PrimaryDrawerItem().withIdentifier(5).withName(drawerNames[5]).withIcon(drawerImages[5]);
+        PrimaryDrawerItem drawerItem9 = new PrimaryDrawerItem().withIdentifier(6).withName(drawerNames[6]).withIcon(drawerImages[5]);
 
 
 
@@ -138,7 +140,11 @@ public class LandingScreen extends AppCompatActivity {
                         new DividerDrawerItem(),
                         drawerItem5,
                         new DividerDrawerItem(),
-                        drawerItem8
+                        drawerItem8,
+                        new DividerDrawerItem(),
+                        drawerItem9
+
+
                 )
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override
@@ -175,6 +181,11 @@ public class LandingScreen extends AppCompatActivity {
                                 break;
                             }
                             case 11: {
+                                fragment = new pdfFragment();
+                                getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment).commit();
+                                break;
+                            }
+                            case 13: {
                                 SharedPreferences preferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
                                 SharedPreferences.Editor editor = preferences.edit();
                                 editor.clear();
@@ -231,10 +242,11 @@ public class LandingScreen extends AppCompatActivity {
         while(getFragmentManager().getBackStackEntryCount() > 0) {
             getFragmentManager().popBackStack(null, 0);
         }
-        Intent a = new Intent(Intent.ACTION_MAIN);
+    /*    Intent a = new Intent(Intent.ACTION_MAIN);
         a.addCategory(Intent.CATEGORY_HOME);
         a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(a);
+        startActivity(a);*/
+
 
         super.onBackPressed();
 
