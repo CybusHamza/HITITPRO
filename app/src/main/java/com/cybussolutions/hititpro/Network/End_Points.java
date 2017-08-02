@@ -2,11 +2,10 @@ package com.cybussolutions.hititpro.Network;
 
 
 public class End_Points {
-
-    public static final String BASE_URL = "http://m1.cybussolutions.com/hititpro/Api_Controller/";
-    public static final String IMAGE_BASE_URL = "http://m1.cybussolutions.com/hititpro/uploads/inspection/";
-    public static final String PDF_BASRURL = "http://m1.cybussolutions.com/hititpro/uploads/reports/";
-    public static final String UPLOAD="http://m1.cybussolutions.com/hititpro/upload_image_mobile.php";
+    public static final String BASE_URL = "http://omar.cybussolutions.com/hititpro/Api_Controller/";
+    public static final String IMAGE_BASE_URL = "http://omar.cybussolutions.com/hititpro/uploads/inspection/";
+    public static final String PDF_BASRURL = "http://omar.cybussolutions.com/hititpro/uploads/reports/";
+    public static final String UPLOAD="http://omar.cybussolutions.com/hititpro/upload_image_mobile.php";
 
 
     public static final String LOGIN = BASE_URL + "login";
@@ -22,6 +21,7 @@ public class End_Points {
     public static final String GET_TEMPLATES = BASE_URL + "getTemplates";
     public static final String GET_TEMPLATES_REVIEW = BASE_URL + "getTemplatesreview";
     public static final String GET_INSPECTION = BASE_URL + "getInspection";
+    public static final String FORGOT_PASSWORD = BASE_URL + "forgotpassword";
     public static final String GET_TEMPLATE_DATA = BASE_URL + "getTemplatesData";
     public static final String GET_ARCHIVE_TEMPLATE_DATA = BASE_URL + "getArchiveAllTemplates";
     public static final String DELETE_TEMPLATE = BASE_URL + "deleteTemplate";

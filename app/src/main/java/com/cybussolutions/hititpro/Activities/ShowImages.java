@@ -4,14 +4,11 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,8 +35,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
-
-import static com.cybussolutions.hititpro.R.drawable.del;
 
 public class ShowImages extends AppCompatActivity {
 
@@ -133,7 +128,7 @@ public class ShowImages extends AppCompatActivity {
         }
 
         if(imageNames.length>0) {
-            String url = "http://xfer.cybusservices.com/hititpro/uploads/inspection/" + imageNames[0].trim();
+            String url = "http://omar.cybussolutions.com/hititpro/uploads/inspection/" + imageNames[0].trim();
 
                 /*Picasso.with(ShowImages.this)
                         .load(url)
@@ -147,7 +142,7 @@ public class ShowImages extends AppCompatActivity {
         }
 
         if(imageNames.length>1) {
-            String url1 = "http://xfer.cybusservices.com/hititpro/uploads/inspection/" + imageNames[1].trim();
+            String url1 = "http://omar.cybussolutions.com/hititpro/uploads/inspection/" + imageNames[1].trim();
            /* Picasso.with(ShowImages.this)
                     .load(url1)
                     .into(image2);*/
@@ -159,7 +154,7 @@ public class ShowImages extends AppCompatActivity {
         }
 
         if(imageNames.length>2) {
-            String url2 = "http://xfer.cybusservices.com/hititpro/uploads/inspection/" + imageNames[2].trim();
+            String url2 = "http://omar.cybussolutions.com/hititpro/uploads/inspection/" + imageNames[2].trim();
             /*Picasso.with(ShowImages.this)
                     .load(url2)
                     .into(image3);*/

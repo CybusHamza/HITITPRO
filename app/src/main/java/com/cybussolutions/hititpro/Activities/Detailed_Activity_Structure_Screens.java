@@ -195,39 +195,46 @@ public class Detailed_Activity_Structure_Screens extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        update();
-        String[] insertArray = Detailed_Adapter.getDbInsertArray();
+        if(!(enteredStructure.length() == 0))
+        {
+            update();
+            String[] insertArray = Detailed_Adapter.getDbInsertArray();
 
-        for (int i = 0; i < insertArray.length - 1; i++) {
-            enteredStructure += insertArray[i] + "^";
+            for (int i = 0; i < insertArray.length - 1; i++) {
+                enteredStructure += insertArray[i] + "^";
+            }
+
+            enteredStructure = enteredStructure.substring(0, enteredStructure.length() - 1);
+
+            // Insert in local DataBase
+            database.insertEntry(dbColumn, enteredStructure, dbTable, inspectionID);
+
+            finish();
+
         }
-
-        enteredStructure = enteredStructure.substring(0, enteredStructure.length() - 1);
-
-        // Insert in local DataBase
-        database.insertEntry(dbColumn, enteredStructure, dbTable, inspectionID);
-
-        finish();
 
         return super.onOptionsItemSelected(item);
     }
 
     @Override
     public void onBackPressed() {
-        update();
-        String[] insertArray = Detailed_Adapter.getDbInsertArray();
 
-        for (int i = 0; i < insertArray.length - 1; i++) {
-            enteredStructure += insertArray[i] + "^";
+        if(!(enteredStructure.length() == 0)) {
+            update();
+            String[] insertArray = Detailed_Adapter.getDbInsertArray();
+
+            for (int i = 0; i < insertArray.length - 1; i++) {
+                enteredStructure += insertArray[i] + "^";
+            }
+
+            enteredStructure = enteredStructure.substring(0, enteredStructure.length() - 1);
+
+            // Insert in local DataBase
+            database.insertEntry(dbColumn, enteredStructure, dbTable, inspectionID);
+
         }
-
-        enteredStructure = enteredStructure.substring(0, enteredStructure.length() - 1);
-
-        // Insert in local DataBase
-        database.insertEntry(dbColumn, enteredStructure, dbTable, inspectionID);
-
-
         super.onBackPressed();
+
     }
 
 

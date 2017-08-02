@@ -62,7 +62,9 @@ public class PDFAddapter extends ArrayAdapter<PDFModel>
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://m1.cybussolutions.com/hititpro/uploads/reports/"+pdfModels.get(position).getName()));
+
+                String url = pdfModels.get(position).getName().replace(" ","%20");
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://omar.cybussolutions.com/hititpro/uploads/reports/"+url));
                 context. startActivity(browserIntent);
             }
         });

@@ -11,6 +11,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -75,6 +76,7 @@ public class ClientsFragment extends BaseFragment {
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.menu_black);
 
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
   /*      String[] client_name = new String[]{"Hamza Bin Tariq", "Zaeem Sattar", "Noor Siddiqui", "Maria Talib"};
         for (String aClient_name : client_name) {
@@ -96,6 +98,7 @@ public class ClientsFragment extends BaseFragment {
 
                 String nameToSearch = search.getText().toString();
                 ArrayList<Clients_model> filteredLeaves = new ArrayList<Clients_model>();
+
 
                 for (Clients_model data : list) {
                     if (data.getClient_name().toLowerCase().contains(nameToSearch.toLowerCase()) || data.getClient_phone().toLowerCase().equalsIgnoreCase(nameToSearch.toLowerCase())) {

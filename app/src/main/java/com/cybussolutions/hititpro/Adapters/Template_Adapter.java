@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.support.v7.app.AlertDialog;
@@ -35,13 +36,15 @@ import java.util.Map;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
+import static android.content.Context.MODE_PRIVATE;
+
 public class Template_Adapter extends BaseAdapter {
     ArrayList<Templates_model> arrayList;
     Context context;
     LayoutInflater inflter;
     View view;
     String from;
-    private static final int MY_SOCKET_TIMEOUT_MS = 10000;
+    private static final int MY_SOCKET_TIMEOUT_MS = 20000;
     ProgressDialog ringProgressDialog;
 
 
@@ -340,11 +343,12 @@ public class Template_Adapter extends BaseAdapter {
                     @Override
                     public void onResponse(String response) {
 
+                       String url=  response.replace(" ","%20");
                         ringProgressDialog.dismiss();
 
                       /*  Intent intent = new Intent(context, PdfView.class);
                         context.startActivity(intent);*/
-                        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://m1.cybussolutions.com/hititpro/uploads/reports/"+response));
+                        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://omar.cybussolutions.com/hititpro/uploads/reports/"+url));
                         context. startActivity(browserIntent);
 
 
@@ -388,6 +392,8 @@ public class Template_Adapter extends BaseAdapter {
                 params.put("client",arrayList.get(position).getClient_id());
                 params.put("temp",arrayList.get(position).get_template_id());
                 params.put("insp",arrayList.get(position).get_inspection_id());
+                SharedPreferences pref = context.getApplicationContext().getSharedPreferences("UserPrefs", MODE_PRIVATE);
+                params.put("user_id", pref.getString("user_id",""));
                 return params;
             }
         };

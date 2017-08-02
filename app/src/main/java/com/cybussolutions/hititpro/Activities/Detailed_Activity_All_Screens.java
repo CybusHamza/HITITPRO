@@ -46,30 +46,31 @@ import java.util.Map;
 public class Detailed_Activity_All_Screens extends AppCompatActivity {
 
     private static final int MY_SOCKET_TIMEOUT_MS = 10000;
+    private static final Map<String, String> myMap;
     public static boolean isSame;
+    static boolean isAnyChecked = false;
+
+    static {
+        myMap = new HashMap<String, String>();
+        myMap.put("portfolio", "16");
+        myMap.put("roofing", "12");
+    }
+
     ListView detailedListView;
     String[] items;
     String heading, fromadapter, dbColumn, userid, dbTable, enteredStructure = "", inspectionID, fromDataBase;
     CustomArrayAdapter Detailed_Adapter;
     Database database = new Database(this);
-  //  Button addCategory;
+    //  Button addCategory;
     ImageView addCategory;
     AlertDialog b;
     ArrayAdapter<Checkbox_model> adapter;
     ArrayList<String> checkedValue;
     String toPass[];
-    static  boolean isAnyChecked = false;
-    String dbEnterArray[],tag;
+    String dbEnterArray[], tag;
     ProgressDialog ringProgressDialog;
     private ArrayList<Checkbox_model> list = new ArrayList<>();
     private ArrayList<Checkbox_model> list_temp;
-    private static final Map<String, String> myMap;
-    static
-    {
-        myMap = new HashMap<String, String>();
-        myMap.put("portfolio", "16");
-        myMap.put("roofing", "12");
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,7 +94,7 @@ public class Detailed_Activity_All_Screens extends AppCompatActivity {
         inspectionID = intent.getStringExtra("inspectionID");
         tag = intent.getStringExtra("tag");
 
-        toPass = new String[]{heading, dbColumn, dbTable,tag};
+        toPass = new String[]{heading, dbColumn, dbTable, tag};
 
         SharedPreferences pref = getApplicationContext().getSharedPreferences("UserPrefs", MODE_PRIVATE);
         userid = pref.getString("user_id", "");
@@ -142,44 +143,15 @@ public class Detailed_Activity_All_Screens extends AppCompatActivity {
 
             int position = 0;
             for (String item : row) {
-                Checkbox_model model = new Checkbox_model();
-                model.setTitle(item);
-
-                String splitter1 = "%";
-                String rows[] = item.split(splitter1);
-
-                list.add(model);
-
-                if (rows[1] != null && rows[1].equals("1")) {
-                    list.get(position).setChecked(true);
-                } else {
-                    list.get(position).setChecked(false);
-                }
-
-
-                position++;
-            }
-
-        }
-        else {
-            int position = 0;
-
-            if (items.length != 0) {
-
-                int length = 0;
-                if (fromadapter.equals("edit")) {
-                    length = items.length;
-                } else if (fromadapter.equals("true")) {
-                    length = items.length - 1;
-                }
-
-                for (int i = 0; i < length; i++) {
+                if (!fromDataBase.equals("")) {
                     Checkbox_model model = new Checkbox_model();
-                    model.setTitle(items[i]);
+                    model.setTitle(item);
+
                     String splitter1 = "%";
-                    String rows[] = items[i].split(splitter1);
+                    String rows[] = item.split(splitter1);
 
                     list.add(model);
+
 
                     if (rows[1] != null && rows[1].equals("1")) {
                         list.get(position).setChecked(true);
@@ -187,8 +159,47 @@ public class Detailed_Activity_All_Screens extends AppCompatActivity {
                         list.get(position).setChecked(false);
                     }
                     position++;
+
+                }
+
+
+            }
+
+        } else {
+            int position = 0;
+
+            if (items != null) {
+                if (items.length != 0) {
+
+                    int length = 0;
+                    if (fromadapter.equals("edit")) {
+                        length = items.length;
+                    } else if (fromadapter.equals("true")) {
+                        length = items.length - 1;
+                    }
+
+                    for (int i = 0; i < length; i++) {
+                        Checkbox_model model = new Checkbox_model();
+                        if (items.length != 0) {
+                            model.setTitle(items[i]);
+                            String splitter1 = "%";
+                            String rows[] = items[i].split(splitter1);
+
+                            list.add(model);
+
+                            if (rows[1] != null && rows[1].equals("1")) {
+                                list.get(position).setChecked(true);
+                            } else {
+                                list.get(position).setChecked(false);
+                            }
+                            position++;
+                        }
+
+                    }
+
                 }
             }
+
 
         }
 
@@ -217,46 +228,56 @@ public class Detailed_Activity_All_Screens extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-
-
         String[] insertArray = Detailed_Adapter.getDbInsertArray();
 
+        if (!(insertArray.length ==0)) {
 
 
-        for (int i = 0; i < insertArray.length - 1; i++) {
-            enteredStructure += insertArray[i] + "^";
+
+
+            for (int i = 0; i < insertArray.length - 1; i++) {
+                enteredStructure += insertArray[i] + "^";
+            }
+
+            enteredStructure = enteredStructure.substring(0, enteredStructure.length() - 1);
+
+            // Insert in local DataBase
+            database.insertEntry(dbColumn, enteredStructure, dbTable, inspectionID);
+            update();
+
+            finish();
+        } else {
+            database.insertEntry(dbColumn, "", dbTable, inspectionID);
         }
-
-        enteredStructure = enteredStructure.substring(0, enteredStructure.length() - 1);
-
-        // Insert in local DataBase
-        database.insertEntry(dbColumn, enteredStructure, dbTable, inspectionID);
-        update();
-
-        finish();
-
         return super.onOptionsItemSelected(item);
     }
 
     @Override
     public void onBackPressed() {
-
-
         String[] insertArray = Detailed_Adapter.getDbInsertArray();
 
+        if (!(insertArray.length == 0 ) )
+        {
 
-        for (int i = 0; i < insertArray.length - 1; i++) {
 
-            enteredStructure += insertArray[i] + "^";
+
+            for (int i = 0; i < insertArray.length - 1; i++) {
+
+                enteredStructure += insertArray[i] + "^";
+            }
+
+            update();
+
+            if(!(enteredStructure.equals("")))
+            {
+                enteredStructure = enteredStructure.substring(0, enteredStructure.length() - 1);
+            }
+
+            // Insert in local DataBase
+            database.insertEntry(dbColumn, enteredStructure, dbTable, inspectionID);
+        } else {
+            database.insertEntry(dbColumn, "", dbTable, inspectionID);
         }
-
-        update();
-
-        enteredStructure = enteredStructure.substring(0, enteredStructure.length() - 1);
-
-        // Insert in local DataBase
-        database.insertEntry(dbColumn, enteredStructure, dbTable, inspectionID);
-
         super.onBackPressed();
     }
 
@@ -349,6 +370,7 @@ public class Detailed_Activity_All_Screens extends AppCompatActivity {
 
 
                     Intent intent = new Intent(Detailed_Activity_All_Screens.this, Detailed_Activity_All_Screens.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+
                     intent.putExtra("items", dbEnterArray);
                     intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                     intent.putExtra("heading", toPass[0]);
@@ -379,13 +401,12 @@ public class Detailed_Activity_All_Screens extends AppCompatActivity {
     public void update() {
 
 
-
         StringRequest request = new StringRequest(Request.Method.POST, End_Points.UPDATELIVE,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
 
-                     //   Toast.makeText(Detailed_Activity_All_Screens.this, response, Toast.LENGTH_SHORT).show();
+                        //   Toast.makeText(Detailed_Activity_All_Screens.this, response, Toast.LENGTH_SHORT).show();
 
 
                     }

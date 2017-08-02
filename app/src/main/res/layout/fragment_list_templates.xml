@@ -36,13 +36,23 @@
 
     </LinearLayout>
 
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linear"
+        android:id="@+id/search"
+        android:hint="Search"
+        android:layout_margin="10dp"
+        android:background="@drawable/outline_style"
+        android:padding="15dp"
+        />
     <ListView
         android:id="@+id/templates_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:dividerHeight="2dp"
         android:divider="#000"
-        android:layout_below="@+id/linear"
+        android:layout_below="@+id/search"
         android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

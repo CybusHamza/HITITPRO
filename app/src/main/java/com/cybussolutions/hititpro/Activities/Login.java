@@ -2,11 +2,11 @@ package com.cybussolutions.hititpro.Activities;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -45,6 +45,7 @@ public class Login extends AppCompatActivity {
     TextView username, password;
     String strUser,strPass;
     TextView forgotPassword;
+    AlertDialog b;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -230,31 +231,125 @@ public class Login extends AppCompatActivity {
 
     }
     public void forgotPasswordDialog() {
-        // canvas.setMode(CanvasView.Mode.TEXT);
-        AlertDialog.Builder alert = new AlertDialog.Builder(Login.this);
-        alert.setTitle("Forgot Password"); //Set Alert dialog title here
-        alert.setMessage("Enter Your Email Here"); //Message here
 
-        // Set an EditText view to get user input
-        final EditText input = new EditText(Login.this);
-        alert.setView(input);
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = getLayoutInflater();
+        final View dialogView = inflater.inflate(R.layout.add_dalogboxforgot, null);
+        dialogBuilder.setView(dialogView);
+        dialogBuilder.setCancelable(false);
 
-        alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
-                //You will get as string input data in this variable.
-                // here we convert the input to a string and show in a toast.
-                String srt = input.getEditableText().toString();
+        // initializing variables
+        final EditText Add = (EditText) dialogView.findViewById(R.id.add_ET);
+        final Button to = (Button) dialogView.findViewById(R.id.add_BT);
+        final Button cancel = (Button) dialogView.findViewById(R.id.cancel);
 
-            } // End of onClick(DialogInterface dialog, int whichButton)
-        }); //End of alert.setPositiveButton
-        alert.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
-                // Canceled.
-                dialog.cancel();
+
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                b.dismiss();
+
             }
-        }); //End of alert.setNegativeButton
-        AlertDialog alertDialog = alert.create();
-        alertDialog.show();
+        });
+
+        to.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ForgotPassword(Add.getText().toString());
+                b.dismiss();
+            }
+        });
+
+        b = dialogBuilder.create();
+
+
+        b.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+
+
+        b.show();
+
+    }
+
+    public void ForgotPassword(final String email) {
+
+        ringProgressDialog = ProgressDialog.show(this, "", "Please wait ...", true);
+        ringProgressDialog.setCancelable(false);
+        ringProgressDialog.show();
+
+        StringRequest request = new StringRequest(Request.Method.POST, End_Points.FORGOT_PASSWORD,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        ringProgressDialog.dismiss();
+
+                        if(response.equals("001"))
+                        {
+                            Toast.makeText(Login.this, "No user found with this Email-ID", Toast.LENGTH_SHORT).show();
+                        }
+                        else
+                        {
+                            new SweetAlertDialog(Login.this, SweetAlertDialog.SUCCESS_TYPE)
+                                    .setTitleText("Done!")
+                                    .setConfirmText("OK").setContentText("An E-Mail has been sent to your respective ID to reset your password")
+                                    .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                        @Override
+                                        public void onClick(SweetAlertDialog sDialog) {
+                                            sDialog.dismiss();
+                                        }
+                                    })
+                                    .show();
+                        }
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                ringProgressDialog.dismiss();
+                if (error instanceof NoConnectionError) {
+
+                    new SweetAlertDialog(Login.this, SweetAlertDialog.ERROR_TYPE)
+                            .setTitleText("Error!")
+                            .setConfirmText("OK").setContentText("No Internet Connection")
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    sDialog.dismiss();
+                                }
+                            })
+                            .show();
+                } else if (error instanceof TimeoutError) {
+
+                    new SweetAlertDialog(Login.this, SweetAlertDialog.ERROR_TYPE)
+                            .setTitleText("Error!")
+                            .setConfirmText("OK").setContentText("Connection TimeOut! Please check your internet connection.")
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    sDialog.dismiss();
+                                }
+                            })
+                            .show();
+                }
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+
+                Map<String, String> params = new HashMap<>();
+                params.put("forgot_email",email);
+
+                return params;
+            }
+        };
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                MY_SOCKET_TIMEOUT_MS,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+        requestQueue.add(request);
 
     }
 }

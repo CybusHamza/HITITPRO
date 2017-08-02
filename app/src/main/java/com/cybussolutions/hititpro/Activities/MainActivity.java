@@ -1,9 +1,7 @@
 package com.cybussolutions.hititpro.Activities;
 
 import android.Manifest;
-import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.DownloadManager;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -13,13 +11,7 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Matrix;
-import android.graphics.Paint;
-import android.graphics.Path;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffXfermode;
 import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Build;
@@ -29,27 +21,15 @@ import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Base64;
 import android.util.Log;
-import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.android.graphics.CanvasView;
-import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.NoConnectionError;
 import com.android.volley.Request;
@@ -61,9 +41,6 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.cybussolutions.hititpro.Network.End_Points;
 import com.cybussolutions.hititpro.R;
-import com.darsh.multipleimageselect.activities.AlbumSelectActivity;
-import com.darsh.multipleimageselect.helpers.Constants;
-import com.darsh.multipleimageselect.models.Image;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -75,17 +52,12 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.sql.Time;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
-
-import static android.graphics.Color.BLACK;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -111,7 +83,6 @@ public class MainActivity extends AppCompatActivity {
     String data;
     String table_name;
 
-    EditText etAttachmentName;
     private String mCurrentPhotoPath,ba1,mSavedPhotoName;
     String mainFormName;
 
@@ -147,7 +118,6 @@ public class MainActivity extends AppCompatActivity {
         clientId=intent.getStringExtra("clientId");
         templateId=intent.getStringExtra("templateId");
         inspectionId=intent.getStringExtra("inspectionId");
-        attachment_name=intent.getStringExtra("attachmentName");
 
         if(showImage.equals("false"))
         getImages();
@@ -167,8 +137,6 @@ public class MainActivity extends AppCompatActivity {
         drawPen=(Button)findViewById(R.id.pen);
         undo= (Button) findViewById(R.id.undo);
         redo= (Button) findViewById(R.id.redo);
-        etAttachmentName= (EditText) findViewById(R.id.et_attachment_name);
-        etAttachmentName.setText(attachment_name);
 
         if(scaled==null){
             drawLine.setVisibility(View.INVISIBLE);
@@ -278,13 +246,9 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "no image selected", Toast.LENGTH_LONG).show();
                     }
                     if (sp.getBoolean("flag", false) == true) {
-                        String check=etAttachmentName.getText().toString();
-                        if(check.equals("")){
-                            Toast.makeText(getApplicationContext(),"Plz enter some attachment name",Toast.LENGTH_LONG).show();
-                        }
-                        else {
+
                             up();
-                        }
+
 
                     } else {
                         OutputStream fOut = null;
@@ -297,15 +261,7 @@ public class MainActivity extends AppCompatActivity {
                         Uri outputFileUri;
                         try {
 
-                            String check=etAttachmentName.getText().toString();
-                            if(check.equals("")){
-                               // Toast ToastMessage =
-                                 Toast.makeText(getApplicationContext(),"Please enter attachment name",Toast.LENGTH_SHORT).show();
-//                                View toastView = ToastMessage.getView();
-//                                toastView.setBackgroundResource(R.color.colorPrimary);
-//                                ToastMessage.show();
-                            }
-                            else {
+
                                 File root = new File(Environment.getExternalStorageDirectory()
                                         + File.separator + "folder_name" + File.separator);
                                 if (!root.exists()) {
@@ -319,7 +275,6 @@ public class MainActivity extends AppCompatActivity {
                                 Intent intent = new Intent(MainActivity.this, Add_Comments.class);
                                 mCurrentPhotoPath=outputFileUri.getPath();
                                 intent.putExtra("mCurrentPhotoPath", mCurrentPhotoPath);
-                                intent.putExtra("attachmentName", etAttachmentName.getText().toString());
                                 intent.putExtra("dbTable",table_name);
                                 intent.putExtra("data", data);
                                 intent.putExtra("clientId",clientId);
@@ -335,7 +290,7 @@ public class MainActivity extends AppCompatActivity {
                                     fOut.close();
                                 } catch (Exception e) {
                                 }
-                            }
+
                         } catch (Exception e) {
                             Toast.makeText(getApplicationContext(), "Error occured. Please try again later.",
                                     Toast.LENGTH_SHORT).show();
@@ -614,7 +569,7 @@ public class MainActivity extends AppCompatActivity {
                 params.put("main_form_name",mainFormName);
                 params.put("column_name",table_name);
                 params.put("element_id",data);
-                params.put("attachment_name",etAttachmentName.getText().toString());
+                params.put("attachment_name"," ");
                 params.put("attachment_original_name",mSavedPhotoName);/*mCurrentPhotoPath*/
                 params.put("attachment_saved_name",mSavedPhotoName);
                 params.put("image_comments",sp.getString("imagecomments",null));
@@ -945,13 +900,7 @@ public class MainActivity extends AppCompatActivity {
         edit.putBoolean("flag", false);
         edit.commit();
     }
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        InputMethodManager imm = (InputMethodManager)getSystemService(Context.
-                INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
-        return true;
-    }
+
 
     public static int calculateInSampleSize(BitmapFactory.Options options,
                                             int reqWidth, int reqHeight) {

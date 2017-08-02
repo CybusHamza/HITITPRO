@@ -6,11 +6,14 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 
@@ -54,6 +57,7 @@ public class ArchiveList  extends BaseFragment {
     Fragment fragment = null;
     String templatename,inspectionname;
     Button active ;
+    EditText search;
 
 
     @Override
@@ -66,6 +70,7 @@ public class ArchiveList  extends BaseFragment {
         templates_list = (ListView) root.findViewById(R.id.templates_list);
         active = (Button) root.findViewById(R.id.active);
 
+        search=(EditText) root.findViewById(R.id.search);
         active.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -77,6 +82,44 @@ public class ArchiveList  extends BaseFragment {
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Inspection List");
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.menu_black);
+
+        search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+
+                String nameToSearch = search.getText().toString();
+                ArrayList<Templates_model> filteredLeaves = new ArrayList<Templates_model>();
+
+
+                for (Templates_model data : list) {
+                    if (data.getClient_name().toLowerCase().contains(nameToSearch.toLowerCase())) {
+                        filteredLeaves.add(data);
+                    }
+
+
+                }
+                /*leaveDatas.clear();
+                leaveDatas.addAll(filteredLeaves);
+                leaves_adapter.notifyDataSetChanged();*/
+                Template_Adapter client_adapter = new Template_Adapter(filteredLeaves, getActivity(),"template");
+                templates_list.setAdapter(client_adapter);
+
+            }                //     listView.setAdapter(leaves_adapter);
+
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+
+            }
+        });
+
 
 
 
