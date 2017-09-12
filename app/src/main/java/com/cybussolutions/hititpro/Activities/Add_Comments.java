@@ -20,6 +20,7 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -408,7 +409,14 @@ public class Add_Comments extends AppCompatActivity {
                                 else if(recomendation.equals("Concern")){
                                     radioButton= (RadioButton) findViewById(R.id.radio5);
                                     radioButton.setChecked(true);
+                                }else if(recomendation.equals("observation_notCheck")){
+                                    radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
+                                    radioGroup.setVisibility(View.GONE);
+                                    TextView textView= (TextView) findViewById(R.id.selrecTV);
+                                    textView.setVisibility(View.INVISIBLE);
+
                                 }else {
+                                    radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
                                     radioGroup.clearCheck();
                                 }
 

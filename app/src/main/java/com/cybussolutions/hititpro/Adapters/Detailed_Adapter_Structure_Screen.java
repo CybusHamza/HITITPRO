@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -98,6 +99,8 @@ public class Detailed_Adapter_Structure_Screen extends ArrayAdapter<Checkbox_mod
             holder = new Holder();
 
             convertView = layoutInflater.inflate(R.layout.row_detailed, parent, false);
+            holder.setTextViewTitle((TextView) convertView
+                    .findViewById(R.id.label));
             holder.setCheckBox((CheckBox) convertView
                     .findViewById(R.id.check));
 
@@ -184,13 +187,76 @@ public class Detailed_Adapter_Structure_Screen extends ArrayAdapter<Checkbox_mod
         });
 
 
+        final Holder finalHolder2 = holder;
         holder.imageEditor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 try {
-                    Intent intent=new Intent(context,MainActivity.class);
+                   // ImageView checkBox = (ImageView) view;
+                  //  int position = (Integer) view.getTag();
+                  //  int position = (Integer) view.getTag();
+                    String name = finalHolder2.getCheckBox().getText().toString().replaceAll("\\s+","");
+                    int pagePosition= 0;
+                    switch (topass[2]){
+                        case "portfolio":
+                            pagePosition= 1;
+                            break;
+                        case "roofing":
+                            pagePosition= 2;
+                            topass[1]="observation";
+                            break;
+                        case "exterior":
+                            pagePosition= 3;
+                            topass[1]="observation";
+                            break;
+                        case "interior":
+                            pagePosition= 9;
+                            break;
+                        case "heating":
+                            pagePosition= 5;
+                            break;
+                        case "cooling":
+                            pagePosition= 6;
+                            break;
+                        case "electrical":
+                            pagePosition= 4;
+                            break;
+                        case "insulation":
+                            pagePosition= 7;
+                            break;
+                        case "plumbing":
+                            pagePosition= 8;
+                            break;
+                        case "appliance":
+                            pagePosition= 10;
+                            break;
+                        case "fireplaces":
+                            pagePosition= 11;
+                            break;
+
+                        default:
+                            pagePosition= 0;
+
+                    }
+                    data = pagePosition+"_"+topass[3]+"_"+name;
+                   /* Intent intent=new Intent(context,MainActivity.class);
                     intent.putExtra("dbTable",topass[1]);
                     intent.putExtra("showImages","false");
+                    context.startActivity(intent);*/
+                    Intent intent = new Intent(context, MainActivity.class);
+                    intent.putExtra("data", data);
+                    intent.putExtra("dbTable", topass[1]);
+                    intent.putExtra("tag", topass[3]);
+                    intent.putExtra("showImages", "false");
+                    intent.putExtra("clientId", StructureScreensActivity.client_id);
+                    intent.putExtra("inspectionId", StructureScreensActivity.inspectionID);
+                    intent.putExtra("templateId", StructureScreensActivity.template_id);
+                    intent.putExtra("attachmentName","");
+                    SharedPreferences sp1 = context.getSharedPreferences("prefs", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor edit1 = sp1.edit();
+                    // edit.putString("back","add_comments");
+                    edit1.putBoolean("flag", false);
+                    edit1.commit();
                     context.startActivity(intent);
                 }catch (Exception e){
                     Toast.makeText(context,e.toString(),Toast.LENGTH_LONG).show();
@@ -556,6 +622,12 @@ public class Detailed_Adapter_Structure_Screen extends ArrayAdapter<Checkbox_mod
 
         public void setCheckBox(CheckBox checkBox) {
             this.checkBox = checkBox;
+        }
+        public void setTextViewTitle(TextView textViewTitle) {
+            this.textViewTitle = textViewTitle;
+        }
+        public TextView getTextViewTitle() {
+            return textViewTitle;
         }
 
     }

@@ -225,7 +225,7 @@ public class AppliancesScreenFragment extends BaseFragment {
         appliance_observations.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                edit.putBoolean("imageButton",false);
+                edit.putBoolean("imageButton",true);
                 edit.putBoolean("addObservationButton",false);
                 edit.commit();
                 Intent intent= new Intent(getActivity(), Detailed_Activity_Structure_Screens.class);

@@ -99,8 +99,9 @@ public class Login extends AppCompatActivity {
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent= new Intent(Login.this,SignupActivity.class);
-                startActivity(intent);
+                //Intent intent= new Intent(Login.this,SignupActivity.class);
+               // startActivity(intent);
+                Toast.makeText(Login.this, "To signup to HITIT Pro, please visit our website and complete your billing process!", Toast.LENGTH_SHORT).show();
             }
         });
     }

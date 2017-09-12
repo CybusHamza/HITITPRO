@@ -275,7 +275,7 @@ public class RoofingScreenFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
 
-                edit.putBoolean("imageButton",false);
+                edit.putBoolean("imageButton",true);
                 edit.putBoolean("addObservationButton",false);
                 edit.commit();
 

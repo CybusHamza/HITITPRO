@@ -117,7 +117,7 @@ public class LandingScreen extends AppCompatActivity {
         PrimaryDrawerItem drawerItem4 = new PrimaryDrawerItem().withIdentifier(3).withName(drawerNames[3]).withIcon(drawerImages[3]);
         PrimaryDrawerItem drawerItem5 = new PrimaryDrawerItem().withIdentifier(4).withName(drawerNames[4]).withIcon(drawerImages[4]);
         PrimaryDrawerItem drawerItem8 = new PrimaryDrawerItem().withIdentifier(5).withName(drawerNames[5]).withIcon(drawerImages[5]);
-        PrimaryDrawerItem drawerItem9 = new PrimaryDrawerItem().withIdentifier(6).withName(drawerNames[6]).withIcon(drawerImages[5]);
+        PrimaryDrawerItem drawerItem9 = new PrimaryDrawerItem().withIdentifier(6).withName(drawerNames[6]).withIcon(drawerImages[6]);
 
 
 
