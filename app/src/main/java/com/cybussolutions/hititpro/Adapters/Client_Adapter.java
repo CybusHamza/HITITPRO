@@ -41,12 +41,13 @@ public class Client_Adapter extends BaseAdapter {
     View view;
     ProgressDialog ringProgressDialog;
     private static final int MY_SOCKET_TIMEOUT_MS = 10000;
-
-    public Client_Adapter(ArrayList<Clients_model> arrayList, Context context)
+    String active;
+    public Client_Adapter(ArrayList<Clients_model> arrayList, Context context,String active)
     {
         this.arrayList=arrayList;
         this.context=context;
         inflter = (LayoutInflater.from(context));
+        this.active=active;
 
 
     }
@@ -87,20 +88,55 @@ public class Client_Adapter extends BaseAdapter {
             viewholder.phone_number.setTypeface(face, Typeface.BOLD);
             viewholder.phone_number.setTextSize(15);
             viewholder.editClient=(ImageView)v.findViewById(R.id.editClient);
+            viewholder.active=(ImageView)v.findViewById(R.id.activeClient);
             viewholder.deleteClient=(ImageView)v.findViewById(R.id.deleteClient);
             v.setTag(viewholder);
         } else {
             viewholder = (ViewHolder) v.getTag();
         }
+        if(active.equals("active")){
+            viewholder.active.setVisibility(View.GONE);
+            viewholder.deleteClient.setVisibility(View.VISIBLE);
+            viewholder.editClient.setVisibility(View.VISIBLE);
+        }else {
+            viewholder.active.setVisibility(View.VISIBLE);
+            viewholder.deleteClient.setVisibility(View.GONE);
+            viewholder.editClient.setVisibility(View.GONE);
+        }
+        viewholder.active.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new AlertDialog.Builder(context)
+                        .setTitle("Confirmation")
+                        .setMessage("Do you really want to activate Client ")
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                            /*Intent intent=new Intent(getActivity(),LandingScreen.class);
+                            intent.putExtra("activityName", "StructureScreen");
+                            startActivity(intent);*/
+                                activeClient(arrayList.get(position).getClient_id(),position);
 
+
+
+                            }
+                        })
+                        .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        })
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .show();
+            }
+        });
         viewholder.name.setText(arrayList.get(position).getClient_name());
         viewholder.adress.setText(arrayList.get(position).getClient_adress());
         viewholder.phone_number.setText(arrayList.get(position).getClient_phone());
         viewholder.deleteClient.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) { new AlertDialog.Builder(context)
-                    .setTitle("Delete Client")
-                    .setMessage("If you delete client, all associated properties will also be deleted. Do you really want to delete ")
+                    .setTitle("Confirmation")
+                    .setMessage("Do you really want to delete Client")
                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                             /*Intent intent=new Intent(getActivity(),LandingScreen.class);
@@ -218,10 +254,83 @@ public class Client_Adapter extends BaseAdapter {
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         requestQueue.add(request);
     }
+    private void activeClient(final String client_id, final int position) {
+        ringProgressDialog = ProgressDialog.show(context, "", "Please wait ...Activating client......", true);
+        ringProgressDialog.setCancelable(false);
+        ringProgressDialog.show();
+
+        StringRequest request = new StringRequest(Request.Method.POST, End_Points.ACTIVE_CLIENT,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        ringProgressDialog.dismiss();
+                        new SweetAlertDialog(context, SweetAlertDialog.SUCCESS_TYPE)
+                                .setTitleText("Success!")
+                                .setConfirmText("OK").setContentText("Client Activated Successfully")
+                                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                    @Override
+                                    public void onClick(SweetAlertDialog sDialog) {
+                                        sDialog.dismiss();
+                                        arrayList.remove(position);
+                                        notifyDataSetChanged();
+                                    }
+                                })
+                                .show();
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                ringProgressDialog.dismiss();
+                if (error instanceof NoConnectionError) {
+
+                    new SweetAlertDialog(context, SweetAlertDialog.ERROR_TYPE)
+                            .setTitleText("Error!")
+                            .setConfirmText("OK").setContentText("No Internet Connection")
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    sDialog.dismiss();
+                                }
+                            })
+                            .show();
+                } else if (error instanceof TimeoutError) {
+
+                    new SweetAlertDialog(context, SweetAlertDialog.ERROR_TYPE)
+                            .setTitleText("Error!")
+                            .setConfirmText("OK").setContentText("Connection TimeOut! Please check your internet connection.")
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    sDialog.dismiss();
+                                }
+                            })
+                            .show();
+                }
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+
+                Map<String, String> params = new HashMap<>();
+                params.put("cliet_id",client_id);
+                return params;
+            }
+        };
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                MY_SOCKET_TIMEOUT_MS,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        requestQueue.add(request);
+    }
 
     class ViewHolder{
           protected TextView name,adress,phone_number;
-          ImageView editClient,deleteClient;
+          ImageView editClient,deleteClient,active;
 
 
     }

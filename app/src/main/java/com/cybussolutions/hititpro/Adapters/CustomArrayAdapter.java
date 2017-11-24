@@ -18,21 +18,34 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.NoConnectionError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.TimeoutError;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.cybussolutions.hititpro.Activities.Detailed_Activity_All_Screens;
 import com.cybussolutions.hititpro.Activities.MainActivity;
 import com.cybussolutions.hititpro.Activities.StructureScreensActivity;
 import com.cybussolutions.hititpro.Model.Checkbox_model;
+import com.cybussolutions.hititpro.Network.End_Points;
 import com.cybussolutions.hititpro.R;
 import com.cybussolutions.hititpro.Sql_LocalDataBase.Database;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
 
-	public class CustomArrayAdapter extends ArrayAdapter<Checkbox_model> implements
-			View.OnClickListener {
-
+public class CustomArrayAdapter extends ArrayAdapter<Checkbox_model> implements
+		View.OnClickListener {
+	private static final int MY_SOCKET_TIMEOUT_MS = 10000;
 	private LayoutInflater layoutInflater;
 	String[] dbEnterArray;
 	private final List<Checkbox_model> list;
@@ -296,11 +309,56 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 		else
 		{
 			dbEnterArray[position] = row1[0] + "%0";
+			String name = row1[0].toString().replaceAll("\\s+","");
+			int pagePosition= 0;
+			switch (topass[2]){
+				case "portfolio":
+					pagePosition= 1;
+					break;
+				case "roofing":
+					pagePosition= 2;
+					break;
+				case "exterior":
+					pagePosition= 3;
+					break;
+				case "interior":
+					pagePosition= 9;
+					break;
+				case "heating":
+					pagePosition= 5;
+					break;
+				case "cooling":
+					pagePosition= 6;
+					break;
+				case "electrical":
+					pagePosition= 4;
+					break;
+				case "insulation":
+					pagePosition= 7;
+					break;
+				case "plumbing":
+					pagePosition= 8;
+					break;
+				case "appliance":
+					pagePosition= 10;
+					break;
+				case "fireplaces":
+					pagePosition= 11;
+					break;
+
+				default:
+					pagePosition= 0;
+
+			}
+			String new_s = topass[0].toLowerCase().replaceAll("[ /]", "_");
+
+			String data = pagePosition+"_"+topass[3]+"_"+name;
+			deleteDataOnUncheck(data,topass[2]);
 		}
 
 
 	}
-	
+
 
 	/**
 	 * Set the background of a row based on the value of its checkbox value.
@@ -536,7 +594,57 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 		return dbEnterArray;
 	}
 
+	public void deleteDataOnUncheck(final String element_id,final String main_form_name) {
 
+
+		StringRequest request = new StringRequest(Request.Method.POST, End_Points.DELETE_DATA_ON_UN_CHECK_ITEM,
+				new Response.Listener<String>() {
+					@Override
+					public void onResponse(String response) {
+
+						//  Toast.makeText(context, response, Toast.LENGTH_SHORT).show();
+
+
+					}
+				}, new Response.ErrorListener() {
+			@Override
+			public void onErrorResponse(VolleyError error) {
+
+				if (error instanceof NoConnectionError) {
+
+					Toast.makeText(context, "no internet connection", Toast.LENGTH_SHORT).show();
+
+
+				} else if (error instanceof TimeoutError) {
+
+
+					Toast.makeText(context, " Connection time out please try again", Toast.LENGTH_SHORT).show();
+				}
+			}
+		}) {
+			@Override
+			protected Map<String, String> getParams() throws AuthFailureError {
+
+				Map<String, String> params = new HashMap<>();
+				params.put("element_id", element_id);
+				params.put("main_form_name", main_form_name);
+				params.put("inspection_id", StructureScreensActivity.inspectionID);
+				params.put("template_id", StructureScreensActivity.template_id);
+				params.put("client_id", StructureScreensActivity.client_id);
+              /*  params.put("is_checked", isAnyChecked+"");
+                params.put("total_fields", myMap.get(dbTable));*/
+				return params;
+			}
+		};
+		request.setRetryPolicy(new DefaultRetryPolicy(
+				MY_SOCKET_TIMEOUT_MS,
+				DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+				DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+		RequestQueue requestQueue = Volley.newRequestQueue(context);
+		requestQueue.add(request);
+
+	}
 
 
 }

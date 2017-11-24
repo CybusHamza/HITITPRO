@@ -1,6 +1,11 @@
 package com.cybussolutions.hititpro.Fragments;
 
+/**
+ * Created by Hamza Android on 11/23/2017.
+ */
+
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,12 +16,13 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
@@ -28,8 +34,9 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.cybussolutions.hititpro.Adapters.Template_Adapter;
-import com.cybussolutions.hititpro.Model.Templates_model;
+import com.cybussolutions.hititpro.Activities.Add_Client;
+import com.cybussolutions.hititpro.Adapters.Client_Adapter;
+import com.cybussolutions.hititpro.Model.Clients_model;
 import com.cybussolutions.hititpro.Network.End_Points;
 import com.cybussolutions.hititpro.R;
 
@@ -44,44 +51,56 @@ import java.util.Map;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
 
-public class TemplatesListFragment extends BaseFragment {
+public class ArchiveClient extends BaseFragment {
 
     View root;
-    private ArrayList<Templates_model> list = new ArrayList<>();
-    ListView templates_list;
+    private ArrayList<Clients_model> list = new ArrayList<>();
+    ListView client_list;
     ImageView addClient;
     String id;
+    EditText search;
+    TextView textnoclient,textAddclient;
+    ImageView pictureadd,clientimg;
     private static final int MY_SOCKET_TIMEOUT_MS = 10000;
     ProgressDialog ringProgressDialog;
-    Button archive;
+    Button active;
     Fragment fragment = null;
-    String templatename,inspectionname;
-    EditText search;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        root = inflater.inflate(R.layout.fragment_list_templates, container, false);
-
-        templates_list = (ListView) root.findViewById(R.id.templates_list);
-
-       // archive = (Button) root.findViewById(R.id.archive);
+        root = inflater.inflate(R.layout.archive_fragment_clients, container, false);
+        active = (Button) root.findViewById(R.id.active);
+        client_list = (ListView) root.findViewById(R.id.client);
+        addClient=(ImageView) root.findViewById(R.id.add_client);
+        addClient.setVisibility(View.INVISIBLE);
+        textnoclient=(TextView) root.findViewById(R.id.textclient);
+        textAddclient=(TextView) root.findViewById(R.id.noclientText);
+        pictureadd=(ImageView) root.findViewById(R.id.img_id);
+        clientimg=(ImageView) root.findViewById(R.id.clientimg);
         search=(EditText) root.findViewById(R.id.search);
-        search.setSelected(false);
 
-       /* archive.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                fragment = new ArchiveList();
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment).commit();
-
-            }
-        });*/
-
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Inspection List");
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Clients");
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.menu_black);
 
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+        active.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                fragment = new ClientsFragment();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment).commit();
+
+            }
+        });
+  /*      String[] client_name = new String[]{"Hamza Bin Tariq", "Zaeem Sattar", "Noor Siddiqui", "Maria Talib"};
+        for (String aClient_name : client_name) {
+            Clients_model model = new Clients_model();
+            model.setClient_name(aClient_name);
+
+            list.add(model);
+        }*/
 
         search.addTextChangedListener(new TextWatcher() {
             @Override
@@ -94,24 +113,21 @@ public class TemplatesListFragment extends BaseFragment {
 
 
                 String nameToSearch = search.getText().toString();
-                ArrayList<Templates_model> filteredLeaves = new ArrayList<Templates_model>();
+                ArrayList<Clients_model> filteredLeaves = new ArrayList<Clients_model>();
 
 
-                for (Templates_model data : list) {
-                    if (data.getClient_name().toLowerCase().contains(nameToSearch.toLowerCase())) {
+                for (Clients_model data : list) {
+                    if (data.getClient_name().toLowerCase().contains(nameToSearch.toLowerCase()) || data.getClient_phone().toLowerCase().equalsIgnoreCase(nameToSearch.toLowerCase())) {
                         filteredLeaves.add(data);
                     }
 
 
                 }
-                if(filteredLeaves.size()<1){
-                    Toast.makeText(getActivity(),"No Such Property found",Toast.LENGTH_LONG).show();
-                }
                 /*leaveDatas.clear();
                 leaveDatas.addAll(filteredLeaves);
                 leaves_adapter.notifyDataSetChanged();*/
-                Template_Adapter client_adapter = new Template_Adapter(filteredLeaves, getActivity(),"template");
-                templates_list.setAdapter(client_adapter);
+                Client_Adapter client_adapter = new Client_Adapter(filteredLeaves, getActivity(),"archive");
+                client_list.setAdapter(client_adapter);
 
             }                //     listView.setAdapter(leaves_adapter);
 
@@ -125,24 +141,40 @@ public class TemplatesListFragment extends BaseFragment {
 
 
 
+
+
         final SharedPreferences pref = getActivity().getSharedPreferences("UserPrefs", getActivity().MODE_PRIVATE);
         id = pref.getString("user_id", null);
+
         AllClients();
-        templates_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+        client_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-               /* Intent intent = new Intent(getActivity(), StructureScreensActivity.class);
-                intent.putExtra("inspectionId",list.get(position).get_inspection_id());
-                intent.putExtra("client_id", list.get(position).getClient_id());
-                intent.putExtra("template_id",list.get(position).get_template_id());
-                intent.putExtra("inspection_type", "old");
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+              /*  Intent intent = new Intent(getActivity(), Start_Inspection.class);
+                intent.putExtra("client_name", list.get(i).getClient_name());
+                intent.putExtra("client_id", list.get(i).getClient_id());
                 startActivity(intent);*/
             }
         });
+
+        addClient.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), Add_Client.class);
+                startActivity(intent);
+
+            }
+        });
+
         return root;
     }
 
-
+/*    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_clients, menu);  // Use filter.xml from step 1
+    }*/
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -158,31 +190,25 @@ public class TemplatesListFragment extends BaseFragment {
         ringProgressDialog.setCancelable(false);
         ringProgressDialog.show();
 
-        StringRequest request = new StringRequest(Request.Method.POST, End_Points.GET_ALL_TEMPLATES,
+        StringRequest request = new StringRequest(Request.Method.POST, End_Points.GET_CLIENT,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
 
                         ringProgressDialog.dismiss();
-                        if (response.equals("[]")) {
-                            new SweetAlertDialog(getActivity(), SweetAlertDialog.ERROR_TYPE)
-                                    .setTitleText("Error!")
-                                    .setConfirmText("OK").setContentText("No Property Found ")
-                                    .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                                        @Override
-                                        public void onClick(SweetAlertDialog sDialog) {
-                                            sDialog.dismiss();
+                        if (response.equals("\"no record found\"")) {
 
-                                        }
-                                    })
-                                    .show();
+                            textAddclient.setVisibility(View.VISIBLE);
+                           // textnoclient.setVisibility(View.VISIBLE);
+                          //  pictureadd.setVisibility(View.VISIBLE);
+                           // clientimg.setVisibility(View.VISIBLE);
                         }
                         else {
 
                             parseJson(response);
 
-                            Template_Adapter client_adapter = new Template_Adapter(list, getActivity(),"template");
-                            templates_list.setAdapter(client_adapter);
+                            Client_Adapter client_adapter = new Client_Adapter(list, getActivity(),"archive");
+                            client_list.setAdapter(client_adapter);
 
 
                         }
@@ -223,7 +249,8 @@ public class TemplatesListFragment extends BaseFragment {
             protected Map<String, String> getParams() throws AuthFailureError {
 
                 Map<String, String> params = new HashMap<>();
-                params.put("id",id);
+                params.put("userid",id);
+                params.put("is_active","1");
                 return params;
             }
         };
@@ -238,7 +265,7 @@ public class TemplatesListFragment extends BaseFragment {
     }
 
 
-    public ArrayList<Templates_model>  parseJson(String responce)
+    public ArrayList<Clients_model>  parseJson(String responce)
     {
 
         try {
@@ -249,27 +276,19 @@ public class TemplatesListFragment extends BaseFragment {
 
                 JSONObject object = new JSONObject(Array.getJSONObject(i).toString());
 
-                Templates_model model =  new Templates_model();
-                templatename=object.getString("name");
-                if(templatename==null||templatename.equals("null")){
-                    templatename=object.getString("template_name");
-                }
-                else
-                templatename=object.getString("name");
+                Clients_model model =  new Clients_model();
 
-                inspectionname=object.getString("inspection_name");
-                if(inspectionname==null || inspectionname.equals("")){
-                    inspectionname="No inspection found";
-                }
-                else
-                    inspectionname=object.getString("inspection_name");
+                model.setClient_name(object.getString("client_name"));
+                model.setClient_id(object.getString("id"));
+                model.setClient_adress(object.getString("address"));
+                model.setClient_phone(object.getString("phone"));
+                model.setContact_name(object.getString("contactname"));
+                model.set_city(object.getString("city"));
+                model.set_fax(object.getString("fax"));
+                model.set_email(object.getString("email"));
+                model.set_state(object.getString("state"));
+                model.set_zip(object.getString("zip"));
 
-                model.setClient_name("Client Name: "+object.getString("client_name"));
-                model.setClient_id(object.getString("client_id"));
-                model.set_template("Property: "+templatename);
-                model.set_template_id(object.getString("template_id"));
-                model.set_inspection("Inspection: "+inspectionname);
-                model.set_inspection_id(object.getString("inspection_id"));
                 list.add(model);
             }
 

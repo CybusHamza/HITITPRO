@@ -1,20 +1,52 @@
 package com.cybussolutions.hititpro.Activities;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SwitchCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.NoConnectionError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.TimeoutError;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.cybussolutions.hititpro.Network.End_Points;
 import com.cybussolutions.hititpro.R;
 import com.cybussolutions.hititpro.Sql_LocalDataBase.Database;
+import com.cybussolutions.hititpro.Template_Inspection.AppliancesScreenFragment;
+import com.cybussolutions.hititpro.Template_Inspection.CoolingScreenFragment;
+import com.cybussolutions.hititpro.Template_Inspection.ElectricalScreenFragment;
+import com.cybussolutions.hititpro.Template_Inspection.ExteriorScreenFragment;
+import com.cybussolutions.hititpro.Template_Inspection.FirePlaceScreenFragment;
+import com.cybussolutions.hititpro.Template_Inspection.HeatingScreenFragment;
+import com.cybussolutions.hititpro.Template_Inspection.InsulationScreenFragment;
+import com.cybussolutions.hititpro.Template_Inspection.InteriorScreenFragment;
+import com.cybussolutions.hititpro.Template_Inspection.PlumbingScreenFragment;
+import com.cybussolutions.hititpro.Template_Inspection.RoofingScreenFragment;
 import com.cybussolutions.hititpro.Template_Inspection.StructureScreenFragment;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 
 public class StructureScreensActivity extends AppCompatActivity {
@@ -27,6 +59,8 @@ public class StructureScreensActivity extends AppCompatActivity {
     public static String temp_name;
     public static boolean is_saved;
     public static String is_notemplate;
+    public static Menu menu;
+    public static SwitchCompat switc;
 
     public static String[] foundationSpinnerValues, columnsSpinnerValues, floorStructureSpinnerValues, wallStructureSpinnerValues, ceilingStructureSpinnerValues, roofStructureSpinnerValues,
             structureObservationsSpinnerValues, roFoundationSpinnerValues, roCrawlSpacesSpinnerValues, roFloorsValues, roExteriorWallsValues, roRoofValues;
@@ -117,10 +151,121 @@ public class StructureScreensActivity extends AppCompatActivity {
 
 
         prePopulatelocal();
+      //  getSupportFragmentManager().beginTransaction().replace(R.id.container,
+        //        new StructureScreenFragment()).addToBackStack("structure").commit();
+       getBookMarkedData();
+
+    }
+
+    private void getBookMarkedData() {
+       final ProgressDialog ringProgressDialog = ProgressDialog.show(StructureScreensActivity.this, "", "Please wait ...", true);
+        ringProgressDialog.setCancelable(false);
+        ringProgressDialog.show();
+
+        final StringRequest request = new StringRequest(Request.Method.POST, End_Points.GET_BOOKMARKS,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        ringProgressDialog.dismiss();
+
+                        try {
+                            if(!response.equals("0")) {
+                                JSONArray jsonArray = new JSONArray(response);
+
+                                JSONObject object = jsonArray.getJSONObject(0);
+                                if (object.getString("form_step").equals("1")) {
+                                    getSupportFragmentManager().beginTransaction().replace(R.id.container,
+                                            new StructureScreenFragment()).addToBackStack("structure").commit();
+                                } else if (object.getString("form_step").equals("2")) {
+                                    getSupportFragmentManager().beginTransaction().replace(R.id.container, new RoofingScreenFragment()).addToBackStack("roofing").commit();
+                                } else if (object.getString("form_step").equals("3")) {
+                                    getSupportFragmentManager().beginTransaction().replace(R.id.container, new ExteriorScreenFragment()).addToBackStack("exterior").commit();
+                                } else if (object.getString("form_step").equals("4")) {
+                                    getSupportFragmentManager().beginTransaction().replace(R.id.container, new ElectricalScreenFragment()).addToBackStack("electrical").commit();
+                                } else if (object.getString("form_step").equals("5")) {
+                                    getSupportFragmentManager().beginTransaction().replace(R.id.container, new HeatingScreenFragment()).addToBackStack("heating").commit();
+                                } else if (object.getString("form_step").equals("6")) {
+                                    getSupportFragmentManager().beginTransaction().replace(R.id.container, new CoolingScreenFragment()).addToBackStack("cooling").commit();
+                                } else if (object.getString("form_step").equals("7")) {
+                                    getSupportFragmentManager().beginTransaction().replace(R.id.container, new InsulationScreenFragment()).addToBackStack("insulation").commit();
+                                } else if (object.getString("form_step").equals("8")) {
+                                    getSupportFragmentManager().beginTransaction().replace(R.id.container, new PlumbingScreenFragment()).addToBackStack("plumbing").commit();
+                                } else if (object.getString("form_step").equals("9")) {
+                                    getSupportFragmentManager().beginTransaction().replace(R.id.container, new InteriorScreenFragment()).addToBackStack("interior").commit();
+                                } else if (object.getString("form_step").equals("10")) {
+                                    getSupportFragmentManager().beginTransaction().replace(R.id.container, new AppliancesScreenFragment()).addToBackStack("appliances").commit();
+                                } else if (object.getString("form_step").equals("11")) {
+                                    getSupportFragmentManager().beginTransaction().replace(R.id.container, new FirePlaceScreenFragment()).addToBackStack("fireplaces").commit();
+                                }
+                            }else if(response.equals("0")){
+                                getSupportFragmentManager().beginTransaction().replace(R.id.container,
+                                        new StructureScreenFragment()).addToBackStack("structure").commit();
+
+                            }
 
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.container,
-                new StructureScreenFragment()).addToBackStack("structure").commit();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                ringProgressDialog.dismiss();
+                if (error instanceof NoConnectionError) {
+
+                    new SweetAlertDialog(StructureScreensActivity.this, SweetAlertDialog.ERROR_TYPE)
+                            .setTitleText("Error!")
+                            .setConfirmText("OK").setContentText("No Internet Connection")
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    sDialog.dismiss();
+                                }
+                            })
+                            .show();
+                } else if (error instanceof TimeoutError) {
+
+                    new SweetAlertDialog(StructureScreensActivity.this, SweetAlertDialog.ERROR_TYPE)
+                            .setTitleText("Error!")
+                            .setConfirmText("OK").setContentText("Connection TimeOut! Please check your internet connection.")
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    sDialog.dismiss();
+                                }
+                            })
+                            .show();
+                }
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                final SharedPreferences pref = getSharedPreferences("UserPrefs",MODE_PRIVATE);
+
+                Map<String, String> params = new HashMap<>();
+                params.put("client_id",client_id);
+                params.put("tempid",template_id );
+                params.put("inspection_id",inspectionID);
+                params.put("user_id", pref.getString("user_id", null));
+
+
+
+                return params;
+
+            }
+        };
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                1000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        RequestQueue requestQueue = Volley.newRequestQueue(StructureScreensActivity.this);
+        requestQueue.add(request);
     }
 
     @Override
@@ -678,7 +823,9 @@ public class StructureScreensActivity extends AppCompatActivity {
 
     }
     public boolean onCreateOptionsMenu(Menu menu) {
+        this.menu=menu;
         MenuInflater inflater = getMenuInflater();
+
         inflater.inflate(R.menu.menu_forms, menu);
         return true;
     }

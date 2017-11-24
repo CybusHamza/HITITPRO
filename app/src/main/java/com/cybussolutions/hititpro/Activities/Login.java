@@ -92,7 +92,11 @@ public class Login extends AppCompatActivity {
                 }
                 else
                 {
-                    login();
+                    if(strPass.length()<8){
+                        Toast.makeText(Login.this, "enter the password  minimum 8 characters", Toast.LENGTH_SHORT).show();
+                    }else {
+                        login();
+                    }
                 }
             }
         });

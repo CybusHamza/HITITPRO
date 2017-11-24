@@ -32,7 +32,6 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.cybussolutions.hititpro.Activities.Detailed_Activity_All_Screens;
 import com.cybussolutions.hititpro.Activities.Detailed_Activity_Structure_Screens;
-import com.cybussolutions.hititpro.Activities.LandingScreen;
 import com.cybussolutions.hititpro.Activities.StructureScreensActivity;
 import com.cybussolutions.hititpro.Fragments.BaseFragment;
 import com.cybussolutions.hititpro.Fragments.TemplatesFragment;
@@ -72,6 +71,8 @@ public class InsulationScreenFragment extends BaseFragment {
     private static final String INSULATION_TABLE = "insulation";
     SharedPreferences sp;
     SharedPreferences.Editor edit;
+    String isApplicable;
+    MenuItem item;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -122,6 +123,8 @@ public class InsulationScreenFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
                 getActivity().getSupportFragmentManager().popBackStack();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new CoolingScreenFragment()).commit();
+
             }
         });
 
@@ -398,6 +401,16 @@ public class InsulationScreenFragment extends BaseFragment {
                             JSONArray jsonArray = new JSONArray(response);
 
                             JSONObject object = jsonArray.getJSONObject(0);
+                            isApplicable=object.getString("is_applicable");
+                            //  item= (MenuItem)(R.id.applicable);
+
+                            item=StructureScreensActivity.menu.findItem(R.id.applicable);
+                            if(isApplicable.equals("0")){
+
+                                item.setChecked(true);
+                            }else {
+                                item.setChecked(false);
+                            }
 
                             database.insertEntry("atticinsulation", object.getString("atticinsulation"), INSULATION_TABLE, StructureScreensActivity.template_id);
                             database.insertEntry("exteriorwallinsulation", object.getString("exteriorwallinsulation"), INSULATION_TABLE, StructureScreensActivity.template_id);
@@ -477,7 +490,154 @@ public class InsulationScreenFragment extends BaseFragment {
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
         requestQueue.add(request);
     }
+    private void SetChecked(final String s) {
+        final ProgressDialog ringProgressDialog = ProgressDialog.show(getActivity(), "", "Please wait ...", true);
+        ringProgressDialog.setCancelable(false);
+        ringProgressDialog.show();
 
+        final StringRequest request = new StringRequest(Request.Method.POST, End_Points.NOT_APPLICABLE,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        ringProgressDialog.dismiss();
+                        if(!response.equals("0")){
+
+                        }
+
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                ringProgressDialog.dismiss();
+                if (error instanceof NoConnectionError) {
+
+                    new SweetAlertDialog(getActivity(), SweetAlertDialog.ERROR_TYPE)
+                            .setTitleText("Error!")
+                            .setConfirmText("OK").setContentText("No Internet Connection")
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    sDialog.dismiss();
+                                }
+                            })
+                            .show();
+                } else if (error instanceof TimeoutError) {
+
+                    new SweetAlertDialog(getActivity(), SweetAlertDialog.ERROR_TYPE)
+                            .setTitleText("Error!")
+                            .setConfirmText("OK").setContentText("Connection TimeOut! Please check your internet connection.")
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    sDialog.dismiss();
+                                }
+                            })
+                            .show();
+                }
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                final SharedPreferences pref = getActivity().getSharedPreferences("UserPrefs",MODE_PRIVATE);
+
+                Map<String, String> params = new HashMap<>();
+                params.put("client_id",StructureScreensActivity.client_id);
+                params.put("tempid",StructureScreensActivity.template_id);
+                params.put("inspection_id",StructureScreensActivity.inspectionID);
+                params.put("table_name",INSULATION_TABLE);
+                params.put("isApplicable", s);
+
+
+
+                return params;
+
+            }
+        };
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                1000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+        requestQueue.add(request);
+    }
+    private void BookMarkForm() {
+        final ProgressDialog ringProgressDialog = ProgressDialog.show(getActivity(), "", "Please wait ...", true);
+        ringProgressDialog.setCancelable(false);
+        ringProgressDialog.show();
+
+        final StringRequest request = new StringRequest(Request.Method.POST, End_Points.BOOKMARK_FORM,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        ringProgressDialog.dismiss();
+                        if(!response.equals("0")){
+                            getActivity().finish();
+                        }
+
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                ringProgressDialog.dismiss();
+                if (error instanceof NoConnectionError) {
+
+                    new SweetAlertDialog(getActivity(), SweetAlertDialog.ERROR_TYPE)
+                            .setTitleText("Error!")
+                            .setConfirmText("OK").setContentText("No Internet Connection")
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    sDialog.dismiss();
+                                }
+                            })
+                            .show();
+                } else if (error instanceof TimeoutError) {
+
+                    new SweetAlertDialog(getActivity(), SweetAlertDialog.ERROR_TYPE)
+                            .setTitleText("Error!")
+                            .setConfirmText("OK").setContentText("Connection TimeOut! Please check your internet connection.")
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    sDialog.dismiss();
+                                }
+                            })
+                            .show();
+                }
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                final SharedPreferences pref = getActivity().getSharedPreferences("UserPrefs",MODE_PRIVATE);
+
+                Map<String, String> params = new HashMap<>();
+                params.put("client_id",StructureScreensActivity.client_id);
+                params.put("tempid",StructureScreensActivity.template_id);
+                params.put("inspection_id",StructureScreensActivity.inspectionID);
+                params.put("user_id", pref.getString("user_id", null));
+                params.put("form_step", "7");
+
+
+
+                return params;
+
+            }
+        };
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                1000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+        requestQueue.add(request);
+    }
 
     public void InsulationSync() {
 
@@ -745,9 +905,9 @@ public class InsulationScreenFragment extends BaseFragment {
                     .setMessage("Are you sure you want to Close Form !!")
                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
-                            Intent intent=new Intent(getActivity(),LandingScreen.class);
-                            intent.putExtra("activityName", "addTemplateClass");
-                            startActivity(intent);
+                           /* Intent intent=new Intent(getActivity(),LandingScreen.class);
+                            intent.putExtra("activityName", "templateList");
+                            startActivity(intent);*/
                             getActivity().finish();
 
 
@@ -764,7 +924,40 @@ public class InsulationScreenFragment extends BaseFragment {
             //Do whatever you want to do
             return true;
         }
+        if(id == R.id.book_mark_btn){
+            new AlertDialog.Builder(getActivity())
+                    .setTitle("BookMark")
+                    .setMessage("BookMark And Exit!")
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                           /* Intent intent=new Intent(getActivity(),LandingScreen.class);
+                            intent.putExtra("activityName", "templateList");
+                            startActivity(intent);*/
+                            BookMarkForm();
+                        }
+                    })
+                    .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
 
+                        }
+                    })
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .show();
+            //Do whatever you want to do
+            return true;
+        }
+        if(id == R.id.applicable){
+            if(item.isChecked()){
+                item.setChecked(false);
+                SetChecked("1");
+            }else {
+                item.setChecked(true);
+                SetChecked("0");
+            }
+
+            //Do whatever you want to do
+            return true;
+        }
         return super.onOptionsItemSelected(item);
     }
 

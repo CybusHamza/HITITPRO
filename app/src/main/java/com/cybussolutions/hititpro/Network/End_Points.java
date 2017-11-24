@@ -54,5 +54,11 @@ public class End_Points {
     public static final String SYNC_PLUMBING = BASE_URL + "syncPlumbing";
     public static final String SYNC_APPLIANCES = BASE_URL + "syncAppliances";
     public static final String SYNC_FIREPLACE = BASE_URL + "syncFirePlace";
+    public static final String DELETE_DATA_ON_UN_CHECK_ITEM = BASE_URL + "deleteDataOnUnCheckItem";
+    public static final String GET_BOOKMARKS = BASE_URL + "getBookMark";
+    public static final String BOOKMARK_FORM = BASE_URL + "bookMarkForm";
+    public static final String ACTIVE_CLIENT = BASE_URL + "activeClient";
+    public static final String NOT_APPLICABLE = BASE_URL + "notApplicableForm";
+
 
 }

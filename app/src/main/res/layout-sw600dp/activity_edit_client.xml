@@ -152,6 +152,7 @@
                 android:textColor="@color/black"
                 android:inputType="textEmailAddress"
                 android:textSize="15sp"
+                android:editable="false"
                 android:id="@+id/client_email" />
             <TextView
                 android:layout_width="match_parent"

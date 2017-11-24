@@ -72,7 +72,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:weightSum="4"
+        android:weightSum="3"
         android:id="@+id/box"
         android:layout_below="@+id/template"
         android:layout_alignParentLeft="true"
@@ -179,7 +179,7 @@
                android:text="Download"
                />-->
     </LinearLayout>
-        <LinearLayout
+       <!-- <LinearLayout
             android:layout_width="1dp"
             android:layout_height="30dp"
             android:orientation="vertical">
@@ -188,8 +188,8 @@
                 android:layout_height="30dp"
                 android:layout_marginBottom="13dp"
                 android:background="#C0C0C0"/>
-        </LinearLayout>
-        <LinearLayout
+        </LinearLayout>-->
+       <!-- <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -205,14 +205,14 @@
                 android:layout_toStartOf="@+id/deleteTemplate"
                 android:src="@drawable/archvive_selector" />
 
-           <!-- <TextView
+           &lt;!&ndash; <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_margin="3dp"
                 android:text="Archive"
-                android:textStyle="bold" />-->
-        </LinearLayout>
+                android:textStyle="bold" />&ndash;&gt;
+        </LinearLayout>-->
 
 
     </LinearLayout>

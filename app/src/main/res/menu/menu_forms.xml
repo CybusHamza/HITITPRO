@@ -1,9 +1,24 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:All4One="http://schemas.android.com/tools">
     <!-- Search, should appear as action button -->
-    <item android:id="@+id/cancel_btn"
-        android:icon="@drawable/cancel"
 
+    <item
+        android:id="@+id/applicable"
+        android:title="Not Applicable"
+        android:checkable="true"
+        app:showAsAction="never"
+        />
+    <item
+        android:id="@+id/book_mark_btn"
+        android:title="BookMark and Exit"
+        android:itemBackground="#fff"
+        android:icon="@android:drawable/btn_star_big_off"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/cancel_btn"
+        android:icon="@drawable/cancel"
         android:title="Cancel"
         app:showAsAction="always" />
 

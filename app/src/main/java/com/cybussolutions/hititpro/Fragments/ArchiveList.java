@@ -68,17 +68,17 @@ public class ArchiveList  extends BaseFragment {
         root = inflater.inflate(R.layout.fragment_archive_list, container, false);
 
         templates_list = (ListView) root.findViewById(R.id.templates_list);
-        active = (Button) root.findViewById(R.id.active);
+//        active = (Button) root.findViewById(R.id.active);
 
         search=(EditText) root.findViewById(R.id.search);
-        active.setOnClickListener(new View.OnClickListener() {
+       /* active.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 fragment = new TemplatesListFragment();
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment).commit();
 
             }
-        });
+        });*/
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Inspection List");
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.menu_black);

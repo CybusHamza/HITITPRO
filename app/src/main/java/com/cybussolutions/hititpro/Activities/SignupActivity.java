@@ -260,10 +260,10 @@ public class SignupActivity extends AppCompatActivity {
                     public void onResponse(String response) {
 
 
-                        if (response.equals("Email already Exists ")) {
+                        if (response.equals("User already Registered with an this Email Adress")) {
                             new SweetAlertDialog(SignupActivity.this, SweetAlertDialog.ERROR_TYPE)
                                     .setTitleText("Error!")
-                                    .setConfirmText("OK").setContentText(response)
+                                    .setConfirmText("OK").setContentText("Email already Exist!")
                                     .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                                         @Override
                                         public void onClick(SweetAlertDialog sDialog) {

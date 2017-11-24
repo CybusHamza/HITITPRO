@@ -199,11 +199,23 @@ public class Add_Client extends AppCompatActivity {
                                         }
                                     })
                                     .show();
+                        }else if (response.equals("User already Registered with an this Email Adress")) {
+                            new SweetAlertDialog(Add_Client.this, SweetAlertDialog.ERROR_TYPE)
+                                    .setTitleText("Error!")
+                                    .setConfirmText("OK").setContentText("Email already exist!")
+                                    .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                        @Override
+                                        public void onClick(SweetAlertDialog sDialog) {
+                                            sDialog.dismiss();
+
+                                        }
+                                    })
+                                    .show();
                         }
-                        else {
+                        else if(!response.equals("0")){
                             new SweetAlertDialog(Add_Client.this, SweetAlertDialog.SUCCESS_TYPE)
                                     .setTitleText("Success!")
-                                    .setConfirmText("OK").setContentText("Client Added Successful")
+                                    .setConfirmText("OK").setContentText("Client Added Successfully")
                                     .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                                         @Override
                                         public void onClick(SweetAlertDialog sDialog) {

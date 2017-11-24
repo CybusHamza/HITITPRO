@@ -131,7 +131,6 @@
         android:hint="Zip"
         android:singleLine="true"
         android:layout_margin="5dp"
-        android:inputType="number"
         android:textColor="@color/black"
         android:textSize="15sp"
         android:id="@+id/client_zip" />

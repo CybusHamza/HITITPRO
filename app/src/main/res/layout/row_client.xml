@@ -56,6 +56,16 @@
     <ImageView
         android:layout_width="35dp"
         android:layout_height="35dp"
+        android:id="@+id/activeClient"
+        android:src="@drawable/tick_black"
+        android:paddingRight="10dp"
+
+        android:layout_alignTop="@+id/client_phone"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+    <ImageView
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:id="@+id/deleteClient"
         android:src="@drawable/delet_selector"
         android:paddingRight="10dp"

@@ -10,15 +10,14 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Base64;
-import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -36,7 +35,6 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.cybussolutions.hititpro.Helper.CircleTransform;
 import com.cybussolutions.hititpro.Network.End_Points;
 import com.cybussolutions.hititpro.R;
 import com.squareup.picasso.Picasso;
@@ -145,7 +143,7 @@ public class Edit_Profile extends AppCompatActivity {
                 String fax=Fax.getText().toString();
                 pref = getApplicationContext().getSharedPreferences("UserPrefs", MODE_PRIVATE);
                 pic=pref.getString("img",null);
-                if(firstName.equals("")||lastName.equals("")||userEmail.equals("")||userContact.equals("")||companyInfo.equals("")||userAddress.equals("")||website.equals("")||fax.equals("")){
+                if(firstName.equals("")||lastName.equals("")||userEmail.equals("")||userContact.equals("")||companyInfo.equals("")||userAddress.equals("")/*||website.equals("")||fax.equals("")*/){
                     Toast.makeText(Edit_Profile.this,"Plz fill the empty fields",Toast.LENGTH_LONG).show();
                 }else {
 
@@ -161,6 +159,9 @@ public class Edit_Profile extends AppCompatActivity {
         CompanyInfo.setText(companyinfo);
         UserAddress.setText(useraddress);
         Website.setText(website);
+        if(fax.equals("null"))
+        Fax.setText("");
+        else
         Fax.setText(fax);
         UserContact.addTextChangedListener(new TextWatcher() {
             @Override
@@ -328,7 +329,7 @@ public class Edit_Profile extends AppCompatActivity {
                         else {
                             new SweetAlertDialog(Edit_Profile.this, SweetAlertDialog.SUCCESS_TYPE)
                                     .setTitleText("Success!")
-                                    .setConfirmText("OK").setContentText("Profile Updated Successful")
+                                    .setConfirmText("OK").setContentText("Profile Updated Successfully")
                                     .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                                         @Override
                                         public void onClick(SweetAlertDialog sDialog) {

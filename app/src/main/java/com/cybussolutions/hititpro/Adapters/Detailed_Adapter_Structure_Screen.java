@@ -15,7 +15,6 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -452,6 +451,7 @@ public class Detailed_Adapter_Structure_Screen extends ArrayAdapter<Checkbox_mod
 
 
                     Intent intent = new Intent(getContext(), Detailed_Activity_Structure_Screens.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                    ((Activity)context).overridePendingTransition(0, 0);
                     intent.putExtra("items", dbEnterArray);
                     intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                     intent.putExtra("heading", topass[0]);
@@ -461,7 +461,7 @@ public class Detailed_Adapter_Structure_Screen extends ArrayAdapter<Checkbox_mod
                     intent.putExtra("tag", topass[3]);
                     ((Activity) context).finish();
                     context.startActivity(intent);
-
+                    ((Activity)context).overridePendingTransition(0, 0);
 
                 } else {
                     for (int i = 0; i < list.size(); i++) {
@@ -505,7 +505,9 @@ public class Detailed_Adapter_Structure_Screen extends ArrayAdapter<Checkbox_mod
                     }
 
 
-                    Intent intent = new Intent(getContext(), Detailed_Activity_Structure_Screens.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                    Intent intent = new Intent(getContext(), Detailed_Activity_Structure_Screens.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                    ((Activity)context).overridePendingTransition(0, 0);
                     intent.putExtra("items", dbEnterArray);
                     intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
                     intent.putExtra("heading", topass[0]);
@@ -515,6 +517,7 @@ public class Detailed_Adapter_Structure_Screen extends ArrayAdapter<Checkbox_mod
                     intent.putExtra("tag", topass[3]);
                     ((Activity) context).finish();
                     context.startActivity(intent);
+                    ((Activity)context).overridePendingTransition(0, 0);
 
 
                 } else {
@@ -523,7 +526,7 @@ public class Detailed_Adapter_Structure_Screen extends ArrayAdapter<Checkbox_mod
                         dbEnterArray[i] = row1[0] + "%0";
                     }
                 }
-                Toast.makeText(context, "Cancel", Toast.LENGTH_LONG).show();
+               // Toast.makeText(context, "Cancel", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -541,7 +544,10 @@ public class Detailed_Adapter_Structure_Screen extends ArrayAdapter<Checkbox_mod
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Toast.makeText(getContext(),response,Toast.LENGTH_LONG).show();
+                        if(!response.equals("0")){
+                            Toast.makeText(getContext(),"Updated Successfully",Toast.LENGTH_LONG).show();
+                        }
+                       // Toast.makeText(getContext(),response,Toast.LENGTH_LONG).show();
                     }
                 }, new Response.ErrorListener() {
             @Override

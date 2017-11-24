@@ -34,7 +34,6 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class EditClient extends AppCompatActivity {
 
-
     EditText Name,City,ContactName,Address,Phone,Fax,Email,State,Zip;
     String strName,strCity,strContactName,strAddress,strPhone,strFax,strEmail,strState,strZip,userid;
     Button Update;

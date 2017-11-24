@@ -102,6 +102,8 @@ public class LandingScreen extends AppCompatActivity {
             getSupportFragmentManager().beginTransaction().replace(R.id.container, new ClientsFragment()).commit();
         } else if(activityName.equals("editClientClass")){
             getSupportFragmentManager().beginTransaction().replace(R.id.container, new ClientsFragment()).commit();
+        } else if(activityName.equals("templateList")){
+
         }
         else
         getSupportFragmentManager().beginTransaction().replace(R.id.container, new ProfileFragment()).commit();

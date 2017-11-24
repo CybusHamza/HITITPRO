@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -57,13 +59,14 @@ public class ClientsFragment extends BaseFragment {
     ImageView pictureadd,clientimg;
     private static final int MY_SOCKET_TIMEOUT_MS = 10000;
     ProgressDialog ringProgressDialog;
-
+    Button archive;
+    Fragment fragment = null;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         root = inflater.inflate(R.layout.fragment_clients, container, false);
-
+        archive = (Button) root.findViewById(R.id.archive);
         client_list = (ListView) root.findViewById(R.id.client);
         addClient=(ImageView) root.findViewById(R.id.add_client);
         textnoclient=(TextView) root.findViewById(R.id.textclient);
@@ -86,6 +89,14 @@ public class ClientsFragment extends BaseFragment {
             list.add(model);
         }*/
 
+        archive.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                fragment = new ArchiveClient();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment).commit();
+
+            }
+        });
         search.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -110,7 +121,7 @@ public class ClientsFragment extends BaseFragment {
                 /*leaveDatas.clear();
                 leaveDatas.addAll(filteredLeaves);
                 leaves_adapter.notifyDataSetChanged();*/
-                Client_Adapter client_adapter = new Client_Adapter(filteredLeaves, getActivity());
+                Client_Adapter client_adapter = new Client_Adapter(filteredLeaves, getActivity(),"active");
                 client_list.setAdapter(client_adapter);
 
             }                //     listView.setAdapter(leaves_adapter);
@@ -185,13 +196,13 @@ public class ClientsFragment extends BaseFragment {
                             textAddclient.setVisibility(View.VISIBLE);
                             textnoclient.setVisibility(View.VISIBLE);
                             pictureadd.setVisibility(View.VISIBLE);
-                            clientimg.setVisibility(View.VISIBLE);
+                           // clientimg.setVisibility(View.VISIBLE);
                         }
                         else {
 
                             parseJson(response);
 
-                            Client_Adapter client_adapter = new Client_Adapter(list, getActivity());
+                            Client_Adapter client_adapter = new Client_Adapter(list, getActivity(),"active");
                             client_list.setAdapter(client_adapter);
 
 
@@ -234,6 +245,7 @@ public class ClientsFragment extends BaseFragment {
 
                 Map<String, String> params = new HashMap<>();
                 params.put("userid",id);
+                params.put("is_active","0");
                 return params;
             }
         };

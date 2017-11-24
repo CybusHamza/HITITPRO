@@ -116,9 +116,11 @@ public class TemplatesFragment extends BaseFragment {
                     // int inspection_id =  inspection_spinner.getSelectedItemPosition();
                     int template_id = tem_spinner.getSelectedItemPosition();
                     String client= client_spinner.getSelectedItem().toString();
-                    String template= tem_spinner.getSelectedItem().toString();
+                    String template="";
+                    if(template_id!=-1)
+                    template= tem_spinner.getSelectedItem().toString();
 
-                    if (!client.equals("No Client Found")) {
+                    if (!client.equals("No Client Found") && !template.equals("")) {
                         if (!template.equals("No Template Found")) {
                            myparah_no_temp= paraEt.getText().toString();
                             if (isStarted.get(tem_spinner.getSelectedItemPosition()).equals("0")) {
@@ -609,6 +611,7 @@ public class TemplatesFragment extends BaseFragment {
 
                 Map<String, String> params = new HashMap<>();
                 params.put("userid", id);
+                params.put("is_active","0");
                 return params;
             }
         };

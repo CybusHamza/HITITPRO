@@ -98,7 +98,7 @@ public class Template_Adapter extends BaseAdapter {
             viewholder.template.setTextSize(15);
             viewholder.editTemplate=(ImageView)v.findViewById(R.id.editTemplate);
             viewholder.deleteTemplate=(ImageView)v.findViewById(R.id.deleteTemplate);
-            viewholder.archiveTemp=(ImageView)v.findViewById(R.id.archive);
+          //  viewholder.archiveTemp=(ImageView)v.findViewById(R.id.archive);
             viewholder.donwloadTemplate=(ImageView)v.findViewById(R.id.download);
             v.setTag(viewholder);
         } else {
@@ -116,7 +116,7 @@ public class Template_Adapter extends BaseAdapter {
                 pdfView(position);
             }
         });
-        viewholder.archiveTemp.setOnClickListener(new View.OnClickListener() {
+       /* viewholder.archiveTemp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 new AlertDialog.Builder(context)
@@ -138,7 +138,7 @@ public class Template_Adapter extends BaseAdapter {
                         .show();
 
             }
-        });
+        });*/
         viewholder.name.setText(arrayList.get(position).getClient_name());
         viewholder.inspection.setText(arrayList.get(position).get_inspection());
         viewholder.template.setText(arrayList.get(position).get_template());

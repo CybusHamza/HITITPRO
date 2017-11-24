@@ -25,6 +25,8 @@
         android:textColor="@android:color/black"
         android:layout_alignTop="@+id/imageEditor"
         android:lines="1"
+        android:ellipsize="marquee"
+        android:maxLines="1"
         android:layout_marginTop="3dp"
         android:layout_toRightOf="@+id/checkBox"
         android:layout_toEndOf="@+id/checkBox"

@@ -52,6 +52,7 @@ public class ShowImages extends AppCompatActivity {
     int count;
     ImageView deleteImageButton1,deleteImageButton2,deleteImageButton3;
     String attachment_name;
+    ImageView editComment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +71,7 @@ public class ShowImages extends AppCompatActivity {
         deleteImageButton1= (ImageView) findViewById(R.id.delete1);
         deleteImageButton2= (ImageView) findViewById(R.id.delete2);
         deleteImageButton3= (ImageView) findViewById(R.id.delete3);
+        editComment= (ImageView) findViewById(R.id.editComment);
 /*
         image1= (ImageButton) findViewById(R.id.image1);
         image2= (ImageButton) findViewById(R.id.image2);
@@ -81,6 +83,22 @@ public class ShowImages extends AppCompatActivity {
 //        image4= (ImageButton) findViewById(R.id.image4);
 
         addNew= (ImageView) findViewById(R.id.add_pic);
+        editComment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(ShowImages.this,Add_Comments.class);
+                    intent.putExtra("dbTable",table_name);
+                    intent.putExtra("data",data);
+                    intent.putExtra("clientId",StructureScreensActivity.client_id);
+                    intent.putExtra("inspectionId",StructureScreensActivity.inspectionID);
+                    intent.putExtra("templateId",StructureScreensActivity.template_id);
+                    intent.putExtra("attachmentName",attachment_name);
+                     intent.putExtra("imageNames", imageNames);
+                    finish();
+                    showImagesCounter=3;
+                    startActivity(intent);
+            }
+        });
 
         addNew.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,17 +115,17 @@ public class ShowImages extends AppCompatActivity {
                     finish();
                     startActivity(intent);
                 }else {
-                    Intent intent=new Intent(ShowImages.this,Add_Comments.class);
-                    intent.putExtra("dbTable",table_name);
-                    intent.putExtra("data",data);
-                    intent.putExtra("clientId",StructureScreensActivity.client_id);
-                    intent.putExtra("inspectionId",StructureScreensActivity.inspectionID);
-                    intent.putExtra("templateId",StructureScreensActivity.template_id);
-                    intent.putExtra("attachmentName",attachment_name);
+//                    Intent intent=new Intent(ShowImages.this,Add_Comments.class);
+//                    intent.putExtra("dbTable",table_name);
+//                    intent.putExtra("data",data);
+//                    intent.putExtra("clientId",StructureScreensActivity.client_id);
+//                    intent.putExtra("inspectionId",StructureScreensActivity.inspectionID);
+//                    intent.putExtra("templateId",StructureScreensActivity.template_id);
+//                    intent.putExtra("attachmentName",attachment_name);
                    // intent.putExtra("imageNames", imageNames);
                     //finish();
                     showImagesCounter=3;
-                    startActivity(intent);
+//                    startActivity(intent);
                     Toast.makeText(getApplicationContext(), "you cannot upload more photos", Toast.LENGTH_LONG).show();
                 }
             }

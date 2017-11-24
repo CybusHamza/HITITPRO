@@ -50,8 +50,8 @@ public class Detailed_Activity_Structure_Screens extends AppCompatActivity {
     String heading, dbColumn, fromadapter, dbTable, userid, enteredStructure = "", inspectionID, fromDataBase;
     Detailed_Adapter_Structure_Screen Detailed_Adapter;
     Database database = new Database(this);
-   // Button addCategory;
-   ImageView addCategory;
+    // Button addCategory;
+    ImageView addCategory;
     AlertDialog b;
     ArrayAdapter<Checkbox_model> adapter;
     String toPass[],tag;
@@ -93,7 +93,7 @@ public class Detailed_Activity_Structure_Screens extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setTitleTextColor(getResources().getColor(android.R.color.black));
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.back_btn);
-        toolbar.inflateMenu(R.menu.menu_forms);
+        //toolbar.inflateMenu(R.menu.menu_forms);
 
         detailedListView = (ListView) findViewById(R.id.details_listview);
         addCategory = (ImageView) findViewById(R.id.add_category);
@@ -101,7 +101,7 @@ public class Detailed_Activity_Structure_Screens extends AppCompatActivity {
         SharedPreferences pref = getApplicationContext().getSharedPreferences("UserPrefs", MODE_PRIVATE);
         userid = pref.getString("user_id", "");
         if(sp.getBoolean("addObservationButton",true)==false){
-                addCategory.setVisibility(View.INVISIBLE);
+            addCategory.setVisibility(View.INVISIBLE);
         }
 
         toPass = new String[]{heading, dbColumn, dbTable,tag};
@@ -109,11 +109,11 @@ public class Detailed_Activity_Structure_Screens extends AppCompatActivity {
 
         addCategory.setOnClickListener(
                 new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                addDetail();
-            }
-        });
+                    @Override
+                    public void onClick(View view) {
+                        addDetail();
+                    }
+                });
 
         if (fromadapter.equals("false")) {
             Cursor cursor = database.getData(dbColumn, dbTable, inspectionID);
@@ -195,7 +195,7 @@ public class Detailed_Activity_Structure_Screens extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        if(!(enteredStructure.length() == 0))
+      /*  if(!(enteredStructure.length() == 0))
         {
             update();
             String[] insertArray = Detailed_Adapter.getDbInsertArray();
@@ -213,11 +213,34 @@ public class Detailed_Activity_Structure_Screens extends AppCompatActivity {
 
         }
 
+        return super.onOptionsItemSelected(item);*/
+        String[] insertArray = Detailed_Adapter.getDbInsertArray();
+
+        if (!(insertArray.length ==0)) {
+
+
+
+
+            for (int i = 0; i < insertArray.length - 1; i++) {
+                enteredStructure += insertArray[i] + "^";
+            }
+
+            enteredStructure = enteredStructure.substring(0, enteredStructure.length() - 1);
+
+            // Insert in local DataBase
+            database.insertEntry(dbColumn, enteredStructure, dbTable, inspectionID);
+            update();
+
+            finish();
+        } else {
+            database.insertEntry(dbColumn, "", dbTable, inspectionID);
+        }
         return super.onOptionsItemSelected(item);
     }
 
     @Override
     public void onBackPressed() {
+
 
         if(!(enteredStructure.length() == 0)) {
             update();
@@ -345,7 +368,7 @@ public class Detailed_Activity_Structure_Screens extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
 
-                       // Toast.makeText(Detailed_Activity_Structure_Screens.this, response, Toast.LENGTH_SHORT).show();
+                        // Toast.makeText(Detailed_Activity_Structure_Screens.this, response, Toast.LENGTH_SHORT).show();
 
 
                     }

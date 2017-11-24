@@ -7,35 +7,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/linear"
-        android:weightSum="2">
-
-        <Button
-            android:id="@+id/active"
-            android:layout_margin="5dp"
-            android:layout_width="0dp"
-            android:layout_height="60dp"
-            android:layout_weight="1"
-            android:background="@drawable/outline_active_style"
-            android:text="Active Inspections"
-            android:textStyle="bold"/>
-
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="60dp"
-            android:layout_margin="5dp"
-            android:layout_weight="1"
-            android:id="@+id/archive"
-            android:background="@drawable/outline_style"
-            android:text="Archive Inspections"
-            android:textStyle="bold"
-            />
-
-    </LinearLayout>
-
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

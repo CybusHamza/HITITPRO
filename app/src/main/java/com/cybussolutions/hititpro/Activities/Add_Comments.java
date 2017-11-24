@@ -115,6 +115,12 @@ public class Add_Comments extends AppCompatActivity {
                         if(radioGroup.getCheckedRadioButtonId()==-1){
                             checkedBox="";
                         }
+                        radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
+                        pos=radioGroup.getCheckedRadioButtonId();
+                        if(pos!=-1) {
+                            radioButton = (RadioButton) findViewById(pos);
+                            checkedBox = radioButton.getText().toString();
+                        }
                         mSavedPhotoName = "";
                         mCurrentPhotoPath = "";
                         attachmentName="";
@@ -122,6 +128,13 @@ public class Add_Comments extends AppCompatActivity {
                     } else {
                         if(radioGroup.getCheckedRadioButtonId()==-1){
                             checkedBox="";
+                        }else {
+                            radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
+                            pos=radioGroup.getCheckedRadioButtonId();
+                            if(pos!=-1) {
+                                radioButton = (RadioButton) findViewById(pos);
+                                checkedBox = radioButton.getText().toString();
+                            }
                         }
                         up();
                        // startDialog();
@@ -142,9 +155,11 @@ public class Add_Comments extends AppCompatActivity {
                 // TODO Auto-generated method stub
 
                 // Method 1 For Getting Index of RadioButton
-                pos=radioGroup.getCheckedRadioButtonId();
-                radioButton = (RadioButton) findViewById(pos);
-                checkedBox=radioButton.getText().toString();
+                if(pos!=-1) {
+                    pos = radioGroup.getCheckedRadioButtonId();
+                    radioButton = (RadioButton) findViewById(pos);
+                    checkedBox = radioButton.getText().toString();
+                }
                 //up();
 
             }
@@ -416,8 +431,16 @@ public class Add_Comments extends AppCompatActivity {
                                     textView.setVisibility(View.INVISIBLE);
 
                                 }else {
-                                    radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
-                                    radioGroup.clearCheck();
+                                    RadioButton radioButton= (RadioButton) findViewById(R.id.radio0);
+                                    radioButton.setChecked(false);
+                                    RadioButton radioButton1= (RadioButton) findViewById(R.id.radio1);
+                                    radioButton1.setChecked(false);
+                                    RadioButton radioButton2= (RadioButton) findViewById(R.id.radio3);
+                                    radioButton2.setChecked(false);
+                                    RadioButton radioButton3= (RadioButton) findViewById(R.id.radio4);
+                                    radioButton3.setChecked(false);
+                                    RadioButton radioButton4= (RadioButton) findViewById(R.id.radio5);
+                                    radioButton4.setChecked(false);
                                 }
 
 
