@@ -32,6 +32,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.cybussolutions.hititpro.Activities.Detailed_Activity_All_Screens;
 import com.cybussolutions.hititpro.Activities.Detailed_Activity_Structure_Screens;
+import com.cybussolutions.hititpro.Activities.LandingScreen;
 import com.cybussolutions.hititpro.Activities.StructureScreensActivity;
 import com.cybussolutions.hititpro.Fragments.BaseFragment;
 import com.cybussolutions.hititpro.Fragments.TemplatesFragment;
@@ -569,6 +570,7 @@ public class PlumbingScreenFragment extends BaseFragment {
                                 @Override
                                 public void onClick(SweetAlertDialog sDialog) {
                                     sDialog.dismiss();
+                                    getPlumbing();
                                 }
                             })
                             .show();
@@ -581,6 +583,7 @@ public class PlumbingScreenFragment extends BaseFragment {
                                 @Override
                                 public void onClick(SweetAlertDialog sDialog) {
                                     sDialog.dismiss();
+                                    getPlumbing();
                                 }
                             })
                             .show();
@@ -626,7 +629,7 @@ public class PlumbingScreenFragment extends BaseFragment {
 
                         ringProgressDialog.dismiss();
                         if(!response.equals("0")){
-
+                            isApplicable=s;
                         }
 
 
@@ -700,7 +703,11 @@ public class PlumbingScreenFragment extends BaseFragment {
 
                         ringProgressDialog.dismiss();
                         if(!response.equals("0")){
+                            getActivity().getSupportFragmentManager().popBackStack();
+                            Intent intent = new Intent(getActivity(),LandingScreen.class);
+                            intent.putExtra("activityName","addTemplateClass");
                             getActivity().finish();
+                            startActivity(intent);
                         }
 
 
@@ -820,7 +827,7 @@ public class PlumbingScreenFragment extends BaseFragment {
                 params.put("template_id", StructureScreensActivity.template_id);
                 params.put("inspection_id", StructureScreensActivity.inspectionID);
                 params.put("client_id", StructureScreensActivity.client_id);
-                params.put("is_applicable", "1");
+                params.put("is_applicable", isApplicable);
 
                 if(cursor != null) {
                     params.put("watersupplysource", cursor.getString(6));

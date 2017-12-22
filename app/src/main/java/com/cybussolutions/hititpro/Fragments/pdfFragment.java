@@ -210,6 +210,7 @@ public class pdfFragment extends Fragment {
 
                 Map<String, String> params = new HashMap<>();
                 params.put("userid", id);
+                params.put("is_active","0");
                 return params;
             }
         };

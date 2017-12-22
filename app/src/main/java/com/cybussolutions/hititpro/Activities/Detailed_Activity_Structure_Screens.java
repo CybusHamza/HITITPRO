@@ -241,8 +241,28 @@ public class Detailed_Activity_Structure_Screens extends AppCompatActivity {
     @Override
     public void onBackPressed() {
 
+        String[] insertArray = Detailed_Adapter.getDbInsertArray();
 
-        if(!(enteredStructure.length() == 0)) {
+        if (!(insertArray.length ==0)) {
+
+
+
+
+            for (int i = 0; i < insertArray.length - 1; i++) {
+                enteredStructure += insertArray[i] + "^";
+            }
+
+            enteredStructure = enteredStructure.substring(0, enteredStructure.length() - 1);
+
+            // Insert in local DataBase
+            database.insertEntry(dbColumn, enteredStructure, dbTable, inspectionID);
+            update();
+
+            finish();
+        } else {
+            database.insertEntry(dbColumn, "", dbTable, inspectionID);
+        }
+       /* if(!(enteredStructure.length() == 0)) {
             update();
             String[] insertArray = Detailed_Adapter.getDbInsertArray();
 
@@ -255,7 +275,7 @@ public class Detailed_Activity_Structure_Screens extends AppCompatActivity {
             // Insert in local DataBase
             database.insertEntry(dbColumn, enteredStructure, dbTable, inspectionID);
 
-        }
+        }*/
         super.onBackPressed();
 
     }

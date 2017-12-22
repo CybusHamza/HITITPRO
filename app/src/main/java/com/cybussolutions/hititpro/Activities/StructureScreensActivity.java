@@ -153,7 +153,7 @@ public class StructureScreensActivity extends AppCompatActivity {
         prePopulatelocal();
       //  getSupportFragmentManager().beginTransaction().replace(R.id.container,
         //        new StructureScreenFragment()).addToBackStack("structure").commit();
-       getBookMarkedData();
+
 
     }
 
@@ -225,6 +225,7 @@ public class StructureScreensActivity extends AppCompatActivity {
                                 @Override
                                 public void onClick(SweetAlertDialog sDialog) {
                                     sDialog.dismiss();
+                                    finish();
                                 }
                             })
                             .show();
@@ -237,6 +238,7 @@ public class StructureScreensActivity extends AppCompatActivity {
                                 @Override
                                 public void onClick(SweetAlertDialog sDialog) {
                                     sDialog.dismiss();
+                                    finish();
                                 }
                             })
                             .show();
@@ -591,7 +593,9 @@ public class StructureScreensActivity extends AppCompatActivity {
                     "Panel Front Missing%0", "Panel Poorly Labeled%0", "Wiring Clamps Missing%0", "Blunt Panel Screws Needed%0", "Overheated Wiring%0", "Double Taps Present%0",
                     "Oversized AC Breaker%0"};
             roSubpanelButtonValues = new String[]{"Old%0", "Panel Location Poor%0", "Panel Crowded%0", "Close Panel Openings%0", "Panel Poorly Labeled%0",
-                    "Wiring Clamps Missing%0", "Blunt Panel Screws Needed%0", "Overheated Wiring%0", "Double Taps Present%0"};
+                    "Wiring Clamps Missing%0", "Blunt Panel Screws Needed%0", "Overheated Wiring%0", "Double Taps Present%0",
+                    "Isolate Grounds and Neutrals%0", "Remove Bonding Strap%0", "Oversized AC Breaker%0", "Unlabeled Neutral Wire%0",
+                    "Panel Cover Screws Missing%0", "Mismatched Breakers%0"};
             roDistributionButtonValues = new String[]{"Abandoned Wiring%0", "Loose Wiring%0", "Overheated%0", "Exposed Wiring%0", "Extension Cords%0", "Open Junction Box%0",
                     "Loose Junction Box%0", "Poor Wiring Installation%0", "Knob and Tube%0"};
             roOutletButtonValues = new String[]{"Inoperative%0", "Damaged%0", "Missing Covers%0", "Loose Outlet%0", "Missing Cover Plate%0", "Ungrounded 3-Prong Outlet%0",
@@ -710,7 +714,7 @@ public class StructureScreensActivity extends AppCompatActivity {
             dwv_plumbingValues =  new String[]{"Leaks%0","Flexible Piping%0","Overflow Pan for Washing Machine%0",
                     "Overflow Pan for WH%0","Trap Leak%0","S-Trap%0", "Insufficient Slope%0","Support Lacking%0","Older Piping%0",
                     "No Main Clean-Out Found%0","Septic System Warning/Disclosure%0", "Septic System Disclaimer%0",
-                    "Odor%0","Vent Stack Height Insufficient%0"};
+                    "Odor%0","Vent Stack Height Insufficient%0","Septic System Possible%0","System Age Unknown%0"};
             fixtures_observationValues =  new String[]{"Older%0","Insufficient Water Flow%0","Hot/Cold Reversed%0","Faucet Leaking%0","Previous Leaks Under Sinks%0"
                     ,"Under Sink Openings%0","Sink Drains Slow%0", "Sink Drain Damaged%0","Sink Drain Missing%0","Loose Toilet Only%0"
                     ,"Loose Toilet Wax Ring%0","Toilet Lid Cracked%0","Toilet Slow Flush%0","Toilet Runs%0",
@@ -817,7 +821,10 @@ public class StructureScreensActivity extends AppCompatActivity {
             database.prePopulateData("recommendationswood", wood_stoveValues, FIREPLACE_TABLE, StructureScreensActivity.inspectionID);
             database.prePopulateData("fireplace_ro", fireplace_roValues, FIREPLACE_TABLE, StructureScreensActivity.inspectionID);
             database.prePopulateData("wood_stove_ro", wood_stove_roValues, FIREPLACE_TABLE, StructureScreensActivity.inspectionID);
-
+            StructureScreensActivity.inspection_type="old";
+            getBookMarkedData();
+        }else {
+            getBookMarkedData();
         }
 
 

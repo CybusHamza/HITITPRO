@@ -91,6 +91,7 @@ public class TemplatesFragment extends BaseFragment {
         review = (Button) root.findViewById(R.id.button);
        // add_template = (ImageView) root.findViewById(R.id.add_template);
 
+
         client_spinner.setOnItemSelectedListener(new CustomOnItemSelectedListener_client());
 
       /*  add_template.setOnClickListener(new View.OnClickListener() {
@@ -110,17 +111,17 @@ public class TemplatesFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
 
-
-
                     int client_id = client_spinner.getSelectedItemPosition();
                     // int inspection_id =  inspection_spinner.getSelectedItemPosition();
                     int template_id = tem_spinner.getSelectedItemPosition();
-                    String client= client_spinner.getSelectedItem().toString();
+                String client="";
+                if(client_id!=-1)
+                    client= client_spinner.getSelectedItem().toString();
                     String template="";
                     if(template_id!=-1)
                     template= tem_spinner.getSelectedItem().toString();
 
-                    if (!client.equals("No Client Found") && !template.equals("")) {
+                    if (!client.equals("No Client Found") && !client.equals("") && !template.equals("") && client_spinner.getSelectedItemPosition()!=-1) {
                         if (!template.equals("No Template Found")) {
                            myparah_no_temp= paraEt.getText().toString();
                             if (isStarted.get(tem_spinner.getSelectedItemPosition()).equals("0")) {
@@ -651,11 +652,13 @@ public class TemplatesFragment extends BaseFragment {
                                 String temp[] ;
                                 temp = response.split(" ");
                                 intent.putExtra("inspectionId", temp[1]);
+                                intent.putExtra("inspection_type", "old");
                             }
                             else
                             {
 
                                 intent.putExtra("inspectionId",response);
+                                intent.putExtra("inspection_type", "old");
                             }
                             intent.putExtra("client_id", clientId);
                             intent.putExtra("client_name",client_id);
@@ -680,7 +683,7 @@ public class TemplatesFragment extends BaseFragment {
                             }
 
 
-                            intent.putExtra("inspection_type", "old");
+
                             startActivity(intent);
                         } else {
                             new SweetAlertDialog(getActivity(), SweetAlertDialog.ERROR_TYPE)

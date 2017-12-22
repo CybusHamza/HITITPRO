@@ -329,7 +329,7 @@ public class Add_Comments extends AppCompatActivity {
                 params.put("column_name", tablename);/*sp.getString("heading", "")*/
                 params.put("element_id",data);
                 params.put("attachment_name", " ");
-                params.put("attachment_original_name", mCurrentPhotoPath);
+                params.put("attachment_original_name", mSavedPhotoName);
                 params.put("attachment_saved_name", mSavedPhotoName);
                 params.put("image_comments", etComments.getText().toString());
                 params.put("selrecomd", checkedBox);

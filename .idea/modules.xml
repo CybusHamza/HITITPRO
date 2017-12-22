@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/HITITPRO.iml" filepath="$PROJECT_DIR$/HITITPRO.iml" />
-      <module fileurl="file://$PROJECT_DIR$/HITIT_PRO.iml" filepath="$PROJECT_DIR$/HITIT_PRO.iml" />
+      <module fileurl="file://C:\Users\Sufyan Cybus\StudioProjects\Hititpro\HITIT_PRO.iml" filepath="C:\Users\Sufyan Cybus\StudioProjects\Hititpro\HITIT_PRO.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Hititpro.iml" filepath="$PROJECT_DIR$/Hititpro.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

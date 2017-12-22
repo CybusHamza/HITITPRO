@@ -621,6 +621,7 @@ public class StructureScreenFragment extends BaseFragment {
                                 @Override
                                 public void onClick(SweetAlertDialog sDialog) {
                                     sDialog.dismiss();
+                                    getStructure();
                                 }
                             })
                             .show();
@@ -633,6 +634,7 @@ public class StructureScreenFragment extends BaseFragment {
                                 @Override
                                 public void onClick(SweetAlertDialog sDialog) {
                                     sDialog.dismiss();
+                                    getStructure();
                                 }
                             })
                             .show();
@@ -967,7 +969,11 @@ public class StructureScreenFragment extends BaseFragment {
 
                         ringProgressDialog.dismiss();
                         if(!response.equals("0")){
+                            getActivity().getSupportFragmentManager().popBackStack();
+                            Intent intent = new Intent(getActivity(),LandingScreen.class);
+                            intent.putExtra("activityName","addTemplateClass");
                             getActivity().finish();
+                            startActivity(intent);
                         }
 
 

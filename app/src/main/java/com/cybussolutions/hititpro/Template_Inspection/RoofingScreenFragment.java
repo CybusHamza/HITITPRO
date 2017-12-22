@@ -32,6 +32,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.cybussolutions.hititpro.Activities.Detailed_Activity_All_Screens;
 import com.cybussolutions.hititpro.Activities.Detailed_Activity_Structure_Screens;
+import com.cybussolutions.hititpro.Activities.LandingScreen;
 import com.cybussolutions.hititpro.Activities.StructureScreensActivity;
 import com.cybussolutions.hititpro.Fragments.BaseFragment;
 import com.cybussolutions.hititpro.Fragments.TemplatesFragment;
@@ -69,7 +70,7 @@ public class RoofingScreenFragment extends BaseFragment {
 
     SharedPreferences sp;
     SharedPreferences.Editor edit;
-    String isApplicable;
+    String isApplicable="1";
     MenuItem item;
     @Nullable
     @Override
@@ -405,7 +406,11 @@ public class RoofingScreenFragment extends BaseFragment {
 
                         ringProgressDialog.dismiss();
                         if(!response.equals("0")){
+                            getActivity().getSupportFragmentManager().popBackStack();
+                            Intent intent = new Intent(getActivity(),LandingScreen.class);
+                            intent.putExtra("activityName","addTemplateClass");
                             getActivity().finish();
+                            startActivity(intent);
                         }
 
 
@@ -530,7 +535,7 @@ public class RoofingScreenFragment extends BaseFragment {
                 params.put("template_id", StructureScreensActivity.template_id);
                 params.put("inspection_id", StructureScreensActivity.template_id);
                 params.put("client_id", StructureScreensActivity.client_id);
-                params.put("is_applicable", "1");
+                params.put("is_applicable", isApplicable);
                 if(cursor != null) {
                     params.put("roofcovering", cursor.getString(6));
                     params.put("roofflashing", cursor.getString(7));
@@ -648,6 +653,7 @@ public class RoofingScreenFragment extends BaseFragment {
                                 @Override
                                 public void onClick(SweetAlertDialog sDialog) {
                                     sDialog.dismiss();
+                                    getRoofing();
                                 }
                             })
                             .show();
@@ -660,6 +666,7 @@ public class RoofingScreenFragment extends BaseFragment {
                                 @Override
                                 public void onClick(SweetAlertDialog sDialog) {
                                     sDialog.dismiss();
+                                    getRoofing();
                                 }
                             })
                             .show();
@@ -705,7 +712,7 @@ public class RoofingScreenFragment extends BaseFragment {
 
                         ringProgressDialog.dismiss();
                         if(!response.equals("0")){
-
+                            isApplicable=s;
                         }
 
 

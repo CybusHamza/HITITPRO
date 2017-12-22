@@ -165,7 +165,7 @@ public class EditClient extends AppCompatActivity {
                         if(strPhone.matches(numberPattern))
                         {
                             UpdateClient();
-                       }
+                        }
                         else {
                             new SweetAlertDialog(EditClient.this, SweetAlertDialog.ERROR_TYPE)
                                     .setTitleText("Error!")

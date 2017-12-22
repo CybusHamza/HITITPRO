@@ -126,7 +126,7 @@ public class ArchiveClient extends BaseFragment {
                 /*leaveDatas.clear();
                 leaveDatas.addAll(filteredLeaves);
                 leaves_adapter.notifyDataSetChanged();*/
-                Client_Adapter client_adapter = new Client_Adapter(filteredLeaves, getActivity(),"archive");
+                Client_Adapter client_adapter = new Client_Adapter(filteredLeaves, getActivity(),"archive",root);
                 client_list.setAdapter(client_adapter);
 
             }                //     listView.setAdapter(leaves_adapter);
@@ -170,6 +170,10 @@ public class ArchiveClient extends BaseFragment {
 
         return root;
     }
+    public void updateUi(View root){
+        textAddclient=(TextView) root.findViewById(R.id.noclientText);
+        textAddclient.setVisibility(View.VISIBLE);
+    }
 
 /*    @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -207,7 +211,7 @@ public class ArchiveClient extends BaseFragment {
 
                             parseJson(response);
 
-                            Client_Adapter client_adapter = new Client_Adapter(list, getActivity(),"archive");
+                            Client_Adapter client_adapter = new Client_Adapter(list, getActivity(),"archive",root);
                             client_list.setAdapter(client_adapter);
 
 

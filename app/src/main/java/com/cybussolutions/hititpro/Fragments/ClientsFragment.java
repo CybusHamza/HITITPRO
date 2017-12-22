@@ -1,6 +1,7 @@
 package com.cybussolutions.hititpro.Fragments;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -121,7 +122,7 @@ public class ClientsFragment extends BaseFragment {
                 /*leaveDatas.clear();
                 leaveDatas.addAll(filteredLeaves);
                 leaves_adapter.notifyDataSetChanged();*/
-                Client_Adapter client_adapter = new Client_Adapter(filteredLeaves, getActivity(),"active");
+                Client_Adapter client_adapter = new Client_Adapter(filteredLeaves, getActivity(),"active",root);
                 client_list.setAdapter(client_adapter);
 
             }                //     listView.setAdapter(leaves_adapter);
@@ -138,7 +139,7 @@ public class ClientsFragment extends BaseFragment {
 
 
 
-        final SharedPreferences pref = getActivity().getSharedPreferences("UserPrefs", getActivity().MODE_PRIVATE);
+        final SharedPreferences pref = getActivity().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
          id = pref.getString("user_id", null);
 
         AllClients();
@@ -164,6 +165,14 @@ public class ClientsFragment extends BaseFragment {
         });
 
         return root;
+    }
+    public void updateUi(View root){
+        textnoclient=(TextView) root.findViewById(R.id.textclient);
+        textAddclient=(TextView) root.findViewById(R.id.noclientText);
+        pictureadd=(ImageView) root.findViewById(R.id.img_id);
+        textAddclient.setVisibility(View.VISIBLE);
+        textnoclient.setVisibility(View.VISIBLE);
+        pictureadd.setVisibility(View.VISIBLE);
     }
 
 /*    @Override
@@ -202,7 +211,7 @@ public class ClientsFragment extends BaseFragment {
 
                             parseJson(response);
 
-                            Client_Adapter client_adapter = new Client_Adapter(list, getActivity(),"active");
+                            Client_Adapter client_adapter = new Client_Adapter(list, getActivity(),"active",root);
                             client_list.setAdapter(client_adapter);
 
 

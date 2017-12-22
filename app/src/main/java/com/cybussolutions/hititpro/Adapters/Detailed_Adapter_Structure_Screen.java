@@ -327,12 +327,60 @@ public class Detailed_Adapter_Structure_Screen extends ArrayAdapter<Checkbox_mod
                         || topass[0].equals("Heating Observations") || topass[0].equals("Cooling/Heat Pump Observations")
                         || topass[0].equals("Interior Observations")  || topass[0].equals("Insulation / Ventilation Observations")
                         || topass[0].equals("Plumbing Observations")||  topass[0].equals("Roofing Observations") || topass[0].equals("Appliance Observations:")
-                        || topass[0].equals("Fireplace / Wood Stove Observations:"))&& checkBox.isChecked()){
+                        || topass[0].equals("Fireplace / Wood Stove Observations:"))/*&& checkBox.isChecked()*/){
+                        if(checkBox.isChecked()) {
+                            getDefaultComments();
+                            getItem(position).setChecked(checkBox.isChecked());
 
-                        getDefaultComments();
-                        getItem(position).setChecked(checkBox.isChecked());
+                            showDialog(position, view);
+                        }else {
+                            if (checkBox.isChecked()) {
 
-                        showDialog(position, view);
+                                int size = list.size();
+                                list_temp = new ArrayList<>(list);
+                                list.clear();
+                                for (int i = 0; i < size; i++) {
+                                    String splitter = "%";
+                                    String row[] = list_temp.get(i).getTitle().split(splitter);
+
+                                    Checkbox_model model = new Checkbox_model();
+                                    if (i == position) {
+
+                                        model.setTitle(row[0] + "%1");
+                                    } else {
+                                        model.setTitle(row[0] + "%0");
+                                    }
+
+                                    list.add(model);
+                                }
+
+
+                                for (int i = 0; i < list.size(); i++) {
+                                    dbEnterArray[i] = list.get(i).getTitle();
+                                }
+
+
+                                Intent intent = new Intent(getContext(), Detailed_Activity_Structure_Screens.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                                ((Activity)context).overridePendingTransition(0, 0);
+                                intent.putExtra("items", dbEnterArray);
+                                intent.putExtra("inspectionID", StructureScreensActivity.inspectionID);
+                                intent.putExtra("heading", topass[0]);
+                                intent.putExtra("fromAddapter", "true");
+                                intent.putExtra("column", topass[1]);
+                                intent.putExtra("dbTable", topass[2]);
+                                intent.putExtra("tag", topass[3]);
+                                ((Activity) context).finish();
+                                context.startActivity(intent);
+                                ((Activity)context).overridePendingTransition(0, 0);
+
+                            } else {
+                                for (int i = 0; i < list.size(); i++) {
+                                    String row1[] = list.get(i).getTitle().split("%");
+                                    dbEnterArray[i] = row1[0] + "%0";
+                                }
+                            }
+                            deleteDataOnUncheck(data,topass[2]);
+                        }
                 } else {
                     getItem(position).setChecked(checkBox.isChecked());
 
@@ -406,7 +454,57 @@ public class Detailed_Adapter_Structure_Screen extends ArrayAdapter<Checkbox_mod
 
         return convertView;
     }
+    public void deleteDataOnUncheck(final String element_id,final String main_form_name) {
 
+
+        StringRequest request = new StringRequest(Request.Method.POST, End_Points.DELETE_DATA_ON_UN_CHECK_ITEM,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        //  Toast.makeText(context, response, Toast.LENGTH_SHORT).show();
+
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                if (error instanceof NoConnectionError) {
+
+                    Toast.makeText(context, "no internet connection", Toast.LENGTH_SHORT).show();
+
+
+                } else if (error instanceof TimeoutError) {
+
+
+                    Toast.makeText(context, " Connection time out please try again", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+
+                Map<String, String> params = new HashMap<>();
+                params.put("element_id", element_id);
+                params.put("main_form_name", main_form_name);
+                params.put("inspection_id", StructureScreensActivity.inspectionID);
+                params.put("template_id", StructureScreensActivity.template_id);
+                params.put("client_id", StructureScreensActivity.client_id);
+              /*  params.put("is_checked", isAnyChecked+"");
+                params.put("total_fields", myMap.get(dbTable));*/
+                return params;
+            }
+        };
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                MY_SOCKET_TIMEOUT_MS,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        requestQueue.add(request);
+
+    }
     private void showDialog(final int position,final View v) {
         LayoutInflater inflater = LayoutInflater.from(context);
         final View subView = inflater.inflate(R.layout.dilogue_layout, null);

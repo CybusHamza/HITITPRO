@@ -1,5 +1,7 @@
 package com.cybussolutions.hititpro.Adapters;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -24,6 +26,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.cybussolutions.hititpro.Activities.EditClient;
+import com.cybussolutions.hititpro.Activities.LandingScreen;
+import com.cybussolutions.hititpro.Fragments.ArchiveClient;
+import com.cybussolutions.hititpro.Fragments.ClientsFragment;
 import com.cybussolutions.hititpro.Model.Clients_model;
 import com.cybussolutions.hititpro.Network.End_Points;
 import com.cybussolutions.hititpro.R;
@@ -42,12 +47,14 @@ public class Client_Adapter extends BaseAdapter {
     ProgressDialog ringProgressDialog;
     private static final int MY_SOCKET_TIMEOUT_MS = 10000;
     String active;
-    public Client_Adapter(ArrayList<Clients_model> arrayList, Context context,String active)
+    View root;
+    public Client_Adapter(ArrayList<Clients_model> arrayList, Context context,String active,View root)
     {
         this.arrayList=arrayList;
         this.context=context;
         inflter = (LayoutInflater.from(context));
         this.active=active;
+        this.root=root;
 
 
     }
@@ -201,6 +208,10 @@ public class Client_Adapter extends BaseAdapter {
                                         sDialog.dismiss();
                                         arrayList.remove(position);
                                         notifyDataSetChanged();
+                                        if(arrayList.size()<1){
+                                           ClientsFragment fragment = new ClientsFragment();
+                                            fragment.updateUi(root);
+                                        }
                                     }
                                 })
                                 .show();
@@ -274,6 +285,10 @@ public class Client_Adapter extends BaseAdapter {
                                         sDialog.dismiss();
                                         arrayList.remove(position);
                                         notifyDataSetChanged();
+                                        if(arrayList.size()<1){
+                                             ArchiveClient fragment = new ArchiveClient();
+                                           fragment.updateUi(root);
+                                        }
                                     }
                                 })
                                 .show();

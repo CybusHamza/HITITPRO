@@ -55,8 +55,8 @@ public class Edit_Profile extends AppCompatActivity {
     private static int IMG_RESULT = 2;
     String ImageDecode;
 
-    EditText FirstName,LastName,UserEmail,UserContact,UserCity,UserAddress,UserCountry,Website,CompanyInfo,Fax;
-    String username,useremail,usercontact,useraddress,companyinfo,pic,userid,website,fax;
+    EditText FirstName,LastName,UserEmail,UserContact,UserCity,UserAddress,UserCountry,Website,CompanyInfo,Fax,UserState,Zip;
+    String username,useremail,usercontact,useraddress,companyinfo,pic,userid,website,fax,userCity,userState,zip;
     String[] flname;
     String[] fulladdress;
     Button updateProfile,changelogo;
@@ -81,16 +81,19 @@ public class Edit_Profile extends AppCompatActivity {
         pref = getApplicationContext().getSharedPreferences("UserPrefs", MODE_PRIVATE);
         userid = pref.getString("user_id", null);
         pic = pref.getString("img",null);
-
+       // SharedPreferences pref = getApplicationContext().getSharedPreferences("UserPrefs", MODE_PRIVATE);
         Intent intent = getIntent();
-        username = intent.getStringExtra("user_name");
+        username = pref.getString("user_name","");
         flname = username.split(" ");
-        useremail = intent.getStringExtra("email");
-        usercontact = intent.getStringExtra("phone");
-        useraddress = intent.getStringExtra("adress");
-        companyinfo = intent.getStringExtra("company_info");
-        website = intent.getStringExtra("website");
-        fax = intent.getStringExtra("fax");
+        useremail = pref.getString("email","");
+        usercontact = pref.getString("phone","");
+        useraddress = pref.getString("adress","");
+        companyinfo = pref.getString("company_info","");
+        website = pref.getString("website","");
+        fax = pref.getString("fax","");
+        userCity = pref.getString("city","");
+        userState = pref.getString("state","");
+        zip = pref.getString("zip","");
         //fulladdress=useraddress.split(",");
 
         FirstName = (EditText) findViewById(R.id.et_first_name);
@@ -98,7 +101,10 @@ public class Edit_Profile extends AppCompatActivity {
         UserEmail = (EditText) findViewById(R.id.et_user_email);
         UserContact = (EditText) findViewById(R.id.et_user_contact);
         Website = (EditText) findViewById(R.id.et_user_website);
-        Fax = (EditText) findViewById(R.id.et_user_fax);
+        UserCity = (EditText) findViewById(R.id.client_city);
+        UserState = (EditText) findViewById(R.id.client_state);
+        Zip = (EditText) findViewById(R.id.zip);
+      //  Fax = (EditText) findViewById(R.id.et_user_fax);
         CompanyInfo = (EditText) findViewById(R.id.et_user_company_info);
         UserAddress = (EditText) findViewById(R.id.et_user_address);
         logo = (ImageView) findViewById(R.id.logo);
@@ -140,7 +146,7 @@ public class Edit_Profile extends AppCompatActivity {
                 String companyInfo=CompanyInfo.getText().toString();
                 String userAddress=UserAddress.getText().toString();
                 String website=Website.getText().toString();
-                String fax=Fax.getText().toString();
+              //  String fax=Fax.getText().toString();
                 pref = getApplicationContext().getSharedPreferences("UserPrefs", MODE_PRIVATE);
                 pic=pref.getString("img",null);
                 if(firstName.equals("")||lastName.equals("")||userEmail.equals("")||userContact.equals("")||companyInfo.equals("")||userAddress.equals("")/*||website.equals("")||fax.equals("")*/){
@@ -159,10 +165,23 @@ public class Edit_Profile extends AppCompatActivity {
         CompanyInfo.setText(companyinfo);
         UserAddress.setText(useraddress);
         Website.setText(website);
-        if(fax.equals("null"))
+        if(userCity.equals("null")){
+            UserCity.setText("");
+        }else
+            UserCity.setText(userCity);
+        if(userState.equals("null")){
+            UserState.setText("");
+        }else
+            UserState.setText(userState);
+        if(zip.equals("null")){
+            Zip.setText("");
+        }else
+            Zip.setText(zip);
+
+      /*  if(fax.equals("null"))
         Fax.setText("");
         else
-        Fax.setText(fax);
+        Fax.setText(fax);*/
         UserContact.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -186,7 +205,7 @@ public class Edit_Profile extends AppCompatActivity {
 
             }
         });
-        Fax.addTextChangedListener(new TextWatcher() {
+        /*Fax.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -208,7 +227,7 @@ public class Edit_Profile extends AppCompatActivity {
                 }
 
             }
-        });
+        });*/
 
     }
 
@@ -344,7 +363,10 @@ public class Edit_Profile extends AppCompatActivity {
                                             editor.putString("adress", UserAddress.getText().toString());
                                             editor.putString("company_info", CompanyInfo.getText().toString());
                                             editor.putString("website",Website.getText().toString());
-                                            editor.putString("fax",Fax.getText().toString());
+                                            editor.putString("city",UserCity.getText().toString());
+                                            editor.putString("state",UserState.getText().toString());
+                                            editor.putString("zip",Zip.getText().toString());
+                                           // editor.putString("fax",Fax.getText().toString());
                                             editor.commit();
                                             Intent intent=new Intent(Edit_Profile.this,LandingScreen.class);
                                             intent.putExtra("activityName","");
@@ -398,7 +420,10 @@ public class Edit_Profile extends AppCompatActivity {
                 params.put("company_info",CompanyInfo.getText().toString());
                 params.put("adress", UserAddress.getText().toString());
                 params.put("website",Website.getText().toString());
-                params.put("fax",Fax.getText().toString());
+                params.put("city",UserCity.getText().toString());
+                params.put("state",UserState.getText().toString());
+                params.put("zip",Zip.getText().toString());
+              //  params.put("fax",Fax.getText().toString());
                 params.put("profile_image",pic);
                // params.put("country",UserCountry.getText().toString());
                 params.put("id", userid);

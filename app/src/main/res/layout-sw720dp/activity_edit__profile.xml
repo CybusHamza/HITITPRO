@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout android:layout_width="match_parent"
+<RelativeLayout
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <include
@@ -51,7 +52,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:digits="1234567890qwertzuiopasdfghjklyxcvbnmABCDEFGHIJKLMNOPQRSTUVWXYZ" android:hint="Last Name"
+                android:digits="1234567890qwertzuiopasdfghjklyxcvbnmABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                android:hint="Last Name"
                 android:singleLine="true"
                 android:textColor="@color/black"
                 android:textSize="15sp" />
@@ -95,7 +97,7 @@
                 android:textSize="15sp"
                 android:id="@+id/et_user_contact"
                 android:maxLength="14"/>
-            <TextView
+            <!--<TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Fax"
@@ -104,18 +106,71 @@
                 android:textSize="15sp"
                 />
 
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Fax"
+                    android:singleLine="true"
+                    android:layout_margin="10dp"
+                    android:textColor="@color/black"
+                    android:inputType="phone"
+                    android:textSize="15sp"
+                    android:id="@+id/et_user_fax"
+                    android:maxLength="14"/>-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="City"
+                android:textColor="@color/black"
+                android:layout_margin="10dp"
+                android:textSize="15sp"
+                />
+
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Fax"
-                android:singleLine="true"
+                android:hint="City"
                 android:layout_margin="10dp"
+                android:singleLine="true"
                 android:textColor="@color/black"
-                android:inputType="phone"
                 android:textSize="15sp"
-                android:id="@+id/et_user_fax"
-                android:maxLength="14"/>
+                android:id="@+id/client_city" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="State"
+                android:textColor="@color/black"
+                android:layout_margin="10dp"
+                android:textSize="15sp"
+                />
 
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="State"
+                android:layout_margin="10dp"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:id="@+id/client_state" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Zip"
+                android:textColor="@color/black"
+                android:layout_margin="10dp"
+                android:textSize="15sp"
+                />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Zip"
+                android:layout_margin="10dp"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:id="@+id/zip" />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

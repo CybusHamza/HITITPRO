@@ -33,6 +33,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.cybussolutions.hititpro.Activities.Detailed_Activity_All_Screens;
 import com.cybussolutions.hititpro.Activities.Detailed_Activity_Structure_Screens;
+import com.cybussolutions.hititpro.Activities.LandingScreen;
 import com.cybussolutions.hititpro.Activities.StructureScreensActivity;
 import com.cybussolutions.hititpro.Fragments.BaseFragment;
 import com.cybussolutions.hititpro.Fragments.TemplatesFragment;
@@ -599,7 +600,11 @@ public class ExteriorScreenFragment extends BaseFragment {
 
                         ringProgressDialog.dismiss();
                         if(!response.equals("0")){
+                            getActivity().getSupportFragmentManager().popBackStack();
+                            Intent intent = new Intent(getActivity(),LandingScreen.class);
+                            intent.putExtra("activityName","addTemplateClass");
                             getActivity().finish();
+                            startActivity(intent);
                         }
 
 
@@ -721,7 +726,7 @@ public class ExteriorScreenFragment extends BaseFragment {
                 params.put("template_id", StructureScreensActivity.template_id);
                 params.put("inspection_id", StructureScreensActivity.inspectionID);
                 params.put("client_id", StructureScreensActivity.client_id);
-                params.put("is_applicable", "1");
+                params.put("is_applicable", isApplicable);
                 params.put("empty_fields", "0");
                 if(cursor != null) {
                     params.put("wallcovering", cursor.getString(6));
@@ -866,6 +871,7 @@ public class ExteriorScreenFragment extends BaseFragment {
                                 @Override
                                 public void onClick(SweetAlertDialog sDialog) {
                                     sDialog.dismiss();
+                                    getExterior();
                                 }
                             })
                             .show();
@@ -878,6 +884,7 @@ public class ExteriorScreenFragment extends BaseFragment {
                                 @Override
                                 public void onClick(SweetAlertDialog sDialog) {
                                     sDialog.dismiss();
+                                    getExterior();
                                 }
                             })
                             .show();
@@ -1070,7 +1077,7 @@ public class ExteriorScreenFragment extends BaseFragment {
 
                         ringProgressDialog.dismiss();
                         if(!response.equals("0")){
-
+                            isApplicable=s;
                         }
 
 
