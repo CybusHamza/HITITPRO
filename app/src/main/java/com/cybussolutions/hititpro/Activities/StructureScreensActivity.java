@@ -406,7 +406,7 @@ public class StructureScreensActivity extends AppCompatActivity {
             roPorchesButtonValues = new String[]{"Front Porch Landing Settled%0", "Porch Steps Separated From Landing%0", "Porch Railing Loose%0", "Porch Railing Needed%0", "Porch Railing Openings%0", "Seal Porch Columns%0", "Porch Dilapidated%0"};
             roDrivewaysButtonValues = new String[]{"Drainage Insufficient%0", "Drain Needed%0", "Surface Cracks%0", "Driveway Heaving%0"};
             roStepsButtonValues = new String[]{"Re-Point Patio Bricks/Stone%0", "Re-Point Brick/Stone Steps%0", "Steps Rotting%0", "Cracks in Patios/Walkways%0", "Walkway Trip Hazard%0", "Stair Treads Deteriorated%0", "Stair Treads Loose%0"};
-            roDeckButtonValues = new String[]{"Need Paint or Stain%0", "Deck Rot%0", "Ledger Band Not Bolted%0", "Deck Flashing Missing%0", "Floor Joists Toe Nailed%0", "Deck Built Grade Level%0", "Deck Lattice Contact Ground%0", "4X4 Supports Poor%0", "Deck Steps Rotting%0", "Railing Loose%0", "Railing Needed%0", "Railing Height Improper%0", "Railing Pickets Too Far Apart%0", "Deck Dilapidated%0"};
+            roDeckButtonValues = new String[]{"Need Paint or Stain%0", "Deck Rot%0", "Ledger Band Not Bolted%0", "Deck Flashing Missing%0", "Floor Joists Toe Nailed%0", "Deck Built Grade Level%0", "Deck Lattice Contact Ground%0", "4X4 Supports Poor%0", "Deck Steps Rotting%0", "Railing Loose%0","Improper Handrail Width%0","Open Stairway Risers%0", "Railing Needed%0", "Railing Height Improper%0", "Railing Pickets Too Far Apart%0", "Deck Dilapidated%0"};
             roDrainangeButtonValues = new String[]{"Low Lot Relative to Neighbor%0", "Drainage Easement%0", "Grading Improvement Needed%0", "Improve Swale b/w Houses%0", "Backyard Hill Slopes to House%0", "Driveway Slopes to House%0", "Ravine Erosion Concern%0", "Ponding%0"};
             roLandscapButtonValues = new String[]{"Trim Branches%0", "Irrigation System%0", "Tree Roots%0", "Vines Growing on House%0"};
             roRetainingButtonValues = new String[]{"Wood Wall OK%0", "Wall Slight Movement%0", "Movement/Minor Rot%0", "Movement/Major Rot%0", "Rebuild Wall%0"};
@@ -474,8 +474,8 @@ public class StructureScreensActivity extends AppCompatActivity {
             Counters_Cabinets_observationValues = new  String []{"Damaged Countertops%0","Missing Grout%0","Damaged Tile%0","Damaged Cabinets%0"
                     ,"Damaged Door Hinges%0","Missing/Damaged Cabinet Handles%0","Broken Drawers%0","Paint Cabinets%0"};
             skylights_obsValues = new  String []{"Water Damage%0"};
-            stairways_observationValues = new  String []{"Loose Handrail%0","Need Handrail%0","Openings in Handrail%0","Railing Height%0",
-                    "Stairway Clearance%0","Stairway Treads%0","Door Opens Into Stairway%0"};
+            stairways_observationValues = new  String []{"Loose Handrail%0","Need Handrail%0","Improper Handrail Width%0","Openings in Handrail%0","Railing Height%0",
+                    "Loose Newel Post%0","Stairway Clearance%0","Stairway Treads%0","Open Stairway Risers%0","Door Opens Into Stairway%0"};
             basement_observationValues = new String[]{"No Leaks Visible%0","Leaking Repair%0","Leaking Monitor%0","Leaking With Sump Pump Present%0"};
             environmental_issues_roValues = new  String []{"Possible Asbestos%0","3 Hour Radon Screening%0"};
 

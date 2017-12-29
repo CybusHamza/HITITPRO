@@ -169,7 +169,7 @@ public class ElectricalScreenFragment extends BaseFragment {
         ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.back_btn);*/
         setHasOptionsMenu(true);
 
-        SharedPreferences pref = getActivity().getApplicationContext().getSharedPreferences("HititPro", getActivity().MODE_PRIVATE);
+        SharedPreferences pref = getActivity().getApplicationContext().getSharedPreferences("HititPro",MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
         String populate = pref.getString("isElectrical_populated","");
 
