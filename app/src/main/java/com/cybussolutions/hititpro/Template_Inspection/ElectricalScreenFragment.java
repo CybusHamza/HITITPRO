@@ -623,10 +623,11 @@ public class ElectricalScreenFragment extends BaseFragment {
                 ringProgressDialog.dismiss();
                 if (error instanceof NoConnectionError) {
 
-                    new SweetAlertDialog(getActivity(), SweetAlertDialog.ERROR_TYPE)
-                            .setTitleText("Error!")
-                            .setConfirmText("OK").setContentText("No Internet Connection")
-                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    SweetAlertDialog sDialog=new SweetAlertDialog(getActivity());
+                    sDialog.setTitleText("Error!");
+                    sDialog.setCancelable(false);
+                    sDialog.setConfirmText("OK").setContentText("No Internet Connection");
+                    sDialog.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                                 @Override
                                 public void onClick(SweetAlertDialog sDialog) {
                                     sDialog.dismiss();
@@ -636,10 +637,11 @@ public class ElectricalScreenFragment extends BaseFragment {
                             .show();
                 } else if (error instanceof TimeoutError) {
 
-                    new SweetAlertDialog(getActivity(), SweetAlertDialog.ERROR_TYPE)
-                            .setTitleText("Error!")
-                            .setConfirmText("OK").setContentText("Connection TimeOut! Please check your internet connection.")
-                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    SweetAlertDialog sDialog=new SweetAlertDialog(getActivity());
+                    sDialog.setTitleText("Error!");
+                    sDialog.setCancelable(false);
+                    sDialog.setConfirmText("OK").setContentText("Connection TimeOut! Please check your internet connection.");
+                    sDialog.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                                 @Override
                                 public void onClick(SweetAlertDialog sDialog) {
                                     sDialog.dismiss();

@@ -591,7 +591,7 @@ public class StructureScreensActivity extends AppCompatActivity {
             roEntranceButtonValues = new String[]{"Undersized%0", "Tap on Main Service%0", "Drip Loop Insufficient%0", "Clearance Inadequate%0", "Poorly Attached%0", "Service Conductors Need Conduit%0", "Rusted Service Box%0", "Damaged Service Box%0", "Ground Rod Ineffective%0"};
             roMainpanelButtonValues = new String[]{"Old%0", "Federal Pacific Panel%0", "Zinsko Panel%0", "Panel Location Poor%0", "Panel Crowded%0", "Close Panel Openings%0",
                     "Panel Front Missing%0", "Panel Poorly Labeled%0", "Wiring Clamps Missing%0", "Blunt Panel Screws Needed%0", "Overheated Wiring%0", "Double Taps Present%0",
-                    "Oversized AC Breaker%0"};
+                    "Oversized AC Breaker%0","Panel Cover Screws Missing%0", "Mismatched Breakers%0"};
             roSubpanelButtonValues = new String[]{"Old%0", "Panel Location Poor%0", "Panel Crowded%0", "Close Panel Openings%0", "Panel Poorly Labeled%0",
                     "Wiring Clamps Missing%0", "Blunt Panel Screws Needed%0", "Overheated Wiring%0", "Double Taps Present%0",
                     "Isolate Grounds and Neutrals%0", "Remove Bonding Strap%0", "Oversized AC Breaker%0", "Unlabeled Neutral Wire%0",

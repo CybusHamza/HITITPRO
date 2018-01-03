@@ -39,6 +39,7 @@ import com.cybussolutions.hititpro.Sql_LocalDataBase.Database;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -318,6 +319,7 @@ public class Detailed_Activity_All_Screens extends AppCompatActivity {
 
                     list_temp = new ArrayList<>(list);
                     // clearing list view
+                       if(!Arrays.asList(insertArray).contains(Add.getText().toString() + "%0") && !Arrays.asList(insertArray).contains(Add.getText().toString() + "%1")){
                     list.clear();
 
 
@@ -383,6 +385,10 @@ public class Detailed_Activity_All_Screens extends AppCompatActivity {
 
 
                     b.dismiss();
+                }else {
+                           Toast.makeText(Detailed_Activity_All_Screens.this, "Item Already Exists", Toast.LENGTH_SHORT).show();
+
+                       }
                 }
 
             }
